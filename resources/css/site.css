@@ -183,21 +183,21 @@ button[data-checked="true"] {
 }
 
 /* Image group hover */
-.group-image-hover>figure img,
-.group-image-hover>div figure img,
-.group-image-hover>a figure img {
-    @apply transition-transform duration-500 ease-in-out
+.group-image-hover > figure img,
+.group-image-hover > div figure img,
+.group-image-hover > a figure img {
+    @apply transition-transform duration-500 ease-in-out;
 }
 
-.group-image-hover:hover>figure img,
-.group-image-hover:hover>div figure img,
-.group-image-hover:hover>a figure img {
-    @apply scale-105
+.group-image-hover:hover > figure img,
+.group-image-hover:hover > div figure img,
+.group-image-hover:hover > a figure img {
+    @apply scale-105;
 }
 
 /* Safari CSS fixes */
-@media not all and (min-resolution:.001dpcm) {
-    @supports (-webkit-appearance:none) and (stroke-color:transparent) {
+@media not all and (min-resolution: 0.001dpcm) {
+    @supports (-webkit-appearance: none) and (stroke-color: transparent) {
         #content ul {
             @apply pl-5;
         }
@@ -207,9 +207,9 @@ button[data-checked="true"] {
 code,
 pre code,
 pre.hljs {
-    @apply !bg-gray-50 block rounded-md my-10 !p-5 overflow-x-auto text-gray-900
+    @apply !bg-gray-50 block rounded-md my-10 !p-5 overflow-x-auto text-gray-900;
 }
 
 code {
-    @apply inline !px-2 !py-1 rounded-md border-gray-100 border
+    @apply inline !px-2 !py-1 rounded-md border-gray-100 border;
 }
