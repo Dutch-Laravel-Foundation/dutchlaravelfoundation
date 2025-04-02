@@ -11,7 +11,7 @@
         {{ if number_of_member_insights > 1 }}
             <div class="flex flex-col px-6 sm:flex-row sm:px-0">
                 {{ collection:insights limit="2" offset="1" sort="date:desc" }}
-                    {{ partial:blocks/meta-alt class="sm:!w-1/2 px-0 { switch between="sm:pr-5|sm:pl-5" }" :text="title" title="Insights - { category }" link="/insights/{ slug }" link_class="text-tertiary-dark hover:text-primary-accent" }}
+                    {{ partial:blocks/meta-alt class="sm:w-1/2! px-0 { switch between="sm:pr-5|sm:pl-5" }" :text="title" title="Insights - { category }" link="/insights/{ slug }" link_class="text-tertiary-dark hover:text-primary-accent" }}
                 {{ /collection:insights }}
             </div>
         {{ /if }}

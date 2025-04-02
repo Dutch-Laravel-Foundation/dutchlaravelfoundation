@@ -16,7 +16,7 @@
                             src="{{ glide src="{featured_image}" fit="crop_focal" width="1280" }}" alt="{{ featured_image:alt ?? title }}">
                     {{ /if }}
                 </figure>
-                {{ partial:blocks/base class="relative z-10 w-full xl:w-2/3 xl:mt-48 !pb-16" }}
+                {{ partial:blocks/base class="relative z-10 w-full xl:w-2/3 xl:mt-48 pb-16!" }}
                     {{ slot }}
                     {{ partial:buttons/more :link="link" class="" button_class="" background_class="" }}
                 {{ /partial:blocks/base }}

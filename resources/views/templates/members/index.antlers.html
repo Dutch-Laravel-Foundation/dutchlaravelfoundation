@@ -16,7 +16,7 @@
                 <span class="block meta-dark">Ik zoek een</span>
                 <div class="flex flex-wrap gap-2">
                     <template x-for="type in types" :key="type">
-                        <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="types" :data-value="type" x-text="type" class="flex items-center justify-center w-full sm:w-auto h-12 px-8 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light !text-tertiary-regular hover:!text-tertiary-dark hover:border-primary-accent opacity-80 hover:opacity-100"></button>
+                        <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="types" :data-value="type" x-text="type" class="flex items-center justify-center w-full sm:w-auto h-12 px-8 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light text-tertiary-regular! hover:text-tertiary-dark! hover:border-primary-accent opacity-80 hover:opacity-100"></button>
                     </template>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                 <span class="block meta-dark">Aantal Laravel developers</span>
                 <div class="flex flex-wrap gap-2">
                     <template x-for="employee in employees" :key="employee">
-                        <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="employees" :data-value="employee" x-text="employee" class="flex items-center justify-center w-full sm:w-auto h-12 px-8 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light !text-tertiary-regular hover:!text-tertiary-dark hover:border-primary-accent opacity-80 hover:opacity-100"></button>
+                        <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="employees" :data-value="employee" x-text="employee" class="flex items-center justify-center w-full sm:w-auto h-12 px-8 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light text-tertiary-regular! hover:text-tertiary-dark! hover:border-primary-accent opacity-80 hover:opacity-100"></button>
                     </template>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                 <span class="block meta-dark">Provincie</span>
                 <div class="flex flex-wrap gap-2">
                     <template x-for="province in provinces" :key="province">
-                        <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="provinces" :data-value="province" x-text="province" class="flex items-center justify-center w-full sm:w-auto h-12 px-8 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light !text-tertiary-regular hover:!text-tertiary-dark hover:border-primary-accent opacity-80 hover:opacity-100"></button>
+                        <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="provinces" :data-value="province" x-text="province" class="flex items-center justify-center w-full sm:w-auto h-12 px-8 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light text-tertiary-regular! hover:text-tertiary-dark! hover:border-primary-accent opacity-80 hover:opacity-100"></button>
                     </template>
                 </div>
             </div>
@@ -48,18 +48,18 @@
             <div class="w-full pt-10 pb-5 sm:p-10 sm:w-1/2 xl:w-1/3" data-aos="fade-up" data-aos-delay="250">
                 <div class="flex flex-col w-full bg-white group-image-hover shadow-custom">
                     <a x-bind:href="'/{{ segment_1 }}/' + item.slug">
-                        <figure class="flex items-center justify-center w-full h-64 overflow-hidden bg-gradient-to-b from-white to-secondary-light">
+                        <figure class="flex items-center justify-center w-full h-64 overflow-hidden bg-linear-to-b from-white to-secondary-light">
                             <img x-show="item.logo" class="block max-w-[66%] max-h-[66%]" :src="item.logo" :alt="item.title">
                         </figure>
                     </a>
-                    <div class="relative w-full p-10 min-h-40 !pb-16">
+                    <div class="relative w-full p-10 min-h-40 pb-16!">
                         <a x-bind:href="'/{{ segment_1 }}/' + item.slug">
                             <div class="flex flex-col w-full ">
                                 <h4 class="block w-full mb-[.3rem]" x-text="item.title"></h4>
                             <span class="meta text-primary-accent" x-text="item.city + (item.province ? ', ' + item.province: null)"></span>
                             </div>
                         </a>
-                        <a x-bind:href="'/{{ segment_1 }}/' + item.slug" class="flex h-12 items-center justify-center group !absolute right-0 bottom-0 ">
+                        <a x-bind:href="'/{{ segment_1 }}/' + item.slug" class="flex h-12 items-center justify-center group absolute! right-0 bottom-0 ">
                             <div class="z-20 flex items-center justify-center w-12 h-full px-8 text-xs font-bold text-white uppercase transition-transform whitespace-nowrap group-hover:-translate-x-1 group-hover:-translate-y-1 bg-primary-accent aspect-square ">&gt;</div>
                             <div class="absolute bottom-0 right-0 z-10 w-full h-full border border-primary-accent "></div>
                         </a>

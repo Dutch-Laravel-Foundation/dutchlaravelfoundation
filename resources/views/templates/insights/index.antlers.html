@@ -21,7 +21,7 @@
 
     {{ if insight_count > 1 }}
         {{ collection:insights id:not="{ highlighted_id.0 }" limit="1" offset="1" sort="date:desc" }}
-            {{ partial:blocks/image-left class="w-full lg:!w-11/12 lg:ml-auto" :image="featured_image" :category="category" link="/insights/{ slug }" }}
+            {{ partial:blocks/image-left class="w-full lg:w-11/12! lg:ml-auto" :image="featured_image" :category="category" link="/insights/{ slug }" }}
                 {{ introduction }}
             {{ /partial:blocks/image-left }}
         {{ /collection:insights }}
@@ -37,7 +37,7 @@
 
     {{ if insight_count > 2 }}
         {{ collection:insights id:not="{ highlighted_id.0 }" offset="2" sort="date:desc" }}
-            {{ partial:blocks/image-left class="w-full lg:!w-11/12 { switch between='{{ highlighted_id.0 ? "lg:ml-auto|" : "|lg:ml-auto" }}' }" :image="featured_image" :category="category" link="/insights/{ slug }" }}
+            {{ partial:blocks/image-left class="w-full lg:w-11/12! { switch between='{{ highlighted_id.0 ? "lg:ml-auto|" : "|lg:ml-auto" }}' }" :image="featured_image" :category="category" link="/insights/{ slug }" }}
                 {{ introduction }}
             {{ /partial:blocks/image-left }}
         {{ /collection:insights }}
