@@ -7,34 +7,45 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T344V7V5E"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-1T344V7V5E');
     </script>
+    <!-- Leadinfo tracking code -->
+    <script>
+        (function (l, e, a, d, i, n, f, o) {
+            if (!l[i]) {
+                l.GlobalLeadinfoNamespace = l.GlobalLeadinfoNamespace || [];
+                l.GlobalLeadinfoNamespace.push(i); l[i] = function () { (l[i].q = l[i].q || []).push(arguments) }; l[i].t = l[i].t || n;
+                l[i].q = l[i].q || []; o = e.createElement(a); f = e.getElementsByTagName(a)[0]; o.async = 1; o.src = d; f.parentNode.insertBefore(o, f);
+            }
+        }(window, document, 'script', 'https://cdn.leadinfo.net/ping.js', 'leadinfo', 'LI-643558C020FD3'));
+    </script>
+    <script src="https://cdn.usefathom.com/script.js" data-site="XTVPLNKC" defer></script>
     {{ /if }}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{ site_title = meta_title ?? title }}
-    {{ site_name = seo:meta_title ?? site:name  }}
+    {{ site_name = seo:meta_title ?? site:name }}
     <title>{{ if site_title }}{{ site_title }} - {{ /if }}{{ site_name }}</title>
+    <meta property="og:title" content="{{ if site_title }}{{ site_title }} - {{ /if }}{{ site_name }}">
     {{ meta_description_text = meta_description ? meta_description : seo:meta_description }}
     {{ if meta_description_text }}
-        <meta name="description" content="{{ meta_description_text }}"/>
+    <meta name="description" content="{{ meta_description_text }}">
     {{ /if }}
     {{ meta_keywords_text = meta_keywords ? meta_keywords : seo:meta_keywords }}
     {{ if meta_keywords_text }}
-        <meta name="keywords" content="{{ meta_keywords_text }}"/>
+    <meta name="keywords" content="{{ meta_keywords_text }}">
     {{ /if }}
-    <meta property="og:title" content="{{ if title_text }}{{ title_text }} - {{ /if }}{{ site:name }}" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="{{ current_url }}" />
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ current_url }}">
     {{ meta_description_text = meta_description ? meta_description : seo:meta_description }}
     {{ if meta_description_text }}
-        <meta property="og:description" content="{{ meta_description_text }}">
+    <meta property="og:description" content="{{ meta_description_text }}">
     {{ /if }}
     {{ opengraph_image = opengraph:opengraph_image ?? "/og-image.png" }}
-    <meta property="og:image" content="{{ site:url }}{{ opengraph_image }}" />
+    <meta property="og:image" content="{{ site:url }}{{ opengraph_image }}">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://use.typekit.net/oap5ojy.css">
@@ -56,7 +67,6 @@
 
     {{ dynamic_token }}
     <script src="{{ mix src='assets/js/site.js' }}"></script>
-    {{ recaptcha }}
 </body>
 
 </html>

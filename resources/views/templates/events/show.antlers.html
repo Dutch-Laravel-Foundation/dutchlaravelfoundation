@@ -19,7 +19,7 @@
                 {{ if date_start }}
                     <div class="flex flex-col sm:table-row">
                         <div class="font-semibold sm:table-cell">Datum</div>
-                        <div class="sm:table-cell "><span class="capitalize whitespace-nowrap">{{ date_start format_localized="%A" }}</span> {{ date_start format_localized="%e %B %Y" }}</div>
+                        <div class="sm:table-cell "><span class="capitalize whitespace-nowrap">{{ date_start | iso_format="dddd" }}</span> {{ date_start | iso_format="D MMMM YYYY" }}</div>
                     </div>
                 {{ /if }}
                 {{ if time_start }}
@@ -36,8 +36,8 @@
                 {{ /if }}
                 {{ if address }}
                     <div class="flex flex-col sm:table-row">
-                        <div class="pr-6 font-semibold sm:table-cell lg:pr-10">Soort event</div>
-                        <div class="sm:table-cell ">{{ type }}</div>
+                        <div class="pr-6 font-semibold sm:table-cell lg:pr-10">Adres</div>
+                        <div class="sm:table-cell ">{{ address }}</div>
                     </div>
                 {{ /if }}
             </div>

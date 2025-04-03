@@ -16,13 +16,15 @@ number_of_employees: 1-10
 province: Gelderland
 city: Nijmegen
 website: vormkracht10.nl
+recruitment_website: vormkracht10.nl/werken-bij
 phone: '+31 (0)24 260 0000'
-updated_by: 8d873b47-ad86-4fd3-9e95-27842ea80beb
-updated_at: 1655377996
+updated_by: 28c0a799-7234-4581-b869-6eda5a36a8e2
+updated_at: 1707473848
 logo: vormkracht10-logo.png
 founding_partner: false
 member_type: bedrijf
 type: Bedrijf
 employees: 1-10
 email: info@vormkracht10.nl
+published: true
 ---

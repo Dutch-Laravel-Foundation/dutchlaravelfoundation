@@ -5,8 +5,8 @@ title: Synetic
 founding_partner: false
 type: Bedrijf
 employees: 1-10
-updated_by: 8d873b47-ad86-4fd3-9e95-27842ea80beb
-updated_at: 1656402892
+updated_by: 28c0a799-7234-4581-b869-6eda5a36a8e2
+updated_at: 1729539111
 logo: synetic-logo-payoff-dark.png
 description: |-
   Als het internet een van de belangrijke media is voor je bedrijf, verdient je organisatie een digitaal platform dat vlekkeloos presteert. Hoe groots je ideeën ook zijn: wij vertalen je strategie naar een krachtige applicatie. Samen met jou bouwen we een digitaal landschap waarin je plannen zich thuisvoelen en veilig kunnen groeien. Bijvoorbeeld met maatwerk softwareontwikkeling, een nieuw e-commerce platform of webpersonalisatie waarmee je klanten altijd op maat bedient.
@@ -19,4 +19,7 @@ city: Haarlem
 email: info@synetic.nl
 website: synetic.nl
 phone: '+31 (023) 303 21 00'
+recruitment_website: synetic.nl/werken-bij
+video: 'https://youtu.be/W4nqlUNxA4o?si=EQ9abd4uNUX8A2CF'
+published: true
 ---

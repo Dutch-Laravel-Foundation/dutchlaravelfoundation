@@ -10,9 +10,9 @@ date_start: '2019-12-11'
 time_start: '18:00'
 time_end: '21:00'
 signup_link: 'https://www.meetup.com/nl-NL/meetup-group-NBzJdgRH/events/264685464/'
-updated_by: 8d873b47-ad86-4fd3-9e95-27842ea80beb
-updated_at: 1655300590
-featured_image: laravel-meetup.jpeg
+updated_by: 28c0a799-7234-4581-b869-6eda5a36a8e2
+updated_at: 1733153354
+featured_image: directors-dinner.jpeg
 content:
   -
     type: paragraph

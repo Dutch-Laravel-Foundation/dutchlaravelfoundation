@@ -1,5 +1,8 @@
 <?php
 
+use Statamic\StaticCaching\Replacers\NoCacheReplacer;
+use Statamic\StaticCaching\Replacers\CsrfTokenReplacer;
+
 return [
 
     /*
@@ -91,5 +94,10 @@ return [
     */
 
     'ignore_query_strings' => false,
+
+    'replacers' => [
+        CsrfTokenReplacer::class,
+        NoCacheReplacer::class,
+    ],
 
 ];

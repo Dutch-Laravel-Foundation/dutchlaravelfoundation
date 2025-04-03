@@ -3,7 +3,7 @@
     {{ if image }}
     <img class="object-cover w-96 {{ if featured-image-size === 'large'}} absolute -z-10 w-[36rem] -translate-y-48 -translate-x-96 {{ /if }}"
         style="object-position:{{ featured_image:focus_css }}" src="{{ glide src="{featured_image}" fit="crop_focal" width="1280" }}"
-        alt="{{ featured_image:alt ?? title }}" />
+        alt="{{ featured_image:alt ?? title }}">
     {{ /if }}
     {{ partial:blocks/base class="w-2/3" }}
 </div>

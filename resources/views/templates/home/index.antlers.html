@@ -19,7 +19,7 @@
         {{# Background image #}}
         <div class="absolute z-[-1] flex items-center justify-center sm:top-[12rem] top-[20rem] md:top-[10rem] lg:top-[-4rem] left-[-28rem]">
             <div>
-                <img src="/assets/img/backgrounds/floor-mid-half-gray.svg" class="w-[1000px] h-[600px]"/>
+                <img src="/assets/img/backgrounds/floor-mid-half-gray.svg" class="w-[1000px] h-[600px]">
             </div>
         </div>
     </section>
@@ -52,7 +52,7 @@
             <div class="flex swiper-wrapper">
                 {{ collection:clients logo:isset="true" sort="ASC" }}
                 <div class="flex items-center justify-center px-4 mx-auto swiper-slide">
-                    <img src="{{ logo }}" alt="{{ title }} logo" class="max-h-24" />
+                    <img src="{{ logo }}" alt="{{ title }} logo" class="max-h-24">
                 </div>
                 {{ /collection:clients }}
 
@@ -61,12 +61,12 @@
                     and currently there are 3 actual clients #}}
                 {{ collection:clients logo:isset="true" sort="DESC" }}
                 <div class="flex items-center justify-center px-4 mx-auto swiper-slide">
-                    <img src="{{ logo }}" alt="{{ title }} logo" class="max-h-24" />
+                    <img src="{{ logo }}" alt="{{ title }} logo" class="max-h-24">
                 </div>
                 {{ /collection:clients }}
                 {{ collection:clients logo:isset="true" sort="DESC" }}
                 <div class="flex items-center justify-center px-4 mx-auto swiper-slide">
-                    <img src="{{ logo }}" alt="{{ title }} logo" class="max-h-24" />
+                    <img src="{{ logo }}" alt="{{ title }} logo" class="max-h-24">
                 </div>
                 {{ /collection:clients }}
                 {{# End 2nd and 3rd loop #}}

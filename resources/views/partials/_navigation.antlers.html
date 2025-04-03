@@ -12,7 +12,6 @@
             {{ nav_class = active_class }}
         {{ /if }}
         <a href="/{{ page.slug != 'home' ?= page.slug }}"
-            class="block h-auto my-auto border-b border-transparent hover:text-inherit {{ nav_class }} {{ class }}">{{
-            title }}</a>
+            class="block h-auto my-auto border-b border-transparent hover:text-inherit {{ nav_class }} {{ class }}">{{ title }}</a>
     {{ /if }}
 {{ /nav:main }}

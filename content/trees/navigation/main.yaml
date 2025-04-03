@@ -30,6 +30,11 @@ tree:
     data:
       page: 7840f9f9-3fba-4608-b877-250f18e634b2
   -
+    id: baea41fd-e38d-42e6-a85d-6d2cbdbad34b
+    title: Knowledge
+    data:
+      page: 83389b84-3d9d-43ad-956c-223c261062cc
+  -
     id: 0686089d-49e7-4e88-bb03-6b4a1374262b
     title: Agenda
     data:

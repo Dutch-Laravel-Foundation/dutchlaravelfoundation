@@ -78,7 +78,7 @@ return [
             'connection' => 'cache',
             'lock_connection' => 'default',
             'options' => [
-                'prefix' => basename(base_path()).'_',
+                'prefix' => basename(base_path()) . '_',
             ],
         ],
 
@@ -108,6 +108,6 @@ return [
     |
     */
 
-    'prefix' => env('CACHE_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_cache'),
+    'prefix' => env('CACHE_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_') . '_cache'),
 
 ];

@@ -12,7 +12,6 @@ sections:
           display: Naam
           instructions_position: above
           listable: hidden
-          read_only: false
           input_type: text
           antlers: false
       -
@@ -23,7 +22,6 @@ sections:
           display: Omschrijving
           instructions_position: above
           listable: hidden
-          read_only: false
           restrict: false
           automatic_line_breaks: true
           automatic_links: false
@@ -45,7 +43,6 @@ sections:
           icon: assets
           listable: hidden
           instructions_position: above
-          read_only: false
   sidebar:
     display: Sidebar
     fields:
@@ -63,7 +60,6 @@ sections:
           icon: toggle
           listable: hidden
           instructions_position: above
-          read_only: false
       -
         handle: type
         field:
@@ -84,7 +80,6 @@ sections:
           icon: select
           listable: hidden
           instructions_position: above
-          read_only: false
       -
         handle: employees
         field:
@@ -105,7 +100,6 @@ sections:
           icon: select
           listable: hidden
           instructions_position: above
-          read_only: false
   contact:
     display: Contactgegevens
     fields:
@@ -119,7 +113,6 @@ sections:
           icon: text
           listable: hidden
           instructions_position: above
-          read_only: false
       -
         import: province
       -
@@ -132,7 +125,16 @@ sections:
           icon: text
           listable: hidden
           instructions_position: above
-          read_only: false
+      -
+        handle: phone
+        field:
+          input_type: text
+          antlers: false
+          display: Telefoon
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
       -
         handle: website
         field:
@@ -144,18 +146,27 @@ sections:
           icon: text
           listable: hidden
           instructions_position: above
-          read_only: false
       -
-        handle: phone
+        handle: recruitment_website
         field:
           input_type: text
+          prepend: 'https://'
           antlers: false
-          display: Telefoon
+          display: 'Vacature website'
           type: text
           icon: text
           listable: hidden
           instructions_position: above
-          read_only: false
+          visibility: visible
+      -
+        handle: video
+        field:
+          display: Video
+          type: video
+          icon: video
+          listable: hidden
+          instructions_position: above
+          visibility: visible
   seo:
     display: SEO
     fields:
