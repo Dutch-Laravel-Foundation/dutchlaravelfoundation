@@ -66,16 +66,6 @@ if (header != null && isIE === false) {
         },
         false
     );
-
-    window.addEventListener("scroll", (event) => {
-        if (window.scrollY > bannerHeight / 2) {
-            nav.classList.add("make-small");
-            nav.classList.remove("make-large");
-        } else {
-            nav.classList.add("make-large");
-            nav.classList.remove("make-small");
-        }
-    });
 }
 
 function combinedHeaderHeight(includeBanner = true) {
