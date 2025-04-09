@@ -57,10 +57,15 @@
     <link rel="manifest" href="/site.webmanifest">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
+        rel="stylesheet">
+
     {{ vite src="resources/js/site.js|resources/css/tailwind.css" }}
 </head>
 
-<body class="font-sans leading-normal bg-white text-primary-text">
+<body class="font-sans leading-normal  bg-white text-primary-text" x-data="{ overflowHidden: false }" @open-vragen-ai.window="overflowHidden = true" @close-vragen-ai.window="overflowHidden = false" :class="overflowHidden ? 'overflow-hidden h-screen': ''">
     <div class="frontend relative page-{{ slug }}">
         {{ partial:header }}
         {{ partial:content }}

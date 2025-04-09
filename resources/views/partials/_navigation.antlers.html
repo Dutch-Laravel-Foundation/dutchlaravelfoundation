@@ -6,11 +6,26 @@
 {{ button_background_class = style == 'contrast' ? 'border-white' : 'border-primary-accent' }}
 {{ chevron_class = style == 'contrast' ? 'text-white' : 'text-black/50' }}
 
-<a href="/">
+<a href="/" class="mt-8">
     <img class="!w-44 {{nav_url_class}}" src="{{ nav_logo }}" alt="{{ title }}">
 </a>
 
-<div class="flex items-center gap-12">
+<div class="flex flex-col space-y-4 items-end">
+    <div class="group cursor-pointer" @click="$dispatch('open-vragen-ai')" x-data>
+        <div class="{{ if style == 'contrast' }} text-white/80 group-hover:text-white {{ else }}text-black/50 group-hover:text-primary-accent {{ /if }}  flex items-center gap-1 text-sm"
+            @click="showVragenAi = true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                class="size-4">
+                <path fill-rule="evenodd"
+                    d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                    clip-rule="evenodd" />
+            </svg>
+            <span class="{{ if style=='contrast' }} text-white/80 group-hover:text-white {{ else }}text-black/50
+                group-hover:text-primary-accent {{ /if }} ">Zoeken</span>
+        </div>
+    </div>
+    <div class="flex items-center gap-12">
+
+
     {{ nav:main }}
         {{ if depth == 1 }}
             <div class="group relative py-4 flex items-center gap-1">
@@ -39,4 +54,5 @@
     {{ /nav:main }}
 
     {{ partial:buttons/primary-border-alt class="{{ button_class }}" background_class="{{ button_background_class }}" link="/lid-worden" type="button" }}Lid worden{{ /partial:buttons/primary-border-alt }}
+    </div>
 </div>

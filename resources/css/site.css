@@ -1,3 +1,7 @@
+[x-cloak] {
+    display: none !important;
+}
+
 /* Main styling */
 html {
     @apply overflow-x-hidden text-tertiary-regular;
