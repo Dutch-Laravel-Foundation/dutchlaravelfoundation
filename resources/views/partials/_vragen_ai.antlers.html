@@ -1,79 +1,138 @@
-<div x-data="{ showVragenAi: false }" @open-vragen-ai.window="showVragenAi = true" @close-vragen-ai.window="showVragenAi = false" x-cloak x-show="showVragenAi" role="dialog" aria-modal="true" x-on:keydown.escape.prevent.stop="showVragenAi = false" x-transition.opacity id="vragenai-app-container" class="px-2 flex fixed top-0 left-0 w-screen justify-center items-start h-screen bg-black/20 z-1000" @click.self="$dispatch('close-vragen-ai')">
-  <div class="w-full max-w-screen-md bg-white/50 rounded-2xl p-1 shadow-xl mt-2 sm:mt-20 md:mt-40">
-    <div class="w-full max-h-[calc(100vh-1.5rem)] sm:max-h-[400px] overflow-y-auto bg-white rounded-xl p-2 border border-gray-100" :style="overscroll-behavior: contain;">
-        <div class="flex flex-row justify-between items-center mb-2 px-4 py-2">
-          <h3 class="my-0 font-bold">Zoeken</h3>
-          <button class="text-black/50 cursor-pointer text-sm font-medium hover:text-black" @click="$dispatch('close-vragen-ai')">
-            Sluiten
-          </button>
-        </div>
+<div x-data="{ showVragenAi: false }" @open-vragen-ai.window="showVragenAi = true"
+  @close-vragen-ai.window="showVragenAi = false" x-cloak x-show="showVragenAi" role="dialog" aria-modal="true"
+  x-on:keydown.escape.prevent.stop="showVragenAi = false" x-transition.opacity id="vragenai-app-container"
+  class="px-2 flex fixed top-0 left-0 w-screen justify-center items-center h-screen bg-black/20 z-1000"
+  @click.self="$dispatch('close-vragen-ai')">
+  <div class="w-full max-w-screen-md bg-white/50 rounded-2xl p-1 shadow-xl">
+    <div
+      class="w-full h-[calc(100vh-1.5rem)] sm:max-h-[800px]  overflow-y-auto bg-white rounded-xl p-2 border border-gray-100">
+      <div class="flex flex-row justify-between items-center mb-2 px-4 py-2">
+        <h3 class="my-0 font-bold">Zoeken</h3>
+        <button class="text-black/50 cursor-pointer text-sm font-medium hover:text-black"
+          @click="$dispatch('close-vragen-ai')">
+          Sluiten
+        </button>
+      </div>
+      <style>
+        .vragenai-question-form,
+        .vragenai-question-form:focus {
+          border-radius: 6px !important;
+          outline-color: #FF2D20 !important;
+        }
 
-        <style>
-          .vragenai-question-form,
-          .vragenai-question-form:focus {
-            border-radius: 6px !important;
-            outline-color: #FF2D20 !important;
-          }
-          .vragenai-hybrid-run {
-            padding: 0 16px !important;
-          }
-        </style>
-        <script nonce="">
-          window.WebConverse = window.WebConverse || {};
-          window.WebConverse.locale = {
-            'Vertel, wat wil je weten?': 'Stel je vraag of praat met Dutch Laravel Foundation'
-          };
-          window.WebConverse.feedbackAngles = {};
-        </script>
-        <link rel="preload" as="style" href="https://dlf.vragen.ai/build/assets/BaseSourceIdentifier-CsEv2LBR.css" />
-        <link rel="preload" as="style" href="https://dlf.vragen.ai/build/assets/BaseSearchResults-K6k1DzuK.css" />
-        <link rel="preload" as="style" href="https://dlf.vragen.ai/build/assets/BaseDisclaimer-BxtkM5OQ.css" />
-        <link rel="preload" as="style" href="https://dlf.vragen.ai/build/assets/hybridApp-1ugLerwh.css" />
-        <link rel="modulepreload" href="https://dlf.vragen.ai/build/assets/hybridApp-t69rVmgQ.js" />
-        <link rel="modulepreload" href="https://dlf.vragen.ai/build/assets/BaseSourceIdentifier-BITTHmS_.js" />
-        <link rel="modulepreload" href="https://dlf.vragen.ai/build/assets/_plugin-vue_export-helper-BaFjlJhp.js" />
-        <link rel="modulepreload" href="https://dlf.vragen.ai/build/assets/StopIcon-DFJkhbz4.js" />
-        <link rel="modulepreload" href="https://dlf.vragen.ai/build/assets/XMarkIcon-DU0sp1iF.js" />
-        <link rel="modulepreload" href="https://dlf.vragen.ai/build/assets/BaseSearchResults-WBKgMjIH.js" />
-        <link rel="modulepreload" href="https://dlf.vragen.ai/build/assets/BaseDisclaimer-OldHAE4o.js" />
-        <link rel="modulepreload" href="https://dlf.vragen.ai/build/assets/marked.esm-BcTrTRPX.js" />
-        <link rel="modulepreload" href="https://dlf.vragen.ai/build/assets/HandThumbUpIcon-DLaKIaDY.js" />
-        <link rel="stylesheet" href="https://dlf.vragen.ai/build/assets/BaseSourceIdentifier-CsEv2LBR.css"
-          data-navigate-track="reload" />
-        <link rel="stylesheet" href="https://dlf.vragen.ai/build/assets/BaseSearchResults-K6k1DzuK.css"
-          data-navigate-track="reload" />
-        <link rel="stylesheet" href="https://dlf.vragen.ai/build/assets/BaseDisclaimer-BxtkM5OQ.css"
-          data-navigate-track="reload" />
-        <link rel="stylesheet" href="https://dlf.vragen.ai/build/assets/hybridApp-1ugLerwh.css"
-          data-navigate-track="reload" />
-        <script type="module" src="https://dlf.vragen.ai/build/assets/hybridApp-t69rVmgQ.js"
-          data-navigate-track="reload"></script>
-        <script nonce="">
-          window.Vragenai = window.Vragenai || {};
-          window.Vragenai.blueprint = {
-            "uuid": "d54f9529-05aa-4cf1-b727-00f420b49934",
-            "name": "Dutch Laravel Foundation",
-            "slug": "dutch-laravel-foundation",
-            "avatar": "https:\/\/dutchlaravelfoundation.nl\/favicon-32x32.png",
-            "example_questions": [
-              {
-                "question": "Wat is de Dutch Laravel Foundation?"
-              }, {
-                "question": "Hoe kan ik lid worden van de Dutch Laravel Foundation?"
-              }, {
-                "question": "Welke voordelen biedt het lidmaatschap van de Dutch Laravel Foundation?"
-              }
-            ],
-            "view_mode": "hybrid",
-            "base_url": "https:\/\/dlf.vragen.ai",
-            "conversation_endpoint": "https:\/\/dlf.vragen.ai\/conversation\/d54f9529-05aa-4cf1-b727-00f420b49934\/start",
-            "search_endpoint": "https:\/\/dlf.vragen.ai\/conversation\/d54f9529-05aa-4cf1-b727-00f420b49934\/results",
-            "suggest_endpoint": "https:\/\/dlf.vragen.ai\/conversation\/d54f9529-05aa-4cf1-b727-00f420b49934\/questions",
-            "feedback_endpoint": "https:\/\/dlf.vragen.ai\/conversation\/d54f9529-05aa-4cf1-b727-00f420b49934\/feedback",
-            "simple_feedback_endpoint": "https:\/\/dlf.vragen.ai\/conversation\/d54f9529-05aa-4cf1-b727-00f420b49934\/simpleFeedback"
-          };
-        </script>
-        <div id="vragenai-app"></div>
+        .footer {
+          margin-top: auto;
+          padding-top: 2rem;
+          text-align: center
+        }
+
+        .footer__payoff {
+          font-size: 1.2rem;
+          font-weight: 500;
+          line-height: 2.8ch
+        }
+
+        .footer__payoff .logo {
+          height: 2.7ch;
+          margin-right: 0.1em
+        }
+
+        .footer__payoff a {
+          color: inherit;
+          text-decoration: none
+        }
+
+        .footer__menu {
+          list-style: none;
+          margin-bottom: 1.5rem;
+          padding: 0
+        }
+
+        .footer__menu a {
+          color: #616161;
+          font-size: 0.875rem;
+          line-height: 1.5;
+          text-decoration: none
+        }
+
+        .logo {
+          aspect-ratio: 139 / 36;
+          background: url('https://dlf.vragen.ai/build/assets/logo-DN19yI1e.svg');
+          background-size: 100%;
+          display: inline-block;
+          height: 3ch;
+          text-indent: -200vw
+        }
+      </style>
+      <script nonce="">
+        window.WebConverse = window.WebConverse || {};
+        window.WebConverse.locale = {
+          'Vertel, wat wil je weten?': 'Stel je vraag of praat met Dutch Laravel Foundation'
+        };
+        window.WebConverse.feedbackAngles = {};
+      </script>
+      <link rel="preload" as="style" href="https://dlf.vragen.ai/build/assets/BaseSourceIdentifier-CsEv2LBR.css" />
+      <link rel="preload" as="style" href="https://dlf.vragen.ai/build/assets/BaseSearchResults-K6k1DzuK.css" />
+      <link rel="preload" as="style" href="https://dlf.vragen.ai/build/assets/BaseDisclaimer-BxtkM5OQ.css" />
+      <link rel="preload" as="style" href="https://dlf.vragen.ai/build/assets/hybridApp-1ugLerwh.css" />
+      <link rel="modulepreload" href="https://dlf.vragen.ai/build/assets/hybridApp-t69rVmgQ.js" />
+      <link rel="modulepreload" href="https://dlf.vragen.ai/build/assets/BaseSourceIdentifier-BITTHmS_.js" />
+      <link rel="modulepreload" href="https://dlf.vragen.ai/build/assets/_plugin-vue_export-helper-BaFjlJhp.js" />
+      <link rel="modulepreload" href="https://dlf.vragen.ai/build/assets/StopIcon-DFJkhbz4.js" />
+      <link rel="modulepreload" href="https://dlf.vragen.ai/build/assets/XMarkIcon-DU0sp1iF.js" />
+      <link rel="modulepreload" href="https://dlf.vragen.ai/build/assets/BaseSearchResults-WBKgMjIH.js" />
+      <link rel="modulepreload" href="https://dlf.vragen.ai/build/assets/BaseDisclaimer-OldHAE4o.js" />
+      <link rel="modulepreload" href="https://dlf.vragen.ai/build/assets/marked.esm-BcTrTRPX.js" />
+      <link rel="modulepreload" href="https://dlf.vragen.ai/build/assets/HandThumbUpIcon-DLaKIaDY.js" />
+      <link rel="stylesheet" href="https://dlf.vragen.ai/build/assets/BaseSourceIdentifier-CsEv2LBR.css"
+        data-navigate-track="reload" />
+      <link rel="stylesheet" href="https://dlf.vragen.ai/build/assets/BaseSearchResults-K6k1DzuK.css"
+        data-navigate-track="reload" />
+      <link rel="stylesheet" href="https://dlf.vragen.ai/build/assets/BaseDisclaimer-BxtkM5OQ.css"
+        data-navigate-track="reload" />
+      <link rel="stylesheet" href="https://dlf.vragen.ai/build/assets/hybridApp-1ugLerwh.css"
+        data-navigate-track="reload" />
+      <script type="module" src="https://dlf.vragen.ai/build/assets/hybridApp-t69rVmgQ.js"
+        data-navigate-track="reload"></script>
+      <script nonce="">
+        window.Vragenai = window.Vragenai || {};
+        window.Vragenai.blueprint = {
+          "uuid": "d54f9529-05aa-4cf1-b727-00f420b49934",
+          "name": "Dutch Laravel Foundation",
+          "slug": "dutch-laravel-foundation",
+          "avatar": "https:\/\/dutchlaravelfoundation.nl\/favicon-32x32.png",
+          "example_questions": [
+            {
+              "question": "Wat is de Dutch Laravel Foundation?"
+            }, {
+              "question": "Hoe kan ik lid worden van de Dutch Laravel Foundation?"
+            }, {
+              "question": "Welke voordelen biedt het lidmaatschap van de Dutch Laravel Foundation?"
+            }
+          ],
+          "view_mode": "hybrid",
+          "base_url": "https:\/\/dlf.vragen.ai",
+          "conversation_endpoint": "https:\/\/dlf.vragen.ai\/conversation\/d54f9529-05aa-4cf1-b727-00f420b49934\/start",
+          "search_endpoint": "https:\/\/dlf.vragen.ai\/conversation\/d54f9529-05aa-4cf1-b727-00f420b49934\/results",
+          "suggest_endpoint": "https:\/\/dlf.vragen.ai\/conversation\/d54f9529-05aa-4cf1-b727-00f420b49934\/questions",
+          "feedback_endpoint": "https:\/\/dlf.vragen.ai\/conversation\/d54f9529-05aa-4cf1-b727-00f420b49934\/feedback",
+          "simple_feedback_endpoint": "https:\/\/dlf.vragen.ai\/conversation\/d54f9529-05aa-4cf1-b727-00f420b49934\/simpleFeedback"
+        };
+      </script>
+      <div id="vragenai-app" class="px-4"></div>
+      <div class="footer">
+        <div class="footer__payoff">
+          <a href="https://www.vragen.ai/" target="_blank">
+            <em class="logo">vragen.ai</em>
+            is het nieuwe zoeken
+          </a>
+        </div>
+        <menu class="footer__menu">
+          <li>
+            <a href="https://www.vragen.ai/privacy-statement" target="_blank">Privacy statement</a>
+          </li>
+        </menu>
+      </div>
     </div>
   </div>
 </div>
