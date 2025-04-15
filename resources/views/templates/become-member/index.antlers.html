@@ -1,56 +1,71 @@
 {{# Top background image #}}
 {{ partial:decoration/floor-background background="floor-top-about-us" /}}
 
-<div class="flex flex-col justify-between w-full lg:flex-row">
-    <div class="w-full lg:w-2/3 mb">
-        {{ form:become_member redirect="/lid-worden" }}
-            {{ if success }}
-                <div class="px-6 sm:px-0">
-                    {{ partial:forms/success }}
-                </div>
-            {{ else }}
+<div class="flex flex-col justify-between w-full container mx-auto">
+    <div class="w-full text-center">
+        <h1>Word lid van de Dutch Laravel Foundation en geniet van <span class="relative before:h-2 before:w-full before:bg-primary-accent before:absolute before:-bottom-1 before:left-0">veel</span> voordelen</h1>
+    </div>
+    <div class="grid grid-cols-5 gap-12  items-start">
+        <div class="col-span-3 self-start sticky top-0">
 
-                {{ if errors }}
-                    <div class="p-6 mb-6 bg-primary-accent text-primary-contrast">
-                        {{ errors }}
+            <div class=" border-1 border-gray-100 p-1 bg-gray-100/20 rounded-2xl shadow-xl shadow-gray-200/50 backdrop-blur-xl ">
+                <div class="bg-white border-1 border-gray-100 p-8 rounded-xl shadow-xl shadow-gray-200/50">
+                        {{ form:become_member redirect="/lid-worden" }}
+                        {{ if success }}
+                        <div class="px-6 sm:px-0">
+                            {{ partial:forms/success }}
+                        </div>
+                        {{ else }}
+
+                        {{ if errors }}
+                        <div class="p-6 mb-6 bg-primary-accent text-primary-contrast">
+                            {{ errors }}
                             {{ value }}<br>
-                        {{ /errors }}
-                    </div>
-                {{ else }}
-                    {{ content }}
-                        {{ partial src="sets/autoload" }}
-                    {{ /content }}
-                    {{ partial:decoration/line }}
-                {{ /if }}
+                            {{ /errors }}
+                        </div>
 
-                <input type="text" class="hidden" name="{{ honeypot ?? 'honeypot' }}">
+                        {{ /if }}
 
-                <div class="flex flex-col pb-10 space-y-6 sm:pb-0 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:px-0">
-                    {{ fields }}
-                        {{ if handle != 'agree' }}
-                            <div class="{{ type != "text" ?= 'sm:col-span-2' }}">
+                        <input type="text" class="hidden" name="{{ honeypot ?? 'honeypot' }}">
+
+                        <div class="flex flex-col pb-10 space-y-6 sm:pb-0 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:px-0">
+                            {{ fields }}
+                            {{ if handle != 'agree' }}
+                            <div class="{{ type != " text" ?='sm:col-span-2' }}">
                                 <label for="{{ handle }}"><span class="meta">{{ display }}</span></label>
                                 {{ if instructions_position == 'above' }}
-                                    {{ instructions }}
+                                {{ instructions }}
                                 {{ /if }}
                                 {{# Add ID to field #}}
                                 {{ field = field regex_replace="^<([a-z]+)|<\\1 id='{ handle }'" }}
-                                {{ if instructions_position == 'below' }}
-                                    {{ instructions }}
-                                {{ /if }}
-                                {{ if error }}
-                                    <p class="text-primary-accent">{{ error }}</p>
-                                {{ /if }}
+                                                                    {{ if instructions_position == 'below' }}
+                                                                        {{ instructions }}
+                                                                    {{ /if }}
+                                                                    {{ if error }}
+                                                                        <p class=" text-primary-accent">{{ error }}</p>
+                                    {{ /if }}
                             </div>
-                        {{ else }}
+                            {{ else }}
                             <div class="flex flex-col justify-between col-span-2 lg:flex-row">
-                                <div class="flex flex-row w-full lg:w-4/6 text-tertiary-light mb">{{ field replace="<br>|" }}<span class="ml-2">{{ display regex_replace="(privacy statement)|<a href='/privacy-statement'>\\1</a>" }}</span></div>
-                                {{ partial:buttons/primary type="submit" class="w-full ml-auto sm:w-auto" button_class="w-full" }}Versturen{{ /partial:buttons/primary }}
+                                <div class="flex flex-row w-full lg:w-4/6 text-tertiary-light mb">{{ field replace="<br>|" }}<span
+                                        class="ml-2">{{ display regex_replace="(privacy statement)|<a href='/privacy-statement'>\\1</a>"
+                                        }}</span></div>
+                                {{ partial:buttons/primary type="submit" class="w-full ml-auto sm:w-auto" button_class="w-full" }}Versturen{{
+                                /partial:buttons/primary }}
                             </div>
+                            {{ /if }}
+                            {{ /fields }}
+                        </div>
                         {{ /if }}
-                    {{ /fields }}
+                        {{ /form:become_member }}
                 </div>
-            {{ /if }}
-        {{ /form:become_member }}
+            </div>
+
+        </div>
+        <div class="col-span-2">
+            {{ content }}
+                {{ partial src="sets/autoload" }}
+            {{ /content }}
+        </div>
     </div>
 </div>

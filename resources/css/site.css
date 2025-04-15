@@ -4,11 +4,7 @@
 
 /* Main styling */
 html {
-    @apply overflow-x-hidden text-tertiary-regular;
-}
-
-body {
-    @apply overflow-x-hidden;
+    @apply text-tertiary-regular;
 }
 
 .container {
