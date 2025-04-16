@@ -51,7 +51,7 @@ function menu() {
         <div class="flex flex-row items-start justify-between w-full px-6 pt-6 pb-0 mx-auto xl:pt-10">
             <a href="/" class="flex justify-start w-full"><img class="max-w-full max-h-[3rem] xl:max-h-full" src="{{ banner ? '/assets/img/logo-alt.svg': '/assets/img/logo.svg' }}" alt="Home"></a>
             {{# Toggle button #}}
-            {{# <div class="z-900 absolute top-7.5 right-24 group cursor-pointer" @click="$dispatch('open-vragen-ai')" x-data>
+            <div class="z-900 absolute top-7.5 right-24 group cursor-pointer" @click="$dispatch('open-vragen-ai')" x-data>
                 <div class="{{ if banner }} text-white {{ else }}text-black group-hover:text-primary-accent {{ /if }}  flex items-center gap-1 text-sm"
                     @click="showVragenAi = true">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-9">
@@ -60,7 +60,7 @@ function menu() {
                             clip-rule="evenodd" />
                     </svg>
                 </div>
-            </div> #}}
+            </div>
             <button class="z-900 absolute top-7 right-8 xl:right-20 xl:top-[3rem] h-[2.4rem] w-[2.5rem] cursor-pointer" @click="toggleMenu()" disabled x-bind:disabled="disabled">
                 <div class="relative focus:outline-hidden">
                     <div class="absolute block w-[4rem]">
