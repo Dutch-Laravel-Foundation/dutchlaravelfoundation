@@ -88,11 +88,11 @@ article img {
 
 input:not([type="checkbox"]),
 textarea {
-    @apply w-full !bg-[#FEFEFE] border !border-[#ECECEC] ring-0! focus:!border-primary-accent !shadow-sm shadow-gray-100/70;
+    @apply w-full !bg-[#FEFEFE] border !border-[#ECECEC] ring-0! focus:!border-primary-accent !shadow-md shadow-gray-100/70;
 }
 
 input[type="checkbox"] {
-    @apply w-6 h-6 mr-2 border bg-[#FEFEFE] text-primary-accent focus:ring-primary-accent/25 border-[#ECECEC] !shadow-sm shadow-gray-100/70;
+    @apply w-6 h-6 mr-2 border bg-[#FEFEFE] text-primary-accent focus:ring-primary-accent/25 border-[#ECECEC] !shadow-md shadow-gray-100/70;
 }
 
 .vragenai-question-form textarea.vragenai-question-form__input {
