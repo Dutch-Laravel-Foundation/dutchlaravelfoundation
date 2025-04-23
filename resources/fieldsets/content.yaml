@@ -3,247 +3,6 @@ fields:
   -
     handle: content
     field:
-      always_show_set_button: false
-      sets:
-        double_column:
-          display: 'Double column'
-          fields:
-            -
-              import: heading
-            -
-              handle: left
-              field:
-                always_show_set_button: false
-                buttons:
-                  - h1
-                  - h2
-                  - h3
-                  - h4
-                  - bold
-                  - italic
-                  - unorderedlist
-                  - orderedlist
-                  - removeformat
-                  - quote
-                  - anchor
-                  - image
-                  - table
-                save_html: false
-                toolbar_mode: fixed
-                link_noopener: false
-                link_noreferrer: false
-                target_blank: true
-                reading_time: false
-                fullscreen: true
-                allow_source: true
-                enable_input_rules: true
-                enable_paste_rules: true
-                antlers: false
-                display: Left
-                type: bard
-                icon: bard
-                listable: hidden
-                instructions_position: above
-                read_only: false
-                sets:
-                  meta_block:
-                    display: 'Meta block'
-                    fields:
-                      -
-                        import: meta_block
-                  image:
-                    display: Image
-                    fields:
-                      -
-                        import: image
-                  spacer:
-                    display: Spacer
-                    fields:
-                      -
-                        import: spacer
-                  line:
-                    display: Line
-                    fields:
-                      -
-                        import: line
-                  video:
-                    display: Video
-                    fields:
-                      -
-                        handle: video
-                        field:
-                          display: Video
-                          type: video
-                          icon: video
-                          listable: hidden
-                          instructions_position: above
-                          read_only: false
-                container: assets
-            -
-              handle: right
-              field:
-                always_show_set_button: false
-                buttons:
-                  - h1
-                  - h2
-                  - h3
-                  - h4
-                  - bold
-                  - italic
-                  - unorderedlist
-                  - orderedlist
-                  - removeformat
-                  - quote
-                  - anchor
-                  - image
-                  - table
-                save_html: false
-                toolbar_mode: fixed
-                link_noopener: false
-                link_noreferrer: false
-                target_blank: true
-                reading_time: false
-                fullscreen: true
-                allow_source: true
-                enable_input_rules: true
-                enable_paste_rules: true
-                antlers: false
-                display: Right
-                type: bard
-                icon: bard
-                listable: hidden
-                instructions_position: above
-                read_only: false
-                sets:
-                  meta_block:
-                    display: 'Meta block'
-                    fields:
-                      -
-                        import: meta_block
-                  image:
-                    display: Image
-                    fields:
-                      -
-                        import: image
-                  spacer:
-                    display: Spacer
-                    fields:
-                      -
-                        import: spacer
-                  line:
-                    display: Line
-                    fields:
-                      -
-                        import: line
-                  video:
-                    display: Video
-                    fields:
-                      -
-                        handle: video
-                        field:
-                          display: Video
-                          type: video
-                          icon: video
-                          listable: hidden
-                          instructions_position: above
-                          read_only: false
-                container: assets
-        3_4_column:
-          display: '75% width column'
-          fields:
-            -
-              import: heading
-            -
-              handle: content
-              field:
-                always_show_set_button: false
-                buttons:
-                  - h1
-                  - h2
-                  - h3
-                  - h4
-                  - bold
-                  - italic
-                  - unorderedlist
-                  - orderedlist
-                  - removeformat
-                  - quote
-                  - anchor
-                  - image
-                  - table
-                container: assets
-                save_html: false
-                toolbar_mode: fixed
-                link_noopener: false
-                link_noreferrer: false
-                target_blank: true
-                reading_time: false
-                fullscreen: true
-                allow_source: true
-                enable_input_rules: true
-                enable_paste_rules: true
-                antlers: false
-                display: Content
-                type: bard
-                icon: bard
-                listable: hidden
-                instructions_position: above
-                read_only: false
-                sets:
-                  spacer:
-                    display: Spacer
-                    fields:
-                      -
-                        import: spacer
-                  line:
-                    display: Line
-                    fields:
-                      -
-                        import: line
-                  video:
-                    display: Video
-                    fields:
-                      -
-                        handle: video
-                        field:
-                          display: Video
-                          type: video
-                          icon: video
-                          listable: hidden
-                          instructions_position: above
-                          read_only: false
-        image:
-          display: Image
-          fields:
-            -
-              import: image
-        meta_block:
-          display: 'Meta block'
-          fields:
-            -
-              import: meta_block
-        spacer:
-          display: Spacer
-          fields:
-            -
-              import: spacer
-        line:
-          display: Line
-          fields:
-            -
-              import: line
-        video:
-          display: Video
-          fields:
-            -
-              handle: video
-              field:
-                display: Video
-                type: video
-                icon: video
-                listable: hidden
-                instructions_position: above
-                read_only: false
       buttons:
         - h1
         - h2
@@ -258,21 +17,211 @@ fields:
         - anchor
         - image
         - table
-      save_html: false
-      toolbar_mode: fixed
-      link_noopener: false
-      link_noreferrer: false
       target_blank: true
-      reading_time: false
-      fullscreen: true
-      allow_source: true
-      enable_input_rules: true
-      enable_paste_rules: true
-      antlers: false
       display: Content
       type: bard
-      icon: bard
-      listable: hidden
-      instructions_position: above
-      read_only: false
       container: assets
+      remove_empty_nodes: false
+      sets:
+        main:
+          display: Main
+          sets:
+            double_column:
+              display: 'Double column'
+              fields:
+                -
+                  import: heading
+                -
+                  handle: left
+                  field:
+                    buttons:
+                      - h1
+                      - h2
+                      - h3
+                      - h4
+                      - bold
+                      - italic
+                      - unorderedlist
+                      - orderedlist
+                      - removeformat
+                      - quote
+                      - anchor
+                      - image
+                      - table
+                    target_blank: true
+                    display: Left
+                    type: bard
+                    container: assets
+                    sets:
+                      meta_block:
+                        display: 'Meta block'
+                        fields:
+                          -
+                            import: meta_block
+                      image:
+                        display: Image
+                        fields:
+                          -
+                            import: image
+                      spacer:
+                        display: Spacer
+                        fields:
+                          -
+                            import: spacer
+                      line:
+                        display: Line
+                        fields:
+                          -
+                            import: line
+                      video:
+                        display: Video
+                        fields:
+                          -
+                            handle: video
+                            field:
+                              display: Video
+                              type: video
+                              icon: video
+                              listable: hidden
+                              instructions_position: above
+                              read_only: false
+                -
+                  handle: right
+                  field:
+                    buttons:
+                      - h1
+                      - h2
+                      - h3
+                      - h4
+                      - bold
+                      - italic
+                      - unorderedlist
+                      - orderedlist
+                      - removeformat
+                      - quote
+                      - anchor
+                      - image
+                      - table
+                    target_blank: true
+                    display: Right
+                    type: bard
+                    container: assets
+                    sets:
+                      meta_block:
+                        display: 'Meta block'
+                        fields:
+                          -
+                            import: meta_block
+                      image:
+                        display: Image
+                        fields:
+                          -
+                            import: image
+                      spacer:
+                        display: Spacer
+                        fields:
+                          -
+                            import: spacer
+                      line:
+                        display: Line
+                        fields:
+                          -
+                            import: line
+                      video:
+                        display: Video
+                        fields:
+                          -
+                            handle: video
+                            field:
+                              display: Video
+                              type: video
+                              icon: video
+                              listable: hidden
+                              instructions_position: above
+                              read_only: false
+            3_4_column:
+              display: '75% width column'
+              fields:
+                -
+                  import: heading
+                -
+                  handle: content
+                  field:
+                    buttons:
+                      - h1
+                      - h2
+                      - h3
+                      - h4
+                      - bold
+                      - italic
+                      - unorderedlist
+                      - orderedlist
+                      - removeformat
+                      - quote
+                      - anchor
+                      - image
+                      - table
+                    container: assets
+                    target_blank: true
+                    display: Content
+                    type: bard
+                    sets:
+                      spacer:
+                        display: Spacer
+                        fields:
+                          -
+                            import: spacer
+                      line:
+                        display: Line
+                        fields:
+                          -
+                            import: line
+                      video:
+                        display: Video
+                        fields:
+                          -
+                            handle: video
+                            field:
+                              display: Video
+                              type: video
+                              icon: video
+                              listable: hidden
+                              instructions_position: above
+                              read_only: false
+            image:
+              display: Image
+              fields:
+                -
+                  import: image
+            meta_block:
+              display: 'Meta block'
+              fields:
+                -
+                  import: meta_block
+            spacer:
+              display: Spacer
+              fields:
+                -
+                  import: spacer
+            line:
+              display: Line
+              fields:
+                -
+                  import: line
+            video:
+              display: Video
+              fields:
+                -
+                  handle: video
+                  field:
+                    display: Video
+                    type: video
+            red_note:
+              display: 'Red note'
+              fields:
+                -
+                  handle: content
+                  field:
+                    remove_empty_nodes: false
+                    type: bard
+                    display: Inhoud

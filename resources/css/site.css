@@ -34,7 +34,7 @@ p {
 
 span.meta,
 span.meta-dark {
-    @apply mb-3 text-base font-semibold uppercase break-words md:text-xs text-tertiary-light;
+    @apply mb-3 text-xs font-semibold uppercase break-words md:text-xs text-tertiary-light;
     @layer letter-spacing-[.12em];
 }
 
@@ -59,15 +59,15 @@ footer {
 }
 
 #content ul {
-    @apply pl-2 list-disc list-outside;
-}
-
-#content ul li {
-    @apply pl-3;
+    @apply pl-5 list-disc list-outside text-xl;
 }
 
 #content ul li::marker {
-    @apply text-primary-accent font-bold inline w-[1em] -ml-[1em] content-["\2022"];
+    @apply text-primary-accent;
+}
+
+#content .benefits ul {
+    list-style-image: url("../images/check.svg");
 }
 
 #content ol {
@@ -88,11 +88,15 @@ article img {
 
 input:not([type="checkbox"]),
 textarea {
-    @apply w-full bg-secondary-light! border-none ring-0! focus:border-primary-accent;
+    @apply w-full !bg-[#FEFEFE] border !border-[#ECECEC] ring-0! focus:!border-primary-accent !shadow-sm shadow-gray-100/70;
 }
 
 input[type="checkbox"] {
-    @apply w-6 h-6 mr-2 border rounded-sm bg-secondary-light text-primary-accent focus:ring-primary-accent/25 border-tertiary-light/40;
+    @apply w-6 h-6 mr-2 border bg-[#FEFEFE] text-primary-accent focus:ring-primary-accent/25 border-[#ECECEC] !shadow-sm shadow-gray-100/70;
+}
+
+.vragenai-question-form textarea.vragenai-question-form__input {
+    background-color: transparent !important;
 }
 
 .mt {
@@ -212,4 +216,12 @@ pre.hljs {
 
 code {
     @apply inline px-2! py-1! rounded-md border-gray-100 border;
+}
+
+.red-note h3 {
+    @apply !text-white my-0;
+}
+
+.red-note p {
+    @apply mt-4;
 }
