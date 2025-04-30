@@ -67,7 +67,12 @@ footer {
 }
 
 #content .benefits ul {
+    @apply pl-4;
     list-style-image: url("../images/check.svg");
+}
+
+#content .benefits ul li {
+    @apply pl-1;
 }
 
 #content ol {
