@@ -8,14 +8,14 @@ introduction: |-
   De locatie en het programma worden op een later moment aangekondigd, maar je kunt er van uit gaan dat we het strand weer opzoeken.
 featured_image: aw5zawdodhmvbgfyywzlc3rfmjaymy0xnzguanbn.jpg
 type: Meetup
-location: N.T.B.
-address: N.T.B.
+location: 'SandCbar in Katwijk'
+address: 'Boulevard Zeezijde 43, 2225 BB Katwijk aan Zee'
 date_start: '2025-06-19'
 time_start: '16:30'
 time_end: '23:00'
 signup_link: 'https://www.meetup.com/meetup-group-nbzjdgrh/events/304792628/'
-updated_by: 28c0a799-7234-4581-b869-6eda5a36a8e2
-updated_at: 1733153203
+updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
+updated_at: 1745994500
 content:
   -
     type: paragraph
