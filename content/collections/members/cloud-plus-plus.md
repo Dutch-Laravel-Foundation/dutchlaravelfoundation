@@ -1,5 +1,6 @@
 ---
 id: b16f90d2-309b-4526-8047-9b29dabd57a9
+published: false
 blueprint: members
 title: Cloud++
 description: |-
@@ -19,5 +20,4 @@ website: www.cloudplusplus.nl
 phone: 0513-744175
 updated_by: 28c0a799-7234-4581-b869-6eda5a36a8e2
 updated_at: 1687340432
-published: true
 ---
