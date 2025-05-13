@@ -96,7 +96,11 @@ textarea {
 }
 
 input[type="checkbox"] {
-    @apply w-6 h-6 mr-2 border rounded-sm bg-secondary-light text-primary-accent focus:ring-primary-accent/25 border-tertiary-light/40;
+    @apply w-6 h-6 mr-2 border bg-[#FEFEFE] text-primary-accent focus:ring-primary-accent/25 border-[#ECECEC] shadow-md shadow-gray-100/70;
+}
+
+.vragenai-question-form textarea.vragenai-question-form__input {
+    background-color: transparent !important;
 }
 
 .mt {
@@ -216,4 +220,33 @@ pre.hljs {
 
 code {
     @apply inline px-2! py-1! rounded-md border-gray-100 border;
+}
+
+.red-note h3 {
+    @apply !text-white my-0;
+}
+
+.red-note p {
+    @apply mt-4;
+}
+
+#vragenai-app {
+    --vragenai-color-primary: #ff2d20;
+}
+
+.vragenai-popup {
+    @apply h-[calc(100vh-1.5rem)] sm:!max-h-[800px] !rounded-2xl;
+}
+
+.vragenai-question-form,
+.vragenai-question-form:focus {
+    border-radius: 0.3rem !important;
+    outline-color: #ff2d20 !important;
+}
+
+#vragenai-app .vragenai-popup {
+}
+
+.vragenai-question-form-container--attached {
+    @apply !pb-0.5;
 }
