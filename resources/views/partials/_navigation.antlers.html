@@ -12,8 +12,8 @@
 
 <div class="flex flex-col space-y-5.5 items-end">
     <div class="group cursor-pointer" @click="$dispatch('open-vragen-ai')" x-data>
-        <div class="{{ if style == 'contrast' }} text-white/80 group-hover:text-white {{ else }}text-black/50 group-hover:text-primary-accent {{ /if }}  flex items-center gap-1 text-sm"
-            @click="showVragenAi = true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+        <div class="{{ if style == 'contrast' }} text-white/80 group-hover:text-white {{ else }}text-black/50 group-hover:text-primary-accent {{ /if }}  flex items-center gap-1 text-sm js-vragenai-trigger"
+            ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                 class="size-4">
                 <path fill-rule="evenodd"
                     d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"

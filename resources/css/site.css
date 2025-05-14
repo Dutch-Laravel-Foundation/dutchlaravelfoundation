@@ -230,3 +230,24 @@ code {
 .red-note p {
     @apply mt-4;
 }
+
+#vragenai-app {
+    --vragenai-color-primary: #ff2d20;
+}
+
+.vragenai-popup {
+    @apply h-[calc(100vh-1.5rem)] sm:!max-h-[800px] !rounded-2xl;
+}
+
+.vragenai-question-form,
+.vragenai-question-form:focus {
+    border-radius: 0.3rem !important;
+    outline-color: #ff2d20 !important;
+}
+
+#vragenai-app .vragenai-popup {
+}
+
+.vragenai-question-form-container--attached {
+    @apply !pb-0.5;
+}
