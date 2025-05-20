@@ -1,0 +1,25 @@
+{{ number_of_member_insights = { collection:count in="partners" } }}
+{{ if number_of_member_insights > 0 }}
+<div class="w-full my-12">
+
+  <div class="w-full text-center ">
+    <span class="text-sm text-gray-400">
+      Onze partners
+    </span>
+  </div>
+
+  <div class="w-full relative">
+    <div class="h-full w-10 bg-gradient-to-r from-white to-transparent absolute top-0 left-0 z-10"></div>
+    <div class="h-full w-10 bg-gradient-to-r from-transparent to-white absolute top-0 right-0 z-10"></div>
+    <div class="w-full overflow-x-scroll relative snap-x" style="scrollbar-width: none;">
+      <div class="flex min-w-[1100px] px-8 justify-between mt-8 md:mt-10 relative">
+        {{ collection:partners sort="random" }}
+        {{ logo }}
+        <img class="h-7 snap-center" src="{{ url }}" alt="{{ alt }}" />
+        {{ /logo }}
+        {{ /collection:partners }}
+      </div>
+    </div>
+  </div>
+</div>
+{{ /if }}
