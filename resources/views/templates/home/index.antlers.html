@@ -1,21 +1,16 @@
-<div class="container px-6 lg:px-10 mb-auto mx-auto flex flex-col items-left justify-center relative">
+<div class="container  mb-auto mx-auto flex flex-col items-left justify-center relative">
     {{ number_of_member_insights = { collection:count in="insights" } }}
     {{ if number_of_member_insights > 0 }}
         <section class="relative w-full mb">
             {{ collection:insights limit="1" sort="date:desc" }}
-                <div class="w-full xl:w-11/12 lg:-mt-10 xl:-mt-40">
+                <div class="w-full xl:w-11/12 lg:-mt-10 xl:-mt-40 px-6 lg:px-10">
                     {{ partial:blocks/image-left-large class="" :image="featured_image" :category="category" link="/insights/{ slug }" }}
                         {{ introduction }}
                     {{ /partial:blocks/image-left-large }}
                 </div>
             {{ /collection:insights }}
-            {{ if number_of_member_insights > 1 }}
-                <div class="flex flex-col px-6 sm:flex-row sm:px-0">
-                    {{ collection:insights limit="2" offset="1" sort="date:desc" }}
-                        {{ partial:blocks/meta-alt class="sm:w-1/2! px-0 { switch between="sm:pr-5|sm:pl-5" }" :text="title" title="Insights - { category }" link="/insights/{ slug }" link_class="text-tertiary-dark hover:text-primary-accent" }}
-                    {{ /collection:insights }}
-                </div>
-            {{ /if }}
+
+            {{ partial:partners }}
 
             {{# Background image #}}
             <div class="absolute z-[-1] flex items-center justify-center sm:top-[12rem] top-[20rem] md:top-[10rem] lg:top-[-4rem] left-[-28rem]">
@@ -27,7 +22,7 @@
     {{ /if }}
 
     {{ if { collection:count in="insights" highlight:is="true" sort="updated:desc" limit="1" } > 0 }}
-        <div class="flex flex-row px-0 lg:px-0">
+        <div class="flex flex-row px-6 lg:px-10">
             {{ collection:insights highlight:is="true" limit="1" }}
                 {{ partial:blocks/image-highlight-text :image="featured_image" category="Mis niet" link="/insights/{ slug }" }}
                     {{ introduction }}
