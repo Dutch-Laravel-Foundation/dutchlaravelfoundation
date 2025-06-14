@@ -34,57 +34,7 @@
                         </div>
                     </div>
 
-                    {{ form:become_member redirect="/lid-worden" }}
-                        {{ if success }}
-                            <div class="px-6 sm:px-0">
-                                {{ partial:forms/success }}
-                            </div>
-                        {{ else }}
-
-                        {{ if errors }}
-                            <div class="p-6 mb-6 bg-primary-accent text-primary-contrast">
-                                {{ errors }}
-                                {{ value }}<br>
-                                {{ /errors }}
-                            </div>
-                        {{ /if }}
-
-                        <input type="text" class="hidden" name="{{ honeypot ?? 'honeypot' }}">
-
-                        <div class="flex flex-col pb-10 space-y-6 sm:pb-0 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:px-0">
-                            {{ fields }}
-                                {{ if handle != 'agree' }}
-
-                                <div class="{{ type == "textarea" ?='col-span-2' }}">
-                                    <label for="{{ handle }}"><span class="meta">{{ display }}</span></label>
-                                    {{ if instructions_position == 'above' }}
-                                    {{ instructions }}
-                                    {{ /if }}
-                                    {{# Add ID to field #}}
-                                    {{ field = field regex_replace="^<([a-z]+)|<\\1 id='{ handle }'" }}
-                                                                        {{ if instructions_position == 'below' }}
-                                                                            {{ instructions }}
-                                                                        {{ /if }}
-                                                                        {{ if error }}
-                                                                            <p class="text-sm text-primary-accent">{{ error }}</p>
-                                        {{ /if }}
-                                </div>
-                                {{ else }}
-                                <div class="flex flex-col justify-between col-span-2 lg:flex-row">
-                                    <div class="flex flex-row w-full text-tertiary-light ">{{ field replace="<br>|" }}<span
-                                            class="ml-2">{{ display regex_replace="(privacy statement)|<a href='/privacy-statement'>\\1</a>"
-                                            }}</span></div>
-
-                                </div>
-                                <div class="col-span-2 mt-4">
-                                    {{ partial:buttons/primary type="submit" class="w-full " button_class="w-full" }}Versturen{{
-                                    /partial:buttons/primary }}
-                                </div>
-                                {{ /if }}
-                            {{ /fields }}
-                        </div>
-                        {{ /if }}
-                        {{ /form:become_member }}
+                    <div></div>
                 </div>
             </div>
 
