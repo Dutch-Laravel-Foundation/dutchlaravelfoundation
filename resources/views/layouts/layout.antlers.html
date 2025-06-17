@@ -60,6 +60,8 @@
         rel="stylesheet">
 
     {{ vite src="resources/js/site.js|resources/css/tailwind.css" }}
+
+    {{ captcha:head }}
 </head>
 
 <body class="font-sans leading-normal  bg-white text-primary-text" x-data="{ overflowHidden: false }" @open-vragen-ai.window="overflowHidden = true" @close-vragen-ai.window="overflowHidden = false" :class="overflowHidden ? 'overflow-hidden h-screen': ''">
