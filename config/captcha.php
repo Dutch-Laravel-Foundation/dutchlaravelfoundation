@@ -9,7 +9,7 @@ return [
     'user_login' => true,
     'user_registration' => true,
     'disclaimer' => '',
-    'invisible' => true,
+    'invisible' => false,
     'hide_badge' => true,
     'enable_api_routes' => false,
     'custom_should_verify' => null,
