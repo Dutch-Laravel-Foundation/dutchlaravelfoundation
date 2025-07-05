@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'service' => 'Recaptcha', // options: Recaptcha / Hcaptcha / Turnstile / Altcha
+    'service' => 'Turnstile', // options: Recaptcha / Hcaptcha / Turnstile / Altcha
     'sitekey' => env('CAPTCHA_SITEKEY', ''),
     'secret' => env('CAPTCHA_SECRET', ''),
     'collections' => [],
-    'forms' => ['all'],
+    'forms' => 'all',
     'user_login' => true,
     'user_registration' => true,
     'disclaimer' => '',

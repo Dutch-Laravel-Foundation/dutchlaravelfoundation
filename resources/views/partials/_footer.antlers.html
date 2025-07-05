@@ -42,29 +42,30 @@
                         <div class="w-full md:w-1/2 lg:w-full">
                             <h4>Aanmelden nieuwsbrief</h4>
                                 {{ newsletter_submitted = false }}
-                                {{ form:set is="newsletter" redirect="/newsletter" }}
+                                {{ form:newsletter redirect="/newsletter" }}
                                     {{ captcha }}
-                                    {{ if {form:success} }}
+                                    {{ if {success} }}
                                         {{ redirect to="/newsletter" }}
                                     {{ else }}
-                                        <input type="text" class="hidden" name="{{ honeypot ?? 'honeypot' }}">
-                                        {{ if {form:errors} }}
+
+                                        {{ if {errors} }}
                                             {{ newsletter_submitted = true }}
-                                            {{ form:errors }}
+                                            {{ errors }}
                                             <p class="block w-full text-primary-accent">{{ value }}</p>
-                                            {{ /form:errors }}
+                                            {{ /errors }}
                                         {{ /if }}
-                                        {{ form:create }}
+
                                         <div class="flex flex-row w-full">
+                                            <input type="text" class="hidden" name="{{ honeypot ?? 'honeypot' }}">
                                             {{ fields }}
                                             {{ field regex_replace=">$| style='background-color:#fff !important;'>" }}
                                             {{ /fields }}
                                             {{ partial:buttons/dark type="submit" class="w-full ml-auto sm:w-auto" button_class="w-12 px-0!" }}<img
                                                 src="/assets/img/icons/send.svg" alt="Aanmelden" class="mx-5">{{ /partial:buttons/dark }}
                                         </div>
-                                        {{ /form:create }}
+
                                     {{ /if }}
-                                {{ /form:set }}
+                                {{ /form:newsletter }}
                                 {{ if newsletter_submitted }}
                                 <script>
                                     window.scrollTo(0, document.body.scrollHeight);
