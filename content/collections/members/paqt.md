@@ -4,7 +4,7 @@ blueprint: members
 title: PAQT
 founding_partner: true
 type: Bedrijf
-employees: 51-100
+employees: 51-250
 updated_by: 8d873b47-ad86-4fd3-9e95-27842ea80beb
 updated_at: 1700496193
 logo: paqt.svg

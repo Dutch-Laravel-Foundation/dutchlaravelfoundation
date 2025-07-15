@@ -86,7 +86,7 @@ sections:
           options:
             1-10: null
             11-50: null
-            51-100: null
+            51-250: null
           multiple: false
           max_items: 1
           clearable: false

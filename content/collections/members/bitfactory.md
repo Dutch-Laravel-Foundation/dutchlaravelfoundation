@@ -2,7 +2,7 @@
 id: 0db47724-545b-413f-9d06-e82bf21b63d1
 blueprint: members
 title: Bitfactory
-number_of_employees: 51-100
+number_of_employees: 51-250
 founding_partner: false
 updated_by: 28c0a799-7234-4581-b869-6eda5a36a8e2
 updated_at: 1691653479
