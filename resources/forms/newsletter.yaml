@@ -1,7 +1,8 @@
 title: Nieuwsbrief
-honeypot: name
+honeypot: company
 email:
   -
+    id: bfVvJD0W
     to: '{{ email }}'
     subject: 'Je nieuwsbrief inschrijving bij Dutch Laravel Foundation'
     html: mail/newsletter

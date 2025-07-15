@@ -36,3 +36,4 @@ preferences:
         - name
         - email
         - company_name
+      per_page: 100

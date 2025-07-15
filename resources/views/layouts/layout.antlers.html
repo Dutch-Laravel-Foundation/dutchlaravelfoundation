@@ -13,13 +13,10 @@
     </script>
     <!-- Leadinfo tracking code -->
     <script>
-        (function (l, e, a, d, i, n, f, o) {
-            if (!l[i]) {
-                l.GlobalLeadinfoNamespace = l.GlobalLeadinfoNamespace || [];
-                l.GlobalLeadinfoNamespace.push(i); l[i] = function () { (l[i].q = l[i].q || []).push(arguments) }; l[i].t = l[i].t || n;
-                l[i].q = l[i].q || []; o = e.createElement(a); f = e.getElementsByTagName(a)[0]; o.async = 1; o.src = d; f.parentNode.insertBefore(o, f);
-            }
-        }(window, document, 'script', 'https://cdn.leadinfo.net/ping.js', 'leadinfo', 'LI-643558C020FD3'));
+    (function(l,e,a,d,i,n,f,o){if(!l[i]){l.GlobalLeadinfoNamespace=l.GlobalLeadinfoNamespace||[];
+    l.GlobalLeadinfoNamespace.push(i);l[i]=function(){(l[i].q=l[i].q||[]).push(arguments)};l[i].t=l[i].t||n;
+    l[i].q=l[i].q||[];o=e.createElement(a);f=e.getElementsByTagName(a)[0];o.async=1;o.src=d;f.parentNode.insertBefore(o,f);}
+    }(window,document,'script','https://cdn.leadinfo.net/ping.js','leadinfo','LI-643558C020FD3'));
     </script>
     <script src="https://cdn.usefathom.com/script.js" data-site="XTVPLNKC" defer></script>
     {{ /if }}
@@ -63,6 +60,8 @@
         rel="stylesheet">
 
     {{ vite src="resources/js/site.js|resources/css/tailwind.css" }}
+
+    {{ captcha:head }}
 </head>
 
 <body class="font-sans leading-normal  bg-white text-primary-text" x-data="{ overflowHidden: false }" @open-vragen-ai.window="overflowHidden = true" @close-vragen-ai.window="overflowHidden = false" :class="overflowHidden ? 'overflow-hidden h-screen': ''">
