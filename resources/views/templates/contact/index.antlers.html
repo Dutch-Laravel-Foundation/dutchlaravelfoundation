@@ -44,7 +44,7 @@
                 <div class="flex flex-col justify-between lg:flex-row mt-4">
                     <div class="flex flex-row w-full lg:w-4/6 text-tertiary-light mb">
                         {{ field replace="<br>|" }}<span class="ml-2 sm:text-auto text-[0.9rem]">{{ display
-                            regex_replace="(privacy statement)|<a href='/privacy-statement'>\\1</a>" }}</span>
+                            regex_replace="(privacy statement)|<a href='/privacy-statement' target='_blank'>\\1</a>" }}</span>
                     </div>
 
                     {{ partial:buttons/primary type="submit" class="w-full ml-auto sm:w-auto" button_class="w-full"
