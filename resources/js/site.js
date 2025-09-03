@@ -11,6 +11,7 @@ import php from "highlight.js/lib/languages/php";
 import shell from "highlight.js/lib/languages/shell";
 import sql from "highlight.js/lib/languages/sql";
 import xml from "highlight.js/lib/languages/xml";
+import typescript from "highlight.js/lib/languages/typescript";
 
 import "highlight.js/styles/github.css";
 
@@ -23,6 +24,7 @@ hljs.registerLanguage("php", php);
 hljs.registerLanguage("shell", shell);
 hljs.registerLanguage("sql", sql);
 hljs.registerLanguage("xml", xml);
+hljs.registerLanguage("typescript", typescript);
 
 window.addEventListener("load", (event) => {
     document.querySelectorAll("pre code").forEach((el) => {

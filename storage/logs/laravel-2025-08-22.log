@@ -1,4 +1,0 @@
-[2025-08-22 09:53:47] production.DEBUG: Cannot loop over non-loopable variable: {{ number_of_employees }} {"line":17,"file":"/home/dlf_prod/domains/dutchlaravelfoundation.nl/current/resources/views/templates/members/show.antlers.html"} 
-[2025-08-22 09:59:36] production.DEBUG: Cannot loop over non-loopable variable: {{ number_of_employees }} {"line":17,"file":"/home/dlf_prod/domains/dutchlaravelfoundation.nl/current/resources/views/templates/members/show.antlers.html"} 
-[2025-08-22 17:31:40] production.DEBUG: Cannot loop over non-loopable variable: {{ number_of_employees }} {"line":17,"file":"/home/dlf_prod/domains/dutchlaravelfoundation.nl/current/resources/views/templates/members/show.antlers.html"} 
-[2025-08-22 17:31:55] production.DEBUG: Cannot loop over non-loopable variable: {{ number_of_employees }} {"line":17,"file":"/home/dlf_prod/domains/dutchlaravelfoundation.nl/current/resources/views/templates/members/show.antlers.html"} 

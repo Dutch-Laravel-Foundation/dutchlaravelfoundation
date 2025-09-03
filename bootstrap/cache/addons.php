@@ -17,12 +17,6 @@
     'developer' => 'Aryeh Raber',
     'developerUrl' => 'https://aryeh.dev',
     'email' => NULL,
-    'marketplaceId' => 277,
-    'marketplaceSlug' => 'captcha',
-    'marketplaceUrl' => 'https://statamic.com/addons/aryeh-raber/captcha',
-    'marketplaceSellerSlug' => 'aryeh-raber',
-    'isCommercial' => false,
-    'latestVersion' => '1.14.0',
   ),
   'pecotamic/sitemap' => 
   array (
@@ -42,11 +36,5 @@
     'developer' => 'Werner Freytag',
     'developerUrl' => NULL,
     'email' => NULL,
-    'marketplaceId' => 315,
-    'marketplaceSlug' => 'xml-sitemap',
-    'marketplaceUrl' => 'https://statamic.com/addons/pecotamic/xml-sitemap',
-    'marketplaceSellerSlug' => 'pecotamic',
-    'isCommercial' => false,
-    'latestVersion' => '1.4.9',
   ),
 );
