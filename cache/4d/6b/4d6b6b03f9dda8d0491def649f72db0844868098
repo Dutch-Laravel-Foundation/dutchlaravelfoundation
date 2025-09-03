@@ -1,4 +1,4 @@
-1756722398a:1:{s:4:"data";a:382:{i:0;a:3:{s:7:"version";s:6:"5.64.0";s:4:"date";s:10:"2025-08-21";s:9:"changelog";s:1321:"## What's new
+1756889137a:1:{s:4:"data";a:382:{i:0;a:3:{s:7:"version";s:6:"5.64.0";s:4:"date";s:10:"2025-08-21";s:9:"changelog";s:1321:"## What's new
 - Add `overlaps` and `doesnt_overlap` conditions and modifiers [#9491](https://github.com/statamic/cms/issues/9491) by @ryanmitchell
 - Support whereJsonOverlaps in query builders [#11112](https://github.com/statamic/cms/issues/11112) by @ryanmitchell
 - Support pluck() on eloquent query builder [#12027](https://github.com/statamic/cms/issues/12027) by @ryanmitchell
