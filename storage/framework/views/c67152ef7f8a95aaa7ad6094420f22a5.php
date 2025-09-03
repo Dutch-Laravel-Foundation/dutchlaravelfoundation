@@ -1,2 +1,0 @@
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-<?php /**PATH /home/dlf_prod/domains/dutchlaravelfoundation.nl/current/vendor/aryehraber/statamic-captcha/resources/views/turnstile/head.blade.php ENDPATH**/ ?>
