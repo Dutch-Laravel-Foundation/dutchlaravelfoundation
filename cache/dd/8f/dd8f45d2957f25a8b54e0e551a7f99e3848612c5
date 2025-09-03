@@ -1,0 +1,710 @@
+1756134705a:3:{s:4:"data";a:12:{i:0;a:11:{s:2:"id";i:299;s:4:"name";s:8:"Redirect";s:4:"slug";s:8:"redirect";s:3:"url";s:41:"https://statamic.com/addons/rias/redirect";s:7:"summary";s:120:"Redirect allows you to redirect legacy URLs, so that you don't lose SEO value when rebuilding & restructuring a website.";s:11:"description";s:891:"<p>Redirect allows you to redirect legacy URLs, so that you don't lose SEO value when rebuilding &amp; restructuring a website.</p>
+<p>Redirect supports traditional exact and RegEx matching of URL patterns.</p>
+<p>Redirect will also automatically create a redirect for you if you change an entry's slug or uri.</p>
+<p>Unlike utilizing .htaccess to do redirects, Redirect does not add overhead to each request for each redirect you have in place.</p>
+<p>Redirect has no impact on your website's performance until a 404 exception happens.</p>
+<p>It comes included with a dashboard that quickly shows the statistics and recent 404 errors. Create a new redirect straight from the dashboard for a specific 404 error. This addon also provides widgets to add to your own Control Panel dashboard.</p>
+<p>Read more in <a href="https://statamic.com/addons/rias/redirect/docs">the documentation</a></p>";s:7:"package";s:22:"rias/statamic-redirect";s:6:"assets";a:3:{i:0;a:1:{s:3:"url";s:89:"https://statamic.com/images/storage/products/p4nr1z2tPnotsUjDeFPvSmVSe5d8WuqtuAZ1DA8z.png";}i:1;a:1:{s:3:"url";s:89:"https://statamic.com/images/storage/products/prq57lzhkD3NBU2JYaXlkBUk5nqEvHPDioB6O4xx.png";}i:2;a:1:{s:3:"url";s:89:"https://statamic.com/images/storage/products/TJGlaSuzn7inkqU5xftoOwMqFaqc1yAmbv2tmyrD.png";}}s:6:"seller";a:4:{s:4:"name";s:7:"Rias.be";s:4:"slug";s:4:"rias";s:7:"website";s:15:"https://rias.be";s:6:"avatar";s:88:"https://statamic.com/images/storage/avatars/1Q9wgNIrSY91OlEZSYuQqk9iilr45C7w5G8ZldC1.png";}s:11:"price_range";a:2:{i:0;i:39;i:1;i:39;}s:8:"editions";a:0:{}}i:1;a:11:{s:2:"id";i:263;s:4:"name";s:7:"SEO Pro";s:4:"slug";s:7:"seo-pro";s:3:"url";s:44:"https://statamic.com/addons/statamic/seo-pro";s:7:"summary";s:109:"An all-in-one site reporting, metadata mastering, OG managing, Twitter card making, sitemap generating addon.";s:11:"description";s:2881:"<div class="text-xl mb-4">SEO Pro is an all-in-one site reporting, metadata wrangling, Open Graph managing, Twitter card making, sitemap generating, turnkey addon.</div>
+<h2>How does it do it?</h2>
+<p>SEO Pro maps existing fields (along with the ability to override on a per-collection or per-entry basis) to your meta data. This eliminates complicated logic in your templates and layouts, the need to manually create and include SEO fieldsets, and takes care of your sitemaps for you.</p>
+<h2>Reporting</h2>
+<p>Run reports on your site that factor in modern best practices for Search Engine Optimization. Receive a grade score on how complete and effective your efforts are, as well as a list of things that need to be addressed to improve your rank.</p>
+<h2>Widget</h2>
+<p>The reporting engine can display your current report rank as a widget so you know what needs to be done.</p>
+<h2>Meta Data</h2>
+<p>SEO Pro can use your existing content to dynamically set the full range of meta/OG/twitter data fields. Set site-wide defaults and optionally overriding and customize them on a per-collection/taxonomy level, as well as the individual entry/term/page level.</p>
+<p>SEO Pro handles the following meta fields:</p>
+<ul>
+<li><code>title</code></li>
+<li><code>meta description</code></li>
+<li><code>home/canonical links</code></li>
+</ul>
+<h2>Open Graph</h2>
+<p>SEO Pro automatically sets all appropriate Open Graph tags based on your content and site configuration, including summary/social sharing images and locales.</p>
+<ul>
+<li><code>og:type</code></li>
+<li><code>og:title</code></li>
+<li><code>og:description</code></li>
+<li><code>og:url</code></li>
+<li><code>og:site_name</code></li>
+<li><code>og:locale</code></li>
+<li><code>og:locale:alternate</code></li>
+<li><code>og:image</code></li>
+<li><code>og:image:width</code></li>
+<li><code>og:image:height</code></li>
+</ul>
+<h2>Site Verification</h2>
+<ul>
+<li><code>google_verification_code</code></li>
+<li><code>bing_verification_code</code></li>
+</ul>
+<h2>Twitter Cards</h2>
+<p><a href="https://developer.twitter.com/en/docs/tweets/optimize-with-cards/overview/summary.html">Twitter Cards</a> are designed to give the reader a preview of the content before clicking through to your website.</p>
+<p>SEO Pro will automatically generate Twitter cards for you, using your meta and OG data. No extra work necessary.</p>
+<h2>Sitemap Generator</h2>
+<p>SEO Pro lets you manage a fully configurable and automated sitemap. Customize priority, update frequency, and let it do its thing, hassle free.</p>
+<h2>Humans.txt</h2>
+<p>A <a href="http://humanstxt.org/">humans.txt</a> file contains information about the different people who have contributed to building the website. You can prove your authorship (not your property) in this external, fast, easy and accessible way.</p>
+<p>Of course, you can disable it if you want or need to.</p>";s:7:"package";s:16:"statamic/seo-pro";s:6:"assets";a:10:{i:0;a:1:{s:3:"url";s:89:"https://statamic.com/images/storage/products/QMRbVfSbyZA4Z3Mmh2id3Z0BW6jSa6pTjl2eV6MT.png";}i:1;a:1:{s:3:"url";s:90:"https://statamic.com/images/storage/products/YWbI8mGHSt4wbbrzAhiTyLM79nRQJZVZW0sSD8Er.jpeg";}i:2;a:1:{s:3:"url";s:90:"https://statamic.com/images/storage/products/r5ZO6yJSonLMRn0xV4AgyVNmp1hj15ikQ633rRvT.jpeg";}i:3;a:1:{s:3:"url";s:90:"https://statamic.com/images/storage/products/RS0Cw54fD76ICvjgvLqC1eUCN5Q2AzNyPdfQg7qt.jpeg";}i:4;a:1:{s:3:"url";s:90:"https://statamic.com/images/storage/products/PMgxflb4LngFClF9Qooqi6xYDaSdWBmZBtKtxa3N.jpeg";}i:5;a:1:{s:3:"url";s:90:"https://statamic.com/images/storage/products/vrQaB5cZ5RFr1AnPOBJ3juhnMVcu7ktSIM9tqWBf.jpeg";}i:6;a:1:{s:3:"url";s:90:"https://statamic.com/images/storage/products/OrqnU6ohs6QjA7dUCteqi1XMhFlqBFSr6wZRPCAw.jpeg";}i:7;a:1:{s:3:"url";s:90:"https://statamic.com/images/storage/products/WSoA651IZ9RlyvDXvHd0JXtQcwfIdVvN4GAhuwF6.jpeg";}i:8;a:1:{s:3:"url";s:90:"https://statamic.com/images/storage/products/lgds8qXf383hpPZ9rBhG169mf3B5f96Qs6C3khcK.jpeg";}i:9;a:1:{s:3:"url";s:90:"https://statamic.com/images/storage/products/FJb2h7PRxRqs2sCTqZWudLOTjldC39BZCNHtSeiL.jpeg";}}s:6:"seller";a:4:{s:4:"name";s:8:"Statamic";s:4:"slug";s:8:"statamic";s:7:"website";s:20:"https://statamic.com";s:6:"avatar";s:89:"https://statamic.com/images/storage/avatars/V2npDLnVqlRkfEasZJRkCTxxjH35QUZtatIc4tQW.jpeg";}s:11:"price_range";a:2:{i:0;i:55;i:1;i:55;}s:8:"editions";a:0:{}}i:2;a:11:{s:2:"id";i:232;s:4:"name";s:17:"Responsive Images";s:4:"slug";s:17:"responsive-images";s:3:"url";s:52:"https://statamic.com/addons/spatie/responsive-images";s:7:"summary";s:38:"Automatically create responsive images";s:11:"description";s:10615:"<p><a href="https://supportukrainenow.org"><img src="https://github-ads.s3.eu-central-1.amazonaws.com/support-ukraine.svg?t=1"></a></p>
+<p>This Addon provides responsive images inspired by <a href="https://github.com/spatie/laravel-medialibrary">Our Medialibrary Package</a>.</p>
+<h2>Support us</h2>
+<p><a href="https://spatie.be/github-ad-click/statamic-responsive-images"><img src="https://github-ads.s3.eu-central-1.amazonaws.com/statamic-responsive-images.jpg?t=1" width="419px"></a></p>
+<p>We invest a lot of resources into creating <a href="https://spatie.be/open-source">best in class open source packages</a>. You can support us by <a href="https://spatie.be/open-source/support-us">buying one of our paid products</a>.</p>
+<p>We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on <a href="https://spatie.be/about-us">our contact page</a>. We publish all received postcards on <a href="https://spatie.be/open-source/postcards">our virtual postcard wall</a>.</p>
+<h2>Installation</h2>
+<p>Require it using Composer.</p>
+<pre><code>composer require spatie/statamic-responsive-images
+</code></pre>
+<h2>Fieldtype</h2>
+<p>This addon includes a fieldtype that allows for full Art direction with responsive images.</p>
+<p><img src="https://raw.githubusercontent.com/spatie/statamic-responsive-images/main/./docs/fieldtype.png" alt="fieldtype"></p>
+<p>This fieldtype is configured with the following yaml configuration:</p>
+<pre><code class="language-yaml">-
+    handle: image
+    field:
+      use_breakpoints: true
+      allow_ratio: true
+      allow_fit: true
+      breakpoints:
+        - sm
+        - md
+        - lg
+      display: Image
+      instructions: 'Choose image using art direction.'
+      type: responsive
+      icon: assets
+      listable: hidden
+      container: assets
+      restrict: false
+      allow_uploads: true
+</code></pre>
+<p>The configuration above can be used within Antlers using the responsive tag:</p>
+<pre><code class="language-twig">{{ responsive:image }}
+</code></pre>
+<p>The breakpoints are configured in the <code>breakpoints</code> array of the config file.</p>
+<h2>Using Responsive Images</h2>
+<p>Responsive Images will generate responsive versions of the images whenever a new asset is uploaded. These presets are determined by this package and not by your own Glide presets.</p>
+<p>We generally recommend setting <code>statamic.assets.image_manipulation.cache</code> to <code>false</code> so only images actually requested by a browser are generated. The first time the conversion is loaded will be slow, but Glide still has an internal cache that it will serve from the next time. This saves a lot on server resources and storage requirements.</p>
+<h2>Templating</h2>
+<p>Pass an image to the <code>responsive</code> tag.</p>
+<pre><code class="language-twig">{{ responsive:image_field }}
+</code></pre>
+<p>This will render an image tag with the default srcsets. The tag uses JS to define the value of the sizes attribute. This way the browser will always download the correct image.</p>
+<h2>Image ratio</h2>
+<p>You can make sure images are a certain ratio by passing a <code>ratio</code> parameter, either as a string <code>16/10</code> or as a float <code>1.6</code>.</p>
+<pre><code class="language-twig">{{ responsive:image_field ratio=&quot;16/9&quot; }}
+</code></pre>
+<h2>Responsive placeholder</h2>
+<p>By default, responsive images generates a small base64 encoded placeholder to show while your image loads. If you want to disable this you can pass <code>placeholder=&quot;false&quot;</code> to the tag.</p>
+<pre><code class="language-twig">{{ responsive:image_field placeholder=&quot;false&quot; }}
+</code></pre>
+<h2>Additional image format generation</h2>
+<p>By default, responsive tag generates original source image file format and WEBP variants of the image, so if you use a JPG image as source then by default JPG and WEBP variants will be generated. You can toggle WEBP and AVIF variant generation with the tag parameters.</p>
+<pre><code class="language-twig">{{ responsive:image_field webp=&quot;true&quot; avif=&quot;false&quot; }}
+</code></pre>
+<p>You can also toggle this in responsive-images.php config file, it will apply your preferences globally.</p>
+<pre><code class="language-php">'webp' =&gt; true,
+'avif' =&gt; false,
+</code></pre>
+<h2>Image quality</h2>
+<p>Image format quality settings can be set globally through config. If you wish to override the config quality values you can use tag parameters. You can utilize breakpoints for the quality parameter too!</p>
+<pre><code class="language-twig">{{ responsive:image_field quality:webp=&quot;50&quot; md:quality:webp=&quot;75&quot; }}
+</code></pre>
+<h2>Glide parameters</h2>
+<p>You can still pass any parameters from the Glide tag that you would want to, just make sure to prefix them with <code>glide:</code>.
+Passing <code>glide:width</code> will consider the width as a max width, which can prevent unnecessary large images from being generated.</p>
+<pre><code class="language-twig">{{ responsive:image_field glide:blur=&quot;20&quot; glide:width=&quot;1600&quot; }}
+</code></pre>
+<h2>HTML Attributes</h2>
+<p>If you want to add additional attributes (for example a title attribute) to your image, you can add them as parameters to the tag, any attributes will be added to the image.</p>
+<pre><code class="language-twig">{{ responsive:image_field alt=&quot;{title}&quot; class=&quot;my-class&quot; }}
+</code></pre>
+<h2>Breakpoints &amp; Art direction</h2>
+<p>You can define breakpoints in the config file, by default the breakpoints of TailwindCSS are used.</p>
+<p>Breakpoints allow you to use, for example, different ratios:</p>
+<pre><code class="language-twig">{{ responsive:image_field ratio=&quot;1/1&quot; lg:ratio=&quot;16/9&quot; 2xl:ratio=&quot;2/1&quot; }}
+</code></pre>
+<p>This will apply a default ratio of <code>1/1</code>. From breakpoint <code>lg</code> up to <code>2xl</code>, the ratio will be <code>16/9</code>. From <code>2xl</code> up, the ratio will be <code>2/1</code>.
+The breakpoints can be configured in the config and default to the breakpoints of Tailwind CSS.</p>
+<p>Or different assets:</p>
+<pre><code class="language-twig">{{ responsive:image_field :lg:src=&quot;image_field_lg&quot; :2xl:src=&quot;image_field_2xl&quot; }}
+</code></pre>
+<p>Breakpoints support the <code>ratio</code>, <code>src</code>, <code>quality</code> and <code>glide</code> parameters.</p>
+<h2>Customizing the generated html</h2>
+<p>If you want to customize the generated html, you can publish the views using</p>
+<pre><code class="language-bash">php artisan vendor:publish
+</code></pre>
+<p>and choosing <code>Spatie\ResponsiveImages\ServiceProvider</code></p>
+<h2>Generate command</h2>
+<p>If you need to regenerate the responsive images for a reason, you can use the <code>regenerate</code> command which will clear the Glide cache and regenerate the versions. This command only works when you have the <code>statamic.assets.image_manipulation.cache</code> config option set to <code>true</code> (which we generally don't recommend).</p>
+<pre><code class="language-bash">php please responsive:regenerate
+</code></pre>
+<p>If you are using a service, like Horizon, for queues then jobs will be queued to handle the image resizing.
+By default, the job is queued under the 'default' queue. This can be changed via the <code>queue</code> config key under <code>responsive-images.php</code></p>
+<p>It is also possible to exclude certain containers from generation responsive variants. You can exclude these containers by adding the handle of the container to the <code>excluded_containers</code> array in <code>responsive-images.php</code>.</p>
+<h2>GraphQL</h2>
+<p>This addon comes with 2 GraphQL goodies, it adds a <code>responsive</code> field to assets and responsive fieldtype, allowing you to use this addon like you would with the Antlers tag. Secondly you can just let responsive fieldtype augment itself without passing any arguments.</p>
+<h3>Responsive field on assets / assets fieldtype / responsive fieldtype</h3>
+<p>You can retrieve a responsive version of an <code>image</code> asset fieldtype like this:</p>
+<pre><code class="language-graphql">{
+  entries {
+    data {
+      id,
+      image {
+        responsive(ratio: 1.2) {
+          label
+          minWidth
+          widthUnit
+          ratio
+          sources {
+            format
+            mimeType
+            minWidth
+            mediaWidthUnit
+            mediaString
+            srcSet
+            placeholder
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<p>Majority of tag parameters are available as arguments in the responsive field, the parameters just need to have colons replaced with underscores. For example, <code>lg:glide:filter</code> would become <code>lg_glide_filter</code>.</p>
+<p>If you are unsure what arguments are available, try out the GraphQL explorer in the control panel located at <code>/cp/graphiql</code> and utilize the autocomplete feature.</p>
+<h3>Images from the responsive fieldtype</h3>
+<p>A responsive fieldtype has all the same fields as a normal responsive field from an asset, except they're under a <code>breakpoints</code> key and you cannot pass any arguments to it.</p>
+<pre><code class="language-graphql">{
+  entries {
+    data {
+      id,
+      art_image {
+        breakpoints {
+          label
+          minWidth
+          widthUnit
+          ratio 
+          sources {
+            format
+            mimeType
+            minWidth
+            mediaWidthUnit
+            mediaString
+            srcSet
+            placeholder
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<h2>Changelog</h2>
+<p>Please see <a href="https://github.com/spatie/statamic-responsive-images/blob/main/CHANGELOG.md">CHANGELOG</a> for more information what has changed recently.</p>
+<h2>Contributing</h2>
+<p>Please see <a href="https://github.com/spatie/.github/blob/main/CONTRIBUTING.md">CONTRIBUTING</a> for details.</p>
+<h2>Security</h2>
+<p>If you discover any security related issues, please email <a href="mailto:security@spatie.be">security@spatie.be</a> instead of using the issue tracker.</p>
+<h2>Credits</h2>
+<ul>
+<li><a href="https://github.com/riasvdv">Rias Van der Veken</a></li>
+<li><a href="https://github.com/spatie/statamic-responsive-images/blob/main/../../contributors">All Contributors</a></li>
+</ul>
+<h2>License</h2>
+<p>The MIT License (MIT). Please see <a href="https://github.com/spatie/statamic-responsive-images/blob/main/LICENSE.md">License File</a> for more information.</p>";s:7:"package";s:33:"spatie/statamic-responsive-images";s:6:"assets";a:2:{i:0;a:1:{s:3:"url";s:89:"https://statamic.com/images/storage/products/cKsF1OOQgUEysosmL4bXBGi32ZuqsUrX9tSecr0J.png";}i:1;a:1:{s:3:"url";s:89:"https://statamic.com/images/storage/products/2dvkXaO5ZyGwuDvkzvMQTb2uWHug5X78pARFQOEx.png";}}s:6:"seller";a:4:{s:4:"name";s:6:"Spatie";s:4:"slug";s:6:"spatie";s:7:"website";s:17:"https://spatie.be";s:6:"avatar";s:88:"https://statamic.com/images/storage/avatars/4ypqNkfRzFzHMX7KICZtvHSAbRieO970v1Eu7fb9.png";}s:11:"price_range";a:2:{i:0;N;i:1;N;}s:8:"editions";a:0:{}}i:3;a:11:{s:2:"id";i:277;s:4:"name";s:7:"Captcha";s:4:"slug";s:7:"captcha";s:3:"url";s:47:"https://statamic.com/addons/aryeh-raber/captcha";s:7:"summary";s:52:"Protect your Statamic forms using a Captcha service.";s:11:"description";s:8222:"<p><strong>Protect your Statamic forms using a Captcha service.</strong></p>
+<p>This addon allows you to protect your Statamic forms using any of the following services:</p>
+<ul>
+<li><a href="https://developers.google.com/recaptcha/intro">Google reCAPTCHA v2</a> (v3 not supported)</li>
+<li><a href="https://hcaptcha.com/?r=eaeeea7cd23c">hCaptcha</a></li>
+<li><a href="https://developers.cloudflare.com/turnstile">Cloudflare Turnstile</a></li>
+<li><a href="https://altcha.org">ALTCHA</a></li>
+</ul>
+<p>After the initial setup, all you need to do is add the <code>{{ captcha }}</code> tag inside your forms, easy peasy!</p>
+<h2>Installation</h2>
+<p>Install the addon via composer:</p>
+<pre><code>composer require aryehraber/statamic-captcha
+</code></pre>
+<p>Publish the config file:</p>
+<pre><code> php please vendor:publish --tag=captcha-config
+</code></pre>
+<p>Alternately, you can manually setup the config file by creating <code>captcha.php</code> inside your project's <code>config</code> directory:</p>
+<pre><code class="language-php">&lt;?php
+
+return [
+    'service' =&gt; 'Recaptcha', // options: Recaptcha / Hcaptcha / Turnstile / Altcha
+    'sitekey' =&gt; env('CAPTCHA_SITEKEY', ''),
+    'secret' =&gt; env('CAPTCHA_SECRET', ''),
+    'forms' =&gt; [],
+    'user_login' =&gt; false,
+    'user_registration' =&gt; false,
+    'disclaimer' =&gt; '',
+    'invisible' =&gt; false,
+    'hide_badge' =&gt; false,
+    'enable_api_routes' =&gt; false,
+    'custom_should_verify' =&gt; null,
+];
+</code></pre>
+<p>Once the config file is in place, make sure to add your <code>sitekey</code> &amp; <code>secret</code> from <a href="https://www.google.com/recaptcha/admin">Recaptcha's Console</a>, <a href="https://dashboard.hcaptcha.com/sites">hCaptcha's Console</a>, <a href="https://dash.cloudflare.com">Cloudflare's Dashboard</a> or <a href="https://altcha.org/docs/api/api_keys/">Altcha's Docs</a> and add the handles of the Statamic Forms you'd like to protect:</p>
+<pre><code class="language-php">&lt;?php
+
+return [
+    'service' =&gt; 'Recaptcha', // options: Recaptcha / Hcaptcha / Turnstile / Altcha
+    'sitekey' =&gt; 'YOUR_SITEKEY_HERE', // Or add to .env
+    'secret' =&gt; 'YOUR_SECRET_HERE', // Or add to .env
+    'forms' =&gt; ['contact', 'newsletter'],
+    // ...
+];
+</code></pre>
+<p>If you would like Captcha to verify ALL forms without having to specify each one in the <code>forms</code> config array, you may use the <code>all</code> option instead.</p>
+<p><em>Note: this should replace the array and be set as a string.</em></p>
+<pre><code class="language-php">&lt;?php
+
+return [
+    'forms' =&gt; 'all',
+    // ...
+];
+</code></pre>
+<h2>Usage</h2>
+<pre><code class="language-html">&lt;head&gt;
+    &lt;title&gt;My Awesome Site&lt;/title&gt;
+
+    {{ captcha:head }}
+&lt;/head&gt;
+&lt;body&gt;
+    {{ form:contact }}
+
+        &lt;!-- Add your fields like normal --&gt;
+
+        {{ captcha }}
+
+        {{ if error:captcha }}
+          &lt;p&gt;{{ error:captcha }}&lt;/p&gt;
+        {{ /if }}
+
+    {{ /form:contact }}
+&lt;/body&gt;
+</code></pre>
+<p>This will automatically render the Captcha element on the page. After the form is submitted, the addon will temporarily halt the form from saving while the Captcha service verifies that the request checks out. If all is good, the form will save as normal, otherwise an error will be added to the <code>{{ errors }}</code> object.</p>
+<h2>Invisible Captcha</h2>
+<p>Simply set <code>invisible</code> to <code>true</code> inside Captcha's config (Turnstile handles invisibility from Cloudflares's Dashboard, so no Captcha config changes are needed). To hide the sticky Recaptcha badge, make sure to also set <code>hide_badge</code> to <code>true</code>.</p>
+<p>Note: using Invisible Captcha will require you to display links to the Captcha service's Terms underneath the form, to make this easier use <code>{{ captcha:disclaimer }}</code>. This message can be customised using the <code>disclaimer</code> option inside Captcha's config, however sensible defaults have been added that will automatically switch depending on the Captcha service you're using.</p>
+<h2>User Registration &amp; Login</h2>
+<p>Captcha can also verify <a href="https://statamic.dev/tags/user-register_form">User Registration</a> &amp; <a href="https://statamic.dev/tags/user-login_form">User Login</a> form requests, simply set <code>user_registration</code> / <code>user_login</code> to <code>true</code> inside Captcha's config and use the <code>{{ captcha }}</code> tag as normal inside Statamic's <code>{{ user:register_form }}</code> / <code>{{ user:login_form }}</code> tags.</p>
+<h2>Data Attributes</h2>
+<p>Some of the Captcha services offer additional features, such as light/dark mode and sizing options, via data attributes. These can simply be added to the Captcha tag and will be passed through to the client-side widget.</p>
+<pre><code>{{ captcha data-theme=&quot;dark&quot; data-size=&quot;compact&quot; }}
+</code></pre>
+<h2>Translations</h2>
+<p>This package is localized to English and German.
+If you need translations in another language, you can create them yourself:</p>
+<ul>
+<li>Create the translations file in <code>resources/lang/vendor/statamic-captcha/{language}/messages.php</code>.</li>
+<li>You can use the <a href="https://github.com/aryehraber/statamic-captcha/blob/master/resources/lang/en/messages.php">English translation file</a> as a blueprint.</li>
+<li>You are welcome to share your translations here by <a href="https://github.com/aryehraber/statamic-captcha/pulls">submitting a PR</a>.</li>
+</ul>
+<p>If you want to change existing messages, you can publish and override them:</p>
+<pre><code>php please vendor:publish --tag=&quot;captcha-translations&quot;
+</code></pre>
+<h2>Advanced</h2>
+<h3>Custom &quot;Should Verify&quot; Logic</h3>
+<p>You can provide additional custom logic to determine if verification should be attempted using a custom invokable class. This is useful to adjust Captcha's <code>shouldVerify</code> check to include app-specific behaviour, for example: only enforcing Captcha for guest users and bypassing it for logged-in users.</p>
+<p>To get started, create an invokable class within your app, and add it as the <code>custom_should_verify</code> property in your config:</p>
+<pre><code class="language-php">&lt;?php
+
+return [
+    // ...
+    'custom_should_verify' =&gt; \App\Support\MyCustomShouldVerify::class,
+];
+</code></pre>
+<p>This invokable class must implement the <code>\AryehRaber\Captcha\Contracts\CustomShouldVerify</code> interface, which enforces that an event param gets passed into the invoke method and subsequently returns an optional boolean. To stop Captcha's <code>shouldVerify</code> method from getting called, the invoke method must return <code>false</code>, otherwise returning <code>true</code> (or <code>null</code>) will continue Captcha's verification logic.</p>
+<p>Note: this custom class is resolved via Laravel's container, meaning dependency injection is available via the constructor.</p>
+<pre><code class="language-php">&lt;?php
+
+namespace App\Support;
+
+use AryehRaber\Captcha\Contracts\CustomShouldVerify;
+
+class MyCustomShouldVerify implements CustomShouldVerify
+{
+    public function __invoke($event): ?bool
+    {
+        // bypass verification for authenticated users
+        if (auth()-&gt;check()) {
+            return false;
+        }
+
+        // bypass verification on dev environment
+        if (app()-&gt;environment('dev')) {
+            return false;
+        }
+
+        // bypass verification based on event form submission
+        if ($event instanceof \Statamic\Events\FormSubmitted) {
+            // return $event-&gt;submission;
+        }
+
+        // bypass verification based on login event
+        if ($event instanceof \Illuminate\Auth\Events\Login) {
+            // return $event-&gt;user;
+        }
+
+        // bypass verification based on user registration event
+        if ($event instanceof \Statamic\Events\UserRegistering) {
+            // return $event-&gt;user;
+        }
+
+        // bypass verification based on entry saving event
+        if ($event instanceof \Statamic\Events\EntrySaving) {
+            // return $event-&gt;entry;
+        }
+    }
+}
+</code></pre>";s:7:"package";s:27:"aryehraber/statamic-captcha";s:6:"assets";a:1:{i:0;a:1:{s:3:"url";s:89:"https://statamic.com/images/storage/products/YhSZQCUIru6hWu2k1q62Sw51yZ27SRdAYGal05qe.jpg";}}s:6:"seller";a:4:{s:4:"name";s:11:"Aryeh Raber";s:4:"slug";s:11:"aryeh-raber";s:7:"website";s:16:"https://ar24.dev";s:6:"avatar";s:88:"https://statamic.com/images/storage/avatars/rfu1WgpCiXJK6YMjRFk6DTfZUTSiGSdugWilttDB.jpg";}s:11:"price_range";a:2:{i:0;N;i:1;N;}s:8:"editions";a:0:{}}i:4;a:11:{s:2:"id";i:315;s:4:"name";s:11:"XML Sitemap";s:4:"slug";s:11:"xml-sitemap";s:3:"url";s:49:"https://statamic.com/addons/pecotamic/xml-sitemap";s:7:"summary";s:30:"XML sitemap for statamic sites";s:11:"description";s:3075:"<p><img src="https://img.shields.io/badge/Statamic-3.0+-FF269E?style=for-the-badge&amp;link=https://statamic.com" alt="Statamic 3.0+">
+<img src="https://img.shields.io/badge/Statamic-4.0+-FF269E?style=for-the-badge&amp;link=https://statamic.com" alt="Statamic 4.0+">
+<img src="https://img.shields.io/badge/Statamic-5.0+-FF269E?style=for-the-badge&amp;link=https://statamic.com" alt="Statamic 5.0+"></p>
+<p>Automatically adds a sitemap to your Statamic web site. The default path is &lt;your web site&gt;/sitemap.xml</p>
+<h2>Installation</h2>
+<p>Include the package with composer:</p>
+<pre><code class="language-sh">composer require pecotamic/sitemap
+</code></pre>
+<p>The package requires PHP 7.3+ or PHP 8+. It will auto register.</p>
+<h2>Configuration (optional)</h2>
+<p>You can override the default options by publishing the configuration:</p>
+<pre><code>php artisan vendor:publish --provider=&quot;Pecotamic\Sitemap\ServiceProvider&quot; --tag=config
+</code></pre>
+<p>This will copy the default config file to <code>config/pecotamic/sitemap.php</code>.</p>
+<h3>View (optional)</h3>
+<p>You can also override the view template to adjust the output by publishing the view:</p>
+<pre><code>php artisan vendor:publish --provider=&quot;Pecotamic\Sitemap\ServiceProvider&quot; --tag=view
+</code></pre>
+<p>The view template will be copied to <code>resources/views/vendor/pecotamic/sitemap/sitemap.blade.php</code>.</p>
+<p>If you prefer another view engine, it is also possible. For example to use Antlers, create a file named <code>sitemap.antlers.html</code> instead of the blade template.</p>
+<h4>View variables</h4>
+<p>An array of sitemap <strong>entries</strong> is passed to the view template. Each <strong>entry</strong> has these properties:</p>
+<ul>
+<li><strong>loc</strong>: The absolute url</li>
+<li><strong>path</strong>: The relative path</li>
+<li><strong>lastmod</strong>: A <code>DateTime</code> object of the last modification date</li>
+<li><strong>changefreq</strong>: A string like 'daily', 'weekly' (optional)</li>
+<li><strong>priority</strong>: A string presenting a float value between 0 and 1 (optional)</li>
+</ul>
+<h3>Dynamically adding entries (optional)</h3>
+<p>You may add entries dynamically by providing a closure that returns an array to the <code>addEntries</code> method.</p>
+<pre><code class="language-php">use Pecotamic\Sitemap\Sitemap;
+use Pecotamic\Sitemap\SitemapEntry;
+
+class AppServiceProvider extends Provider
+{
+    public function boot()
+    {
+        Sitemap::addEntries(static function () {
+            return [
+                new SitemapEntry('/hidden-page', new \DateTime('2020-02-20')),
+                new SitemapEntry('/about-me', new \DateTime('now'), 'daily', '1.0'),
+            ];
+        });
+    }
+}
+</code></pre>
+<h2>Credits</h2>
+<p>Thanks for code contribution to <a href="https://github.com/pecotamic/sitemap/blob/main//prageeth">Prageeth Silva</a>, <a href="https://github.com/pecotamic/sitemap/blob/main//pohnean">Poh Nean</a> and <a href="https://github.com/pecotamic/sitemap/blob/main//FrittenKeeZ">Frederik Sauer</a>.</p>";s:7:"package";s:17:"pecotamic/sitemap";s:6:"assets";a:1:{i:0;a:1:{s:3:"url";s:89:"https://statamic.com/images/storage/products/oCNE5j4fHBj2LqqK2wJ8gOLsvhC3GuesCUlugvtO.png";}}s:6:"seller";a:4:{s:4:"name";s:9:"Pecotamic";s:4:"slug";s:9:"pecotamic";s:7:"website";s:28:"https://github.com/pecotamic";s:6:"avatar";s:88:"https://statamic.com/images/storage/avatars/ob2Ssb5GvkliqwJH6MAVyE31jcBFi10dpgf6MzLA.png";}s:11:"price_range";a:2:{i:0;N;i:1;N;}s:8:"editions";a:0:{}}i:5;a:11:{s:2:"id";i:281;s:4:"name";s:7:"Logbook";s:4:"slug";s:7:"logbook";s:3:"url";s:47:"https://statamic.com/addons/aryeh-raber/logbook";s:7:"summary";s:25:"View log files in the CP.";s:11:"description";s:877:"<body>
+<p><strong>View log files in the CP</strong></p>
+<p>Viewing log files directly on the server can be a bit of a hassle... First you have to <code>ssh</code> in, <code>cd</code> to the project's logs directory, and finally open each one only to see the biggest mangle of info logs and error logs with stack traces.</p>
+<p>Logbook solves this by displaying each log file in a table and collapsing the stack traces to keep things nice and tidy.
+You can view a full stack trace by clicking on it.</p>
+<img src="https://user-images.githubusercontent.com/5065331/77851587-4012bb00-71da-11ea-994a-4f6b7166fe19.png" alt="Logbook" width="700">
+<h2>Installation</h2>
+<p>Install the addon via composer:</p>
+<pre><code>composer require aryehraber/statamic-logbook
+</code></pre>
+<p>That's it! Logbook can now be accessed via the CP under <code>Tools &gt; Utilities</code>.</p>
+</body>";s:7:"package";s:27:"aryehraber/statamic-logbook";s:6:"assets";a:1:{i:0;a:1:{s:3:"url";s:90:"https://statamic.com/images/storage/products/dH0z6Zzw9eqCCpnVXDfrfq0vWQAxPX9YiizI3xe1.jpeg";}}s:6:"seller";a:4:{s:4:"name";s:11:"Aryeh Raber";s:4:"slug";s:11:"aryeh-raber";s:7:"website";s:16:"https://ar24.dev";s:6:"avatar";s:88:"https://statamic.com/images/storage/avatars/rfu1WgpCiXJK6YMjRFk6DTfZUTSiGSdugWilttDB.jpg";}s:11:"price_range";a:2:{i:0;N;i:1;N;}s:8:"editions";a:0:{}}i:6;a:11:{s:2:"id";i:423;s:4:"name";s:9:"Admin Log";s:4:"slug";s:9:"admin-log";s:3:"url";s:47:"https://statamic.com/addons/stoffelio/admin-log";s:7:"summary";s:42:"Logs all user actions in the control panel";s:11:"description";s:2627:"<body>
+<p>This addon creates a new log which records every action taken by your users in the control panel, allowing you to track who changed what and when.</p>
+<p>Currently still in development, activiely working on additional features and fine tuning (see ToDo below).</p>
+<h2>Requirements</h2>
+<ul>
+<li>Statamic v3</li>
+</ul>
+<h2>Installation</h2>
+<p>From your site folder, run <code>composer require webographen/statamic-admin-log</code> - or install it via the control panel.</p>
+<h2>Usage</h2>
+<p>Statamic Admin Log will start logging all actions in the control panel once it is installed.</p>
+<p>The logs are saved in the default log directory (usually <code>storage/logs</code>).</p>
+<p>If you want to be able to access your logs from the control panel, we recommend the free <a href="https://statamic.com/addons/aryeh-raber/logbook">Logbook</a> addon.</p>
+<h2>Options</h2>
+<p>The addon automatically publishes a config file in <code>config/admin-log.php</code>. Currently there are three options:</p>
+<p><strong>enabled</strong> - turn the admin loog off and on (also possible via env variable)
+<strong>delete-after</strong> - set how many days of logs laravel should keep (dfault: 30)
+<strong>log-name</strong> - change the name of the logfiles (default: adminlog)</p>
+<h2>Tracked Events</h2>
+<p>Currently these events are logged automatically:</p>
+<ul>
+<li>Asset (create/edit, delete)</li>
+<li>Asset Container (create/edit, delete)</li>
+<li>Asset Folder (create/edit, delete)</li>
+<li>Blueprint (create/edit, delete)</li>
+<li>Collection (create/edit, delete)</li>
+<li>Entry (create/edit, delete)</li>
+<li>Fieldset (create/edit, delete)</li>
+<li>Form (create/edit, delete)</li>
+<li>Form Submission (delete)</li>
+<li>Global Set (create/edit, delete)</li>
+<li>Navigation (create/edit, delete)</li>
+<li>Taxonomy (create/edit, delete)</li>
+<li>Taxonomy Term (create/edit, delete)</li>
+<li>User (create/edit, delete)</li>
+<li>User Group (create/edit, delete)</li>
+<li>User Role (create/edit, delete)</li>
+</ul>
+<h2>ToDo</h2>
+<ul>
+<li>
+<input checked disabled type="checkbox"> Create config for deleting logs after x days</li>
+<li>
+<input disabled type="checkbox"> Differentiate between create and edit events</li>
+<li>
+<input disabled type="checkbox"> Add more useful events</li>
+<li>
+<input disabled type="checkbox"> Add IP logging option</li>
+<li>
+<input disabled type="checkbox"> Tests :)</li>
+</ul>
+<h2>About Us</h2>
+<p><a href="https://webographen.de/">Webographen</a> is a digital design studio focusing on Statamic. We make websites that are not just pretty, but scale in terms of design and technology.</p>
+</body>";s:7:"package";s:30:"webographen/statamic-admin-log";s:6:"assets";a:1:{i:0;a:1:{s:3:"url";s:89:"https://statamic.com/images/storage/products/H6hDGsAEFSNYkpwCcMrCRWjEJny1nuCcnfT9vjJa.png";}}s:6:"seller";a:4:{s:4:"name";s:9:"stoffelio";s:4:"slug";s:9:"stoffelio";s:7:"website";s:18:"https://stoffel.io";s:6:"avatar";s:88:"https://statamic.com/images/storage/avatars/Kfz1mycxMAiENQ5MZyPD4paSjjJ1kpEhyQ7Wd5v6.jpg";}s:11:"price_range";a:2:{i:0;N;i:1;N;}s:8:"editions";a:0:{}}i:7;a:11:{s:2:"id";i:370;s:4:"name";s:11:"Cookie Byte";s:4:"slug";s:11:"cookie-byte";s:3:"url";s:46:"https://statamic.com/addons/dryven/cookie-byte";s:7:"summary";s:229:"Full control over all cookie-related settings right in the CP: Create cookie categories, add code snippets, customise the modal and activate content covers that hide content as long as specific cookie categories are not accepted.";s:11:"description";s:3864:"<img src="https://raw.githubusercontent.com/ddm-studio/cookie-byte/main/resources/svg/cookie-byte.svg" alt="Cookie Byte logo" width="45px" height="45px">
+<h1>Cookie Byte</h1>
+<p><a href="https://statamic.com/"><img src="https://img.shields.io/badge/Statamic-3.0%2B-FF269E" alt="Statamic 3.0+" /></a>
+<a href="https://github.com/ddm-studio/cookie-byte/releases/"><img src="https://img.shields.io/github/release/ddm-studio/cookie-byte.svg" alt="GitHub release" /></a></p>
+<blockquote>
+<p>Keep your friends close, but your cookies closer! Get full control over all your cookie-related settings right in the control panel: Create cookie categories, add code snippets, customise the cookie modal and activate cookie content covers that hide content as long as specific cookie categories are not accepted.</p>
+</blockquote>
+<h2>Disclaimer</h2>
+<p>Please note that we have created the addon to the best of our knowledge, but due to the rapid developments around the
+GDPR, we cannot guarantee full legal compliance and are not liable for violations of the GDPR and other privacy
+policies. In case of doubt, please contact your legal advisor.</p>
+<h2>Features</h2>
+<p>Cookie Byte is an important addon to make your website fit for the current privacy and cookie policies. In addition to
+the usual cookie consent modal, in which users can selectively accept the desired cookies, the addon offers numerous
+other features so that you no longer have to worry about cookies of any kind.</p>
+<ul>
+<li><strong>Control panel settings:</strong> Change the addon's settings directly where you prefer to do it: In the control panel.
+Activate the addon, add cookie categories, remove a code snippet - rule over all cookies!</li>
+<li><strong>Code snippets and their cookies:</strong> Code snippets are loaded on the website only when the user agrees to the cookies
+required for them - without reloading the website (so your analytics data won't be corrupted - yesss!).</li>
+<li><strong>Cookie content covers:</strong> Some content must be hidden as long as the corresponding cookies have not been accepted,
+such as Google Maps embeds. For this we created cookie content covers (and because it's a nice alliteration).</li>
+<li><strong>Customisability:</strong> The modal and the covers are completely customizable - change the text and position of the modal
+as you see fit.</li>
+<li><strong>Developer friendly:</strong> To make your life easier, the addon comes with predefined styles and inline code. But rest
+assured: If you need more control, you can customize everything!</li>
+</ul>
+<p>There are more amazing features coming: Take a look at our <em>Feature releases</em> below!</p>
+<h2>Documentation</h2>
+<p>For more information about how to use this addon see our <a href="https://statamic.com/addons/dryven/cookie-byte/docs">documentation</a>.</p>
+<h2>Licensing</h2>
+<p>Cookie Byte is a commercial addon - you <strong>must purchase a license</strong> via the <a href="https://statamic.com/addons/dryven/cookie-byte">Statamic Marketplace</a> to use it in a production environment.</p>
+<h2>Future features</h2>
+<p>In future releases you will see more awesome features like:</p>
+<ul>
+<li><strong>Second modal type:</strong> We'll add a second modal to choose from, which features submenus and an opt-out which requires
+more steps - for our &quot;I wish more users would accept the statistical cookies so we have more analytics data for our
+online-marketing&quot; colleagues.</li>
+<li><strong>Consent records:</strong> How many people have seen the modal? How many people have accepted? How many have bounced off? So many questions - soon we will provide all the answers!</li>
+<li><strong>Geo-Targeting:</strong> In many countries, the cookie modal does not need to be displayed. So why bother the users from these countries with it? Just exclude them with our geo-tracking.</li>
+</ul>";s:7:"package";s:22:"ddm-studio/cookie-byte";s:6:"assets";a:9:{i:0;a:1:{s:3:"url";s:89:"https://statamic.com/images/storage/products/l0o9LbPLy72GxJvS8VUcyTBtT1LhCJ2JWXSf2kyi.png";}i:1;a:1:{s:3:"url";s:89:"https://statamic.com/images/storage/products/b9HkjbwArjMt9jpA4cbAk3uH0aKRiqp5PBbyxFRC.png";}i:2;a:1:{s:3:"url";s:89:"https://statamic.com/images/storage/products/xm37TcHOWleec6xXCHLqrTAo3nhfHbwbinyBhhyW.png";}i:3;a:1:{s:3:"url";s:89:"https://statamic.com/images/storage/products/FObXMu4lsbCxSv1jCmqAZ92siqsAnlKSBWgE5SkM.png";}i:4;a:1:{s:3:"url";s:89:"https://statamic.com/images/storage/products/uxiZiiUw6sARBezx9CteDeA4sQzPZ3eowd5qrewX.png";}i:5;a:1:{s:3:"url";s:89:"https://statamic.com/images/storage/products/kFxgkQNEBDbG6ikI3n1SMMrLZLkRnNnyzgQNrGbT.png";}i:6;a:1:{s:3:"url";s:89:"https://statamic.com/images/storage/products/2lBhAlb1PvNXxMSWN7XrFETK59wjUXpuJVOj1wL5.png";}i:7;a:1:{s:3:"url";s:89:"https://statamic.com/images/storage/products/08UFFiqx4RUI40kPKFeJUe54m2K7gES1VJtkHkfz.png";}i:8;a:1:{s:3:"url";s:89:"https://statamic.com/images/storage/products/KMapOtC7i0La4pUjRD13GMJZ0iiP0lrNkLr4rybf.png";}}s:6:"seller";a:4:{s:4:"name";s:6:"dryven";s:4:"slug";s:6:"dryven";s:7:"website";s:23:"https://www.dryven.com/";s:6:"avatar";s:88:"https://statamic.com/images/storage/avatars/QSf5xq0bMBHtOT0PROBDqThLxEfWQ8bprRsIW7wE.png";}s:11:"price_range";a:2:{i:0;i:19;i:1;i:19;}s:8:"editions";a:0:{}}i:8;a:11:{s:2:"id";i:283;s:4:"name";s:15:"Bard Text Align";s:4:"slug";s:24:"statamic-bard-text-align";s:3:"url";s:64:"https://statamic.com/addons/optimo-apps/statamic-bard-text-align";s:7:"summary";s:25:"Bard Text Align Extension";s:11:"description";s:1173:"<h1>Statamic Bard Text Align Extension</h1>
+<p><img src="https://img.shields.io/badge/Statamic-3.0+-FF269E?style=for-the-badge&amp;link=https://statamic.com" alt="Statamic 3.0+" />
+<a href="https://packagist.org/packages/optimoapps/statamic-bard-text-align"><img src="https://img.shields.io/packagist/v/optimoapps/statamic-bard-text-align.svg?style=for-the-badge" alt="Latest Version on Packagist" /></a>
+<a href="https://packagist.org/packages/optimoapps/statamic-bard-text-align"><img src="https://img.shields.io/packagist/dt/optimoapps/statamic-bard-text-align.svg?style=for-the-badge" alt="Total Downloads" /></a>
+<img src="https://github.com/OptimoApps/statamic-bard-text-align/workflows/run-tests/badge.svg" alt="run-tests" />
+<img src="https://github.com/OptimoApps/statamic-bard-text-align/workflows/Check%20&amp;%20fix%20styling/badge.svg" alt="Check &amp; fix styling" /></p>
+<blockquote>
+<p>This addon helps you to align the text in Bard Editor</p>
+</blockquote>
+<h2>Installation</h2>
+<p><code>composer require optimoapps/statamic-bard-text-align </code></p>
+<h2>Demo</h2>
+<p><img src="https://i.ibb.co/pvvYMDC/bard-text-align.gif" alt="demo" title="demo" /></p>";s:7:"package";s:35:"optimoapps/statamic-bard-text-align";s:6:"assets";a:1:{i:0;a:1:{s:3:"url";s:89:"https://statamic.com/images/storage/products/KTQetGnZAjjpueZFyOyc8j8AN0ymfFJlhIYXAdid.gif";}}s:6:"seller";a:4:{s:4:"name";s:11:"Optimo Apps";s:4:"slug";s:11:"optimo-apps";s:7:"website";s:23:"https://optimoapps.com/";s:6:"avatar";s:88:"https://statamic.com/images/storage/avatars/0yRZ8nCQ1zrKEn2bkzqHwN9IlqQGh82XoKCSgqcn.png";}s:11:"price_range";a:2:{i:0;N;i:1;N;}s:8:"editions";a:0:{}}i:9;a:11:{s:2:"id";i:279;s:4:"name";s:12:"Impersonator";s:4:"slug";s:12:"impersonator";s:3:"url";s:52:"https://statamic.com/addons/aryeh-raber/impersonator";s:7:"summary";s:79:"Give Super Admins the ability to authenticate as any user for easier debugging.";s:11:"description";s:2795:"<blockquote>
+<p>[!NOTE]
+This addon has been archived since impersonating users was added to Statamic core in <a href="https://github.com/statamic/cms/releases/tag/v4.23.0">v4.23.0</a></p>
+</blockquote>
+<hr>
+<h1>Impersonator</h1>
+<p><strong>Give Admins the ability to authenticate as any user for easier debugging.</strong></p>
+<h2>Installation</h2>
+<p>Install the addon via composer:</p>
+<pre><code>composer require aryehraber/statamic-impersonator
+</code></pre>
+<p>Publish the config file (optional):</p>
+<pre><code>php please vendor:publish --tag=impersonator-config
+</code></pre>
+<p>After installation, all Super Admins will see a new Impersonator utility listed under <code>Tools &gt; Utilities</code>. Regular CP users can also be given access, but will require the &quot;Impersonator&quot; permission to be activated for their User Role.</p>
+<h2>Usage</h2>
+<p>Simply navigate to <code>Tools &gt; Utilities &gt; Impersonator</code>, select the user that you want to authenticate as and click &quot;Go&quot;. This will authenticate you as the selected user and automatically redirect you to the CP Dashboard, or the Homepage if the user doesn't have CP access.</p>
+<p>You are now free to do what you need as this user to debug or give support regarding an issue.</p>
+<p>Once finished, you can easily return back to your own account by clicking the &quot;Back to my account&quot; link:</p>
+<ul>
+<li><strong>CP</strong>: a link can be found in the sidebar nav.</li>
+<li><strong>Frontend</strong>: a small icon should appear in the bottom right corner (only if <code>inject_terminate_link</code> is set to <code>true</code>).</li>
+</ul>
+<p>If either of these doesn't work as expected, you should manually log out and log back in as yourself.</p>
+<h3>Tags</h3>
+<p><code>{{ impersonator:active }}</code></p>
+<p>This tag allows you to check whether the current user is in an active Impersonation session, this can be useful to conditionally show/hide content.</p>
+<p><strong>Examples:</strong></p>
+<p>Show the terminate link to Impersonators only:</p>
+<pre><code class="language-antlers">{{ if {impersonator:active} }}
+  &lt;a href=&quot;{{ impersonator:terminate }}&quot;&gt;Head Back&lt;/a&gt;
+{{ /if }}
+</code></pre>
+<p>Hide sensitive information from Impersonators:</p>
+<pre><code class="language-antlers">{{ unless {impersonator:active} }}
+  &lt;p&gt;Personal user info&lt;/p&gt;
+{{ /unless }}
+</code></pre>
+<hr>
+<p><code>{{ impersonator:terminate }}</code></p>
+<p>This tag outputs the action URL to terminate the Impersonation session, this can be useful if the <code>inject_terminate_link</code> config option has been set to <code>false</code>.</p>
+<h2>Security</h2>
+<p>If you discover any security-related issues, please email aryeh.raber@gmail.com instead of using the issue tracker.</p>";s:7:"package";s:32:"aryehraber/statamic-impersonator";s:6:"assets";a:1:{i:0;a:1:{s:3:"url";s:90:"https://statamic.com/images/storage/products/i90aICVEYDrV23IOzaKmYWFsWAJPVBt0t5Y4mL96.jpeg";}}s:6:"seller";a:4:{s:4:"name";s:11:"Aryeh Raber";s:4:"slug";s:11:"aryeh-raber";s:7:"website";s:16:"https://ar24.dev";s:6:"avatar";s:88:"https://statamic.com/images/storage/avatars/rfu1WgpCiXJK6YMjRFk6DTfZUTSiGSdugWilttDB.jpg";}s:11:"price_range";a:2:{i:0;N;i:1;N;}s:8:"editions";a:0:{}}i:10;a:11:{s:2:"id";i:274;s:4:"name";s:8:"Classify";s:4:"slug";s:8:"classify";s:3:"url";s:53:"https://statamic.com/addons/visuellverstehen/classify";s:7:"summary";s:58:"Add CSS classes to HTML tags generated by the bard editor.";s:11:"description";s:5783:"<p><a href="https://statamic.com/addons/visuellverstehen/classify"><img src="https://img.shields.io/badge/Statamic-v4-FF269E?style=for-the-badge&amp;link=https://statamic.com" alt="Statamic 4"></a>
+<a href="https://statamic.com/addons/visuellverstehen/classify"><img src="https://img.shields.io/badge/Statamic-v5-FF269E?style=for-the-badge&amp;link=https://statamic.com" alt="Statamic 5"></a>
+<a href="https://packagist.org/packages/visuellverstehen/statamic-classify"><img src="https://img.shields.io/packagist/v/visuellverstehen/statamic-classify.svg?style=for-the-badge" alt="Latest version on Packagist"></a></p>
+<h1>Classify</h1>
+<p>Classify is a useful helper to add CSS classes to all HTML tags generated by the Statamic <a href="https://statamic.dev/fieldtypes/bard">Bard</a> editor.</p>
+<h1>Installation</h1>
+<h2>Requirements</h2>
+<ul>
+<li>Statamic v4 || v5</li>
+<li>Laravel 10 || 11 || 12</li>
+<li>PHP 8.2+</li>
+</ul>
+<h2>Installation</h2>
+<p>Install Classify via composer:</p>
+<pre><code class="language-bash">composer require visuellverstehen/statamic-classify
+</code></pre>
+<h2>Publish config file</h2>
+<p>The installation process will automatically publish the <code>classify.php</code> file into the <code>config</code> folder.</p>
+<h2>Usage</h2>
+<h3>Configuration</h3>
+<p>To add or change style sets, simply add or change an array with classes that should be added to the HTML tag.</p>
+<pre><code class="language-php">'default' =&gt; [
+    'h1' =&gt; 'text-2xl',
+    'a'  =&gt; 'link hover:text-blue',
+    'p' =&gt; 'mb-5',
+    'li p' =&gt; 'mb-2 ml-4',
+],
+</code></pre>
+<p><em>This example uses TailwindCSS, but you can use whatever kind of CSS you want.</em></p>
+<h3>Example Output</h3>
+<pre><code class="language-html">&lt;h1 class=&quot;text-2xl&quot;&gt;A headline&lt;/h1&gt;
+&lt;p class=&quot;mb-5&quot;&gt;Some text&lt;/p&gt;
+
+&lt;ul&gt;
+    &lt;li&gt;&lt;p class=&quot;mb-2 ml-4&quot;&gt;A list item&lt;/p&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;p class=&quot;mb-2 ml-4&quot;&gt;A list item&lt;/p&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;p class=&quot;mb-2 ml-4&quot;&gt;&lt;a class=&quot;link hover:text-blue&quot; href=&quot;#&quot;&gt;Click me&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;mb-5&quot;&gt;Another text&lt;/p&gt;
+</code></pre>
+<h3>Usage</h3>
+<p>If you want to use the default style set, use the <code>classify</code> modifier.</p>
+<pre><code class="language-php">{{ bard_text | classify }}
+</code></pre>
+<p>If you want to add multiple style sets, you can define those in the config file:</p>
+<pre><code class="language-php">'default' =&gt; [
+    // 
+],
+'blog' =&gt; [
+    'a'  =&gt; 'link hover:underline',
+    'li p' =&gt; 'ml-3 font-bold',
+    'p' =&gt; 'mb-5',
+],
+
+// Antlers view
+{{ bard_text | classify:blog }}
+</code></pre>
+<p>If you want to get the defined classes for a certain element, you can get them straight from your config or use the <code>classify</code> tag:</p>
+<pre><code>{{ classify:h1 }}
+// output: text-2xl
+
+{{ classify element=&quot;li p&quot; }}
+// output: mb-2 ml-4
+
+{{ classify:a styleset=&quot;blog&quot; }}
+// output: link hover:underline
+</code></pre>
+<h2>Usage with Blade</h2>
+<p>If you wish to use classify with Blade instead of Antlers:</p>
+<pre><code class="language-php">// no param is needed to use the 'default' styleset
+{!! Statamic::modify($bard_text)-&gt;classify() !!}
+{!! Statamic::modify($bard_text)-&gt;classify('blog') !!}
+</code></pre>
+<h2>Nested selectors</h2>
+<p>You can nest your selectors to style elements differently in varying contexts.</p>
+<p>Let's assume you want to style links inside lists differently to a general link, you can make use of nesting:</p>
+<pre><code class="language-php">`ul li p a` =&gt; 'my-secial-css-class-for-nested-links-in-lists`,
+`a` =&gt; `a-general-link-class`,
+</code></pre>
+<p>Classify will take care of the order, so you don't need to define the nested selector before the general selector.</p>
+<h3>Important: Direct child relationships</h3>
+<p><strong>Note:</strong> Nested selectors use CSS direct child selectors (<code>&gt;</code>), which means each element must be a <strong>direct child</strong> of the previous element in the selector.</p>
+<p>For example:</p>
+<ul>
+<li><code>'li p'</code> matches <code>&lt;li&gt;&lt;p&gt;content&lt;/p&gt;&lt;/li&gt;</code> ✅</li>
+<li><code>'ul p'</code> does <strong>not</strong> match <code>&lt;ul&gt;&lt;li&gt;&lt;p&gt;content&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</code> ❌ (because <code>p</code> is not a direct child of <code>ul</code>)</li>
+</ul>
+<p>If you need to target elements with intermediate elements, define the complete path:</p>
+<ul>
+<li>Use <code>'ul li p'</code> to match <code>&lt;ul&gt;&lt;li&gt;&lt;p&gt;content&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</code> ✅</li>
+</ul>
+<h2>Working with CSS frameworks (like TailwindCSS)</h2>
+<p>Some CSS frameworks utilize JIT compiling, or have some other means of purging CSS classes from production builds to reduce file size. Your classify CSS classes may not appear anywhere else in your template files, as they will be added dynamically. To make sure that your classes will be considered for compiling, you have to include the classify config file as content:</p>
+<pre><code class="language-js">module.exports = {
+  content: [
+    // all of your content files
+    // './pages/**/*.{html,js}'
+    // './components/**/*.{html,js}',
+    './config/classify.php',
+  ],
+}
+</code></pre>
+<h1>More about us</h1>
+<ul>
+<li><a href="https://statamic-agency.com">www.statamic-agency.com</a></li>
+<li><a href="https://visuellverstehen.de">www.visuellverstehen.de</a></li>
+</ul>
+<h1>License</h1>
+<p>The MIT License (MIT). Please have a look at our <a href="https://github.com/visuellverstehen/statamic-classify/blob/main/LICENSE.md">license file</a> for more information.</p>";s:7:"package";s:34:"visuellverstehen/statamic-classify";s:6:"assets";a:2:{i:0;a:1:{s:3:"url";s:89:"https://statamic.com/images/storage/products/cTIZPOgtkkDk0nRp08qapebyVHHuqlSYlcvGBBAz.png";}i:1;a:1:{s:3:"url";s:89:"https://statamic.com/images/storage/products/nQuKFAMZ3noT83wWgRbZ0Z21yxFR7IxRJZpMUrO0.png";}}s:6:"seller";a:4:{s:4:"name";s:16:"visuellverstehen";s:4:"slug";s:16:"visuellverstehen";s:7:"website";s:27:"https://visuellverstehen.de";s:6:"avatar";s:88:"https://statamic.com/images/storage/avatars/SF8dMjUnE30qvIUTPEgt5SBGmalbYgMp5whiGxNP.png";}s:11:"price_range";a:2:{i:0;N;i:1;N;}s:8:"editions";a:0:{}}i:11;a:11:{s:2:"id";i:351;s:4:"name";s:15:"Bard Text Color";s:4:"slug";s:26:"Statamic-3-Bard-Text-Color";s:3:"url";s:64:"https://statamic.com/addons/xndbogdan/Statamic-3-Bard-Text-Color";s:7:"summary";s:19:"Text Color For Bard";s:11:"description";s:2399:"<h1>Statamic Bard Text Color Extension</h1>
+<p><img src="https://img.shields.io/badge/Statamic-3.0+-FF269E?style=for-the-badge&amp;link=https://statamic.com" alt="Statamic 3.0+">
+<a href="https://packagist.org/packages/xndbogdan/statamic-bard-text-color"><img src="https://img.shields.io/packagist/dt/xndbogdan/statamic-bard-text-color.svg" alt="Total Downloads"></a></p>
+<h2>Introduction</h2>
+<p><img src="https://github.com/xndbogdan/statamic-bard-text-color/raw/main/preview_v5.0.1.png" alt="alt text" title="Preview"></p>
+<p>This is a statamic bard plugin that lets you change text color!
+It allows you to use the default tailwind palette, but you can also add your own.
+At the moment it's still under development, so please report any bugs that you encounter.
+New feature suggestions are welcomed too.</p>
+<h2>Getting started</h2>
+<p>If you only wish to use the default tailwind palette, then it's as easy as running the composer require command.</p>
+<p><code>composer require xndbogdan/statamic-bard-text-color</code></p>
+<h2>Custom colors</h2>
+<h3>Using a config file</h3>
+<p>The simplest way of adding new colors to this plugin is by adding a  <code>bard-custom-colors.php</code>  config file to your project.
+Please check <a href="https://github.com/xndbogdan/statamic-bard-text-color/blob/main/config/bard-custom-colors.php">this</a> file if you need an example.</p>
+<h2>Planned features</h2>
+<ul>
+<li>Pull colors from tailwind.config.js automatically</li>
+<li>Upgrade to Vue 3</li>
+<li>Upgrade to Vite</li>
+</ul>
+<h2>Credits</h2>
+<p>Big thanks to:</p>
+<ul>
+<li><a href="https://github.com/intrepidws">Craig Anderson</a> for participating in active development.</li>
+<li><a href="https://github.com/heidkaemper">Lars Heidkämper</a> for participating in active development.</li>
+<li><a href="https://github.com/bernhardberger">Bernhard Berger</a> for participating in active development.</li>
+<li><a href="https://github.com/Hesesses">Hesesses</a> for suggesting a custom color implementation.</li>
+<li><a href="https://github.com/ncla">ncla</a> for showing a working example in a project implementation.</li>
+<li><a href="https://github.com/jelleroorda">Jelle Roorda</a> from the Statamic discord, for providing resources &amp; advice on</li>
+<li><a href="https://github.com/pixelastronauts">Max Baan</a> for providing a solution to styling issues caused by Tailwind preflight.</li>
+</ul>";s:7:"package";s:34:"xndbogdan/statamic-bard-text-color";s:6:"assets";a:1:{i:0;a:1:{s:3:"url";s:89:"https://statamic.com/images/storage/products/kdis9oW4MaykHZiLooxbqmxg8ny03u2TBHAD2SNi.png";}}s:6:"seller";a:4:{s:4:"name";s:12:"Bogdan-Mihai";s:4:"slug";s:9:"xndbogdan";s:7:"website";s:27:"https://mbogdan.netlify.app";s:6:"avatar";s:89:"https://statamic.com/images/storage/avatars/2Sk1v7Tth8hIQpq7RnRtfbClEzAC3GlMDfwdpJBv.jpeg";}s:11:"price_range";a:2:{i:0;N;i:1;N;}s:8:"editions";a:0:{}}}s:5:"links";a:4:{s:5:"first";s:53:"https://statamic.com/api/v1/marketplace/addons?page=1";s:4:"last";s:54:"https://statamic.com/api/v1/marketplace/addons?page=33";s:4:"prev";N;s:4:"next";s:53:"https://statamic.com/api/v1/marketplace/addons?page=2";}s:4:"meta";a:8:{s:12:"current_page";i:1;s:4:"from";i:1;s:9:"last_page";i:33;s:5:"links";a:15:{i:0;a:3:{s:3:"url";N;s:5:"label";s:16:"&laquo; Previous";s:6:"active";b:0;}i:1;a:3:{s:3:"url";s:53:"https://statamic.com/api/v1/marketplace/addons?page=1";s:5:"label";s:1:"1";s:6:"active";b:1;}i:2;a:3:{s:3:"url";s:53:"https://statamic.com/api/v1/marketplace/addons?page=2";s:5:"label";s:1:"2";s:6:"active";b:0;}i:3;a:3:{s:3:"url";s:53:"https://statamic.com/api/v1/marketplace/addons?page=3";s:5:"label";s:1:"3";s:6:"active";b:0;}i:4;a:3:{s:3:"url";s:53:"https://statamic.com/api/v1/marketplace/addons?page=4";s:5:"label";s:1:"4";s:6:"active";b:0;}i:5;a:3:{s:3:"url";s:53:"https://statamic.com/api/v1/marketplace/addons?page=5";s:5:"label";s:1:"5";s:6:"active";b:0;}i:6;a:3:{s:3:"url";s:53:"https://statamic.com/api/v1/marketplace/addons?page=6";s:5:"label";s:1:"6";s:6:"active";b:0;}i:7;a:3:{s:3:"url";s:53:"https://statamic.com/api/v1/marketplace/addons?page=7";s:5:"label";s:1:"7";s:6:"active";b:0;}i:8;a:3:{s:3:"url";s:53:"https://statamic.com/api/v1/marketplace/addons?page=8";s:5:"label";s:1:"8";s:6:"active";b:0;}i:9;a:3:{s:3:"url";s:53:"https://statamic.com/api/v1/marketplace/addons?page=9";s:5:"label";s:1:"9";s:6:"active";b:0;}i:10;a:3:{s:3:"url";s:54:"https://statamic.com/api/v1/marketplace/addons?page=10";s:5:"label";s:2:"10";s:6:"active";b:0;}i:11;a:3:{s:3:"url";N;s:5:"label";s:3:"...";s:6:"active";b:0;}i:12;a:3:{s:3:"url";s:54:"https://statamic.com/api/v1/marketplace/addons?page=32";s:5:"label";s:2:"32";s:6:"active";b:0;}i:13;a:3:{s:3:"url";s:54:"https://statamic.com/api/v1/marketplace/addons?page=33";s:5:"label";s:2:"33";s:6:"active";b:0;}i:14;a:3:{s:3:"url";s:53:"https://statamic.com/api/v1/marketplace/addons?page=2";s:5:"label";s:12:"Next &raquo;";s:6:"active";b:0;}}s:4:"path";s:46:"https://statamic.com/api/v1/marketplace/addons";s:8:"per_page";i:12;s:2:"to";i:12;s:5:"total";i:385;}}

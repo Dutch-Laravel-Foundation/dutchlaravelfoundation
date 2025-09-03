@@ -1,0 +1,1 @@
+[2025-08-31 18:16:14] production.DEBUG: Cannot loop over non-loopable variable: {{ number_of_employees }} {"line":17,"file":"/home/dlf_prod/domains/dutchlaravelfoundation.nl/current/resources/views/templates/members/show.antlers.html"} 

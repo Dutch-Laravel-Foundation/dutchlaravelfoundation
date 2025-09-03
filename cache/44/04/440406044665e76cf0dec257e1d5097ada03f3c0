@@ -1,0 +1,197 @@
+1756134709a:3:{s:4:"data";a:2:{i:0;a:11:{s:2:"id";i:277;s:4:"name";s:7:"Captcha";s:4:"slug";s:7:"captcha";s:3:"url";s:47:"https://statamic.com/addons/aryeh-raber/captcha";s:7:"summary";s:52:"Protect your Statamic forms using a Captcha service.";s:11:"description";s:8222:"<p><strong>Protect your Statamic forms using a Captcha service.</strong></p>
+<p>This addon allows you to protect your Statamic forms using any of the following services:</p>
+<ul>
+<li><a href="https://developers.google.com/recaptcha/intro">Google reCAPTCHA v2</a> (v3 not supported)</li>
+<li><a href="https://hcaptcha.com/?r=eaeeea7cd23c">hCaptcha</a></li>
+<li><a href="https://developers.cloudflare.com/turnstile">Cloudflare Turnstile</a></li>
+<li><a href="https://altcha.org">ALTCHA</a></li>
+</ul>
+<p>After the initial setup, all you need to do is add the <code>{{ captcha }}</code> tag inside your forms, easy peasy!</p>
+<h2>Installation</h2>
+<p>Install the addon via composer:</p>
+<pre><code>composer require aryehraber/statamic-captcha
+</code></pre>
+<p>Publish the config file:</p>
+<pre><code> php please vendor:publish --tag=captcha-config
+</code></pre>
+<p>Alternately, you can manually setup the config file by creating <code>captcha.php</code> inside your project's <code>config</code> directory:</p>
+<pre><code class="language-php">&lt;?php
+
+return [
+    'service' =&gt; 'Recaptcha', // options: Recaptcha / Hcaptcha / Turnstile / Altcha
+    'sitekey' =&gt; env('CAPTCHA_SITEKEY', ''),
+    'secret' =&gt; env('CAPTCHA_SECRET', ''),
+    'forms' =&gt; [],
+    'user_login' =&gt; false,
+    'user_registration' =&gt; false,
+    'disclaimer' =&gt; '',
+    'invisible' =&gt; false,
+    'hide_badge' =&gt; false,
+    'enable_api_routes' =&gt; false,
+    'custom_should_verify' =&gt; null,
+];
+</code></pre>
+<p>Once the config file is in place, make sure to add your <code>sitekey</code> &amp; <code>secret</code> from <a href="https://www.google.com/recaptcha/admin">Recaptcha's Console</a>, <a href="https://dashboard.hcaptcha.com/sites">hCaptcha's Console</a>, <a href="https://dash.cloudflare.com">Cloudflare's Dashboard</a> or <a href="https://altcha.org/docs/api/api_keys/">Altcha's Docs</a> and add the handles of the Statamic Forms you'd like to protect:</p>
+<pre><code class="language-php">&lt;?php
+
+return [
+    'service' =&gt; 'Recaptcha', // options: Recaptcha / Hcaptcha / Turnstile / Altcha
+    'sitekey' =&gt; 'YOUR_SITEKEY_HERE', // Or add to .env
+    'secret' =&gt; 'YOUR_SECRET_HERE', // Or add to .env
+    'forms' =&gt; ['contact', 'newsletter'],
+    // ...
+];
+</code></pre>
+<p>If you would like Captcha to verify ALL forms without having to specify each one in the <code>forms</code> config array, you may use the <code>all</code> option instead.</p>
+<p><em>Note: this should replace the array and be set as a string.</em></p>
+<pre><code class="language-php">&lt;?php
+
+return [
+    'forms' =&gt; 'all',
+    // ...
+];
+</code></pre>
+<h2>Usage</h2>
+<pre><code class="language-html">&lt;head&gt;
+    &lt;title&gt;My Awesome Site&lt;/title&gt;
+
+    {{ captcha:head }}
+&lt;/head&gt;
+&lt;body&gt;
+    {{ form:contact }}
+
+        &lt;!-- Add your fields like normal --&gt;
+
+        {{ captcha }}
+
+        {{ if error:captcha }}
+          &lt;p&gt;{{ error:captcha }}&lt;/p&gt;
+        {{ /if }}
+
+    {{ /form:contact }}
+&lt;/body&gt;
+</code></pre>
+<p>This will automatically render the Captcha element on the page. After the form is submitted, the addon will temporarily halt the form from saving while the Captcha service verifies that the request checks out. If all is good, the form will save as normal, otherwise an error will be added to the <code>{{ errors }}</code> object.</p>
+<h2>Invisible Captcha</h2>
+<p>Simply set <code>invisible</code> to <code>true</code> inside Captcha's config (Turnstile handles invisibility from Cloudflares's Dashboard, so no Captcha config changes are needed). To hide the sticky Recaptcha badge, make sure to also set <code>hide_badge</code> to <code>true</code>.</p>
+<p>Note: using Invisible Captcha will require you to display links to the Captcha service's Terms underneath the form, to make this easier use <code>{{ captcha:disclaimer }}</code>. This message can be customised using the <code>disclaimer</code> option inside Captcha's config, however sensible defaults have been added that will automatically switch depending on the Captcha service you're using.</p>
+<h2>User Registration &amp; Login</h2>
+<p>Captcha can also verify <a href="https://statamic.dev/tags/user-register_form">User Registration</a> &amp; <a href="https://statamic.dev/tags/user-login_form">User Login</a> form requests, simply set <code>user_registration</code> / <code>user_login</code> to <code>true</code> inside Captcha's config and use the <code>{{ captcha }}</code> tag as normal inside Statamic's <code>{{ user:register_form }}</code> / <code>{{ user:login_form }}</code> tags.</p>
+<h2>Data Attributes</h2>
+<p>Some of the Captcha services offer additional features, such as light/dark mode and sizing options, via data attributes. These can simply be added to the Captcha tag and will be passed through to the client-side widget.</p>
+<pre><code>{{ captcha data-theme=&quot;dark&quot; data-size=&quot;compact&quot; }}
+</code></pre>
+<h2>Translations</h2>
+<p>This package is localized to English and German.
+If you need translations in another language, you can create them yourself:</p>
+<ul>
+<li>Create the translations file in <code>resources/lang/vendor/statamic-captcha/{language}/messages.php</code>.</li>
+<li>You can use the <a href="https://github.com/aryehraber/statamic-captcha/blob/master/resources/lang/en/messages.php">English translation file</a> as a blueprint.</li>
+<li>You are welcome to share your translations here by <a href="https://github.com/aryehraber/statamic-captcha/pulls">submitting a PR</a>.</li>
+</ul>
+<p>If you want to change existing messages, you can publish and override them:</p>
+<pre><code>php please vendor:publish --tag=&quot;captcha-translations&quot;
+</code></pre>
+<h2>Advanced</h2>
+<h3>Custom &quot;Should Verify&quot; Logic</h3>
+<p>You can provide additional custom logic to determine if verification should be attempted using a custom invokable class. This is useful to adjust Captcha's <code>shouldVerify</code> check to include app-specific behaviour, for example: only enforcing Captcha for guest users and bypassing it for logged-in users.</p>
+<p>To get started, create an invokable class within your app, and add it as the <code>custom_should_verify</code> property in your config:</p>
+<pre><code class="language-php">&lt;?php
+
+return [
+    // ...
+    'custom_should_verify' =&gt; \App\Support\MyCustomShouldVerify::class,
+];
+</code></pre>
+<p>This invokable class must implement the <code>\AryehRaber\Captcha\Contracts\CustomShouldVerify</code> interface, which enforces that an event param gets passed into the invoke method and subsequently returns an optional boolean. To stop Captcha's <code>shouldVerify</code> method from getting called, the invoke method must return <code>false</code>, otherwise returning <code>true</code> (or <code>null</code>) will continue Captcha's verification logic.</p>
+<p>Note: this custom class is resolved via Laravel's container, meaning dependency injection is available via the constructor.</p>
+<pre><code class="language-php">&lt;?php
+
+namespace App\Support;
+
+use AryehRaber\Captcha\Contracts\CustomShouldVerify;
+
+class MyCustomShouldVerify implements CustomShouldVerify
+{
+    public function __invoke($event): ?bool
+    {
+        // bypass verification for authenticated users
+        if (auth()-&gt;check()) {
+            return false;
+        }
+
+        // bypass verification on dev environment
+        if (app()-&gt;environment('dev')) {
+            return false;
+        }
+
+        // bypass verification based on event form submission
+        if ($event instanceof \Statamic\Events\FormSubmitted) {
+            // return $event-&gt;submission;
+        }
+
+        // bypass verification based on login event
+        if ($event instanceof \Illuminate\Auth\Events\Login) {
+            // return $event-&gt;user;
+        }
+
+        // bypass verification based on user registration event
+        if ($event instanceof \Statamic\Events\UserRegistering) {
+            // return $event-&gt;user;
+        }
+
+        // bypass verification based on entry saving event
+        if ($event instanceof \Statamic\Events\EntrySaving) {
+            // return $event-&gt;entry;
+        }
+    }
+}
+</code></pre>";s:7:"package";s:27:"aryehraber/statamic-captcha";s:6:"assets";a:1:{i:0;a:1:{s:3:"url";s:89:"https://statamic.com/images/storage/products/YhSZQCUIru6hWu2k1q62Sw51yZ27SRdAYGal05qe.jpg";}}s:6:"seller";a:4:{s:4:"name";s:11:"Aryeh Raber";s:4:"slug";s:11:"aryeh-raber";s:7:"website";s:16:"https://ar24.dev";s:6:"avatar";s:88:"https://statamic.com/images/storage/avatars/rfu1WgpCiXJK6YMjRFk6DTfZUTSiGSdugWilttDB.jpg";}s:11:"price_range";a:2:{i:0;N;i:1;N;}s:8:"editions";a:0:{}}i:1;a:11:{s:2:"id";i:315;s:4:"name";s:11:"XML Sitemap";s:4:"slug";s:11:"xml-sitemap";s:3:"url";s:49:"https://statamic.com/addons/pecotamic/xml-sitemap";s:7:"summary";s:30:"XML sitemap for statamic sites";s:11:"description";s:3075:"<p><img src="https://img.shields.io/badge/Statamic-3.0+-FF269E?style=for-the-badge&amp;link=https://statamic.com" alt="Statamic 3.0+">
+<img src="https://img.shields.io/badge/Statamic-4.0+-FF269E?style=for-the-badge&amp;link=https://statamic.com" alt="Statamic 4.0+">
+<img src="https://img.shields.io/badge/Statamic-5.0+-FF269E?style=for-the-badge&amp;link=https://statamic.com" alt="Statamic 5.0+"></p>
+<p>Automatically adds a sitemap to your Statamic web site. The default path is &lt;your web site&gt;/sitemap.xml</p>
+<h2>Installation</h2>
+<p>Include the package with composer:</p>
+<pre><code class="language-sh">composer require pecotamic/sitemap
+</code></pre>
+<p>The package requires PHP 7.3+ or PHP 8+. It will auto register.</p>
+<h2>Configuration (optional)</h2>
+<p>You can override the default options by publishing the configuration:</p>
+<pre><code>php artisan vendor:publish --provider=&quot;Pecotamic\Sitemap\ServiceProvider&quot; --tag=config
+</code></pre>
+<p>This will copy the default config file to <code>config/pecotamic/sitemap.php</code>.</p>
+<h3>View (optional)</h3>
+<p>You can also override the view template to adjust the output by publishing the view:</p>
+<pre><code>php artisan vendor:publish --provider=&quot;Pecotamic\Sitemap\ServiceProvider&quot; --tag=view
+</code></pre>
+<p>The view template will be copied to <code>resources/views/vendor/pecotamic/sitemap/sitemap.blade.php</code>.</p>
+<p>If you prefer another view engine, it is also possible. For example to use Antlers, create a file named <code>sitemap.antlers.html</code> instead of the blade template.</p>
+<h4>View variables</h4>
+<p>An array of sitemap <strong>entries</strong> is passed to the view template. Each <strong>entry</strong> has these properties:</p>
+<ul>
+<li><strong>loc</strong>: The absolute url</li>
+<li><strong>path</strong>: The relative path</li>
+<li><strong>lastmod</strong>: A <code>DateTime</code> object of the last modification date</li>
+<li><strong>changefreq</strong>: A string like 'daily', 'weekly' (optional)</li>
+<li><strong>priority</strong>: A string presenting a float value between 0 and 1 (optional)</li>
+</ul>
+<h3>Dynamically adding entries (optional)</h3>
+<p>You may add entries dynamically by providing a closure that returns an array to the <code>addEntries</code> method.</p>
+<pre><code class="language-php">use Pecotamic\Sitemap\Sitemap;
+use Pecotamic\Sitemap\SitemapEntry;
+
+class AppServiceProvider extends Provider
+{
+    public function boot()
+    {
+        Sitemap::addEntries(static function () {
+            return [
+                new SitemapEntry('/hidden-page', new \DateTime('2020-02-20')),
+                new SitemapEntry('/about-me', new \DateTime('now'), 'daily', '1.0'),
+            ];
+        });
+    }
+}
+</code></pre>
+<h2>Credits</h2>
+<p>Thanks for code contribution to <a href="https://github.com/pecotamic/sitemap/blob/main//prageeth">Prageeth Silva</a>, <a href="https://github.com/pecotamic/sitemap/blob/main//pohnean">Poh Nean</a> and <a href="https://github.com/pecotamic/sitemap/blob/main//FrittenKeeZ">Frederik Sauer</a>.</p>";s:7:"package";s:17:"pecotamic/sitemap";s:6:"assets";a:1:{i:0;a:1:{s:3:"url";s:89:"https://statamic.com/images/storage/products/oCNE5j4fHBj2LqqK2wJ8gOLsvhC3GuesCUlugvtO.png";}}s:6:"seller";a:4:{s:4:"name";s:9:"Pecotamic";s:4:"slug";s:9:"pecotamic";s:7:"website";s:28:"https://github.com/pecotamic";s:6:"avatar";s:88:"https://statamic.com/images/storage/avatars/ob2Ssb5GvkliqwJH6MAVyE31jcBFi10dpgf6MzLA.png";}s:11:"price_range";a:2:{i:0;N;i:1;N;}s:8:"editions";a:0:{}}}s:5:"links";a:4:{s:5:"first";s:53:"https://statamic.com/api/v1/marketplace/addons?page=1";s:4:"last";s:53:"https://statamic.com/api/v1/marketplace/addons?page=1";s:4:"prev";N;s:4:"next";N;}s:4:"meta";a:8:{s:12:"current_page";i:1;s:4:"from";i:1;s:9:"last_page";i:1;s:5:"links";a:3:{i:0;a:3:{s:3:"url";N;s:5:"label";s:16:"&laquo; Previous";s:6:"active";b:0;}i:1;a:3:{s:3:"url";s:53:"https://statamic.com/api/v1/marketplace/addons?page=1";s:5:"label";s:1:"1";s:6:"active";b:1;}i:2;a:3:{s:3:"url";N;s:5:"label";s:12:"Next &raquo;";s:6:"active";b:0;}}s:4:"path";s:46:"https://statamic.com/api/v1/marketplace/addons";s:8:"per_page";i:12;s:2:"to";i:2;s:5:"total";i:2;}}

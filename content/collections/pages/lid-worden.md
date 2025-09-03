@@ -3,8 +3,8 @@ id: 3e84afec-448e-4805-8eed-8e209475a28e
 blueprint: pages
 title: 'Lid worden'
 template: templates/become-member/index
-updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
-updated_at: 1745436205
+updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
+updated_at: 1754647338
 call_to_action: c3238da9-592c-4906-9b11-183e37e4b2d3
 content:
   -
@@ -178,16 +178,7 @@ content:
             content:
               -
                 type: text
-                text: "20% korting\_op nieuwe\_PhpStorm-licenties"
-      -
-        type: listItem
-        content:
-          -
-            type: paragraph
-            content:
-              -
-                type: text
-                text: "50% korting\_op nieuwe\_Laravel Idea-licenties\_voor bestaande PhpStorm-gebruikers"
+                text: "20% korting\_op nieuwe\_PhpStorm-licenties (incl. gratis Laravel Idea)"
   -
     type: bulletList
     content:
