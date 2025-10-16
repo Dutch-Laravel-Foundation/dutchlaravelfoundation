@@ -41,3 +41,10 @@ preferences:
       columns:
         - datestamp
         - email
+    contact:
+      columns:
+        - datestamp
+        - company_name
+        - email
+        - name
+        - remarks
