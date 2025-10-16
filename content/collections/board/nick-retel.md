@@ -4,6 +4,6 @@ blueprint: board
 title: 'Nick Retel'
 photo: 1616574469655.jpeg
 updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
-updated_at: 1744105152
+updated_at: 1760601943
 function: 'Content & Kwaliteit'
 ---
