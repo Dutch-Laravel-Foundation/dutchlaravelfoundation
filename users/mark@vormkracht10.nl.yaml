@@ -37,3 +37,7 @@ preferences:
         - email
         - company_name
       per_page: 100
+    newsletter:
+      columns:
+        - datestamp
+        - email
