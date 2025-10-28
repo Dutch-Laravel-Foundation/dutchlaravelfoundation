@@ -1,0 +1,56 @@
+{{# TODO: Use is_homepage (if it works) #}}
+{{# TODO: Use is_current (if it works) #}}
+{{ nav_url_class = style == 'contrast' ? 'text-white! hover:border-primary-contrast': 'hover:border-primary-accent' }}
+{{ nav_logo = style == 'contrast' ? '/assets/img/logo-alt.svg': '/assets/img/logo.svg' }}
+{{ button_class = style == 'contrast' ? 'text-white group-hover:bg-white group-hover:text-primary-accent' : '!text-primary-accent !border-primary-accent hover:!border-primary-accent group-hover:bg-primary-accent hover:!text-white' }}
+{{ button_background_class = style == 'contrast' ? 'border-white' : 'border-primary-accent' }}
+{{ chevron_class = style == 'contrast' ? 'text-white' : 'text-black/50' }}
+
+<a href="/" class="mt-8">
+    <img class="!w-44 {{nav_url_class}}" src="{{ nav_logo }}" alt="{{ title }}">
+</a>
+
+<div class="flex flex-col space-y-5.5 items-end">
+    <div class="group cursor-pointer" @click="$dispatch('open-vragen-ai')" x-data>
+        <div class="{{ if style == 'contrast' }} text-white/80 group-hover:text-white {{ else }}text-black/50 group-hover:text-primary-accent {{ /if }}  flex items-center gap-1 text-sm js-vragenai-trigger"
+            ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                class="size-4">
+                <path fill-rule="evenodd"
+                    d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                    clip-rule="evenodd" />
+            </svg>
+            <span class="{{ if style=='contrast' }} text-white/80 group-hover:text-white {{ else }}text-black/50
+                group-hover:text-primary-accent {{ /if }} ">Zoeken</span>
+        </div>
+    </div>
+    <div class="flex items-center gap-12">
+        {{ nav:main }}
+            {{ if depth == 1 }}
+                <div class="group relative py-4 flex items-center gap-1">
+                    <a href="{{ url }}"
+                        class="font-bold border-b border-transparent hover:text-inherit {{ if is_current or is_parent }} {{active_class}} {{ /if }} {{ nav_url_class }} {{ class }}">
+                        {{ title}}
+                    </a>
+                    {{ if children }}
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4 {{ chevron_class }}">
+                            <path fill-rule="evenodd"
+                                d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
+                                clip-rule="evenodd" />
+                        </svg>
+
+                        <ul class="absolute bg-gray-50 border border-gray-100 p-1 space-y-1 shadow-xl/5 flex-col rounded-md hidden group-hover:flex top-12 min-w-40 left-0">
+                            {{*recursive children* }}
+                        </ul>
+                    {{ /if }}
+                </div>
+            {{ elseif depth == 2 }}
+                <li >
+                    <a class="block py-1 px-3 rounded text-black font-bold text-sm h-auto my-auto hover:bg-primary-accent hover:!text-white {{ if is_current or is_parent }} {{active_class}} {{ /if }}  {{ class }}"
+                        href="{{ url }}">{{ title }}</a>
+                </li>
+            {{ /if }}
+        {{ /nav:main }}
+
+        {{ partial:buttons/primary-border-alt class="{{ button_class }}" background_class="{{ button_background_class }}" link="/lid-worden" type="button" }}Lid worden{{ /partial:buttons/primary-border-alt }}
+    </div>
+</div>

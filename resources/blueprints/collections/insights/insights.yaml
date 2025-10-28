@@ -1,0 +1,179 @@
+title: Insights
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+              display: Titel
+          -
+            handle: featured_image
+            field:
+              mode: grid
+              container: insights
+              max_files: 1
+              display: 'Featured image'
+              type: assets
+          -
+            handle: introduction
+            field:
+              display: Introductietekst
+              type: markdown
+              container: insights
+          -
+            handle: content
+            field:
+              buttons:
+                - h1
+                - h2
+                - h3
+                - h4
+                - bold
+                - italic
+                - unorderedlist
+                - orderedlist
+                - removeformat
+                - quote
+                - anchor
+                - image
+                - table
+              container: insights
+              target_blank: true
+              display: Content
+              type: bard
+              sets:
+                heading:
+                  display: Heading
+                  fields:
+                    -
+                      import: heading
+                image:
+                  display: Image
+                  fields:
+                    -
+                      handle: image
+                      field:
+                        mode: list
+                        container: insights
+                        restrict: false
+                        allow_uploads: true
+                        show_filename: true
+                        display: Image
+                        type: assets
+                        icon: assets
+                        listable: hidden
+                        instructions_position: above
+                        read_only: false
+                line:
+                  display: Line
+                  fields:
+                    -
+                      import: line
+                spacer:
+                  display: Spacer
+                  fields:
+                    -
+                      import: spacer
+                video:
+                  display: Video
+                  fields:
+                    -
+                      import: video
+          -
+            handle: highlight_content
+            field:
+              buttons:
+                - h1
+                - h2
+                - h3
+                - h4
+                - bold
+                - italic
+                - unorderedlist
+                - orderedlist
+                - anchor
+                - removeformat
+              container: assets
+              target_blank: true
+              display: 'Uitgelicht content'
+              type: bard
+              if:
+                highlight: 'equals true'
+              sets:
+                spacer:
+                  display: Spacer
+                  fields:
+                    -
+                      import: spacer
+                line:
+                  display: Line
+                  fields:
+                    -
+                      import: line
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'
+          -
+            handle: category
+            field:
+              options:
+                -
+                  key: Leden
+                  value: null
+                -
+                  key: Netwerk
+                  value: null
+                -
+                  key: Inspiratie
+                  value: null
+                -
+                  key: Bestuur
+                  value: null
+              default: Netwerk
+              display: Category
+              type: select
+          -
+            handle: date
+            field:
+              type: date
+              required: true
+              default: now
+              validate:
+                - required
+          -
+            handle: call_to_action
+            field:
+              max_items: 1
+              mode: select
+              collections:
+                - cta
+              display: 'Call to action'
+              type: entries
+              instructions: 'Shown on the insight detail page'
+          -
+            handle: highlight
+            field:
+              display: Uitgelicht
+              type: toggle
+  seo:
+    display: SEO
+    sections:
+      -
+        fields:
+          -
+            import: seo

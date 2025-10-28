@@ -1,0 +1,15 @@
+title: 'Lid worden'
+honeypot: address
+email:
+  -
+    id: 1ZgBBaQa
+    to: reinier@dutchlaravelfoundation.nl
+    subject: 'DLF Aanmelding: {{ company_name }}'
+    reply_to: '{{ email }}'
+    cc: info@dutchlaravelfoundation.nl
+  -
+    id: fCy9iuUO
+    to: '{{ email }}'
+    subject: 'Je aanmelding bij Dutch Laravel Foundation'
+    html: mail/become-member
+    text: mail/become-member

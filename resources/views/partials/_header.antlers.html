@@ -1,0 +1,100 @@
+
+{{ banner = { partial:if_exists src="banners/{ slug }" } }}
+
+<script>
+// Menu toggle
+function isiOS() {
+    return (
+        ['iPad Simulator', 'iPhone Simulator', 'iPod Simulator', 'iPad', 'iPhone', 'iPod'].includes(navigator.platform) ||
+        (navigator.userAgent.includes('Mac') && 'ontouchend' in document)
+    );
+}
+
+function menu() {
+    return {
+        open: false,
+        disabled: true,
+        init() {
+            this.disabled = false;
+        },
+        toggleMenu() {
+            const content = document.querySelector('.frontend');
+            this.disabled = true;
+            this.open = !this.open;
+            if (this.open === true) {
+                content.style.position = 'fixed';
+                content.style.top = `-${window.pageYOffset}px`;
+                // Fixes bug in Safari iOS 15.2 where screen height is not fully filled due to empty space address bar on bottom
+                if(isiOS() === true) document.documentElement.style.height = window.innerHeight + 'px';
+            } else {
+                content.style.removeProperty('position');
+                content.style.removeProperty('top');
+                window.scrollTo(0, window.pageYOffset);
+                if(isiOS() === true) document.documentElement.style.removeProperty('height');
+            }
+            this.disabled = false;
+        },
+    };
+}
+</script>
+
+<header class="fixed top-0 left-0 w-screen z-999 {{ banner ? 'lg:bg-primary-accent': 'lg:bg-white' }}">
+    {{ partial:vragen_ai}}
+
+    {{# Desktop navigation #}}
+    <div class="container mx-auto px-10 pt-4 pb-10 justify-between space-x-12 hidden lg:flex">
+        {{ partial:navigation show_home_logo="true" active_class="!text-primary-accent" :style="banner ?= 'contrast'" }}
+    </div>
+
+    {{# Mobile navigation #}}
+    <div class="relative lg:hidden js-alpine-init {{ banner ? 'bg-primary-accent': 'bg-white' }} pb-6" x-data="menu()" x-init="init()" x-cloak role="navigation">
+        <div class="flex flex-row items-start justify-between w-full px-6 pt-6 pb-0 mx-auto xl:pt-10">
+            <a href="/" class="flex justify-start w-full"><img class="max-w-full max-h-[3rem] xl:max-h-full" src="{{ banner ? '/assets/img/logo-alt.svg': '/assets/img/logo.svg' }}" alt="Home"></a>
+            {{# Toggle button #}}
+            <div class="z-900 absolute top-7.5 right-24 group cursor-pointer" @click="$dispatch('open-vragen-ai')" x-data>
+                <div class="{{ if banner }} text-white {{ else }}text-black group-hover:text-primary-accent {{ /if }}  flex items-center gap-1 text-sm js-vragenai-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-9">
+                        <path fill-rule="evenodd"
+                            d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </div>
+            </div>
+            <button class="z-900 absolute top-7 right-8 xl:right-20 xl:top-[3rem] h-[2.4rem] w-[2.5rem] cursor-pointer" @click="toggleMenu()" disabled x-bind:disabled="disabled">
+                <div class="relative focus:outline-hidden">
+                    <div class="absolute block w-[4rem]">
+                        <span aria-hidden="true" class="block absolute h-[0.2rem] w-[2.5rem] {{ page.slug == 'home' ? 'bg-white' : 'bg-tertiary-dark' }} transform transition rounded-full duration-300 ease-in-out" :class="{'rotate-45 bg-white!': open,' -translate-y-3': !open }"></span>
+                        <span aria-hidden="true" class="block absolute h-[0.2rem] w-[2rem] {{ page.slug == 'home' ? 'bg-white' : 'bg-tertiary-dark' }} transform transition rounded-full duration-300 ease-in-out" :class="{'opacity-0': open } "></span>
+                        <span aria-hidden="true" class="block absolute h-[0.2rem] w-[2.5rem] {{ page.slug == 'home' ? 'bg-white' : 'bg-tertiary-dark' }} transform  transition rounded-full duration-300 ease-in-out" :class="{'-rotate-45 bg-white!': open, ' translate-y-3': !open}"></span>
+                    </div>
+                </div>
+            </button>
+        </div>
+
+        {{# Mobile menu container with transitions #}}
+        <div class="fixed inset-x-0 top-0 z-50 w-screen h-screen overflow-scroll transition origin-top-right transform"
+            x-show="open" @click.outside="open = false"
+            x-transition:enter="duration-200 ease-out" x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100" x-transition:leave="duration-100 ease-in"
+            x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+            <div class="w-full overflow-scroll">
+                <div class="absolute top-0 left-0 flex flex-col w-full min-h-full bg-primary-contrast">
+
+                    <a class="absolute left-6 top-6" href="/" class="flex justify-start w-full"><img class="max-w-full max-h-[3rem] xl:max-h-full"
+                            src="/assets/img/logo.svg" alt="Home"></a>
+                    {{# Menu items wrapper #}}
+                    <div class="absolute top-[0.8rem] right-0 z-10">
+                        <button type="button" @click="toggleMenu()"
+                            disabled x-bind:disabled="disabled"
+                            class="relative h-[3rem] right-[0.7rem] bottom-[0.2rem] w-[3rem] m-4 text-white uppercase transition duration-150 ease-in-out bg-primary-accent focus:outline-hidden">
+                        </button>
+                    </div>
+                    {{ partial:navigation_mobile show_home_logo="true" active_class="text-primary-accent" class="" }}
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+{{# Optional banner #}}
+{{ banner }}

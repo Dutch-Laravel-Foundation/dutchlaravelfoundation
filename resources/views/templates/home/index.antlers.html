@@ -1,0 +1,72 @@
+<div class="container  mb-auto mx-auto flex flex-col items-left justify-center relative">
+    {{ number_of_member_insights = { collection:count in="insights" } }}
+    {{ if number_of_member_insights > 0 }}
+        <section class="relative w-full mb">
+            {{ collection:insights limit="1" sort="date:desc" }}
+                <div class="w-full xl:w-11/12 lg:-mt-10 xl:-mt-40 px-6 lg:px-10">
+                    {{ partial:blocks/image-left-large class="" :image="featured_image" :category="category" link="/insights/{ slug }" }}
+                        {{ introduction }}
+                    {{ /partial:blocks/image-left-large }}
+                </div>
+            {{ /collection:insights }}
+
+            {{ partial:partners }}
+
+            {{# Background image #}}
+            <div class="absolute z-[-1] flex items-center justify-center sm:top-[12rem] top-[20rem] md:top-[10rem] lg:top-[-4rem] left-[-28rem]">
+                <div>
+                    <img src="/assets/img/backgrounds/floor-mid-half-gray.svg" class="w-[1000px] h-[600px]">
+                </div>
+            </div>
+        </section>
+    {{ /if }}
+
+    {{ if { collection:count in="insights" highlight:is="true" sort="updated:desc" limit="1" } > 0 }}
+        <div class="flex flex-row px-6 lg:px-10">
+            {{ collection:insights highlight:is="true" limit="1" }}
+                {{ partial:blocks/image-highlight-text :image="featured_image" category="Mis niet" link="/insights/{ slug }" }}
+                    {{ introduction }}
+                {{ /partial:blocks/image-highlight-text }}
+            {{ /collection:insights }}
+        </div>
+    {{ /if }}
+
+    <div class="p-6 mb-20 bg-secondary-light lg:p-10">
+        {{ content }}
+            {{ partial src="sets/autoload" }}
+        {{ /content }}
+    </div>
+
+    <div class="flex justify-center mb-10 md:mb-20">
+        <h3 class="block w-full px-6 text-center sm:w-2/3 xl:w-1/2 lg:px-10">Klanten van onze leden die vertrouwen op het Laravel framework</h3>
+    </div>
+
+    <div class="flex justify-center h-24 mb-20">
+        <div class="absolute w-screen -ml-[50vw] left-1/2 h-24 overflow-hidden">
+            <div class="w-full h-full js-logos-swiper">
+                <div class="flex swiper-wrapper">
+                    {{ collection:clients logo:isset="true" sort="ASC" }}
+                    <div class="flex items-center justify-center px-4 mx-auto swiper-slide">
+                        <img src="{{ logo }}" alt="{{ title }} logo" class="max-h-24">
+                    </div>
+                    {{ /collection:clients }}
+
+                    {{# Temporarily add a 2nd and 3rd loop for filling clients,
+                        and use full width with the SwiperJS loop that needs at least 6 items,
+                        and currently there are 3 actual clients #}}
+                    {{ collection:clients logo:isset="true" sort="DESC" }}
+                    <div class="flex items-center justify-center px-4 mx-auto swiper-slide">
+                        <img src="{{ logo }}" alt="{{ title }} logo" class="max-h-24">
+                    </div>
+                    {{ /collection:clients }}
+                    {{ collection:clients logo:isset="true" sort="DESC" }}
+                    <div class="flex items-center justify-center px-4 mx-auto swiper-slide">
+                        <img src="{{ logo }}" alt="{{ title }} logo" class="max-h-24">
+                    </div>
+                    {{ /collection:clients }}
+                    {{# End 2nd and 3rd loop #}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

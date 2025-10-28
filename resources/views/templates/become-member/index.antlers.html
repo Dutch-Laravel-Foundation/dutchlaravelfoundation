@@ -1,0 +1,108 @@
+{{# Top background image #}}
+{{ partial:decoration/floor-background background="floor-top-members" /}}
+
+<div class="container px-3 lg:px-10 mb-auto mx-auto flex flex-col items-left justify-center relative">
+    <div class="w-full px-6 sm:px-12 fixed bottom-4 left-0 z-0 lg:hidden">
+        <a href="#member-form" class="w-full">
+            {{ partial:buttons/primary type="submit" class="w-full " button_class="w-full" }}
+            Word lid
+            {{/partial:buttons/primary }}
+        </a>
+    </div>
+    <div class="w-full text-center max-w-6xl mx-auto">
+        <h1>Word lid van de Dutch Laravel Foundation en geniet van <span
+                class="relative before:h-2 before:w-full before:bg-primary-accent before:absolute before:-bottom-1 before:left-0">veel</span>
+            voordelen</h1>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-9 gap-0 lg:gap-20 items-start mt-0 mb-8  md:my-12">
+        <div class="col-span-1 lg:col-span-4 benefits">
+            {{ content }}
+            {{ partial src="sets/autoload" }}
+            {{ /content }}
+        </div>
+
+        <div
+            class="col-span-1 lg:col-span-5 self-start sticky top-8 pt-10 pb-12 md:pt-20 sm:pb-20 md:pb-12 bg-white lg:bg-transparent xl:py-0 -mb-12 lg:-mb-20 xl:mb-0">
+
+            <div id="member-form"
+                class=" border-1 border-gray-100 p-1 bg-gray-100/20 rounded-2xl shadow-xl shadow-gray-200/50 backdrop-blur-xl ">
+                <div class="bg-white border-1 border-gray-200/60 p-4 md:p-8 rounded-xl shadow-xl shadow-gray-200/50">
+                    <div class="grid grid-cols-1 gap-4 sm:gap-0 xs:grid-cols-2 border-b border-gray-100 pb-8 mb-8">
+                        <div class="flex flex-col">
+                            <strong class="text-black">ZZP</strong>
+                            <span class="text-black">€ 450,- per jaar</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <strong class="text-black">Bureau's & ontwikkelteams</strong>
+                            <span class="text-black">€ 1.250.- per jaar</span>
+                        </div>
+                    </div>
+
+                    {{ form:become_member redirect="/lid-worden" }}
+
+                        {{ if success }}
+                            <div class="px-6 sm:px-0">
+                                {{ partial:forms/success }}
+                            </div>
+                        {{ else }}
+
+                        {{ if errors }}
+                            <div class="p-6 mb-6 bg-primary-accent text-primary-contrast">
+                                {{ errors }}
+                                {{ value }}<br>
+                                {{ /errors }}
+                            </div>
+                        {{ /if }}
+
+                        <input type="text" class="hidden" name="{{ honeypot ?? 'honeypot' }}">
+
+                    <div
+                        class="flex flex-col pb-10 space-y-6 sm:pb-0 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:px-0">
+                        {{ fields }}
+                        {{ if handle != 'agree' }}
+
+                        <div class="{{ type == "textarea" ?='col-span-2' }}">
+                            <label for="{{ handle }}"><span class="meta">{{ display }}</span></label>
+                            {{ if instructions_position == 'above' }}
+                            {{ instructions }}
+                            {{ /if }}
+                            {{# Add ID to field #}}
+                            {{ field = field regex_replace="^<([a-z]+)|<\\1 id='{ handle }'" }}
+                                                                        {{ if instructions_position == 'below' }}
+                                                                            {{ instructions }}
+                                                                        {{ /if }}
+                                                                        {{ if error }}
+                                                                            <p class=" text-sm text-primary-accent">{{
+                                error }}</p>
+                                {{ /if }}
+                        </div>
+                        {{ else }}
+                            <div class="flex flex-col justify-between col-span-2 lg:flex-row">
+                                <div class="flex flex-row w-full text-tertiary-light ">
+                                    {{ field replace="<br>|" }}
+                                    <span class="ml-2">{{ display regex_replace="(privacy statement)|<a
+                                            href='/privacy-statement' target='_blank'>\\1</a>"
+                                        }}
+                                    </span>
+                                </div>
+                            </div>
+                            {{ captcha }}
+                            <div class="col-span-2 mt-4">
+                                {{ partial:buttons/primary type="submit" class="w-full " button_class="w-full" }}Versturen{{
+                                /partial:buttons/primary }}
+                            </div>
+                        {{ /if }}
+                        {{ /fields }}
+                    </div>
+                    {{ /if }}
+                    {{ /form:become_member }}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="w-full mb-12">
+        {{ partial:partners }}
+    </div>
+</div>

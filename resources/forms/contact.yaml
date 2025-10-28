@@ -1,0 +1,12 @@
+title: Contact
+honeypot: address
+email:
+  -
+    to: info@dutchlaravelfoundation.nl
+    subject: 'DLF contact: {{ name }}'
+    reply_to: '{{ email }}'
+  -
+    to: '{{ email }}'
+    subject: 'Je bericht aan Dutch Laravel Foundation'
+    html: mail/contact
+    text: mail/contact

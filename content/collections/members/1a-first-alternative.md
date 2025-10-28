@@ -1,0 +1,25 @@
+---
+id: 48c70a19-9246-4051-a9d6-bbdfc6dd624d
+blueprint: members
+title: '1A First Alternative'
+founding_partner: false
+type: Bedrijf
+employees: 1-10
+updated_by: 28c0a799-7234-4581-b869-6eda5a36a8e2
+updated_at: 1729885541
+description: |-
+  1A First Alternative levert ICT-diensten aan het MKB in Nederland via een landelijk netwerk van gecertificeerde 1A-partners. Deze ICT-diensten zijn vooral gericht op bedrijven van 5-100 medewerkers.
+
+  Al sinds 2001 ontwikkelen we in Delft onze ICT-diensten op basis van Linux en opensource en bieden deze aan voor een vaste lage prijs per maand. De 1A-diensten vormen een totaalconcept en verbinden kantoor, datacenter en clouddiensten. De focus ligt op klanttevredenheid, beveiliging en duurzaamheid. Dankzij modulariteit en standaardisatie kan flexibel omgegaan worden met groei en krimp.
+
+  In 2014 lanceerden we een centraal portaal voor de administratieve taken genaamd My1A. Hiervoor kozen we het Laravel Framework en jaren later staan we nog steeds achter deze keuze. Inmiddels gebruiken we het Laravel Framework ook voor een aantal andere applicaties.
+city: Delft
+email: info@1afa.com
+website: www.1afa.com
+phone: '+31 (0)88 00 164 01'
+logo: 1a-first-alternative.png
+province: Zuid-Holland
+recruitment_website: 1afa.com/werken-bij/
+video: 'https://youtu.be/ySxBX9O62b8?si=Oyr96jt_PITcBZw_'
+published: true
+---

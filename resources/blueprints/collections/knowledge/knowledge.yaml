@@ -1,0 +1,96 @@
+title: Kennis
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+              display: Titel
+          -
+            handle: featured_image
+            field:
+              mode: grid
+              container: knowledge
+              max_files: 1
+              display: 'Featured image'
+              type: assets
+          -
+            handle: introduction
+            field:
+              display: Introductietekst
+              type: markdown
+              container: knowledge
+          -
+            handle: content
+            field:
+              display: Content
+              type: markdown
+              container: assets
+              folder: /
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'
+          -
+            handle: category
+            field:
+              options:
+                -
+                  key: Leden
+                  value: null
+                -
+                  key: Netwerk
+                  value: null
+                -
+                  key: Inspiratie
+                  value: null
+                -
+                  key: Tooling
+                  value: null
+              default: Netwerk
+              display: Category
+              type: select
+          -
+            handle: date
+            field:
+              type: date
+              required: true
+              default: now
+              validate:
+                - required
+          -
+            handle: call_to_action
+            field:
+              max_items: 1
+              mode: select
+              collections:
+                - cta
+              display: 'Call to action'
+              type: entries
+              instructions: 'Shown on the knowledge detail page'
+          -
+            handle: highlight
+            field:
+              display: Uitgelicht
+              type: toggle
+  seo:
+    display: SEO
+    sections:
+      -
+        fields:
+          -
+            import: seo

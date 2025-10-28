@@ -1,0 +1,175 @@
+sections:
+  main:
+    display: Main
+    fields:
+      -
+        handle: title
+        field:
+          type: text
+          required: true
+          validate:
+            - required
+          display: Naam
+          instructions_position: above
+          listable: hidden
+          input_type: text
+          antlers: false
+      -
+        handle: description
+        field:
+          type: markdown
+          localizable: true
+          display: Omschrijving
+          instructions_position: above
+          listable: hidden
+          restrict: false
+          automatic_line_breaks: true
+          automatic_links: false
+          escape_markup: false
+          smartypants: false
+          antlers: false
+          container: members
+      -
+        handle: logo
+        field:
+          mode: list
+          container: members
+          restrict: false
+          allow_uploads: true
+          show_filename: true
+          max_files: 1
+          display: Logo
+          type: assets
+          icon: assets
+          listable: hidden
+          instructions_position: above
+  sidebar:
+    display: Sidebar
+    fields:
+      -
+        handle: slug
+        field:
+          type: slug
+          localizable: true
+      -
+        handle: founding_partner
+        field:
+          default: false
+          display: 'Founding partner'
+          type: toggle
+          icon: toggle
+          listable: hidden
+          instructions_position: above
+      -
+        handle: type
+        field:
+          options:
+            ZZPer: null
+            Bedrijf: null
+            Ontwikkelteam: null
+          multiple: false
+          max_items: 1
+          clearable: false
+          searchable: true
+          taggable: true
+          push_tags: false
+          cast_booleans: false
+          default: Bedrijf
+          display: 'Type lid'
+          type: select
+          icon: select
+          listable: hidden
+          instructions_position: above
+      -
+        handle: employees
+        field:
+          options:
+            1-10: null
+            11-50: null
+            51-250: null
+          multiple: false
+          max_items: 1
+          clearable: false
+          searchable: true
+          taggable: true
+          push_tags: false
+          cast_booleans: false
+          default: 1-10
+          display: 'Aantal werknemers'
+          type: select
+          icon: select
+          listable: hidden
+          instructions_position: above
+  contact:
+    display: Contactgegevens
+    fields:
+      -
+        handle: city
+        field:
+          input_type: text
+          antlers: false
+          display: Stad
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+      -
+        import: province
+      -
+        handle: email
+        field:
+          input_type: text
+          antlers: false
+          display: E-mail
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+      -
+        handle: phone
+        field:
+          input_type: text
+          antlers: false
+          display: Telefoon
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+      -
+        handle: website
+        field:
+          input_type: url
+          prepend: 'https://'
+          antlers: false
+          display: Website
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+      -
+        handle: recruitment_website
+        field:
+          input_type: text
+          prepend: 'https://'
+          antlers: false
+          display: 'Vacature website'
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+      -
+        handle: video
+        field:
+          display: Video
+          type: video
+          icon: video
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+  seo:
+    display: SEO
+    fields:
+      -
+        import: seo
+title: Leden

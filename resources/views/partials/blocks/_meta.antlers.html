@@ -1,0 +1,19 @@
+<div class="block-meta flex flex-col w-full {{ class }}">
+    {{ if title }}
+        {{ if link }}
+            <a href="{{ link }}" title="{{ text }}">
+        {{ /if }}
+            <h4 class="block w-full mb-[.3rem]">{{ title }}</h4>
+        {{ if link }}
+            </a>
+        {{ /if }}
+    {{ /if }}
+    {{ if text }}
+        {{ if link }}
+            <a href="{{ link }}" target="_blank"><span class="meta text-primary-accent">{{ text }}</span></a>
+        {{ else }}
+            <span class="meta">{{ text }}</span>
+        {{ /if }}
+    {{ /if }}
+    {{ slot }}
+</div>
