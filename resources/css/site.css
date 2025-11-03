@@ -95,6 +95,14 @@ article img {
     @apply !pl-5 space-y-1;
 }
 
+#content article ul {
+    @apply text-base;
+}
+
+#content article ul ~ p {
+    @apply mt-4;
+}
+
 input:not([type="checkbox"]),
 textarea {
     @apply w-full !bg-[#FEFEFE] border !border-[#ECECEC] ring-0! focus:!border-primary-accent !shadow-md shadow-gray-100/70;
