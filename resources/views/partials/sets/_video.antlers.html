@@ -1,6 +1,6 @@
 {{ if video | is_embeddable }}
     <!-- Youtube and Vimeo -->
-    <iframe class="w-full aspect-video mt-half mb-half" src="{{ video | embed_url }}" ...></iframe>
+    <iframe class="w-full aspect-video mt-half mb-half" referrerpolicy="strict-origin-when-cross-origin" src="{{ video | embed_url }}" ...></iframe>
 {{ else }}
     <!-- Other HTML5 video types -->
     <video class="w-full aspect-video mt-half mb-half" src="{{ video | embed_url }}" ...></video>
