@@ -1,0 +1,95 @@
+<section class="w-full ">
+  {{ partial:header background="bg-primary-accent" menuColor="white" }}
+</section>
+
+<section class="w-full overflow-hidden bg-primary-accent pt-32 pb-8 sm:pb-24 sm:pt-48 md:pb-8 px-4 md:px-0">
+  <div class="max-w-[900px] mx-auto md:py-0 flex items-center relative justify-center">
+    <div class="translate-x-5 md:-translate-y-5 absolute md:relative">
+      {{ partial:icons/laravel class="size-96 md:size-80 text-white/10 blur-xs md:blur-none md:text-white/20" }}
+    </div>
+    <div class="md:-translate-x-8 max-w-xl mx-auto md:mx-0">
+      <h1 class="text-white my-0 text-center md:text-left">{{title}}</h1>
+      <p class="text-white mt-6 text-center md:text-left md:pl-10 text-lg leading-relaxed">Veel organisaties wachten tot het piept en kraakt, hoewel
+        dat misschien
+        niet de slimste
+        tactiek is. Dan slaat de
+        realiteit toe: dit MOET anders.</p>
+    </div>
+  </div>
+</section>
+
+<section class="w-full container mx-auto py-16 md:py-24 flex flex-col space-x-8 px-4 md:px-0">
+  <h2 class="text-primary-accent relative z-10 font-bold xl:max-w-70 mx-auto xl:mx-0 my-0 text-center xl:text-left">Herken jij ook deze pijnpunten <span class="inline-block">in je bedrijf?</span></h2>
+  <div class="grid grid-cols-1 relative xl:translate-x-12 xl:px-8 md:grid-cols-2 mt-8 sm:mt-16 xl:-mt-32 lg:grid-cols-9 mx-auto max-w-4xl w-full bg-opacity-20 ">
+    <div class="lg:col-span-5 -rotate-[1deg] md:-rotate-[2deg] relative lg:translate-x-12 xl:translate-x-40">
+      {{ partial:landings-page/icon-card}}
+        {{ slot:icon }}
+          {{ partial:landings-page/head-bolts }}
+        {{ /slot:icon }}
+
+        {{ slot:title }}
+          Je bedrijf groeit, maar je <span class="inline-block">systemen groeien niet mee</span>
+        {{ /slot:title }}
+
+        {{ slot:list }}
+          <li>Wat eerst werkte, wordt nu een rem op je groei</li>
+          <li>Meer klanten zorgt voor meer chaos in plaats van meer omzet</li>
+          <li>Medewerkers klagen over omslachtige, trage of onhandige systemen</li>
+        {{ /slot:list }}
+      {{ /partial:landings-page/icon-card }}
+    </div>
+    <div class="lg:col-span-4 rotate-[1deg] mt-0 sm:mt-4 md:rotate-[2deg] md:translate-y-0 md:mt-32 lg:mt-0 md:translate-x-0 lg:-translate-x-3 xl:translate-x-28 lg:translate-y-24 relative">
+      {{ partial:landings-page/icon-card}}
+        {{ slot:icon }}
+          {{ partial:landings-page/head-bolt }}
+        {{ /slot:icon }}
+
+        {{ slot:title }}
+          Je huidige ontwikkelaar blijkt onbetrouwbaar
+        {{ /slot:title }}
+
+        {{ slot:list }}
+          <li>Je (freelance) ontwikkelaar is gestopt of slecht bereikbaar</li>
+          <li>Doorlooptijden van onderhoud en nieuwe features duren steeds langer</li>
+          <li>Concurrenten gaan sneller en je verliest momentum</li>
+        {{ /slot:list }}
+      {{ /partial:landings-page/icon-card }}
+    </div>
+    <div class="lg:col-span-4 relative md:-mt-8 lg:mt-0 lg:-translate-x-3 xl:-translate-x-20 md:-translate-y-7 rotate-[-1deg] md:rotate-[-2deg]">
+      {{ partial:landings-page/icon-card}}
+        {{ slot:icon }}
+          {{ partial:landings-page/cloud-x }}
+        {{ /slot:icon }}
+
+        {{ slot:title }}
+          Je huidige systeem laat je in de steek
+        {{ /slot:title }}
+
+        {{ slot:list }}
+          <li>Je hebt regelmatig storingen of crashes die niet meer uit te leggen zijn aan klanten</li>
+          <li>Je moet steeds vaker klanten compenseren, omdat systemen niet werken (faalkosten)</li>
+          <li>Onderhoud wordt steeds duurder</li>
+        {{ /slot:list }}
+      {{ /partial:landings-page/icon-card }}
+    </div>
+    <div class="lg:col-span-5 mt-0 sm:mt-4 relative rotate-[1deg] md:rotate-[2deg] lg:translate-x-3 xl:-translate-x-12 md:translate-y-20">
+      {{ partial:landings-page/icon-card}}
+        {{ slot:icon }}
+          {{ partial:landings-page/laptop-frustration }}
+        {{ /slot:icon }}
+
+        {{ slot:title }}
+          Je verliest overzicht en controle
+        {{ /slot:title }}
+
+        {{ slot:list }}
+          <li>Informatie is verspreid over verschillende tools</li>
+          <li>Handmatige processen kosten steeds meer tijd</li>
+          <li>Er ontstaan meer fouten door o.a. onduidelijke data of haastwerk</li>
+        {{ /slot:list }}
+      {{ /partial:landings-page/icon-card }}
+    </div>
+  </div>
+</section>
+
+{{ partial:footer }}

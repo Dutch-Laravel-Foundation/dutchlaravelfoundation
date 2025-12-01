@@ -1,8 +1,7 @@
 @import "tailwindcss";
 
-@import "./site.css" layer(base);
-
 @config '../../tailwind.config.js';
+
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
@@ -20,4 +19,270 @@
     ::file-selector-button {
         border-color: var(--color-gray-200, currentColor);
     }
+
+    [x-cloak] {
+      display: none !important;
+    }
+
+    /* Main styling */
+    html {
+        @apply text-tertiary-regular;
+    }
+
+    .container {
+        @apply sm:px-6 lg:px-10 !max-w-6xl w-full mx-auto;
+    }
+
+    h1 {
+        @apply mb-10 text-2xl font-bold break-words md:text-5xl text-tertiary-dark;
+    }
+
+    h2 {
+        @apply mt-5 mb-3 text-xl break-words md:mb-4 md:text-3xl text-tertiary-dark;
+    }
+
+    h3 {
+        @apply mt-5 mb-6 text-lg break-words md:text-xl text-tertiary-dark;
+    }
+
+    h4 {
+        @apply mb-4 text-base font-bold break-words md:text-lg text-tertiary-dark;
+    }
+
+    p {
+        @apply mb-3 text-base break-words;
+    }
+
+    span.meta,
+    span.meta-dark {
+        @apply mb-3 text-xs font-semibold uppercase break-words md:text-xs text-tertiary-light;
+        @layer letter-spacing-[.12em];
+    }
+
+    span.meta-dark {
+        @apply text-tertiary-dark;
+    }
+
+    a {
+        @apply transition-all cursor-pointer text-tertiary-dark hover:text-primary-accent;
+    }
+
+    #content a {
+        @apply transition-colors text-primary-accent hover:text-tertiary-regular;
+    }
+
+    nav {
+        @apply text-base font-bold text-tertiary-dark;
+    }
+
+    footer {
+        @apply text-sm;
+    }
+
+    #content ul {
+        @apply pl-5 list-disc list-outside text-xl;
+    }
+
+    #content ul li::marker {
+        @apply text-primary-accent;
+    }
+
+    #content .benefits ul {
+        @apply pl-4;
+        list-style-image: url("../images/check.svg");
+    }
+
+    #content .benefits ul li {
+        @apply pl-1;
+    }
+
+    #content ol {
+        @apply pl-4 list-decimal list-outside;
+    }
+
+    #content ol li {
+        @apply pl-1;
+    }
+
+    #content ol li::marker {
+        @apply inline w-[1em] -ml-[1em];
+    }
+
+    article img {
+        @apply w-full;
+    }
+
+    #content article ol {
+        @apply !pl-5 space-y-1;
+    }
+
+    #content article ul {
+        @apply text-base;
+    }
+
+    #content article ul ~ p {
+        @apply mt-4;
+    }
+
+    input:not([type="checkbox"]),
+    textarea {
+        @apply w-full !bg-[#FEFEFE] border !border-[#ECECEC] ring-0! focus:!border-primary-accent !shadow-md shadow-gray-100/70;
+    }
+
+    input[type="checkbox"] {
+        @apply w-6 h-6 mr-2 border bg-[#FEFEFE] text-primary-accent focus:ring-primary-accent/25 border-[#ECECEC] !shadow-md shadow-gray-100/70;
+    }
+
+    .vragenai-question-form textarea.vragenai-question-form__input {
+        background-color: transparent !important;
+    }
+
+    .mt {
+        @apply mt-6 sm:mt-10 lg:mt-20;
+    }
+
+    .mt-half {
+        @apply mt-3 sm:mt-10 lg:mt-10;
+    }
+
+    .mb {
+        @apply mb-6 sm:mb-10 lg:mb-20;
+    }
+
+    .mb-half {
+        @apply mb-10;
+    }
+
+    [x-cloak] {
+        display: none;
+    }
+
+    /* Bard content */
+    blockquote {
+        @apply p-6 bg-orange-50 my-8 border border-orange-100 rounded-md;
+    }
+
+    blockquote :last-child {
+        @apply mb-0;
+    }
+
+    /* Sets */
+    .set {
+        @apply px-0;
+    }
+
+    .set .set {
+        @apply px-0!;
+    }
+
+    /* Navigation */
+    .animated {
+        will-change: transform;
+        -webkit-transition: transform 200ms linear;
+        -moz-transition: transform 200ms linear;
+        -ms-transition: transform 200ms linear;
+        -o-transition: transform 200ms linear;
+        transition: transform 200ms linear;
+    }
+
+    .animated.slideDown {
+        -webkit-transform: translateY(0%);
+        -moz-transform: translateY(0%);
+        -o-transform: translateY(0%);
+        -ms-transform: translateY(0%);
+        transform: translateY(0%);
+    }
+
+    .animated.slideUp {
+        -webkit-transform: translateY(-100%);
+        -moz-transform: translateY(-100%);
+        -o-transform: translateY(-100%);
+        -ms-transform: translateY(-100%);
+        transform: translateY(-100%);
+    }
+
+    header nav.animated.make-small {
+        -webkit-transition: max-height 200ms;
+        -moz-transition: max-height 200ms;
+        -ms-transition: max-height 200ms;
+        -o-transition: max-height 200ms;
+        transition: max-height 200ms;
+        max-height: 2.5rem;
+    }
+
+    header nav.animated.make-large {
+        -webkit-transition: max-height 200ms;
+        -moz-transition: max-height 200ms;
+        -ms-transition: max-height 200ms;
+        -o-transition: max-height 200ms;
+        transition: max-height 200ms;
+        max-height: 5rem;
+    }
+
+    /* Filter (members page) */
+    button[data-checked="true"] {
+        @apply border-primary-accent opacity-100 text-tertiary-dark!;
+    }
+
+    /* Image group hover */
+    .group-image-hover > figure img,
+    .group-image-hover > div figure img,
+    .group-image-hover > a figure img {
+        @apply transition-transform duration-500 ease-in-out;
+    }
+
+    .group-image-hover:hover > figure img,
+    .group-image-hover:hover > div figure img,
+    .group-image-hover:hover > a figure img {
+        @apply scale-105;
+    }
+
+    /* Safari CSS fixes */
+    @media not all and (min-resolution: 0.001dpcm) {
+        @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+            #content ul {
+                @apply pl-5;
+            }
+        }
+    }
+
+    code,
+    pre code,
+    pre.hljs {
+        @apply bg-gray-50! block rounded-md my-10 p-5! overflow-x-auto text-gray-900 text-sm;
+    }
+
+    code {
+        @apply inline px-2! py-1! rounded-md border-gray-100 border;
+    }
+
+    .red-note h3 {
+        @apply !text-white my-0;
+    }
+
+    .red-note p {
+        @apply mt-4;
+    }
+
+    #vragenai-app {
+        --vragenai-color-primary: #ff2d20;
+    }
+
+    .vragenai-popup {
+        @apply h-[calc(100vh-1.5rem)] sm:!max-h-[800px] !rounded-2xl;
+    }
+
+    .vragenai-question-form,
+    .vragenai-question-form:focus {
+        border-radius: 0.3rem !important;
+        outline-color: #ff2d20 !important;
+    }
+
+    #vragenai-app .vragenai-popup {
+    }
+
+    .vragenai-question-form-container--attached {
+        @apply !pb-0.5;
+    }
+
 }
