@@ -6,7 +6,7 @@ template: templates/default
 menu_color: white
 call_to_action: ee5d33de-9a24-4860-92dd-3503740b62af
 updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
-updated_at: 1764843630
+updated_at: 1764848034
 content:
   -
     type: paragraph
@@ -26,6 +26,10 @@ content:
       -
         type: text
         text: 'Graag stellen we de werkgroepen aan je voor.'
+      -
+        type: hardBreak
+      -
+        type: hardBreak
   -
     type: heading
     attrs:
@@ -82,6 +86,10 @@ content:
       -
         type: text
         text: "·\_\_\_\_\_\_ Speciale events voor studenten"
+      -
+        type: hardBreak
+      -
+        type: hardBreak
   -
     type: heading
     attrs:
@@ -154,6 +162,10 @@ content:
       -
         type: text
         text: 'Uiteraard staat het delen van kennis ook centraal tijdens onze events.'
+      -
+        type: hardBreak
+      -
+        type: hardBreak
   -
     type: heading
     attrs:
@@ -174,6 +186,10 @@ content:
       -
         type: text
         text: 'Deze werkgroep werkt aan concrete handvatten om potentiële opdrachtgevers te ondersteunen. Met name in aanbestedingen leggen we de voordelen van Laravel uit, inspireren we met cases van eerder gebouwde applicaties en beïnvloeden we hun voorkeur voor Laravel.'
+      -
+        type: hardBreak
+      -
+        type: hardBreak
   -
     type: heading
     attrs:
@@ -218,6 +234,10 @@ content:
       -
         type: text
         text: 'Zo werken we aan de naamsbekendheid en voorkeur voor Laravel en laten we de community en het aantal opdrachten gezamenlijk groeien.'
+      -
+        type: hardBreak
+      -
+        type: hardBreak
   -
     type: heading
     attrs:
@@ -312,6 +332,10 @@ content:
       -
         type: text
         text: 'De werkgroep kan aanvullend besluiten om extra events te organiseren. Ook kennen we een samenwerkingsprogramma: andere initiatieven, vanuit leden maar ook vanuit niet-leden, kunnen de DLF vragen om een bijdrage aan hun Laravel meet-up of event. De DLF kan vervolgens een bijdrage leveren in de vorm van sprekers, organisatorische kracht, netwerk of funding.'
+      -
+        type: hardBreak
+      -
+        type: hardBreak
   -
     type: heading
     attrs:
@@ -332,6 +356,10 @@ content:
       -
         type: text
         text: 'Door bepaalde inkoop collectief te doen, kunnen we de kosten voor iedereen verlagen. Zo is er bijvoorbeeld korting op Sentry, PhpStorm, Laracon, Certified en nog veel meer!'
+      -
+        type: hardBreak
+      -
+        type: hardBreak
   -
     type: heading
     attrs:
@@ -358,6 +386,10 @@ content:
       -
         type: text
         text: 'Ook wordt er internationaal gewerkt aan bijvoorbeeld het uitwisselen van sprekers en het gezamenlijk benaderen van partijen voor ledenvoordeel.'
+      -
+        type: hardBreak
+      -
+        type: hardBreak
   -
     type: heading
     attrs:
