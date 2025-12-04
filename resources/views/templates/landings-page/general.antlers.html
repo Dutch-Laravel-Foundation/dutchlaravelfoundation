@@ -27,14 +27,16 @@
           Je bedrijf groeit, maar je <span class="inline-block">systemen groeien niet mee</span>
         {{ /slot:title }}
 
-        {{ slot:list }}
-          <li>Wat eerst werkte, wordt nu een rem op je groei</li>
-          <li>Meer klanten zorgt voor meer chaos in plaats van meer omzet</li>
-          <li>Medewerkers klagen over omslachtige, trage of onhandige systemen</li>
-        {{ /slot:list }}
+        {{ slot:content }}
+          <ul class="list-disc pl-6 no-underline space-y-1 leading-relaxed">
+            <li>Wat eerst werkte, wordt nu een rem op je groei</li>
+            <li>Meer klanten zorgt voor meer chaos in plaats van meer omzet</li>
+            <li>Medewerkers klagen over omslachtige, trage of onhandige systemen</li>
+          </ul>
+        {{ /slot:content }}
       {{ /partial:landings-page/icon-card }}
     </div>
-    <div class="lg:col-span-4 rotate-[1deg] mt-0 sm:mt-4 md:rotate-[2deg] md:translate-y-0 md:mt-32 lg:mt-0 md:translate-x-0 lg:-translate-x-3 xl:translate-x-28 lg:translate-y-24 relative">
+    <ul class="lg:col-span-4 rotate-[1deg] mt-0 sm:mt-4 md:rotate-[2deg] md:translate-y-0 md:mt-32 lg:mt-0 md:translate-x-0 lg:-translate-x-3 xl:translate-x-28 lg:translate-y-24 relative">
       {{ partial:landings-page/icon-card}}
         {{ slot:icon }}
           {{ partial:landings-page/head-bolt }}
@@ -44,11 +46,13 @@
           Je huidige ontwikkelaar blijkt onbetrouwbaar
         {{ /slot:title }}
 
-        {{ slot:list }}
-          <li>Je (freelance) ontwikkelaar is gestopt of slecht bereikbaar</li>
-          <li>Doorlooptijden van onderhoud en nieuwe features duren steeds langer</li>
-          <li>Concurrenten gaan sneller en je verliest momentum</li>
-        {{ /slot:list }}
+        {{ slot:content }}
+          <ul class="list-disc pl-6 no-underline space-y-1 leading-relaxed">
+            <li>Je (freelance) ontwikkelaar is gestopt of slecht bereikbaar</li>
+            <li>Doorlooptijden van onderhoud en nieuwe features duren steeds langer</li>
+            <li>Concurrenten gaan sneller en je verliest momentum</li>
+          </ul
+        {{ /slot:content }}
       {{ /partial:landings-page/icon-card }}
     </div>
     <div class="lg:col-span-4 relative md:-mt-8 lg:mt-0 lg:-translate-x-3 xl:-translate-x-20 md:-translate-y-7 rotate-[-1deg] md:rotate-[-2deg]">
@@ -61,11 +65,13 @@
           Je huidige systeem laat je in de steek
         {{ /slot:title }}
 
-        {{ slot:list }}
-          <li>Je hebt regelmatig storingen of crashes die niet meer uit te leggen zijn aan klanten</li>
-          <li>Je moet steeds vaker klanten compenseren, omdat systemen niet werken (faalkosten)</li>
-          <li>Onderhoud wordt steeds duurder</li>
-        {{ /slot:list }}
+        {{ slot:content }}
+          <ul class="list-disc pl-6 no-underline space-y-1 leading-relaxed">
+            <li>Je hebt regelmatig storingen of crashes die niet meer uit te leggen zijn aan klanten</li>
+            <li>Je moet steeds vaker klanten compenseren, omdat systemen niet werken (faalkosten)</li>
+            <li>Onderhoud wordt steeds duurder</li>
+          </ul>
+        {{ /slot:content }}
       {{ /partial:landings-page/icon-card }}
     </div>
     <div class="lg:col-span-5 mt-0 sm:mt-4 relative rotate-[1deg] md:rotate-[2deg] lg:translate-x-3 xl:-translate-x-12 md:translate-y-20">
@@ -78,11 +84,13 @@
           Je verliest overzicht en controle
         {{ /slot:title }}
 
-        {{ slot:list }}
-          <li>Informatie is verspreid over verschillende tools</li>
-          <li>Handmatige processen kosten steeds meer tijd</li>
-          <li>Er ontstaan meer fouten door o.a. onduidelijke data of haastwerk</li>
-        {{ /slot:list }}
+        {{ slot:content }}
+          <ul class="list-disc pl-6 no-underline space-y-1 leading-relaxed">
+            <li>Informatie is verspreid over verschillende tools</li>
+            <li>Handmatige processen kosten steeds meer tijd</li>
+            <li>Er ontstaan meer fouten door o.a. onduidelijke data of haastwerk</li>
+          </ul>
+        {{ /slot:content }}
       {{ /partial:landings-page/icon-card }}
     </div>
   </div>
