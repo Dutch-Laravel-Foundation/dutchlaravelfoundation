@@ -109,6 +109,7 @@ module.exports = {
                     "inset 0 0 0 1px #FF2D20, 4px 4px 0 -1px #FFFFFF, 4px 4px 0 0 #FF2D20",
                 "outer-primary": "4px 4px 0 -1px #FFFFFF, 4px 4px 0 0 #FF2D20",
                 "outer-dark": "4px 4px 0 -1px #FFFFFF, 4px 4px 0 0 #000000",
+                "3xl": "0 0 32px 0 rgb(0 0 0 / 0.04), 0 0 24px 0 rgb(0 0 0 / 0.04)",
             },
             backgroundImage: {
                 "floor-primary":

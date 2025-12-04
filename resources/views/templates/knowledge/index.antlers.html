@@ -1,22 +1,26 @@
-{{# Top background image #}}
-{{ partial:decoration/floor-background background="floor-top-knowledge" /}}
-<div class="container px-6 lg:px-10 mb-auto mx-auto flex flex-col items-left justify-center relative">
-    <div class="container mx-auto">
-        {{ content }}
-            {{ partial src="sets/autoload" }}
-        {{ /content }}
-    </div>
+<div class="translate-y-32 lg:translate-y-52 pb-32">
+    {{ partial:decoration/floor-background background="floor-top-knowledge" /}}
+    <div class="container mb-auto mx-auto flex flex-col items-left justify-center relative">
+        <div class="container mx-auto">
+            {{ content }}
+                {{ partial src="sets/autoload" }}
+            {{ /content }}
+        </div>
 
-    {{ insight_count = { collection:count in="knowledge" id:not="{ highlighted_id.0 }" } }}
-    <section class="pb-10">
-        {{ if insight_count > 0 }}
-            {{ collection:knowledge sort="date:desc" }}
-                <div class="w-full lg:w-11/12">
-                    {{ partial:blocks/image-left-large class="" :image="featured_image" :category="category" link="/knowledge/{ slug }" }}
-                        {{ introduction }}
-                    {{ /partial:blocks/image-left-large }}
-                {{ /collection:knowledge }}
-            </div>
-        {{ /if }}
-    </section>
+        {{ insight_count = { collection:count in="knowledge" id:not="{ highlighted_id.0 }" } }}
+        <section class="pb-10">
+            {{ if insight_count > 0 }}
+                {{ collection:knowledge sort="date:desc" }}
+                    <div class="w-full">
+                        {{ partial:blocks/image-left-large class="" :image="featured_image" :category="category" link="/knowledge/{ slug }" }}
+                            {{ date format="d-m-Y" }}
+                            <br/>
+                            <br/>
+                            {{ introduction }}
+                        {{ /partial:blocks/image-left-large }}
+                    {{ /collection:knowledge }}
+                </div>
+            {{ /if }}
+        </section>
+    </div>
 </div>

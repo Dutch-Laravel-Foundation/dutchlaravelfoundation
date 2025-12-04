@@ -1,0 +1,13 @@
+  <div class="flex flex-col gap-6 p-8 md:p-12 rounded-xl bg-white shadow-2xl shadow-black/5 text-black">
+    <div class="flex flex-col gap-2">
+      <img class="size-8 opacity-50" src="/assets/img/quote.svg" alt="Quote">
+      <h3 class="font-bold text-black text-xl md:text-[32px] my-0">
+        {{ slot:quote }}
+      </h3>
+    </div>
+    <div class="flex flex-col gap-2">
+      <ul class="list-disc pl-5 opacity-70 space-y-2 leading-relaxed">
+        {{ slot:list }}
+      </ul>
+    </div>
+  </div>

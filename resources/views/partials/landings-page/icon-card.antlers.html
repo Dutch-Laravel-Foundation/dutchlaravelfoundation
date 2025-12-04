@@ -1,0 +1,13 @@
+<div class="rounded-2xl p-6 md:pr-12 shadow-3xl flex flex-col gap-3 bg-white">
+  <div class="flex space-x-4 items-center">
+    <div class="size-11">
+      {{ slot:icon }}
+    </div>
+    <h3 class="my-0 text-black font-bold text-[20px] leading-snug">
+      {{ slot:title }}
+    </h3>
+  </div>
+  <u class="list-disc pl-6 no-underline space-y-1 leading-relaxed">
+    {{ slot:list }}
+  </u>
+</div>
