@@ -1,6 +1,6 @@
-{{# Top background image #}}
+<div class="translate-y-32 lg:translate-y-52 pb-32">
 {{ partial:decoration/floor-background background="floor-top-insights" /}}
-<div class="container px-6 lg:px-10 mb-auto mx-auto flex flex-col items-left justify-center relative">
+<div class="container mb-auto mx-auto flex flex-col items-left justify-center relative">
     {{ content }}
         {{ partial src="sets/autoload" }}
     {{ /content }}
@@ -13,6 +13,9 @@
             {{ collection:insights id:not="{ highlighted_id.0 }" limit="1" sort="date:desc" }}
                 <div class="w-full lg:w-11/12">
                     {{ partial:blocks/image-left-large class="" :image="featured_image" :category="category" link="/insights/{ slug }" }}
+                        {{ date format="d-m-Y" }}
+                        <br/>
+                        <br/>
                         {{ introduction }}
                     {{ /partial:blocks/image-left-large }}
                 {{ /collection:insights }}
@@ -22,7 +25,10 @@
         {{ if insight_count > 1 }}
             {{ collection:insights id:not="{ highlighted_id.0 }" limit="1" offset="1" sort="date:desc" }}
                 {{ partial:blocks/image-left class="w-full lg:w-11/12! lg:ml-auto" :image="featured_image" :category="category" link="/insights/{ slug }" }}
-                    {{ introduction }}
+                    {{ date format="d-m-Y" }}
+                    <br/>
+                    <br/>
+                {{ introduction }}
                 {{ /partial:blocks/image-left }}
             {{ /collection:insights }}
         {{ /if }}
@@ -30,6 +36,9 @@
         {{ if highlighted_id.0 }}
             {{ collection:insights id:is="{ highlighted_id.0 }" limit="1" }}
                 {{ partial:blocks/image-highlight class="xl:w-11/12" :image="featured_image" category="Mis niet" link="/insights/{ slug }" }}
+                    {{ date format="d-m-Y" }}
+                    <br/>
+                    <br/>
                     {{ introduction }}
                 {{ /partial:blocks/image-highlight }}
             {{ /collection:insights }}
@@ -38,9 +47,13 @@
         {{ if insight_count > 2 }}
             {{ collection:insights id:not="{ highlighted_id.0 }" offset="2" sort="date:desc" }}
                 {{ partial:blocks/image-left class="w-full lg:w-11/12! { switch between='{{ highlighted_id.0 ? "lg:ml-auto|" : "|lg:ml-auto" }}' }" :image="featured_image" :category="category" link="/insights/{ slug }" }}
+                    {{ date format="d-m-Y" }}
+                    <br/>
+                    <br/>
                     {{ introduction }}
                 {{ /partial:blocks/image-left }}
             {{ /collection:insights }}
         {{ /if }}
     </section>
+</div>
 </div>

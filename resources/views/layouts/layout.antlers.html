@@ -70,9 +70,22 @@
 <body class="font-sans leading-normal  bg-white text-primary-text" x-data="{ overflowHidden: false }"
     @open-vragen-ai.window="overflowHidden = true" @close-vragen-ai.window="overflowHidden = false"
     :class="overflowHidden ? 'overflow-hidden h-screen': ''">
+
+    <section class="w-full">
+        {{ if menu_color == 'red' }}
+            {{ partial:header background="bg-primary-accent" menuColor="white"  }}
+        {{ else }}
+            {{ partial:header background="bg-white"  }}
+        {{ /if }}
+    </section>
+
     <div class="frontend relative page-{{ slug }}">
         {{ template_content }}
     </div>
+
+    <section class="w-full ">
+    {{ partial:footer }}
+    </section>
 
     {{ dynamic_token }}
 

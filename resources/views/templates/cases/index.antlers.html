@@ -1,17 +1,18 @@
-{{# Top background image #}}
-{{ partial:decoration/floor-background background="floor-top-what-is-laravel" /}}
+<div class="translate-y-32 lg:translate-y-52 pb-32">
+    {{ partial:decoration/floor-background background="floor-top-what-is-laravel" /}}
 
-<div class="container px-6 lg:px-10 mb-auto mx-auto flex flex-col items-left justify-center relative">
-    {{ content }}
-        {{ partial src="sets/autoload" }}
-    {{ /content }}
+    <div class="container mb-auto mx-auto flex flex-col items-left justify-center relative">
+        {{ content }}
+            {{ partial src="sets/autoload" }}
+        {{ /content }}
 
-    <section class="mb">
-        {{ collection:cases limit="9" sort="date:desc" }}
-            {{ case_block = { switch between='blocks/image-left-larger|blocks/image-right-larger' } }}
-            {{ partial:{ case_block } class="lg:w-3/4! py-4 lg:py-0 { switch between='|lg:ml-[25%]' }" :image="featured_image" :title="title_long" :category="member:title" link="/cases/{ slug }" }}
-            {{ introduction }}
-            {{ /partial:{ case_block } }}
-        {{ /collection:cases }}
-    </section>
+        <section class="mb">
+            {{ collection:cases limit="9" sort="date:desc" }}
+                {{ case_block = { switch between='blocks/image-left-larger|blocks/image-right-larger' } }}
+                {{ partial:{ case_block } class="lg:w-3/4! py-4 lg:py-0 { switch between='|lg:ml-[25%]' }" :image="featured_image" :title="title_long" :category="member:title" link="/cases/{ slug }" }}
+                {{ introduction }}
+                {{ /partial:{ case_block } }}
+            {{ /collection:cases }}
+        </section>
+    </div>
 </div>

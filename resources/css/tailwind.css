@@ -29,8 +29,16 @@
         @apply text-tertiary-regular;
     }
 
+    header.headroom--top {
+        @apply !shadow-none !border-b-0;
+    }
+
+    header.headroom--not-top {
+        @apply !shadow-2xl !shadow-black/5 !border-b !border-white/10;
+    }
+
     .container {
-        @apply sm:px-6 lg:px-10 !max-w-6xl w-full mx-auto;
+        @apply px-4 sm:px-6 lg:px-10 xl:px-0 !max-w-6xl w-full mx-auto;
     }
 
     h1 {

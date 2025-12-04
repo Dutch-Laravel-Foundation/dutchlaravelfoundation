@@ -14,6 +14,10 @@ tree:
       -
         id: dd5bf3ce-7847-4aab-98e4-0cdca75518c7
         entry: 83389b84-3d9d-43ad-956c-223c261062cc
+      -
+        id: a3f44247-74c7-4810-aa2f-cb526c6facc9
+        entry: 59fb3a00-7ce0-412b-891e-98cca178e4e7
+        title: 'Betaalbaar maatwerk'
   -
     id: 8191f4bc-14a4-4911-a3d5-c9d282bb0946
     entry: 7840f9f9-3fba-4608-b877-250f18e634b2
@@ -30,6 +34,9 @@ tree:
         id: 7b4e4030-5766-4cb0-bd98-2ab81506ec70
         entry: c2893d75-5eb2-4840-b20d-d222a9155b4c
         title: 'De organisatie'
+      -
+        id: 414929a3-ef9e-43e3-a07a-48bb740da3f9
+        entry: fbdd13d8-526d-4152-8ef4-53d8e9fba3c4
       -
         id: 11cdc56a-d8b5-45ce-9126-e0b8b1fdaa43
         entry: 35fe78ba-35d3-44a4-b514-55167c5e514c

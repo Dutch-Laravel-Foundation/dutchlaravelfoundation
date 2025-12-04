@@ -1,5 +1,5 @@
 <footer class="w-full overflow-clip pt-96 -mt-96">
-    <div class="container relative mx-auto {{ if call_to_action }} -mt-16 {{ /if }}"">
+    <div class="container !px-0 relative mx-auto {{ if call_to_action }} -mt-16 {{ /if }}"">
         {{ call_to_action }}
             <div class=" sm:px-6 lg:px-10" data-aos="fade-up" data-aos-delay="250">
         {{ partial:blocks/base class="z-10 translate-y-16" :title="title" category="" }}
@@ -86,7 +86,7 @@
                     {{ /if }}
                     {{ /nav:legal }}
                     <br><br>
-                    <div class="flex flex-row items-center mb-10 gap-6">
+                    <div class="flex flex-row flex-wrap justify-center md:justify-start items-center mb-10 gap-6">
                         <a href="https://www.leadinfo.com/nl/" target="_blank" style="display: inline-block"><img
                                 src="/assets/img/leadinfo.png" alt="Leadinfo" style="height: 45px;"></a>
                         <a href="https://www.larabelles.com/" target="_blank" style="display: inline-block"><img

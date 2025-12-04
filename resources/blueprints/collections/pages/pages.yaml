@@ -1,111 +1,88 @@
-sections:
+title: "Pagina's"
+tabs:
   main:
     display: Main
-    fields:
+    sections:
       -
-        handle: title
-        field:
-          type: text
-          required: true
-          validate:
-            - required
-      -
-        import: content
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+          -
+            import: content
   sidebar:
     display: Sidebar
-    fields:
+    sections:
       -
-        handle: slug
-        field:
-          type: slug
-          localizable: true
-      -
-        handle: template
-        field:
-          hide_partials: true
-          display: Template
-          type: template
-          icon: template
-          listable: hidden
-          instructions_position: above
-          read_only: false
-      -
-        handle: parent
-        field:
-          type: entries
-          collections:
-            - pages
-          max_items: 1
-          listable: false
-          localizable: true
-      -
-        handle: call_to_action
-        field:
-          max_items: 1
-          mode: select
-          create: true
-          collections:
-            - cta
-          display: 'Call to action'
-          type: entries
-          icon: entries
-          listable: hidden
-          instructions_position: above
-          read_only: false
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'
+          -
+            handle: template
+            field:
+              display: Template
+              type: template
+          -
+            handle: menu_color
+            field:
+              options:
+                -
+                  key: white
+                  value: Wit
+                -
+                  key: red
+                  value: Rood
+              type: select
+              display: 'Menu kleur'
+          -
+            handle: parent
+            field:
+              type: entries
+              collections:
+                - pages
+              max_items: 1
+              listable: false
+              localizable: true
+          -
+            handle: call_to_action
+            field:
+              max_items: 1
+              mode: select
+              collections:
+                - cta
+              display: 'Call to action'
+              type: entries
   header:
     display: Header
-    fields:
+    sections:
       -
-        handle: header_title
-        field:
-          input_type: text
-          antlers: false
-          display: 'Header titel'
-          type: text
-          icon: text
-          listable: hidden
-          instructions_position: above
-          read_only: false
-          if:
-            title: 'equals Home'
-      -
-        handle: header_content
-        field:
-          always_show_set_button: false
-          buttons:
-            - h2
-            - h3
-            - bold
-            - italic
-            - unorderedlist
-            - orderedlist
-            - removeformat
-            - quote
-            - anchor
-            - image
-            - table
-          save_html: false
-          toolbar_mode: fixed
-          link_noopener: false
-          link_noreferrer: false
-          target_blank: false
-          reading_time: false
-          fullscreen: true
-          allow_source: true
-          enable_input_rules: true
-          enable_paste_rules: true
-          antlers: false
-          display: 'Header content'
-          type: bard
-          icon: bard
-          listable: hidden
-          instructions_position: above
-          read_only: false
-          if:
-            title: 'equals Home'
+        fields:
+          -
+            handle: header_title
+            field:
+              display: 'Header titel'
+              type: text
+              if:
+                title: 'equals Home'
+          -
+            handle: header_content
+            field:
+              display: 'Header content'
+              type: bard
+              if:
+                title: 'equals Home'
   seo:
     display: SEO
-    fields:
+    sections:
       -
-        import: seo
-title: 'Pagina''s'
+        fields:
+          -
+            import: seo
