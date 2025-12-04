@@ -1,3 +1,4 @@
 *
-!glide/*
+!glide
+!glide/**
 !.gitignore
