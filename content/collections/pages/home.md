@@ -5,7 +5,7 @@ title: Home
 template: templates/home/index
 author: 9342694a-2c6c-4640-8da1-91a61cfda771
 updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
-updated_at: 1764838057
+updated_at: 1764845132
 call_to_action: ee5d33de-9a24-4860-92dd-3503740b62af
 highlight_text:
   -
@@ -82,7 +82,7 @@ content:
   -
     type: set
     attrs:
-      id: 4JwtXuEH
+      id: Rw5Cfll9
       values:
         type: double_column
         left:
