@@ -164,6 +164,7 @@
 
     cd {{ $newDeploymentPath }}
     echo "📚 Warming up Stache cache..."
+    php please stache:clear
     php please stache:warm
     echo "🔎 Updating search indexes..."
     php please search:update --all
