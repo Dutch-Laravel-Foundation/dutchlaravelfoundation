@@ -151,6 +151,7 @@
 
     cd {{ $newDeploymentPath }}
     echo "🚀 Running php artisan optimize..."
+    php artisan optimize:clear
     php artisan optimize
     echo "✅ Application optimized"
     echo ""
