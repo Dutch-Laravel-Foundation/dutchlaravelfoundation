@@ -17,4 +17,3 @@ yarn-error.log
 .DS_Store
 public/mix-manifest.json
 .claude
-Envoy.blade.php
