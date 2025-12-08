@@ -2,9 +2,18 @@
 
 {{ menuColor = menuColor ?? (banner ? 'white' : 'black') }}
 
-{{ background = background ?? (banner ? 'lg:bg-primary-accent' : 'lg:bg-white') }}
+{{ background = menu_color == 'red' ? 'lg:bg-primary-accent' : 'lg:bg-white' }}
+
+{{ backgroundRecognizedBy = menu_color == 'red' ? 'bg-white' : 'bg-primary-accent' }}
+
+{{ laravelLogoColor = menu_color == 'red' ? 'text-primary-accent' : 'text-white' }}
+
+{{ recognizedByTextColor = menu_color == 'red' ? 'text-black/50' : 'text-white/60' }}
 
 <header class="fixed top-0 left-0 w-screen z-999 {{ background }}">
+
+    {{ partial:recognized-by-laravel backgroundRecognizedBy="{{ backgroundRecognizedBy }}" laravelLogoColor="{{ laravelLogoColor }}" recognizedByTextColor="{{ recognizedByTextColor }}" }}
+
     {{ partial:vragen_ai}}
 
     {{# Desktop navigation #}}
@@ -16,7 +25,8 @@
 
     {{# Mobile navigation #}}
     <div class="relative lg:hidden js-alpine-init {{ banner ? 'bg-primary-accent': 'bg-white' }} pb-6" x-data="menu()"
-        x-init="init()" x-cloak role="navigation">
+         x-cloak role="navigation">
+
         <div class="flex flex-row items-start justify-between w-full px-6 pt-6 pb-0 mx-auto xl:pt-10">
             <a href="/" class="flex justify-start w-full"><img class="max-w-full max-h-[3rem] xl:max-h-full"
                     src="{{ banner ? '/assets/img/logo-alt.svg': '/assets/img/logo.svg' }}" alt="Home"></a>
@@ -58,11 +68,11 @@
             x-transition:leave-end="opacity-0">
             <div class="w-full overflow-scroll">
                 <div class="absolute top-0 left-0 flex flex-col w-full min-h-full bg-primary-contrast">
-
-                    <a class="absolute left-6 top-6" href="/" class="flex justify-start w-full"><img
+                    {{ partial:recognized-by-laravel }}
+                    <a class="absolute left-6 top-14" href="/" class="flex justify-start w-full"><img
                             class="max-w-full max-h-[3rem] xl:max-h-full" src="/assets/img/logo.svg" alt="Home"></a>
                     {{# Menu items wrapper #}}
-                    <div class="absolute top-[0.8rem] right-0 z-10">
+                    <div class="absolute top-11 right-0 z-10">
                         <button type="button" @click="toggleMenu()" disabled x-bind:disabled="disabled"
                             class="relative h-[3rem] right-[0.7rem] bottom-[0.2rem] w-[3rem] m-4 text-white uppercase transition duration-150 ease-in-out bg-primary-accent focus:outline-hidden">
                         </button>
