@@ -4,7 +4,7 @@ blueprint: pages
 title: 'Lid worden'
 template: templates/become-member/index
 updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
-updated_at: 1765369618
+updated_at: 1765380883
 call_to_action: c3238da9-592c-4906-9b11-183e37e4b2d3
 content:
   -
@@ -104,6 +104,29 @@ content:
               -
                 type: text
                 text: 'Toegang tot werkgroepen met veel kennis met betrekking tot best practices binnen Laravel, Laravel in het onderwijs, diversiteit en bijvoorbeeld het gebruik van Laravel binnen de overheid.'
+      -
+        type: listItem
+        content:
+          -
+            type: paragraph
+            content:
+              -
+                type: text
+                text: 'Maak kosteloos gebruik van de Hosting Hotline. Stel je hosting vragen aan onze managed hosting expert, '
+              -
+                type: text
+                marks:
+                  -
+                    type: link
+                    attrs:
+                      href: 'https://shockmedia.nl'
+                      rel: null
+                      target: _blank
+                      title: null
+                text: 'Shock Media'
+              -
+                type: text
+                text: .
               -
                 type: hardBreak
               -
@@ -178,7 +201,30 @@ content:
             content:
               -
                 type: text
-                text: "20% korting\_op nieuwe\_PhpStorm-licenties (incl. gratis Laravel Idea)"
+                text: "20% korting\_op nieuwe JetBrains'\_PhpStorm-licenties"
+      -
+        type: listItem
+        content:
+          -
+            type: paragraph
+            content:
+              -
+                type: text
+                text: 'Proefperiode van 3 maanden bij '
+              -
+                type: text
+                marks:
+                  -
+                    type: link
+                    attrs:
+                      href: 'https://sentry.io'
+                      rel: null
+                      target: _blank
+                      title: null
+                text: 'sentry.io '
+              -
+                type: text
+                text: .
       -
         type: listItem
         content:
@@ -250,16 +296,7 @@ content:
             content:
               -
                 type: text
-                text: "Aanvullende kortingen momenteel in ontwikkeling. Zo hebben we lopende gesprekken met onder andere\_"
-              -
-                type: text
-                marks:
-                  -
-                    type: bold
-                text: Sentry
-              -
-                type: text
-                text: ",\_"
+                text: "Aanvullende kortingen momenteel in ontwikkeling. Zo hebben we lopende gesprekken met onder andere,\_"
               -
                 type: text
                 marks:
