@@ -4,7 +4,6 @@ blueprint: members
 title: blauwfruit
 description: 'blauwfruit is een online marketing en webdevelopment agency uit Rotterdam. Wij helpen onze klanten groeien door middel van bewezen e-commerce strategieën.'
 logo: beeldmerk.svg
-published: true
 founding_partner: false
 type: Bedrijf
 employees: 1-10
@@ -14,5 +13,5 @@ email: hallo@blauwfruit.nl
 phone: '010 307 67 42'
 website: blauwfruit.nl
 updated_by: 28c0a799-7234-4581-b869-6eda5a36a8e2
-updated_at: 1715773998
+updated_at: 1765871467
 ---
