@@ -87,7 +87,7 @@
     }
 
     #content ul {
-        @apply pl-5 list-disc list-outside text-xl;
+        @apply pl-5 list-disc list-outside space-y-3;
     }
 
     #content ul li::marker {
@@ -104,7 +104,7 @@
     }
 
     #content ol {
-        @apply pl-4 list-decimal list-outside;
+        @apply pl-4 list-decimal list-outside space-y-3;
     }
 
     #content ol li {
@@ -166,12 +166,17 @@
 
     /* Bard content */
     blockquote {
-        @apply p-6 bg-orange-50 my-8 border border-orange-100 rounded-md;
+        @apply py-6 px-7 bg-primary-accent text-white my-8 border border-primary-accent italic relative before:w-full before:h-full before:left-3 before:top-3 before:border before:border-primary-accent before:absolute;
     }
 
     blockquote :last-child {
         @apply mb-0;
     }
+
+    blockquote p {
+        @apply text-lg leading-relaxed;
+    }
+
 
     /* Sets */
     .set {
