@@ -1,4 +1,5 @@
-data: {  }
+data:
+  alt: 'Laravel software door Goedemiddag! uit Delft'
 size: 76964
 last_modified: 1766150217
 width: 1024
