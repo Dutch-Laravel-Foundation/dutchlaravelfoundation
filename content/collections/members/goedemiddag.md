@@ -6,12 +6,14 @@ founding_partner: true
 type: Bedrijf
 employees: 11-50
 updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
-updated_at: 1766155959
+updated_at: 1766156006
 logo: goedemiddag-header_2112x640px_v2.jpg
 description: |-
   Bij Goedemiddag! draait het niet alleen om techniek. Wij maken software die begrijpelijk blijft, goed te onderhouden is en écht in jouw voordeel werkt. Jij komt met het idee of de uitdaging, wij vertalen dat naar een doordachte online oplossing die past bij je organisatie en je toekomstplannen.
 
-  Sinds 2014 bouwen onze Laravel-gecertificeerde developers schaalbare maatwerk software. Dat doen we voor grote namen als ABN AMRO, Aalberts, Race Planet en Stichting Halt, maar net zo goed voor ambitieuze MKB-ondernemers. Denk aan administratiesystemen die processen efficiënter maken, een veilingplatform voor klassieke auto’s, gamified leeromgevingen en beheersystemen voor vastgoed. Ook complexe API-integraties en koppelingen met bestaande systemen zijn voor ons vertrouwd terrein. Wij denken mee binnen vrijwel elk type project en budget. Je kunt ons ook inschakelen voor het overnemen van bestaande Laravel applicaties. Ook hier hebben wij ruimschoots ervaring mee!
+  Sinds 2014 bouwen onze Laravel-gecertificeerde developers schaalbare maatwerk software. Dat doen we voor grote namen als ABN AMRO, Aalberts, Race Planet en Stichting Halt, maar net zo goed voor ambitieuze MKB-ondernemers. Denk aan administratiesystemen die processen efficiënter maken, een veilingplatform voor klassieke auto’s, gamified leeromgevingen en beheersystemen voor vastgoed. 
+
+  Ook complexe API-integraties en koppelingen met bestaande systemen zijn voor ons vertrouwd terrein. Wij denken mee binnen vrijwel elk type project en budget. Je kunt ons ook inschakelen voor het overnemen van bestaande Laravel applicaties. Ook hier hebben wij ruimschoots ervaring mee!
 
   Als founding partner van de Dutch Laravel Foundation zetten we ons actief in voor kennisontwikkeling en samenwerking. Want om vooruitgang te boeken, hebben we juist elkaar nodig.
 
