@@ -6,8 +6,8 @@ founding_partner: true
 type: Bedrijf
 employees: 11-50
 updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
-updated_at: 1766150263
-logo: goedemiddag-header_1024px_v2.jpg
+updated_at: 1766150694
+logo: goedemiddag-header_2112x640px_v2.jpg
 description: |-
   Goedemiddag! werkt sinds 2014 met veel enthousiasme met het Laravel Framework. We bouwen online oplossingen voor een breed scala aan opdrachtgevers. Van bank tot DJ, van bejaardentehuis tot liefhebber van klassieke auto's en van gamification platform tot vastgoedbeheerder.
 
