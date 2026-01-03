@@ -1,4 +1,5 @@
-data: {  }
+data:
+  alt: 'PHPStan runtime'
 size: 24171
 last_modified: 1767458870
 width: 378
