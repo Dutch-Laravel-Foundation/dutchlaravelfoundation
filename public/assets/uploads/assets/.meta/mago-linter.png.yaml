@@ -1,4 +1,5 @@
-data: {  }
+data:
+  alt: 'Mago linter output'
 size: 15209
 last_modified: 1767459639
 width: 560
