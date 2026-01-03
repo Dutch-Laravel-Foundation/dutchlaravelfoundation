@@ -1,4 +1,5 @@
-data: {  }
+data:
+  alt: 'Mago setup wizard'
 size: 49006
 last_modified: 1767459987
 width: 785
