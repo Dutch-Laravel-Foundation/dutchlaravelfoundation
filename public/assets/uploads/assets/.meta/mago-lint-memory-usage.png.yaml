@@ -1,4 +1,5 @@
-data: {  }
+data:
+  alt: 'Mago linter memory usage'
 size: 151926
 last_modified: 1767460542
 width: 935
