@@ -1,4 +1,5 @@
-data: {  }
+data:
+  alt: 'Mago VS PHPStan and Laravel Pint'
 size: 2341022
 last_modified: 1767461640
 width: 1536
