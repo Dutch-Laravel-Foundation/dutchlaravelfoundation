@@ -1,4 +1,5 @@
-data: {  }
+data:
+  alt: 'Mago static analyses output'
 size: 127776
 last_modified: 1767459115
 width: 1825
