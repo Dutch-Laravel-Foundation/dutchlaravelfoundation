@@ -3,8 +3,8 @@ id: 645047c0-702b-40fd-9f72-621e0803318b
 blueprint: pages
 title: 'Onze leden'
 template: templates/members/index
-updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
-updated_at: 1744095779
+updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
+updated_at: 1768977187
 call_to_action: c3238da9-592c-4906-9b11-183e37e4b2d3
 content:
   -
@@ -28,7 +28,21 @@ content:
             content:
               -
                 type: text
-                text: 'De Dutch Laravel Foundation zorgt voor de promotie van Laravel en stimuleert kennisuitwisseling tussen Laravel developers in Nederland. Opdrachtgevers van webapplicaties kunnen via de stichting geschikte Laravel developers vinden.'
+                text: 'Wil je software laten bouwen met Laravel en zoek je een partij die je kunt vertrouwen? De leden van de Dutch Laravel Foundation zijn ervaren professionals en bureaus die dagelijks met Laravel werken. Gebruik de filters om snel een passende partij te vinden en neem daarna direct contact op om vrijblijvend je project te bespreken. Hulp nodig bij je zoektocht? Mail dan naar '
+              -
+                type: text
+                marks:
+                  -
+                    type: link
+                    attrs:
+                      href: 'mailto:info@dutchlaravelfoundation.nl'
+                      rel: null
+                      target: null
+                      title: null
+                text: info@dutchlaravelfoundation.nl
+              -
+                type: text
+                text: .
         heading:
           -
             type: heading
@@ -37,7 +51,7 @@ content:
             content:
               -
                 type: text
-                text: 'Onze leden'
+                text: 'Zoek jij een ervaren Laravel developer?'
   -
     type: paragraph
 ---
