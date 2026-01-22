@@ -2,12 +2,20 @@
 id: 201dbb24-5f6f-4c35-8de1-ba599424e035
 blueprint: pages
 title: 'Hosting Hotline'
-template: layouts/layout
+template: templates/default
 menu_color: white
 call_to_action: 6bc4ea55-2728-4615-8d45-75d49d29d157
 updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
-updated_at: 1769073256
+updated_at: 1769073413
 content:
+  -
+    type: heading
+    attrs:
+      level: 1
+    content:
+      -
+        type: text
+        text: 'Hosting Hotline!'
   -
     type: paragraph
     content:
