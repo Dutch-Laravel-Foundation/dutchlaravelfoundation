@@ -6,7 +6,7 @@ template: templates/default
 menu_color: white
 call_to_action: 6bc4ea55-2728-4615-8d45-75d49d29d157
 updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
-updated_at: 1769073413
+updated_at: 1769073497
 content:
   -
     type: heading
@@ -146,7 +146,21 @@ content:
     content:
       -
         type: text
-        text: 'Heb je een dus een vraag over hosting, serverconfiguratie, beveiliging of infrastructuur? Of overweeg je een migratie of opschaling van je Laravel applicatie? Neem dan gerust contact op via de Hosting Hotline op hotline@shockmedia.nl. Wij helpen je graag verder.'
+        text: 'Heb je een dus een vraag over hosting, serverconfiguratie, beveiliging of infrastructuur? Of overweeg je een migratie of opschaling van je Laravel applicatie? Neem dan gerust contact op via de Hosting Hotline op '
+      -
+        type: text
+        marks:
+          -
+            type: link
+            attrs:
+              href: 'mailto:hotline@shockmedia.nl'
+              rel: null
+              target: null
+              title: null
+        text: hotline@shockmedia.nl
+      -
+        type: text
+        text: '. Wij helpen je graag verder.'
   -
     type: paragraph
     content:
