@@ -1,5 +1,6 @@
 ---
 id: 47bd7c35-8cce-45ca-b6be-cb6ad0d89ade
+published: false
 blueprint: members
 title: 'van der Arend Automatisering'
 description: |-
@@ -11,5 +12,5 @@ employees: 1-10
 email: info@vd-arend.nl
 phone: '0626538995'
 updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
-updated_at: 1770128980
+updated_at: 1770128994
 ---
