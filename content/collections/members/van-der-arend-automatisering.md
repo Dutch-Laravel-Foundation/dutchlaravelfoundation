@@ -11,8 +11,9 @@ founding_partner: false
 type: Bedrijf
 employees: 1-10
 city: Nijmegen
+province: Gelderland
 email: info@vd-arend.nl
 phone: '0626538995'
 updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
-updated_at: 1770189611
+updated_at: 1770189640
 ---
