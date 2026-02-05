@@ -7,5 +7,12 @@ featured_image: cxo-diner.jpg
 type: Meetup
 date_start: '2026-11-26'
 updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
-updated_at: 1770290571
+updated_at: 1770290591
+content:
+  -
+    type: paragraph
+    content:
+      -
+        type: text
+        text: 'Ook dit jaar is er weer een CxO diner voor alle executives van onze leden. De informatie over dit event wordt nog bekend gemaakt, maar save the date!'
 ---
