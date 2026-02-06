@@ -5,9 +5,9 @@ title: SWIS
 founding_partner: false
 type: Bedrijf
 employees: 1-10
-updated_by: 28c0a799-7234-4581-b869-6eda5a36a8e2
-updated_at: 1734429201
-logo: swis.svg
+updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
+updated_at: 1770369285
+logo: swis-wordmark-with-payoff-rgb.svg
 description: |-
   Sinds 1999 is het web ons werkterrein. Van daaruit gooien we dagelijks alles in de strijd. Voor onze opdrachtgevers, maar uiteindelijk voor iedereen. Zo maken we dankzij onze digitale daadkracht van de wereld een betere plek, project voor project. Wij noemen dat Duurzaam Digitaal Veranderen.
 
