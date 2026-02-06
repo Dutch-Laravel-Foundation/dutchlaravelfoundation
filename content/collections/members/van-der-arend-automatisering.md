@@ -16,5 +16,6 @@ province: Gelderland
 email: info@vd-arend.nl
 phone: '0626538995'
 updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
-updated_at: 1770368632
+updated_at: 1770368930
+logo: vd-arend-automatisering.jpg
 ---
