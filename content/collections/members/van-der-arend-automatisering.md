@@ -8,7 +8,7 @@ description: |-
   Met meer dan tien jaar Laravel-ervaring worden complexe processen omgezet naar werkbare applicaties. Denk aan koppelingen met Exact, RDW en diverse AI-diensten, of het vertalen van belastingwetgeving naar software waar gebruikers direct mee aan de slag kunnen. De applicaties draaien in-house op eigen VM's en Linux-servers, wat bijdraagt aan een stabiele en beheersbare infrastructuur.
 
   Korte lijnen, snelle respons en luisteren naar de wensen van eindgebruikers, dat is waar het om draait.
-logo: mvda.logo_dejuiste.png
+logo: vd-arend-automatisering.jpg
 founding_partner: false
 type: Bedrijf
 employees: 1-10
@@ -16,6 +16,6 @@ city: Nijmegen
 province: Gelderland
 email: info@vd-arend.nl
 phone: '0626538995'
-updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
-updated_at: 1770190253
+updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
+updated_at: 1770368632
 ---
