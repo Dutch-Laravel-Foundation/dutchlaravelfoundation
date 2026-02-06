@@ -8,7 +8,6 @@ description: |-
   Met meer dan tien jaar Laravel-ervaring worden complexe processen omgezet naar werkbare applicaties. Denk aan koppelingen met Exact, RDW en diverse AI-diensten, of het vertalen van belastingwetgeving naar software waar gebruikers direct mee aan de slag kunnen. De applicaties draaien in-house op eigen VM's en Linux-servers, wat bijdraagt aan een stabiele en beheersbare infrastructuur.
 
   Korte lijnen, snelle respons en luisteren naar de wensen van eindgebruikers, dat is waar het om draait.
-logo: vd-arend-automatisering.jpg
 founding_partner: false
 type: Bedrijf
 employees: 1-10
