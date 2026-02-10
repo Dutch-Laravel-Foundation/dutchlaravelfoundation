@@ -1,0 +1,9 @@
+title: Stages
+template: internships/show
+layout: layout
+revisions: false
+route: '/stagebank/{slug}'
+sort_dir: desc
+date_behavior:
+  past: public
+  future: private

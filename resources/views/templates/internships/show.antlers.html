@@ -1,0 +1,40 @@
+<div class="translate-y-32 lg:translate-y-52 pb-32 md:pb-48">
+    <div class="container mb-auto mx-auto flex flex-col items-left justify-center relative">
+        <div class="flex flex-col w-full lg:flex-row">
+            <div class="lg:w-4/6 lg:pr-20 mb">
+                <h1>{{ title }}</h1>
+                {{ description }}
+            </div>
+
+            <div class="mb-16 lg:w-2/6">
+                {{ partial:company/base :logo="member:logo" link="https://{ member:website }" target="_blank" class="w-full px-10 pb-10 mt-10 overflow-hidden" }}
+                    {{ if member:city || member:province }}
+                        {{ partial:blocks/meta-alt title="Locatie" text="{ arr({ member:city }, { member:province }) | remove_empty | list }" class="px-0" }}
+                    {{ /if }}
+                    {{ if member:website }}
+                        {{ partial:blocks/meta-alt target="_blank" title="Website" :text="member:website" link="https://{ member:website }" class="px-0" }}
+                    {{ /if }}
+                    {{ if member:internship_contact_name || member:internship_contact_email || member:internship_contact_phone }}
+                        <div class="px-0 pt-6 border-t border-secondary-light">
+                            <h3 class="mb-4 text-sm font-bold uppercase text-tertiary-dark">Stage contactpersoon</h3>
+                            {{ if member:internship_contact_name }}
+                                {{ partial:blocks/meta-alt title="Naam" :text="member:internship_contact_name" class="px-0" }}
+                            {{ /if }}
+                            {{ if member:internship_contact_email }}
+                                {{ partial:blocks/meta-alt title="E-mail" :text="member:internship_contact_email" link="mailto:{ member:internship_contact_email }" class="px-0" }}
+                            {{ /if }}
+                            {{ if member:internship_contact_phone }}
+                                {{ partial:blocks/meta-alt title="Telefoonnummer" :text="member:internship_contact_phone" link="tel:{ member:internship_contact_phone regex_replace="\(0\)|" regex_replace="[^+0-9]|" }" class="px-0" }}
+                            {{ /if }}
+                        </div>
+                    {{ /if }}
+                    <div class="px-0 pt-6">
+                        <a href="/leden/{{ member:slug }}" class="text-sm font-bold text-primary-accent hover:text-primary-dark">
+                            Bekijk bedrijfsprofiel →
+                        </a>
+                    </div>
+                {{ /partial:company/base }}
+            </div>
+        </div>
+    </div>
+</div>

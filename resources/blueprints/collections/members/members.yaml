@@ -100,6 +100,15 @@ sections:
           icon: select
           listable: hidden
           instructions_position: above
+      -
+        handle: sbb
+        field:
+          default: false
+          display: SBB
+          type: toggle
+          icon: toggle
+          listable: hidden
+          instructions_position: above
   contact:
     display: Contactgegevens
     fields:
@@ -167,6 +176,39 @@ sections:
           listable: hidden
           instructions_position: above
           visibility: visible
+  internship_contact:
+    display: Stage contactpersoon
+    fields:
+      -
+        handle: internship_contact_name
+        field:
+          input_type: text
+          antlers: false
+          display: Naam
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+      -
+        handle: internship_contact_email
+        field:
+          input_type: text
+          antlers: false
+          display: E-mail
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+      -
+        handle: internship_contact_phone
+        field:
+          input_type: text
+          antlers: false
+          display: Telefoon
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
   seo:
     display: SEO
     fields:

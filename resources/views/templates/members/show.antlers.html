@@ -15,6 +15,24 @@
                 </div>
                 {{ /if }}
                 {{ description }}
+                {{ if { collection:count in="internships" member:is="{ id }" } > 0 }}
+                <div class="mt-6 md:mt-20">
+                    <h2 class="mb-6">Beschikbare stages</h2>
+                    {{ collection:internships member:is="{ id }" }}
+                        <div class="mb-6 p-6 border border-secondary-light">
+                            <h3 class="mb-2"><a href="/stagebank/{{ slug }}" class="text-primary-accent hover:text-primary-dark">{{ title }}</a></h3>
+                            {{ if description }}
+                                <div class="prose prose-sm max-w-none">
+                                    {{ description | truncate:150 }}
+                                </div>
+                            {{ /if }}
+                            <a href="/stagebank/{{ slug }}" class="inline-block mt-4 text-sm font-bold text-primary-accent hover:text-primary-dark">
+                                Bekijk stage →
+                            </a>
+                        </div>
+                    {{ /collection:internships }}
+                </div>
+                {{ /if }}
                 {{ if { collection:count in="cases" member:is="{ id }" } > 0 }}
                 {{ collection:cases member:is="{ id }" limit="3" }}
                     {{ if first }}<div class="mt-6 md:mt-20">{{ /if }}
@@ -46,6 +64,9 @@
                     {{ number_of_employees }}
                         {{ partial:blocks/meta-alt title="Aantal developers" :text="title" class="px-0" }}
                     {{ /number_of_employees }}
+                    {{ if sbb }}
+                        {{ partial:blocks/meta-alt title="SBB" text="SBB erkend" class="px-0" }}
+                    {{ /if }}
                 {{ /partial:company/base }}
             </div>
         </div>

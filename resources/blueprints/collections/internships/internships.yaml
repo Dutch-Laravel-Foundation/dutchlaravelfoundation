@@ -1,0 +1,60 @@
+sections:
+  main:
+    display: Main
+    fields:
+      -
+        handle: title
+        field:
+          type: text
+          required: true
+          validate:
+            - required
+          display: Titel
+          instructions_position: above
+          listable: hidden
+          input_type: text
+          antlers: false
+      -
+        handle: description
+        field:
+          type: markdown
+          localizable: true
+          display: Omschrijving
+          instructions_position: above
+          listable: hidden
+          restrict: false
+          automatic_line_breaks: true
+          automatic_links: false
+          escape_markup: false
+          smartypants: false
+          antlers: false
+  sidebar:
+    display: Sidebar
+    fields:
+      -
+        handle: slug
+        field:
+          type: slug
+          localizable: true
+      -
+        handle: member
+        field:
+          max_items: 1
+          mode: select
+          create: true
+          collections:
+            - members
+          display: Lid
+          type: entries
+          icon: entries
+          listable: hidden
+          instructions_position: above
+          required: true
+          validate:
+            - required
+  seo:
+    display: SEO
+    fields:
+      -
+        import: seo
+title: Stages

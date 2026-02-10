@@ -1,0 +1,178 @@
+<div class="translate-y-32 lg:translate-y-52 pb-32 md:pb-48">
+    {{# Top background image #}}
+    {{ partial:decoration/floor-background background="floor-top-members" /}}
+
+    <div class="container mb-auto mx-auto flex flex-col items-left justify-center relative">
+        {{ content }}
+            {{ partial src="sets/autoload" }}
+        {{ /content }}
+
+        <div class="container mx-auto" x-data="loadInternships()">
+            <div class="mr-[-2rem] ml-[-2rem] sm:mx-auto py-10 bg-secondary-light px-8 sm:px-10 sm:w-full" x-show="provinces.length > 1 || employees.length > 1 || hasSbb">
+                <div class="flex flex-col items-baseline justify-between base:flex-row">
+                    <h2 class="block mb-8 base:mb-0">Kunnen wij je helpen zoeken?</h2>
+                    <div class="hidden base:block"><a class="font-bold" x-on:click="resetFilters()">Filters wissen</a></div>
+                </div>
+                <div class="flex flex-col w-full lg:grid lg:grid-cols-2 lg:gap-x-8">
+                    <div class="mt-8" x-show="employees.length > 1">
+                        <span class="block meta-dark">Aantal Laravel developers</span>
+                        <div class="flex flex-wrap gap-2">
+                            <template x-for="employee in employees" :key="employee">
+                                <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="employees" :data-value="employee" x-text="employee" class="flex items-center justify-center w-full sm:w-auto h-12 px-8 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light text-tertiary-regular! hover:text-tertiary-dark! hover:border-primary-accent opacity-80 hover:opacity-100"></button>
+                            </template>
+                        </div>
+                    </div>
+                    <div class="col-span-2 mt-8" x-show="provinces.length > 1">
+                        <span class="block meta-dark">Provincie</span>
+                        <div class="flex flex-wrap gap-2">
+                            <template x-for="province in provinces" :key="province">
+                                <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="provinces" :data-value="province" x-text="province" class="flex items-center justify-center w-full sm:w-auto h-12 px-8 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light text-tertiary-regular! hover:text-tertiary-dark! hover:border-primary-accent opacity-80 hover:opacity-100"></button>
+                            </template>
+                        </div>
+                    </div>
+                    <div class="mt-8" x-show="hasSbb">
+                        <span class="block meta-dark">SBB erkend</span>
+                        <div class="flex flex-wrap gap-2">
+                            <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="sbb" data-value="true" class="flex items-center justify-center w-full sm:w-auto h-12 px-8 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light text-tertiary-regular! hover:text-tertiary-dark! hover:border-primary-accent opacity-80 hover:opacity-100">SBB erkend</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="block w-full mt-8 text-left base:hidden sm:text-right"><a class="font-bold" x-on:click="resetFilters()">Filters wissen</a></div>
+            </div>
+            <div class="relative flex flex-wrap overflow-visible md:pt-5 mb">
+                <div x-show="filteredInternships.length === 0" class="w-full p-6 mt-6 text-center border lg:p-10 lg:mt-10 border-secondary-light">
+                    Er zijn geen stages gevonden die voldoen aan je zoekopdracht.
+                </div>
+                <template x-for="item in filteredInternships" :key="item.id">
+                    <div class="w-full pt-10 pb-5 sm:p-10 sm:w-1/2 xl:w-1/3" data-aos="fade-up" data-aos-delay="250">
+                        <div class="flex flex-col w-full bg-white group-image-hover">
+                            <a x-bind:href="'/stagebank/' + item.slug">
+                                <figure class="flex items-center justify-center w-full h-64 overflow-hidden bg-linear-to-b from-white to-secondary-light">
+                                    <img x-show="item.member_logo" class="block max-w-[66%] max-h-[66%]" :src="item.member_logo" :alt="item.member_title">
+                                </figure>
+                            </a>
+                            <div class="relative w-full p-10 min-h-40 pb-16!">
+                                <a x-bind:href="'/stagebank/' + item.slug">
+                                    <div class="flex flex-col w-full">
+                                        <h4 class="block w-full mb-[.3rem]" x-text="item.title"></h4>
+                                        <span class="meta text-primary-accent" x-text="item.member_title"></span>
+                                        <span class="meta text-primary-accent" x-text="item.city + (item.province ? ', ' + item.province: '')"></span>
+                                    </div>
+                                </a>
+                                <a x-bind:href="'/stagebank/' + item.slug" class="flex h-12 items-center justify-center group absolute! right-0 bottom-0 ">
+                                    <div class="z-20 flex items-center justify-center w-12 h-full px-8 text-xs font-bold text-white uppercase transition-transform whitespace-nowrap group-hover:-translate-x-1 group-hover:-translate-y-1 bg-primary-accent aspect-square ">&gt;</div>
+                                    <div class="absolute bottom-0 right-0 z-10 w-full h-full border border-primary-accent "></div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
+                {{# Background image #}}
+                <div x-show="filteredInternships.length > 10" class="absolute z-[-1] h-full w-full flex items-center left-[-10rem] top-0">
+                    <div>
+                        <img src="/assets/img/backgrounds/floor-mid-gray.svg" class="w-[1120px] h-[900px]">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+var internships = [
+    {{ collection:internships }}
+    {{ if member }}
+    {
+        id: '{{ id }}',
+        slug: '{{ slug }}',
+        title: '{{ title | replace("'", "\\'") }}',
+        member_id: '{{ member:id }}',
+        member_title: '{{ member:title | replace("'", "\\'") }}',
+        member_logo: '{{ if member:logo }}{{ member:logo | first | url }}{{ /if }}',
+        employees: '{{ member:employees }}',
+        province: '{{ member:province }}',
+        city: '{{ member:city }}',
+        sbb: {{ member:sbb ? 'true' : 'false' }}
+    }{{ !last ?= ',' }}
+    {{ /if }}
+    {{ /collection:internships }}
+],
+employees = internships.map((obj) => { return obj.employees; }).filter((item, index, arr) => { return item && item.length > 0 && arr.indexOf(item) == index; }).sort(),
+provinces = internships.map((obj) => { return obj.province; }).filter((item, index, arr) => { return item && item.length > 0 && arr.indexOf(item) == index; }).sort();
+
+function loadInternships() {
+    var hasSbb = internships.some(function(item) { return item.sbb === true || item.sbb === 'true'; });
+    
+    return {
+        dataToFilter: internships,
+        employees: employees,
+        provinces: provinces,
+        hasSbb: hasSbb,
+        filter: {
+            employees: [],
+            provinces: [],
+            sbb: [],
+        },
+        // Reset all filters to show all internships
+        resetFilters() {
+            this.filter = {
+                employees: [],
+                provinces: [],
+                sbb: [],
+            };
+            const checkedFilters = document.querySelectorAll('button[data-checked="true"]');
+            for (let i = 0; i < checkedFilters.length; i++) {
+                checkedFilters[i].setAttribute('data-checked', false);
+            }
+        },
+        // Update the filter
+        updateFilter(target) {
+            const checked = target.getAttribute('data-checked'),
+                type = target.getAttribute('data-type'),
+                value = target.getAttribute('data-value');
+
+            // Toggle checked state for the clicked element
+            target.setAttribute('data-checked', checked == 'false');
+
+            // Add or remove the value from the filter
+            if (this.filter[type].includes(value)) {
+                this.filter[type].splice(this.filter[type].indexOf(value), 1);
+            } else {
+                this.filter[type].push(value);
+            }
+        },
+        // Check if conditions match
+        checkFilter(type, value) {
+            return (this.filter[type].length == 0 || (this.filter[type].length > 0 && this.filter[type].includes(value)));
+        },
+        // Loop to check all filters
+        checkFilters(item) {
+            var sbbMatch = this.filter.sbb.length === 0 || (this.filter.sbb.length > 0 && this.filter.sbb.includes('true') && (item.sbb === true || item.sbb === 'true'));
+            return this.checkFilter('employees', item.employees)
+                && this.checkFilter('provinces', item.province)
+                && sbbMatch;
+        },
+        // Check if all filters are empty
+        allFiltersEmpty() {
+            return this.filter.employees.length === 0
+                && this.filter.provinces.length === 0
+                && this.filter.sbb.length === 0;
+        },
+        // Return filtered internship data
+        get filteredInternships() {
+            if (this.allFiltersEmpty()) {
+                return this.dataToFilter;
+            }
+
+            return [
+                ...new Set(
+                    this.dataToFilter.filter((item) => {
+                        return this.checkFilters(item);
+                    })
+                )
+            ];
+        }
+    };
+}
+</script>
