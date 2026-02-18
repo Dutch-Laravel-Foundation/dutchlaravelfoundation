@@ -6,8 +6,14 @@
                 {{ if video }}
                 <div class="relative" style="padding-top: 50%; margin-bottom: 20px;">
                     {{ if video | is_embeddable }}
-                        <!-- Youtube and Vimeo -->
-                        <iframe src="{{ video | embed_url }}&byline=0&color=ff2d20&title=0&transparent=1" referrerpolicy="strict-origin-when-cross-origin" class="absolute inset-0 w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write"></iframe>
+                        {{ video_url = video | embed_url }}
+                        {{ if video | contains:'youtube' || video | contains:'youtu.be' }}
+                            <!-- YouTube -->
+                            <iframe src="{{ video_url }}?rel=0&modestbranding=1" referrerpolicy="strict-origin-when-cross-origin" class="absolute inset-0 w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write"></iframe>
+                        {{ else }}
+                            <!-- Vimeo -->
+                            <iframe src="{{ video_url }}&byline=0&color=ff2d20&title=0&transparent=1" referrerpolicy="strict-origin-when-cross-origin" class="absolute inset-0 w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write"></iframe>
+                        {{ /if }}
                     {{ else }}
                         <!-- Other HTML5 video types -->
                         <video src="{{ video | embed_url }}" class="absolute inset-0 w-full h-full" allow="autoplay; fullscreen; picture-in-picture; clipboard-write"></video>
