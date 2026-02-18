@@ -14,9 +14,9 @@ city: Nijvel
 province: België
 email: info@easi.net
 website: easi.net
-recruitment_website: 'https://easi.net/nl/jobs#'
+recruitment_website: 'easi.net/nl/jobs#'
 video: 'https://www.youtube.com/watch?v=Qag5GwZ4aBg'
 updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
-updated_at: 1771411769
+updated_at: 1771411827
 sbb: false
 ---
