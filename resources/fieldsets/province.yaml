@@ -16,6 +16,7 @@ fields:
         Utrecht: null
         Zeeland: null
         Zuid-Holland: null
+        België: null
       multiple: false
       max_items: 1
       clearable: false

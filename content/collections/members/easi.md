@@ -11,7 +11,7 @@ founding_partner: false
 type: Bedrijf
 employees: 51-250
 city: 
-province: 
+province: België
 email: info@easi.net
 phone: 
 website: easi.net
