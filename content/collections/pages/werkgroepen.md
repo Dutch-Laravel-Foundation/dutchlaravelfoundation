@@ -5,8 +5,8 @@ title: Werkgroepen
 template: templates/default
 menu_color: white
 call_to_action: ee5d33de-9a24-4860-92dd-3503740b62af
-updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
-updated_at: 1764848034
+updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
+updated_at: 1771487791
 content:
   -
     type: paragraph
@@ -355,7 +355,7 @@ content:
     content:
       -
         type: text
-        text: 'Door bepaalde inkoop collectief te doen, kunnen we de kosten voor iedereen verlagen. Zo is er bijvoorbeeld korting op Sentry, PhpStorm, Laracon, Certified en nog veel meer!'
+        text: 'Door bepaalde inkoop collectief te doen, kunnen we de kosten voor iedereen verlagen. Zo is er bijvoorbeeld korting op Sentry, PhpStorm, Laracon, Certified, Lettermint, Oh Dear en nog veel meer!'
       -
         type: hardBreak
       -
@@ -462,4 +462,20 @@ content:
               target: null
               title: null
         text: 'https://github.com/Dutch-Laravel-Foundation/best-practices'
+  -
+    type: paragraph
+  -
+    type: heading
+    attrs:
+      level: 2
+    content:
+      -
+        type: text
+        text: 'Werkgroep inclusiviteit / diversiteit'
+  -
+    type: paragraph
+    content:
+      -
+        type: text
+        text: 'Deze werkgroep start in 2026.'
 ---
