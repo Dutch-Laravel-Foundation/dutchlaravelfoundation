@@ -6,7 +6,7 @@ template: templates/default
 menu_color: white
 call_to_action: ee5d33de-9a24-4860-92dd-3503740b62af
 updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
-updated_at: 1771487812
+updated_at: 1771487862
 content:
   -
     type: paragraph
