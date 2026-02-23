@@ -1,0 +1,26 @@
+<div class="translate-y-32 lg:translate-y-52 pb-32 md:pb-48">
+    {{ partial:decoration/floor-background background="floor-top-about-us" /}}
+
+    <div class="container mb-auto mx-auto flex flex-col items-left justify-center relative px-6 lg:px-10">
+        <h1 class="text-3xl lg:text-4xl font-bold">{{ title }}</h1>
+
+        <div class="max-w-3xl prose prose-lg">
+            {{ content }}
+                {{ partial src="sets/autoload" }}
+            {{ /content }}
+        </div>
+
+        <div class=" flex justify-start max-w-3xl mt-8">
+            <img src="/assets/img/larabelles-mission.png" alt="Our Mission – Elevating Our Community, Connecting and Engaging, Resource Sharing" >
+        </div>
+
+        <div class="flex items-center gap-4 pt-12 pb-24">
+            <div class="flex-shrink-0">
+                {{ partial:buttons/primary link="https://www.larabelles.com/" target="_blank" class="w-full sm:w-auto" button_class="w-full sm:w-auto" }}Sluit je aan bij de Larabelles{{ /partial:buttons/primary }}
+            </div>
+            <a href="https://www.larabelles.com/" target="_blank" rel="noopener noreferrer" class="inline-block">
+                <img src="/assets/img/larabelles.png" alt="Larabelles" class="h-12 lg:h-14 w-auto">
+            </a>
+        </div>
+    </div>
+</div>
