@@ -39,15 +39,15 @@ tree:
         entry: c2893d75-5eb2-4840-b20d-d222a9155b4c
         title: 'De organisatie'
       -
-        id: a1b2c3d4-5678-90ab-cdef-111111111111
-        entry: 621e1068-bdee-4c09-b75c-7b95b0465a45
-        title: Larabelles
-      -
         id: 414929a3-ef9e-43e3-a07a-48bb740da3f9
         entry: fbdd13d8-526d-4152-8ef4-53d8e9fba3c4
       -
         id: 4e1fa932-90e1-4cb5-9b5f-2770d0f896d6
         entry: 201dbb24-5f6f-4c35-8de1-ba599424e035
+      -
+        id: a1b2c3d4-5678-90ab-cdef-111111111111
+        entry: 621e1068-bdee-4c09-b75c-7b95b0465a45
+        title: Larabelles
       -
         id: 11cdc56a-d8b5-45ce-9126-e0b8b1fdaa43
         entry: 35fe78ba-35d3-44a4-b514-55167c5e514c
