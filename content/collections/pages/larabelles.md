@@ -1,11 +1,11 @@
 ---
 id: 621e1068-bdee-4c09-b75c-7b95b0465a45
 blueprint: pages
-title: 'De Larabelles'
+title: Larabelles
 template: templates/larabelles/index
 menu_color: white
-updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
-updated_at: 1761382800
+updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
+updated_at: 1771836086
 content:
   -
     type: heading
@@ -20,7 +20,21 @@ content:
     content:
       -
         type: text
-        text: 'De Larabelles zijn een internationale community van vrouwelijke Laravel developers die elkaar ondersteunen, inspireren en versterken. Het initiatief is ontstaan vanuit de behoefte aan meer zichtbaarheid, verbinding en onderlinge steun voor vrouwen binnen Laravel en de bredere PHP community.'
+        text: 'De '
+      -
+        type: text
+        marks:
+          -
+            type: link
+            attrs:
+              href: 'https://www.larabelles.com'
+              rel: null
+              target: _blank
+              title: null
+        text: Larabelles
+      -
+        type: text
+        text: ' zijn een internationale community van vrouwelijke Laravel developers die elkaar ondersteunen, inspireren en versterken. Het initiatief is ontstaan vanuit de behoefte aan meer zichtbaarheid, verbinding en onderlinge steun voor vrouwen binnen Laravel en de bredere PHP community.'
   -
     type: paragraph
     content:
