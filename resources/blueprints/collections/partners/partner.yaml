@@ -34,13 +34,4 @@ tabs:
             field:
               type: toggle
               display: Zichtbaar
-          -
-            handle: parent
-            field:
-              type: entries
-              collections:
-                - partners
-              max_items: 1
-              listable: false
-              localizable: true
 title: Partner
