@@ -62,6 +62,3 @@ sections:
           listable: hidden
           instructions_position: below
           read_only: false
-          validate:
-            - required
-          default: '0'
