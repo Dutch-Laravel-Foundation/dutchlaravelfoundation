@@ -44,4 +44,4 @@ tabs:
               type: checkboxes
               instructions_position: below
               validate:
-                - required
+                - sometimes
