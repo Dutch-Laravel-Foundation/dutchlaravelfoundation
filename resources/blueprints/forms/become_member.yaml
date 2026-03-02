@@ -43,5 +43,3 @@ tabs:
               display: 'Bij het gebruiken van dit formulier ga je akkoord met de bepalingen uit ons privacy statement.'
               type: checkboxes
               instructions_position: below
-              validate:
-                - sometimes
