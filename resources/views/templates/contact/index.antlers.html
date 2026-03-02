@@ -13,6 +13,10 @@
                 {{ if errors }}
                 <div class="p-6 mb-6 bg-primary-accent text-primary-contrast">
                     Er ging iets mis. Controleer de foutmelding(en) hieronder.
+
+                    {{ errors }}
+                    {{ value }}<br>
+                    {{ /errors }}
                 </div>
                 {{ else }}
                 {{ content }}
