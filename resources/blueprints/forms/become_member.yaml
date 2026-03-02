@@ -45,5 +45,3 @@ tabs:
               instructions_position: below
               validate:
                 - required
-              default:
-                - '0'
