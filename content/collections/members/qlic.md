@@ -16,6 +16,10 @@ email: info@qlic.nl
 phone: '088 - 0123 900'
 website: www.qlic.nl
 recruitment_website: www.qlic.nl/werken-bij/
-updated_by: 28c0a799-7234-4581-b869-6eda5a36a8e2
-updated_at: 1765880987
+updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
+updated_at: 1772522586
+sbb: true
+internship_contact_name: 'Jorrit Bust'
+internship_contact_email: jorrit@qlic.nl
+internship_contact_phone: 06-83318629
 ---
