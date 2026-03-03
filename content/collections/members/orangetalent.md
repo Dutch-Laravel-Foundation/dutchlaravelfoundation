@@ -17,7 +17,9 @@ email: info@orangetalent.nl
 website: orangetalent.nl
 phone: '+31 (0)341 561 341'
 updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
-updated_at: 1713449075
+updated_at: 1772534349
 recruitment_website: orangetalent.nl/werken-bij
-published: true
+sbb: true
+internship_contact_name: 'Jorrik Tijssen'
+internship_contact_email: jorrik@orangetalent.nl
 ---
