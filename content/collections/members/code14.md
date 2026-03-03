@@ -19,6 +19,9 @@ phone: '+31 548 549 980'
 website: www.code14.nl
 recruitment_website: www.code14.nl/werken-bij
 video: 'https://player.vimeo.com/video/1140382786'
-updated_by: 8d873b47-ad86-4fd3-9e95-27842ea80beb
-updated_at: 1764071369
+updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
+updated_at: 1772534127
+sbb: true
+internship_contact_name: 'Harm-Jan Hazelhorst'
+internship_contact_email: h.hazelhorst@code14.nl
 ---
