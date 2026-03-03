@@ -5,8 +5,8 @@ title: Sqits
 founding_partner: true
 type: Bedrijf
 employees: 1-10
-updated_by: 28c0a799-7234-4581-b869-6eda5a36a8e2
-updated_at: 1684317624
+updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
+updated_at: 1772532953
 logo: logo-sqits.svg
 description: |-
   Sqits is een creatief, digitaal bureau. Wij helpen je om je business en processen te digitaliseren door middel van slimme procesoptimalisatie. Wij zetten comlexe vraagstukken om in gebruiksvriendelijke interfaces, waarbij jij je geen zorgen hoeft te maken over de ingewikkelde backend. Hiermee verlagen wij je proceskosten en verhogen de kwaliteit van je diensten.
@@ -17,5 +17,7 @@ city: Bleiswijk
 email: info@sqits.nl
 website: sqits.nl
 phone: '+31 (0) 85 760 80 90'
-published: true
+sbb: true
+internship_contact_name: 'Ruud Schaaphuizen'
+internship_contact_email: ruud@sqits.nl
 ---
