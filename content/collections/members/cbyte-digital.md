@@ -13,6 +13,9 @@ email: team@cbyte.nl
 phone: '085-130 87 47'
 website: cbyte.digital
 recruitment_website: cbyte.digital/werken-bij
-updated_by: 28c0a799-7234-4581-b869-6eda5a36a8e2
-updated_at: 1742375697
+updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
+updated_at: 1772532999
+sbb: true
+internship_contact_name: 'Martijn van de Wetering'
+internship_contact_email: join@cbyte.nl
 ---
