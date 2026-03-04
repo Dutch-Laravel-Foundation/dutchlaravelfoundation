@@ -55,10 +55,12 @@ sections:
       -
         handle: agree
         field:
-          inline: false
           display: 'Bij het gebruiken van dit formulier ga je akkoord met de bepalingen uit ons privacy statement.'
-          type: checkboxes
-          icon: checkboxes
+          type: toggle
+          icon: toggle
           listable: hidden
           instructions_position: below
           read_only: false
+          validate:
+            - required
+            - accepted

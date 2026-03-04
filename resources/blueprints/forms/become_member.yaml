@@ -39,7 +39,9 @@ tabs:
           -
             handle: agree
             field:
-              inline: true
               display: 'Bij het gebruiken van dit formulier ga je akkoord met de bepalingen uit ons privacy statement.'
-              type: checkboxes
+              type: toggle
               instructions_position: below
+              validate:
+                - required
+                - accepted
