@@ -11,7 +11,6 @@ description: |-
 
   Wij gebruiken al sinds de alpha van onze software Laravel. We zijn ooit gestart met Lumen, maar tegenwoordig zitten we op de laatste versie van Laravel.
 logo: superscanner.svg
-published: true
 founding_partner: false
 type: Bedrijf
 employees: 11-50
@@ -20,6 +19,9 @@ province: Noord-Holland
 email: info@superscanner.nl
 phone: 023-5836948
 website: superscanner.nl
-updated_by: 28c0a799-7234-4581-b869-6eda5a36a8e2
-updated_at: 1732012147
+updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
+updated_at: 1772534069
+sbb: true
+internship_contact_name: 'Andries Mooij'
+internship_contact_email: a.mooij@gmail.com
 ---

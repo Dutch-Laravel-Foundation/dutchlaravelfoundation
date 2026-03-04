@@ -4,8 +4,8 @@ blueprint: members
 title: Endeavour
 number_of_employees: 1-10
 founding_partner: true
-updated_by: 50f8ca13-10c1-43f9-b0a5-20bab3cf4f86
-updated_at: 1729517503
+updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
+updated_at: 1772523523
 city: Haarlem
 member_type: bedrijf
 type: Bedrijf
@@ -23,5 +23,7 @@ website: endeavour.nl
 phone: '+31 (0)23 844 71 03'
 recruitment_website: endeavour.nl/career/
 video: 'https://player.vimeo.com/video/631966009'
-published: true
+sbb: true
+internship_contact_name: 'Bibi Driehuizen'
+internship_contact_email: bibi.driehuizen@endeavour.nl
 ---

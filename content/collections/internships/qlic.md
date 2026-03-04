@@ -13,7 +13,6 @@ description: |-
   - Ben je op zoek naar een grotere uitdaging? In overleg kan je groeien en ook eigen projecten krijgen, in dat geval heb je ook contact met klanten
 
   **Waar kan je op rekenen tijdens je stage**
-
   - Goed gereedschap: een eigen Macbook Pro en twee extra beeldschermen
   - Een prestatievergoeding
   - Leuk team met veel technische kennis
@@ -25,5 +24,5 @@ description: |-
   - Kans op een baan na afloop van de stage, meerdere stagiairs werken nog steeds bij Qlic
 member: a41e1a08-f76d-4a97-b97b-0551d1b7c68f
 updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
-updated_at: 1772522747
+updated_at: 1772523088
 ---

@@ -18,12 +18,15 @@ city: Nijmegen
 website: ux.nl
 recruitment_website: ux.nl/werken-bij
 phone: '+31 (0)24 260 0000'
-updated_by: 28c0a799-7234-4581-b869-6eda5a36a8e2
-updated_at: 1767604601
+updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
+updated_at: 1772523660
 logo: ux-logo.svg
 founding_partner: false
 member_type: bedrijf
 type: Bedrijf
 employees: 1-10
 email: info@ux.nl
+sbb: true
+internship_contact_name: 'Mark van Eijk'
+internship_contact_email: stage@ux.nl
 ---
