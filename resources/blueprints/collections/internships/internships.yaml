@@ -52,6 +52,14 @@ sections:
           required: true
           validate:
             - required
+      -
+        handle: apply_url
+        field:
+          type: link
+          display: Sollicitatie-URL
+          instructions: Externe link naar de pagina waar men kan solliciteren. Indien ingevuld wordt een "Solliciteren" knop getoond.
+          listable: hidden
+          instructions_position: above
   seo:
     display: SEO
     fields:

@@ -7,8 +7,9 @@
             {{ partial src="sets/autoload" }}
         {{ /content }}
 
-        <div class="container mx-auto" x-data="loadMembers()">
-            <div class="mr-[-2rem] ml-[-2rem] sm:mx-auto py-10 bg-secondary-light px-8 sm:px-10 sm:w-full" x-show="types.length > 1 || provinces.length > 1 || employees.length > 1">
+        <div class="container mx-auto" x-data="loadMembers()" x-effect="document.body.classList.toggle('overflow-hidden', filterModalOpen)">
+            {{# Desktop: inline filters #}}
+            <div class="hidden base:block mr-[-2rem] ml-[-2rem] sm:mx-auto py-10 bg-secondary-light px-8 sm:px-10 sm:w-full" x-show="types.length > 1 || provinces.length > 1 || employees.length > 1">
                 <div class="flex flex-col items-baseline justify-between base:flex-row">
                     <h2 class="block mb-8 base:mb-0">Kunnen wij je helpen zoeken?</h2>
                     <div class="hidden base:block"><a class="font-bold" x-on:click="resetFilters()">Filters wissen</a></div>
@@ -18,7 +19,7 @@
                         <span class="block meta-dark">Ik zoek een</span>
                         <div class="flex flex-wrap gap-2">
                             <template x-for="type in types" :key="type">
-                                <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="types" :data-value="type" x-text="type" class="flex items-center justify-center w-full sm:w-auto h-12 px-8 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light text-tertiary-regular! hover:text-tertiary-dark! hover:border-primary-accent opacity-80 hover:opacity-100"></button>
+                                <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="types" :data-value="type" x-text="type" class="flex items-center justify-center w-full sm:w-auto h-12 px-8 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light  hover:text-tertiary-dark! hover:border-primary-accent opacity-80 hover:opacity-100 data-[checked=true]:bg-primary-accent data-[checked=true]:text-white! data-[checked=true]:border-primary-accent data-[checked=true]:opacity-100"></button>
                             </template>
                         </div>
                     </div>
@@ -26,7 +27,7 @@
                         <span class="block meta-dark">Aantal Laravel developers</span>
                         <div class="flex flex-wrap gap-2">
                             <template x-for="employee in employees" :key="employee">
-                                <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="employees" :data-value="employee" x-text="employee" class="flex items-center justify-center w-full sm:w-auto h-12 px-8 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light text-tertiary-regular! hover:text-tertiary-dark! hover:border-primary-accent opacity-80 hover:opacity-100"></button>
+                                <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="employees" :data-value="employee" x-text="employee" class="flex items-center justify-center w-full sm:w-auto h-12 px-8 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light hover:text-tertiary-dark! hover:border-primary-accent opacity-80 hover:opacity-100 data-[checked=true]:bg-primary-accent data-[checked=true]:text-white! data-[checked=true]:border-primary-accent data-[checked=true]:opacity-100"></button>
                             </template>
                         </div>
                     </div>
@@ -34,13 +35,63 @@
                         <span class="block meta-dark">Provincie</span>
                         <div class="flex flex-wrap gap-2">
                             <template x-for="province in provinces" :key="province">
-                                <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="provinces" :data-value="province" x-text="province" class="flex items-center justify-center w-full sm:w-auto h-12 px-8 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light text-tertiary-regular! hover:text-tertiary-dark! hover:border-primary-accent opacity-80 hover:opacity-100"></button>
+                                <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="provinces" :data-value="province" x-text="province" class="flex items-center justify-center w-full sm:w-auto h-12 px-8 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light hover:text-tertiary-dark hover:border-primary-accent opacity-80 hover:opacity-100 data-[checked=true]:bg-primary-accent data-[checked=true]:text-white data-[checked=true]:border-primary-accent data-[checked=true]:opacity-100"></button>
                             </template>
                         </div>
                     </div>
                 </div>
                 <div class="block w-full mt-8 text-left base:hidden sm:text-right"><a class="font-bold" x-on:click="resetFilters()">Filters wissen</a></div>
             </div>
+
+            {{# Mobile: filter trigger + modal #}}
+            <div class="base:hidden mb-6" x-show="types.length > 1 || provinces.length > 1 || employees.length > 1">
+                <button type="button" x-on:click="filterModalOpen = true" class="flex items-center justify-center w-full h-14 px-6 text-sm font-bold uppercase border border-primary-accent bg-primary-accent text-white hover:bg-primary-accent/90 transition-colors">
+                    <span x-text="activeFilterCount > 0 ? 'Filters (' + activeFilterCount + ')' : 'Filters'"></span>
+                </button>
+            </div>
+            <template x-teleport="body">
+                <div class="filter-modal base:hidden fixed inset-0 overflow-visible" x-show="filterModalOpen" x-cloak>
+                    <div class="filter-modal-backdrop" x-on:click="filterModalOpen = false" aria-hidden="true"></div>
+                    <div class="filter-modal-panel">
+                    <div class="flex shrink-0 items-center justify-between border-b border-tertiary-light/30 px-6 py-4">
+                        <h2 class="text-lg font-bold text-tertiary-dark">Kunnen wij je helpen zoeken?</h2>
+                        <button type="button" x-on:click="filterModalOpen = false" class="p-2 -mr-2 text-tertiary-regular hover:text-tertiary-dark" aria-label="Sluiten">&times;</button>
+                    </div>
+                    <div class="flex-1 overflow-y-auto px-6 py-6">
+                        <div class="flex flex-col w-full gap-6">
+                            <div x-show="types.length > 1">
+                                <span class="block meta-dark">Ik zoek een</span>
+                                <div class="flex flex-wrap gap-2 mt-2">
+                                    <template x-for="type in types" :key="type">
+                                        <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="types" :data-value="type" x-text="type" class="flex items-center justify-center h-12 px-6 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light hover:text-tertiary-dark! hover:border-primary-accent opacity-80 hover:opacity-100 data-[checked=true]:bg-primary-accent data-[checked=true]:text-white! data-[checked=true]:border-primary-accent data-[checked=true]:opacity-100"></button>
+                                    </template>
+                                </div>
+                            </div>
+                            <div x-show="employees.length > 1">
+                                <span class="block meta-dark">Aantal Laravel developers</span>
+                                <div class="flex flex-wrap gap-2 mt-2">
+                                    <template x-for="employee in employees" :key="employee">
+                                        <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="employees" :data-value="employee" x-text="employee" class="flex items-center justify-center h-12 px-6 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light hover:text-tertiary-dark! hover:border-primary-accent opacity-80 hover:opacity-100 data-[checked=true]:bg-primary-accent data-[checked=true]:text-white! data-[checked=true]:border-primary-accent data-[checked=true]:opacity-100"></button>
+                                    </template>
+                                </div>
+                            </div>
+                            <div x-show="provinces.length > 1">
+                                <span class="block meta-dark">Provincie</span>
+                                <div class="flex flex-wrap gap-2 mt-2">
+                                    <template x-for="province in provinces" :key="province">
+                                        <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="provinces" :data-value="province" x-text="province" class="flex items-center justify-center h-12 px-6 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light  hover:text-tertiary-dark hover:border-primary-accent opacity-80 hover:opacity-100 data-[checked=true]:bg-primary-accent data-[checked=true]:text-white data-[checked=true]:border-primary-accent data-[checked=true]:opacity-100"></button>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6"><a class="font-bold" x-on:click="resetFilters()">Filters wissen</a></div>
+                    </div>
+                        <div class="shrink-0 border-t border-tertiary-light/30 p-4">
+                            <button type="button" x-on:click="filterModalOpen = false" class="flex w-full items-center justify-center h-14 px-6 text-sm font-bold text-white uppercase bg-primary-accent hover:bg-primary-accent/90 transition-colors" x-text="'Toon ' + filteredMembers.length + ' leden'"></button>
+                        </div>
+                    </div>
+                </div>
+            </template>
             <div class="relative flex flex-wrap overflow-visible md:pt-5 mb">
                 <div x-show="filteredMembers.length === 0" class="w-full p-6 mt-6 text-center border lg:p-10 lg:mt-10 border-secondary-light">
                     Er zijn geen leden gevonden die voldoen aan je zoekopdracht.
@@ -90,6 +141,7 @@ provinces = members.map((obj) => { return obj.province; }).filter((item, index, 
 
 function loadMembers() {
     return {
+        filterModalOpen: false,
         dataToFilter: members,
         filter: {
             types: [],
@@ -139,6 +191,10 @@ function loadMembers() {
             return this.filter.types.length === 0
                 && this.filter.employees.length === 0
                 && this.filter.provinces.length === 0;
+        },
+        // Number of selected filter values (for mobile button badge)
+        get activeFilterCount() {
+            return this.filter.types.length + this.filter.employees.length + this.filter.provinces.length;
         },
         // Return filtered member data
         get filteredMembers() {

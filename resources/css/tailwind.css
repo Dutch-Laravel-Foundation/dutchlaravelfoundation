@@ -74,7 +74,8 @@
         @apply transition-all cursor-pointer text-tertiary-dark hover:text-primary-accent;
     }
 
-    #content a {
+    #content a,
+    .content a {
         @apply transition-colors text-primary-accent hover:text-tertiary-regular;
     }
 
@@ -86,32 +87,39 @@
         @apply text-sm;
     }
 
-    #content ul {
+    #content ul,
+    .content ul {
         @apply pl-5 list-disc list-outside space-y-3;
     }
 
-    #content ul li::marker {
+    #content ul li::marker,
+    .content ul li::marker {
         @apply text-primary-accent;
     }
 
-    #content .benefits ul {
+    #content .benefits ul,
+    .content .benefits ul {
         @apply pl-4;
         list-style-image: url("../images/check.svg");
     }
 
-    #content .benefits ul li {
+    #content .benefits ul li,
+    .content .benefits ul li {
         @apply pl-1;
     }
 
-    #content ol {
+    #content ol,
+    .content ol {
         @apply pl-4 list-decimal list-outside space-y-3;
     }
 
-    #content ol li {
+    #content ol li,
+    .content ol li {
         @apply pl-1;
     }
 
-    #content ol li::marker {
+    #content ol li::marker,
+    .content ol li::marker {
         @apply inline w-[1em] -ml-[1em];
     }
 
@@ -119,16 +127,24 @@
         @apply w-full;
     }
 
-    #content article ol {
+    #content article ol,
+    .content article ol {
         @apply !pl-5 space-y-1;
     }
 
-    #content article ul {
+    #content article ul,
+    .content article ul {
         @apply text-base;
     }
 
-    #content article ul ~ p {
+    #content article ul ~ p,
+    .content article ul ~ p {
         @apply mt-4;
+    }
+
+    #content p ~ p,
+    .content p ~ p {
+        @apply mt-8;
     }
 
     input:not([type="checkbox"]),
@@ -231,11 +247,6 @@
         max-height: 5rem;
     }
 
-    /* Filter (members page) */
-    button[data-checked="true"] {
-        @apply border-primary-accent opacity-100 text-tertiary-dark!;
-    }
-
     /* Image group hover */
     .group-image-hover > figure img,
     .group-image-hover > div figure img,
@@ -252,7 +263,8 @@
     /* Safari CSS fixes */
     @media not all and (min-resolution: 0.001dpcm) {
         @supports (-webkit-appearance: none) and (stroke-color: transparent) {
-            #content ul {
+            #content ul,
+            .content ul {
                 @apply pl-5;
             }
         }
@@ -295,6 +307,25 @@
 
     .vragenai-question-form-container--attached {
         @apply !pb-0.5;
+    }
+
+    /* Filter modal (mobile) – above header (z-999); backdrop and panel full screen */
+    .filter-modal {
+        z-index: 1000;
+    }
+    .filter-modal-backdrop {
+        @apply fixed inset-0 bg-tertiary-dark/50;
+        z-index: 0;
+    }
+    .filter-modal-panel {
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        transform: translateY(0);
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        background-color: #F5F5FA;
     }
 
 }
