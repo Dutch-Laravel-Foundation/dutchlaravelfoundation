@@ -25,5 +25,5 @@ description: |-
 member: a41e1a08-f76d-4a97-b97b-0551d1b7c68f
 apply_url: 'https://www.qlic.nl/vacatures/stage-backend-developer/'
 updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
-updated_at: 1772523088
+updated_at: 1773647670
 ---
