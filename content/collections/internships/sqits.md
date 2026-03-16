@@ -8,5 +8,6 @@ description: |-
   Tijdens je stage kun je rekenen op goede begeleiding, duidelijke doelen en veel ruimte om te leren. We starten met een heldere onboarding, stemmen je opdracht af op je leerdoelen en je krijgt feedbackmomenten om gericht te groeien. Je leert hoe we bij Sqits werken volgens onze vaste aanpak: eerst oriënteren (de vraag en processen scherp krijgen), dan lanceren (snel een minimale versie live) en daarna innoveren (stapsgewijs verbeteren op basis van feedback). Zo ervaar je hoe je van idee naar impactvolle “software zonder zorgen” gaat—met aandacht voor kwaliteit, transparantie en gebruiksvriendelijkheid.
 member: 59fd48e2-1034-4ff2-98dc-35117844ea1a
 updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
-updated_at: 1772532923
+updated_at: 1773647729
+apply_url: 'https://sqits.nl/werken-bij'
 ---
