@@ -17,9 +17,9 @@ email: info@orangetalent.nl
 website: orangetalent.nl
 phone: '+31 (0)341 561 341'
 updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
-updated_at: 1772534349
+updated_at: 1774950858
 recruitment_website: orangetalent.nl/werken-bij
 sbb: true
-internship_contact_name: 'Jorrik Tijssen'
-internship_contact_email: jorrik@orangetalent.nl
+internship_contact_name: 'Emma Smit'
+internship_contact_email: vacatures@orangetalent.nl
 ---
