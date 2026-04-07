@@ -10,9 +10,9 @@ employees: 1-10
 city: Scherpenzeel
 province: Gelderland
 email: hallo@command-g.nl
-website: command-g.nl/
+website: command-g.nl
 phone: '06 – 13 58 06 64'
 updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
-updated_at: 1775559495
+updated_at: 1775559530
 sbb: false
 ---
