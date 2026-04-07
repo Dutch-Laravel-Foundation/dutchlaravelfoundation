@@ -11,7 +11,7 @@
             {{# Desktop: inline filters #}}
             <div class="hidden base:block mr-[-2rem] ml-[-2rem] sm:mx-auto py-10 bg-secondary-light px-8 sm:px-10 sm:w-full" x-show="provinces.length > 1 || hasSbb">
                 <div class="flex flex-col items-baseline justify-between base:flex-row">
-                    <h2 class="block mb-8 base:mb-0">Kunnen wij je helpen zoeken?</h2>
+                    <h2 class="block mb-8 base:mb-0">Wij helpen je zoeken!</h2>
                     <div class="hidden base:block"><a class="font-bold" x-on:click="resetFilters()">Filters wissen</a></div>
                 </div>
                 <div class="flex flex-col w-full lg:grid lg:grid-cols-2 lg:gap-x-8">
@@ -44,7 +44,7 @@
                     <div class="filter-modal-backdrop" x-on:click="filterModalOpen = false" aria-hidden="true"></div>
                     <div class="filter-modal-panel">
                         <div class="flex shrink-0 items-center justify-between border-b border-tertiary-light/30 px-6 py-4">
-                            <h2 class="text-lg font-bold text-tertiary-dark">Kunnen wij je helpen zoeken?</h2>
+                            <h2 class="text-lg font-bold text-tertiary-dark">Wij helpen je zoeken!</h2>
                             <button type="button" x-on:click="filterModalOpen = false" class="p-2 -mr-2 text-tertiary-regular hover:text-tertiary-dark" aria-label="Sluiten">&times;</button>
                         </div>
                         <div class="flex-1 overflow-y-auto px-6 py-6">
@@ -88,7 +88,6 @@
                                 <a x-bind:href="'/stagebank/' + item.slug">
                                     <div class="flex flex-col w-full">
                                         <h4 class="block w-full mb-[.3rem]" x-text="item.title"></h4>
-                                        <span class="meta text-primary-accent" x-text="item.member_title"></span>
                                         <span class="meta text-primary-accent" x-text="item.city + (item.province ? ', ' + item.province: '')"></span>
                                     </div>
                                 </a>
