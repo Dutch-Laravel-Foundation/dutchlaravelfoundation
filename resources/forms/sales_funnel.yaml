@@ -1,0 +1,14 @@
+title: 'Sales Funnel'
+honeypot: address
+email:
+  -
+    to: info@dutchlaravelfoundation.nl
+    subject: 'DLF Lead: {{ product_label }}'
+    reply_to: '{{ email }}'
+    html: mail/sales-funnel
+    text: mail/sales-funnel
+  -
+    to: '{{ email }}'
+    subject: 'Bedankt voor je aanvraag bij Dutch Laravel Foundation'
+    html: mail/sales-funnel-confirmation
+    text: mail/sales-funnel-confirmation

@@ -1,0 +1,492 @@
+{{#
+    Sales Funnel Wizard
+    Renders a multi-step wizard form powered by Alpine.js.
+    Can be embedded in a modal or a dedicated page.
+
+    Tracks step abandonment via GTM dataLayer events:
+    - sales_funnel_step_view: fired when a step becomes visible
+    - sales_funnel_step_complete: fired when user advances past a step
+    - sales_funnel_submit: fired on successful form submission
+    - sales_funnel_abandoned: fired on page unload if not submitted
+#}}
+
+{{ form:sales_funnel redirect="/aanvraag/bedankt" }}
+
+<div
+    x-data="salesFunnelWizard()"
+    x-init="init()"
+    @beforeunload.window="trackAbandonment()"
+    class="w-full"
+>
+    {{# Hidden fields for Statamic form #}}
+    <input type="hidden" name="product" x-model="data.product">
+    <input type="hidden" name="product_label" x-model="productLabel">
+    <input type="hidden" name="budget" x-model="data.budget">
+    <input type="hidden" name="company_type" x-model="data.company_type">
+    <input type="hidden" name="last_completed_step" x-model="lastCompletedStep">
+    <input type="text" class="hidden" name="{{ honeypot ?? 'honeypot' }}">
+
+    {{# Segmented progress bar #}}
+    <div class="mb-10">
+        <div class="flex gap-1.5">
+            <template x-for="(label, index) in stepLabels" :key="index">
+                <div
+                    class="h-1.5 flex-1  transition-colors duration-400"
+                    :class="index <= step ? 'bg-primary-accent' : 'bg-gray-200'"
+                ></div>
+            </template>
+        </div>
+        <p class="text-sm text-tertiary-light mt-3 !mb-0" x-text="'Stap ' + (step + 1) + ' van ' + totalSteps"></p>
+    </div>
+
+    {{# Step 1: Choose a product #}}
+    <div x-show="step === 0" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
+        <h2 class="!mt-0 !mb-2 text-wrap-balance">Waar kunnen we je mee helpen?</h2>
+        <p class="text-tertiary-light mb-8">Kies de optie die het beste bij jouw vraag past.</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" role="radiogroup" aria-label="Product keuze">
+            <template x-for="option in products" :key="option.value">
+                <button
+                    type="button"
+                    role="radio"
+                    :aria-checked="data.product === option.value"
+                    @click="data.product = option.value; clearError('product')"
+                    class="relative p-4 sm:p-5 border text-left transition-colors focus-visible:ring-2 focus-visible:ring-primary-accent focus-visible:ring-offset-2 outline-none flex items-start"
+                    :class="data.product === option.value
+                        ? 'border-primary-accent bg-red-50/50'
+                        : 'border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50'"
+                >
+                    <div class="flex items-start gap-3">
+                        <span
+                            class="mt-0.5 flex-shrink-0 w-5 h-5  border-2 flex items-center justify-center transition-colors"
+                            :class="data.product === option.value
+                                ? 'border-primary-accent bg-primary-accent'
+                                : 'border-gray-300'"
+                            aria-hidden="true"
+                        >
+                            <svg x-show="data.product === option.value" class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                        </span>
+                        <span class="font-semibold text-tertiary-dark text-sm leading-snug" x-text="option.label"></span>
+                    </div>
+                </button>
+            </template>
+        </div>
+
+        <p x-show="errors.product" x-text="errors.product" class="text-primary-accent text-sm mt-3 !mb-0" role="alert"></p>
+    </div>
+
+    {{# Step 2: Description #}}
+    <div x-show="step === 1" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
+        <h2 class="!mt-0 !mb-2 text-wrap-balance">Omschrijving van het vraagstuk</h2>
+        <p class="text-tertiary-light mb-8">Vertel ons meer over wat je nodig hebt.</p>
+
+        <label for="funnel-description" class="sr-only">Omschrijving</label>
+        <textarea
+            id="funnel-description"
+            x-model="data.description"
+            @input="clearError('description')"
+            name="description"
+            rows="6"
+            placeholder="Beschrijf je project of vraag&#8230;"
+            class="w-full"
+            autocomplete="off"
+        ></textarea>
+
+        <p x-show="errors.description" x-text="errors.description" class="text-primary-accent text-sm mt-2 !mb-0" role="alert"></p>
+    </div>
+
+    {{# Step 3: Budget #}}
+    <div x-show="step === 2" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
+        <h2 class="!mt-0 !mb-2 text-wrap-balance">Wat is je budget?</h2>
+        <p class="text-tertiary-light mb-8">Selecteer de budgetrange die het beste past.</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" role="radiogroup" aria-label="Budget selectie">
+            <template x-for="option in budgets" :key="option.value">
+                <button
+                    type="button"
+                    role="radio"
+                    :aria-checked="data.budget === option.value"
+                    @click="data.budget = option.value; clearError('budget')"
+                    class="relative p-6  border text-center transition-colors focus-visible:ring-2 focus-visible:ring-primary-accent focus-visible:ring-offset-2 outline-none"
+                    :class="data.budget === option.value
+                        ? 'border-primary-accent bg-red-50/50'
+                        : 'border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50'"
+                >
+                    <span class="block text-lg font-bold text-tertiary-dark" x-text="option.label"></span>
+                </button>
+            </template>
+        </div>
+
+        <p x-show="errors.budget" x-text="errors.budget" class="text-primary-accent text-sm mt-3 !mb-0" role="alert"></p>
+    </div>
+
+    {{# Step 4: Company type #}}
+    <div x-show="step === 3" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
+        <h2 class="!mt-0 !mb-2 text-wrap-balance">Heb je een voorkeur voor een type partner?</h2>
+        <p class="text-tertiary-light mb-8">Kies het type partij waarmee je het liefst samenwerkt.</p>
+
+        <div class="grid grid-cols-1 gap-3" role="radiogroup" aria-label="Partnertype selectie">
+            <template x-for="option in companyTypes" :key="option.value">
+                <button
+                    type="button"
+                    role="radio"
+                    :aria-checked="data.company_type === option.value"
+                    @click="data.company_type = option.value; clearError('company_type')"
+                    class="relative p-6  border text-center transition-colors focus-visible:ring-2 focus-visible:ring-primary-accent focus-visible:ring-offset-2 outline-none"
+                    :class="data.company_type === option.value
+                        ? 'border-primary-accent bg-red-50/50'
+                        : 'border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50'"
+                >
+                    <span class="block text-lg font-bold text-tertiary-dark" x-text="option.label"></span>
+                    <span class="block text-sm text-tertiary-light mt-1" x-text="option.description"></span>
+                </button>
+            </template>
+        </div>
+
+        <p x-show="errors.company_type" x-text="errors.company_type" class="text-primary-accent text-sm mt-3 !mb-0" role="alert"></p>
+    </div>
+
+    {{# Step 5: Email #}}
+    <div x-show="step === 4" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
+        <h2 class="!mt-0 !mb-2 text-wrap-balance">Wat is je e-mailadres?</h2>
+        <p class="text-tertiary-light mb-8">Zodat we contact met je kunnen opnemen.</p>
+
+        <div class="max-w-md">
+            <label for="funnel-email" class="sr-only">E-mailadres</label>
+            <input
+                type="email"
+                id="funnel-email"
+                x-model="data.email"
+                @input="clearError('email')"
+                name="email"
+                placeholder="naam@bedrijf.nl"
+                autocomplete="email"
+                spellcheck="false"
+                class="w-full"
+            >
+        </div>
+
+        <p x-show="errors.email" x-text="errors.email" class="text-primary-accent text-sm mt-2 !mb-0" role="alert"></p>
+    </div>
+
+    {{# Step 6: Overview #}}
+    <div x-show="step === 5" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
+        <h2 class="!mt-0 !mb-2 text-wrap-balance">Overzicht van je aanvraag</h2>
+        <p class="text-tertiary-light mb-8">Controleer je gegevens en verstuur je aanvraag.</p>
+
+        <div class=" border border-gray-200 divide-y divide-gray-200">
+            <div class="flex justify-between items-start p-4 sm:p-5">
+                <div class="min-w-0">
+                    <span class="block text-xs font-semibold uppercase tracking-wider text-tertiary-light">Product</span>
+                    <span class="block text-tertiary-dark font-medium mt-1" x-text="productLabel"></span>
+                </div>
+                <button type="button" @click="goToStep(0)" class="text-primary-accent text-sm font-semibold hover:underline flex-shrink-0 ml-4 focus-visible:ring-2 focus-visible:ring-primary-accent rounded outline-none">Wijzig</button>
+            </div>
+
+            <div class="flex justify-between items-start p-4 sm:p-5">
+                <div class="min-w-0">
+                    <span class="block text-xs font-semibold uppercase tracking-wider text-tertiary-light">Omschrijving</span>
+                    <span class="block text-tertiary-dark font-medium mt-1 break-words" x-text="data.description"></span>
+                </div>
+                <button type="button" @click="goToStep(1)" class="text-primary-accent text-sm font-semibold hover:underline flex-shrink-0 ml-4 focus-visible:ring-2 focus-visible:ring-primary-accent rounded outline-none">Wijzig</button>
+            </div>
+
+            <div class="flex justify-between items-start p-4 sm:p-5">
+                <div class="min-w-0">
+                    <span class="block text-xs font-semibold uppercase tracking-wider text-tertiary-light">Budget</span>
+                    <span class="block text-tertiary-dark font-medium mt-1" x-text="budgetLabel"></span>
+                </div>
+                <button type="button" @click="goToStep(2)" class="text-primary-accent text-sm font-semibold hover:underline flex-shrink-0 ml-4 focus-visible:ring-2 focus-visible:ring-primary-accent rounded outline-none">Wijzig</button>
+            </div>
+
+            <div class="flex justify-between items-start p-4 sm:p-5">
+                <div class="min-w-0">
+                    <span class="block text-xs font-semibold uppercase tracking-wider text-tertiary-light">Voorkeur partnertype</span>
+                    <span class="block text-tertiary-dark font-medium mt-1" x-text="companyTypeLabel"></span>
+                </div>
+                <button type="button" @click="goToStep(3)" class="text-primary-accent text-sm font-semibold hover:underline flex-shrink-0 ml-4 focus-visible:ring-2 focus-visible:ring-primary-accent rounded outline-none">Wijzig</button>
+            </div>
+
+            <div class="flex justify-between items-start p-4 sm:p-5">
+                <div class="min-w-0">
+                    <span class="block text-xs font-semibold uppercase tracking-wider text-tertiary-light">E-mailadres</span>
+                    <span class="block text-tertiary-dark font-medium mt-1" x-text="data.email"></span>
+                </div>
+                <button type="button" @click="goToStep(4)" class="text-primary-accent text-sm font-semibold hover:underline flex-shrink-0 ml-4 focus-visible:ring-2 focus-visible:ring-primary-accent rounded outline-none">Wijzig</button>
+            </div>
+        </div>
+    </div>
+
+    {{# Navigation #}}
+    <div class="flex justify-between items-center mt-10 pt-8 border-t border-gray-100">
+        <div class="flex items-center gap-4">
+            <button
+                type="button"
+                x-show="step > 0"
+                @click="prevStep()"
+                class="inline-flex items-center gap-2 text-sm font-bold text-tertiary-dark hover:text-primary-accent transition-colors px-4 py-2.5 -ml-4 focus-visible:ring-2 focus-visible:ring-primary-accent rounded outline-none"
+            >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Vorige
+            </button>
+
+            <button
+                type="button"
+                x-show="step > 0"
+                @click="reset()"
+                class="text-sm text-tertiary-light hover:text-primary-accent transition-colors focus-visible:ring-2 focus-visible:ring-primary-accent rounded outline-none"
+            >
+                Opnieuw beginnen
+            </button>
+        </div>
+
+        <div x-show="step === 0"></div>
+
+        <template x-if="step < totalSteps - 1">
+            <button
+                type="button"
+                @click="nextStep()"
+                class="relative flex h-12 items-center justify-center group ml-auto focus-visible:ring-2 focus-visible:ring-primary-accent focus-visible:ring-offset-2 outline-none"
+            >
+                <div class="text-xs uppercase whitespace-nowrap px-8 font-bold flex items-center justify-center w-full h-full transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1 z-20 bg-primary-accent text-white">Volgende</div>
+                <div class="absolute bottom-0 right-0 w-full h-full border z-10 border-primary-accent"></div>
+            </button>
+        </template>
+
+        <template x-if="step === totalSteps - 1">
+            <button
+                type="submit"
+                @click="trackSubmit()"
+                class="relative flex h-12 items-center justify-center group ml-auto focus-visible:ring-2 focus-visible:ring-primary-accent focus-visible:ring-offset-2 outline-none"
+            >
+                <div class="text-xs uppercase whitespace-nowrap px-8 font-bold flex items-center justify-center w-full h-full transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1 z-20 bg-primary-accent text-white">Verstuur aanvraag</div>
+                <div class="absolute bottom-0 right-0 w-full h-full border z-10 border-primary-accent"></div>
+            </button>
+        </template>
+    </div>
+</div>
+
+{{ /form:sales_funnel }}
+
+<script>
+    const STORAGE_KEY = 'dlf_sales_funnel';
+
+    function salesFunnelWizard() {
+        return {
+            step: 0,
+            totalSteps: 6,
+            submitted: false,
+            lastCompletedStep: '0',
+            stepLabels: ['Product', 'Omschrijving', 'Budget', 'Partner', 'Contact', 'Overzicht'],
+            errors: {},
+
+            products: [
+                { value: 'website', label: 'Bouwen van een website' },
+                { value: 'applicatie', label: 'Ontwikkelen van een applicatie/portal' },
+                { value: 'overnemen', label: 'Het overnemen/onderhouden van een bestaand systeem' },
+                { value: 'advies', label: 'Advies/Kennis over Laravel' },
+                { value: 'beoordeling', label: 'Een beoordeling/extern perspectief op mijn bestaande partner' },
+                { value: 'vrijblijvend', label: 'Vrijblijvend advies' },
+            ],
+
+            budgets: [
+                { value: '0-10000', label: '\u20AC0 \u2013 \u20AC10.000' },
+                { value: '10000-30000', label: '\u20AC10.000 \u2013 \u20AC30.000' },
+                { value: '30000-50000', label: '\u20AC30.000 \u2013 \u20AC50.000' },
+                { value: '50000-75000', label: '\u20AC50.000 \u2013 \u20AC75.000' },
+                { value: '75000-150000', label: '\u20AC75.000 \u2013 \u20AC150.000' },
+                { value: '150000+', label: '\u20AC150.000+' },
+            ],
+
+            companyTypes: [
+                { value: 'bureau', label: 'Bureau / Agency', description: 'Een team met meerdere specialisten' },
+                { value: 'zzp', label: 'ZZP\u2019er', description: 'Een individuele specialist' },
+                { value: 'geen_voorkeur', label: 'Geen voorkeur', description: 'Beide opties zijn bespreekbaar' },
+            ],
+
+            data: {
+                product: '',
+                description: '',
+                budget: '',
+                company_type: '',
+                email: '',
+            },
+
+            get productLabel() {
+                const found = this.products.find(p => p.value === this.data.product);
+                return found ? found.label : '';
+            },
+
+            get budgetLabel() {
+                const found = this.budgets.find(b => b.value === this.data.budget);
+                return found ? found.label : '';
+            },
+
+            get companyTypeLabel() {
+                const found = this.companyTypes.find(c => c.value === this.data.company_type);
+                return found ? found.label : '';
+            },
+
+            // localStorage persistence
+            save() {
+                try {
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+                        step: this.step,
+                        data: this.data,
+                        lastCompletedStep: this.lastCompletedStep,
+                        updatedAt: Date.now(),
+                    }));
+                } catch (e) {}
+            },
+
+            restore() {
+                try {
+                    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+                    if (!saved) return;
+
+                    // Expire after 7 days
+                    if (Date.now() - saved.updatedAt > 7 * 24 * 60 * 60 * 1000) {
+                        localStorage.removeItem(STORAGE_KEY);
+                        return;
+                    }
+
+                    this.step = saved.step;
+                    this.data = { ...this.data, ...saved.data };
+                    this.lastCompletedStep = saved.lastCompletedStep;
+                } catch (e) {
+                    localStorage.removeItem(STORAGE_KEY);
+                }
+            },
+
+            clearStorage() {
+                localStorage.removeItem(STORAGE_KEY);
+            },
+
+            reset() {
+                this.step = 0;
+                this.data = { product: '', description: '', budget: '', company_type: '', email: '' };
+                this.lastCompletedStep = '0';
+                this.errors = {};
+                this.clearStorage();
+                this.trackStepView(0);
+            },
+
+            init() {
+                this.restore();
+                this.trackStepView(this.step);
+
+                // Save state on every change
+                this.$watch('step', () => this.save());
+                this.$watch('data', () => this.save(), { deep: true });
+            },
+
+            validate() {
+                this.errors = {};
+
+                switch (this.step) {
+                    case 0:
+                        if (!this.data.product) this.errors.product = 'Selecteer een optie.';
+                        break;
+                    case 1:
+                        if (!this.data.description.trim()) this.errors.description = 'Vul een omschrijving in.';
+                        break;
+                    case 2:
+                        if (!this.data.budget) this.errors.budget = 'Selecteer een budgetrange.';
+                        break;
+                    case 3:
+                        if (!this.data.company_type) this.errors.company_type = 'Selecteer een voorkeur.';
+                        break;
+                    case 4:
+                        if (!this.data.email.trim()) {
+                            this.errors.email = 'Vul je e-mailadres in.';
+                        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.data.email)) {
+                            this.errors.email = 'Vul een geldig e-mailadres in.';
+                        }
+                        break;
+                }
+
+                return Object.keys(this.errors).length === 0;
+            },
+
+            clearError(field) {
+                delete this.errors[field];
+            },
+
+            nextStep() {
+                if (!this.validate()) return;
+
+                this.trackStepComplete(this.step);
+                this.step++;
+                this.lastCompletedStep = String(this.step);
+                this.trackStepView(this.step);
+            },
+
+            prevStep() {
+                if (this.step > 0) {
+                    this.step--;
+                    this.trackStepView(this.step);
+                }
+            },
+
+            goToStep(targetStep) {
+                this.step = targetStep;
+                this.trackStepView(this.step);
+            },
+
+            // GTM dataLayer tracking
+            trackStepView(stepIndex) {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    event: 'sales_funnel_step_view',
+                    funnel_step: stepIndex + 1,
+                    funnel_step_name: this.stepLabels[stepIndex],
+                });
+            },
+
+            trackStepComplete(stepIndex) {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    event: 'sales_funnel_step_complete',
+                    funnel_step: stepIndex + 1,
+                    funnel_step_name: this.stepLabels[stepIndex],
+                });
+            },
+
+            trackSubmit() {
+                this.submitted = true;
+                this.clearStorage();
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    event: 'sales_funnel_submit',
+                    funnel_product: this.data.product,
+                    funnel_budget: this.data.budget,
+                    funnel_company_type: this.data.company_type,
+                });
+            },
+
+            trackAbandonment() {
+                if (this.submitted || this.step === 0) return;
+
+                const payload = JSON.stringify({
+                    event: 'sales_funnel_abandoned',
+                    funnel_step: this.step + 1,
+                    funnel_step_name: this.stepLabels[this.step],
+                    funnel_last_completed_step: this.lastCompletedStep,
+                });
+
+                // sendBeacon is more reliable on page unload than dataLayer
+                if (navigator.sendBeacon) {
+                    navigator.sendBeacon('https://www.google-analytics.com/mp/collect', payload);
+                }
+
+                // Also push to dataLayer as fallback
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push(JSON.parse(payload));
+            },
+        };
+    }
+</script>
