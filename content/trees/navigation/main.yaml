@@ -27,8 +27,14 @@ tree:
     entry: 7840f9f9-3fba-4608-b877-250f18e634b2
     title: Nieuws
   -
-    id: dd6b974d-bb49-4945-b984-75f0f8b0a320
-    entry: 645047c0-702b-40fd-9f72-621e0803318b
+    id: b2c3d4e5-6789-0abc-def1-222222222222
+    title: Studenten
+    url: '#'
+    children:
+      -
+        id: c3d4e5f6-7890-1bcd-ef12-333333333333
+        entry: stagebank-page
+        title: Stagebank
   -
     id: 7090262c-8100-4638-93bc-8b9e02891211
     title: Over
@@ -51,6 +57,9 @@ tree:
       -
         id: 11cdc56a-d8b5-45ce-9126-e0b8b1fdaa43
         entry: 35fe78ba-35d3-44a4-b514-55167c5e514c
+      -
+        id: dd6b974d-bb49-4945-b984-75f0f8b0a320
+        entry: 645047c0-702b-40fd-9f72-621e0803318b
   -
     id: d4685f2c-bae9-4bf1-ab4a-21139b9c2da8
     entry: 03aa1ce0-5b6a-42bc-b339-4972338cdada
