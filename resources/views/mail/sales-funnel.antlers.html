@@ -7,7 +7,7 @@
 <table cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%;">
     <tr>
         <td style="border-bottom: 1px solid #eee; vertical-align: top;"><strong>Product</strong></td>
-        <td style="border-bottom: 1px solid #eee;">{{ product_label }}</td>
+        <td style="border-bottom: 1px solid #eee;">{{ product_label ?? product }}</td>
     </tr>
     <tr>
         <td style="border-bottom: 1px solid #eee; vertical-align: top;"><strong>Omschrijving</strong></td>
@@ -15,11 +15,11 @@
     </tr>
     <tr>
         <td style="border-bottom: 1px solid #eee; vertical-align: top;"><strong>Budget</strong></td>
-        <td style="border-bottom: 1px solid #eee;">{{ budget }}</td>
+        <td style="border-bottom: 1px solid #eee;">{{ budget_label ?? budget }}</td>
     </tr>
     <tr>
         <td style="border-bottom: 1px solid #eee; vertical-align: top;"><strong>Voorkeur partnertype</strong></td>
-        <td style="border-bottom: 1px solid #eee;">{{ company_type }}</td>
+        <td style="border-bottom: 1px solid #eee;">{{ company_type_label ?? company_type }}</td>
     </tr>
     <tr>
         <td style="border-bottom: 1px solid #eee; vertical-align: top;"><strong>Naam</strong></td>

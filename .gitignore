@@ -18,3 +18,4 @@ yarn-error.log
 public/mix-manifest.json
 .claude
 users/
+storage/forms/

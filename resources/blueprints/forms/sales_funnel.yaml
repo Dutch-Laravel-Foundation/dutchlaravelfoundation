@@ -52,6 +52,17 @@ sections:
           validate:
             - required
       -
+        handle: budget_label
+        field:
+          input_type: text
+          antlers: false
+          display: 'Budget (label)'
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+          read_only: false
+      -
         handle: company_type
         field:
           input_type: text
@@ -64,6 +75,17 @@ sections:
           read_only: false
           validate:
             - required
+      -
+        handle: company_type_label
+        field:
+          input_type: text
+          antlers: false
+          display: 'Bedrijfsvoorkeur (label)'
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+          read_only: false
       -
         handle: name
         field:
