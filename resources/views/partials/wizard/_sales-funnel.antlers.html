@@ -23,6 +23,8 @@
     <input type="hidden" name="product_label" x-model="productLabel">
     <input type="hidden" name="budget" x-model="data.budget">
     <input type="hidden" name="company_type" x-model="data.company_type">
+    <input type="hidden" name="name" x-model="data.name">
+    <input type="hidden" name="company_name" x-model="data.company_name">
     <input type="hidden" name="last_completed_step" x-model="lastCompletedStep">
     <input type="text" class="hidden" name="{{ honeypot ?? 'honeypot' }}">
 
@@ -94,7 +96,12 @@
             autocomplete="off"
         ></textarea>
 
-        <p x-show="errors.description" x-text="errors.description" class="text-primary-accent text-sm mt-2 !mb-0" role="alert"></p>
+        <div class="flex justify-between items-start mt-2">
+            <p x-show="errors.description" x-text="errors.description" class="text-primary-accent text-sm !mb-0" role="alert"></p>
+            <p class="text-xs text-tertiary-light !mb-0 ml-auto tabular-nums" :class="data.description.length >= 150 ? 'text-green-600' : ''">
+                <span x-text="data.description.length"></span> / 150
+            </p>
+        </div>
     </div>
 
     {{# Step 3: Budget #}}
@@ -148,27 +155,56 @@
         <p x-show="errors.company_type" x-text="errors.company_type" class="text-primary-accent text-sm mt-3 !mb-0" role="alert"></p>
     </div>
 
-    {{# Step 5: Email #}}
+    {{# Step 5: Contact details #}}
     <div x-show="step === 4" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
-        <h2 class="!mt-0 !mb-2 text-wrap-balance">Wat is je e-mailadres?</h2>
+        <h2 class="!mt-0 !mb-2 text-wrap-balance">Contactgegevens</h2>
         <p class="text-tertiary-light mb-8">Zodat we contact met je kunnen opnemen.</p>
 
-        <div class="max-w-md">
-            <label for="funnel-email" class="sr-only">E-mailadres</label>
-            <input
-                type="email"
-                id="funnel-email"
-                x-model="data.email"
-                @input="clearError('email')"
-                name="email"
-                placeholder="naam@bedrijf.nl"
-                autocomplete="email"
-                spellcheck="false"
-                class="w-full"
-            >
-        </div>
+        <div class="space-y-8">
+            <div>
+                <label for="funnel-name" class="block text-sm font-semibold text-tertiary-dark mb-1">Naam</label>
+                <input
+                    type="text"
+                    id="funnel-name"
+                    x-model="data.name"
+                    @input="clearError('name')"
+                    placeholder="Je volledige naam"
+                    autocomplete="name"
+                    class="w-full"
+                >
+                <p x-show="errors.name" x-text="errors.name" class="text-primary-accent text-sm mt-1 !mb-0" role="alert"></p>
+            </div>
 
-        <p x-show="errors.email" x-text="errors.email" class="text-primary-accent text-sm mt-2 !mb-0" role="alert"></p>
+            <div>
+                <label for="funnel-company" class="block text-sm font-semibold text-tertiary-dark mb-1">Bedrijfsnaam</label>
+                <input
+                    type="text"
+                    id="funnel-company"
+                    x-model="data.company_name"
+                    @input="clearError('company_name')"
+                    placeholder="Je bedrijfsnaam"
+                    autocomplete="organization"
+                    class="w-full"
+                >
+                <p x-show="errors.company_name" x-text="errors.company_name" class="text-primary-accent text-sm mt-1 !mb-0" role="alert"></p>
+            </div>
+
+            <div>
+                <label for="funnel-email" class="block text-sm font-semibold text-tertiary-dark mb-1">E-mailadres</label>
+                <input
+                    type="email"
+                    id="funnel-email"
+                    x-model="data.email"
+                    @input="clearError('email')"
+                    name="email"
+                    placeholder="naam@bedrijf.nl"
+                    autocomplete="email"
+                    spellcheck="false"
+                    class="w-full"
+                >
+                <p x-show="errors.email" x-text="errors.email" class="text-primary-accent text-sm mt-1 !mb-0" role="alert"></p>
+            </div>
+        </div>
     </div>
 
     {{# Step 6: Overview #}}
@@ -211,11 +247,31 @@
 
             <div class="flex justify-between items-start p-4 sm:p-5">
                 <div class="min-w-0">
+                    <span class="block text-xs font-semibold uppercase tracking-wider text-tertiary-light">Naam</span>
+                    <span class="block text-tertiary-dark font-medium mt-1" x-text="data.name"></span>
+                </div>
+                <button type="button" @click="goToStep(4)" class="text-primary-accent text-sm font-semibold hover:underline flex-shrink-0 ml-4 focus-visible:ring-2 focus-visible:ring-primary-accent rounded outline-none">Wijzig</button>
+            </div>
+
+            <div class="flex justify-between items-start p-4 sm:p-5">
+                <div class="min-w-0">
+                    <span class="block text-xs font-semibold uppercase tracking-wider text-tertiary-light">Bedrijfsnaam</span>
+                    <span class="block text-tertiary-dark font-medium mt-1" x-text="data.company_name"></span>
+                </div>
+                <button type="button" @click="goToStep(4)" class="text-primary-accent text-sm font-semibold hover:underline flex-shrink-0 ml-4 focus-visible:ring-2 focus-visible:ring-primary-accent rounded outline-none">Wijzig</button>
+            </div>
+
+            <div class="flex justify-between items-start p-4 sm:p-5">
+                <div class="min-w-0">
                     <span class="block text-xs font-semibold uppercase tracking-wider text-tertiary-light">E-mailadres</span>
                     <span class="block text-tertiary-dark font-medium mt-1" x-text="data.email"></span>
                 </div>
                 <button type="button" @click="goToStep(4)" class="text-primary-accent text-sm font-semibold hover:underline flex-shrink-0 ml-4 focus-visible:ring-2 focus-visible:ring-primary-accent rounded outline-none">Wijzig</button>
             </div>
+        </div>
+
+        <div class="mt-6">
+            {{ captcha }}
         </div>
     </div>
 
@@ -295,8 +351,8 @@
 
             budgets: [
                 { value: '0-10000', label: '\u20AC0 \u2013 \u20AC10.000' },
-                { value: '10000-30000', label: '\u20AC10.000 \u2013 \u20AC30.000' },
-                { value: '30000-50000', label: '\u20AC30.000 \u2013 \u20AC50.000' },
+                { value: '10000-25000', label: '\u20AC10.000 \u2013 \u20AC25.000' },
+                { value: '25000-50000', label: '\u20AC25.000 \u2013 \u20AC50.000' },
                 { value: '50000-75000', label: '\u20AC50.000 \u2013 \u20AC75.000' },
                 { value: '75000-150000', label: '\u20AC75.000 \u2013 \u20AC150.000' },
                 { value: '150000+', label: '\u20AC150.000+' },
@@ -313,6 +369,8 @@
                 description: '',
                 budget: '',
                 company_type: '',
+                name: '',
+                company_name: '',
                 email: '',
             },
 
@@ -368,7 +426,7 @@
 
             reset() {
                 this.step = 0;
-                this.data = { product: '', description: '', budget: '', company_type: '', email: '' };
+                this.data = { product: '', description: '', budget: '', company_type: '', name: '', company_name: '', email: '' };
                 this.lastCompletedStep = '0';
                 this.errors = {};
                 this.clearStorage();
@@ -392,7 +450,11 @@
                         if (!this.data.product) this.errors.product = 'Selecteer een optie.';
                         break;
                     case 1:
-                        if (!this.data.description.trim()) this.errors.description = 'Vul een omschrijving in.';
+                        if (!this.data.description.trim()) {
+                            this.errors.description = 'Vul een omschrijving in.';
+                        } else if (this.data.description.trim().length < 150) {
+                            this.errors.description = 'Omschrijving moet minimaal 150 tekens bevatten (' + this.data.description.trim().length + '/150).';
+                        }
                         break;
                     case 2:
                         if (!this.data.budget) this.errors.budget = 'Selecteer een budgetrange.';
@@ -401,6 +463,8 @@
                         if (!this.data.company_type) this.errors.company_type = 'Selecteer een voorkeur.';
                         break;
                     case 4:
+                        if (!this.data.name.trim()) this.errors.name = 'Vul je naam in.';
+                        if (!this.data.company_name.trim()) this.errors.company_name = 'Vul je bedrijfsnaam in.';
                         if (!this.data.email.trim()) {
                             this.errors.email = 'Vul je e-mailadres in.';
                         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.data.email)) {

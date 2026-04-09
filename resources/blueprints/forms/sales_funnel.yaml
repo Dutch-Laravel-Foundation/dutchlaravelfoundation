@@ -65,6 +65,32 @@ sections:
           validate:
             - required
       -
+        handle: name
+        field:
+          input_type: text
+          antlers: false
+          display: Naam
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+          read_only: false
+          validate:
+            - required
+      -
+        handle: company_name
+        field:
+          input_type: text
+          antlers: false
+          display: Bedrijfsnaam
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+          read_only: false
+          validate:
+            - required
+      -
         handle: email
         field:
           input_type: email
