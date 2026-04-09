@@ -1,0 +1,117 @@
+sections:
+  main:
+    display: Main
+    fields:
+      -
+        handle: product
+        field:
+          input_type: text
+          antlers: false
+          display: Product
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+          read_only: false
+          validate:
+            - required
+      -
+        handle: product_label
+        field:
+          input_type: text
+          antlers: false
+          display: 'Product (label)'
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+          read_only: false
+      -
+        handle: description
+        field:
+          antlers: false
+          display: Omschrijving
+          type: textarea
+          icon: textarea
+          listable: hidden
+          instructions_position: above
+          read_only: false
+          validate:
+            - required
+      -
+        handle: budget
+        field:
+          input_type: text
+          antlers: false
+          display: Budget
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+          read_only: false
+          validate:
+            - required
+      -
+        handle: company_type
+        field:
+          input_type: text
+          antlers: false
+          display: Bedrijfsvoorkeur
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+          read_only: false
+          validate:
+            - required
+      -
+        handle: name
+        field:
+          input_type: text
+          antlers: false
+          display: Naam
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+          read_only: false
+          validate:
+            - required
+      -
+        handle: company_name
+        field:
+          input_type: text
+          antlers: false
+          display: Bedrijfsnaam
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+          read_only: false
+          validate:
+            - required
+      -
+        handle: email
+        field:
+          input_type: email
+          antlers: false
+          display: E-mailadres
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+          read_only: false
+          validate:
+            - required
+            - email
+      -
+        handle: last_completed_step
+        field:
+          input_type: text
+          antlers: false
+          display: 'Laatste stap'
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+          read_only: false
