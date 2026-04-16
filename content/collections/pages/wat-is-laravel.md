@@ -3,13 +3,14 @@ id: b343e99d-f01e-4cd1-8587-cf8e99ccec76
 blueprint: pages
 title: 'Wat is Laravel?'
 template: templates/what-is-laravel/index
-updated_by: 8d873b47-ad86-4fd3-9e95-27842ea80beb
-updated_at: 1655319736
+updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
+updated_at: 1776339328
 call_to_action: c3238da9-592c-4906-9b11-183e37e4b2d3
 content:
   -
     type: set
     attrs:
+      id: eDmeTIfT
       values:
         type: 3_4_column
         content:
@@ -18,7 +19,7 @@ content:
             content:
               -
                 type: text
-                text: 'Laravel is een framework binnen de PHP wereld. PHP is een programmeertaal die gebruikt wordt om websites en webapplicaties in te bouwen. De taal is in 1994 ontworpen en naar schatting gebruikt ruim 80% van alle websites PHP als programmeertaal. Ook populaire sites zoals Facebook gebruiken PHP onder de motorkap.'
+                text: 'Laravel is het meest gebruikte framework voor nieuwe projecten binnen de PHP wereld. PHP is een programmeertaal die gebruikt wordt om websites en webapplicaties in te bouwen. De taal is in 1994 ontworpen en naar schatting gebruikt ruim 80% van alle websites PHP als programmeertaal. Ook populaire sites zoals Facebook gebruiken PHP onder de motorkap.'
           -
             type: paragraph
             content:
@@ -30,7 +31,7 @@ content:
             content:
               -
                 type: text
-                text: 'Het Laravel framework bestaat al sinds 2011. Wereldwijd maken ruim 50.000 developers gebruik van het framework, waarmee het één van de populairste en grootste frameworks ter wereld is.'
+                text: 'Het Laravel framework bestaat al sinds 2011. Wereldwijd maken honderdduizenden developers gebruik van het framework, waarmee het één van de populairste en grootste frameworks ter wereld is.'
         heading:
           -
             type: heading
@@ -43,12 +44,14 @@ content:
   -
     type: set
     attrs:
+      id: IQIg8QCU
       values:
         type: image
         image: whatis-main@2x.jpg
   -
     type: set
     attrs:
+      id: zbXrxaeX
       values:
         type: double_column
         title:
@@ -69,10 +72,10 @@ content:
                 text: 'Laravel is een veelzijdig, open-source PHP framework dat multi-functioneel ingezet kan worden voor alle soorten en maten webapplicaties. Gesteund door een enorme community in de rug en frequente updates voor een optimale veilige basis.'
         right:
           -
-            type: bullet_list
+            type: bulletList
             content:
               -
-                type: list_item
+                type: listItem
                 content:
                   -
                     type: paragraph
@@ -81,7 +84,7 @@ content:
                         type: text
                         text: 'Het is Open Source'
               -
-                type: list_item
+                type: listItem
                 content:
                   -
                     type: paragraph
@@ -90,25 +93,25 @@ content:
                         type: text
                         text: 'Het is betrouwbaar en veilig'
               -
-                type: list_item
+                type: listItem
                 content:
                   -
                     type: paragraph
                     content:
                       -
                         type: text
-                        text: 'De Laravel applicaties zijn licht en snel'
+                        text: 'De Laravel applicaties zijn licht en snel, performance en schaalbaarheid gegarandeerd'
               -
-                type: list_item
+                type: listItem
                 content:
                   -
                     type: paragraph
                     content:
                       -
                         type: text
-                        text: 'De applicaties zijn eenvoudig te onderhouden en makkelijk uit te breiden'
+                        text: 'Applicaties in Laravel zijn snel te bouwen vanwege kant-en-klare bouwblokken en applicatie zijn eenvoudig te onderhouden enge makkelijk uit te breiden'
               -
-                type: list_item
+                type: listItem
                 content:
                   -
                     type: paragraph
@@ -117,7 +120,7 @@ content:
                         type: text
                         text: 'De applicaties zijn makkelijk te koppelen aan andere systemen'
               -
-                type: list_item
+                type: listItem
                 content:
                   -
                     type: paragraph
@@ -126,7 +129,7 @@ content:
                         type: text
                         text: 'Je krijgt de mogelijkheid tot geautomatiseerd testen'
               -
-                type: list_item
+                type: listItem
                 content:
                   -
                     type: paragraph
@@ -135,14 +138,23 @@ content:
                         type: text
                         text: 'Er is een uitgebreide foutafhandeling'
               -
-                type: list_item
+                type: listItem
                 content:
                   -
                     type: paragraph
                     content:
                       -
                         type: text
-                        text: 'Een community van ruim 50.000 developers voegt dagelijks nieuwe componenten aan het framework toe'
+                        text: 'Volledige ondersteuning en integratie van AI'
+              -
+                type: listItem
+                content:
+                  -
+                    type: paragraph
+                    content:
+                      -
+                        type: text
+                        text: 'Een community van honderdduizenden developers voegt dagelijks nieuwe componenten aan het framework toe'
         heading:
           -
             type: heading
@@ -155,13 +167,15 @@ content:
   -
     type: set
     attrs:
+      id: Kw997CxJ
       values:
         type: meta_block
-        title: '> 10'
+        title: '> 15'
         content: 'Jaar bewezen waarde'
   -
     type: set
     attrs:
+      id: VijgdPzJ
       values:
         type: meta_block
         title: '> 150M'
@@ -169,6 +183,7 @@ content:
   -
     type: set
     attrs:
+      id: M05Ymsvs
       values:
         type: meta_block
         title: '> 5.000'
