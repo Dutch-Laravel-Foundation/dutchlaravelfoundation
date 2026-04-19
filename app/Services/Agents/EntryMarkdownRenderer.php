@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Services\Agents;
 
 use Statamic\Contracts\Entries\Entry;
-use Statamic\Fieldtypes\Bard\Augmentor as BardAugmentor;
 
 class EntryMarkdownRenderer
 {
@@ -53,16 +52,8 @@ class EntryMarkdownRenderer
             }
 
             if (is_array($raw)) {
-                // Bard field: array of nodes. Convert to HTML directly (bypassing set augmentation),
-                // then strip tags to produce plain text suitable for markdown.
-                $blueprintField = $entry->blueprint()?->field($field);
-                if ($blueprintField !== null) {
-                    $augmentor = new BardAugmentor($blueprintField->fieldtype());
-                    $html = $augmentor->convertToHtml($raw);
-                    return trim(strip_tags(is_string($html) ? $html : ''));
-                }
-
-                // Fallback: flatten the array to extract any text values.
+                // Bard field: array of ProseMirror nodes. Use flattenBardNodes for reliable
+                // text extraction that works regardless of whether sets are configured.
                 return trim($this->flattenBardNodes($raw));
             }
 
