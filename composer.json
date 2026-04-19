@@ -5,6 +5,7 @@
         "php": "^8.4",
         "aryehraber/statamic-captcha": "^1.16",
         "laravel/framework": "^12.0",
+        "laravel/mcp": "^0.5.9",
         "laravel/tinker": "^2.10",
         "pecotamic/sitemap": "^1.4",
         "rocketeers-app/rocketeers-laravel": "^2.1",
