@@ -18,5 +18,7 @@ class DlfServer extends Server
     protected array $tools = [
         \App\Mcp\Tools\ListInsights::class,
         \App\Mcp\Tools\GetInsight::class,
+        \App\Mcp\Tools\ListKnowledge::class,
+        \App\Mcp\Tools\GetKnowledgeArticle::class,
     ];
 }
