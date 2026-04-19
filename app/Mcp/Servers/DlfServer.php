@@ -26,5 +26,6 @@ class DlfServer extends Server
         \App\Mcp\Tools\ListMembers::class,
         \App\Mcp\Tools\ListBoard::class,
         \App\Mcp\Tools\ListPartners::class,
+        \App\Mcp\Tools\SearchContent::class,
     ];
 }
