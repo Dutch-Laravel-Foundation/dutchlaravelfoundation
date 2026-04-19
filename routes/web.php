@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Agents\RobotsController;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/robots.txt', RobotsController::class);
 
 Route::permanentRedirect('/leden/avocado-media', '/leden/clarity');
 
