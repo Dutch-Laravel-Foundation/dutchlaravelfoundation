@@ -28,4 +28,22 @@ return [
         'max_entries_per_section' => 50,
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Markdown negotiation
+    |--------------------------------------------------------------------------
+    |
+    | Pages listed in the denylist will NOT be served as markdown, even when
+    | requested via `.md` suffix or `Accept: text/markdown`. Typically these
+    | are form-success / thank-you pages with no meaningful standalone content.
+    |
+    */
+
+    'markdown_negotiation' => [
+        'pages_denylist' => [
+            'bedankt',
+            'thank-you',
+        ],
+    ],
+
 ];

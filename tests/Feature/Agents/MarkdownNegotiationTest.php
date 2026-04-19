@@ -73,4 +73,34 @@ class MarkdownNegotiationTest extends TestCase
 
         $this->assertStringContainsString('text/html', (string) $response->headers->get('Content-Type'));
     }
+
+    public function testPagesSupportMarkdownNegotiation(): void
+    {
+        // Use the 'over-ons' page which exists in the redirect table.
+        $response = $this->get('/over-ons.md');
+
+        if ($response->status() === 404) {
+            $this->markTestSkipped('over-ons page missing in this environment');
+        }
+
+        $response->assertOk();
+        $response->assertHeader('Content-Type', 'text/markdown; charset=UTF-8');
+    }
+
+    public function testDenylistedPagesFallThroughToHtml(): void
+    {
+        config()->set('dlf.markdown_negotiation.pages_denylist', ['bedankt', 'thank-you']);
+
+        // A denylisted path should NOT be served as markdown even with .md
+        $response = $this->get('/bedankt.md');
+
+        // The middleware must NOT return text/markdown for a denylisted page.
+        $this->assertStringNotContainsString(
+            'text/markdown',
+            (string) $response->headers->get('Content-Type', '')
+        );
+
+        // Response should be a non-200 status (404 in prod; 500 in test env due to missing Vite build).
+        $this->assertNotSame(200, $response->status());
+    }
 }

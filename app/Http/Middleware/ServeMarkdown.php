@@ -75,6 +75,15 @@ class ServeMarkdown
                 return true;
             }
         }
-        return false;
+
+        // Top-level pages (single-segment or parent_uri/slug) from the 'pages' collection.
+        if ($path === '/' || $path === '') {
+            return false;
+        }
+
+        $slug = ltrim($path, '/');
+        $denylist = (array) config('dlf.markdown_negotiation.pages_denylist', []);
+
+        return ! in_array($slug, $denylist, true);
     }
 }
