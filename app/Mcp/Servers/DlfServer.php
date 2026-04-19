@@ -16,6 +16,6 @@ class DlfServer extends Server
 
     /** @var array<int, class-string> */
     protected array $tools = [
-        // Tools registered in later tasks
+        \App\Mcp\Tools\ListInsights::class,
     ];
 }
