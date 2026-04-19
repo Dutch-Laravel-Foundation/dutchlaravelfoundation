@@ -20,5 +20,11 @@ class DlfServer extends Server
         \App\Mcp\Tools\GetInsight::class,
         \App\Mcp\Tools\ListKnowledge::class,
         \App\Mcp\Tools\GetKnowledgeArticle::class,
+        \App\Mcp\Tools\ListEvents::class,
+        \App\Mcp\Tools\ListInternships::class,
+        \App\Mcp\Tools\ListCases::class,
+        \App\Mcp\Tools\ListMembers::class,
+        \App\Mcp\Tools\ListBoard::class,
+        \App\Mcp\Tools\ListPartners::class,
     ];
 }
