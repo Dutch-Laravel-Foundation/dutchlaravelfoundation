@@ -1,12 +1,12 @@
 ---
 id: ad21bc8a-e46a-4e99-93cf-1b112c7cc789
 blueprint: pages
-title: 'Gastcolleges voor HBO & MBO'
+title: 'Gastcolleges HBO & MBO'
 template: templates/default
 menu_color: white
 call_to_action: 6bc4ea55-2728-4615-8d45-75d49d29d157
 updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
-updated_at: 1776678850
+updated_at: 1776678953
 content:
   -
     type: heading
