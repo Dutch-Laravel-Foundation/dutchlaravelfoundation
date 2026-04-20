@@ -6,7 +6,7 @@ template: templates/default
 menu_color: white
 call_to_action: 6bc4ea55-2728-4615-8d45-75d49d29d157
 updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
-updated_at: 1776678239
+updated_at: 1776678281
 content:
   -
     type: heading
@@ -28,14 +28,15 @@ content:
       -
         type: text
         text: 'Omdat de DLF volledig wordt gerund door vrijwilligers, is het aantal events dat we zelf kunnen organiseren beperkt. Daarom bieden we zowel leden als niet-leden de mogelijkheid om samen met ons een Meet-up te organiseren.'
+      -
+        type: hardBreak
   -
-    type: paragraph
+    type: heading
+    attrs:
+      level: 2
     content:
       -
         type: text
-        marks:
-          -
-            type: bold
         text: 'Samen een Meet-up organiseren'
   -
     type: paragraph
@@ -94,6 +95,8 @@ content:
       -
         type: text
         text: 'Jij bent verantwoordelijk voor de praktische organisatie zoals de locatie, planning en uitvoering van het event. De Meet-up wordt vervolgens gepresenteerd als een gezamenlijk initiatief van jou en de DLF.'
+      -
+        type: hardBreak
   -
     type: heading
     attrs:
@@ -197,6 +200,8 @@ content:
       -
         type: text
         text: 'Op deze manier dragen we samen bij aan een sterke en actieve Laravel community.'
+      -
+        type: hardBreak
   -
     type: heading
     attrs:
@@ -210,7 +215,21 @@ content:
     content:
       -
         type: text
-        text: 'Heb je een idee voor een Meet-up of wil je samen met ons een event organiseren? We horen graag van je. Stuur een e-mail naar info@dutchlaravelfoundation.nl en we kijken samen naar de mogelijkheden.'
+        text: 'Heb je een idee voor een Meet-up of wil je samen met ons een event organiseren? We horen graag van je. Stuur een e-mail naar '
+      -
+        type: text
+        marks:
+          -
+            type: link
+            attrs:
+              href: 'mailto:info@dutchlaravelfoundation.nl'
+              rel: null
+              target: null
+              title: null
+        text: info@dutchlaravelfoundation.nl
+      -
+        type: text
+        text: ' en we kijken samen naar de mogelijkheden.'
   -
     type: paragraph
 ---
