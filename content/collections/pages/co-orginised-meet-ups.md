@@ -2,11 +2,11 @@
 id: 599530a8-0398-4b27-806b-72196f8d80f0
 blueprint: pages
 title: 'Co-organised Meet-ups'
-template: templates/default
+template: layouts/layout
 menu_color: white
 call_to_action: 6bc4ea55-2728-4615-8d45-75d49d29d157
 updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
-updated_at: 1776678313
+updated_at: 1776678335
 content:
   -
     type: heading
