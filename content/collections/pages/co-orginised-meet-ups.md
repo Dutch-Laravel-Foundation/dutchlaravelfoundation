@@ -6,7 +6,7 @@ template: templates/default
 menu_color: white
 call_to_action: 6bc4ea55-2728-4615-8d45-75d49d29d157
 updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
-updated_at: 1776678345
+updated_at: 1776678397
 content:
   -
     type: heading
@@ -126,18 +126,21 @@ content:
     content:
       -
         type: text
+        text: '<iframe width="560" height="315" src="'
+      -
+        type: text
         marks:
           -
             type: link
             attrs:
-              href: 'https://youtu.be/n3dC_C3e-zo'
+              href: 'https://www.youtube.com/embed/n3dC_C3e-zo?si=FMk56AlgYDL9xDId'
               rel: null
               target: null
               title: null
-        text: 'https://youtu.be/n3dC_C3e-zo'
+        text: 'https://www.youtube.com/embed/n3dC_C3e-zo?si=FMk56AlgYDL9xDId'
       -
         type: text
-        text: ' embedden'
+        text: '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
   -
     type: paragraph
     content:
