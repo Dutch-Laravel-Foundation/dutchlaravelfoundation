@@ -59,10 +59,13 @@ tree:
         entry: 03aa1ce0-5b6a-42bc-b339-4972338cdada
   -
     id: b2c3d4e5-6789-0abc-def1-222222222222
-    title: Studenten
+    title: Onderwijs
     url: '#'
     children:
       -
         id: c3d4e5f6-7890-1bcd-ef12-333333333333
         entry: stagebank-page
         title: Stagebank
+      -
+        id: bb954efa-0a13-446f-9dec-e718afb57be2
+        entry: ad21bc8a-e46a-4e99-93cf-1b112c7cc789
