@@ -46,7 +46,7 @@
     {{# Step 1: Choose a product #}}
     <div x-show="step === 0" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
         <h2 class="!mt-0 !mb-2 text-wrap-balance">Waar kunnen we je mee helpen?</h2>
-        <p class="text-tertiary-light mb-8">Kies de optie die het beste bij jouw vraag past.</p>
+        <p class="text-tertiary-light mb-8">Door een vijftal korte vragen te beantwoorden, helpen we je om een goede Laravel partner voor je project te selecteren. Op basis van je antwoorden mailen we je geheel vrijblijvend onze selectie van de beste Laravel specialisten. Kies allereerst de opties die het beste bij jouw vraag passen.</p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" role="radiogroup" aria-label="Product keuze">
             <template x-for="option in products" :key="option.value">
@@ -54,7 +54,7 @@
                     type="button"
                     role="radio"
                     :aria-checked="data.product === option.value"
-                    @click="data.product = option.value; clearError('product')"
+                    @click="data.product = data.product === option.value ? '' : option.value; clearError('product')"
                     class="relative p-4 sm:p-5 border text-left transition-colors focus-visible:ring-2 focus-visible:ring-primary-accent focus-visible:ring-offset-2 outline-none flex items-start"
                     :class="data.product === option.value
                         ? 'border-primary-accent bg-red-50/50'
@@ -84,7 +84,7 @@
     {{# Step 2: Description #}}
     <div x-show="step === 1" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
         <h2 class="!mt-0 !mb-2 text-wrap-balance">Omschrijving van het vraagstuk</h2>
-        <p class="text-tertiary-light mb-8">Vertel ons meer over wat je nodig hebt.</p>
+        <p class="text-tertiary-light mb-8">Vertel ons meer over het project dat je in gedachte hebt. Hoe meer informatie je ons geeft, hoe beter wij onze leden kunnen matchen.</p>
 
         <label for="funnel-description" class="sr-only">Omschrijving</label>
         <textarea
@@ -109,7 +109,7 @@
     {{# Step 3: Budget #}}
     <div x-show="step === 2" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
         <h2 class="!mt-0 !mb-2 text-wrap-balance">Wat is je budget?</h2>
-        <p class="text-tertiary-light mb-8">Selecteer de budgetrange die het beste past.</p>
+        <p class="text-tertiary-light mb-8">Ook het budget dat beschikbaar is kan invloed hebben op onze selectie. Selecteer de budgetrange die je in gedachte hebt voor dit project.</p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" role="radiogroup" aria-label="Budget selectie">
             <template x-for="option in budgets" :key="option.value">
@@ -134,7 +134,7 @@
     {{# Step 4: Company type #}}
     <div x-show="step === 3" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
         <h2 class="!mt-0 !mb-2 text-wrap-balance">Heb je een voorkeur voor een type partner?</h2>
-        <p class="text-tertiary-light mb-8">Kies het type partij waarmee je het liefst samenwerkt.</p>
+        <p class="text-tertiary-light mb-8">Met welke partij werk je het liefst samen.</p>
 
         <div class="grid grid-cols-1 gap-3" role="radiogroup" aria-label="Partnertype selectie">
             <template x-for="option in companyTypes" :key="option.value">
@@ -160,7 +160,7 @@
     {{# Step 5: Contact details #}}
     <div x-show="step === 4" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
         <h2 class="!mt-0 !mb-2 text-wrap-balance">Contactgegevens</h2>
-        <p class="text-tertiary-light mb-8">Zodat we contact met je kunnen opnemen.</p>
+        <p class="text-tertiary-light mb-8">We vragen je tot slot om je gegevens in te vullen, zodat we je de beste matches kunnen mailen.</p>
 
         <div class="space-y-8">
             <div>
@@ -343,11 +343,12 @@
             errors: {},
 
             products: [
-                { value: 'website', label: 'Bouwen van een website' },
                 { value: 'applicatie', label: 'Ontwikkelen van een applicatie/portal' },
+                { value: 'website', label: 'Bouwen van een website' },
                 { value: 'overnemen', label: 'Het overnemen/onderhouden van een bestaand systeem' },
                 { value: 'advies', label: 'Advies/Kennis over Laravel' },
                 { value: 'beoordeling', label: 'Een beoordeling/extern perspectief op mijn bestaande partner' },
+                { value: 'audit', label: 'Een beoordeling/audit op mijn bestaande applicatie' },
                 { value: 'vrijblijvend', label: 'Vrijblijvend advies' },
             ],
 
