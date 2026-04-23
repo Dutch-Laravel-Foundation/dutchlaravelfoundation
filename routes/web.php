@@ -1,6 +1,14 @@
 <?php
 
+use App\Http\Controllers\Agents\LlmsController;
+use App\Http\Controllers\Agents\RobotsController;
+use App\Http\Controllers\Agents\WellKnownController;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/robots.txt', RobotsController::class);
+Route::get('/.well-known/mcp.json', [WellKnownController::class, 'mcp']);
+Route::get('/llms.txt', [LlmsController::class, 'index']);
+Route::get('/llms-full.txt', [LlmsController::class, 'full']);
 
 Route::permanentRedirect('/leden/avocado-media', '/leden/clarity');
 
