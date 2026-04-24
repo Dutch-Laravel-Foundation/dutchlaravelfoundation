@@ -14,8 +14,8 @@ website: besite.nl
 recruitment_website: www.werkenbijbesite.nl
 phone: '0543 490 080'
 updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
-updated_at: 1777011248
-sbb: false
+updated_at: 1777011335
+sbb: true
 internship_contact_name: 'Monique Tijdeman en Tanja Holtermann'
 internship_contact_email: stage@besite.nl
 internship_contact_phone: '0543490080'
