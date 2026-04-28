@@ -7,12 +7,12 @@ featured_image: aw5zawdodhmvbgfyywzlc3rfmjaymy0xnzguanbn.jpg
 type: Meetup
 location: SandCBar
 address: 'Boulevard Zeezijde 43, 2225 BB Katwijk aan Zee'
-date_start: '2026-06-18'
+date_start: '2026-06-18 00:00'
 time_start: '16:30'
 time_end: '23:00'
 signup_link: 'https://www.meetup.com/dutchlaravelfoundation/events/308645363/'
-updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
-updated_at: 1769073076
+updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
+updated_at: 1777373938
 content:
   -
     type: paragraph
@@ -27,10 +27,9 @@ content:
       -
         type: text
         text: 'Ook in 2026 organiseren we bij de Dutch Laravel Foundation weer het mooiste en meest unieke Laravel / Tech feestje van Nederland: LaraFest!'
-      -
-        type: hardBreak
-      -
-        type: hardBreak
+  -
+    type: paragraph
+    content:
       -
         type: text
         text: 'Het exacte programma wordt op een later moment aangekondigd, maar de locatie is wel alvast bekend!'
@@ -48,39 +47,14 @@ content:
         type: hardBreak
       -
         type: text
-        marks:
-          -
-            type: italic
-        text: 'Het event is enkel open voor inschrijving voor leden van de Dutch Laravel Foundation ('
-      -
-        type: text
-        marks:
-          -
-            type: link
-            attrs:
-              href: 'https://www.dutchlaravelfoundation.nl'
-              rel: null
-              target: null
-              title: null
-          -
-            type: italic
-        text: 'https://www.dutchlaravelfoundation.nl'
-      -
-        type: text
-        marks:
-          -
-            type: italic
-        text: ).
-      -
-        type: text
-        text: ' LaraFest is 100% gratis voor developers van de Dutch Laravel Foundation leden!'
+        text: 'Het event is enkel open voor inschrijving voor leden van de Dutch Laravel Foundation. LaraFest is 100% gratis voor developers van de Dutch Laravel Foundation leden!'
       -
         type: hardBreak
       -
         type: hardBreak
       -
         type: text
-        text: 'Meld je hier aan via Meetup onder vermelding van het bedrijf (DLF lid) namens wie je komt. Tot 18 juni!'
+        text: 'Meld je aan via Meetup onder vermelding van het bedrijf (DLF lid) namens wie je komt. Tot 18 juni!'
       -
         type: hardBreak
       -
@@ -95,7 +69,55 @@ content:
         type: hardBreak
       -
         type: text
-        text: 'To be announced!'
+        marks:
+          -
+            type: italic
+        text: 'Worms in our software supply chain - Where do we go from here?'
+      -
+        type: hardBreak
+      -
+        type: text
+        text: 'In 2025, we saw seen an unprecedented surge in attacks against the open-source software supply chain. What began as smaller, isolated incidents has escalated into full-on worms propagating through widely used packages. In 2026, that escalation has continued, with major attacks targeting LiteLLM, Axios, Trivy, and other popular libraries/tools.'
+  -
+    type: paragraph
+    content:
+      -
+        type: text
+        text: 'This shift has forced us to confront just how fragile and how critical our ecosystem really is, and to ask hard questions about where we go from here.'
+  -
+    type: paragraph
+    content:
+      -
+        type: text
+        text: 'This talk traces the recent history of supply-chain threats, highlights the evolution that brought us to this moment, and explores the uncomfortable but necessary conversations we must have as a community to ensure that open source remains resilient, secure, and worthy of our trust.'
+  -
+    type: paragraph
+    content:
+      -
+        type: text
+        marks:
+          -
+            type: italic
+        text: 'Door '
+      -
+        type: text
+        marks:
+          -
+            type: bold
+          -
+            type: italic
+        text: 'Charlie Eriksen'
+      -
+        type: text
+        marks:
+          -
+            type: italic
+        text: ', Security Researcher @ Aikido Security'
+      -
+        type: hardBreak
+      -
+        type: text
+        text: "Charlie Eriksen is a Security Researcher at Aikido Security, specializing in software supply-chain security. He focuses on detecting malicious code in open-source packages and on improving the ecosystem's resilience against emerging threats. Previously, he worked in consulting, offensive security, and bug bounties, co-founded a training company focused on the OWASP Top 10, and founded a company focused on JavaScript static analysis."
       -
         type: hardBreak
       -
@@ -117,7 +139,7 @@ content:
         type: hardBreak
       -
         type: text
-        text: 'Heb je en project dat je graag wilt laten zien, meldt het dan vooral bij Chris Hagg ('
+        text: 'Heb je een project dat je graag wilt laten zien, meldt het dan vooral bij Chris Hagg ('
       -
         type: text
         marks:
@@ -161,7 +183,12 @@ content:
         type: hardBreak
       -
         type: text
-        text: 'To be announced!'
+        text: 'Vanaf 16.30 tot 23.00'
+      -
+        type: hardBreak
+      -
+        type: text
+        text: 'Programma: To be announced!'
       -
         type: hardBreak
       -
