@@ -15,8 +15,9 @@ website: dawn.tech
 recruitment_website: werkenbijdawn.tech
 video: 'https://youtu.be/hKXulYUTmKk?si=PArcpDFOnSMeWZjk'
 updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
-updated_at: 1777379551
+updated_at: 1777530423
 sbb: true
 internship_contact_name: 'Quinton Verbon'
+internship_contact_email: quinton.verbon@dawn.tech
 internship_contact_phone: '0657836909'
 ---
