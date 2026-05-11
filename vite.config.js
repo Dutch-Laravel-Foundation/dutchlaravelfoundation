@@ -14,15 +14,5 @@ export default (mode) => {
                 ...(appUrl ? { detectTls: false } : {}),
             }),
         ],
-        server: appUrl
-            ? {
-                  origin: appUrl,
-                  hmr: {
-                      host: new URL(appUrl).hostname,
-                      protocol: "wss",
-                      clientPort: 443,
-                  },
-              }
-            : undefined,
     });
 };
