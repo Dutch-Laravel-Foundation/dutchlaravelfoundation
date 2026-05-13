@@ -6,7 +6,7 @@ template: templates/default
 menu_color: white
 call_to_action: 6bc4ea55-2728-4615-8d45-75d49d29d157
 updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
-updated_at: 1778658126
+updated_at: 1778659119
 content:
   -
     type: heading
@@ -162,7 +162,7 @@ content:
                     attrs:
                       href: 'https://laravel.com/learn'
                       rel: null
-                      target: null
+                      target: _blank
                       title: null
                 text: 'https://laravel.com/learn'
       -
@@ -182,7 +182,7 @@ content:
                     attrs:
                       href: 'https://www.php.net/docs.php'
                       rel: null
-                      target: null
+                      target: _blank
                       title: null
                 text: 'https://www.php.net/docs.php'
       -
@@ -202,7 +202,7 @@ content:
                     attrs:
                       href: 'https://laravel.com/docs'
                       rel: null
-                      target: null
+                      target: _blank
                       title: null
                 text: 'https://laravel.com/docs'
               -
@@ -249,7 +249,7 @@ content:
                     attrs:
                       href: 'https://laracasts.com/'
                       rel: null
-                      target: null
+                      target: _blank
                       title: null
                 text: 'https://laracasts.com/'
       -
@@ -269,7 +269,7 @@ content:
                     attrs:
                       href: 'https://onramp.dev/en'
                       rel: null
-                      target: null
+                      target: _blank
                       title: null
                 text: 'https://onramp.dev/en'
               -
@@ -316,7 +316,7 @@ content:
                     attrs:
                       href: 'https://www.jetbrains.com/academy/student-pack/'
                       rel: null
-                      target: null
+                      target: _blank
                       title: null
                 text: 'https://www.jetbrains.com/academy/student-pack/'
               -
@@ -372,7 +372,7 @@ content:
                     attrs:
                       href: 'https://www.youtube.com/@LaravelPHP'
                       rel: null
-                      target: null
+                      target: _blank
                       title: null
                 text: 'https://www.youtube.com/@LaravelPHP'
               -
@@ -386,7 +386,7 @@ content:
                     attrs:
                       href: 'https://www.youtube.com/@nunomaduro'
                       rel: null
-                      target: null
+                      target: _blank
                       title: null
                 text: 'https://www.youtube.com/@nunomaduro'
       -
@@ -481,7 +481,7 @@ content:
                     attrs:
                       href: 'https://dutchlaravelfoundation.nl/'
                       rel: null
-                      target: null
+                      target: _blank
                       title: null
                 text: 'https://dutchlaravelfoundation.nl/'
               -
@@ -621,12 +621,12 @@ content:
                     attrs:
                       href: 'http://dutchlaravelfoundation.nl/kennis'
                       rel: null
-                      target: null
+                      target: _blank
                       title: null
-                text: 'http://dutchlaravelfoundation.nl/kennis'
+                text: 'http://dutchlaravelfoundation.nl/kennis '
               -
                 type: text
-                text: ' vind je interessante technische artikelen.'
+                text: 'vind je interessante technische artikelen.'
       -
         type: listItem
         content:
@@ -680,7 +680,7 @@ content:
                     attrs:
                       href: 'https://larabelles.com/'
                       rel: null
-                      target: null
+                      target: _blank
                       title: null
                 text: 'https://larabelles.com/'
               -
@@ -721,7 +721,7 @@ content:
                     attrs:
                       href: 'https://certificationforlaravel.com/'
                       rel: null
-                      target: null
+                      target: _blank
                       title: null
                 text: 'https://certificationforlaravel.com/'
   -
