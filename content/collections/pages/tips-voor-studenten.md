@@ -5,8 +5,8 @@ title: 'Tips voor studenten'
 template: templates/default
 menu_color: white
 call_to_action: 6bc4ea55-2728-4615-8d45-75d49d29d157
-updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
-updated_at: 1778659119
+updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
+updated_at: 1778667321
 content:
   -
     type: heading
@@ -28,10 +28,6 @@ content:
       -
         type: text
         text: 'Of je nu een opleiding mbo 4 Software Developer doet of een hbo-opleiding ICT/Software Engineering volgt: met Laravel kun je snel echte projecten bouwen: van API’s tot SaaS-platforms en AI-tools. En eerlijk: het is ook gewoon leuk om mee te werken.'
-      -
-        type: hardBreak
-      -
-        type: hardBreak
   -
     type: heading
     attrs:
@@ -118,10 +114,6 @@ content:
       -
         type: text
         text: 'Laravel voelt modern, clean en developer-friendly. Daardoor kun je sneller resultaat zien en dat motiveert enorm. Iedere developer begint ergens. Het verschil maak je vooral door veel te bouwen, nieuwsgierig te blijven en slimme resources te gebruiken. Daarom hebben we hieronder onze favoriete tips & tricks verzameld om je Laravel journey goed te starten.'
-      -
-        type: hardBreak
-      -
-        type: hardBreak
   -
     type: heading
     attrs:
@@ -205,10 +197,6 @@ content:
                       target: _blank
                       title: null
                 text: 'https://laravel.com/docs'
-              -
-                type: hardBreak
-              -
-                type: hardBreak
   -
     type: heading
     attrs:
@@ -272,10 +260,6 @@ content:
                       target: _blank
                       title: null
                 text: 'https://onramp.dev/en'
-              -
-                type: hardBreak
-              -
-                type: hardBreak
   -
     type: heading
     attrs:
@@ -319,10 +303,6 @@ content:
                       target: _blank
                       title: null
                 text: 'https://www.jetbrains.com/academy/student-pack/'
-              -
-                type: hardBreak
-              -
-                type: hardBreak
   -
     type: heading
     attrs:
@@ -354,7 +334,18 @@ content:
             content:
               -
                 type: text
-                text: 'Taylor Otwell, de maker van Laravel! -https://x.com/taylorotwell'
+                text: 'Taylor Otwell, de maker van Laravel! -'
+              -
+                type: text
+                marks:
+                  -
+                    type: link
+                    attrs:
+                      href: 'https://x.com/taylorotwell'
+                      rel: null
+                      target: _blank
+                      title: null
+                text: 'https://x.com/taylorotwell'
       -
         type: listItem
         content:
@@ -398,10 +389,6 @@ content:
               -
                 type: text
                 text: 'Volg andere Laravel developers en bedrijven om op de hoogte te blijven van nieuwe ontwikkelingen.'
-              -
-                type: hardBreak
-              -
-                type: hardBreak
   -
     type: heading
     attrs:
@@ -484,10 +471,6 @@ content:
                       target: _blank
                       title: null
                 text: 'https://dutchlaravelfoundation.nl/'
-              -
-                type: hardBreak
-              -
-                type: hardBreak
   -
     type: heading
     attrs:
@@ -574,10 +557,6 @@ content:
       -
         type: text
         text: 'Juist van bugs, errors en problemen leer je het meest. Dat hoort erbij, ook senior developers zittendagelijks te debuggen.'
-      -
-        type: hardBreak
-      -
-        type: hardBreak
   -
     type: heading
     attrs:
@@ -642,10 +621,6 @@ content:
       -
         type: text
         text: 'Developers die AI slim kunnen combineren met software development hebben een enorme voorsprong.'
-      -
-        type: hardBreak
-      -
-        type: hardBreak
   -
     type: heading
     attrs:
@@ -683,10 +658,6 @@ content:
                       target: _blank
                       title: null
                 text: 'https://larabelles.com/'
-              -
-                type: hardBreak
-              -
-                type: hardBreak
   -
     type: heading
     attrs:
@@ -748,10 +719,6 @@ content:
               -
                 type: text
                 text: 'Laravel te checken, of vraag je docent om meer info.'
-              -
-                type: hardBreak
-              -
-                type: hardBreak
   -
     type: heading
     attrs:
