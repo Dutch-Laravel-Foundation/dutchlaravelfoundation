@@ -28,7 +28,34 @@ content:
             content:
               -
                 type: text
-                text: 'Wil je software laten bouwen met Laravel en zoek je een partij die je kunt vertrouwen? De leden van de Dutch Laravel Foundation zijn ervaren professionals en bureaus die dagelijks met Laravel werken. Gebruik de filters om snel een passende partij te vinden en neem daarna direct contact op om vrijblijvend je project te bespreken. Hulp nodig bij je zoektocht? Mail dan naar '
+                text: 'Wil je software laten bouwen met Laravel en zoek je een betrouwbare partij? De leden van de Dutch Laravel Foundation zijn ervaren professionals en bureaus die dagelijks met Laravel werken.'
+          -
+            type: paragraph
+            content:
+              -
+                type: text
+                text: 'Twijfel je welke partij het beste past bij jouw project? Maak het jezelf makkelijk en gebruik de knop "Match mijn project". Je beantwoordt een paar korte vragen en wij koppelen je aan één of meerdere leden die écht goed aansluiten bij jouw wensen en uitdaging.'
+          -
+            type: set
+            attrs:
+              id: ctaMatchProject
+              values:
+                type: cta_button
+                label: 'Match mijn project'
+                link: /aanvraag
+        right:
+          -
+            type: paragraph
+            content:
+              -
+                type: text
+                text: 'Liever zelf zoeken? Bekijk het ledenoverzicht hieronder en gebruik de filters om een partij te vinden die bij je past.'
+          -
+            type: paragraph
+            content:
+              -
+                type: text
+                text: 'Kom je er niet helemaal uit of wil je sparren? Mail naar '
               -
                 type: text
                 marks:
@@ -42,7 +69,7 @@ content:
                 text: info@dutchlaravelfoundation.nl
               -
                 type: text
-                text: .
+                text: ', we denken graag met je mee.'
         heading:
           -
             type: heading
