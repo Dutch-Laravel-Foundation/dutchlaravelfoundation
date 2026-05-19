@@ -6,7 +6,7 @@ template: templates/default
 menu_color: white
 call_to_action: 6bc4ea55-2728-4615-8d45-75d49d29d157
 updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
-updated_at: 1779176977
+updated_at: 1779177009
 content:
   -
     type: heading
@@ -262,7 +262,7 @@ content:
         text: contactformulier
       -
         type: text
-        text: ' #link invoegen#.'
+        text: .
   -
     type: paragraph
     content:
