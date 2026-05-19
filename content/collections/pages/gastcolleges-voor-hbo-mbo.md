@@ -5,8 +5,8 @@ title: 'Gastcolleges voor HBO & MBO'
 template: templates/default
 menu_color: white
 call_to_action: 6bc4ea55-2728-4615-8d45-75d49d29d157
-updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
-updated_at: 1776772560
+updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
+updated_at: 1779176977
 content:
   -
     type: heading
@@ -28,10 +28,6 @@ content:
       -
         type: text
         text: 'Onze gastcolleges worden gegeven door ervaren developers die werkzaam zijn bij onze leden. Zij nemen praktijkervaring mee de klas in en leggen direct de koppeling met de beroepspraktijk.'
-      -
-        type: hardBreak
-      -
-        type: hardBreak
   -
     type: heading
     attrs:
@@ -97,10 +93,6 @@ content:
       -
         type: text
         text: 'Onze gastdocenten delen niet alleen technische kennis, maar geven ook inzicht in hoe het er in de praktijk aan toegaat.'
-      -
-        type: hardBreak
-      -
-        type: hardBreak
   -
     type: heading
     attrs:
@@ -202,10 +194,6 @@ content:
       -
         type: text
         text: 'Hebben jullie specifieke wensen of een onderwerp dat hier niet tussen staat? We denken graag met jullie mee.'
-      -
-        type: hardBreak
-      -
-        type: hardBreak
   -
     type: heading
     attrs:
@@ -247,10 +235,6 @@ content:
       -
         type: text
         text: 'Of het nu gaat om een introductiecollege, verdieping of inspiratie voor studenten, wij sluiten graag aan.'
-      -
-        type: hardBreak
-      -
-        type: hardBreak
   -
     type: heading
     attrs:
@@ -264,7 +248,21 @@ content:
     content:
       -
         type: text
-        text: 'Bij interesse in een gastcollege nemen jullie contact met ons op via het contactformulier #link invoegen#.'
+        text: 'Bij interesse in een gastcollege nemen jullie contact met ons op via het '
+      -
+        type: text
+        marks:
+          -
+            type: link
+            attrs:
+              href: 'https://dutchlaravelfoundation.nl/contact'
+              rel: null
+              target: _blank
+              title: null
+        text: contactformulier
+      -
+        type: text
+        text: ' #link invoegen#.'
   -
     type: paragraph
     content:
@@ -312,17 +310,5 @@ content:
     content:
       -
         type: text
-        text: 'Graag tot ziens in de klas!'
-  -
-    type: paragraph
-    content:
-      -
-        type: text
-        text: "\_"
-  -
-    type: paragraph
-    content:
-      -
-        type: text
-        text: "\_"
+        text: "Graag tot ziens in de klas!\_"
 ---
