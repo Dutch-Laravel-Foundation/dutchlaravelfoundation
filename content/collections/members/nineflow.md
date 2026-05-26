@@ -14,8 +14,10 @@ email: info@nineflow.nl
 website: www.nineflow.nl
 phone: '+31 (0)341 74 50 51'
 updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
-updated_at: 1779799100
+updated_at: 1779801039
 sbb: false
 city: Nunspeet
 province: Gelderland
+internship_contact_name: 'Diana Groot Karsijn'
+internship_contact_email: info@nineflow.nl
 ---
