@@ -1,0 +1,383 @@
+{{#
+  Landing page: /aanbesteding
+  Sections (top-to-bottom):
+    1. Hero (pink)
+    2. "150 miljoen softwareprojecten" + customer logos
+    3. Dark four-pillar block — Laravel voldoet aan de eisen
+    4. BAKE narrative
+    5. Black benefits band — Zo heb je het beste van beide werelden
+    6. Praktische vervolgstappen (3 audience cards)
+    7. FAQ accordion (red-outlined cards with circular +/− icons)
+    8. Wat is de Dutch Laravel Foundation?
+#}}
+
+{{# 1. Hero #}}
+<section class="w-full overflow-hidden bg-primary-accent pt-44 pb-16 sm:pb-24 sm:pt-56 md:pb-16 px-4 md:px-0">
+  <div class="max-w-[900px] mx-auto md:py-0 flex items-center relative justify-center">
+    <div class="translate-x-5 md:-translate-y-5 absolute md:relative">
+      {{ partial:icons/laravel class="size-96 md:size-80 text-white/10 blur-xs md:blur-none md:text-white/20" }}
+    </div>
+    <div class="md:-translate-x-8 max-w-xl mx-auto md:mx-0">
+      <h1 class="text-white my-0 text-center md:text-left">{{ title }}</h1>
+      <p class="text-white mt-6 text-center md:text-left md:pl-8 text-lg leading-relaxed">
+        Hier vind je duidelijke informatie over waarom Laravel een veilige en betrouwbare keuze is voor overheden, semi-overheidsinstellingen en grote organisaties.
+      </p>
+    </div>
+  </div>
+</section>
+
+{{# 2. 150 miljoen + customer logos #}}
+<section class="w-full bg-white py-12 md:py-20 px-4 md:px-0">
+  <div class="container">
+    <div class="max-w-3xl mx-auto flex flex-col items-center text-center gap-10 md:gap-14">
+      <h2 class="font-bold text-primary-accent my-0 text-2xl md:text-3xl">
+        150 miljoen softwareprojecten wereldwijd zijn ontwikkeld in Laravel
+      </h2>
+      <div class="w-full grid grid-cols-2 sm:grid-cols-3 gap-x-8 sm:gap-x-12 gap-y-14">
+        <div class="flex items-center justify-center h-16 md:h-20">
+          <img src="/assets/img/customers/diabetes-nl.svg" alt="diabetes.nl" class="max-w-full h-auto">
+        </div>
+        <div class="flex items-center justify-center h-16 md:h-20">
+          <img src="/assets/img/customers/abnamro.svg" alt="ABN AMRO" class="max-h-full max-w-full object-contain">
+        </div>
+        <div class="flex items-center justify-center h-16 md:h-20">
+          <img src="/assets/img/customers/rijksoverheid.svg" alt="Rijksoverheid" class="max-h-full max-w-full object-contain">
+        </div>
+        <div class="flex items-center justify-center h-16 md:h-20">
+          <img src="/assets/img/customers/avia.svg" alt="AVIA" class="max-h-full max-w-full object-contain">
+        </div>
+        <div class="flex items-center justify-center h-16 md:h-20">
+          <img src="/assets/img/customers/de-hypotheekshop.svg" alt="De Hypotheekshop" class="max-h-full max-w-full object-contain">
+        </div>
+        <div class="flex items-center justify-center h-16 md:h-20">
+          <img src="/assets/img/customers/nva.svg" alt="NVA — Nederlandse Vereniging voor Autisme" class="max-h-full max-w-full object-contain">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{# 3. Dark four-pillar block — Laravel voldoet aan de eisen #}}
+<section class="bg-black text-white py-16 md:py-24">
+  <div class="container flex relative">
+    <div class="absolute w-full h-[calc(100%-24rem)] top-96 -left-48 hidden md:block">
+      <div class="sticky top-24">
+        {{ partial:icons/laravel class="size-132 text-white/10" }}
+      </div>
+    </div>
+
+    <div class="flex flex-col md:flex-row gap-8 md:gap-12 relative z-10 px-4 md:px-0">
+      <div class="w-full md:w-1/3 flex justify-start flex-col mt-0 md:mt-12">
+        <h2 class="font-bold text-xl text-white mt-0">Laravel voldoet aan de eisen van een aanbesteding</h2>
+        <p>Vier redenen waarom Laravel een veilige en toekomstbestendige keuze is voor publieke en grote organisaties.</p>
+      </div>
+      <div class="w-full md:w-2/3 space-y-4 sm:space-y-6">
+        <div class="flex flex-col py-8 md:py-12 px-8 md:px-12 rounded-xl bg-white shadow-2xl shadow-black/5 text-black">
+          <h3 class="font-bold text-primary-accent my-0 text-xl md:text-2xl">
+            Laravel is open source
+          </h3>
+          <p class="mt-4 mb-0">
+            Veel aanbestedingen vragen expliciet om open source software. Laravel voldoet daaraan: de broncode is voor iedereen toegankelijk. Dit past binnen het <span class="underline">&ldquo;Open source, tenzij&rdquo; beleid</span> van de overheid, omdat het transparantie en controle mogelijk maakt.
+          </p>
+        </div>
+
+        <div class="flex flex-col py-8 md:py-12 px-8 md:px-12 rounded-xl bg-white shadow-2xl shadow-black/5 text-black">
+          <h3 class="font-bold text-primary-accent my-0 text-xl md:text-2xl">
+            Géén vendor lock-in
+          </h3>
+          <p class="mt-4 mb-0">
+            Omdat het Laravel framework wereldwijd wordt gebruikt volgens vaste standaarden (PSR-12 coding style guide / Common Ground), kunnen andere developers het werk overnemen. In Nederland zijn honderden partijen die Laravel gebruiken. Je zit dus nooit vast aan één leverancier (vendor lock-in).
+          </p>
+        </div>
+
+        <div class="flex flex-col py-8 md:py-12 px-8 md:px-12 rounded-xl bg-white shadow-2xl shadow-black/5 text-black">
+          <h3 class="font-bold text-primary-accent my-0 text-xl md:text-2xl">
+            Bewezen en toekomstbestendig
+          </h3>
+          <p class="mt-4 mb-0">
+            Laravel is een PHP-framework en bestaat sinds 2011. Het evolueert mee met nieuwe technologieën en beveiligingsstandaarden. Je hoeft je dus geen zorgen te maken over verouderde software die over een paar jaar vervangen moet worden. Laravel is een stabiele basis omdat het actief wordt doorontwikkeld.
+          </p>
+        </div>
+
+        <div class="flex flex-col py-8 md:py-12 px-8 md:px-12 rounded-xl bg-white shadow-2xl shadow-black/5 text-black">
+          <h3 class="font-bold text-primary-accent my-0 text-xl md:text-2xl">
+            Veiligheid is gewaarborgd
+          </h3>
+          <p class="mt-4 mb-0">
+            Laravel biedt bescherming tegen veelvoorkomende beveiligingsrisico&rsquo;s zoals SQL-injectie, CSRF-aanvallen en XSS. Ook houdt de wereldwijde Laravel-community de veiligheid scherp in de gaten. Als er een risico wordt ontdekt, is er vaak binnen uren een oplossing beschikbaar.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{# 4. BAKE narrative #}}
+<section class="container py-16 md:py-24 relative overflow-hidden">
+  <img src="/assets/img/backgrounds/floor-primary.svg" class="w-[1400px] absolute -top-12 left-1/2 -translate-x-1/2 opacity-30 pointer-events-none hidden md:block">
+  <div class="flex flex-col gap-6 md:gap-8 max-w-3xl mx-auto relative z-10 px-4 md:px-0">
+    <h2 class="font-bold text-primary-accent my-0 text-2xl md:text-3xl">
+      Laravel is een combinatie van standaard componenten én maatwerk
+    </h2>
+    <p class="leading-relaxed">
+      De traditionele keuze is: koop je een standaardpakket (Buy) of laat je alles op maat maken (Make)? Laravel biedt een derde optie: <span class="font-bold">BAKE (Buy And Keep Evolving)</span>. Een systeem gebouwd in Laravel wordt opgezet met bouwblokken en modules die al bij tientallen organisaties draaien. Heb je daarnaast andere of aangepaste functionaliteiten, bouwblokken of modules nodig voor jouw unieke situatie? Dan wordt dit op maat ontwikkeld.
+    </p>
+  </div>
+</section>
+
+{{# 5. Black benefits — Zo heb je het beste #}}
+<section class="bg-black text-white py-16 md:py-24">
+  <div class="container px-4 md:px-0">
+    <div class="max-w-4xl md:px-10">
+      <p class="text-xl md:text-2xl font-bold leading-snug my-0 text-white text-left">
+        Zo heb je het beste van beide werelden: de <span class="text-primary-accent">snelheid</span> en <span class="text-primary-accent">betrouwbaarheid</span> van een standaardoplossing met de <span class="text-primary-accent">flexibiliteit</span> van maatwerk.
+      </p>
+    </div>
+    <div class="w-full grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/20 mt-10 md:mt-20">
+      <div class="flex flex-col gap-5 px-0 md:px-10 py-8 md:py-0">
+        <img src="/assets/img/aanbesteding/icon-demo.png" alt="Snel een werkende demo" class="size-11">
+        <h3 class="my-0 font-bold text-[20px] text-white">Snel een werkende demo</h3>
+        <p class="mb-0 text-white/80 leading-relaxed">
+          Met tools zoals Laravel Filament kunnen developers snel professionele dashboards, formulieren en gebruikersbeheer bouwen. Denk ook aan overzichten, rapportages en workflows. Als klant zie je dus al vroeg in het proces een werkende eerste versie (MVP).
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-5 px-0 md:px-10 py-8 md:py-0">
+        <img src="/assets/img/aanbesteding/icon-link.png" alt="Veel kant-en-klare packages voor koppelingen" class="size-11">
+        <h3 class="my-0 font-bold text-[20px] text-white">Veel kant-en-klare packages voor koppelingen (API&rsquo;s)</h3>
+        <p class="mb-0 text-white/80 leading-relaxed">
+          Veel (overheids)systemen moeten gekoppeld worden met andere systemen, zoals DigiD-koppelingen, zaaksystemen of boekhoudpakketten. Developers kunnen in Laravel dit soort integraties relatief eenvoudig realiseren. En vaak zijn er al bestaande modules voor beschikbaar.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-5 px-0 md:px-10 py-8 md:py-0">
+        <img src="/assets/img/aanbesteding/icon-scale.png" alt="Flexibel en schaalbaar systeem" class="size-11">
+        <h3 class="my-0 font-bold text-[20px] text-white">Flexibel en schaalbaar systeem</h3>
+        <p class="mb-0 text-white/80 leading-relaxed">
+          Laravel-systemen groeien moeiteloos mee met je organisatie dankzij de bouwblokken voor functionaliteiten. Ook qua gebruikersaantallen schaalt Laravel goed. Of het nu gaat om 500 of 500.000 gebruikers: het framework kan het aan. Dat heeft zich in de 150+ miljoen wereldwijde projecten al bewezen.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{# 6. Praktische vervolgstappen — three audience cards #}}
+<section class="bg-[#FFEBE8] py-16 md:py-24">
+  <div class="container relative">
+    <div class="absolute w-full h-[calc(100%-24rem)] top-96 -left-48 hidden md:block">
+      <div class="sticky top-56">
+        {{ partial:icons/laravel class="size-132 text-primary-accent/10" }}
+      </div>
+    </div>
+  <div class="flex flex-col md:flex-row gap-8 md:gap-12 px-4 md:px-0 relative z-10">
+    <div class="w-full md:w-1/3">
+      <h2 class="font-bold text-primary-accent my-0 text-2xl md:text-3xl sticky top-24">
+        Praktische vervolgstappen
+      </h2>
+    </div>
+    <div class="w-full md:w-2/3 space-y-6 md:space-y-10">
+      <div class="flex flex-col bg-white rounded-xl shadow-2xl shadow-black/5 overflow-hidden">
+        <div class="p-8 md:p-12 flex flex-col gap-4">
+          <h3 class="font-bold text-primary-accent my-0 text-xl md:text-2xl">
+            Voor opstellers/aanbieders van een aanbesteding
+          </h3>
+          <p class="my-0">
+            Wil je voorkomen dat je na afloop vastzit aan één leverancier of een systeem dat niet meegroeit? Formuleer je uitvraag dan niet als een keuze tussen een standaardpakket (Buy) of volledig maatwerk (Make).
+          </p>
+          <ul class="list-disc pl-6 space-y-2 leading-relaxed mt-2 mb-0">
+            <li>Vraag om toelichting waarom inschrijvers voor een specifiek open framework kiezen in plaats van er zelf één te verplichten</li>
+            <li>Benoem expliciet dat een aanpak met standaard- en maatwerk modules tot de opties behoort</li>
+            <li>Vraag naar het percentage maatwerk versus bestaande modules</li>
+          </ul>
+        </div>
+        <div class="bg-[#FFEBE8] bg-center bg-cover h-40 md:h-56 w-full" style="background-image: url('/img/asset/Y2FzZXMvZGlhYmV0ZXMtaG9tZXBhZ2UtbW9ja3VwLWxhbmRzY2FwZV9wbmcud2VicA/diabetes-homepage-mockup-landscape_png.webp?fit=crop&w=1500&s=479c8c2bef05da01ce9ddb37a8587849');"></div>
+      </div>
+
+      <div class="flex flex-col bg-white rounded-xl shadow-2xl shadow-black/5 overflow-hidden">
+        <div class="p-8 md:p-12 flex flex-col gap-4">
+          <h3 class="font-bold text-primary-accent my-0 text-xl md:text-2xl">
+            Voor beoordelaars van de aanbesteding
+          </h3>
+          <p class="my-0">
+            Krijg je een offerte binnen waarin Laravel wordt voorgesteld? Stel dan deze vragen aan het bureau:
+          </p>
+          <ul class="list-disc pl-6 space-y-2 leading-relaxed mt-2 mb-0">
+            <li>Welke modules en componenten hebben jullie al op de plank liggen?</li>
+            <li>Bij welke vergelijkbare organisaties draaien deze al?</li>
+            <li>Wordt het intellectueel eigendom overgedragen aan ons als opdrachtgever?</li>
+            <li>Welke PSR-standaarden hanteren jullie?</li>
+            <li>Zijn jullie bekend met Common Ground (bij gemeenten)?</li>
+          </ul>
+        </div>
+        <div class="bg-[#FFEBE8] bg-center bg-no-repeat h-40 md:h-56 w-full" style="background-image: url('/img/asset/YXNzZXRzL2F2aWEtbW9iaWxlLnBuZw/avia-mobile.png?fit=crop&w=1280&s=5a8ef275b6f72bb304cf7863c8d3a8a2'); background-size: 120% auto;"></div>
+      </div>
+
+      <div class="flex flex-col bg-white rounded-xl shadow-2xl shadow-black/5 overflow-hidden">
+        <div class="p-8 md:p-12 flex flex-col gap-4">
+          <h3 class="font-bold text-primary-accent my-0 text-xl md:text-2xl">
+            Voor tender inschrijvers
+          </h3>
+          <p class="my-0">
+            Vind je Laravel het beste platform voor de ontwikkeling van het (maatwerk)systeem? Leg dan in begrijpelijke taal uit waarom Laravel voldoet aan de eisen die gesteld zijn in de aanbesteding. Dit kun je doen op basis van de informatie op deze webpagina.
+          </p>
+          <p class="my-0">
+            Daarnaast vinden opdrachtgevers het prettig om te weten wat al (door jullie) is ontwikkeld in Laravel, dat lijkt op wat zij ook nodig hebben. Dit geeft vertrouwen dat Laravel een goede keuze is voor hun eigen systeem.
+          </p>
+        </div>
+        <div class="bg-[#FFEBE8] bg-center bg-cover h-40 md:h-56 w-full" style="background-image: url('/img/asset/Y2FzZXMvaW1hZ2UtMS5qcGc/image-1.jpg?fit=crop&w=1500&s=db491a53085694f9208249d1d1ab58b0');"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+{{# 7. FAQ — red-outlined cards with circular +/− icons #}}
+<section class="container py-16 md:py-24">
+  <div class="flex flex-col md:flex-row gap-8 md:gap-12 px-4 md:px-0">
+    <div class="w-full md:w-1/3">
+      <h2 class="font-bold text-primary-accent my-0 text-2xl md:text-3xl sticky top-24">
+        Veelgestelde vragen over Laravel
+      </h2>
+    </div>
+    <div class="w-full md:w-2/3 flex flex-col gap-6">
+      <div x-data="{ open: true }" class="bg-white rounded-xl border border-black/10 overflow-hidden">
+        <button type="button" @click="open = !open" :aria-expanded="open" class="w-full flex items-start justify-between gap-6 cursor-pointer p-6 md:p-8 text-left">
+          <span class="font-bold text-black text-lg md:text-xl leading-snug">Is (gedeeltelijk) maatwerk niet altijd duurder dan standaardsoftware?</span>
+          <span class="shrink-0 size-7 rounded-full border-2 border-primary-accent flex items-center justify-center text-primary-accent mt-0.5">
+            <svg class="size-3.5" x-show="open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12h14"/>
+            </svg>
+            <svg class="size-3.5" x-show="!open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 5v14"/>
+              <path d="M5 12h14"/>
+            </svg>
+          </span>
+        </button>
+        <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" :class="open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'">
+          <div class="overflow-hidden">
+            <div class="px-6 md:px-8 pb-6 md:pb-8 -mt-2 space-y-4">
+              <p class="my-0 leading-relaxed">
+                Standaardsoftware lijkt op het eerste gezicht goedkoper, maar brengt verborgen kosten met zich mee: maandelijkse licenties, aanpassingen omdat het systeem nooit helemaal past bij jouw werkwijze en afhankelijkheid van de keuzes en ontwikkelrichting van de leverancier. Je bent nooit de eigenaar, dus je hebt geen volledige controle over je systeem en data.
+              </p>
+              <p class="my-0 leading-relaxed">
+                Met Laravel betaal je vooral aan het begin. Daarna zijn de kosten beperkt tot onderhoud en hosting, zonder doorlopende licenties. En wat je laat bouwen is van jou en past precies bij jouw situatie en werkwijze. Je bepaalt je eigen roadmap, bent niet afhankelijk van wat een leverancier wel of niet doorontwikkelt én je kunt altijd overstappen naar een andere partij.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div x-data="{ open: false }" class="bg-white rounded-xl border border-black/10 overflow-hidden">
+        <button type="button" @click="open = !open" :aria-expanded="open" class="w-full flex items-start justify-between gap-6 cursor-pointer p-6 md:p-8 text-left">
+          <span class="font-bold text-black text-lg md:text-xl leading-snug">Laravel is een PHP-framework. Is PHP niet ouderwets?</span>
+          <span class="shrink-0 size-7 rounded-full border-2 border-primary-accent flex items-center justify-center text-primary-accent mt-0.5">
+            <svg class="size-3.5" x-show="open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12h14"/>
+            </svg>
+            <svg class="size-3.5" x-show="!open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 5v14"/>
+              <path d="M5 12h14"/>
+            </svg>
+          </span>
+        </button>
+        <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" :class="open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'">
+          <div class="overflow-hidden">
+            <div class="px-6 md:px-8 pb-6 md:pb-8 -mt-2">
+              <p class="my-0 leading-relaxed">
+                PHP draait al jaren een groot deel van het web (waaronder WordPress, Wikipedia en Facebook&rsquo;s oorsprong) en wordt nog altijd actief doorontwikkeld. Moderne PHP (PHP 8+) is snel, typeveilig en uitstekend geschikt voor enterprise toepassingen. Het Laravel-framework is bovendien een van de meest moderne en best onderhouden frameworks in de PHP-wereld.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div x-data="{ open: false }" class="bg-white rounded-xl border border-black/10 overflow-hidden">
+        <button type="button" @click="open = !open" :aria-expanded="open" class="w-full flex items-start justify-between gap-6 cursor-pointer p-6 md:p-8 text-left">
+          <span class="font-bold text-black text-lg md:text-xl leading-snug">Hoe weet ik of een Laravel-bureau betrouwbaar is?</span>
+          <span class="shrink-0 size-7 rounded-full border-2 border-primary-accent flex items-center justify-center text-primary-accent mt-0.5">
+            <svg class="size-3.5" x-show="open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12h14"/>
+            </svg>
+            <svg class="size-3.5" x-show="!open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 5v14"/>
+              <path d="M5 12h14"/>
+            </svg>
+          </span>
+        </button>
+        <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" :class="open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'">
+          <div class="overflow-hidden">
+            <div class="px-6 md:px-8 pb-6 md:pb-8 -mt-2">
+              <p class="my-0 leading-relaxed">
+                De Dutch Laravel Foundation stimuleert haar leden om te voldoen aan professionele standaarden zoals PSR-12 en het delen van best practices. Bekijk de lijst met aangesloten leden en vraag bij een bureau referenties op van vergelijkbare projecten en organisaties.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div x-data="{ open: false }" class="bg-white rounded-xl border border-black/10 overflow-hidden">
+        <button type="button" @click="open = !open" :aria-expanded="open" class="w-full flex items-start justify-between gap-6 cursor-pointer p-6 md:p-8 text-left">
+          <span class="font-bold text-black text-lg md:text-xl leading-snug">Ben ik vrij in de keuze van een hostingpartij bij het gebruik van Laravel?</span>
+          <span class="shrink-0 size-7 rounded-full border-2 border-primary-accent flex items-center justify-center text-primary-accent mt-0.5">
+            <svg class="size-3.5" x-show="open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12h14"/>
+            </svg>
+            <svg class="size-3.5" x-show="!open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 5v14"/>
+              <path d="M5 12h14"/>
+            </svg>
+          </span>
+        </button>
+        <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" :class="open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'">
+          <div class="overflow-hidden">
+            <div class="px-6 md:px-8 pb-6 md:pb-8 -mt-2">
+              <p class="my-0 leading-relaxed">
+                Ja. Laravel-systemen draaien op vrijwel elke moderne hostingomgeving: van Nederlandse hostingpartijen tot AWS, Azure, Google Cloud of je eigen servers. Je bent dus nooit afhankelijk van één hostingleverancier.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{# 8. Wat is de Dutch Laravel Foundation? #}}
+<section class="container py-12 md:py-24">
+  <div class="flex flex-col md:flex-row gap-8 lg:gap-32 px-4 md:px-0">
+    <div class="w-full md:w-1/2">
+      <h2 class="font-bold text-primary-accent text-2xl">Wat is de Dutch Laravel Foundation?</h2>
+      <p class="leading-relaxed">Wij maken Laravel bekender bij Nederlandse bedrijven en bevorderen Laravel-ontwikkelaars continu beter te worden door kennis te delen.
+Met goedkeuring van Taylor Otwell (grondlegger van Laravel) helpen wij Nederlandse bedrijven de juiste keuzes te maken bij maatwerksoftware.
+Wij hebben hierin geen commercieel belang maar wél de expertise om je te begeleiden naar de beste oplossing.</p>
+    </div>
+    <div class="w-full md:w-1/2 mt-4 md:mt-0">
+      <img class="h-full object-cover" src="/assets/img/larafest-sylvester-damgaard.jpg" alt="Laravel">
+    </div>
+  </div>
+  <div class="w-full flex px-4 md:px-0 flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-black/10 mt-4 md:mt-16">
+    <div class="w-full flex flex-col gap-4 md:px-10 py-8 md:py-0">
+      <div class="flex flex-col gap-3">
+        <img src="/assets/img/connecting.svg" alt="Wij verbinden" class="size-11">
+        <h3 class="my-0 font-bold text-[20px] text-primary-accent">Wij verbinden</h3>
+      </div>
+      <p class="mb-0">Wij brengen bedrijven in contact met de beste Laravel-ontwikkelaars in Nederland.</p>
+    </div>
+
+    <div class="w-full flex flex-col gap-4 md:px-10 py-8 md:py-0">
+      <div class="flex flex-col gap-3">
+        <img src="/assets/img/assuring-quality.svg" alt="Wij waarborgen de kwaliteit" class="size-11">
+        <h3 class="my-0 font-bold text-[20px] text-primary-accent">Wij waarborgen de kwaliteit</h3>
+      </div>
+      <p class="mb-0">Wij stimuleren dat onze leden voldoen aan professionele standaarden.</p>
+    </div>
+
+    <div class="w-full flex flex-col gap-4 md:px-10 py-8 md:py-0">
+      <div class="flex flex-col gap-3">
+        <img src="/assets/img/boosting-knowledge.svg" alt="Wij boosten technische kennis" class="size-11">
+        <h3 class="my-0 font-bold text-[20px] text-primary-accent">Wij boosten technische kennis</h3>
+      </div>
+      <p class="mb-0">Wij organiseren talks en events voor kennisuitwisseling tussen ontwikkelaars.</p>
+    </div>
+  </div>
+</section>
