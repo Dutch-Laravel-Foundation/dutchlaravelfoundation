@@ -39,6 +39,16 @@ sections:
           listable: hidden
           instructions_position: above
           read_only: false
+      -
+        handle: link_2
+        field:
+          display: 'Link (tweede knop)'
+          type: link
+          icon: link
+          listable: hidden
+          instructions: 'Optioneel. Vul in om een tweede knop te tonen.'
+          instructions_position: above
+          read_only: false
   sidebar:
     display: Sidebar
     fields:
@@ -74,6 +84,38 @@ sections:
           push_tags: false
           cast_booleans: false
           display: 'Knop stijl'
+          type: select
+          icon: select
+          listable: hidden
+          instructions_position: above
+          read_only: false
+      -
+        handle: button_text_2
+        field:
+          input_type: text
+          antlers: false
+          display: 'Knop tekst (tweede knop)'
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+          read_only: false
+      -
+        handle: button_style_2
+        field:
+          options:
+            primary: Primair
+            dark: Donker
+            light: Licht
+            light-alt: 'Licht (alternatief)'
+          multiple: false
+          max_items: 1
+          clearable: false
+          searchable: true
+          taggable: false
+          push_tags: false
+          cast_booleans: false
+          display: 'Knop stijl (tweede knop)'
           type: select
           icon: select
           listable: hidden

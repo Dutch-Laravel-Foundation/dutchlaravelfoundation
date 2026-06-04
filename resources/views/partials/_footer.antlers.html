@@ -2,10 +2,16 @@
     <div class="container !px-0 relative mx-auto {{ if call_to_action }} -mt-16 {{ /if }}"">
         {{ call_to_action }}
             <div class=" sm:px-6 lg:px-10" data-aos="fade-up" data-aos-delay="250">
-        {{ partial:blocks/base class="z-10 translate-y-16" :title="title" category="" }}
+        {{ partial:blocks/base class="z-10 translate-y-16" :title="title" category="" :link="false" }}
         <div class="flex flex-col items-center justify-between base:flex-row">
             <div class="w-full lg:w-2/3 3xl:w-7/12 4xl:w-1/2">{{ description }}</div>
-            <div class="w-full pt-6 pl-0 ml-auto base:pl-10 base:pt-0 sm:w-auto">
+            <div class="flex flex-col w-full gap-4 pt-6 pl-0 ml-auto base:flex-row base:pl-10 base:pt-0 sm:w-auto">
+                {{ if link_2 }}
+                    {{ partial:if_exists src="buttons/{ button_style_2 }" :link="link_2" class="w-full" button_class="w-full"
+                    background-class="" }}
+                    {{ button_text_2 }}
+                    {{ /partial:if_exists }}
+                {{ /if }}
                 {{ partial:if_exists src="buttons/{ button_style }" :link="link" class="w-full" button_class="w-full"
                 background-class="" }}
                 {{ button_text }}

@@ -34,14 +34,14 @@ content:
             content:
               -
                 type: text
-                text: 'Twijfel je welke partij het beste past bij jouw project? Maak het jezelf makkelijk en gebruik de knop "Match mijn project". Je beantwoordt een paar korte vragen en wij koppelen je aan één of meerdere leden die écht goed aansluiten bij jouw wensen en uitdaging.'
+                text: 'Twijfel je welke partij het beste past bij jouw project? Maak het jezelf makkelijk en gebruik de knop "Match je project". Je beantwoordt een paar korte vragen en wij koppelen je aan één of meerdere leden die écht goed aansluiten bij jouw wensen en uitdaging.'
           -
             type: set
             attrs:
               id: ctaMatchProject
               values:
                 type: cta_button
-                label: 'Match mijn project'
+                label: 'Match je project'
                 link: /aanvraag
         right:
           -
