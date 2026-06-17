@@ -16,9 +16,10 @@ city: Almelo
 province: Overijssel
 email: hello@adwise.nl
 website: www.adwise.nl
+video: https://www.youtube.com/watch?v=ecsSNeJwyKQ
 phone: "+31 546 80 74 80"
 updated_by: 28c0a799-7234-4581-b869-6eda5a36a8e2
-updated_at: 1781690173
+updated_at: 1781691741
 sbb: false
 published: true
 ---
