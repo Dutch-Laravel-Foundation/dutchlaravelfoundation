@@ -19,9 +19,10 @@ province: Noord-Holland
 email: info@superscanner.nl
 phone: 023-5836948
 website: superscanner.nl
-updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
-updated_at: 1772534069
+updated_by: 40793228-864a-4a7f-9ba1-b3b4dbd02791
+updated_at: 1782482800
 sbb: true
 internship_contact_name: 'Andries Mooij'
 internship_contact_email: a.mooij@gmail.com
+recruitment_website: superscanner.nl/nl/vacatures
 ---
