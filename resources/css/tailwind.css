@@ -158,6 +158,31 @@
 
     .vragenai-question-form textarea.vragenai-question-form__input {
         background-color: transparent !important;
+        box-shadow: none !important;
+        filter: none !important;
+    }
+
+    .vragenai-popup-container.vragenai-container {
+        position: fixed !important;
+        inset: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .vragenai-popup-container.vragenai-container .vragenai-popup {
+        margin: auto !important;
+        max-height: calc(100vh - 2rem) !important;
+        max-height: calc(100dvh - 2rem) !important;
+    }
+
+    .button-face-delayed-fill {
+        transition-property: transform, color, background-color, border-color !important;
+        transition-duration: 150ms, 150ms, 150ms, 150ms !important;
+        transition-timing-function: ease-in-out !important;
+        transition-delay: 0ms, 150ms, 150ms, 150ms !important;
     }
 
     .mt {
