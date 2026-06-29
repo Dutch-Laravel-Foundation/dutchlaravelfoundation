@@ -55,7 +55,12 @@
     <meta property="og:description" content="{{ meta_description_text }}">
     {{ /if }}
     {{ opengraph_image = opengraph:opengraph_image ?? "/og-image.png" }}
-    <meta property="og:image" content="{{ site:url }}{{ opengraph_image }}">
+    {{ if collection == "knowledge" || collection == "insights" }}
+        {{ if featured_image }}
+            {{ opengraph_image = featured_image:url }}
+        {{ /if }}
+    {{ /if }}
+    <meta property="og:image" content="{{ config:app:url }}{{ opengraph_image }}">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://use.typekit.net/oap5ojy.css">
