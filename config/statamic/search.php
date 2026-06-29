@@ -27,8 +27,8 @@ return [
 
         'default' => [
             'driver' => 'local',
-            'searchables' => ['collection:insights', 'collection:knowledge', 'collection:events', 'collection:internships', 'collection:cases'],
-            'fields' => ['title', 'excerpt', 'content'],
+            'searchables' => 'content',
+            'fields' => ['title'],
         ],
 
         // 'blog' => [

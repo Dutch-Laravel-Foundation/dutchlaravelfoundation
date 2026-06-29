@@ -25,7 +25,6 @@ class AddDiscoveryHeaders
         $response->headers->set('Link', implode(', ', [
             '<' . $base . '/llms.txt>; rel="llms-txt"',
             '<' . $base . '/sitemap.xml>; rel="sitemap"',
-            '<' . $base . '/.well-known/mcp.json>; rel="mcp"',
         ]));
 
         return $response;

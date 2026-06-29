@@ -32,15 +32,21 @@ class LlmsTxtTest extends TestCase
         $this->assertStringContainsString('## Insights', $body);
         $this->assertStringContainsString('## Events', $body);
         $this->assertStringContainsString('## Internships', $body);
-        $this->assertStringContainsString('## Programmatic access', $body);
+        $this->assertStringContainsString('## Markdown access', $body);
     }
 
-    public function testLlmsTxtAdvertisesMcpAndMarkdownNegotiation(): void
+    public function testLlmsTxtAdvertisesMarkdownNegotiation(): void
     {
         $body = $this->get('/llms.txt')->getContent();
 
-        $this->assertStringContainsString('/mcp', $body);
-        $this->assertStringContainsString('/.well-known/mcp.json', $body);
         $this->assertStringContainsString('Accept: text/markdown', $body);
+    }
+
+    public function testLlmsTxtLinksToExistingLaravelPageSlug(): void
+    {
+        $body = $this->get('/llms.txt')->getContent();
+
+        $this->assertStringContainsString('/wat-is-laravel.md', $body);
+        $this->assertStringNotContainsString('/what-is-laravel.md', $body);
     }
 }

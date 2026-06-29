@@ -26,14 +26,6 @@ class LinkHeadersTest extends TestCase
         $this->assertStringContainsString('/sitemap.xml', (string) $link);
     }
 
-    public function testHomepageAdvertisesMcpDiscovery(): void
-    {
-        $link = $this->get('/')->headers->get('Link');
-
-        $this->assertStringContainsString('rel="mcp"', (string) $link);
-        $this->assertStringContainsString('/.well-known/mcp.json', (string) $link);
-    }
-
     public function testLinkHeadersOnlyAppearOnHtmlResponses(): void
     {
         $link = $this->get('/robots.txt')->headers->get('Link');

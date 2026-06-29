@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
 
         $invalidate = function ($event): void {
             $handle = $event->entry->collectionHandle();
-            if (in_array($handle, ['insights', 'knowledge', 'events', 'internships', 'cases', 'pages', 'members', 'board', 'partners'], true)) {
+            if (in_array($handle, ['insights', 'knowledge', 'events', 'internships'], true)) {
                 Cache::forget(LlmsController::CACHE_KEY_INDEX);
                 Cache::forget(LlmsController::CACHE_KEY_FULL);
             }

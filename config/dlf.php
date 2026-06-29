@@ -21,7 +21,7 @@ return [
         'highlighted_pages' => [
             ['label' => 'Over ons', 'slug' => 'over-ons'],
             ['label' => 'Lid worden', 'slug' => 'lid-worden'],
-            ['label' => 'What is Laravel', 'slug' => 'what-is-laravel'],
+            ['label' => 'What is Laravel', 'slug' => 'wat-is-laravel'],
         ],
 
         // Max entries per auto section in llms.txt
