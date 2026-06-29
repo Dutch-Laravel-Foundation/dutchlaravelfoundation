@@ -63,7 +63,7 @@
     span.meta,
     span.meta-dark {
         @apply mb-3 text-xs font-semibold uppercase break-words md:text-xs text-tertiary-light;
-        @layer letter-spacing-[.12em];
+        letter-spacing: .12em;
     }
 
     span.meta-dark {
