@@ -29,6 +29,14 @@ class OpenGraphImageTest extends TestCase
         );
     }
 
+    public function testDefaultOpenGraphImageIsLargeEnoughForSocialCards(): void
+    {
+        [$width, $height] = getimagesize(public_path('og-image.png'));
+
+        $this->assertGreaterThanOrEqual(1200, $width);
+        $this->assertGreaterThanOrEqual(600, $height);
+    }
+
     public function testKnowledgeArticlesUseTheirFeaturedImageAsTheOpenGraphImage(): void
     {
         $entry = $this->firstArticleWithFeaturedImage('knowledge');
@@ -71,6 +79,28 @@ class OpenGraphImageTest extends TestCase
         );
     }
 
+    public function testPodcastEntriesUseTheirThumbnailAsTheSocialImage(): void
+    {
+        $entry = $this->firstPodcastWithThumbnail();
+
+        if ($entry === null) {
+            $this->markTestSkipped('No published podcast entry with a thumbnail URL present');
+        }
+
+        $response = $this->get($entry->url());
+        $thumbnailUrl = $entry->get('thumbnail_url');
+
+        $response->assertOk();
+        $this->assertStringContainsString(
+            '<meta property="og:image" content="' . $thumbnailUrl . '">',
+            $response->getContent(),
+        );
+        $this->assertStringContainsString(
+            '<meta name="twitter:image" content="' . $thumbnailUrl . '">',
+            $response->getContent(),
+        );
+    }
+
     private function firstArticleWithFeaturedImage(string $collection): ?Entry
     {
         return EntryRepository::query()
@@ -78,5 +108,14 @@ class OpenGraphImageTest extends TestCase
             ->where('published', true)
             ->get()
             ->first(fn (Entry $entry): bool => filled($entry->get('featured_image')));
+    }
+
+    private function firstPodcastWithThumbnail(): ?Entry
+    {
+        return EntryRepository::query()
+            ->where('collection', 'podcasts')
+            ->where('published', true)
+            ->get()
+            ->first(fn (Entry $entry): bool => filled($entry->get('thumbnail_url')));
     }
 }
