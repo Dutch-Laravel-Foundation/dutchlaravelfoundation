@@ -1,0 +1,41 @@
+<div class="translate-y-32 lg:translate-y-52 pb-32 md:pb-48">
+    <div class="container mb-auto mx-auto flex flex-col items-left justify-center relative">
+        <article id="content" class="mb-half">
+            <div class="relative w-full aspect-video mb-6 lg:mb-8 bg-secondary-light overflow-hidden">
+                {{ if video_url | is_embeddable }}
+                    <iframe class="absolute inset-0 w-full h-full" referrerpolicy="strict-origin-when-cross-origin" src="{{ video_url | embed_url }}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" allowfullscreen></iframe>
+                {{ else }}
+                    <video class="absolute inset-0 w-full h-full" src="{{ video_url | embed_url }}" controls></video>
+                {{ /if }}
+            </div>
+
+            <div class="relative w-full lg:w-11/12 lg:mx-auto bg-white min-h-[10rem] px-6 sm:px-0 lg:p-10 z-10" x-data="{ activeTab: 'description' }">
+                <span class="meta">Podcast</span>
+                <h1>{{ title }}</h1>
+                {{ if date }}
+                    <span class="block mb-8">{{ date format="d-m-Y" }}</span>
+                {{ /if }}
+
+                <div class="mb-10 flex flex-wrap gap-3 border-b border-secondary-light" role="tablist" aria-label="Podcast content">
+                    <button type="button" id="description-tab" class="px-4 py-3 font-bold cursor-pointer border-b-2" x-bind:class="activeTab === 'description' ? 'border-primary-accent text-primary-accent' : 'border-transparent text-black/50'" x-on:click="activeTab = 'description'" x-bind:aria-selected="activeTab === 'description'" aria-controls="description-panel" role="tab">
+                        Samenvatting
+                    </button>
+                    <button type="button" id="transcript-tab" class="px-4 py-3 font-bold cursor-pointer border-b-2" x-bind:class="activeTab === 'transcript' ? 'border-primary-accent text-primary-accent' : 'border-transparent text-black/50'" x-on:click="activeTab = 'transcript'" x-bind:aria-selected="activeTab === 'transcript'" aria-controls="transcript-panel" role="tab">
+                        Transcript
+                    </button>
+                </div>
+
+                <div id="description-panel" class="w-full" x-show="activeTab === 'description'" role="tabpanel" aria-labelledby="description-tab">
+                    {{ description }}
+                </div>
+
+                <div id="transcript-panel" class="w-full" x-show="activeTab === 'transcript'" role="tabpanel" aria-labelledby="transcript-tab" x-cloak>
+                    {{ transcript }}
+                </div>
+            </div>
+        </article>
+        <div class="flex w-full px-6 mx-auto mb lg:w-11/12 sm:px-0 lg:px-10">
+            {{ partial:buttons/light link="/{{ segment_1 }}" }}Naar alle podcasts{{ /partial:buttons/light }}
+        </div>
+    </div>
+</div>

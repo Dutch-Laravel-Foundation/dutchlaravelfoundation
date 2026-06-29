@@ -27,6 +27,11 @@
 - [{{ $item['title'] }}]({{ $item['url'] }}.md)
 @endforeach
 
+## Podcasts
+@foreach ($podcastItems as $item)
+- [{{ $item['title'] }}]({{ $item['url'] }}.md){!! $item['date'] ? ' — ' . $item['date'] : '' !!}
+@endforeach
+
 ## Markdown access
 - Append `.md` to any content URL, or send `Accept: text/markdown`
 - Full dump of content: {{ $base }}/llms-full.txt

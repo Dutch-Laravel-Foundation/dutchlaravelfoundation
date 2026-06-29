@@ -1,0 +1,33 @@
+<div class="translate-y-32 lg:translate-y-52 pb-32">
+    {{ partial:decoration/floor-background background="floor-top-knowledge" /}}
+    <div class="container mb-auto mx-auto flex flex-col items-left justify-center relative">
+        {{ content }}
+            {{ partial src="sets/autoload" }}
+        {{ /content }}
+
+        <div class="w-full md:w-3/4 lg:w-1/2 mb-half">
+            <p>Bekijk talks, interviews en andere video's ook direct op het <a href="https://www.youtube.com/@DutchLaravelFoundation" target="_blank" rel="noopener">Dutch Laravel Foundation YouTube-kanaal</a>.</p>
+        </div>
+
+        <section class="pb-10">
+            {{ if { collection:count in="podcasts" } > 0 }}
+                {{ collection:podcasts sort="date:desc" }}
+                    <div class="block-image-left-large group-image-hover relative flex flex-col lg:flex-row w-full mb" data-aos="fade-up" data-aos-delay="250">
+                        <figure class="w-full overflow-hidden lg:absolute bg-secondary-light h-96 lg:w-1/2">
+                            <img class="object-cover w-full h-full max-w-full max-h-full" src="{{ thumbnail_url }}" alt="{{ title }}">
+                        </figure>
+                        {{ partial:blocks/base class="lg:ml-[33.33333%] w-full lg:w-2/3 lg:mt-48 z-10 pb-16!" :title="title" link="/podcast/{ slug }" category="Podcast" }}
+                            <span class="block mb-4 text-sm text-black/50">{{ date format="d-m-Y" }}</span>
+                            <p>{{ summary }}</p>
+                            {{ partial:buttons/more link="/podcast/{ slug }" class="" button_class="" background_class="" }}
+                        {{ /partial:blocks/base }}
+                    </div>
+                {{ /collection:podcasts }}
+            {{ else }}
+                {{ partial:blocks/base class="w-full lg:w-11/12" title="Binnenkort beschikbaar" category="Podcast" }}
+                    <p>Nieuwe afleveringen verschijnen hier zodra de eerste video's met transcript zijn gepubliceerd.</p>
+                {{ /partial:blocks/base }}
+            {{ /if }}
+        </section>
+    </div>
+</div>

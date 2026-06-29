@@ -29,6 +29,11 @@ class EntryMarkdownRenderer
 
         $lines[] = '**URL:** ' . $entry->absoluteUrl();
 
+        $videoUrl = $this->fieldAsText($entry->get('video_url'));
+        if ($videoUrl !== '') {
+            $lines[] = '**Video:** ' . $videoUrl;
+        }
+
         $tags = $entry->get('tags');
         if (is_array($tags) && $tags !== []) {
             $lines[] = '**Tags:** ' . implode(', ', array_map('strval', $tags));
@@ -44,23 +49,49 @@ class EntryMarkdownRenderer
 
     private function body(Entry $entry): string
     {
+        if ($entry->collectionHandle() === 'podcasts') {
+            return $this->podcastBody($entry);
+        }
+
         foreach (['content', 'body', 'description', 'intro'] as $field) {
-            $raw = $entry->get($field);
+            $text = $this->fieldAsText($entry->get($field));
 
-            if ($raw === null || $raw === '' || $raw === []) {
-                continue;
+            if ($text !== '') {
+                return $text;
             }
-
-            if (is_array($raw)) {
-                // Bard field: array of ProseMirror nodes. Use flattenBardNodes for reliable
-                // text extraction that works regardless of whether sets are configured.
-                return trim($this->flattenBardNodes($raw));
-            }
-
-            return trim((string) $raw);
         }
 
         return '';
+    }
+
+    private function podcastBody(Entry $entry): string
+    {
+        $description = $this->fieldAsText($entry->get('description'));
+        $transcript = $this->fieldAsText($entry->get('transcript'));
+        $parts = [];
+
+        if ($description !== '') {
+            $parts[] = $description;
+        }
+
+        if ($transcript !== '') {
+            $parts[] = "## Transcript\n\n{$transcript}";
+        }
+
+        return implode("\n\n", $parts);
+    }
+
+    private function fieldAsText(mixed $raw): string
+    {
+        if ($raw === null || $raw === '' || $raw === []) {
+            return '';
+        }
+
+        if (is_array($raw)) {
+            return trim($this->flattenBardNodes($raw));
+        }
+
+        return trim((string) $raw);
     }
 
     /**

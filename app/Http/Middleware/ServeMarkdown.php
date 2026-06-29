@@ -22,6 +22,7 @@ class ServeMarkdown
         '/events/'    => 'events',
         '/stagebank/' => 'internships',
         '/cases/'     => 'cases',
+        '/podcast/'   => 'podcasts',
     ];
 
     public function handle(Request $request, Closure $next): Response

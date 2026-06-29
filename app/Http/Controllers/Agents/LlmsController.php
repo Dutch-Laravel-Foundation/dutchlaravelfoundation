@@ -43,6 +43,7 @@ class LlmsController extends Controller
             'insightsItems'   => $this->publishedEntries('insights', $limit),
             'eventsItems'     => $this->publishedEntries('events', $limit),
             'internshipItems' => $this->publishedEntries('internships', $limit),
+            'podcastItems'    => $this->publishedEntries('podcasts', $limit),
         ])->render();
     }
 
@@ -59,6 +60,7 @@ class LlmsController extends Controller
                 'Insights'       => $this->entriesFor('insights', $limit),
                 'Events'         => $this->entriesFor('events', $limit),
                 'Internships'    => $this->entriesFor('internships', $limit),
+                'Podcasts'       => $this->entriesFor('podcasts', $limit),
             ],
             'renderer' => $renderer,
         ])->render();

@@ -1,0 +1,85 @@
+title: Podcasts
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+              display: Titel
+          -
+            handle: summary
+            field:
+              display: 'Korte omschrijving'
+              instructions: 'Gebruik maximaal twee zinnen voor overzichtspagina’s.'
+              type: textarea
+              required: true
+              validate:
+                - required
+          -
+            handle: description
+            field:
+              display: 'Volledige omschrijving'
+              type: markdown
+              container: assets
+              required: true
+              validate:
+                - required
+          -
+            handle: video_url
+            field:
+              display: Video URL
+              type: video
+              required: true
+              validate:
+                - required
+          -
+            handle: thumbnail_url
+            field:
+              display: 'YouTube cover URL'
+              type: text
+              required: true
+              validate:
+                - required
+                - url
+          -
+            handle: transcript
+            field:
+              display: Transcript
+              type: markdown
+              container: assets
+              required: true
+              validate:
+                - required
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'
+          -
+            handle: date
+            field:
+              type: date
+              required: true
+              default: now
+              validate:
+                - required
+  seo:
+    display: SEO
+    sections:
+      -
+        fields:
+          -
+            import: seo
