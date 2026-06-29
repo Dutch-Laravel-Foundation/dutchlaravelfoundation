@@ -19,6 +19,14 @@ class OpenGraphImageTest extends TestCase
             '<meta property="og:image" content="' . config('app.url') . '/og-image.png">',
             $response->getContent(),
         );
+        $this->assertStringContainsString(
+            '<meta name="twitter:card" content="summary_large_image">',
+            $response->getContent(),
+        );
+        $this->assertStringContainsString(
+            '<meta name="twitter:image" content="' . config('app.url') . '/og-image.png">',
+            $response->getContent(),
+        );
     }
 
     public function testKnowledgeArticlesUseTheirFeaturedImageAsTheOpenGraphImage(): void
@@ -36,6 +44,10 @@ class OpenGraphImageTest extends TestCase
             '<meta property="og:image" content="' . config('app.url') . $entry->augmentedValue('featured_image')->value()->url() . '">',
             $response->getContent(),
         );
+        $this->assertStringContainsString(
+            '<meta name="twitter:image" content="' . config('app.url') . $entry->augmentedValue('featured_image')->value()->url() . '">',
+            $response->getContent(),
+        );
     }
 
     public function testNewsArticlesUseTheirFeaturedImageAsTheOpenGraphImage(): void
@@ -51,6 +63,10 @@ class OpenGraphImageTest extends TestCase
         $response->assertOk();
         $this->assertStringContainsString(
             '<meta property="og:image" content="' . config('app.url') . $entry->augmentedValue('featured_image')->value()->url() . '">',
+            $response->getContent(),
+        );
+        $this->assertStringContainsString(
+            '<meta name="twitter:image" content="' . config('app.url') . $entry->augmentedValue('featured_image')->value()->url() . '">',
             $response->getContent(),
         );
     }

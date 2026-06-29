@@ -61,6 +61,12 @@
         {{ /if }}
     {{ /if }}
     <meta property="og:image" content="{{ config:app:url }}{{ opengraph_image }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ if site_title }}{{ site_title }} - {{ /if }}{{ site_name }}">
+    {{ if meta_description_text }}
+    <meta name="twitter:description" content="{{ meta_description_text }}">
+    {{ /if }}
+    <meta name="twitter:image" content="{{ config:app:url }}{{ opengraph_image }}">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://use.typekit.net/oap5ojy.css">
