@@ -198,7 +198,7 @@
     echo "=========================================="
 
     echo "🧹 Clearing OPcache via PHP-FPM socket..."
-    cachetool opcache:reset --fcgi=/run/php/dutchlaravelfoundation.nl-php8.4-fpm.sock
+    cachetool opcache:reset --fcgi=/run/php/dutchlaravelfoundation.nl-php8.5-fpm.sock
     echo "✅ OPcache reset successfully"
     echo ""
 @endtask
