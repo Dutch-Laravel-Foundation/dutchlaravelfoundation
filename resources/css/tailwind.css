@@ -179,10 +179,35 @@
     }
 
     .button-face-delayed-fill {
-        transition-property: transform, color, background-color, border-color !important;
-        transition-duration: 150ms, 150ms, 150ms, 150ms !important;
-        transition-timing-function: ease-in-out !important;
-        transition-delay: 0ms, 150ms, 150ms, 150ms !important;
+        transition-property: transform, translate, scale, rotate, color, background-color, border-color !important;
+        transition-duration:
+            var(--default-transition-duration),
+            var(--default-transition-duration),
+            var(--default-transition-duration),
+            var(--default-transition-duration),
+            var(--default-transition-duration),
+            var(--default-transition-duration),
+            var(--default-transition-duration) !important;
+        transition-timing-function:
+            var(--default-transition-timing-function),
+            var(--default-transition-timing-function),
+            var(--default-transition-timing-function),
+            var(--default-transition-timing-function),
+            var(--default-transition-timing-function),
+            var(--default-transition-timing-function),
+            var(--default-transition-timing-function) !important;
+        transition-delay:
+            0ms,
+            0ms,
+            0ms,
+            0ms,
+            var(--default-transition-duration),
+            var(--default-transition-duration),
+            var(--default-transition-duration) !important;
+    }
+
+    :is(a, button).group:hover > .button-face-delayed-fill {
+        transition-delay: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms !important;
     }
 
     .mt {
