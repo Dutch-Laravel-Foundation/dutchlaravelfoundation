@@ -85,6 +85,19 @@ fields:
                               listable: hidden
                               instructions_position: above
                               read_only: false
+                      cta_button:
+                        display: 'CTA button'
+                        fields:
+                          -
+                            handle: label
+                            field:
+                              display: Label
+                              type: text
+                          -
+                            handle: link
+                            field:
+                              display: Link
+                              type: text
                 -
                   handle: right
                   field:

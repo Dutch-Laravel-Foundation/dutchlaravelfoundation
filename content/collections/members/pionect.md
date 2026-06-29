@@ -15,7 +15,10 @@ province: Zuid-Holland
 email: info@pionect.nl
 website: www.pionect.com
 phone: '+31 10 340 0308'
-updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
-updated_at: 1769758738
+updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
+updated_at: 1777373123
 recruitment_website: pionect.jobs/jobs-overview
+sbb: false
+internship_contact_name: 'Tomas van Rijsse'
+internship_contact_email: tomas@pionect.nl
 ---

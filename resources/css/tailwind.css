@@ -89,7 +89,7 @@
 
     #content ul,
     .content ul {
-        @apply pl-5 list-disc list-outside space-y-3;
+        @apply pl-5 list-[square] list-outside space-y-3;
     }
 
     #content ul li::marker,

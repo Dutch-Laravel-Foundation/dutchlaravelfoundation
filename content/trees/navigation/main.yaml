@@ -22,6 +22,10 @@ tree:
         id: 24bbe7cb-14f3-45a8-a12a-940006596de5
         entry: 7dda1138-c09a-48e6-8ea2-1dd34f083467
         title: 'Voordelen Laravel'
+      -
+        id: f4a92e8d-3b71-4c5e-9d68-1a2b3c4d5e6f
+        entry: acb86213-2b12-4ac7-ba9a-db8d9f021c82
+        title: Aanbestedingen
   -
     id: 8191f4bc-14a4-4911-a3d5-c9d282bb0946
     entry: 7840f9f9-3fba-4608-b877-250f18e634b2
@@ -49,6 +53,9 @@ tree:
         entry: 621e1068-bdee-4c09-b75c-7b95b0465a45
         title: Larabelles
       -
+        id: aaacab5f-a8a9-447d-a6f3-9a8c98008c13
+        entry: 599530a8-0398-4b27-806b-72196f8d80f0
+      -
         id: 11cdc56a-d8b5-45ce-9126-e0b8b1fdaa43
         entry: 35fe78ba-35d3-44a4-b514-55167c5e514c
       -
@@ -56,10 +63,16 @@ tree:
         entry: 03aa1ce0-5b6a-42bc-b339-4972338cdada
   -
     id: b2c3d4e5-6789-0abc-def1-222222222222
-    title: Studenten
+    title: Onderwijs
     url: '#'
     children:
       -
         id: c3d4e5f6-7890-1bcd-ef12-333333333333
         entry: stagebank-page
         title: Stagebank
+      -
+        id: bb954efa-0a13-446f-9dec-e718afb57be2
+        entry: ad21bc8a-e46a-4e99-93cf-1b112c7cc789
+      -
+        id: 3e574ed0-b305-4c8e-ac49-0899945488d6
+        entry: 23ab10f2-7db6-4c8b-b138-c73b73f7e557
