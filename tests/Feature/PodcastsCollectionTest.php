@@ -135,6 +135,52 @@ class PodcastsCollectionTest extends TestCase
         }
     }
 
+    public function testPodcastSummariesAndDescriptionsUseDutchCopy(): void
+    {
+        $paths = glob(base_path('content/collections/podcasts/*.md'));
+        $englishImportPhrases = [
+            '\bIn this (?:episode|interview)\b',
+            '\bRecorded live\b',
+            '\bLive from\b',
+            '\bWe (?:talk|discuss|dive)\b',
+            '\bThis episode\b',
+            '\bSteve works\b',
+            '\bTaylor Otwell on AI\b',
+            '\bfirst impressions\b',
+            '\bwhat we.?re excited\b',
+            '\bAI-mindset shifts\b',
+            '\bside projects\b',
+            '\bmanaging director\b',
+            '\bofficial Laravel Partner\b',
+            '\bprove their Laravel expertise\b',
+        ];
+
+        foreach ($paths as $path) {
+            $entry = $this->parseFrontMatter($path);
+
+            foreach (['summary', 'description'] as $field) {
+                $this->assertDoesNotMatchRegularExpression(
+                    '/'.implode('|', $englishImportPhrases).'/i',
+                    $entry[$field] ?? '',
+                    basename($path).': '.$field,
+                );
+            }
+        }
+
+        $steve = $this->parseFrontMatter(base_path(
+            'content/collections/podcasts/2026-03-04.steve-mcdougall-laravel-certification-explained-why-developers-and-employers-should-care.md',
+        ));
+
+        $this->assertStringContainsString(
+            'Live vanaf Laracon EU 2026 spreken we met Steve McDougall',
+            $steve['summary'],
+        );
+        $this->assertStringContainsString(
+            'Steve werkt aan het certificeringsinitiatief',
+            $steve['description'],
+        );
+    }
+
     public function testPodcastMarkdownIncludesVideoUrlAndTranscript(): void
     {
         $entry = new class implements Entry {
