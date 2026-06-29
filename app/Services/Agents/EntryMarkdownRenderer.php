@@ -34,6 +34,11 @@ class EntryMarkdownRenderer
             $lines[] = '**Video:** ' . $videoUrl;
         }
 
+        $spotifyUrl = $this->fieldAsText($entry->get('spotify_url'));
+        if ($spotifyUrl !== '') {
+            $lines[] = '**Spotify:** ' . $spotifyUrl;
+        }
+
         $tags = $entry->get('tags');
         if (is_array($tags) && $tags !== []) {
             $lines[] = '**Tags:** ' . implode(', ', array_map('strval', $tags));
