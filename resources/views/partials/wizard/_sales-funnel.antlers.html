@@ -7,7 +7,7 @@
     - sales_funnel_step_view: fired when a step becomes visible
     - sales_funnel_step_complete: fired when user advances past a step
     - sales_funnel_submit: fired on successful form submission
-    - sales_funnel_abandoned: fired on page unload if not submitted
+    - sales_funnel_abandonment: fired on page leave if not submitted
 #}}
 
 {{ form:sales_funnel redirect="/aanvraag/bedankt" }}
@@ -16,6 +16,7 @@
     x-data="salesFunnelWizard()"
     x-init="init()"
     @beforeunload.window="trackAbandonment()"
+    @visibilitychange.document="document.visibilityState === 'hidden' && trackAbandonment()"
     class="w-full"
 >
     {{# Hidden fields for Statamic form #}}
@@ -338,6 +339,10 @@
             step: 0,
             totalSteps: 6,
             submitted: false,
+            analyticsEnabled: {{ if environment === 'production' }}true{{ else }}false{{ /if }},
+            lastTrackedStepIndex: null,
+            hasTrackedSubmit: false,
+            hasTrackedAbandonment: false,
             lastCompletedStep: '0',
             stepLabels: ['Product', 'Omschrijving', 'Budget', 'Partner', 'Contact', 'Overzicht'],
             errors: {},
@@ -504,9 +509,19 @@
             },
 
             // GTM dataLayer tracking
-            trackStepView(stepIndex) {
+            pushAnalyticsEvent(payload) {
+                if (!this.analyticsEnabled) return;
+
                 window.dataLayer = window.dataLayer || [];
-                window.dataLayer.push({
+                window.dataLayer.push(payload);
+            },
+
+            trackStepView(stepIndex) {
+                if (this.lastTrackedStepIndex === stepIndex) return;
+
+                this.lastTrackedStepIndex = stepIndex;
+
+                this.pushAnalyticsEvent({
                     event: 'sales_funnel_step_view',
                     funnel_step: stepIndex + 1,
                     funnel_step_name: this.stepLabels[stepIndex],
@@ -514,8 +529,7 @@
             },
 
             trackStepComplete(stepIndex) {
-                window.dataLayer = window.dataLayer || [];
-                window.dataLayer.push({
+                this.pushAnalyticsEvent({
                     event: 'sales_funnel_step_complete',
                     funnel_step: stepIndex + 1,
                     funnel_step_name: this.stepLabels[stepIndex],
@@ -523,35 +537,28 @@
             },
 
             trackSubmit() {
+                if (this.hasTrackedSubmit) return;
+
                 this.submitted = true;
+                this.hasTrackedSubmit = true;
                 this.clearStorage();
-                window.dataLayer = window.dataLayer || [];
-                window.dataLayer.push({
+                this.pushAnalyticsEvent({
                     event: 'sales_funnel_submit',
-                    funnel_product: this.data.product,
-                    funnel_budget: this.data.budget,
-                    funnel_company_type: this.data.company_type,
+                    funnel_product: this.productLabel,
+                    funnel_budget: this.budgetLabel,
+                    funnel_company_type: this.companyTypeLabel,
                 });
             },
 
             trackAbandonment() {
-                if (this.submitted || this.step === 0) return;
+                if (this.submitted || this.step === 0 || this.hasTrackedAbandonment) return;
 
-                const payload = JSON.stringify({
-                    event: 'sales_funnel_abandoned',
+                this.hasTrackedAbandonment = true;
+                this.pushAnalyticsEvent({
+                    event: 'sales_funnel_abandonment',
                     funnel_step: this.step + 1,
                     funnel_step_name: this.stepLabels[this.step],
-                    funnel_last_completed_step: this.lastCompletedStep,
                 });
-
-                // sendBeacon is more reliable on page unload than dataLayer
-                if (navigator.sendBeacon) {
-                    navigator.sendBeacon('https://www.google-analytics.com/mp/collect', payload);
-                }
-
-                // Also push to dataLayer as fallback
-                window.dataLayer = window.dataLayer || [];
-                window.dataLayer.push(JSON.parse(payload));
             },
         };
     }
