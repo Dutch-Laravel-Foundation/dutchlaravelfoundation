@@ -12,9 +12,14 @@
             <div class="relative w-full lg:w-11/12 lg:mx-auto bg-white min-h-[10rem] px-6 sm:px-0 lg:p-10 z-10" x-data="{ activeTab: 'description' }">
                 <span class="meta">Podcast</span>
                 <h1>{{ title }}</h1>
-                {{ if date }}
-                    <span class="block mb-8">{{ date format="d-m-Y" }}</span>
+                {{ if published_at }}
+                    <span class="block mb-8">{{ published_at format="d-m-Y" }}</span>
                 {{ /if }}
+
+                <div class="mb-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                    {{ partial:buttons/youtube :link="video_url" class="w-full sm:w-auto" button_class="w-full sm:w-auto" }}YouTube{{ /partial:buttons/youtube }}
+                    {{ partial:buttons/spotify :link="spotify_url" class="w-full sm:w-auto" button_class="w-full sm:w-auto" }}Spotify{{ /partial:buttons/spotify }}
+                </div>
 
                 <div class="mb-10 flex flex-wrap gap-3 border-b border-secondary-light" role="tablist" aria-label="Podcast content">
                     <button type="button" id="description-tab" class="px-4 py-3 font-bold cursor-pointer border-b-2" x-bind:class="activeTab === 'description' ? 'border-primary-accent text-primary-accent' : 'border-transparent text-black/50'" x-on:click="activeTab = 'description'" x-bind:aria-selected="activeTab === 'description'" aria-controls="description-panel" role="tab">

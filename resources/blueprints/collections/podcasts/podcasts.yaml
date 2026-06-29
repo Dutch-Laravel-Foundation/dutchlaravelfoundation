@@ -40,6 +40,15 @@ tabs:
               validate:
                 - required
           -
+            handle: spotify_url
+            field:
+              display: Spotify URL
+              type: text
+              required: true
+              validate:
+                - required
+                - url
+          -
             handle: thumbnail_url
             field:
               display: 'YouTube cover URL'
@@ -72,6 +81,17 @@ tabs:
             handle: date
             field:
               type: date
+              display: Datum
+              required: true
+              default: now
+              validate:
+                - required
+          -
+            handle: published_at
+            field:
+              type: date
+              display: Publicatietijd
+              time_enabled: true
               required: true
               default: now
               validate:
