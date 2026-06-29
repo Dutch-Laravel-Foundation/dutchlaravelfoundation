@@ -1,13 +1,14 @@
 {
     "name": "vormkracht10/dutchlaravelfoundation",
+    "description": "Website for the Dutch Laravel Foundation.",
+    "license": "proprietary",
     "type": "project",
     "require": {
         "php": "^8.4",
         "aryehraber/statamic-captcha": "^1.16",
-        "laravel/framework": "^12.0",
-        "laravel/tinker": "^2.10",
+        "laravel/framework": "^13.0",
+        "laravel/tinker": "^3.0",
         "pecotamic/sitemap": "^1.4",
-        "rocketeers-app/rocketeers-laravel": "^2.1",
         "statamic/cms": "^6.0"
     },
     "require-dev": {

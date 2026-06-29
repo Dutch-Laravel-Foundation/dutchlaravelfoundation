@@ -16,7 +16,8 @@
         data-loop = "false"
         data-drag = "true"
 */
-import Swiper, { Autoplay, Navigation, Pagination } from 'swiper';
+import Swiper from 'swiper';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/autoplay';
 import 'swiper/css/navigation';
