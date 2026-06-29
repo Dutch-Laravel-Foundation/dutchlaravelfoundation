@@ -63,7 +63,7 @@
     span.meta,
     span.meta-dark {
         @apply mb-3 text-xs font-semibold uppercase break-words md:text-xs text-tertiary-light;
-        @layer letter-spacing-[.12em];
+        letter-spacing: .12em;
     }
 
     span.meta-dark {
@@ -158,6 +158,56 @@
 
     .vragenai-question-form textarea.vragenai-question-form__input {
         background-color: transparent !important;
+        box-shadow: none !important;
+        filter: none !important;
+    }
+
+    .vragenai-popup-container.vragenai-container {
+        position: fixed !important;
+        inset: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .vragenai-popup-container.vragenai-container .vragenai-popup {
+        margin: auto !important;
+        max-height: calc(100vh - 2rem) !important;
+        max-height: calc(100dvh - 2rem) !important;
+    }
+
+    .button-face-delayed-fill {
+        transition-property: transform, translate, scale, rotate, color, background-color, border-color !important;
+        transition-duration:
+            var(--default-transition-duration),
+            var(--default-transition-duration),
+            var(--default-transition-duration),
+            var(--default-transition-duration),
+            var(--default-transition-duration),
+            var(--default-transition-duration),
+            var(--default-transition-duration) !important;
+        transition-timing-function:
+            var(--default-transition-timing-function),
+            var(--default-transition-timing-function),
+            var(--default-transition-timing-function),
+            var(--default-transition-timing-function),
+            var(--default-transition-timing-function),
+            var(--default-transition-timing-function),
+            var(--default-transition-timing-function) !important;
+        transition-delay:
+            0ms,
+            0ms,
+            0ms,
+            0ms,
+            var(--default-transition-duration),
+            var(--default-transition-duration),
+            var(--default-transition-duration) !important;
+    }
+
+    :is(a, button).group:hover > .button-face-delayed-fill {
+        transition-delay: 0ms, 0ms, 0ms, 0ms, 0ms, 0ms, 0ms !important;
     }
 
     .mt {
