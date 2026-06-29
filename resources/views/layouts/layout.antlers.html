@@ -54,7 +54,7 @@
     {{ if meta_description_text }}
     <meta property="og:description" content="{{ meta_description_text }}">
     {{ /if }}
-    {{ opengraph_image = opengraph:opengraph_image ?? "/og-image.png" }}
+    {{ opengraph_image = opengraph:opengraph_image ?? "/og-image.jpg" }}
     {{ if collection == "knowledge" || collection == "insights" }}
         {{ if featured_image }}
             {{ opengraph_image = featured_image:url }}

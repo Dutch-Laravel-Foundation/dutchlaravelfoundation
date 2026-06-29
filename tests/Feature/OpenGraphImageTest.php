@@ -16,7 +16,7 @@ class OpenGraphImageTest extends TestCase
 
         $response->assertOk();
         $this->assertStringContainsString(
-            '<meta property="og:image" content="' . config('app.url') . '/og-image.png">',
+            '<meta property="og:image" content="' . config('app.url') . '/og-image.jpg">',
             $response->getContent(),
         );
         $this->assertStringContainsString(
@@ -24,17 +24,19 @@ class OpenGraphImageTest extends TestCase
             $response->getContent(),
         );
         $this->assertStringContainsString(
-            '<meta name="twitter:image" content="' . config('app.url') . '/og-image.png">',
+            '<meta name="twitter:image" content="' . config('app.url') . '/og-image.jpg">',
             $response->getContent(),
         );
     }
 
-    public function testDefaultOpenGraphImageIsLargeEnoughForSocialCards(): void
+    public function testDefaultOpenGraphImageIsAJpegLargeEnoughForSocialCards(): void
     {
-        [$width, $height] = getimagesize(public_path('og-image.png'));
+        [$width, $height, $type] = getimagesize(public_path('og-image.jpg'));
 
         $this->assertGreaterThanOrEqual(1200, $width);
         $this->assertGreaterThanOrEqual(600, $height);
+        $this->assertSame(IMAGETYPE_JPEG, $type);
+        $this->assertLessThan(5 * 1024 * 1024, filesize(public_path('og-image.jpg')));
     }
 
     public function testKnowledgeArticlesUseTheirFeaturedImageAsTheOpenGraphImage(): void
