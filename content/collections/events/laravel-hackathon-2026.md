@@ -8,11 +8,9 @@ type: Meetup
 location: SWIS
 address: '3e Binnenvestgracht 23T1 · Leiden'
 date_start: '2026-10-28 23:00'
-time_start: '09:00'
-time_end: '18:00'
 signup_link: 'https://www.meetup.com/dutchlaravelfoundation/events/315526780/?utm_medium=referral&utm_campaign=share-btn_savedevents_share_modal&utm_source=link&utm_version=v2&member_id=255973386'
 updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
-updated_at: 1783576309
+updated_at: 1783576362
 content:
   -
     type: paragraph
