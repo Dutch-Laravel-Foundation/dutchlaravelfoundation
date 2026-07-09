@@ -2,6 +2,7 @@
 id: 368ee00f-b4c3-4f68-85fc-4626183a5306
 blueprint: events
 title: 'Laravel Hackathon 2026'
+introduction: 'Ook dit jaar is er weer een heuze Laravel hackathon, dit keer bij bij DLF-lid SWIS te Leiden. De hackathon is toegankelijk voor leden van de Dutch Laravel Foundation, maar ook voor niet-leden. De toegang is gratis. De hackathon vindt plaats op donderdag 29 oktober 2026.'
 featured_image: hackathon.jpeg
 type: Meetup
 location: SWIS
@@ -11,7 +12,7 @@ time_start: '09:00'
 time_end: '18:00'
 signup_link: 'https://www.meetup.com/dutchlaravelfoundation/events/315526780/?utm_medium=referral&utm_campaign=share-btn_savedevents_share_modal&utm_source=link&utm_version=v2&member_id=255973386'
 updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
-updated_at: 1783576264
+updated_at: 1783576309
 content:
   -
     type: paragraph
