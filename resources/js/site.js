@@ -12,6 +12,7 @@ import shell from "highlight.js/lib/languages/shell";
 import sql from "highlight.js/lib/languages/sql";
 import xml from "highlight.js/lib/languages/xml";
 import typescript from "highlight.js/lib/languages/typescript";
+import yaml from "highlight.js/lib/languages/yaml";
 
 import "highlight.js/styles/github.css";
 
@@ -25,11 +26,10 @@ hljs.registerLanguage("shell", shell);
 hljs.registerLanguage("sql", sql);
 hljs.registerLanguage("xml", xml);
 hljs.registerLanguage("typescript", typescript);
+hljs.registerLanguage("yaml", yaml);
 
-window.addEventListener("load", (event) => {
-    document.querySelectorAll("pre code").forEach((el) => {
-        hljs.highlightElement(el);
-    });
+document.querySelectorAll("pre code").forEach((el) => {
+    hljs.highlightElement(el);
 });
 
 var header = document.querySelector("header"),

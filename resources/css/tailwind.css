@@ -9,6 +9,10 @@
 
 @config '../../tailwind.config.js';
 
+[x-cloak] {
+    display: none !important;
+}
+
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
@@ -24,10 +28,6 @@
     ::backdrop,
     ::file-selector-button {
         border-color: var(--color-gray-200, currentColor);
-    }
-
-    [x-cloak] {
-      display: none !important;
     }
 
     /* Main styling */
@@ -279,10 +279,6 @@
 
     .mb-half {
         @apply mb-10;
-    }
-
-    [x-cloak] {
-        display: none;
     }
 
     /* Bard content */

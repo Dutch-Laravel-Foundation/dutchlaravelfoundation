@@ -8,5 +8,6 @@ description: |-
   Bob is al ruim 30 jaar actief in softwareontwikkeling en werkt sinds 2015 met Laravel. Omdat hij zelf slechthorend is, merkt hij dagelijks hoe belangrijk digitale toegankelijkheid is.
 
   Naast softwareontwikkeling is Bob actief in het onderwijs, de zorg en het bedrijfsleven. Vanuit zijn eigen ervaring geeft hij workshops en gastlessen over inclusie rond handicaps.
+linkedin_url: 'https://www.linkedin.com/in/bobkosse/'
 website_url: 'https://www.ikverstajeniet.nl'
 ---

@@ -338,6 +338,8 @@
 }
 
 .dlf-member-detail-head__copy {
+    display: grid;
+    align-content: center;
     padding: 48px 40px 40px;
 }
 
@@ -346,6 +348,10 @@
     gap: 24px;
     margin: 0;
     padding-top: 8px;
+}
+
+.dlf-internship-detail-page .dlf-member-detail-head__copy .dlf-detail-properties {
+    padding-top: 16px;
 }
 
 .dlf-member-detail-head__website {
@@ -804,7 +810,7 @@
 
 .dlf-lid-benefit {
     min-width: 0;
-    padding: 26px;
+    padding: 48px 48px 26px;
     border-right: 1px solid var(--dlf-line);
     border-bottom: 1px solid var(--dlf-line);
     direction: ltr;
@@ -828,7 +834,7 @@
     display: block;
     margin-bottom: 5px;
     color: var(--dlf-ink);
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 600;
 }
 
@@ -902,15 +908,15 @@
 
 .dlf-lid-checkmark {
     display: grid;
-    width: 28px;
-    height: 28px;
+    width: 21px;
+    height: 21px;
     flex: none;
     place-items: center;
-    margin-top: 1px;
+    margin-top: 2px;
     color: var(--dlf-red);
     border-radius: 3px;
     background: var(--dlf-soft-red);
-    font-size: 17px;
+    font-size: 12.75px;
     font-weight: 700;
 }
 
@@ -1587,6 +1593,10 @@
 
     .dlf-lid-benefits::before {
         grid-row: 1 / 2;
+    }
+
+    .dlf-lid-benefit {
+        padding: 28px 24px 40px;
     }
 
     .dlf-lid-events-photo {

@@ -6,9 +6,6 @@
             <div class="dlf-member-detail-head__copy">
                 <span class="dlf-community-kicker">{{ type ?? "Lid" }}</span>
                 <h1 id="member-heading" class="dlf-community-title">{{ title }}</h1>
-                {{ if city || province }}
-                    <p class="dlf-community-intro">{{ arr({ city }, { province }) | remove_empty | list }}</p>
-                {{ /if }}
             </div>
 
             {{ if logo }}

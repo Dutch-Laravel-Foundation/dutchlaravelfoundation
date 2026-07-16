@@ -619,6 +619,8 @@ html.dlf-menu-open {
     flex-direction: column;
     flex: none;
     gap: 1px;
+    overflow: hidden;
+    border-radius: 2px;
 }
 
 .dlf-footer-recognized > span:first-child {
@@ -823,6 +825,7 @@ html.dlf-menu-open {
     align-self: flex-end;
     margin: 0;
     color: var(--dlf-copy);
+    font-size: 14px;
     text-align: right;
 }
 
