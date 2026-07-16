@@ -1,0 +1,58 @@
+title: 'DLF Beeld en tekst'
+fields:
+  -
+    handle: eyebrow
+    field:
+      display: Bovenregel
+      type: text
+  -
+    handle: heading
+    field:
+      display: Kop
+      type: text
+      validate:
+        - required
+  -
+    handle: body
+    field:
+      display: Tekst
+      type: bard
+      remove_empty_nodes: true
+  -
+    handle: image
+    field:
+      display: Afbeelding
+      type: assets
+      container: assets
+      mode: grid
+      max_files: 1
+  -
+    handle: image_position
+    field:
+      display: Beeldpositie
+      type: select
+      default: right
+      options:
+        right: Rechts
+        left: Links
+  -
+    handle: tone
+    field:
+      display: Achtergrond
+      type: select
+      default: white
+      options:
+        white: Wit
+        soft: Lichtgrijs
+        dark: Donker
+        red: Rood
+  -
+    handle: link_label
+    field:
+      display: Linktekst
+      type: text
+  -
+    handle: link
+    field:
+      display: Link
+      type: link

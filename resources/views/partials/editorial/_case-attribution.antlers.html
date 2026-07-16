@@ -1,0 +1,32 @@
+{{ if member:title || client:title }}
+    <section class="editorial-author editorial-case-attribution" aria-labelledby="case-attribution-title">
+        <span class="editorial-author__label">Projectinformatie</span>
+        <div class="editorial-author__grid">
+            <div class="editorial-author__content">
+                {{ if member:logo }}
+                    <div class="editorial-case-attribution__logo">
+                        <img src="{{ member:logo | first | url }}" alt="Logo van {{ member:title }}" loading="lazy">
+                    </div>
+                {{ /if }}
+                <div class="editorial-author__details">
+                    <h2 id="case-attribution-title">Over deze case</h2>
+                    <div class="editorial-author__bio">
+                        {{ if member:title }}
+                            <p><strong>Gerealiseerd door:</strong> {{ member:title }}</p>
+                        {{ /if }}
+                        {{ if client:title }}
+                            <p><strong>Opdrachtgever:</strong> {{ client:title }}</p>
+                        {{ /if }}
+                    </div>
+
+                    {{ if member:url }}
+                        <a class="dlf-btn editorial-author__link" href="{{ member:url }}">
+                            <span class="dlf-btn-face dlf-btn-face--red">Bekijk {{ member:title }}</span>
+                            <span class="dlf-btn-shadow dlf-btn-shadow--red" aria-hidden="true"></span>
+                        </a>
+                    {{ /if }}
+                </div>
+            </div>
+        </div>
+    </section>
+{{ /if }}

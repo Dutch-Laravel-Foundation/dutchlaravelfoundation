@@ -1,0 +1,69 @@
+title: 'DLF Voordelen'
+fields:
+  -
+    handle: eyebrow
+    field:
+      display: Bovenregel
+      type: text
+  -
+    handle: heading
+    field:
+      display: Kop
+      type: text
+      validate:
+        - required
+  -
+    handle: introduction
+    field:
+      display: Introductie
+      type: bard
+      remove_empty_nodes: true
+  -
+    handle: columns
+    field:
+      display: Kolommen
+      type: select
+      default: '3'
+      options:
+        '2': Twee
+        '3': Drie
+        '4': Vier
+  -
+    handle: features
+    field:
+      display: Voordelen
+      type: grid
+      mode: stacked
+      reorderable: true
+      add_row: 'Voordeel toevoegen'
+      fields:
+        -
+          handle: icon
+          field:
+            display: Icoon
+            type: assets
+            container: assets
+            mode: grid
+            max_files: 1
+        -
+          handle: heading
+          field:
+            display: Kop
+            type: text
+            validate:
+              - required
+        -
+          handle: body
+          field:
+            display: Tekst
+            type: markdown
+        -
+          handle: link_label
+          field:
+            display: Linktekst
+            type: text
+        -
+          handle: link
+          field:
+            display: Link
+            type: link

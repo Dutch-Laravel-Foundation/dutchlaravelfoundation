@@ -1,0 +1,59 @@
+{{ if authors }}
+    <section class="editorial-author editorial-author--knowledge" id="editorial-authors" data-knowledge-authors>
+        {{ authors }}
+            {{ if first }}
+                <span class="editorial-author__label">
+                    {{ if total_results > 1 }}Over de auteurs{{ else }}Over de auteur{{ /if }}
+                </span>
+
+                <div class="editorial-author__list{{ if total_results > 1 }} editorial-author__list--multiple{{ /if }}">
+            {{ /if }}
+
+            <article class="editorial-author__grid">
+                <div class="editorial-author__content">
+                    {{ if photo }}
+                        <div class="editorial-author__portrait">
+                            <img
+                                src="{{ glide src="{photo}" width="960" }}"
+                                alt="{{ photo:alt ?? title }}"
+                                loading="lazy"
+                            >
+                        </div>
+                    {{ /if }}
+
+                    <div class="editorial-author__details">
+                        <h2>{{ title }}</h2>
+                        {{ if job_title }}<p class="editorial-author__role">{{ job_title }}</p>{{ /if }}
+                        {{ if description }}<div class="editorial-author__bio">{{ description }}</div>{{ /if }}
+
+                        {{ if linkedin_url || website_url }}
+                            <div class="editorial-author__actions">
+                                {{ if linkedin_url }}
+                                    <a class="editorial-author__link" href="{{ linkedin_url }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn van {{ title }}">
+                                        <span class="editorial-author__link-face">
+                                            <img class="editorial-author__icon" src="/assets/redesign/socials/linkedin.svg" alt="">
+                                        </span>
+                                    </a>
+                                {{ /if }}
+                                {{ if website_url }}
+                                    <a class="editorial-author__link" href="{{ website_url }}" target="_blank" rel="noopener noreferrer" aria-label="Website van {{ title }}">
+                                        <span class="editorial-author__link-face">
+                                            <svg class="editorial-author__icon" viewBox="0 0 24 24" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                                                <path d="M3.5 12h17M12 3c2.2 2.5 3.4 5.5 3.4 9S14.2 18.5 12 21M12 3C9.8 5.5 8.6 8.5 8.6 12S9.8 18.5 12 21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                            </svg>
+                                        </span>
+                                    </a>
+                                {{ /if }}
+                            </div>
+                        {{ /if }}
+                    </div>
+                </div>
+            </article>
+
+            {{ if last }}
+                </div>
+            {{ /if }}
+        {{ /authors }}
+    </section>
+{{ /if }}

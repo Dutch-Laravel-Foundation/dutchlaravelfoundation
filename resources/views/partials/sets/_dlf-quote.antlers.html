@@ -1,0 +1,12 @@
+<figure class="dlf-block dlf-quote dlf-block--{{ tone ?? 'soft' }}">
+    {{ if image }}<img src="{{ glide src="{image}" fit="crop_focal" width="640" height="640" }}" alt="{{ image:alt ?? name }}" style="object-position: {{ image:focus_css }}">{{ /if }}
+    <div>
+        <blockquote>“{{ quote }}”</blockquote>
+        {{ if name || role }}
+            <figcaption>
+                {{ if name }}<strong>{{ name }}</strong>{{ /if }}
+                {{ if role }}<span>{{ role }}</span>{{ /if }}
+            </figcaption>
+        {{ /if }}
+    </div>
+</figure>

@@ -1,0 +1,31 @@
+{{ if author_name }}
+    <section class="editorial-author" id="editorial-author" data-editorial-author>
+        <span class="editorial-author__label">Over de auteur</span>
+        <div class="editorial-author__grid">
+            <div class="editorial-author__content">
+                {{ if author_image }}
+                    <div class="editorial-author__portrait">
+                        <img
+                            src="{{ glide src="{author_image}" width="480" }}"
+                            alt="{{ author_image:alt ?? author_name }}"
+                            loading="lazy"
+                        >
+                    </div>
+                {{ /if }}
+
+                <div class="editorial-author__details">
+                    <h2>{{ author_name }}</h2>
+                    {{ if author_role }}<p class="editorial-author__role">{{ author_role }}</p>{{ /if }}
+                    {{ if author_bio }}<div class="editorial-author__bio">{{ author_bio }}</div>{{ /if }}
+
+                    {{ if author_link }}
+                        <a class="dlf-btn editorial-author__link" href="{{ author_link }}" target="_blank" rel="noopener noreferrer">
+                            <span class="dlf-btn-face dlf-btn-face--red">Meer over {{ author_name }}</span>
+                            <span class="dlf-btn-shadow dlf-btn-shadow--red" aria-hidden="true"></span>
+                        </a>
+                    {{ /if }}
+                </div>
+            </div>
+        </div>
+    </section>
+{{ /if }}

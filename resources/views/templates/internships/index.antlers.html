@@ -1,209 +1,269 @@
-<div class="translate-y-32 lg:translate-y-52 pb-32 md:pb-48">
-    {{# Top background image #}}
-    {{ partial:decoration/floor-background background="floor-top-members" /}}
+{{ page_title = title }}
 
-    <div class="container mb-auto mx-auto flex flex-col items-left justify-center relative">
-        {{ content }}
-            {{ partial src="sets/autoload" }}
-        {{ /content }}
-
-        <div class="container mx-auto" x-data="loadInternships()" x-effect="document.body.classList.toggle('overflow-hidden', filterModalOpen)">
-            {{# Desktop: inline filters #}}
-            <div class="hidden base:block mr-[-2rem] ml-[-2rem] sm:mx-auto py-10 bg-secondary-light px-8 sm:px-10 sm:w-full" x-show="provinces.length > 1 || hasSbb">
-                <div class="flex flex-col items-baseline justify-between base:flex-row">
-                    <h2 class="block mb-8 base:mb-0">Wij helpen je zoeken!</h2>
-                    <div class="hidden base:block"><a class="font-bold" x-on:click="resetFilters()">Filters wissen</a></div>
-                </div>
-                <div class="flex flex-col w-full lg:grid lg:grid-cols-2 lg:gap-x-8">
-                    <div class="col-span-2 mt-8" x-show="provinces.length > 1">
-                        <span class="block meta-dark">Provincie</span>
-                        <div class="flex flex-wrap gap-2">
-                            <template x-for="province in provinces" :key="province">
-                                <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="provinces" :data-value="province" x-text="province" class="flex items-center justify-center w-full sm:w-auto h-12 px-8 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light  hover:text-tertiary-dark! hover:border-primary-accent opacity-80 hover:opacity-100 data-[checked=true]:bg-primary-accent data-[checked=true]:text-white! data-[checked=true]:border-primary-accent data-[checked=true]:opacity-100"></button>
-                            </template>
+<div
+    class="dlf-community-page dlf-internships-page"
+    x-data="loadInternships()"
+    x-effect="document.body.classList.toggle('overflow-hidden', filterModalOpen)"
+    @keydown.escape.window="closeFilterModal()"
+>
+    {{ content }}
+        {{ if type == "double_column" }}
+            <section class="dlf-community-section" aria-labelledby="internships-heading">
+                <div class="dlf-community-head">
+                    <div class="dlf-members-intro">
+                        <div>
+                            <span class="dlf-community-kicker">{{ page_title }}</span>
+                            <h1 id="internships-heading" class="dlf-community-title">{{ heading | strip_tags }}</h1>
                         </div>
-                    </div>
-                    <div class="mt-8" x-show="hasSbb">
-                        <span class="block meta-dark">SBB erkend</span>
-                        <div class="flex flex-wrap gap-2">
-                            <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="sbb" data-value="true" class="flex items-center justify-center w-full sm:w-auto h-12 px-8 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light hover:text-tertiary-dark! hover:border-primary-accent opacity-80 hover:opacity-100 data-[checked=true]:bg-primary-accent data-[checked=true]:text-white! data-[checked=true]:border-primary-accent data-[checked=true]:opacity-100">SBB erkend</button>
+                        <div class="dlf-members-intro__copy dlf-community-copy">
+                            {{ left }}
+                                {{ partial src="sets/autoload" }}
+                            {{ /left }}
+                            {{ right }}
+                                {{ partial src="sets/autoload" }}
+                            {{ /right }}
                         </div>
                     </div>
                 </div>
-                <div class="block w-full mt-8 text-left base:hidden sm:text-right"><a class="font-bold" x-on:click="resetFilters()">Filters wissen</a></div>
+            </section>
+        {{ /if }}
+    {{ /content }}
+
+    <section class="dlf-community-section" aria-label="Stages zoeken en filteren" x-cloak>
+        <div class="dlf-members-toolbar">
+            <div class="dlf-members-result-count" aria-live="polite">
+                <span x-text="resultLabel"></span>
             </div>
+            <button
+                type="button"
+                class="dlf-members-filter-button ml-auto"
+                x-ref="filterTrigger"
+                x-show="provinces.length > 1 || hasSbb"
+                @click="openFilterModal()"
+                :aria-expanded="filterModalOpen"
+                aria-haspopup="dialog"
+                aria-controls="internship-filter-dialog"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                    <path d="M2 4.75A.75.75 0 0 1 2.75 4h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 4.75ZM4 8a.75.75 0 0 1 .75-.75h6.5a.75.75 0 0 1 0 1.5h-6.5A.75.75 0 0 1 4 8Zm2.25 3.25a.75.75 0 0 0 0 1.5h3.5a.75.75 0 0 0 0-1.5h-3.5Z" />
+                </svg>
+                <span>Filters</span>
+                <span class="dlf-members-filter-count" x-show="activeFilterCount" x-text="activeFilterCount" x-cloak></span>
+            </button>
+        </div>
+    </section>
 
-            {{# Mobile: filter trigger + modal (teleported to body so fixed works outside translate parent) #}}
-            <div class="base:hidden mb-6" x-show="provinces.length > 1 || hasSbb">
-                <button type="button" x-on:click="filterModalOpen = true" class="flex items-center justify-center w-full h-14 px-6 text-sm font-bold uppercase border border-primary-accent bg-primary-accent text-white hover:bg-primary-accent/90 transition-colors">
-                    <span x-text="activeFilterCount > 0 ? 'Filters (' + activeFilterCount + ')' : 'Filters'"></span>
+    <section class="dlf-members-fallback" aria-label="Beschikbare stages" x-show="false">
+        <div class="dlf-members-grid">
+            {{ collection:internships }}
+                {{ if member }}
+                    <a class="dlf-member-card" href="{{ url }}">
+                        <span class="dlf-member-card__logo">
+                            {{ if member:logo }}<img src="{{ member:logo | first | url }}" alt="" loading="lazy">{{ /if }}
+                        </span>
+                        <span class="dlf-member-card__body">
+                            <span class="dlf-member-card__name">{{ title }}</span>
+                            <span class="dlf-member-card__location">{{ member:city }}{{ if member:city && member:province }}, {{ /if }}{{ member:province }}</span>
+                        </span>
+                    </a>
+                {{ /if }}
+            {{ /collection:internships }}
+        </div>
+    </section>
+
+    <div class="dlf-members-empty" x-show="filteredInternships.length === 0" x-cloak aria-live="polite">
+        Er zijn geen stages gevonden die voldoen aan je zoekopdracht.
+    </div>
+
+    <section aria-label="Beschikbare stages" x-show="filteredInternships.length > 0" x-cloak>
+        <div class="dlf-members-grid">
+            <template x-for="item in filteredInternships" :key="item.id">
+                <a class="dlf-member-card" :href="item.url">
+                    <span class="dlf-member-card__logo">
+                        <img x-show="item.logo" :src="item.logo" alt="" loading="lazy">
+                    </span>
+                    <span class="dlf-member-card__body">
+                        <span class="dlf-member-card__name" x-text="item.title"></span>
+                        <span class="dlf-member-card__location" x-text="location(item)"></span>
+                    </span>
+                </a>
+            </template>
+        </div>
+    </section>
+
+    <div class="dlf-members-modal" x-show="filterModalOpen" x-transition.opacity x-cloak @click.self="closeFilterModal()">
+        <div
+            id="internship-filter-dialog"
+            class="dlf-members-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="internship-filter-title"
+            @keydown.tab="trapFilterFocus($event)"
+        >
+            <div class="dlf-members-dialog__head">
+                <h2 id="internship-filter-title">Wij helpen je zoeken!</h2>
+                <button
+                    type="button"
+                    class="dlf-members-dialog__close"
+                    x-ref="filterClose"
+                    @click="closeFilterModal()"
+                    aria-label="Filters sluiten"
+                >&times;</button>
+            </div>
+            <div class="dlf-members-dialog__body">
+                <div class="dlf-members-filter-group" x-show="provinces.length > 1">
+                    <span class="dlf-community-kicker">Provincie</span>
+                    <div class="dlf-members-filter-options">
+                        <template x-for="province in provinces" :key="province">
+                            <button
+                                type="button"
+                                class="dlf-members-chip"
+                                :class="{ 'is-active': filter.provinces.includes(province) }"
+                                :aria-pressed="filter.provinces.includes(province)"
+                                @click="toggleFilter('provinces', province)"
+                                x-text="province"
+                            ></button>
+                        </template>
+                    </div>
+                </div>
+                <div class="dlf-members-filter-group" x-show="hasSbb">
+                    <span class="dlf-community-kicker">Erkenning</span>
+                    <div class="dlf-members-filter-options">
+                        <button
+                            type="button"
+                            class="dlf-members-chip"
+                            :class="{ 'is-active': filter.sbb.includes('true') }"
+                            :aria-pressed="filter.sbb.includes('true')"
+                            @click="toggleFilter('sbb', 'true')"
+                        >SBB erkend</button>
+                    </div>
+                </div>
+            </div>
+            <div class="dlf-members-dialog__foot">
+                <button type="button" class="dlf-members-clear" @click="resetFilters()">Filters wissen</button>
+                <button type="button" class="dlf-community-button" style="width: 196px" @click="closeFilterModal()">
+                    <span class="dlf-community-button__face" x-text="'Toon ' + resultLabel"></span>
+                    <span class="dlf-community-button__back" aria-hidden="true"></span>
                 </button>
             </div>
-            <template x-teleport="body">
-                <div class="filter-modal base:hidden fixed inset-0 overflow-visible" x-show="filterModalOpen" x-cloak>
-                    <div class="filter-modal-backdrop" x-on:click="filterModalOpen = false" aria-hidden="true"></div>
-                    <div class="filter-modal-panel">
-                        <div class="flex shrink-0 items-center justify-between border-b border-tertiary-light/30 px-6 py-4">
-                            <h2 class="text-lg font-bold text-tertiary-dark">Wij helpen je zoeken!</h2>
-                            <button type="button" x-on:click="filterModalOpen = false" class="p-2 -mr-2 text-tertiary-regular hover:text-tertiary-dark" aria-label="Sluiten">&times;</button>
-                        </div>
-                        <div class="flex-1 overflow-y-auto px-6 py-6">
-                            <div class="flex flex-col w-full gap-6">
-                                <div x-show="provinces.length > 1">
-                                    <span class="block meta-dark">Provincie</span>
-                                    <div class="flex flex-wrap gap-2 mt-2">
-                                        <template x-for="province in provinces" :key="province">
-                                            <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="provinces" :data-value="province" x-text="province" class="flex items-center justify-center h-12 px-6 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light hover:text-tertiary-dark! hover:border-primary-accent opacity-80 hover:opacity-100 data-[checked=true]:bg-primary-accent data-[checked=true]:text-white! data-[checked=true]:border-primary-accent data-[checked=true]:opacity-100"></button>
-                                        </template>
-                                    </div>
-                                </div>
-                                <div x-show="hasSbb">
-                                    <span class="block meta-dark">SBB erkend</span>
-                                    <div class="flex flex-wrap gap-2 mt-2">
-                                        <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="sbb" data-value="true" class="flex items-center justify-center h-12 px-6 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light hover:text-tertiary-dark! hover:border-primary-accent opacity-80 hover:opacity-100 data-[checked=true]:bg-primary-accent data-[checked=true]:text-white! data-[checked=true]:border-primary-accent data-[checked=true]:opacity-100">SBB erkend</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-6"><a class="font-bold" x-on:click="resetFilters()">Filters wissen</a></div>
-                        </div>
-                        <div class="shrink-0 border-t border-tertiary-light/30 p-4">
-                            <button type="button" x-on:click="filterModalOpen = false" class="flex w-full items-center justify-center h-14 px-6 text-sm font-bold text-white uppercase bg-primary-accent hover:bg-primary-accent/90 transition-colors" x-text="'Toon ' + filteredInternships.length + ' stages'"></button>
-                        </div>
-                    </div>
-                </div>
-            </template>
-            <div class="relative flex flex-wrap overflow-visible md:pt-5 mb">
-                <div x-show="filteredInternships.length === 0" class="w-full p-6 mt-6 text-center border lg:p-10 lg:mt-10 border-secondary-light">
-                    Er zijn geen stages gevonden die voldoen aan je zoekopdracht.
-                </div>
-                <template x-for="item in filteredInternships" :key="item.id">
-                    <div class="w-full pt-10 pb-5 sm:p-10 sm:w-1/2 xl:w-1/3" data-aos="fade-up" data-aos-delay="250">
-                        <div class="flex flex-col w-full bg-white group-image-hover">
-                            <a x-bind:href="'/stagebank/' + item.slug">
-                                <figure class="flex items-center justify-center w-full h-64 overflow-hidden bg-linear-to-b from-white to-secondary-light">
-                                    <img x-show="item.member_logo" class="block max-w-[66%] max-h-[66%]" :src="item.member_logo" :alt="item.member_title">
-                                </figure>
-                            </a>
-                            <div class="relative w-full p-10 min-h-40 pb-16!">
-                                <a x-bind:href="'/stagebank/' + item.slug">
-                                    <div class="flex flex-col w-full">
-                                        <h4 class="block w-full mb-[.3rem]" x-text="item.title"></h4>
-                                        <span class="meta text-primary-accent" x-text="item.city + (item.province ? ', ' + item.province: '')"></span>
-                                    </div>
-                                </a>
-                                <a x-bind:href="'/stagebank/' + item.slug" class="flex h-12 items-center justify-center group absolute! right-0 bottom-0 ">
-                                    <div class="z-20 flex items-center justify-center w-12 h-full px-8 text-xs font-bold text-white uppercase transition-transform whitespace-nowrap group-hover:-translate-x-1 group-hover:-translate-y-1 bg-primary-accent aspect-square ">&gt;</div>
-                                    <div class="absolute bottom-0 right-0 z-10 w-full h-full border border-primary-accent "></div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </template>
-
-                {{# Background image #}}
-                <div x-show="filteredInternships.length > 10" class="absolute z-[-1] h-full w-full flex items-center left-[-10rem] top-0">
-                    <div>
-                        <img src="/assets/img/backgrounds/floor-mid-gray.svg" class="w-[1120px] h-[900px]">
-                    </div>
-                </div>
-            </div>
         </div>
+    </div>
+
+    <div id="internships-data" hidden>
+        {{ collection:internships }}
+            {{ if member }}
+                <i
+                    data-internship
+                    data-id="{{ id }}"
+                    data-slug="{{ slug }}"
+                    data-url="{{ url }}"
+                    data-title="{{ title | entities }}"
+                    data-member-id="{{ member:id }}"
+                    data-member-title="{{ member:title | entities }}"
+                    data-logo="{{ if member:logo }}{{ member:logo | first | url }}{{ /if }}"
+                    data-employees="{{ member:employees | entities }}"
+                    data-province="{{ member:province | entities }}"
+                    data-city="{{ member:city | entities }}"
+                    data-sbb="{{ member:sbb ? 'true' : 'false' }}"
+                ></i>
+            {{ /if }}
+        {{ /collection:internships }}
     </div>
 </div>
 
 <script>
-var internships = [
-    {{ collection:internships }}
-    {{ if member }}
-    {
-        id: '{{ id }}',
-        slug: '{{ slug }}',
-        title: '{{ title | replace("'", "\\'") }}',
-        member_id: '{{ member:id }}',
-        member_title: '{{ member:title | replace("'", "\\'") }}',
-        member_logo: '{{ if member:logo }}{{ member:logo | first | url }}{{ /if }}',
-        employees: '{{ member:employees }}',
-        province: '{{ member:province }}',
-        city: '{{ member:city }}',
-        sbb: {{ member:sbb ? 'true' : 'false' }}
-    }{{ !last ?= ',' }}
-    {{ /if }}
-    {{ /collection:internships }}
-],
-provinces = internships.map((obj) => { return obj.province; }).filter((item, index, arr) => { return item && item.length > 0 && arr.indexOf(item) == index; }).sort();
-
 function loadInternships() {
-    var hasSbb = internships.some(function(item) { return item.sbb === true || item.sbb === 'true'; });
+    const internships = Array.from(document.querySelectorAll('#internships-data [data-internship]'))
+        .map((element) => ({ ...element.dataset }));
+
+    const provinces = [...new Set(internships.map((internship) => internship.province).filter(Boolean))]
+        .sort((left, right) => left.localeCompare(right, 'nl'));
 
     return {
         filterModalOpen: false,
-        dataToFilter: internships,
-        provinces: provinces,
-        hasSbb: hasSbb,
+        internships,
+        provinces,
+        hasSbb: internships.some((internship) => internship.sbb === 'true'),
         filter: {
             provinces: [],
             sbb: [],
         },
-        // Reset all filters to show all internships
+        openFilterModal() {
+            this.filterModalOpen = true;
+            this.$nextTick(() => this.$refs.filterClose?.focus());
+        },
+        closeFilterModal() {
+            if (!this.filterModalOpen) {
+                return;
+            }
+
+            this.filterModalOpen = false;
+            this.$nextTick(() => this.$refs.filterTrigger?.focus());
+        },
+        trapFilterFocus(event) {
+            const focusable = Array.from(event.currentTarget.querySelectorAll(
+                'button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'
+            )).filter((element) => element.offsetParent !== null);
+
+            if (focusable.length === 0) {
+                return;
+            }
+
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+
+            if (event.shiftKey && document.activeElement === first) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault();
+                first.focus();
+            }
+        },
+        toggleFilter(group, value) {
+            const index = this.filter[group].indexOf(value);
+
+            if (index === -1) {
+                this.filter[group].push(value);
+
+                return;
+            }
+
+            this.filter[group].splice(index, 1);
+        },
         resetFilters() {
             this.filter = {
                 provinces: [],
                 sbb: [],
             };
-            const checkedFilters = document.querySelectorAll('button[data-checked="true"]');
-            for (let i = 0; i < checkedFilters.length; i++) {
-                checkedFilters[i].setAttribute('data-checked', false);
-            }
         },
-        // Update the filter
-        updateFilter(target) {
-            const checked = target.getAttribute('data-checked'),
-                type = target.getAttribute('data-type'),
-                value = target.getAttribute('data-value');
-
-            // Toggle checked state for the clicked element
-            target.setAttribute('data-checked', checked == 'false');
-
-            // Add or remove the value from the filter
-            if (this.filter[type].includes(value)) {
-                this.filter[type].splice(this.filter[type].indexOf(value), 1);
-            } else {
-                this.filter[type].push(value);
-            }
+        location(internship) {
+            return [internship.city, internship.province].filter(Boolean).join(', ');
         },
-        // Check if conditions match
-        checkFilter(type, value) {
-            return (this.filter[type].length == 0 || (this.filter[type].length > 0 && this.filter[type].includes(value)));
-        },
-        // Loop to check all filters
-        checkFilters(item) {
-            var sbbMatch = this.filter.sbb.length === 0 || (this.filter.sbb.length > 0 && this.filter.sbb.includes('true') && (item.sbb === true || item.sbb === 'true'));
-            return this.checkFilter('provinces', item.province)
-                && sbbMatch;
-        },
-        // Check if all filters are empty
-        allFiltersEmpty() {
-            return this.filter.provinces.length === 0
-                && this.filter.sbb.length === 0;
-        },
-        // Number of selected filter values (for mobile button badge)
         get activeFilterCount() {
             return this.filter.provinces.length + this.filter.sbb.length;
         },
-        // Return filtered internship data
         get filteredInternships() {
-            if (this.allFiltersEmpty()) {
-                return this.dataToFilter;
-            }
+            return this.internships.filter((internship) => {
+                const provinceMatches = this.filter.provinces.length === 0
+                    || this.filter.provinces.includes(internship.province);
+                const sbbMatches = this.filter.sbb.length === 0
+                    || internship.sbb === 'true';
 
-            return [
-                ...new Set(
-                    this.dataToFilter.filter((item) => {
-                        return this.checkFilters(item);
-                    })
-                )
-            ];
-        }
+                return provinceMatches && sbbMatches;
+            });
+        },
+        get resultLabel() {
+            const count = String(this.filteredInternships.length).padStart(2, '0');
+
+            return count + (this.filteredInternships.length === 1 ? ' stage' : ' stages');
+        },
     };
 }
 </script>
+
+{{ content }}
+    {{ unless type == "double_column" }}
+        {{ partial src="sets/autoload" }}
+    {{ /unless }}
+{{ /content }}
