@@ -12,7 +12,8 @@ Extend the established redesign instead of inventing a parallel page system. Mat
 1. Work from the Git repository root containing this skill. Confirm the current branch/worktree and preserve all unrelated and uncommitted work.
 2. Read the final corrections in [foundations.md](references/foundations.md), then scan the map and selected family in [page-families.md](references/page-families.md). Load other sections only when relevant.
 3. Inspect the target entry, its closest canonical rendered page, that page's blueprint, Antlers template/partials, scoped CSS, and interaction JavaScript before editing.
-4. Use Orbit for the project lifecycle and `https://new-design.dutchlaravelfoundation.test` for browser review.
+4. Record the reported viewport and whether the direction is viewport-specific. Measure the target and its nearest alignment/spacing reference in the browser before changing CSS.
+5. Use Orbit for the project lifecycle and `https://new-design.dutchlaravelfoundation.test` for browser review unless the task explicitly excludes Orbit.
 
 Resolve conflicts in this order:
 
@@ -45,9 +46,11 @@ Keep author-controlled content in the host family's existing Bard stream. The re
 - Continue the 1152px bordered rail and its flush grids. Assign each divider to one edge so adjacent cells do not create double borders or gaps.
 - Let one page family own the shell. A shared block may own its internal `dlf-*` classes and button, but do not import a second page-family namespace. Do not introduce another root token set, container primitive, button system, or near-duplicate component.
 - Use balanced section padding and the established spacing scale. Avoid generic oversized whitespace or card padding.
+- Express alignment as an invariant: name the shared edge, gap, height, or padding that must match. Use existing rail insets or spacing tokens instead of visually close one-off values.
 - Keep body copy consistent with the homepage; headings are semibold. Remove content-authored `<br>` elements and embedded bold styling when layout or hierarchy should provide the emphasis.
 - Preserve supplied SVG/icon geometry and the asset family already used by the page family. Recolor existing artwork; never replace it with an approximation.
-- Treat desktop, tablet, and mobile as designed states. Collapse deliberately, preserve useful content, and keep mobile-only rules from leaking upward.
+- Treat desktop, tablet, and mobile as designed states. Scope a viewport-specific correction inside the narrowest matching media query, preserve useful content, and keep mobile-only rules from leaking upward.
+- Apply a repeated-item correction to the whole owning grid or component state, not only the selected example. Keep intentional first/last-item differences explicit.
 
 ## Avoid redesign drift
 
@@ -55,12 +58,13 @@ Do not add generic intro stripes, floating divider fragments, isolated decorativ
 
 ## Validate before handoff
 
-Use the `agent-browser` skill after frontend changes. Check at approximately 1440px, 768px, and 390px, plus the breakpoints affected by the change.
+Use the `agent-browser` skill after frontend changes. Start at the exact reported viewport, then check both sides of every affected breakpoint and one unaffected control viewport. For a mobile-only task, desktop is a required regression check.
 
 Verify:
 
 - header, navigation, footer, and full-page border continuity;
-- content order, grid collapse, padding, image crop, and horizontal overflow;
+- content order, grid collapse, equal or intentionally unequal padding, image crop, and horizontal overflow;
+- computed insets, gaps, line heights, and bounding boxes against the reference element named in the feedback;
 - hover, focus, keyboard, form, menu, filter, FAQ, and other changed interactions;
 - header-aware sticky behavior and TOC active state while scrolling;
 - reduced motion, semantic landmarks, heading order, alt text, and contrast;

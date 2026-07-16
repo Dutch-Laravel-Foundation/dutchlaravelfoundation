@@ -49,6 +49,9 @@ If editors must repeat/reorder content that no compatible set represents, first 
 
 - Start ordinary pages from `templates/default`: white unstriped intro, 1152px outer rail, narrow prose, reduced desktop TOC, and footer-owned CTA.
 - Keep author/facts/media/related content in the order of the closest detail type. Remove authored line breaks and visual bold.
+- Keep long-form prose at the established `38rem` measure when the TOC is hidden on tablet; only shrink when the viewport and page inset require it.
+- On index pages, use the shared horizontally scrollable mobile filter row with its right-edge fade and the shared one-line `newer / count / older` pagination. Keep list-ending space balanced before the footer CTA.
+- Reuse the detail page's author portrait and channel-button treatments on related index/summary surfaces rather than rebuilding lighter substitutes.
 - A logo-led split hero may follow `/larabelles` only when co-branding is central. Add a TOC only by adopting the established long-form template/behavior, never a second script.
 - Reuse contact/newsletter form semantics and improve ARIA links when needed.
 
@@ -56,6 +59,8 @@ If editors must repeat/reorder content that no compatible set represents, first 
 
 - Preserve the contiguous bordered grid and current filter/form behavior.
 - Mobile becomes one ordered flow without losing labels, organization data, or actions.
+- Align desktop card contents to the section-head inset. Apply card padding and border corrections to every item in the owning grid, including first/last and odd/even variants.
+- Keep member locations structured as city plus a non-breaking province span. If the location wraps, match its line height to the compact card typography rather than the prose default.
 - Use the community button family and align benefits/forms/CTA to its rail.
 
 ### Acquisition

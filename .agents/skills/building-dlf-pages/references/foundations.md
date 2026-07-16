@@ -55,9 +55,17 @@ Diagonal stripes belong to the homepage, global footer/CTA, deliberate red/black
 ## Layout and responsive behavior
 
 - Build a contiguous rail/grid: no arbitrary gaps, double borders, or rules stopping short. Give a grid top/left edges and cells right/bottom edges, or copy the family's equivalent ownership.
-- Prefer balanced top/bottom space and baseline alignment over generic large padding. Common compact/ordinary gaps are 12/24px; larger regions use 32–48px.
+- Treat alignment and spacing as measurable relationships. Content that shares a rail should share its horizontal edge; repeated cards should share padding; adjacent block gaps should match their outer inset when requested.
+- Prefer equal top/bottom padding unless the composition has a documented reason to differ. Include the final item and the space before the next section; do not stop checking at the last line of content.
+- Common compact/ordinary gaps are 12/24px; larger regions use 32–48px. Reuse the exact owning component value rather than introducing a visually approximate number.
 - Main collapse occurs around 1024px; mobile stacking around 640px. Copy a family's narrower 480px adjustment only when relevant.
+- A smaller viewport does not automatically mean one column. Preserve useful density with two- or three-column grids when the item composition and minimum content width support it; change the internal composition at the breakpoint instead of stretching sparse cards.
 - At smaller sizes, outer rail borders commonly disappear and grids become one ordered column with horizontal dividers. Preserve useful labels, data, and actions; do not hide content for layout convenience.
+- Scope review feedback to its stated viewport. Put mobile-only corrections under the appropriate `max-width` rule and verify that tablet and desktop computed styles are unchanged.
+- When a side rail or TOC disappears, keep editorial prose at the established readable maximum width and center it until the viewport becomes narrower than that measure.
+- Use horizontal scrolling for compact filter/tab rows that cannot wrap cleanly. Hide the scrollbar visually without disabling scrolling and add an edge fade that indicates more content.
+- Keep semantic tokens together: model city and province as separate spans and prevent a hyphenated province from breaking internally. Set a deliberate compact line height when the full location still wraps.
+- Truncate values only in interfaces that require one-line rows; preserve the full value with an accessible tooltip/title. Do not truncate editorial copy.
 - Sticky elements consume current header-aware CSS variables. Never hardcode a competing top offset.
 - Motion normally finishes in roughly 150–250ms; keep slower image hover motion only where established and honor `prefers-reduced-motion` in CSS and JavaScript.
 
@@ -68,7 +76,10 @@ Diagonal stripes belong to the homepage, global footer/CTA, deliberate red/black
 - Use those blocks only in a rail-level block stream. In the default 38rem prose stream, use its ordinary Bard sets unless a deliberate breakout adapter is part of the task and browser-verified.
 - If a shared DLF block is valid in the host, let it keep its internal component/button namespace; do not import another page family's CSS to restyle it.
 - Photos follow their block's crop with `object-fit: cover`; logos use `contain`. Provide intrinsic dimensions, responsive sources where supported, meaningful alt text, and lazy loading below the fold.
+- In split media/text rows, make media match the content-side height at that breakpoint. On mobile, use the family's full-width or 16:9 treatment and remove the owning container inset instead of compensating with arbitrary offsets.
+- If an author or person image already exists, show it consistently in both the compact attribution and full profile treatment unless the family intentionally omits portraits.
 - Inputs need visible labels, connected errors (`aria-describedby`, `aria-invalid`), visible focus, sufficient targets, and no decorative shadows.
+- Reuse the existing control/component variant exactly. Mobile pagination uses the established single-line previous/count/next composition; channel links use the existing button treatment; do not approximate either with plain text links.
 
 ## Accessibility and quality gate
 
