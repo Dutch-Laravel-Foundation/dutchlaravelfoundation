@@ -24,6 +24,10 @@
     border-inline: 1px solid var(--editorial-line);
 }
 
+.editorial-page--cases .editorial-rail {
+    padding-bottom: 12rem;
+}
+
 .editorial-page__header {
     border-bottom: 1px solid var(--editorial-line);
     background-color: #fff;

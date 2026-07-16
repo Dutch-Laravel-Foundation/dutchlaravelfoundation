@@ -599,6 +599,16 @@
     margin-top: 16px;
 }
 
+@media (min-width: 1024px) {
+    .dlf-about-partners .dlf-member-card__logo {
+        padding-inline: 40px;
+    }
+
+    .dlf-about-partners .dlf-member-card__body {
+        padding-inline: 40px;
+    }
+}
+
 .dlf-members-empty {
     padding: 40px;
     text-align: center;
