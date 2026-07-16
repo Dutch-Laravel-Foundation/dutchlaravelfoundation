@@ -6,6 +6,11 @@
     --dlf-muted: #737378;
     --dlf-line: #ececec;
     --dlf-soft: #f7f7fb;
+    --dlf-topbar-copy: #ffd2cf;
+}
+
+html {
+    background-color: var(--dlf-red);
 }
 
 html.dlf-menu-open {
@@ -91,7 +96,6 @@ html.dlf-menu-open {
 
 .dlf-topbar {
     background-color: var(--dlf-red);
-    background-image: repeating-linear-gradient(45deg, rgb(0 0 0 / 7%) 0, rgb(0 0 0 / 7%) 1px, transparent 1px, transparent 5px);
     font-size: 12px;
 }
 
@@ -111,7 +115,7 @@ html.dlf-menu-open {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: rgb(255 255 255 / 75%);
+    color: var(--dlf-topbar-copy);
     white-space: nowrap;
 }
 
@@ -126,7 +130,7 @@ html.dlf-menu-open {
     align-items: center;
     justify-content: flex-end;
     gap: 12px;
-    color: rgb(255 255 255 / 35%);
+    color: var(--dlf-topbar-copy);
 }
 
 .dlf-topbar-links a,
@@ -137,7 +141,7 @@ html.dlf-menu-open {
     padding: 0;
     border: 0;
     background: transparent;
-    color: rgb(255 255 255 / 85%);
+    color: var(--dlf-topbar-copy);
     font: inherit;
     text-decoration: none;
     cursor: pointer;

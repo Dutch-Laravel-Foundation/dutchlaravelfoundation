@@ -733,7 +733,6 @@
 /* Become a member */
 .dlf-lid-hero-copy {
     padding: 48px 40px 40px;
-    border-right: 1px solid var(--dlf-line);
     border-bottom: 1px solid var(--dlf-line);
 }
 
@@ -778,7 +777,6 @@
     z-index: 6;
     display: grid;
     grid-auto-flow: column;
-    grid-template-columns: 0;
     grid-template-rows: repeat(2, minmax(0, 1fr));
     grid-auto-columns: calc(min(100vw, 1152px) * .3);
     margin: 36px 0 -52px;
@@ -787,22 +785,28 @@
     overflow-x: auto;
     border-top: 1px solid var(--dlf-line);
     background: #fff;
-    direction: rtl;
-    scrollbar-color: #c9c9d0 transparent;
-    scrollbar-width: thin;
-    scroll-snap-type: x mandatory;
+    cursor: grab;
+    scrollbar-width: none;
+    touch-action: pan-x pan-y;
+    user-select: none;
+}
+
+.dlf-lid-benefits:active {
+    cursor: grabbing;
+}
+
+.dlf-lid-benefits:focus-visible {
+    outline: 2px solid var(--dlf-red);
+    outline-offset: -2px;
 }
 
 .dlf-lid-benefits::before {
-    position: sticky;
+    position: absolute;
     z-index: 7;
     top: 0;
-    right: calc(100% - var(--dlf-lid-benefits-fade-width));
+    bottom: 0;
+    left: 0;
     width: var(--dlf-lid-benefits-fade-width);
-    height: calc(100% + 1px);
-    grid-row: 1 / 3;
-    grid-column: 1 / 2;
-    margin-top: -1px;
     content: "";
     pointer-events: none;
     background: linear-gradient(to right, #fff 35%, rgba(255, 255, 255, 0));
@@ -813,21 +817,10 @@
     padding: 48px 48px 26px;
     border-right: 1px solid var(--dlf-line);
     border-bottom: 1px solid var(--dlf-line);
-    direction: ltr;
-    scroll-snap-align: start;
 }
 
 .dlf-lid-benefits::-webkit-scrollbar {
-    height: 8px;
-}
-
-.dlf-lid-benefits::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    background: #c9c9d0;
-}
-
-.dlf-lid-benefits::-webkit-scrollbar-track {
-    background: transparent;
+    display: none;
 }
 
 .dlf-lid-benefit__title {
@@ -1513,6 +1506,10 @@
         gap: 24px;
     }
 
+    .dlf-member-detail-head {
+        padding: 0;
+    }
+
     .dlf-member-detail-head--with-logo {
         grid-template-columns: 1fr;
     }
@@ -1589,10 +1586,6 @@
         grid-template-rows: minmax(0, 1fr);
         grid-auto-columns: 52vw;
         margin: 24px -24px -40px;
-    }
-
-    .dlf-lid-benefits::before {
-        grid-row: 1 / 2;
     }
 
     .dlf-lid-benefit {

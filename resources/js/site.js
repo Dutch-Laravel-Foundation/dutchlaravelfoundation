@@ -81,6 +81,7 @@ import "./components/swiper";
 import "./components/client-logo-wall";
 import "./components/header-aware-sticky";
 import "./components/editorial-article";
+import "./components/lid-benefits-marquee";
 import "./components/vragen-ai-search";
 
 // AlpineJS
