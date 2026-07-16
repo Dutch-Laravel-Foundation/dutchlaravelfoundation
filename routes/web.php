@@ -8,7 +8,11 @@ Route::get('/robots.txt', RobotsController::class);
 Route::get('/llms.txt', [LlmsController::class, 'index']);
 Route::get('/llms-full.txt', [LlmsController::class, 'full']);
 
-Route::permanentRedirect('/leden/avocado-media', '/leden/clarity');
+Route::permanentRedirect('/leden/avocado-media', '/leden');
+Route::permanentRedirect(
+    '/cases/mobiele-app-api-en-adminpanel-als-mvp-voor-toetsing-onder-duizenden-reizigers',
+    '/nieuws/showcase-ov-chipkaart-app'
+);
 
 // General redirects
 Route::permanentRedirect('/about-us', '/over-ons');
@@ -26,6 +30,7 @@ Route::permanentRedirect('/news/{slug?}', '/nieuws/{slug?}');
 Route::permanentRedirect('/insights/{slug?}', '/nieuws/{slug?}');
 
 // Agenda/event redirects
+Route::permanentRedirect('/calendar/laravel-directors-dinner', '/events/laravel-directors-dinner');
 Route::permanentRedirect('/calendar/{slug?}', '/agenda/{slug?}');
 
 // Cases redirects

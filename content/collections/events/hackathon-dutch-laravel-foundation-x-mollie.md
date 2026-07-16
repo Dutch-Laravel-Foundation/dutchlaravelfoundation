@@ -34,14 +34,6 @@ content:
         text: 'Vorig jaar ging het team van '
       -
         type: text
-        marks:
-          -
-            type: link
-            attrs:
-              href: 'https://dutchlaravelfoundation.nl/leden/avocado-media'
-              rel: null
-              target: null
-              title: null
         text: 'Avocado Media'
       -
         type: text
