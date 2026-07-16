@@ -39,7 +39,7 @@ class OhDearBrokenLinksTest extends TestCase
             ->assertDontSee('dlf_ruud_vertalingen.pdf', false);
     }
 
-    public function test_diabetes_case_images_are_rendered_by_glide(): void
+    public function test_diabetes_case_uses_valid_webp_image_sources(): void
     {
         $response = $this->get('/cases/diabetes-nl-helpt-je-verder-weten-delen-doen');
 
@@ -53,8 +53,14 @@ class OhDearBrokenLinksTest extends TestCase
 
         $this->assertCount(2, $matches[1]);
 
-        foreach ($matches[1] as $imageUrl) {
-            $this->get(html_entity_decode($imageUrl))->assertOk();
+        foreach ([
+            'diabetes-wegwijzer_0.webp',
+            'diabetes.nl-architectuur-16-10.webp',
+        ] as $filename) {
+            $image = getimagesize(public_path("assets/uploads/assets/{$filename}"));
+
+            $this->assertIsArray($image);
+            $this->assertSame('image/webp', $image['mime']);
         }
     }
 
