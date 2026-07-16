@@ -21,7 +21,7 @@
 
     <section class="dlf-community-section" aria-label="Leden zoeken en filteren" x-cloak>
         <div class="dlf-members-toolbar">
-            <div class="dlf-members-result-count" aria-live="polite">
+            <div class="dlf-members-result-count dlf-members-result-count--desktop" aria-live="polite">
                 <span x-text="resultLabel"></span>
             </div>
             <label class="dlf-members-search">
@@ -37,6 +37,7 @@
                 </svg>
                 <span>Filters</span>
                 <span class="dlf-members-filter-count" x-show="activeFilterCount" x-text="activeFilterCount" x-cloak></span>
+                <span class="dlf-members-result-count--mobile" x-text="resultLabel"></span>
             </button>
         </div>
     </section>
@@ -50,7 +51,9 @@
                     </span>
                     <span class="dlf-member-card__body">
                         <span class="dlf-member-card__name">{{ title }}</span>
-                        <span class="dlf-member-card__location">{{ city }}{{ if city && province }}, {{ /if }}{{ province }}</span>
+                        <span class="dlf-member-card__location">
+                            <span>{{ city }}{{ if city && province }}, {{ /if }}</span><span class="dlf-member-card__province">{{ province }}</span>
+                        </span>
                     </span>
                 </a>
             {{ /collection:members }}
@@ -70,7 +73,9 @@
                     </span>
                     <span class="dlf-member-card__body">
                         <span class="dlf-member-card__name" x-text="item.title"></span>
-                        <span class="dlf-member-card__location" x-text="location(item)"></span>
+                        <span class="dlf-member-card__location">
+                            <span x-text="item.city + (item.city && item.province ? ', ' : '')"></span><span class="dlf-member-card__province" x-text="item.province"></span>
+                        </span>
                     </span>
                 </a>
             </template>
@@ -98,7 +103,9 @@
                     </span>
                     <span class="dlf-member-card__body">
                         <span class="dlf-member-card__name" x-text="item.title"></span>
-                        <span class="dlf-member-card__location" x-text="location(item)"></span>
+                        <span class="dlf-member-card__location">
+                            <span x-text="item.city + (item.city && item.province ? ', ' : '')"></span><span class="dlf-member-card__province" x-text="item.province"></span>
+                        </span>
                     </span>
                 </a>
             </template>

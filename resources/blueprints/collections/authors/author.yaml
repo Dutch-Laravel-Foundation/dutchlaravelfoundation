@@ -27,6 +27,11 @@ tabs:
               display: Foto
               type: assets
           -
+            handle: photo_url
+            field:
+              display: 'Foto URL'
+              type: text
+          -
             handle: description
             field:
               display: Beschrijving

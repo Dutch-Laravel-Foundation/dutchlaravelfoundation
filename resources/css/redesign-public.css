@@ -302,6 +302,10 @@
     color: var(--editorial-ink);
 }
 
+.editorial-channel-actions {
+    display: none;
+}
+
 .editorial-podcast__media iframe,
 .editorial-podcast__media video {
     position: absolute;
@@ -436,6 +440,37 @@
 }
 
 @media (max-width: 639px) {
+    .dlf-public-page--larabelles .dlf-public-page__hero--split > img {
+        justify-self: start;
+    }
+
+    .editorial-channel-links {
+        display: none;
+    }
+
+    .editorial-channel-actions {
+        display: flex;
+        gap: 12px;
+        padding: 0 24px 44px;
+    }
+
+    .editorial-channel-actions .dlf-btn {
+        width: auto;
+        min-width: 0;
+        flex: 1;
+    }
+
+    .editorial-channel-actions .dlf-btn-face {
+        gap: 8px;
+        padding-inline: 12px;
+        font-size: 10px;
+    }
+
+    .editorial-channel-actions .dlf-btn-icon {
+        width: 16px;
+        height: 16px;
+    }
+
     .dlf-public-contact-card {
         padding: 1.5rem;
     }

@@ -1176,6 +1176,44 @@
 }
 
 @media (max-width: 639px) {
+    .dlf-bm--tender .dlf-bm-logo-cloud > header {
+        padding-block: 76px;
+    }
+
+    .dlf-bm-photo-band__backdrop {
+        display: none;
+    }
+
+    .dlf-bm-photo-band__inner {
+        padding: 0;
+    }
+
+    .dlf-bm-laravel > .dlf-bm-grid-3 > article:not(:last-child) {
+        border-bottom: 1px solid var(--dlf-line);
+    }
+
+    .dlf-bm-objections__cards {
+        gap: 12px;
+        margin-inline: -12px;
+    }
+
+    .dlf-bm-cases__inner {
+        padding-inline: 24px;
+    }
+
+    .dlf-bm-cases__list {
+        gap: 12px;
+        margin-inline: -12px;
+    }
+
+    .dlf-bm-cases__list figure {
+        margin-inline: 0;
+    }
+
+    .dlf-bm-foundation-values > article {
+        padding-block: 44px;
+    }
+
     .dlf-bm-photo-band__benefits .dlf-btn,
     .dlf-bm-laravel .dlf-btn,
     .dlf-bm-cases .dlf-btn,

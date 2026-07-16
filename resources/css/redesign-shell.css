@@ -605,8 +605,7 @@ html.dlf-menu-open {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-inline: calc(50% - 50vw);
-    padding: 0 calc(50vw - 50%) 32px;
+    padding-bottom: 32px;
     border-bottom: 1px solid var(--dlf-line);
 }
 
@@ -650,6 +649,12 @@ html.dlf-menu-open {
 
 .dlf-footer-content {
     display: flex;
+}
+
+@media (min-width: 1024px) {
+    .dlf-footer:has(.dlf-cta-card--dark) :is(.dlf-footer-brand, .dlf-footer-content) {
+        margin-inline: 9px;
+    }
 }
 
 .dlf-members-column {
@@ -1186,7 +1191,10 @@ html.dlf-menu-open {
     }
 
     .dlf-footer-bottom > div {
+        display: flex;
         width: 100%;
+        flex-direction: column;
+        align-items: center;
     }
 
     .dlf-footer-bottom > p {
@@ -1196,11 +1204,27 @@ html.dlf-menu-open {
 
     .dlf-footer-badges {
         flex-wrap: wrap;
-        gap: 20px 28px;
+        justify-content: center;
+        gap: 32px;
+        margin-top: 32px;
+    }
+
+    .dlf-legal-links {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .dlf-hosted-by > span {
+        text-align: center;
     }
 }
 
 @media (max-width: 639px) {
+    .dlf-cta-card,
+    .dlf-cta-card--dark {
+        margin-block: 24px;
+    }
+
     .dlf-topbar-links > a,
     .dlf-topbar-links > a + span {
         display: none;

@@ -23,6 +23,8 @@
                                         alt="{{ photo:alt ?? title }}"
                                         loading="lazy"
                                     >
+                                {{ elseif photo_url }}
+                                    <img src="{{ photo_url }}" alt="{{ title }}" loading="lazy">
                                 {{ /if }}
                                 <span>
                                     <strong>{{ title }}</strong>

@@ -164,6 +164,10 @@
         @apply w-full !bg-[#FEFEFE] border !border-[#ECECEC] ring-0! focus:!border-primary-accent !shadow-md shadow-gray-100/70;
     }
 
+    .dlf-members-search input {
+        @apply !shadow-none;
+    }
+
     .dlf-form-group,
     .dlf-form-label {
         display: block;

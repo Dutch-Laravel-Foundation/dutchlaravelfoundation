@@ -19,6 +19,10 @@
                                 loading="lazy"
                             >
                         </div>
+                    {{ elseif photo_url }}
+                        <div class="editorial-author__portrait">
+                            <img src="{{ photo_url }}" alt="{{ title }}" loading="lazy">
+                        </div>
                     {{ /if }}
 
                     <div class="editorial-author__details">

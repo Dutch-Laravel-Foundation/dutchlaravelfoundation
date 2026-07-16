@@ -124,8 +124,10 @@
                             <img src="{{ glide src='{photo}' fit='crop_focal' width='240' height='240' }}" alt="{{ title }}" loading="lazy" style="object-position: {{ photo:focus_css }}">
                         {{ /if }}
                     </figure>
-                    <span class="dlf-about-board-card__name">{{ title }}</span>
-                    <span class="dlf-about-board-card__function">{{ function }}</span>
+                    <div class="dlf-about-board-card__copy">
+                        <span class="dlf-about-board-card__name">{{ title }}</span>
+                        <span class="dlf-about-board-card__function">{{ function }}</span>
+                    </div>
                 </article>
             {{ /collection:board }}
         </div>
@@ -174,7 +176,9 @@
                     </span>
                     <span class="dlf-member-card__body">
                         <span class="dlf-member-card__name">{{ title }}</span>
-                        <span class="dlf-member-card__location">{{ city }}{{ if city && province }}, {{ /if }}{{ province }}</span>
+                        <span class="dlf-member-card__location">
+                            <span>{{ city }}{{ if city && province }}, {{ /if }}</span><span class="dlf-member-card__province">{{ province }}</span>
+                        </span>
                     </span>
                 </a>
             {{ /collection:members }}

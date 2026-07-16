@@ -404,6 +404,10 @@
     white-space: nowrap;
 }
 
+.dlf-members-result-count--mobile {
+    display: none;
+}
+
 .dlf-members-search {
     position: relative;
     display: flex;
@@ -585,6 +589,10 @@
     font-weight: 700;
     letter-spacing: .1em;
     text-transform: uppercase;
+}
+
+.dlf-member-card__province {
+    white-space: nowrap;
 }
 
 .dlf-member-card__action {
@@ -1200,6 +1208,12 @@
     object-fit: cover;
 }
 
+.dlf-about-board-card__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
 .dlf-about-board-card__name {
     color: var(--dlf-ink);
     font-size: 17px;
@@ -1454,6 +1468,7 @@
 
     .dlf-internship-sidebar {
         padding: 0;
+        border-top: 1px solid var(--dlf-line);
     }
 
     .dlf-internship-sidebar__contact {
@@ -1719,7 +1734,137 @@
     }
 }
 
+@media (min-width: 640px) and (max-width: 1023px) {
+    .dlf-about-page .dlf-community-section--grid > .dlf-community-grid-2 > .dlf-about-event {
+        padding-block: 28px;
+    }
+
+    .dlf-about-event__image {
+        min-height: 0;
+        height: auto;
+        align-self: stretch;
+    }
+
+    .dlf-about-board-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .dlf-about-page .dlf-community-section--grid > .dlf-about-board-grid > .dlf-about-board-card {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 24px;
+    }
+
+    .dlf-about-page .dlf-community-section--grid > .dlf-about-board-grid > .dlf-about-board-card:not(:nth-child(3n)) {
+        border-right: 1px solid var(--dlf-line);
+    }
+
+    .dlf-about-board-card__photo {
+        width: 120px;
+        height: 120px;
+        margin-bottom: 16px;
+    }
+}
+
 @media (max-width: 639px) {
+    .dlf-about-stats {
+        padding-inline: 0;
+    }
+
+    .dlf-about-event {
+        padding-top: 0;
+    }
+
+    .dlf-about-event__image {
+        width: calc(100% + 48px);
+        min-height: 0;
+        aspect-ratio: 16 / 9;
+        margin-inline: -24px;
+    }
+
+    .dlf-about-board-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .dlf-about-page .dlf-community-section--grid > .dlf-about-board-grid > .dlf-about-board-card {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-block: 28px;
+    }
+
+    .dlf-about-page .dlf-community-section--grid > .dlf-about-board-grid > .dlf-about-board-card:nth-child(odd) {
+        border-right: 1px solid var(--dlf-line);
+    }
+
+    .dlf-about-board-card__photo {
+        width: 96px;
+        height: 96px;
+        margin-bottom: 16px;
+    }
+
+    .dlf-about-board-card__copy {
+        gap: 4px;
+        align-self: flex-start;
+    }
+
+    .dlf-about-board-card__function {
+        margin-top: 0;
+    }
+
+    .dlf-member-card__location {
+        line-height: 1.9;
+    }
+
+    .dlf-about-timeline {
+        padding-bottom: 0;
+    }
+
+    .dlf-about-timeline__row {
+        grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    .dlf-members-result-count--desktop {
+        display: none;
+    }
+
+    .dlf-members-result-count--mobile {
+        display: block;
+        margin-left: auto;
+        color: var(--dlf-muted);
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 12px;
+        font-variant-numeric: tabular-nums;
+        font-weight: 700;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        white-space: nowrap;
+    }
+
+    .dlf-members-search {
+        padding-block: 9px;
+        box-shadow: none;
+    }
+
+    .dlf-members-search input {
+        padding-left: 24px;
+        box-shadow: none !important;
+    }
+
+    .dlf-members-filter-button {
+        border-bottom: 0;
+    }
+
+    .dlf-laravel-cta__buttons {
+        flex-direction: column;
+    }
+
+    .dlf-laravel-cta .dlf-community-button {
+        width: 100% !important;
+        flex: none;
+    }
+
     .dlf-member-card__logo {
         height: 108px;
         padding-inline: 16px;
