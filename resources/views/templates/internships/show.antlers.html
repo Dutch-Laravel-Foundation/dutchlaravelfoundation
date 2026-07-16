@@ -6,9 +6,22 @@
             <div class="dlf-member-detail-head__copy">
                 <span class="dlf-community-kicker">Stage bij {{ member:title }}</span>
                 <h1 id="internship-heading" class="dlf-community-title">{{ title }}</h1>
-                {{ if member:city || member:province }}
-                    <p class="dlf-community-intro">{{ arr({ member:city }, { member:province }) | remove_empty | list }}</p>
-                {{ /if }}
+                <dl class="dlf-detail-properties">
+                    {{ if member:city || member:province }}
+                        <div>
+                            <dt class="dlf-community-kicker mb-1!">Locatie</dt>
+                            <dd class="m-0 text-base text-tertiary-dark">{{ arr({ member:city }, { member:province }) | remove_empty | list }}</dd>
+                        </div>
+                    {{ /if }}
+                    {{ if member:website }}
+                        <div>
+                            <dt class="dlf-community-kicker mb-1!">Website</dt>
+                            <dd class="m-0 text-base">
+                                <a class="dlf-member-detail-head__website" href="https://{{ member:website }}" target="_blank" rel="noopener noreferrer">{{ member:website }}</a>
+                            </dd>
+                        </div>
+                    {{ /if }}
+                </dl>
             </div>
 
             {{ if member:logo }}
@@ -37,33 +50,11 @@
                 {{ /if }}
             </article>
 
-            <aside class="dlf-community-cell dlf-internship-sidebar" aria-labelledby="internship-company-heading">
-                <div class="dlf-internship-sidebar__company">
-                    <span class="dlf-community-kicker">Stagebedrijf</span>
-                    <h2 id="internship-company-heading" class="dlf-community-heading dlf-community-heading--small">{{ member:title }}</h2>
-
-                    <dl class="space-y-6">
-                        {{ if member:city || member:province }}
-                            <div>
-                                <dt class="dlf-community-kicker mb-1!">Locatie</dt>
-                                <dd class="m-0 text-base text-tertiary-dark">{{ arr({ member:city }, { member:province }) | remove_empty | list }}</dd>
-                            </div>
-                        {{ /if }}
-                        {{ if member:website }}
-                            <div>
-                                <dt class="dlf-community-kicker mb-1!">Website</dt>
-                                <dd class="m-0 text-base">
-                                    <a href="https://{{ member:website }}" target="_blank" rel="noopener noreferrer">{{ member:website }}</a>
-                                </dd>
-                            </div>
-                        {{ /if }}
-                    </dl>
-                </div>
-
+            <aside class="dlf-community-cell dlf-internship-sidebar" aria-label="Contact en bedrijfsprofiel">
                 {{ if member:internship_contact_name || member:internship_contact_email || member:internship_contact_phone }}
                     <section class="dlf-internship-sidebar__contact" aria-labelledby="internship-contact-heading">
-                        <h3 id="internship-contact-heading" class="dlf-community-heading dlf-community-heading--small">Stage contactpersoon</h3>
-                        <dl class="space-y-6">
+                        <h3 id="internship-contact-heading" class="dlf-community-heading">Stage contactpersoon</h3>
+                        <dl class="dlf-detail-properties">
                             {{ if member:internship_contact_name }}
                                 <div>
                                     <dt class="dlf-community-kicker mb-1!">Naam</dt>

@@ -223,7 +223,7 @@
 .dlf-community-feature-copy {
     margin-bottom: 0 !important;
     color: #5f6464;
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.6;
 }
 
@@ -339,6 +339,19 @@
 
 .dlf-member-detail-head__copy {
     padding: 48px 40px 40px;
+}
+
+.dlf-detail-properties {
+    display: grid;
+    gap: 24px;
+    margin: 0;
+    padding-top: 8px;
+}
+
+.dlf-member-detail-head__website {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
 }
 
 .dlf-member-detail-head__logo {
@@ -518,13 +531,8 @@
     padding: 0;
 }
 
-.dlf-internship-sidebar__company {
-    padding: 40px;
-}
-
 .dlf-internship-sidebar__contact {
-    padding: 32px 40px 40px;
-    border-top: 1px solid var(--dlf-line);
+    padding: 40px;
 }
 
 .dlf-internship-sidebar__action {
@@ -533,7 +541,7 @@
 
 .dlf-internship-sidebar__action--standalone {
     margin-top: 0;
-    padding: 0 40px 40px;
+    padding: 40px;
 }
 
 .dlf-member-card__body {
@@ -748,6 +756,8 @@
 .dlf-lid-events-block {
     position: relative;
     z-index: 8;
+    padding-bottom: 0;
+    border-left: 1px solid var(--dlf-line);
     background: #fff;
 }
 
@@ -824,8 +834,8 @@
 
 .dlf-lid-benefit__copy {
     color: #5f6464;
-    font-size: 14px;
-    line-height: 1.55;
+    font-size: 16px;
+    line-height: 1.6;
 }
 
 .dlf-lid-list {
@@ -842,7 +852,7 @@
     display: flex;
     gap: 12px;
     color: var(--dlf-copy);
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.6;
 }
 
@@ -862,7 +872,7 @@
 
 .dlf-lid-events-photo {
     height: 320px;
-    margin: 40px -48px 0;
+    margin: 52px -48px 0;
     overflow: hidden;
     border-top: 1px solid var(--dlf-line);
     background: #f5f5fa;
@@ -886,7 +896,7 @@
     gap: 14px;
     align-items: flex-start;
     color: var(--dlf-copy);
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.6;
 }
 
@@ -986,7 +996,8 @@
 
 .dlf-lid-price__period {
     color: rgba(255, 255, 255, .7);
-    font-size: 13px;
+    font-size: 16px;
+    line-height: 1.6;
 }
 
 .dlf-lid-price__amount {
@@ -1022,6 +1033,7 @@
     height: 18px;
     flex: none;
     margin-top: 2px;
+    border-radius: 4px !important;
     accent-color: var(--dlf-red);
 }
 
@@ -1445,13 +1457,12 @@
         padding: 0;
     }
 
-    .dlf-internship-sidebar__company,
     .dlf-internship-sidebar__contact {
         padding: 28px 24px 40px;
     }
 
     .dlf-internship-sidebar__action--standalone {
-        padding: 0 24px 40px;
+        padding: 28px 24px 40px;
     }
 
     .dlf-community-grid-2 > .dlf-community-cell:last-child,
@@ -1584,7 +1595,7 @@
     }
 
     .dlf-lid-events-block {
-        padding-bottom: 28px;
+        padding-bottom: 0;
     }
 
     .dlf-lid-reason {

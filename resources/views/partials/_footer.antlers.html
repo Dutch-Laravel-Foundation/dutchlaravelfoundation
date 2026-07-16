@@ -46,8 +46,6 @@
 
                         {{ newsletter_submitted = false }}
                         {{ form:newsletter redirect="/newsletter" class="dlf-newsletter-form" }}
-                            {{ captcha }}
-
                             {{ if success }}
                                 {{ redirect to="/newsletter" }}
                             {{ else }}
@@ -72,6 +70,7 @@
                                         <img src="/assets/img/icons/send.svg" alt="">
                                     </button>
                                 </div>
+                                {{ captcha }}
                             {{ /if }}
                         {{ /form:newsletter }}
 

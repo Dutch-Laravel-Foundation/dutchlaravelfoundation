@@ -22,7 +22,7 @@
     <section class="dlf-community-section dlf-community-section--grid" aria-label="Bedrijfsprofiel">
         <div class="dlf-community-grid-2">
             <article class="dlf-community-cell">
-                <h2 class="dlf-community-heading">Over {{ title }}</h2>
+                <h2 class="dlf-community-heading">Over</h2>
 
                 {{ if video }}
                     <div class="relative mb-8 aspect-video overflow-hidden bg-black">
@@ -67,10 +67,9 @@
             </article>
 
             <aside class="dlf-community-cell dlf-member-detail-sidebar" aria-labelledby="member-details-heading">
-                <span class="dlf-community-kicker">Bedrijfsgegevens</span>
-                <h2 id="member-details-heading" class="dlf-community-heading dlf-community-heading--small">Contact met {{ title }}</h2>
+                <h2 id="member-details-heading" class="dlf-community-heading">Bedrijfsgegevens</h2>
 
-                <dl class="space-y-6">
+                <dl class="dlf-detail-properties">
                     {{ if city || province }}
                         <div>
                             <dt class="dlf-community-kicker mb-1!">Locatie</dt>

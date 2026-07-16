@@ -786,6 +786,10 @@ html.dlf-menu-open {
     height: auto;
 }
 
+.dlf-newsletter-form > .cf-turnstile {
+    margin-top: 12px;
+}
+
 .dlf-honeypot {
     position: absolute !important;
     left: -10000px !important;
