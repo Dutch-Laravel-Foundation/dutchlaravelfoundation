@@ -353,18 +353,18 @@
     text-transform: uppercase;
 }
 
-.editorial-breadcrumb a {
-    color: var(--editorial-muted);
+.editorial-breadcrumb .editorial-breadcrumb__link {
+    color: var(--editorial-muted, var(--dlf-muted, #737378));
     text-decoration: none;
 }
 
-.editorial-breadcrumb a:hover,
-.editorial-breadcrumb [aria-current="page"] {
-    color: var(--editorial-red);
+.editorial-breadcrumb .editorial-breadcrumb__link:hover,
+.editorial-breadcrumb .editorial-breadcrumb__current {
+    color: var(--editorial-red, var(--dlf-red, #ff2d20));
 }
 
-.editorial-breadcrumb > span[aria-hidden="true"] {
-    color: var(--editorial-line);
+.editorial-breadcrumb .editorial-breadcrumb__separator {
+    color: var(--editorial-line, var(--dlf-line, #ececec));
 }
 
 .editorial-article__hero {
