@@ -3,6 +3,7 @@ id: 621e1068-bdee-4c09-b75c-7b95b0465a45
 blueprint: pages
 title: Larabelles
 template: templates/larabelles/index
+call_to_action: ee5d33de-9a24-4860-92dd-3503740b62af
 menu_color: white
 updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
 updated_at: 1771836086

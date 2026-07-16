@@ -1,26 +1,99 @@
-<div class="translate-y-32 lg:translate-y-52 pb-32">
-    {{ partial:decoration/floor-background background="floor-top-knowledge" /}}
-    <div class="container mb-auto mx-auto flex flex-col items-left justify-center relative">
-        <div class="container mx-auto">
-            {{ content }}
-                {{ partial src="sets/autoload" }}
-            {{ /content }}
-        </div>
+<div class="editorial-page">
+    <div class="editorial-rail">
+        <header class="editorial-page__header">
+            <div class="editorial-page__heading">
+                <span class="editorial-eyebrow">Kennis</span>
+                <h1 class="editorial-page__title">Kennis uit de community</h1>
+                <p class="editorial-page__intro">Verdieping, praktijkkennis en best practices uit het Nederlandse Laravel-ecosysteem — van toegankelijkheid en security tot performance en tooling.</p>
+            </div>
 
-        {{ insight_count = { collection:count in="knowledge" id:not="{ highlighted_id.0 }" } }}
-        <section class="pb-10">
-            {{ if insight_count > 0 }}
-                {{ collection:knowledge sort="date:desc" }}
-                    <div class="w-full">
-                        {{ partial:blocks/image-left-large class="" :image="featured_image" :category="category" link="/knowledge/{ slug }" }}
-                            {{ date format="d-m-Y" }}
-                            <br/>
-                            <br/>
-                            {{ introduction }}
-                        {{ /partial:blocks/image-left-large }}
-                    {{ /collection:knowledge }}
+            <nav class="editorial-filters" aria-label="Filter kennisartikelen">
+                <a href="/kennis" {{ unless get:category }}aria-current="page"{{ /unless }}>Alles</a>
+                <a href="/kennis?category=Leden" {{ if get:category === "Leden" }}aria-current="page"{{ /if }}>Leden</a>
+                <a href="/kennis?category=Netwerk" {{ if get:category === "Netwerk" }}aria-current="page"{{ /if }}>Netwerk</a>
+                <a href="/kennis?category=Inspiratie" {{ if get:category === "Inspiratie" }}aria-current="page"{{ /if }}>Inspiratie</a>
+                <a href="/kennis?category=Tooling" {{ if get:category === "Tooling" }}aria-current="page"{{ /if }}>Tooling</a>
+            </nav>
+        </header>
+
+        {{ collection:knowledge sort="date:desc" paginate="10" as="articles" category:is="{get:category}" }}
+            {{ if no_results }}
+                <div class="editorial-empty">
+                    <h2>Geen artikelen gevonden</h2>
+                    <p>Er zijn nog geen kennisartikelen in deze categorie.</p>
+                    <a href="/kennis" class="editorial-text-link">Bekijk alle kennis</a>
                 </div>
+            {{ else }}
+                <div class="editorial-feed">
+                    {{ articles }}
+                        <article class="editorial-entry {{ switch between="editorial-entry--media-start|editorial-entry--media-end" }} {{ if first }}editorial-entry--featured{{ /if }}">
+                            <a class="editorial-entry__media" href="{{ url }}" aria-label="Lees {{ title }}">
+                                {{ if featured_image }}
+                                    {{ if first }}
+                                        <img
+                                            class="editorial-entry__image"
+                                            src="{{ glide src="{featured_image}" width="960" height="768" fit="crop_focal" }}"
+                                            srcset="{{ glide src="{featured_image}" width="640" height="512" fit="crop_focal" }} 640w, {{ glide src="{featured_image}" width="960" height="768" fit="crop_focal" }} 960w"
+                                            sizes="(min-width: 1024px) 576px, 100vw"
+                                            alt="{{ featured_image:alt ?? title }}"
+                                            style="object-position: {{ featured_image:focus_css }}"
+                                            fetchpriority="high"
+                                        >
+                                    {{ else }}
+                                        <img
+                                            class="editorial-entry__image"
+                                            src="{{ glide src="{featured_image}" width="960" height="640" fit="crop_focal" }}"
+                                            srcset="{{ glide src="{featured_image}" width="640" height="427" fit="crop_focal" }} 640w, {{ glide src="{featured_image}" width="960" height="640" fit="crop_focal" }} 960w"
+                                            sizes="(min-width: 1024px) 576px, 100vw"
+                                            alt="{{ featured_image:alt ?? title }}"
+                                            style="object-position: {{ featured_image:focus_css }}"
+                                            loading="lazy"
+                                        >
+                                    {{ /if }}
+                                {{ else }}
+                                    <span class="editorial-media-placeholder" aria-hidden="true"><img src="/assets/uploads/globals/LaravelBrandMark.svg" alt=""></span>
+                                {{ /if }}
+                            </a>
+
+                            <div class="editorial-entry__body">
+                                <div class="editorial-entry__meta">
+                                    <span class="editorial-entry__category">{{ category }}</span>
+                                    <span class="editorial-entry__dot" aria-hidden="true">·</span>
+                                    <time datetime="{{ date format="Y-m-d" }}">{{ date | iso_format="D MMMM YYYY" }}</time>
+                                </div>
+
+                                {{ if first }}
+                                    <h2 class="editorial-entry__title editorial-entry__title--featured"><a href="{{ url }}">{{ title }}</a></h2>
+                                {{ else }}
+                                    <h2 class="editorial-entry__title"><a href="{{ url }}">{{ title }}</a></h2>
+                                {{ /if }}
+
+                                {{ if introduction }}
+                                    <p class="editorial-entry__summary">{{ introduction | strip_tags | truncate:240 }}</p>
+                                {{ /if }}
+
+                                <a class="editorial-text-link" href="{{ url }}">Lees meer <span aria-hidden="true">→</span></a>
+                            </div>
+                        </article>
+                    {{ /articles }}
+                </div>
+
+                {{ paginate }}
+                    {{ if total_pages > 1 }}
+                        <nav class="editorial-pagination" aria-label="Paginering kennisartikelen">
+                            <span>Pagina {{ current_page }} van {{ total_pages }}</span>
+                            <div class="editorial-pagination__links">
+                                {{ if prev_page }}
+                                    <a href="{{ prev_page }}"><span aria-hidden="true">←</span> Nieuwere artikelen</a>
+                                {{ /if }}
+                                {{ if next_page }}
+                                    <a href="{{ next_page }}">Oudere artikelen <span aria-hidden="true">→</span></a>
+                                {{ /if }}
+                            </div>
+                        </nav>
+                    {{ /if }}
+                {{ /paginate }}
             {{ /if }}
-        </section>
+        {{ /collection:knowledge }}
     </div>
 </div>

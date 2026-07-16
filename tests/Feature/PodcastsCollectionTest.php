@@ -28,7 +28,7 @@ class PodcastsCollectionTest extends TestCase
         $blueprint = $this->parseYaml(base_path('resources/blueprints/collections/podcasts/podcasts.yaml'));
         $fields = $this->fieldsByHandle($blueprint);
 
-        foreach (['title', 'summary', 'description', 'video_url', 'spotify_url', 'thumbnail_url', 'transcript', 'date', 'published_at', 'slug'] as $handle) {
+        foreach (['title', 'summary', 'description', 'video_url', 'spotify_url', 'thumbnail_url', 'transcript', 'date', 'published_at', 'slug', 'call_to_action'] as $handle) {
             $this->assertArrayHasKey($handle, $fields);
         }
 
@@ -39,6 +39,8 @@ class PodcastsCollectionTest extends TestCase
         $this->assertSame('text', $fields['spotify_url']['type'] ?? null);
         $this->assertSame('text', $fields['thumbnail_url']['type'] ?? null);
         $this->assertSame('markdown', $fields['transcript']['type'] ?? null);
+        $this->assertSame('entries', $fields['call_to_action']['type'] ?? null);
+        $this->assertSame(['cta'], $fields['call_to_action']['collections'] ?? null);
 
         foreach (['title', 'summary', 'description', 'video_url', 'spotify_url', 'thumbnail_url', 'transcript', 'date', 'published_at'] as $handle) {
             $this->assertContains('required', $fields[$handle]['validate'] ?? []);
@@ -54,7 +56,7 @@ class PodcastsCollectionTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('Podcast', false);
-        $response->assertSee('Bekijk talks, interviews en andere video\'s ook direct via onze kanalen.', false);
+        $response->assertSee('Talks, interviews en praktijkverhalen over Laravel, softwareontwikkeling en de mensen achter de Nederlandse community.', false);
     }
 
     public function testPodcastOverviewPageAndNavigationUseSingularLabel(): void
@@ -84,13 +86,8 @@ class PodcastsCollectionTest extends TestCase
         $this->assertNotFalse($indexTemplate);
         $this->assertStringContainsString('video_url', $showTemplate);
         $this->assertStringContainsString('spotify_url', $showTemplate);
-        $this->assertStringContainsString('partial:buttons/youtube', $showTemplate);
-        $this->assertStringContainsString('partial:buttons/spotify', $showTemplate);
-        $this->assertStringContainsString('partial:buttons/youtube', $indexTemplate);
-        $this->assertStringContainsString('partial:buttons/spotify', $indexTemplate);
         $this->assertStringContainsString('https://www.youtube.com/@DutchLaravelFoundation', $indexTemplate);
         $this->assertStringContainsString('https://open.spotify.com/show/28cbLx8VKFE0j3xdbRhxsO', $indexTemplate);
-        $this->assertStringContainsString('aspect-video mb-6 lg:mb-8', $showTemplate);
         $this->assertStringContainsString('thumbnail_url', $indexTemplate);
         $this->assertStringContainsString('summary', $indexTemplate);
         $this->assertStringContainsString('description', $showTemplate);
@@ -101,7 +98,21 @@ class PodcastsCollectionTest extends TestCase
         $this->assertStringContainsString("activeTab === 'description'", $showTemplate);
         $this->assertStringContainsString('collection:podcasts', $indexTemplate);
         $this->assertStringContainsString('sort="published_at:desc"', $indexTemplate);
-        $this->assertStringContainsString('block-image-left-large', $indexTemplate);
+    }
+
+    public function testPodcastEntriesUseTheHomepageCallToActionBanner(): void
+    {
+        $paths = glob(base_path('content/collections/podcasts/*.md'));
+
+        foreach ($paths as $path) {
+            $entry = $this->parseFrontMatter($path);
+
+            $this->assertSame(
+                'ee5d33de-9a24-4860-92dd-3503740b62af',
+                $entry['call_to_action'] ?? null,
+                basename($path).' must use the homepage CTA banner.',
+            );
+        }
     }
 
     public function testPodcastEntriesCanBeServedAsMarkdown(): void

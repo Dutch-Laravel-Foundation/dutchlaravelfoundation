@@ -1,17 +1,59 @@
-<div class="translate-y-32 lg:translate-y-52 pb-32 md:pb-48">
-    <div class="container mb-auto mx-auto flex flex-col items-left justify-center relative">
-        <article id="content" class="mb-half">
-            <img src="{{ glide src="{featured_image}" fit="crop_focal" width="1500" }}" class="object-cover w-full h-96 lg:h-[48rem] mb" style="object-position:{{ featured_image:focus_css }}">
-            <div class="relative w-full lg:w-11/12 lg:mx-auto bg-white lg:-mt-64 min-h-[10rem] px-6 sm:px-0 lg:p-10 z-10">
+<div class="editorial-article">
+    <div class="editorial-rail editorial-rail--article">
+        {{ partial:breadcrumb href="/kennis" label="Kennis" :current="category" }}
+
+        <header class="editorial-article__hero">
+            <div class="editorial-article__head">
+                <div class="editorial-entry__meta editorial-article__meta">
+                    <span class="editorial-entry__category">{{ category }}</span>
+                    <span class="editorial-entry__dot" aria-hidden="true">·</span>
+                    <time datetime="{{ date format="Y-m-d" }}">{{ date | iso_format="D MMMM YYYY" }}</time>
+                </div>
                 <h1>{{ title }}</h1>
-                {{ date format="d-m-Y" }}
-                <br/>
-                <br/>
-                {{ content }}
+                {{ if introduction }}
+                    <div class="editorial-article__lead">{{ introduction }}</div>
+                {{ /if }}
+                {{ if author_name }}
+                    <div class="editorial-article__author-summary">
+                        {{ if author_image }}
+                            <img
+                                src="{{ glide src="{author_image}" width="240" }}"
+                                alt="{{ author_image:alt ?? author_name }}"
+                                loading="lazy"
+                            >
+                        {{ /if }}
+                        <span>
+                            <strong>{{ author_name }}</strong>
+                            {{ if author_role }}<small>{{ author_role }}</small>{{ /if }}
+                        </span>
+                    </div>
+                {{ /if }}
             </div>
-        </article>
-        <div class="flex w-full px-6 mx-auto mb lg:w-11/12 sm:px-0 lg:px-10">
-            {{ partial:buttons/light link="/{{ segment_1 }}" }}Naar alle kennis{{ /partial:buttons/light }}
+
+            <figure class="editorial-article__figure">
+                {{ if featured_image }}
+                    <img
+                        src="{{ glide src="{featured_image}" width="1200" height="960" fit="crop_focal" }}"
+                        srcset="{{ glide src="{featured_image}" width="640" height="512" fit="crop_focal" }} 640w, {{ glide src="{featured_image}" width="960" height="768" fit="crop_focal" }} 960w, {{ glide src="{featured_image}" width="1200" height="960" fit="crop_focal" }} 1200w"
+                        sizes="(min-width: 1024px) 576px, 100vw"
+                        alt="{{ featured_image:alt ?? title }}"
+                        style="object-position: {{ featured_image:focus_css }}"
+                        fetchpriority="high"
+                    >
+                {{ else }}
+                    <span class="editorial-media-placeholder" aria-hidden="true"><img src="/assets/uploads/globals/LaravelBrandMark.svg" alt=""></span>
+                {{ /if }}
+            </figure>
+        </header>
+
+        <div class="editorial-article__body" data-editorial-article>
+            {{ partial:editorial/toc label="In dit artikel" }}
+
+            <article class="editorial-article__prose" data-editorial-prose>
+                {{ content }}
+            </article>
         </div>
+
+        {{ partial:editorial-author }}
     </div>
 </div>

@@ -1,83 +1,203 @@
-<div class="translate-y-32 lg:translate-y-52 pb-32 md:pb-48">
-    <div class="container mb-auto mx-auto flex flex-col items-left justify-center relative">
-        <a href="/leden" class="mb-6 inline-flex items-center gap-2 text-sm font-bold text-primary-accent hover:text-primary-dark">
-            ← Terug naar overzicht
-        </a>
-        <div class="flex flex-col w-full lg:flex-row">
-            <div class="lg:w-4/6 lg:pr-20 mb">
-                <h1>{{ title }}</h1>
-                {{ if video }}
-                <div class="relative" style="padding-top: 50%; margin-bottom: 20px;">
-                    {{ if video | is_embeddable }}
-                        {{ video_url = video | embed_url }}
-                        {{ if video | contains:'youtube' || video | contains:'youtu.be' }}
-                            <!-- YouTube -->
-                            <iframe src="{{ video_url }}?rel=0&modestbranding=1" referrerpolicy="strict-origin-when-cross-origin" class="absolute inset-0 w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write"></iframe>
-                        {{ else }}
-                            <!-- Vimeo -->
-                            <iframe src="{{ video_url }}&byline=0&color=ff2d20&title=0&transparent=1" referrerpolicy="strict-origin-when-cross-origin" class="absolute inset-0 w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write"></iframe>
-                        {{ /if }}
-                    {{ else }}
-                        <!-- Other HTML5 video types -->
-                        <video src="{{ video | embed_url }}" class="absolute inset-0 w-full h-full" allow="autoplay; fullscreen; picture-in-picture; clipboard-write"></video>
-                    {{ /if }}
-                </div>
-                {{ /if }}
-                {{ description }}
-                {{ if { collection:count in="internships" member:is="{ id }" } > 0 }}
-                <div class="mt-6 md:mt-20">
-                    <h2 class="mb-6">Beschikbare stages</h2>
-                    {{ collection:internships member:is="{ id }" }}
-                        <div class="mb-6 p-6 border border-secondary-light">
-                            <h3 class="mb-2"><a href="/stagebank/{{ slug }}" class="text-primary-accent hover:text-primary-dark">{{ title }}</a></h3>
-                            {{ if description }}
-                                <div class="prose prose-sm max-w-none">
-                                    {{ description | truncate:150 }}
-                                </div>
-                            {{ /if }}
-                            <a href="/stagebank/{{ slug }}" class="inline-block mt-4 text-sm font-bold text-primary-accent hover:text-primary-dark">
-                                Bekijk stage →
-                            </a>
-                        </div>
-                    {{ /collection:internships }}
-                </div>
-                {{ /if }}
-                {{ if { collection:count in="cases" member:is="{ id }" } > 0 }}
-                {{ collection:cases member:is="{ id }" limit="3" }}
-                    {{ if first }}<div class="mt-6 md:mt-20">{{ /if }}
-                    {{ partial:blocks/image-center-larger :image="featured_image" :title="title_long" :category="member:title" class="" link="/cases/{ slug }" }}
-                        {{ introduction }}
-                    {{ /partial:blocks/image-center-larger }}
-                    {{ if first }}</div>{{ /if }}
-                {{ /collection:cases }}
+<div class="dlf-community-page dlf-member-detail-page">
+    <section class="dlf-community-section" aria-labelledby="member-heading">
+        {{ partial:breadcrumb href="/leden" label="Leden" :current="title" }}
+
+        <div class="dlf-community-head dlf-member-detail-head{{ if logo }} dlf-member-detail-head--with-logo{{ /if }}">
+            <div class="dlf-member-detail-head__copy">
+                <span class="dlf-community-kicker">{{ type ?? "Lid" }}</span>
+                <h1 id="member-heading" class="dlf-community-title">{{ title }}</h1>
+                {{ if city || province }}
+                    <p class="dlf-community-intro">{{ arr({ city }, { province }) | remove_empty | list }}</p>
                 {{ /if }}
             </div>
 
-            <div class="mb-16 lg:w-2/6">
-                {{ partial:company/base :logo="logo" link="https://{ website }" target="_blank" class="w-full px-10 pb-10 mt-10 overflow-hidden" }}
+            {{ if logo }}
+                <div class="dlf-member-detail-head__logo" aria-hidden="true">
+                    <img src="{{ logo | first | url }}" alt="">
+                </div>
+            {{ /if }}
+        </div>
+    </section>
+
+    <section class="dlf-community-section dlf-community-section--grid" aria-label="Bedrijfsprofiel">
+        <div class="dlf-community-grid-2">
+            <article class="dlf-community-cell">
+                <h2 class="dlf-community-heading">Over {{ title }}</h2>
+
+                {{ if video }}
+                    <div class="relative mb-8 aspect-video overflow-hidden bg-black">
+                        {{ if video | is_embeddable }}
+                            {{ video_url = video | embed_url }}
+                            {{ if video | contains:'youtube' || video | contains:'youtu.be' }}
+                                <iframe
+                                    class="absolute inset-0 h-full w-full"
+                                    src="{{ video_url }}?rel=0&modestbranding=1"
+                                    title="Video van {{ title }}"
+                                    referrerpolicy="strict-origin-when-cross-origin"
+                                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+                                    allowfullscreen
+                                    loading="lazy"
+                                ></iframe>
+                            {{ else }}
+                                <iframe
+                                    class="absolute inset-0 h-full w-full"
+                                    src="{{ video_url }}&byline=0&color=ff2d20&title=0&transparent=1"
+                                    title="Video van {{ title }}"
+                                    referrerpolicy="strict-origin-when-cross-origin"
+                                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+                                    allowfullscreen
+                                    loading="lazy"
+                                ></iframe>
+                            {{ /if }}
+                        {{ else }}
+                            <video
+                                class="absolute inset-0 h-full w-full"
+                                src="{{ video | embed_url }}"
+                                aria-label="Video van {{ title }}"
+                                controls
+                                preload="metadata"
+                            ></video>
+                        {{ /if }}
+                    </div>
+                {{ /if }}
+
+                <div class="content dlf-community-copy">
+                    {{ description }}
+                </div>
+            </article>
+
+            <aside class="dlf-community-cell dlf-member-detail-sidebar" aria-labelledby="member-details-heading">
+                <span class="dlf-community-kicker">Bedrijfsgegevens</span>
+                <h2 id="member-details-heading" class="dlf-community-heading dlf-community-heading--small">Contact met {{ title }}</h2>
+
+                <dl class="space-y-6">
                     {{ if city || province }}
-                        {{ partial:blocks/meta-alt title="Locatie" text="{ arr({ city }, { province }) | remove_empty | list }" class="px-0" }}
+                        <div>
+                            <dt class="dlf-community-kicker mb-1!">Locatie</dt>
+                            <dd class="m-0 text-base text-tertiary-dark">{{ arr({ city }, { province }) | remove_empty | list }}</dd>
+                        </div>
                     {{ /if }}
                     {{ if website }}
-                        {{ partial:blocks/meta-alt target="_blank" title="Website" :text="website" link="https://{ website }" class="px-0" }}
+                        <div>
+                            <dt class="dlf-community-kicker mb-1!">Website</dt>
+                            <dd class="m-0 text-base"><a href="https://{{ website }}" target="_blank" rel="noopener noreferrer">{{ website }}</a></dd>
+                        </div>
                     {{ /if }}
                     {{ if recruitment_website }}
-                        {{ partial:blocks/meta-alt target="_blank" title="Vacatures" :text="recruitment_website" link="https://{ recruitment_website }" class="px-0" }}
+                        <div>
+                            <dt class="dlf-community-kicker mb-1!">Vacatures</dt>
+                            <dd class="m-0 text-base"><a href="https://{{ recruitment_website }}" target="_blank" rel="noopener noreferrer">{{ recruitment_website }}</a></dd>
+                        </div>
                     {{ /if }}
                     {{ if email }}
-                        {{ partial:blocks/meta-alt title="E-mail" :text="email" link="mailto:{ email }" class="px-0" }}
+                        <div>
+                            <dt class="dlf-community-kicker mb-1!">E-mail</dt>
+                            <dd class="m-0 text-base"><a href="mailto:{{ email }}">{{ email }}</a></dd>
+                        </div>
                     {{ /if }}
                     {{ if phone }}
-                        {{ partial:blocks/meta-alt title="Telefoonnummer" :text="phone" link="tel:{ phone regex_replace="\(0\)|" regex_replace="[^+0-9]|" }" class="px-0" }}
+                        <div>
+                            <dt class="dlf-community-kicker mb-1!">Telefoonnummer</dt>
+                            <dd class="m-0 text-base"><a href="tel:{{ phone regex_replace="\(0\)|" regex_replace="[^+0-9]|" }}">{{ phone }}</a></dd>
+                        </div>
                     {{ /if }}
-                    {{ number_of_employees }}
-                        {{ partial:blocks/meta-alt title="Aantal developers" :text="title" class="px-0" }}
-                    {{ /number_of_employees }}
+                    {{ if employees }}
+                        <div>
+                            <dt class="dlf-community-kicker mb-1!">Aantal medewerkers</dt>
+                            <dd class="m-0 text-base text-tertiary-dark">{{ employees }}</dd>
+                        </div>
+                    {{ elseif number_of_employees }}
+                        {{ number_of_employees }}
+                            <div>
+                                <dt class="dlf-community-kicker mb-1!">Aantal developers</dt>
+                                <dd class="m-0 text-base text-tertiary-dark">{{ title }}</dd>
+                            </div>
+                        {{ /number_of_employees }}
+                    {{ /if }}
                     {{ if sbb }}
-                        {{ partial:blocks/meta-alt title="SBB" text="SBB erkend" class="px-0" }}
+                        <div>
+                            <dt class="dlf-community-kicker mb-1!">Erkenning</dt>
+                            <dd class="m-0 text-base text-tertiary-dark">SBB erkend leerbedrijf</dd>
+                        </div>
                     {{ /if }}
-                {{ /partial:company/base }}
-            </div>
+                </dl>
+
+                {{ if website || recruitment_website }}
+                    <div class="mt-10 flex flex-wrap gap-5">
+                        {{ if website }}
+                            <a class="dlf-btn" href="https://{{ website }}" target="_blank" rel="noopener noreferrer">
+                                <span class="dlf-btn-face dlf-btn-face--red">Bezoek website</span>
+                                <span class="dlf-btn-shadow dlf-btn-shadow--red" aria-hidden="true"></span>
+                            </a>
+                        {{ /if }}
+                        {{ if recruitment_website }}
+                            <a class="dlf-btn" href="https://{{ recruitment_website }}" target="_blank" rel="noopener noreferrer">
+                                <span class="dlf-btn-face dlf-btn-face--outline-red">Bekijk vacatures</span>
+                                <span class="dlf-btn-shadow dlf-btn-shadow--red" aria-hidden="true"></span>
+                            </a>
+                        {{ /if }}
+                    </div>
+                {{ /if }}
+            </aside>
         </div>
-    </div>
+    </section>
+
+    {{ if { collection:count in="internships" member:is="{ id }" } > 0 }}
+        <section class="dlf-community-section dlf-member-detail-internships" aria-labelledby="member-internships-heading">
+            <div class="dlf-community-head dlf-community-head--compact">
+                <span class="dlf-community-kicker">Stagebank</span>
+                <h2 id="member-internships-heading" class="dlf-community-heading">Beschikbare stages bij {{ title }}</h2>
+            </div>
+            <div class="dlf-members-grid dlf-fill-grid">
+                {{ collection:internships member:is="{ id }" }}
+                    <a class="dlf-member-card" href="{{ url }}">
+                        <span class="dlf-member-card__logo">
+                            {{ if member:logo }}
+                                <img src="{{ member:logo | first | url }}" alt="" loading="lazy">
+                            {{ /if }}
+                        </span>
+                        <span class="dlf-member-card__body">
+                            <span class="dlf-member-card__name">{{ title }}</span>
+                            {{ if description }}
+                                <span class="dlf-member-card__description">{{ description | strip_tags | truncate:150 }}</span>
+                            {{ /if }}
+                            <span class="dlf-member-card__location dlf-member-card__action">Bekijk stage</span>
+                        </span>
+                    </a>
+                {{ /collection:internships }}
+            </div>
+        </section>
+    {{ /if }}
+
+    {{ if { collection:count in="cases" member:is="{ id }" } > 0 }}
+        <section class="dlf-community-section dlf-community-section--grid dlf-member-detail-cases" aria-labelledby="member-cases-heading">
+            <div class="dlf-community-head dlf-community-head--compact">
+                <span class="dlf-community-kicker">Cases</span>
+                <h2 id="member-cases-heading" class="dlf-community-heading">Werk van {{ title }}</h2>
+            </div>
+            <div class="dlf-member-cases-grid dlf-fill-grid">
+                {{ collection:cases member:is="{ id }" limit="3" }}
+                    {{ case_title = title_long ?? title }}
+                    <article class="dlf-community-cell">
+                        {{ if featured_image }}
+                            <a class="mb-6 block overflow-hidden" href="{{ url }}" aria-label="Bekijk {{ case_title }}">
+                                <img
+                                    class="aspect-[4/3] w-full object-cover"
+                                    src="{{ glide src="{featured_image}" width="640" height="480" fit="crop_focal" }}"
+                                    alt="{{ featured_image:alt ?? case_title }}"
+                                    style="object-position: {{ featured_image:focus_css }}"
+                                    loading="lazy"
+                                >
+                            </a>
+                        {{ /if }}
+                        <h3 class="dlf-community-heading dlf-community-heading--small"><a href="{{ url }}">{{ case_title }}</a></h3>
+                        {{ if introduction }}
+                            <p class="dlf-community-copy">{{ introduction | strip_tags | truncate:180 }}</p>
+                        {{ /if }}
+                        <a class="dlf-community-text-link" href="{{ url }}">Bekijk case <span aria-hidden="true">→</span></a>
+                    </article>
+                {{ /collection:cases }}
+            </div>
+        </section>
+    {{ /if }}
 </div>

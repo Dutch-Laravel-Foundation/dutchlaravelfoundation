@@ -1,0 +1,37 @@
+title: 'DLF Quote'
+fields:
+  -
+    handle: quote
+    field:
+      display: Quote
+      type: textarea
+      validate:
+        - required
+  -
+    handle: name
+    field:
+      display: Naam
+      type: text
+  -
+    handle: role
+    field:
+      display: Functie
+      type: text
+  -
+    handle: image
+    field:
+      display: Portret
+      type: assets
+      container: assets
+      mode: grid
+      max_files: 1
+  -
+    handle: tone
+    field:
+      display: Achtergrond
+      type: select
+      default: soft
+      options:
+        soft: Lichtgrijs
+        red: Rood
+        dark: Donker
