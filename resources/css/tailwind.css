@@ -1,17 +1,6 @@
 @import "tailwindcss";
-@import "./redesign-shell.css";
-@import "./redesign-blocks.css";
-@import "./redesign-home.css";
-@import "./redesign-landing.css";
-@import "./redesign-editorial.css";
-@import "./redesign-community.css";
-@import "./redesign-public.css";
 
 @config '../../tailwind.config.js';
-
-[x-cloak] {
-    display: none !important;
-}
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
@@ -28,6 +17,10 @@
     ::backdrop,
     ::file-selector-button {
         border-color: var(--color-gray-200, currentColor);
+    }
+
+    [x-cloak] {
+      display: none !important;
     }
 
     /* Main styling */
@@ -125,11 +118,6 @@
         @apply pl-1;
     }
 
-    #content li > p,
-    .content li > p {
-        margin-bottom: 0;
-    }
-
     #content ol li::marker,
     .content ol li::marker {
         @apply inline w-[1em] -ml-[1em];
@@ -162,49 +150,6 @@
     input:not([type="checkbox"]),
     textarea {
         @apply w-full !bg-[#FEFEFE] border !border-[#ECECEC] ring-0! focus:!border-primary-accent !shadow-md shadow-gray-100/70;
-    }
-
-    .dlf-form-group,
-    .dlf-form-label {
-        display: block;
-    }
-
-    .dlf-form-label {
-        margin-bottom: 4px;
-        color: var(--dlf-ink);
-        font-size: 14px;
-        font-weight: 600;
-        line-height: 1.4;
-    }
-
-    input.dlf-form-field:not([type="checkbox"]),
-    textarea.dlf-form-field,
-    select.dlf-form-field {
-        width: 100%;
-        min-height: 44px;
-        padding: 0 14px;
-        border: 1px solid var(--dlf-line);
-        border-radius: 4px;
-        outline: 0;
-        background: #fff !important;
-        box-shadow: none !important;
-        color: var(--dlf-copy);
-        font: inherit;
-        font-size: 14px;
-    }
-
-    textarea.dlf-form-field {
-        min-height: 96px;
-        padding-block: 12px;
-        resize: vertical;
-    }
-
-    input.dlf-form-field:focus,
-    textarea.dlf-form-field:focus,
-    select.dlf-form-field:focus {
-        border-width: 1.5px !important;
-        border-color: var(--dlf-red) !important;
-        box-shadow: none !important;
     }
 
     input[type="checkbox"] {
@@ -279,6 +224,10 @@
 
     .mb-half {
         @apply mb-10;
+    }
+
+    [x-cloak] {
+        display: none;
     }
 
     /* Bard content */

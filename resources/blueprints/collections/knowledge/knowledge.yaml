@@ -34,16 +34,6 @@ tabs:
               type: markdown
               container: assets
               folder: /
-          -
-            handle: authors
-            field:
-              mode: select
-              collections:
-                - authors
-              reorderable: true
-              display: Auteurs
-              instructions: 'Optioneel. Selecteer één of meerdere auteurs in de gewenste weergavevolgorde.'
-              type: entries
   sidebar:
     display: Sidebar
     sections:

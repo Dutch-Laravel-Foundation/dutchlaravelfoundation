@@ -1,77 +1,80 @@
-<div class="dlf-public-page dlf-contact-page editorial-article">
-    <div class="editorial-rail editorial-rail--article">
-        <header class="dlf-public-page__hero">
-            <span class="editorial-eyebrow">Contact</span>
-            <h1>Neem contact op</h1>
-            <p>Een vraag over Laravel, onze stichting of de Nederlandse community? We denken graag met je mee.</p>
-        </header>
+<div class="translate-y-32 lg:translate-y-52 pb-32 md:pb-48">
+    <div class="container mb-auto mx-auto flex flex-col items-left justify-center relative">
+        <div class="flex flex-col justify-between w-full lg:flex-row">
+            <div class="w-full lg:w-1/2 mb">
+                {{ form:contact redirect="/contact" }}
 
-        <div class="dlf-contact-grid">
-            <div class="dlf-contact-copy">
-                <article class="editorial-article__prose dlf-public-page__prose">
-                    {{ content }}
-                        {{ partial src="sets/autoload" }}
-                    {{ /content }}
-                </article>
+                {{ if success }}
+                <div class="px-6 sm:px-0">
+                    {{ partial:forms/success }}
+                </div>
+                {{ else }}
 
-                <aside class="dlf-public-contact-card" aria-label="Contactgegevens Dutch Laravel Foundation">
-                    <span class="editorial-eyebrow">Stichting</span>
-                    <h2>{{ dlf:title }}</h2>
-                    <p>{{ dlf:address }}<br>{{ dlf:zipcode }} {{ dlf:city }}</p>
-                    <p>
-                        <a href="tel:{{ dlf:phone regex_replace=" \(0\)|" regex_replace="[^+0-9]|" }}">{{ dlf:phone }}</a><br>
-                        <a href="mailto:{{ dlf:email }}">{{ dlf:email }}</a>
-                    </p>
-                    <p>KVK: {{ dlf:coc }}</p>
-                </aside>
+                {{ if errors }}
+                <div class="p-6 mb-6 bg-primary-accent text-primary-contrast">
+                    Er ging iets mis. Controleer de foutmelding(en) hieronder.
+
+                    {{ errors }}
+                    {{ value }}<br>
+                    {{ /errors }}
+                </div>
+                {{ else }}
+                {{ content }}
+                {{ partial src="sets/autoload" }}
+                {{ /content }}
+                {{ /if }}
+
+                <input type="text" class="hidden" name="{{ honeypot ?? 'honeypot' }}">
+
+                <div class="sm:px-0" data-aos="fade-up" data-aos-delay="250">
+                    {{ fields }}
+                    {{ if handle != 'agree' }}
+                    <div class="mb-6 {{ if first }}mt{{ /if }}">
+                        <label for="{{ handle }}"><span class="meta text-[0.9rem]! sm:text-auto">{{ display
+                                }}</span></label>
+                        {{ if instructions_position == 'above' }}
+                        {{ instructions }}
+                        {{ /if }}
+                        {{# Add ID to field #}}
+                        {{ field regex_replace="^<([a-z]+)|<\\1 id='{ handle }'" regex_replace="" }}
+                                        {{ if instructions_position == 'below' }}
+                                            {{ instructions }}
+                                        {{ /if }}
+                                        {{ if error }}
+                                            <p class=" text-primary-accent">{{ error }}</p>
+                            {{ /if }}
+                    </div>
+                    {{ else }}
+                    {{ captcha }}
+                    <div class="flex flex-col justify-between lg:flex-row mt-4">
+                        <div class="flex flex-row w-full lg:w-4/6 text-tertiary-light mb">
+                            {{ field replace="<br>|" }}<span class="ml-2 sm:text-auto text-[0.9rem]">{{ display
+                                regex_replace="(privacy statement)|<a href='/privacy-statement' target='_blank'>\\1</a>" }}</span>
+                        </div>
+
+                        {{ partial:buttons/primary type="submit" class="w-full ml-auto sm:w-auto" button_class="w-full"
+                        }}Versturen{{ /partial:buttons/primary }}
+                    </div>
+                    {{ /if }}
+                    {{ /fields }}
+                </div>
+                {{ /if }}
+                {{ /form:contact }}
             </div>
 
-            <div class="dlf-member-form dlf-contact-form">
-                {{ form:contact redirect="/contact" }}
-                    {{ if success }}
-                        <div class="dlf-contact-form__success" role="status">
-                            <span class="dlf-public-success__mark" aria-hidden="true">✓</span>
-                            <h2>Bedankt voor je bericht</h2>
-                            <p>We nemen zo snel mogelijk contact met je op.</p>
-                        </div>
-                    {{ else }}
-                        {{ if errors }}
-                            <div class="dlf-member-form__errors" role="alert">
-                                <strong>Controleer de gemarkeerde velden.</strong><br>
-                                {{ errors }}{{ value }}<br>{{ /errors }}
-                            </div>
-                        {{ /if }}
-
-                        <input type="text" class="hidden" name="{{ honeypot ?? 'honeypot' }}" tabindex="-1" autocomplete="off">
-
-                        <div class="dlf-member-form__fields">
-                            {{ fields }}
-                                {{ if handle != 'agree' }}
-                                    <label class="dlf-form-group">
-                                        <span class="dlf-form-label">{{ display }}</span>
-                                        {{ if instructions_position == 'above' }}{{ instructions }}{{ /if }}
-                                        {{ field = field regex_replace="^<([a-z]+)|<\1 class='dlf-form-field'" }}
-                                        {{ if instructions_position == 'below' }}{{ instructions }}{{ /if }}
-                                        {{ if error }}<p class="dlf-member-form__error">{{ error }}</p>{{ /if }}
-                                    </label>
-                                {{ else }}
-                                    <label class="dlf-member-form__agree">
-                                        {{ field replace="<br>|" }}
-                                        <span>{{ display regex_replace="(privacy statement)|<a href='/privacy-statement' target='_blank'>\1</a>" }}</span>
-                                    </label>
-                                    {{ if error }}<p class="dlf-member-form__error">{{ error }}</p>{{ /if }}
-                                {{ /if }}
-                            {{ /fields }}
-
-                            {{ captcha }}
-
-                            <button type="submit" class="dlf-btn dlf-contact-form__submit">
-                                <span class="dlf-btn-face dlf-btn-face--red">Versturen</span>
-                                <span class="dlf-btn-shadow dlf-btn-shadow--red" aria-hidden="true"></span>
-                            </button>
-                        </div>
-                    {{ /if }}
-                {{ /form:contact }}
+            <div class="w-full py-10 lg:py-0 lg:w-5/12 mb">
+                <div class="px-0 md:px-6 lg:px-10 lg:-mr-10">
+                    {{ partial:company/base :logo="dlf:logo" class="w-full px-10 pb-10 mt-10 overflow-hidden" }}
+                    <h4 class="w-min">{{ dlf:title }}</h4>
+                    <p>{{ dlf:address }}<br>{{ dlf:zipcode }} {{ dlf:city }}</p>
+                    <p>
+                        <a href="tel:{{ dlf:phone regex_replace=" \(0\)|" regex_replace="[^+0-9]|" }}"
+                            class="text-primary-accent">{{ dlf:phone }}</a><br><a href="mailto:{{ dlf:email }}"
+                            class="text-primary-accent">{{ dlf:email }}</a>
+                    </p>
+                    <p>KVK: {{ dlf:coc }}</p>
+                    {{ /partial:company/base }}
+                </div>
             </div>
         </div>
     </div>

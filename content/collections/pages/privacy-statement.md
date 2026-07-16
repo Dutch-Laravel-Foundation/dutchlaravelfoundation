@@ -105,6 +105,9 @@ content:
     content:
       -
         type: text
+        marks:
+          -
+            type: bold
         text: 'Verzenden van nieuwsbrieven'
   -
     type: paragraph
@@ -119,6 +122,9 @@ content:
     content:
       -
         type: text
+        marks:
+          -
+            type: bold
         text: Contactformulier
   -
     type: paragraph
@@ -139,6 +145,9 @@ content:
     content:
       -
         type: text
+        marks:
+          -
+            type: bold
         text: Reclame
   -
     type: paragraph
@@ -198,6 +207,9 @@ content:
     content:
       -
         type: text
+        marks:
+          -
+            type: bold
         text: 'Verstrekking aan andere bedrijven of instellingen'
   -
     type: paragraph
@@ -212,6 +224,9 @@ content:
     content:
       -
         type: text
+        marks:
+          -
+            type: bold
         text: Statistieken
   -
     type: paragraph
@@ -232,6 +247,9 @@ content:
     content:
       -
         type: text
+        marks:
+          -
+            type: bold
         text: Cookies
   -
     type: paragraph
@@ -246,6 +264,9 @@ content:
     content:
       -
         type: text
+        marks:
+          -
+            type: bold
         text: 'Google Analytics'
   -
     type: paragraph
@@ -260,6 +281,9 @@ content:
     content:
       -
         type: text
+        marks:
+          -
+            type: bold
         text: Beveiliging
   -
     type: paragraph
@@ -274,6 +298,9 @@ content:
     content:
       -
         type: text
+        marks:
+          -
+            type: bold
         text: 'Wijzigingen in deze privacyverklaring'
   -
     type: paragraph
@@ -288,12 +315,18 @@ content:
     content:
       -
         type: text
+        marks:
+          -
+            type: bold
         text: 'Inzage, wijzigen en'
       -
         type: text
         text: ' '
       -
         type: text
+        marks:
+          -
+            type: bold
         text: 'verwijderen van je gegevens'
   -
     type: paragraph
@@ -386,6 +419,9 @@ content:
     content:
       -
         type: text
+        marks:
+          -
+            type: bold
         text: 'Klacht indienen'
   -
     type: paragraph
@@ -414,5 +450,8 @@ content:
     content:
       -
         type: text
+        marks:
+          -
+            type: bold
         text: Contactgegevens
 ---

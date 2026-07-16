@@ -1,189 +1,48 @@
-<div class="dlf-community-page dlf-about-page">
-    <section class="dlf-community-section" aria-labelledby="about-heading">
-        <div class="dlf-community-head">
-            <span class="dlf-community-kicker">{{ title }}</span>
-            <h1 id="about-heading" class="dlf-community-title">De kennis- en brancheorganisatie voor Laravel in Nederland</h1>
-            <p class="dlf-community-intro">De Dutch Laravel Foundation verenigt de Nederlandse bedrijven die met Laravel bouwen. We maken Laravel bekender, stimuleren kennisuitwisseling tussen onze leden en behartigen de belangen van de community — bij bedrijven, de overheid en het onderwijs.</p>
-        </div>
-    </section>
+<div class="translate-y-32 lg:translate-y-52 pb-32 md:pb-48">
 
-    <section class="dlf-community-section dlf-community-section--grid dlf-about-work" aria-labelledby="about-work-heading">
-        <div class="dlf-about-red-head">
-            <h2 id="about-work-heading">Wat we doen</h2>
-        </div>
-        <div class="dlf-community-grid-2">
-            <article class="dlf-community-cell">
-                <span class="dlf-community-icon"><img src="/assets/img/proven-secure.svg" alt="" loading="lazy"></span>
-                <h3 class="dlf-community-feature-title">Laravel promoten</h3>
-                <p class="dlf-community-feature-copy">We laten bedrijven, overheden en onderwijsinstellingen zien waarom Laravel een volwassen en betrouwbare keuze is voor maatwerksoftware.</p>
-            </article>
-            <article class="dlf-community-cell">
-                <span class="dlf-community-icon"><img src="/assets/img/boosting-knowledge.svg" alt="" loading="lazy"></span>
-                <h3 class="dlf-community-feature-title">Kennis delen</h3>
-                <p class="dlf-community-feature-copy">Via events, werkgroepen en artikelen brengen we Laravel-developers samen en houden we de kennis in Nederland op peil.</p>
-            </article>
-            <article class="dlf-community-cell">
-                <span class="dlf-community-icon"><img src="/assets/img/assuring-quality.svg" alt="" loading="lazy"></span>
-                <h3 class="dlf-community-feature-title">Samen sterker</h3>
-                <p class="dlf-community-feature-copy">Als collectief maken we afspraken met leveranciers over hosting, tooling en trainingen — voordelen waar al onze leden van profiteren.</p>
-            </article>
-            <article class="dlf-community-cell">
-                <span class="dlf-community-icon"><img src="/assets/img/future-proof.svg" alt="" loading="lazy"></span>
-                <h3 class="dlf-community-feature-title">Belangen behartigen</h3>
-                <p class="dlf-community-feature-copy">We vertegenwoordigen de Nederlandse Laravel-community en bevorderen verantwoorde adoptie van het framework in de markt.</p>
-            </article>
-        </div>
-    </section>
+    {{# Top background image #}}
+    {{ partial:decoration/floor-background background="floor-top-about-us" /}}
 
-    <section class="dlf-community-section dlf-community-grid-2 dlf-about-story" aria-labelledby="about-story-heading">
-        <div class="dlf-about-story-copy">
-            <span class="dlf-community-kicker">Ons verhaal</span>
-            <h2 id="about-story-heading" class="dlf-community-heading" style="color: #ff2d20 !important">Ontstaan vanuit de community, voor de community</h2>
-            <p class="dlf-community-copy">De Dutch Laravel Foundation ontstond uit een simpele constatering: Nederland telt opvallend veel sterke Laravel-bureaus, maar ze werkten vooral op zichzelf. Door krachten te bundelen konden we kennis delen, Laravel steviger op de kaart zetten en samen betere voorwaarden regelen.</p>
-            <p class="dlf-community-copy">Met de erkenning van Taylor Otwell, de grondlegger van Laravel, groeide de stichting uit tot een herkenbaar keurmerk. Vandaag vertegenwoordigen we tientallen aangesloten bureaus en productteams door het hele land.</p>
-        </div>
-        <figure class="dlf-community-photo">
-            <img src="/assets/uploads/assets/AboutUs_b@2x.jpg" alt="Leden van de Dutch Laravel Foundation tijdens een bijeenkomst" loading="lazy">
-        </figure>
-    </section>
+    <div class="container mb-auto mx-auto flex flex-col items-left justify-center relative">
 
-    <section class="dlf-community-red-band" aria-label="Dutch Laravel Foundation in cijfers">
-        <div class="dlf-community-red-inner dlf-about-stats">
-            <div class="dlf-about-stat">
-                <strong>{{ collection:count in="members" }}+</strong>
-                <span>aangesloten leden</span>
-            </div>
-            <div class="dlf-about-stat">
-                <strong>10+</strong>
-                <span>events per jaar</span>
-            </div>
-            <div class="dlf-about-stat">
-                <strong>100+</strong>
-                <span>developers per LaraFest</span>
-            </div>
-            <div class="dlf-about-stat">
-                <strong>2019</strong>
-                <span>actief sinds</span>
-            </div>
-        </div>
-    </section>
+        {{ content }}
+            {{ partial src="sets/autoload" }}
+        {{ /content }}
 
-    <section class="dlf-community-section dlf-community-section--grid" aria-labelledby="about-events-heading">
-        <div class="dlf-community-head dlf-community-head--divided">
-            <span class="dlf-community-kicker">Events</span>
-            <h2 id="about-events-heading" class="dlf-community-heading">Wat we organiseren</h2>
-            <p class="dlf-community-intro">Het hele jaar door brengen we de community samen — van grote jaarlijkse events tot informele meetups in de regio.</p>
-        </div>
-        <div class="dlf-community-grid-2">
-            <article class="dlf-community-cell dlf-about-event">
-                <figure class="dlf-about-event__image"><img src="/assets/uploads/events/zandvoort-strand.jpg" alt="LaraFest" loading="lazy"></figure>
-                <div>
-                    <span class="dlf-community-kicker" style="color: #ff2d20">LaraFest &amp; LaraWards</span>
-                    <h3>Het jaarlijkse community-event</h3>
-                    <p class="dlf-community-feature-copy">Een dag vol talks, de uitreiking van de LaraWards en volop ruimte om bij te praten met de hele Nederlandse Laravel-community.</p>
+        <div class="container mx-auto">
+            {{# Board #}}
+            <div class="relative py-4 lg:py-10">
+                <h2>Bestuur</h2>
+                <p class="block w-full mb-5 sm:px-0 sm:w-3/4 base:w-2/3 lg:w-1/2 3xl:w-2/5 4xl:w-1/3">De Dutch Laravel Foundation wordt gerund door een enthousiast bestuur van zes vrijwilligers die in de dagelijkse praktijk ook met Laravel werken.</p>
+
+                <div class="flex flex-wrap justify-center overflow-hidden sm:mx-0 lg:py-10 space-y-8 mt-12">
+                    {{ collection:board sort="random" }}
+                        {{ partial:blocks/photo :image="photo" :title="title" :text="function" class="w-1/2 md:w-1/3 lg:w-1/4 px-6 md:px-12" }}
+                    {{ /collection:board }}
                 </div>
-            </article>
-            <article class="dlf-community-cell dlf-about-event">
-                <figure class="dlf-about-event__image"><img src="/assets/uploads/events/hackathon.jpeg" alt="Laravel hackathon" loading="lazy"></figure>
-                <div>
-                    <span class="dlf-community-kicker" style="color: #ff2d20">Hackathon</span>
-                    <h3>Een etmaal samen bouwen</h3>
-                    <p class="dlf-community-feature-copy">Teams bouwen een dag en nacht door aan nieuwe ideeën — van AI-experimenten tot open source-bijdragen.</p>
-                </div>
-            </article>
-            <article class="dlf-community-cell dlf-about-event">
-                <figure class="dlf-about-event__image"><img src="/assets/uploads/events/cxo-diner.jpg" alt="CxO-diner" loading="lazy"></figure>
-                <div>
-                    <span class="dlf-community-kicker" style="color: #ff2d20">CxO-diner</span>
-                    <h3>Doorpraten op bestuursniveau</h3>
-                    <p class="dlf-community-feature-copy">Bestuurders van onze leden schuiven aan voor gesprekken over de toekomst van maatwerksoftware en de rol van Laravel.</p>
-                </div>
-            </article>
-            <article class="dlf-community-cell dlf-about-event">
-                <figure class="dlf-about-event__image"><img src="/assets/uploads/events/laravel-meetup.jpeg" alt="Laravel meetup" loading="lazy"></figure>
-                <div>
-                    <span class="dlf-community-kicker" style="color: #ff2d20">Meetups</span>
-                    <h3>Kennis delen in de regio</h3>
-                    <p class="dlf-community-feature-copy">Regelmatige, informele bijeenkomsten door het hele land met talks, demo’s en tijd om te netwerken.</p>
-                </div>
-            </article>
-        </div>
-    </section>
 
-    <section class="dlf-community-section dlf-community-section--grid" aria-labelledby="about-board-heading">
-        <div class="dlf-community-head dlf-community-head--divided">
-            <span class="dlf-community-kicker">Het bestuur</span>
-            <h2 id="about-board-heading" class="dlf-community-heading">De mensen achter de stichting</h2>
-            <p class="dlf-community-intro">Het bestuur bestaat uit vrijwilligers uit de aangesloten bureaus, die zich naast hun werk inzetten voor de community.</p>
-        </div>
-        <div class="dlf-community-grid-4 dlf-about-board-grid dlf-fill-grid">
-            {{ collection:board sort="title" }}
-                <article class="dlf-community-cell dlf-about-board-card">
-                    <figure class="dlf-about-board-card__photo">
-                        {{ if photo }}
-                            <img src="{{ glide src='{photo}' fit='crop_focal' width='240' height='240' }}" alt="{{ title }}" loading="lazy" style="object-position: {{ photo:focus_css }}">
-                        {{ /if }}
-                    </figure>
-                    <span class="dlf-about-board-card__name">{{ title }}</span>
-                    <span class="dlf-about-board-card__function">{{ function }}</span>
-                </article>
-            {{ /collection:board }}
-        </div>
-    </section>
+                {{# Background image #}}
+                <div class="absolute z-[-1] flex items-center justify-center top-0">
+                    <div>
+                        <img src="/assets/img/backgrounds/floor-mid-gray.svg" class="w-[1120px] h-[900px]">
+                    </div>
+                </div>
+            </div>
 
-    <section class="dlf-community-section" aria-labelledby="about-milestones-heading">
-        <div class="dlf-community-head dlf-community-head--compact">
-            <span class="dlf-community-kicker">Mijlpalen</span>
-            <h2 id="about-milestones-heading" class="dlf-community-heading">Van eerste meetup tot brancheorganisatie</h2>
-        </div>
-        <div class="dlf-about-timeline">
-            <div class="dlf-about-timeline__row">
-                <span class="dlf-about-timeline__year">2019</span>
-                <div><h3>Oprichting van de stichting</h3><p>Een groep Nederlandse Laravel-bureaus bundelt de krachten en richt de Dutch Laravel Foundation op.</p></div>
-            </div>
-            <div class="dlf-about-timeline__row">
-                <span class="dlf-about-timeline__year">2021</span>
-                <div><h3>Eerste LaraFest</h3><p>Het eerste grote jaarlijkse community-event brengt developers uit het hele land samen.</p></div>
-            </div>
-            <div class="dlf-about-timeline__row">
-                <span class="dlf-about-timeline__year">2023</span>
-                <div><h3>Keurmerk voor leden</h3><p>Aangesloten bureaus krijgen een herkenbaar keurmerk als erkende Laravel-specialist.</p></div>
-            </div>
-            <div class="dlf-about-timeline__row">
-                <span class="dlf-about-timeline__year">2024</span>
-                <div><h3>Stagebank &amp; onderwijs</h3><p>De stichting verbindt studenten met leden via een stagebank en gastcolleges op HBO en MBO.</p></div>
-            </div>
-            <div class="dlf-about-timeline__row">
-                <span class="dlf-about-timeline__year">2026</span>
-                <div><h3>Een groeiende community</h3><p>De community groeit door met tientallen aangesloten bureaus en productteams.</p></div>
-            </div>
-        </div>
-    </section>
 
-    <section class="dlf-about-partners" aria-labelledby="about-partners-heading">
-        <div class="dlf-community-head dlf-community-head--divided">
-            <span class="dlf-community-kicker">Founding partners</span>
-            <h2 id="about-partners-heading" class="dlf-community-heading">De bedrijven van het eerste uur</h2>
-            <p class="dlf-community-intro">De volgende bedrijven hebben in 2019 gezamenlijk gewerkt aan de oprichting van de Dutch Laravel Foundation.</p>
+            {{# Founding partners #}}
+            <div>
+                <h2>Founding partners</h2>
+                <p class="block w-full mb-5 sm:px-0 sm:w-3/4 base:w-2/3 lg:w-1/2 3xl:w-2/5 4xl:w-1/3">De volgende bedrijven hebben in 2019 gezamenlijk gewerkt aan de oprichting van de Dutch Laravel Foundation.</p>
+            </div>
+
+            <div class="mx-auto mb-10 md:mb-20">
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4  gap-6">
+                    {{ collection:members founding_partner:is="true" }}
+                        {{ partial:company/simple :logo="logo" :title="title" text="{ arr({ city }, { province }) | remove_empty | list }" class="w-full shadow-custom" link="/leden/{ slug }" index="4"}}
+                    {{ /collection:members }}
+                </div>
+            </div>
         </div>
-        <div class="dlf-members-grid">
-            {{ collection:members founding_partner:is="true" sort="title" }}
-                <a href="/leden/{{ slug }}" class="dlf-member-card">
-                    <span class="dlf-member-card__logo">
-                        {{ if logo }}<img src="{{ logo | first | url }}" alt="{{ title }}" loading="lazy">{{ /if }}
-                    </span>
-                    <span class="dlf-member-card__body">
-                        <span class="dlf-member-card__name">{{ title }}</span>
-                        <span class="dlf-member-card__location">{{ city }}{{ if city && province }}, {{ /if }}{{ province }}</span>
-                    </span>
-                </a>
-            {{ /collection:members }}
-        </div>
-    </section>
+    </div>
 </div>
-
-{{ content }}
-    {{ if type | starts_with:'dlf_' }}
-        {{ partial src="sets/autoload" }}
-    {{ /if }}
-{{ /content }}

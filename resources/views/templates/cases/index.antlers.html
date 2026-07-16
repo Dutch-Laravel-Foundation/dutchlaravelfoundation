@@ -1,75 +1,18 @@
-<div class="editorial-page">
-    <div class="editorial-rail">
-        <header class="editorial-page__header">
-            <div class="editorial-page__heading">
-                <span class="editorial-eyebrow">Cases</span>
-                <h1 class="editorial-page__title">Cases uit de community</h1>
-                <p class="editorial-page__intro">Ontdek welke digitale oplossingen onze leden met Laravel bouwen voor organisaties in uiteenlopende sectoren.</p>
-            </div>
-        </header>
+<div class="translate-y-32 lg:translate-y-52 pb-32">
+    {{ partial:decoration/floor-background background="floor-top-what-is-laravel" /}}
 
-        {{ collection:cases sort="date:desc" as="case_entries" }}
-            {{ if no_results }}
-                <div class="editorial-empty">
-                    <h2>Geen cases gevonden</h2>
-                    <p>Er zijn op dit moment geen cases beschikbaar.</p>
-                </div>
-            {{ else }}
-                <div class="editorial-feed">
-                    {{ case_entries }}
-                        {{ case_title = title_long ?? title }}
-                        <article class="editorial-entry {{ switch between="editorial-entry--media-start|editorial-entry--media-end" }} {{ if first }}editorial-entry--featured{{ /if }}">
-                            <a class="editorial-entry__media" href="{{ url }}" aria-label="Lees {{ case_title }}">
-                                {{ if featured_image }}
-                                    {{ if first }}
-                                        <img
-                                            class="editorial-entry__image"
-                                            src="{{ glide src="{featured_image}" width="960" height="768" fit="crop_focal" }}"
-                                            srcset="{{ glide src="{featured_image}" width="640" height="512" fit="crop_focal" }} 640w, {{ glide src="{featured_image}" width="960" height="768" fit="crop_focal" }} 960w"
-                                            sizes="(min-width: 1024px) 576px, 100vw"
-                                            alt="{{ featured_image:alt ?? case_title }}"
-                                            style="object-position: {{ featured_image:focus_css }}"
-                                            fetchpriority="high"
-                                        >
-                                    {{ else }}
-                                        <img
-                                            class="editorial-entry__image"
-                                            src="{{ glide src="{featured_image}" width="960" height="640" fit="crop_focal" }}"
-                                            srcset="{{ glide src="{featured_image}" width="640" height="427" fit="crop_focal" }} 640w, {{ glide src="{featured_image}" width="960" height="640" fit="crop_focal" }} 960w"
-                                            sizes="(min-width: 1024px) 576px, 100vw"
-                                            alt="{{ featured_image:alt ?? case_title }}"
-                                            style="object-position: {{ featured_image:focus_css }}"
-                                            loading="lazy"
-                                        >
-                                    {{ /if }}
-                                {{ else }}
-                                    <span class="editorial-media-placeholder" aria-hidden="true"><img src="/assets/uploads/globals/LaravelBrandMark.svg" alt=""></span>
-                                {{ /if }}
-                            </a>
+    <div class="container mb-auto mx-auto flex flex-col items-left justify-center relative">
+        {{ content }}
+            {{ partial src="sets/autoload" }}
+        {{ /content }}
 
-                            <div class="editorial-entry__body">
-                                <div class="editorial-entry__meta">
-                                    <span class="editorial-entry__category">{{ member:title ?? "Case" }}</span>
-                                    <span class="editorial-entry__dot" aria-hidden="true">·</span>
-                                    <time datetime="{{ date format="Y-m-d" }}">{{ date | iso_format="D MMMM YYYY" }}</time>
-                                </div>
-
-                                {{ if first }}
-                                    <h2 class="editorial-entry__title editorial-entry__title--featured"><a href="{{ url }}">{{ case_title }}</a></h2>
-                                {{ else }}
-                                    <h2 class="editorial-entry__title"><a href="{{ url }}">{{ case_title }}</a></h2>
-                                {{ /if }}
-
-                                {{ if introduction }}
-                                    <p class="editorial-entry__summary">{{ introduction | strip_tags | truncate:240 }}</p>
-                                {{ /if }}
-
-                                <a class="editorial-text-link" href="{{ url }}">Bekijk case <span aria-hidden="true">→</span></a>
-                            </div>
-                        </article>
-                    {{ /case_entries }}
-                </div>
-            {{ /if }}
-        {{ /collection:cases }}
+        <section class="mb">
+            {{ collection:cases limit="9" sort="date:desc" }}
+                {{ case_block = { switch between='blocks/image-left-larger|blocks/image-right-larger' } }}
+                {{ partial:{ case_block } class="lg:w-3/4! py-4 lg:py-0 { switch between='|lg:ml-[25%]' }" :image="featured_image" :title="title_long" :category="member:title" link="/cases/{ slug }" }}
+                {{ introduction }}
+                {{ /partial:{ case_block } }}
+            {{ /collection:cases }}
+        </section>
     </div>
 </div>

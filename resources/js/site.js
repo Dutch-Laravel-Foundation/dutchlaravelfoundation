@@ -12,7 +12,6 @@ import shell from "highlight.js/lib/languages/shell";
 import sql from "highlight.js/lib/languages/sql";
 import xml from "highlight.js/lib/languages/xml";
 import typescript from "highlight.js/lib/languages/typescript";
-import yaml from "highlight.js/lib/languages/yaml";
 
 import "highlight.js/styles/github.css";
 
@@ -26,14 +25,16 @@ hljs.registerLanguage("shell", shell);
 hljs.registerLanguage("sql", sql);
 hljs.registerLanguage("xml", xml);
 hljs.registerLanguage("typescript", typescript);
-hljs.registerLanguage("yaml", yaml);
 
-document.querySelectorAll("pre code").forEach((el) => {
-    hljs.highlightElement(el);
+window.addEventListener("load", (event) => {
+    document.querySelectorAll("pre code").forEach((el) => {
+        hljs.highlightElement(el);
+    });
 });
 
 var header = document.querySelector("header"),
-    banner = document.querySelector(".banner");
+    banner = document.querySelector(".banner"),
+    nav = header.querySelector("nav.animated");
 
 var includeBannerHeight = false;
 var bannerHeight = combinedHeaderHeight(includeBannerHeight);
@@ -71,17 +72,13 @@ if (header != null && isIE === false) {
 
 function combinedHeaderHeight(includeBanner = true) {
     return (
-        (header ? header.offsetHeight : 0) +
+        header.offsetHeight +
         (includeBanner && banner ? banner.offsetHeight : 0)
     );
 }
 
 // SwiperJS
 import "./components/swiper";
-import "./components/client-logo-wall";
-import "./components/header-aware-sticky";
-import "./components/editorial-article";
-import "./components/vragen-ai-search";
 
 // AlpineJS
 import Alpine from "alpinejs";
@@ -104,31 +101,22 @@ if (aosElement) {
 // GSAP
 import { gsap } from "gsap";
 
-const bottomFloorElements = gsap.utils.toArray(
-    ".top-floor-floating-element-bottom"
-);
-const topFloorElements = gsap.utils.toArray(".top-floor-floating-element-top");
+gsap.to(".top-floor-floating-element-bottom", {
+    y: 20,
+    duration: 5,
+    stagger: {
+        each: 0.6,
+        repeat: -1,
+        yoyo: true,
+    },
+});
 
-if (bottomFloorElements.length > 0) {
-    gsap.to(bottomFloorElements, {
-        y: 20,
-        duration: 5,
-        stagger: {
-            each: 0.6,
-            repeat: -1,
-            yoyo: true,
-        },
-    });
-}
-
-if (topFloorElements.length > 0) {
-    gsap.to(topFloorElements, {
-        y: -20,
-        duration: 5,
-        stagger: {
-            each: 0.6,
-            repeat: -1,
-            yoyo: true,
-        },
-    });
-}
+gsap.to(".top-floor-floating-element-top", {
+    y: -20,
+    duration: 5,
+    stagger: {
+        each: 0.6,
+        repeat: -1,
+        yoyo: true,
+    },
+});

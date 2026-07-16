@@ -1,280 +1,233 @@
-<div
-    class="dlf-community-page dlf-members-page"
-    x-data="loadMembers()"
-    x-effect="document.body.classList.toggle('overflow-hidden', filterModalOpen)"
-    @keydown.escape.window="closeFilterModal()"
->
-    <section class="dlf-community-section" aria-labelledby="members-heading">
-        <div class="dlf-community-head">
-            <div class="dlf-members-intro">
-                <div>
-                    <span class="dlf-community-kicker">{{ title }}</span>
-                    <h1 id="members-heading" class="dlf-community-title">Zoek jij een ervaren Laravel developer?</h1>
-                </div>
-                <div class="dlf-members-intro__copy">
-                    <p class="dlf-community-copy">Wil je software laten bouwen met Laravel? Onze leden zijn ervaren bureaus en professionals die er dagelijks mee werken.</p>
-                    <p class="dlf-community-copy">Liever zelf zoeken? Gebruik de filters hieronder. Kom je er niet uit? Mail naar <a href="mailto:info@dutchlaravelfoundation.nl">info@dutchlaravelfoundation.nl</a>.</p>
-                </div>
+<div class="translate-y-32 lg:translate-y-52 pb-32 md:pb-48">
+    {{# Top background image #}}
+    <div class="absolute w-full top-0 left-0 h-[900px] overflow-hidden hidden sm:block">
+        <div class="container relative mx-auto">
+            <div class="absolute right-[-35rem] md:right-[-45rem] lg:right-[-13rem] top-0 w-[1120px] h-[900px]">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1129 908" class="w-[1120px] h-[900px]">
+                    <g fill="none" stroke="#ECECEC" opacity=".5">
+                        <path d="m225.8 476.687 74.255 42.237-74.255 42.238-74.255-42.238 74.255-42.237Zm0-102.562 74.255 42.238L225.8 458.6l-74.255-42.237 74.255-42.238Z" />
+                        <path d="m225.8 303.556 74.255 42.237L225.8 388.03l-74.255-42.237 74.255-42.237Zm-75.267 43.282 74.256 42.238-74.256 42.237-74.255-42.237 74.255-42.238Zm225.8 59.279 74.256 42.237-74.256 42.238-74.255-42.238 74.255-42.237Zm150.534-15.996 74.255 42.238-74.255 42.237-74.256-42.237 74.256-42.238Zm150.533 0 74.255 42.238-74.255 42.237-74.255-42.237L677.4 390.12Zm150.533 0 74.256 42.238-74.256 42.237-74.255-42.237 74.255-42.238Zm-526.866-43.283 74.255 42.238-74.255 42.237-74.256-42.237 74.256-42.238Zm150.533 0 74.255 42.238-74.255 42.237-74.255-42.237 74.255-42.238Zm150.533 0 74.256 42.238-74.256 42.237-74.255-42.237 74.255-42.238Zm150.534 0 74.255 42.238-74.255 42.237-74.256-42.237 74.256-42.238Zm150.533 0 74.255 42.238-74.255 42.237-74.255-42.237 74.255-42.238Z" />
+                        <path d="m451.6 433.404 74.255 42.237L451.6 517.88l-74.255-42.238 74.255-42.237ZM376.333 216.99l74.256 42.237-74.256 42.237-74.255-42.237 74.255-42.237ZM677.4 303.556l74.255 42.237L677.4 388.03l-74.255-42.237 74.255-42.237Zm-301.067 0 74.256 42.237-74.256 42.237-74.255-42.237 74.255-42.237Zm150.534 0 74.255 42.237-74.255 42.237-74.256-42.237 74.256-42.237Zm75.266 129.848 74.256 42.237-74.256 42.238-74.255-42.238 74.255-42.237Zm225.8-113.853 74.256 42.238-74.256 42.237-74.255-42.237 74.255-42.238Zm-526.866-59.278 74.255 42.237-74.255 42.237-74.256-42.237 74.256-42.237Zm301.066 0 74.256 42.237-74.256 42.237-74.255-42.237 74.255-42.237Zm150.534 0 74.255 42.237-74.255 42.237-74.256-42.237 74.256-42.237Zm150.533 0 74.255 42.237-74.255 42.237-74.255-42.237 74.255-42.237Z" />
+                        <path d="m451.6 244.277 74.255 42.237-74.255 42.237-74.255-42.237 74.255-42.237Zm225.8-27.287 74.255 42.237-74.255 42.237-74.255-42.237L677.4 216.99Z" />
+                        <path d="m526.867 216.99 74.255 42.237-74.255 42.237-74.256-42.237 74.256-42.237Zm301.066 0 74.256 42.237-74.256 42.237-74.255-42.237 74.255-42.237Zm-451.6 432.829 74.256 42.237-74.256 42.237-74.255-42.237 74.255-42.237Zm150.534 0 74.255 42.237-74.255 42.237-74.256-42.237 74.256-42.237Zm150.533 0 74.255 42.237-74.255 42.237-74.255-42.237 74.255-42.237Zm150.533 0 74.256 42.237-74.256 42.237-74.255-42.237 74.255-42.237ZM451.6 606.536l74.255 42.237L451.6 691.01l-74.255-42.237 74.255-42.237Zm150.533 0 74.256 42.237-74.256 42.237-74.255-42.237 74.255-42.237Zm150.534-15.996 74.255 42.237-74.255 42.237-74.256-42.237 74.256-42.237ZM903.2 606.536l74.255 42.237L903.2 691.01l-74.255-42.237 74.255-42.237ZM451.6 709.098l74.255 42.237-74.255 42.237-74.255-42.237 74.255-42.237Zm-75.267-232.411 74.256 42.237-74.256 42.238-74.255-42.238 74.255-42.237Z" />
+                        <path d="m677.4 563.253 74.255 42.237-74.255 42.237-74.255-42.237 74.255-42.237Zm-301.067 0 74.256 42.237-74.256 42.237-74.255-42.237 74.255-42.237Zm150.534-15.996 74.255 42.237-74.255 42.238-74.256-42.238 74.256-42.237Zm75.266 145.845 74.256 42.237-74.256 42.237-74.255-42.237 74.255-42.237Zm225.8-129.849 74.256 42.237-74.256 42.237-74.255-42.237 74.255-42.237Z" />
+                        <path d="m602.133 519.97 74.256 42.237-74.256 42.237-74.255-42.237 74.255-42.237Zm150.534 0 74.255 42.237-74.255 42.237-74.256-42.237 74.256-42.237Zm150.533 0 74.255 42.237-74.255 42.237-74.255-42.237L903.2 519.97Zm-451.6 0 74.255 42.237-74.255 42.237-74.255-42.237L451.6 519.97Zm225.8-43.283 74.255 42.237-74.255 42.238-74.255-42.238 74.255-42.237Zm-150.533 0 74.255 42.237-74.255 42.238-74.256-42.238 74.256-42.237Zm301.066 0 74.256 42.237-74.256 42.238-74.255-42.238 74.255-42.237Zm-75.266-43.283 74.255 42.237-74.255 42.238-74.256-42.238 74.256-42.237Zm-451.6 0 74.255 42.237-74.255 42.238-74.256-42.238 74.256-42.237Zm0 173.132 74.255 42.237-74.255 42.237-74.256-42.237 74.256-42.237Zm225.8 129.849 74.255 42.237-74.255 42.237-74.256-42.237 74.256-42.237Zm150.533 0 74.255 42.237-74.255 42.237-74.255-42.237 74.255-42.237Zm150.533 0 74.256 42.237-74.256 42.237-74.255-42.237 74.255-42.237ZM903.2 433.404l74.255 42.237L903.2 517.88l-74.255-42.238 74.255-42.237ZM451.6 173.707l74.255 42.237-74.255 42.237-74.255-42.237 74.255-42.237Zm-75.267-43.283 74.256 42.237-74.256 42.237-74.255-42.237 74.255-42.237ZM903.2 173.707l74.255 42.237-74.255 42.237-74.255-42.237 74.255-42.237Z" />
+                        <path d="m978.467 146.42 74.255 42.237-74.255 42.237-74.256-42.237 74.256-42.237Zm-451.6-15.996 74.255 42.237-74.255 42.237-74.256-42.237 74.256-42.237ZM677.4 114.428l74.255 42.237-74.255 42.237-74.255-42.237 74.255-42.237Z" />
+                        <path d="m602.133 87.141 74.256 42.237-74.256 42.237-74.255-42.237 74.255-42.237Zm0-86.566 74.256 42.237-74.256 42.238-74.255-42.238L602.133.575Zm0 173.132 74.256 42.237-74.256 42.237-74.255-42.237 74.255-42.237ZM301.067 519.97l74.255 42.237-74.255 42.237-74.256-42.237 74.256-42.237Zm-225.8-43.283 74.255 42.237-74.255 42.238L1.01 518.924l74.256-42.237Zm301.066 259.698 74.256 42.237-74.256 42.237-74.255-42.237 74.255-42.237Zm-150.533 0 74.255 42.237-74.255 42.237-74.255-42.237 74.255-42.237Zm451.6 86.565 74.255 42.238-74.255 42.237-74.255-42.237L677.4 822.95Zm376.333-389.546 74.256 42.237-74.256 42.238-74.255-42.238 74.255-42.237ZM75.267 303.556l74.255 42.237-74.255 42.237L1.01 345.793l74.256-42.237Zm978.466 302.98 74.256 42.237-74.256 42.237-74.255-42.237 74.255-42.237ZM451.6.575l74.255 42.237L451.6 85.05l-74.255-42.238L451.6.575Z" />
+                    </g>
+                </svg>
             </div>
         </div>
-    </section>
-
-    <section class="dlf-community-section" aria-label="Leden zoeken en filteren" x-cloak>
-        <div class="dlf-members-toolbar">
-            <div class="dlf-members-result-count" aria-live="polite">
-                <span x-text="resultLabel"></span>
-            </div>
-            <label class="dlf-members-search">
-                <span class="sr-only">Zoek een lid op naam</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" />
-                </svg>
-                <input type="search" placeholder="Zoek een lid op naam" x-model.debounce.200ms="query">
-            </label>
-            <button type="button" class="dlf-members-filter-button" x-ref="filterTrigger" @click="openFilterModal()" :aria-expanded="filterModalOpen">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                    <path d="M2 4.75A.75.75 0 0 1 2.75 4h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 4.75ZM4 8a.75.75 0 0 1 .75-.75h6.5a.75.75 0 0 1 0 1.5h-6.5A.75.75 0 0 1 4 8Zm2.25 3.25a.75.75 0 0 0 0 1.5h3.5a.75.75 0 0 0 0-1.5h-3.5Z" />
-                </svg>
-                <span>Filters</span>
-                <span class="dlf-members-filter-count" x-show="activeFilterCount" x-text="activeFilterCount" x-cloak></span>
-            </button>
-        </div>
-    </section>
-
-    <section class="dlf-members-fallback" aria-label="Onze leden" x-show="false">
-        <div class="dlf-members-grid dlf-fill-grid">
-            {{ collection:members sort="title" }}
-                <a class="dlf-member-card" href="{{ url }}">
-                    <span class="dlf-member-card__logo">
-                        {{ if logo }}<img src="{{ logo | first | url }}" alt="{{ title }}" loading="lazy">{{ /if }}
-                    </span>
-                    <span class="dlf-member-card__body">
-                        <span class="dlf-member-card__name">{{ title }}</span>
-                        <span class="dlf-member-card__location">{{ city }}{{ if city && province }}, {{ /if }}{{ province }}</span>
-                    </span>
-                </a>
-            {{ /collection:members }}
-        </div>
-    </section>
-
-    <div class="dlf-members-empty" x-show="filteredMembers.length === 0" x-cloak>
-        Er zijn geen leden gevonden die voldoen aan je zoekopdracht.
     </div>
 
-    <section aria-label="Onze leden" x-show="filteredMembers.length > 0" x-cloak>
-        <div class="dlf-members-grid dlf-fill-grid">
-            <template x-for="item in firstMembers" :key="item.id">
-                <a class="dlf-member-card" :href="'/leden/' + item.slug">
-                    <span class="dlf-member-card__logo">
-                        <img x-show="item.logo" :src="item.logo" :alt="item.title" loading="lazy">
-                    </span>
-                    <span class="dlf-member-card__body">
-                        <span class="dlf-member-card__name" x-text="item.title"></span>
-                        <span class="dlf-member-card__location" x-text="location(item)"></span>
-                    </span>
-                </a>
-            </template>
-        </div>
+    <div class="container mb-auto mx-auto flex flex-col items-left justify-center relative">
+        {{ content }}
+            {{ partial src="sets/autoload" }}
+        {{ /content }}
 
-        <div class="dlf-community-red-band" x-show="showMatchBanner" x-cloak>
-            <div class="dlf-community-red-inner dlf-members-match">
-                <div class="dlf-members-match__copy">
-                    <span class="dlf-community-kicker" style="color: rgba(255, 255, 255, .75)">Match je project</span>
-                    <h2>Twijfel je welke partij het beste past bij jouw project?</h2>
-                    <p>Maak het jezelf makkelijk en beantwoord een paar korte vragen. Wij koppelen je aan één of meerdere leden die écht goed aansluiten bij jouw wensen en uitdaging.</p>
+        <div class="container mx-auto" x-data="loadMembers()" x-effect="document.body.classList.toggle('overflow-hidden', filterModalOpen)">
+            {{# Desktop: inline filters #}}
+            <div class="hidden base:block mr-[-2rem] ml-[-2rem] sm:mx-auto py-10 bg-secondary-light px-8 sm:px-10 sm:w-full" x-show="types.length > 1 || provinces.length > 1 || employees.length > 1">
+                <div class="flex flex-col items-baseline justify-between base:flex-row">
+                    <h2 class="block mb-8 base:mb-0">Kunnen wij je helpen zoeken?</h2>
+                    <div class="hidden base:block"><a class="font-bold" x-on:click="resetFilters()">Filters wissen</a></div>
                 </div>
-                <a href="/aanvraag" class="dlf-community-button dlf-community-button--light" style="width: 196px">
-                    <span class="dlf-community-button__face">Match je project</span>
-                    <span class="dlf-community-button__back" style="border-color: #fff" aria-hidden="true"></span>
-                </a>
-            </div>
-        </div>
-
-        <div class="dlf-members-grid dlf-fill-grid" x-show="secondMembers.length > 0">
-            <template x-for="item in secondMembers" :key="item.id">
-                <a class="dlf-member-card" :href="'/leden/' + item.slug">
-                    <span class="dlf-member-card__logo">
-                        <img x-show="item.logo" :src="item.logo" :alt="item.title" loading="lazy">
-                    </span>
-                    <span class="dlf-member-card__body">
-                        <span class="dlf-member-card__name" x-text="item.title"></span>
-                        <span class="dlf-member-card__location" x-text="location(item)"></span>
-                    </span>
-                </a>
-            </template>
-        </div>
-    </section>
-
-    <div class="dlf-members-modal" x-show="filterModalOpen" x-transition.opacity x-cloak @click.self="closeFilterModal()">
-        <div class="dlf-members-dialog" role="dialog" aria-modal="true" aria-labelledby="member-filter-title" @keydown.tab="trapFilterFocus($event)">
-            <div class="dlf-members-dialog__head">
-                <h2 id="member-filter-title">Kunnen wij je helpen zoeken?</h2>
-                <button type="button" class="dlf-members-dialog__close" x-ref="filterClose" @click="closeFilterModal()" aria-label="Filters sluiten">&times;</button>
-            </div>
-            <div class="dlf-members-dialog__body">
-                <div class="dlf-members-filter-group" x-show="types.length > 1">
-                    <span class="dlf-community-kicker">Ik zoek een</span>
-                    <div class="dlf-members-filter-options">
-                        <template x-for="type in types" :key="type">
-                            <button type="button" class="dlf-members-chip" :class="{ 'is-active': filter.types.includes(type) }" :aria-pressed="filter.types.includes(type)" @click="toggleFilter('types', type)" x-text="type"></button>
-                        </template>
+                <div class="flex flex-col w-full lg:grid lg:grid-cols-2 lg:gap-x-8">
+                    <div class="mt-8" x-show="types.length > 1">
+                        <span class="block meta-dark">Ik zoek een</span>
+                        <div class="flex flex-wrap gap-2">
+                            <template x-for="type in types" :key="type">
+                                <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="types" :data-value="type" x-text="type" class="flex items-center justify-center w-full sm:w-auto h-12 px-8 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light  hover:text-tertiary-dark! hover:border-primary-accent opacity-80 hover:opacity-100 data-[checked=true]:bg-primary-accent data-[checked=true]:text-white! data-[checked=true]:border-primary-accent data-[checked=true]:opacity-100"></button>
+                            </template>
+                        </div>
+                    </div>
+                    <div class="mt-8" x-show="employees.length > 1">
+                        <span class="block meta-dark">Aantal Laravel developers</span>
+                        <div class="flex flex-wrap gap-2">
+                            <template x-for="employee in employees" :key="employee">
+                                <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="employees" :data-value="employee" x-text="employee" class="flex items-center justify-center w-full sm:w-auto h-12 px-8 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light hover:text-tertiary-dark! hover:border-primary-accent opacity-80 hover:opacity-100 data-[checked=true]:bg-primary-accent data-[checked=true]:text-white! data-[checked=true]:border-primary-accent data-[checked=true]:opacity-100"></button>
+                            </template>
+                        </div>
+                    </div>
+                    <div class="col-span-2 mt-8" x-show="provinces.length > 1">
+                        <span class="block meta-dark">Provincie</span>
+                        <div class="flex flex-wrap gap-2">
+                            <template x-for="province in provinces" :key="province">
+                                <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="provinces" :data-value="province" x-text="province" class="flex items-center justify-center w-full sm:w-auto h-12 px-8 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light hover:text-tertiary-dark hover:border-primary-accent opacity-80 hover:opacity-100 data-[checked=true]:bg-primary-accent data-[checked=true]:text-white data-[checked=true]:border-primary-accent data-[checked=true]:opacity-100"></button>
+                            </template>
+                        </div>
                     </div>
                 </div>
-                <div class="dlf-members-filter-group" x-show="employees.length > 1">
-                    <span class="dlf-community-kicker">Aantal Laravel developers</span>
-                    <div class="dlf-members-filter-options">
-                        <template x-for="employee in employees" :key="employee">
-                            <button type="button" class="dlf-members-chip" :class="{ 'is-active': filter.employees.includes(employee) }" :aria-pressed="filter.employees.includes(employee)" @click="toggleFilter('employees', employee)" x-text="employee"></button>
-                        </template>
-                    </div>
-                </div>
-                <div class="dlf-members-filter-group" x-show="provinces.length > 1">
-                    <span class="dlf-community-kicker">Provincie</span>
-                    <div class="dlf-members-filter-options">
-                        <template x-for="province in provinces" :key="province">
-                            <button type="button" class="dlf-members-chip" :class="{ 'is-active': filter.provinces.includes(province) }" :aria-pressed="filter.provinces.includes(province)" @click="toggleFilter('provinces', province)" x-text="province"></button>
-                        </template>
-                    </div>
-                </div>
+                <div class="block w-full mt-8 text-left base:hidden sm:text-right"><a class="font-bold" x-on:click="resetFilters()">Filters wissen</a></div>
             </div>
-            <div class="dlf-members-dialog__foot">
-                <button type="button" class="dlf-members-clear" @click="resetFilters">Filters wissen</button>
-                <button type="button" class="dlf-community-button" style="width: 184px" @click="closeFilterModal()">
-                    <span class="dlf-community-button__face" x-text="'Toon ' + filteredMembers.length + (filteredMembers.length === 1 ? ' lid' : ' leden')"></span>
-                    <span class="dlf-community-button__back" aria-hidden="true"></span>
+
+            {{# Mobile: filter trigger + modal #}}
+            <div class="base:hidden mb-6" x-show="types.length > 1 || provinces.length > 1 || employees.length > 1">
+                <button type="button" x-on:click="filterModalOpen = true" class="flex items-center justify-center w-full h-14 px-6 text-sm font-bold uppercase border border-primary-accent bg-primary-accent text-white hover:bg-primary-accent/90 transition-colors">
+                    <span x-text="activeFilterCount > 0 ? 'Filters (' + activeFilterCount + ')' : 'Filters'"></span>
                 </button>
             </div>
-        </div>
-    </div>
+            <template x-teleport="body">
+                <div class="filter-modal base:hidden fixed inset-0 overflow-visible" x-show="filterModalOpen" x-cloak>
+                    <div class="filter-modal-backdrop" x-on:click="filterModalOpen = false" aria-hidden="true"></div>
+                    <div class="filter-modal-panel">
+                    <div class="flex shrink-0 items-center justify-between border-b border-tertiary-light/30 px-6 py-4">
+                        <h2 class="text-lg font-bold text-tertiary-dark">Kunnen wij je helpen zoeken?</h2>
+                        <button type="button" x-on:click="filterModalOpen = false" class="p-2 -mr-2 text-tertiary-regular hover:text-tertiary-dark" aria-label="Sluiten">&times;</button>
+                    </div>
+                    <div class="flex-1 overflow-y-auto px-6 py-6">
+                        <div class="flex flex-col w-full gap-6">
+                            <div x-show="types.length > 1">
+                                <span class="block meta-dark">Ik zoek een</span>
+                                <div class="flex flex-wrap gap-2 mt-2">
+                                    <template x-for="type in types" :key="type">
+                                        <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="types" :data-value="type" x-text="type" class="flex items-center justify-center h-12 px-6 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light hover:text-tertiary-dark! hover:border-primary-accent opacity-80 hover:opacity-100 data-[checked=true]:bg-primary-accent data-[checked=true]:text-white! data-[checked=true]:border-primary-accent data-[checked=true]:opacity-100"></button>
+                                    </template>
+                                </div>
+                            </div>
+                            <div x-show="employees.length > 1">
+                                <span class="block meta-dark">Aantal Laravel developers</span>
+                                <div class="flex flex-wrap gap-2 mt-2">
+                                    <template x-for="employee in employees" :key="employee">
+                                        <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="employees" :data-value="employee" x-text="employee" class="flex items-center justify-center h-12 px-6 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light hover:text-tertiary-dark! hover:border-primary-accent opacity-80 hover:opacity-100 data-[checked=true]:bg-primary-accent data-[checked=true]:text-white! data-[checked=true]:border-primary-accent data-[checked=true]:opacity-100"></button>
+                                    </template>
+                                </div>
+                            </div>
+                            <div x-show="provinces.length > 1">
+                                <span class="block meta-dark">Provincie</span>
+                                <div class="flex flex-wrap gap-2 mt-2">
+                                    <template x-for="province in provinces" :key="province">
+                                        <button x-on:click="updateFilter(event.target)" data-checked="false" data-type="provinces" :data-value="province" x-text="province" class="flex items-center justify-center h-12 px-6 text-xs font-bold uppercase whitespace-nowrap transition-colors bg-transparent border border-tertiary-light  hover:text-tertiary-dark hover:border-primary-accent opacity-80 hover:opacity-100 data-[checked=true]:bg-primary-accent data-[checked=true]:text-white data-[checked=true]:border-primary-accent data-[checked=true]:opacity-100"></button>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6"><a class="font-bold" x-on:click="resetFilters()">Filters wissen</a></div>
+                    </div>
+                        <div class="shrink-0 border-t border-tertiary-light/30 p-4">
+                            <button type="button" x-on:click="filterModalOpen = false" class="flex w-full items-center justify-center h-14 px-6 text-sm font-bold text-white uppercase bg-primary-accent hover:bg-primary-accent/90 transition-colors" x-text="'Toon ' + filteredMembers.length + ' leden'"></button>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <div class="relative flex flex-wrap overflow-visible md:pt-5 mb">
+                <div x-show="filteredMembers.length === 0" class="w-full p-6 mt-6 text-center border lg:p-10 lg:mt-10 border-secondary-light">
+                    Er zijn geen leden gevonden die voldoen aan je zoekopdracht.
+                </div>
+                <template x-for="item in filteredMembers" :key="item.id">
+                    {{# This is actually the company/simple template, pasted to save some time #}}
+                    <div class="w-full pt-10 pb-5 sm:p-10 sm:w-1/2 xl:w-1/3" data-aos="fade-up" data-aos-delay="250">
+                        <div class="flex flex-col w-full bg-white group-image-hover">
+                            <a x-bind:href="'/{{ segment_1 }}/' + item.slug">
+                                <figure class="flex items-center justify-center w-full h-64 overflow-hidden bg-linear-to-b from-white to-secondary-light">
+                                    <img x-show="item.logo" class="block max-w-[66%] max-h-[66%]" :src="item.logo" :alt="item.title">
+                                </figure>
+                            </a>
+                            <div class="relative w-full p-10 min-h-40 pb-16!">
+                                <a x-bind:href="'/{{ segment_1 }}/' + item.slug">
+                                    <div class="flex flex-col w-full ">
+                                        <h4 class="block w-full mb-[.3rem]" x-text="item.title"></h4>
+                                    <span class="meta text-primary-accent" x-text="item.city + (item.province ? ', ' + item.province: null)"></span>
+                                    </div>
+                                </a>
+                                <a x-bind:href="'/{{ segment_1 }}/' + item.slug" class="flex h-12 items-center justify-center group absolute! right-0 bottom-0 ">
+                                    <div class="z-20 flex items-center justify-center w-12 h-full px-8 text-xs font-bold text-white uppercase transition-transform whitespace-nowrap group-hover:-translate-x-1 group-hover:-translate-y-1 bg-primary-accent aspect-square ">&gt;</div>
+                                    <div class="absolute bottom-0 right-0 z-10 w-full h-full border border-primary-accent "></div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </template>
 
-    <div id="members-data" hidden>
-        {{ collection:members sort="title" }}
-            <i
-                data-member
-                data-id="{{ id }}"
-                data-slug="{{ slug }}"
-                data-title="{{ title | entities }}"
-                data-logo="{{ logo | first | url }}"
-                data-type="{{ type | entities }}"
-                data-employees="{{ employees | entities }}"
-                data-province="{{ province | entities }}"
-                data-city="{{ city | entities }}"
-            ></i>
-        {{ /collection:members }}
+                {{# Background image #}}
+                <div x-show="filteredMembers.length > 10" class="absolute z-[-1] h-full w-full flex items-center left-[-10rem] top-0">
+                    <div>
+                        <img src="/assets/img/backgrounds/floor-mid-gray.svg" class="w-[1120px] h-[900px]">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
+{{# Fix the initiation of members later, maybe somehow with Statamics to_json #}}
 <script>
+var members = [{{ members = {collection:members sort="random"} }}{{ noparse }}{ {{ /noparse }}{{ "id:'" + $id + "',slug:'" + $slug + "',title:'" + $title + "',logo:'" + (logo | first | url) + "',type:'" + $type + "',employees:'" + $employees + "',province:'" + $province + "',city:'" + $city + "'" }}{{ noparse }}}{{ /noparse }}{{ !last ?= ',' }}{{ /members }}],
+types = members.map((obj) => { return obj.type; }).filter((item, index, arr) => { return item.length > 0 && arr.indexOf(item) == index; }).sort(),
+employees = members.map((obj) => { return obj.employees; }).filter((item, index, arr) => { return item.length > 0 && arr.indexOf(item) == index; }).sort(),
+provinces = members.map((obj) => { return obj.province; }).filter((item, index, arr) => { return item.length > 0 && arr.indexOf(item) == index; }).sort();
+
 function loadMembers() {
-    const members = Array.from(document.querySelectorAll('#members-data [data-member]'))
-        .map((element) => ({ ...element.dataset }))
-        .sort((left, right) => left.title.localeCompare(right.title, 'nl'));
-
-    const options = (key) => [...new Set(members.map((member) => member[key]).filter(Boolean))]
-        .sort((left, right) => left.localeCompare(right, 'nl', { numeric: true }));
-
     return {
         filterModalOpen: false,
-        query: '',
-        members,
-        types: options('type'),
-        employees: options('employees'),
-        provinces: options('province'),
+        dataToFilter: members,
         filter: {
             types: [],
             employees: [],
             provinces: [],
         },
-        openFilterModal() {
-            this.filterModalOpen = true;
-            this.$nextTick(() => this.$refs.filterClose?.focus());
-        },
-        closeFilterModal() {
-            if (!this.filterModalOpen) {
-                return;
-            }
-
-            this.filterModalOpen = false;
-            this.$nextTick(() => this.$refs.filterTrigger?.focus());
-        },
-        trapFilterFocus(event) {
-            const focusable = Array.from(event.currentTarget.querySelectorAll(
-                'button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'
-            )).filter((element) => element.offsetParent !== null);
-
-            if (focusable.length === 0) {
-                return;
-            }
-
-            const first = focusable[0];
-            const last = focusable[focusable.length - 1];
-
-            if (event.shiftKey && document.activeElement === first) {
-                event.preventDefault();
-                last.focus();
-            } else if (!event.shiftKey && document.activeElement === last) {
-                event.preventDefault();
-                first.focus();
-            }
-        },
-        toggleFilter(group, value) {
-            const index = this.filter[group].indexOf(value);
-
-            if (index === -1) {
-                this.filter[group].push(value);
-                return;
-            }
-
-            this.filter[group].splice(index, 1);
-        },
+        // Reset all filters to show all members
         resetFilters() {
             this.filter = {
                 types: [],
                 employees: [],
                 provinces: [],
             };
+            const checkedFilters = document.querySelectorAll('button[data-checked="true"]');
+            for (let i = 0; i < checkedFilters.length; i++) {
+                checkedFilters[i].setAttribute('data-checked', false);
+            }
         },
-        matches(group, value) {
-            return this.filter[group].length === 0 || this.filter[group].includes(value);
+        // Update the filter
+        updateFilter(target) {
+            const checked = target.getAttribute('data-checked'),
+                type = target.getAttribute('data-type'),
+                value = target.getAttribute('data-value');
+
+            // Toggle checked state for the clicked element
+            target.setAttribute('data-checked', checked == 'false');
+
+            // Add or remove the value from the filter
+            if (this.filter[type].includes(value)) {
+                this.filter[type].splice(this.filter[type].indexOf(value), 1);
+            } else {
+                this.filter[type].push(value);
+            }
         },
-        location(member) {
-            return [member.city, member.province].filter(Boolean).join(', ');
+        // Check if conditions match
+        checkFilter(type, value) {
+            return (this.filter[type].length == 0 || (this.filter[type].length > 0 && this.filter[type].includes(value)));
         },
+        // Loop to check all filters
+        checkFilters(item) {
+            return this.checkFilter('types', item.type)
+                && this.checkFilter('employees', item.employees)
+                && this.checkFilter('provinces', item.province);
+        },
+        // Check if all filters are empty
+        allFiltersEmpty() {
+            return this.filter.types.length === 0
+                && this.filter.employees.length === 0
+                && this.filter.provinces.length === 0;
+        },
+        // Number of selected filter values (for mobile button badge)
         get activeFilterCount() {
             return this.filter.types.length + this.filter.employees.length + this.filter.provinces.length;
         },
+        // Return filtered member data
         get filteredMembers() {
-            const query = this.query.trim().toLocaleLowerCase('nl');
+            if (this.allFiltersEmpty()) {
+                return this.dataToFilter;
+            }
 
-            return this.members.filter((member) => {
-                const matchesQuery = query === '' || member.title.toLocaleLowerCase('nl').includes(query);
-
-                return matchesQuery
-                    && this.matches('types', member.type)
-                    && this.matches('employees', member.employees)
-                    && this.matches('provinces', member.province);
-            });
-        },
-        get showMatchBanner() {
-            return this.query.trim() === '' && this.activeFilterCount === 0 && this.filteredMembers.length > 24;
-        },
-        get firstMembers() {
-            return this.showMatchBanner ? this.filteredMembers.slice(0, 24) : this.filteredMembers;
-        },
-        get secondMembers() {
-            return this.showMatchBanner ? this.filteredMembers.slice(24) : [];
-        },
-        get resultLabel() {
-            const count = String(this.filteredMembers.length).padStart(2, '0');
-
-            return `${count} ${this.filteredMembers.length === 1 ? 'lid' : 'leden'}`;
-        },
+            return [
+                ...new Set(
+                    this.dataToFilter.filter((item) => {
+                        return this.checkFilters(item);
+                    })
+                )
+            ];
+        }
     };
 }
 </script>
-
-{{ content }}
-    {{ if type | starts_with:'dlf_' }}
-        {{ partial src="sets/autoload" }}
-    {{ /if }}
-{{ /content }}
