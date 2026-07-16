@@ -39,12 +39,42 @@ class KnowledgeAuthorsTest extends TestCase
         }
     }
 
+    public function testBobKosseIsMigratedToTheAuthorsCollection(): void
+    {
+        $author = $this->parseFrontMatter(base_path('content/collections/authors/bob-kosse.md'));
+        $article = $this->parseFrontMatter(base_path('content/collections/knowledge/2026-07-01-2200.het-belang-van-toegankelijke-websites.md'));
+
+        $this->assertSame('fe71f8d9-3bfe-4f29-af8b-c1726e2b4849', $author['id'] ?? null);
+        $this->assertSame('author', $author['blueprint'] ?? null);
+        $this->assertSame('Bob Kosse', $author['title'] ?? null);
+        $this->assertSame('Onafhankelijk Laravel-ontwikkelaar', $author['job_title'] ?? null);
+        $this->assertSame('introductie-afbeelding-bob-kosse.png', $author['photo'] ?? null);
+        $this->assertSame('https://www.ikverstajeniet.nl', $author['website_url'] ?? null);
+        $this->assertSame(['fe71f8d9-3bfe-4f29-af8b-c1726e2b4849'], $article['authors'] ?? null);
+
+        foreach (['author_name', 'author_role', 'author_bio', 'author_image', 'author_link'] as $legacyHandle) {
+            $this->assertArrayNotHasKey($legacyHandle, $article);
+        }
+    }
+
     /** @return array<string, mixed> */
     private function parseYaml(string $path): array
     {
         $this->assertFileExists($path);
 
         return Yaml::parseFile($path);
+    }
+
+    /** @return array<string, mixed> */
+    private function parseFrontMatter(string $path): array
+    {
+        $this->assertFileExists($path);
+
+        $contents = file_get_contents($path);
+        $this->assertIsString($contents);
+        $this->assertSame(1, preg_match('/^---\R(.*?)\R---/s', $contents, $matches));
+
+        return Yaml::parse($matches[1]);
     }
 
     /**
