@@ -299,6 +299,7 @@ html.dlf-menu-open {
     font-size: 14px;
     font-weight: 700;
     text-decoration: none;
+    transition: none;
     white-space: nowrap;
 }
 
