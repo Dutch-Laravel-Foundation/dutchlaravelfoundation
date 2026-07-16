@@ -13,19 +13,23 @@
                 {{ if introduction }}
                     <div class="editorial-article__lead">{{ introduction }}</div>
                 {{ /if }}
-                {{ if author_name }}
-                    <div class="editorial-article__author-summary">
-                        {{ if author_image }}
-                            <img
-                                src="{{ glide src="{author_image}" width="240" }}"
-                                alt="{{ author_image:alt ?? author_name }}"
-                                loading="lazy"
-                            >
-                        {{ /if }}
-                        <span>
-                            <strong>{{ author_name }}</strong>
-                            {{ if author_role }}<small>{{ author_role }}</small>{{ /if }}
-                        </span>
+                {{ if authors }}
+                    <div class="editorial-article__author-summary" aria-label="Auteur(s)">
+                        {{ authors }}
+                            <a class="editorial-article__author-summary-item" href="#editorial-authors">
+                                {{ if photo }}
+                                    <img
+                                        src="{{ glide src="{photo}" width="480" }}"
+                                        alt="{{ photo:alt ?? title }}"
+                                        loading="lazy"
+                                    >
+                                {{ /if }}
+                                <span>
+                                    <strong>{{ title }}</strong>
+                                    {{ if job_title }}<small>{{ job_title }}</small>{{ /if }}
+                                </span>
+                            </a>
+                        {{ /authors }}
                     </div>
                 {{ /if }}
             </div>
@@ -54,6 +58,6 @@
             </article>
         </div>
 
-        {{ partial:editorial-author }}
+        {{ partial:editorial/knowledge-authors }}
     </div>
 </div>

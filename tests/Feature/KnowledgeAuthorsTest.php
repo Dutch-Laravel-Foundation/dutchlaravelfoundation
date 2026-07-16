@@ -57,6 +57,44 @@ class KnowledgeAuthorsTest extends TestCase
         }
     }
 
+    public function testKnowledgeArticleRendersItsAssignedAuthor(): void
+    {
+        $response = $this->get('/kennis/het-belang-van-toegankelijke-websites');
+
+        $response->assertOk();
+        $response->assertSee('data-knowledge-authors', false);
+        $response->assertSee('Over de auteur', false);
+        $response->assertSee('Bob Kosse', false);
+        $response->assertSee('Onafhankelijk Laravel-ontwikkelaar', false);
+        $response->assertSee('Website van Bob Kosse', false);
+        $response->assertSee('href="https://www.ikverstajeniet.nl"', false);
+        $response->assertDontSee('LinkedIn van Bob Kosse', false);
+    }
+
+    public function testKnowledgeArticleWithoutAuthorsRendersNoAuthorUi(): void
+    {
+        $response = $this->get('/kennis/laravel-meer-dan-een-framework');
+
+        $response->assertOk();
+        $response->assertDontSee('data-knowledge-authors', false);
+        $response->assertDontSee('editorial-article__author-summary', false);
+    }
+
+    public function testKnowledgeTemplateUsesTheReusableAuthorsRelationship(): void
+    {
+        $template = file_get_contents(base_path('resources/views/templates/knowledge/show.antlers.html'));
+        $partial = file_get_contents(base_path('resources/views/partials/editorial/_knowledge-authors.antlers.html'));
+
+        $this->assertIsString($template);
+        $this->assertIsString($partial);
+        $this->assertStringContainsString('{{ authors }}', $template);
+        $this->assertStringContainsString('partial:editorial/knowledge-authors', $template);
+        $this->assertStringContainsString('{{ authors }}', $partial);
+        $this->assertStringContainsString('linkedin_url', $partial);
+        $this->assertStringContainsString('website_url', $partial);
+        $this->assertStringNotContainsString('author_name', $template);
+    }
+
     /** @return array<string, mixed> */
     private function parseYaml(string $path): array
     {
