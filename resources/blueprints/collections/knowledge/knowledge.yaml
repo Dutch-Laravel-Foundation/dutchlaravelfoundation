@@ -35,33 +35,15 @@ tabs:
               container: assets
               folder: /
           -
-            handle: author_name
+            handle: authors
             field:
-              display: Naam auteur
-              type: text
-          -
-            handle: author_role
-            field:
-              display: Rol auteur
-              type: text
-          -
-            handle: author_bio
-            field:
-              display: Biografie auteur
-              type: markdown
-          -
-            handle: author_image
-            field:
-              display: Foto auteur
-              type: assets
-              container: insights
-              mode: grid
-              max_files: 1
-          -
-            handle: author_link
-            field:
-              display: Link auteur
-              type: link
+              mode: select
+              collections:
+                - authors
+              reorderable: true
+              display: Auteurs
+              instructions: 'Optioneel. Selecteer één of meerdere auteurs in de gewenste weergavevolgorde.'
+              type: entries
   sidebar:
     display: Sidebar
     sections:
