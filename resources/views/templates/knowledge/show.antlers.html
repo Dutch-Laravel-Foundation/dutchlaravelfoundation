@@ -36,7 +36,7 @@
                 {{ /if }}
             </div>
 
-            <figure class="editorial-article__figure">
+            <figure class="editorial-article__figure" data-progressive-media-frame>
                 {{ if featured_image }}
                     <img
                         src="{{ glide src="{featured_image}" width="1200" height="960" fit="crop_focal" }}"
@@ -44,7 +44,7 @@
                         sizes="(min-width: 1024px) 576px, 100vw"
                         alt="{{ featured_image:alt ?? title }}"
                         style="object-position: {{ featured_image:focus_css }}"
-                        fetchpriority="high"
+                        {{ partial:progressive_media_attributes width="1200" height="960" loading="eager" fetchpriority="high" }}
                     >
                 {{ else }}
                     <span class="editorial-media-placeholder" aria-hidden="true"><img src="/assets/uploads/globals/LaravelBrandMark.svg" alt=""></span>
@@ -56,7 +56,7 @@
             {{ partial:editorial/toc label="In dit artikel" }}
 
             <article class="editorial-article__prose" data-editorial-prose>
-                {{ content }}
+                {{ content | progressive_media }}
             </article>
         </div>
 

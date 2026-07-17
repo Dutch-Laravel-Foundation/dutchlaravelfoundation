@@ -21,17 +21,15 @@
                 {{ /if }}
             </div>
 
-            <figure class="editorial-article__figure">
+            <figure class="editorial-article__figure" data-progressive-media-frame>
                 {{ if featured_image }}
                     <img
                         src="{{ glide src="{featured_image}" width="1200" height="960" fit="crop_focal" }}"
                         srcset="{{ glide src="{featured_image}" width="640" height="512" fit="crop_focal" }} 640w, {{ glide src="{featured_image}" width="960" height="768" fit="crop_focal" }} 960w, {{ glide src="{featured_image}" width="1200" height="960" fit="crop_focal" }} 1200w"
                         sizes="(min-width: 1024px) 576px, 100vw"
-                        width="1200"
-                        height="960"
                         alt="{{ featured_image:alt ?? title }}"
                         style="object-position: {{ featured_image:focus_css }}"
-                        fetchpriority="high"
+                        {{ partial:progressive_media_attributes width="1200" height="960" loading="eager" fetchpriority="high" }}
                     >
                 {{ else }}
                     <span class="editorial-media-placeholder" aria-hidden="true"><img src="/assets/uploads/globals/LaravelBrandMark.svg" alt=""></span>

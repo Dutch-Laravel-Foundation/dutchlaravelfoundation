@@ -1,8 +1,8 @@
 <div class="block-event group-image-hover relative flex flex-col lg:flex-row w-full mb {{ class }}">
-    <figure class="right-0 w-full h-full overflow-hidden lg:absolute bg-secondary-light lg:w-1/2">
+    <figure class="right-0 w-full h-full overflow-hidden lg:absolute bg-secondary-light lg:w-1/2" data-progressive-media-frame>
         {{ if featured_image }}
             <img class="object-cover w-full h-full max-w-full max-h-full {{ image_class }}" style="object-position:{{ featured_image:focus_css }}"
-                src="{{ glide src="{featured_image}" fit="crop_focal" width="1280" }}" alt="{{ featured_image:alt ?? title }}" />
+                src="{{ glide src="{featured_image}" fit="crop_focal" width="1280" }}" alt="{{ featured_image:alt ?? title }}" {{ partial:progressive_media_attributes :width="featured_image:width" :height="featured_image:height" }} />
         {{ /if }}
     </figure>
     <div class="flex flex-row items-center py-4 pl-6 text-lg text-white lg:hidden {{ past_event ? 'bg-tertiary-light': 'bg-primary-accent' }}">{{ date_start format="j M" | strtolower }}</div>

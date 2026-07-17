@@ -95,6 +95,10 @@
 
     {{ vite src="resources/js/site.js|resources/css/tailwind.css" }}
 
+    <noscript>
+        <style>[data-progressive-media] { opacity: 1 !important; }</style>
+    </noscript>
+
     {{ captcha:head }}
 </head>
 

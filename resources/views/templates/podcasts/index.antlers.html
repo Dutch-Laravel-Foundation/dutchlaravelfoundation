@@ -39,13 +39,17 @@
                 <div class="editorial-feed">
                     {{ episodes }}
                         <article class="editorial-entry {{ switch between="editorial-entry--media-start|editorial-entry--media-end" }} {{ if first }}editorial-entry--featured{{ /if }}">
-                            <a class="editorial-entry__media" href="{{ url }}" aria-label="Beluister {{ title }}">
+                            <a class="editorial-entry__media" href="{{ url }}" aria-label="Beluister {{ title }}" data-progressive-media-frame>
                                 {{ if thumbnail_url }}
                                     <img
                                         class="editorial-entry__image"
                                         src="{{ thumbnail_url }}"
                                         alt="{{ title }}"
-                                        {{ if first }}fetchpriority="high"{{ else }}loading="lazy"{{ /if }}
+                                        {{ if first }}
+                                            {{ partial:progressive_media_attributes width="1280" height="720" loading="eager" fetchpriority="high" }}
+                                        {{ else }}
+                                            {{ partial:progressive_media_attributes width="1280" height="720" }}
+                                        {{ /if }}
                                     >
                                 {{ else }}
                                     <span class="editorial-media-placeholder" aria-hidden="true"><img src="/assets/uploads/globals/LaravelBrandMark.svg" alt=""></span>

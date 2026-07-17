@@ -83,6 +83,9 @@ import "./components/header-aware-sticky";
 import "./components/editorial-article";
 import "./components/lid-benefits-marquee";
 import "./components/vragen-ai-search";
+import { initProgressiveMedia } from "./components/progressive-media";
+
+initProgressiveMedia();
 
 // AlpineJS
 import Alpine from "alpinejs";

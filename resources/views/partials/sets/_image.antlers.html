@@ -1,1 +1,3 @@
-<img src="{{ glide src="{image}" fit="crop_focal" width="1280" }}" class="object-cover w-full mb-10 {{ class }}" style="object-position:{{ image:focus_css }}">
+<figure class="mb-10" data-progressive-media-frame>
+    <img src="{{ glide src="{image}" fit="crop_focal" width="1280" }}" class="object-cover w-full {{ class }}" alt="{{ image:alt }}" style="object-position:{{ image:focus_css }}" {{ partial:progressive_media_attributes :width="image:width" :height="image:height" }}>
+</figure>

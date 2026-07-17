@@ -15,8 +15,8 @@
             </div>
         </div>
     </div>
-    <figure class="dlf-home-hero__photo">
-        <img src="/assets/redesign/photos/larafest-groepsfoto.jpeg" alt="Laravel developers tijdens een bijeenkomst van de Dutch Laravel Foundation">
+    <figure class="dlf-home-hero__photo" data-progressive-media-frame>
+        <img src="/assets/redesign/photos/larafest-groepsfoto.jpeg" alt="Laravel developers tijdens een bijeenkomst van de Dutch Laravel Foundation" {{ partial:progressive_media_attributes width="3632" height="2406" loading="eager" fetchpriority="high" }}>
     </figure>
 </section>
 
@@ -33,11 +33,11 @@
 
         <div class="dlf-home-bento">
             {{ collection:insights limit="1" sort="date:desc" }}
-                <figure class="dlf-home-bento__featured-image">
+                <figure class="dlf-home-bento__featured-image" data-progressive-media-frame>
                     {{ if featured_image }}
-                        <img src="{{ glide src="{featured_image}" fit="crop_focal" width="1400" height="760" }}" alt="{{ featured_image:alt ?? title }}" style="object-position: {{ featured_image:focus_css }}">
+                        <img src="{{ glide src="{featured_image}" fit="crop_focal" width="1400" height="760" }}" alt="{{ featured_image:alt ?? title }}" style="object-position: {{ featured_image:focus_css }}" {{ partial:progressive_media_attributes width="1400" height="760" }}>
                     {{ else }}
-                        <img src="/assets/redesign/photos/easi-2025.jpg" alt="">
+                        <img src="/assets/redesign/photos/easi-2025.jpg" alt="" {{ partial:progressive_media_attributes width="2500" height="1405" }}>
                     {{ /if }}
                 </figure>
                 <article class="dlf-home-bento__featured-copy">
@@ -98,11 +98,11 @@
                 <div class="dlf-home-excerpt">{{ introduction | markdown | strip_tags | safe_truncate:360 }}</div>
                 <a class="dlf-text-link" href="{{ url }}">Lees meer <span aria-hidden="true">→</span></a>
             </article>
-            <figure>
+            <figure data-progressive-media-frame>
                 {{ if featured_image }}
-                    <img src="{{ glide src="{featured_image}" fit="crop_focal" width="1400" height="900" }}" alt="{{ featured_image:alt ?? title }}" style="object-position: {{ featured_image:focus_css }}">
+                    <img src="{{ glide src="{featured_image}" fit="crop_focal" width="1400" height="900" }}" alt="{{ featured_image:alt ?? title }}" style="object-position: {{ featured_image:focus_css }}" {{ partial:progressive_media_attributes width="1400" height="900" }}>
                 {{ else }}
-                    <img src="/assets/redesign/photos/larafest-groepsfoto.jpeg" alt="">
+                    <img src="/assets/redesign/photos/larafest-groepsfoto.jpeg" alt="" {{ partial:progressive_media_attributes width="3632" height="2406" }}>
                 {{ /if }}
             </figure>
         </section>

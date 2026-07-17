@@ -19,8 +19,8 @@
         {{ /if }}
     </div>
     {{ if image }}
-        <figure class="dlf-block-hero__media">
-            <img src="{{ glide src="{image}" fit="crop_focal" width="1800" }}" alt="{{ image:alt ?? heading }}" style="object-position: {{ image:focus_css }}">
+        <figure class="dlf-block-hero__media" data-progressive-media-frame>
+            <img src="{{ glide src="{image}" fit="crop_focal" width="1800" height="1200" }}" alt="{{ image:alt ?? heading }}" style="object-position: {{ image:focus_css }}" {{ partial:progressive_media_attributes width="1800" height="1200" }}>
         </figure>
     {{ /if }}
 </section>

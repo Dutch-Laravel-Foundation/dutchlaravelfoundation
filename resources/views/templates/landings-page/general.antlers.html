@@ -48,13 +48,13 @@
     </section>
 
     <section class="dlf-bm-photo-band">
-        <picture class="dlf-bm-photo-band__backdrop" aria-hidden="true">
+        <picture class="dlf-bm-photo-band__backdrop" aria-hidden="true" data-progressive-media-frame>
             <source
                 srcset="/assets/redesign/photos/kantoor-developers-1280.webp 1280w, /assets/redesign/photos/kantoor-developers-2048.webp 2048w"
                 sizes="100vw"
                 type="image/webp"
             >
-            <img src="/assets/redesign/photos/kantoor-developers-1280.webp" width="1280" height="854" loading="lazy" decoding="async" alt="">
+            <img src="/assets/redesign/photos/kantoor-developers-1280.webp" alt="" {{ partial:progressive_media_attributes width="1280" height="854" }}>
         </picture>
         <div class="dlf-bm-photo-band__inner">
             <div class="dlf-bm-photo-band__statement">
@@ -84,7 +84,7 @@
             <h2>Maatwerk klinkt duur en ingewikkeld, maar dat hóeft niet!</h2>
             <p>We begrijpen je twijfels. Je bent niet de eerste ondernemer die bij maatwerksoftware denkt aan oneindige projecten, enorme kosten en technische complexiteit. Maar die tijd is voorbij dankzij Laravel, een van de meest geschikte open source frameworks voor een systeem op maat.</p>
         </div>
-        <figure><img src="/assets/redesign/photos/laravel-ecosystem.png" alt="Het Laravel-ecosysteem"></figure>
+        <figure data-progressive-media-frame><img src="/assets/redesign/photos/laravel-ecosystem.png" alt="Het Laravel-ecosysteem" {{ partial:progressive_media_attributes width="954" height="640" }}></figure>
     </section>
 
     <section class="dlf-bm-objections">
@@ -138,7 +138,7 @@
                     <span class="dlf-btn-shadow dlf-btn-shadow--red" aria-hidden="true"></span>
                 </a>
             </div>
-            <figure><img src="/assets/redesign/photos/laravel-12.png" alt="Laravel 12"></figure>
+            <figure data-progressive-media-frame><img src="/assets/redesign/photos/laravel-12.png" alt="Laravel 12" {{ partial:progressive_media_attributes width="954" height="640" }}></figure>
         </div>
         <div class="dlf-bm-grid-3">
             <article>
@@ -179,7 +179,7 @@
                             </a>
                         </div>
                         {{ if featured_image }}
-                            <figure><img src="{{ glide src="{featured_image}" fit="crop_focal" width="1200" height="650" }}" alt="{{ featured_image:alt ?? title }}" style="object-position: {{ featured_image:focus_css }}"></figure>
+                            <figure data-progressive-media-frame><img src="{{ glide src="{featured_image}" fit="crop_focal" width="1200" height="650" }}" alt="{{ featured_image:alt ?? title }}" style="object-position: {{ featured_image:focus_css }}" {{ partial:progressive_media_attributes width="1200" height="650" }}></figure>
                         {{ /if }}
                     </article>
                 {{ /collection:cases }}
@@ -193,16 +193,13 @@
                 <h2>Wil je stoppen met gehannes en eindelijk efficiënt werken?</h2>
                 <p>Met een systeem op maat, gemaakt in Laravel, is dat mogelijk. Stap van Excel, handmatig werk of een standaardsysteem over op iets dat écht naadloos past bij je processen. Met Laravel zie je vaak al binnen weken na projectstart de eerste resultaten.</p>
             </div>
-            <figure>
+            <figure data-progressive-media-frame>
                 <img
                     src="/assets/redesign/photos/developer-bureau-1200.webp"
                     srcset="/assets/redesign/photos/developer-bureau-640.webp 640w, /assets/redesign/photos/developer-bureau-1200.webp 1200w, /assets/redesign/photos/developer-bureau-2000.webp 2000w"
                     sizes="(max-width: 1023px) 100vw, 576px"
-                    width="2000"
-                    height="1334"
-                    loading="lazy"
-                    decoding="async"
                     alt="Developer aan het werk"
+                    {{ partial:progressive_media_attributes width="2000" height="1334" }}
                 >
             </figure>
         </div>
@@ -231,7 +228,7 @@
             <h2>Wat is de Dutch Laravel Foundation?</h2>
             <p>Wij maken Laravel bekender bij Nederlandse bedrijven en bevorderen Laravel-ontwikkelaars continu beter te worden door kennis te delen. Met goedkeuring van Taylor Otwell helpen wij Nederlandse bedrijven de juiste keuzes te maken bij maatwerksoftware. Wij hebben hierin geen commercieel belang maar wél de expertise om je te begeleiden naar de beste oplossing.</p>
         </div>
-        <figure><img src="/assets/redesign/photos/dlf-larafest-talk.png" alt="Spreker op een DLF-evenement"></figure>
+        <figure data-progressive-media-frame><img src="/assets/redesign/photos/dlf-larafest-talk.png" alt="Spreker op een DLF-evenement" {{ partial:progressive_media_attributes width="954" height="640" }}></figure>
     </section>
 </main>
 

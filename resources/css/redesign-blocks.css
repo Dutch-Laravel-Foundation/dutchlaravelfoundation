@@ -279,9 +279,15 @@
     background: #fff;
 }
 
+.dlf-content-card__media {
+    margin: 0;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+}
+
 .dlf-content-card__image {
     width: 100%;
-    aspect-ratio: 16 / 9;
+    height: 100%;
     object-fit: cover;
 }
 
@@ -434,7 +440,14 @@
     border-bottom: 1px solid var(--dlf-line);
 }
 
-.dlf-quote > img {
+.dlf-quote__media {
+    display: block;
+    width: 240px;
+    height: 240px;
+    overflow: hidden;
+}
+
+.dlf-quote__media img {
     width: 240px;
     height: 240px;
     object-fit: cover;
@@ -576,7 +589,8 @@
         padding: 40px 24px;
     }
 
-    .dlf-quote > img {
+    .dlf-quote__media,
+    .dlf-quote__media img {
         width: 112px;
         height: 112px;
     }

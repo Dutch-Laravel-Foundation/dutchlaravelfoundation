@@ -6,13 +6,13 @@
     </section>
 
     <section class="dlf-bm-photo-band">
-        <picture class="dlf-bm-photo-band__backdrop" aria-hidden="true">
+        <picture class="dlf-bm-photo-band__backdrop" aria-hidden="true" data-progressive-media-frame>
             <source
                 srcset="/assets/redesign/photos/kantoor-developers-1280.webp 1280w, /assets/redesign/photos/kantoor-developers-2048.webp 2048w"
                 sizes="100vw"
                 type="image/webp"
             >
-            <img src="/assets/redesign/photos/kantoor-developers-1280.webp" width="1280" height="854" loading="lazy" decoding="async" alt="">
+            <img src="/assets/redesign/photos/kantoor-developers-1280.webp" alt="" {{ partial:progressive_media_attributes width="1280" height="854" }}>
         </picture>
         <div class="dlf-bm-photo-band__inner">
             <div class="dlf-bm-photo-band__statement">
@@ -148,8 +148,8 @@
                                 <span class="dlf-btn-shadow dlf-btn-shadow--red" aria-hidden="true"></span>
                             </a>
                         </div>
-                        <figure>
-                            <img src="{{ glide src="{featured_image}" fit="crop_focal" width="1500" }}" alt="{{ title }}">
+                        <figure data-progressive-media-frame>
+                            <img src="{{ glide src="{featured_image}" fit="crop_focal" width="1500" }}" alt="{{ title }}" {{ partial:progressive_media_attributes :width="featured_image:width" :height="featured_image:height" }}>
                         </figure>
                     </article>
                 {{ /collection:cases }}
@@ -163,7 +163,7 @@
                 <h2>Kom in contact met Laravel-specialisten</h2>
                 <p>Bekijk aangesloten Laravel-specialisten en begin een gesprek over jouw toekomstige maatwerk systeem.</p>
             </div>
-            <figure><img src="/assets/img/developer-achter-bureau.jpg" alt="Developer achter een bureau"></figure>
+            <figure data-progressive-media-frame><img src="/assets/img/developer-achter-bureau.jpg" alt="Developer achter een bureau" {{ partial:progressive_media_attributes width="2000" height="1334" }}></figure>
         </div>
         <div class="dlf-bm-grid-2 dlf-bm-efficient__actions">
             <article>
@@ -190,7 +190,7 @@
             <h2>Wat is de Dutch Laravel Foundation?</h2>
             <p>Wij maken Laravel bekender bij Nederlandse bedrijven en bevorderen Laravel-ontwikkelaars continu beter te worden door kennis te delen. Met goedkeuring van Taylor Otwell (grondlegger van Laravel) helpen wij Nederlandse bedrijven de juiste keuzes te maken bij maatwerksoftware. Wij hebben hierin geen commercieel belang maar wél de expertise om je te begeleiden naar de beste oplossing.</p>
         </div>
-        <figure><img src="/assets/img/larafest-sylvester-damgaard.jpg" alt="Laravel"></figure>
+        <figure data-progressive-media-frame><img src="/assets/img/larafest-sylvester-damgaard.jpg" alt="Laravel" {{ partial:progressive_media_attributes width="954" height="640" }}></figure>
     </section>
     <div class="dlf-bm-grid-3 dlf-bm-foundation-values">
         <article>
