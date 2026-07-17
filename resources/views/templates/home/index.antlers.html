@@ -33,22 +33,27 @@
 
         <div class="dlf-home-bento">
             {{ collection:insights limit="1" sort="date:desc" }}
-                <figure class="dlf-home-bento__featured-image" data-progressive-media-frame>
+                <a class="dlf-home-bento__featured-image" href="{{ url }}" aria-label="Lees {{ title }}" data-progressive-media-frame>
                     {{ if featured_image }}
                         <img src="{{ glide src="{featured_image}" fit="crop_focal" width="1400" height="760" }}" alt="{{ featured_image:alt ?? title }}" style="object-position: {{ featured_image:focus_css }}" {{ partial:progressive_media_attributes width="1400" height="760" }}>
                     {{ else }}
                         <img src="/assets/redesign/photos/easi-2025.jpg" alt="" {{ partial:progressive_media_attributes width="2500" height="1405" }}>
                     {{ /if }}
-                </figure>
-                <article class="dlf-home-bento__featured-copy">
+                </a>
+                <a class="dlf-home-bento__featured-copy" href="{{ url }}">
                     <p class="dlf-kicker">{{ category ?? 'Nieuws' }}</p>
-                    <h3><a href="{{ url }}">{{ title }}</a></h3>
+                    <h3>{{ title }}</h3>
                     <div class="dlf-home-excerpt">{{ introduction | markdown | strip_tags | safe_truncate:260 }}</div>
-                    <a class="dlf-text-link" href="{{ url }}">Lees meer <span aria-hidden="true">→</span></a>
-                </article>
+                    <span class="dlf-text-link">Lees meer <span aria-hidden="true">→</span></span>
+                </a>
             {{ /collection:insights }}
 
             {{ collection:knowledge limit="1" sort="date:desc" }}
+                {{ if featured_image }}
+                    <a class="dlf-home-bento__knowledge-image" href="{{ url }}" aria-label="Lees {{ title }}" data-progressive-media-frame>
+                        <img src="{{ glide src="{featured_image}" fit="crop_focal" width="1000" height="600" }}" alt="{{ featured_image:alt ?? title }}" style="object-position: {{ featured_image:focus_css }}" {{ partial:progressive_media_attributes width="1000" height="600" }}>
+                    </a>
+                {{ /if }}
                 <article class="dlf-home-bento__knowledge">
                     <p class="dlf-kicker">Kennis</p>
                     <h3><a href="{{ url }}">{{ title }}</a></h3>

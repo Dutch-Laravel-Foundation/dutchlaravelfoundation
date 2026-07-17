@@ -3,6 +3,11 @@
     to { transform: translateX(-50%); }
 }
 
+@keyframes dlf-home-hero-zoom-out {
+    from { transform: scale(1.2); }
+    to { transform: scale(1.1); }
+}
+
 .dlf-footer {
     font-size: 16px;
     line-height: 1.5;
@@ -67,6 +72,12 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transform: scale(1.1);
+    transform-origin: 50% 72%;
+}
+
+.dlf-home-hero__photo img[data-media-state="loaded"] {
+    animation: dlf-home-hero-zoom-out 9.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .dlf-home-main {
@@ -142,6 +153,7 @@
     border-right: 1px solid var(--dlf-line);
     border-bottom: 1px solid var(--dlf-line);
     background: var(--dlf-soft);
+    text-decoration: none;
 }
 
 .dlf-home-bento__featured-image img {
@@ -150,9 +162,19 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.dlf-home-bento article {
+.dlf-home-bento:has(
+    .dlf-home-bento__featured-image:hover,
+    .dlf-home-bento__featured-copy:hover,
+    .dlf-home-bento__featured-copy:focus-within
+) .dlf-home-bento__featured-image img {
+    transform: scale(1.035);
+}
+
+.dlf-home-bento article,
+.dlf-home-bento__featured-copy {
     padding: 40px;
 }
 
@@ -181,6 +203,8 @@
     grid-row: 2;
     min-height: 320px;
     border-right: 1px solid var(--dlf-line);
+    color: inherit;
+    text-decoration: none;
 }
 
 .dlf-home-bento__featured-copy h3 {
@@ -192,6 +216,16 @@
     grid-column: 8 / span 5;
     grid-row: 1;
     border-bottom: 1px solid var(--dlf-line);
+}
+
+.dlf-home-bento__knowledge-image {
+    display: none;
+}
+
+.dlf-home-bento__knowledge-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .dlf-home-bento__about {
@@ -311,7 +345,7 @@
 }
 
 .dlf-home-highlight article {
-    padding: 48px 40px 64px;
+    padding: 64px 40px;
     border-right: 1px solid var(--dlf-line);
 }
 
@@ -354,7 +388,7 @@
     position: relative;
     z-index: 3;
     display: flex;
-    width: 46%;
+    width: calc(100% / 3);
     min-height: 384px;
     align-items: center;
     padding: 64px 56px 64px 80px;
@@ -419,6 +453,41 @@
     width: 52%;
     background: linear-gradient(to right, #fff 55%, transparent);
     pointer-events: none;
+}
+
+@media (min-width: 1024px) and (max-width: 1152px) {
+    .dlf-home-hero {
+        min-height: 0;
+        grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    }
+
+    .dlf-home-hero__copy > div {
+        margin-left: 40px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+    .dlf-home-section-head,
+    .dlf-home-bento article,
+    .dlf-home-bento__featured-copy,
+    .dlf-home-highlight article {
+        padding-right: 40px;
+        padding-left: 40px;
+    }
+
+    .dlf-home-partners__spacer {
+        display: none;
+    }
+
+    .dlf-home-partners h2 {
+        width: 194px;
+        padding-right: 40px;
+        padding-left: 40px;
+    }
+
+    .dlf-home-clients__label {
+        padding-left: 40px;
+    }
 }
 
 @media (max-width: 1023px) {
@@ -487,13 +556,44 @@
         border-bottom: 1px solid var(--dlf-line);
     }
 
-    .dlf-home-bento article {
+    .dlf-home-bento__about {
+        order: 6;
+    }
+
+    .dlf-home-bento__knowledge-image {
+        display: block;
+        height: 264px;
+        order: 2;
+        overflow: hidden;
+        background: var(--dlf-soft);
+    }
+
+    .dlf-home-bento__knowledge {
+        order: 3;
+    }
+
+    .dlf-home-bento__featured-image {
+        order: 4;
+    }
+
+    .dlf-home-bento__featured-copy {
+        order: 5;
+    }
+
+    .dlf-home-bento article,
+    .dlf-home-bento__featured-copy {
         min-height: 0;
-        padding: 28px 24px 40px;
+        padding: 56px 24px;
+    }
+
+    .dlf-home-bento__featured-copy,
+    .dlf-home-bento article.dlf-home-bento__knowledge {
+        padding-top: 28px;
     }
 
     .dlf-home-partners {
         flex-direction: column;
+        border-top: 0;
     }
 
     .dlf-home-partners__spacer {
@@ -569,7 +669,7 @@
 }
 
 @media (max-width: 639px) {
-    .dlf-home-section-head nav > span {
+    .dlf-home-section-head nav {
         display: none;
     }
 
@@ -578,7 +678,22 @@
     }
 }
 
+@media (max-width: 1023px) {
+    .dlf-home-bento__featured-copy {
+        border-bottom: 0;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
+    .dlf-home-hero__photo img[data-media-state="loaded"] {
+        animation: none;
+    }
+
+    .dlf-home-bento__featured-image img {
+        transition: none;
+        transform: none;
+    }
+
     .dlf-home-partners__track {
         animation-play-state: paused;
     }

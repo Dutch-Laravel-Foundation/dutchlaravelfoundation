@@ -46,6 +46,12 @@ The handoff's “Mulish everywhere, bold headings, square corners, broad offset 
 
 Do not declare a third global token set to resolve the muted/soft collision. Use the selected family's scoped/inherited values. Do not use brand red or muted gray for small regular text on white when contrast fails; use ink or a sufficiently large/strong treatment.
 
+### Section padding vocabulary
+
+Use the owning page family's named section-padding unit when feedback describes vertical section spacing as a multiple. In the community family, `1x`, `1.5x`, `2x`, and `2.5x` resolve to `32`, `48`, `64`, and `80px` on desktop, then `24`, `36`, `48`, and `60px` below the 1024px collapse. Keep horizontal insets separate from this vertical rhythm.
+
+Top and bottom may use different multiples when the composition calls for it. Record the pair explicitly, such as `1x / 2x`; do not infer symmetry or replace a documented exception. Reuse the corresponding `--dlf-section-padding-*` custom property in the owning family instead of entering the resolved pixel value. Existing card-specific `28px` spacing remains an intentional exception, not another section unit.
+
 Use Mulish for prose and headings. Reserve uppercase, tracked JetBrains Mono for established eyebrows, compact metadata, and button labels. Copy the chosen family's type scale and line height instead of adding page-local sizes.
 
 Keep ordinary surfaces white with thin gray dividers. Panels/media remain rectangular with subtle 3–4px rounding. Avoid pills/circles unless an existing semantic control requires them, generic card shadows, isolated decorative left borders, floating divider fragments, boxed quote glyphs, oversized card padding, and one-off buttons.

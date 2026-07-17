@@ -944,6 +944,7 @@
 }
 
 .dlf-bm--tender .dlf-bm-faq header {
+    top: calc(var(--dlf-sticky-top, 120px) - 64px);
     padding: 64px 40px;
 }
 
@@ -1008,7 +1009,7 @@
     .dlf-bm-pains article:nth-last-child(-n + 2),
     .dlf-bm-grid-3 > article,
     .dlf-bm-efficient__actions > article {
-        padding: 28px 24px 40px;
+        padding: 28px 24px;
         border-right: 0;
         border-bottom: 1px solid var(--dlf-line);
     }

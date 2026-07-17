@@ -6,6 +6,10 @@
     --dlf-line: #ececec;
     --dlf-soft-red: #ffecea;
     --dlf-soft: #f7f7fb;
+    --dlf-section-padding-1x: 32px;
+    --dlf-section-padding-1-5x: 48px;
+    --dlf-section-padding-2x: 64px;
+    --dlf-section-padding-2-5x: 80px;
     position: relative;
     width: min(100%, 1152px);
     margin-inline: auto;
@@ -164,6 +168,7 @@
 }
 
 .dlf-fill-grid {
+    border-bottom: 1px solid var(--dlf-line);
     background: #fff repeating-linear-gradient(45deg, #f7f7fb 0, #f7f7fb 1px, transparent 1px, transparent 5px);
 }
 
@@ -600,6 +605,47 @@
 }
 
 @media (min-width: 1024px) {
+    :is(.dlf-members-page, .dlf-internships-page) .dlf-member-card {
+        padding: 40px 40px 32px;
+    }
+
+    :is(.dlf-members-page, .dlf-internships-page) .dlf-member-card__logo {
+        height: 92px;
+        padding: 0;
+    }
+
+    :is(.dlf-members-page, .dlf-internships-page) .dlf-member-card__logo img {
+        max-width: 76%;
+    }
+
+    :is(.dlf-members-page, .dlf-internships-page) .dlf-member-card__body {
+        min-height: 0;
+        padding: 20px 0 0;
+    }
+
+    :is(.dlf-members-page, .dlf-internships-page) .dlf-member-card__location {
+        margin-top: 9px;
+        line-height: 1.5;
+    }
+
+    :is(.dlf-members-page, .dlf-internships-page) .dlf-members-grid:last-of-type .dlf-member-card:last-of-type {
+        border-bottom: 0;
+    }
+
+    :is(.dlf-members-page, .dlf-internships-page) .dlf-members-result-count,
+    :is(.dlf-members-page, .dlf-internships-page) .dlf-members-filter-button {
+        padding-inline: 40px;
+    }
+
+    :is(.dlf-members-page, .dlf-internships-page) .dlf-members-search svg {
+        left: 40px;
+    }
+
+    :is(.dlf-members-page, .dlf-internships-page) .dlf-members-search input {
+        padding-right: 40px;
+        padding-left: 70px;
+    }
+
     .dlf-about-partners .dlf-member-card__logo {
         padding-inline: 40px;
     }
@@ -621,6 +667,12 @@
     justify-content: space-between;
     gap: 48px;
     padding-block: 52px;
+}
+
+.dlf-members-page .dlf-community-red-band {
+    z-index: 10;
+    isolation: isolate;
+    border-block: 0;
 }
 
 .dlf-members-match__copy {
@@ -1116,6 +1168,20 @@
     border-bottom: 0;
 }
 
+.dlf-about-board,
+.dlf-about-board .dlf-about-board-grid {
+    border-bottom: 0;
+}
+
+.dlf-about-board.dlf-community-section--grid > .dlf-about-board-grid > .dlf-about-board-card:nth-child(4) {
+    border-bottom: 1px solid var(--dlf-line);
+}
+
+.dlf-about-milestones .dlf-community-head--compact {
+    padding-bottom: 14px;
+    border-top: 1px solid var(--dlf-line);
+}
+
 .dlf-about-work .dlf-community-grid-2 {
     border-bottom: 1px solid var(--dlf-line);
 }
@@ -1434,15 +1500,31 @@
     }
 }
 
-@media (max-width: 1023px) {
-    .dlf-community-page {
-        width: 100%;
-        padding-bottom: 0;
-    }
-
+@media (max-width: 1152px) {
     .dlf-community-page::before,
     .dlf-community-page::after {
         display: none;
+    }
+
+    .dlf-become-member-page .dlf-lid-events-block {
+        border-left: 0;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1152px) {
+    .dlf-lid-benefits {
+        margin-left: -48px;
+    }
+}
+
+@media (max-width: 1023px) {
+    .dlf-community-page {
+        --dlf-section-padding-1x: 24px;
+        --dlf-section-padding-1-5x: 36px;
+        --dlf-section-padding-2x: 48px;
+        --dlf-section-padding-2-5x: 60px;
+        width: 100%;
+        padding-bottom: 0;
     }
 
     .dlf-community-head {
@@ -1471,7 +1553,7 @@
     .dlf-community-grid-3 > .dlf-community-cell:nth-child(3n),
     .dlf-community-grid-4 > .dlf-community-cell:nth-child(2n),
     .dlf-community-grid-4 > .dlf-community-cell:nth-child(4n) {
-        padding: 28px 24px 40px;
+        padding: 28px 24px;
         border-right: 0;
         border-bottom: 1px solid var(--dlf-line);
     }
@@ -1482,11 +1564,11 @@
     }
 
     .dlf-internship-sidebar__contact {
-        padding: 28px 24px 40px;
+        padding: 28px 24px;
     }
 
     .dlf-internship-sidebar__action--standalone {
-        padding: 28px 24px 40px;
+        padding: 28px 24px;
     }
 
     .dlf-community-grid-2 > .dlf-community-cell:last-child,
@@ -1594,7 +1676,7 @@
 
     .dlf-lid-hero-copy,
     .dlf-lid-content-block {
-        padding: 28px 24px 40px;
+        padding: 28px 24px;
     }
 
     .dlf-lid-hero-copy {
@@ -1614,7 +1696,7 @@
     }
 
     .dlf-lid-benefit {
-        padding: 28px 24px 40px;
+        padding: 28px 24px;
     }
 
     .dlf-lid-events-photo {
@@ -1628,7 +1710,7 @@
 
     .dlf-lid-reason {
         margin-left: 0;
-        padding: 42px 24px 60px;
+        padding: var(--dlf-section-padding-2-5x) 24px;
     }
 
     .dlf-lid-reason__copy {
@@ -1671,7 +1753,7 @@
     }
 
     .dlf-laravel-explanation {
-        padding: 28px 24px 40px;
+        padding: 28px 24px;
         border-right: 0;
     }
 
@@ -1689,7 +1771,7 @@
 
     .dlf-laravel-feature,
     .dlf-laravel-link {
-        padding: 28px 24px 40px;
+        padding: 28px 24px;
     }
 
     .dlf-laravel-feature {
@@ -1778,6 +1860,18 @@
 }
 
 @media (max-width: 639px) {
+    .dlf-lid-content-block {
+        padding-bottom: 28px;
+    }
+
+    .dlf-lid-benefits {
+        margin-bottom: -28px;
+    }
+
+    .dlf-lid-events-block {
+        padding-bottom: 0;
+    }
+
     .dlf-about-stats {
         padding-inline: 0;
     }

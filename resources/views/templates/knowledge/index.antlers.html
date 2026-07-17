@@ -26,8 +26,9 @@
             {{ else }}
                 <div class="editorial-feed">
                     {{ articles }}
-                        <article class="editorial-entry {{ switch between="editorial-entry--media-start|editorial-entry--media-end" }} {{ if first }}editorial-entry--featured{{ /if }}">
-                            <a class="editorial-entry__media" href="{{ url }}" aria-label="Lees {{ title }}" data-progressive-media-frame>
+                        <article class="editorial-entry editorial-entry--linked {{ switch between="editorial-entry--media-start|editorial-entry--media-end" }} {{ if first }}editorial-entry--featured{{ /if }}">
+                            <a class="editorial-entry__link" href="{{ url }}" aria-label="Lees {{ title }}">
+                            <span class="editorial-entry__media" data-progressive-media-frame>
                                 {{ if featured_image }}
                                     {{ if first }}
                                         <img
@@ -53,7 +54,7 @@
                                 {{ else }}
                                     <span class="editorial-media-placeholder" aria-hidden="true"><img src="/assets/uploads/globals/LaravelBrandMark.svg" alt=""></span>
                                 {{ /if }}
-                            </a>
+                            </span>
 
                             <div class="editorial-entry__body">
                                 <div class="editorial-entry__meta">
@@ -63,17 +64,18 @@
                                 </div>
 
                                 {{ if first }}
-                                    <h2 class="editorial-entry__title editorial-entry__title--featured"><a href="{{ url }}">{{ title }}</a></h2>
+                                    <h2 class="editorial-entry__title editorial-entry__title--featured">{{ title }}</h2>
                                 {{ else }}
-                                    <h2 class="editorial-entry__title"><a href="{{ url }}">{{ title }}</a></h2>
+                                    <h2 class="editorial-entry__title">{{ title }}</h2>
                                 {{ /if }}
 
                                 {{ if introduction }}
                                     <p class="editorial-entry__summary">{{ introduction | strip_tags | truncate:240 }}</p>
                                 {{ /if }}
 
-                                <a class="editorial-text-link" href="{{ url }}">Lees meer <span aria-hidden="true">→</span></a>
+                                <span class="editorial-text-link">Lees meer <span aria-hidden="true">→</span></span>
                             </div>
+                            </a>
                         </article>
                     {{ /articles }}
                 </div>

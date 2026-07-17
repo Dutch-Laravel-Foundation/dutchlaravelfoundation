@@ -29,7 +29,7 @@
         {{ /if }}
     {{ /content }}
 
-    <section class="dlf-community-section" aria-label="Stages zoeken en filteren" x-cloak>
+    <section class="dlf-community-section" aria-label="Stages zoeken en filteren">
         <div class="dlf-members-toolbar">
             <div class="dlf-members-result-count" aria-live="polite">
                 <span x-text="resultLabel"></span>
@@ -54,7 +54,7 @@
     </section>
 
     <section class="dlf-members-fallback" aria-label="Beschikbare stages" x-show="false">
-        <div class="dlf-members-grid">
+        <div class="dlf-members-grid dlf-fill-grid">
             {{ collection:internships }}
                 {{ if member }}
                     <a class="dlf-member-card" href="{{ url }}">
@@ -76,7 +76,7 @@
     </div>
 
     <section aria-label="Beschikbare stages" x-show="filteredInternships.length > 0" x-cloak>
-        <div class="dlf-members-grid">
+        <div class="dlf-members-grid dlf-fill-grid">
             <template x-for="item in filteredInternships" :key="item.id">
                 <a class="dlf-member-card" :href="item.url">
                     <span class="dlf-member-card__logo">
@@ -169,7 +169,12 @@
             {{ /if }}
         {{ /collection:internships }}
     </div>
+
 </div>
+
+{{ unless call_to_action }}
+    {{ partial:footer_cta_banner :page_slug="slug" }}
+{{ /unless }}
 
 <script>
 function loadInternships() {
