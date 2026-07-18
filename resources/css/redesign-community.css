@@ -605,6 +605,15 @@
 }
 
 @media (min-width: 1024px) {
+    .dlf-member-detail-internships,
+    .dlf-member-detail-internships .dlf-members-grid {
+        border-bottom: 0;
+    }
+
+    .dlf-member-detail-internships .dlf-member-card__body {
+        padding: 20px 40px 40px;
+    }
+
     :is(.dlf-members-page, .dlf-internships-page) .dlf-member-card {
         padding: 40px 40px 32px;
     }
@@ -1492,11 +1501,36 @@
 }
 
 @media (min-width: 1024px) {
+    .dlf-become-member-page > .dlf-community-section:first-child .dlf-community-photo {
+        border-left: 1px solid var(--dlf-line);
+    }
+
+    .dlf-lid-left > .dlf-lid-content-block:first-child {
+        padding-block: 49px;
+    }
+
+    .dlf-lid-left > .dlf-lid-content-block:first-child .dlf-lid-benefits {
+        margin-top: 49px;
+        margin-bottom: -49px;
+    }
+
     .dlf-member-detail-sidebar {
         position: sticky;
         top: var(--dlf-header-visible-height, 0px);
         align-self: start;
         transition: top 350ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+}
+
+@media (min-width: 1121px) {
+    .dlf-lid-left > .dlf-lid-content-block:first-child {
+        padding-top: 66px;
+        padding-bottom: 65px;
+    }
+
+    .dlf-lid-left > .dlf-lid-content-block:first-child .dlf-lid-benefits {
+        margin-top: 65px;
+        margin-bottom: -65px;
     }
 }
 
@@ -1677,6 +1711,10 @@
     .dlf-lid-right {
         padding-bottom: 0;
         border-left: 0;
+    }
+
+    .dlf-lid-events-block {
+        border-top: 1px solid var(--dlf-line);
     }
 
     .dlf-lid-benefits {
