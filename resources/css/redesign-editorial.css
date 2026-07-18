@@ -150,7 +150,7 @@
 
 .editorial-events-section--past .editorial-entry {
     background-color: #f8f8f8;
-    background-image: repeating-linear-gradient(45deg, rgb(9 9 16 / 0.035) 0, rgb(9 9 16 / 0.035) 1px, transparent 1px, transparent 6px);
+    background-image: repeating-linear-gradient(30deg, rgb(9 9 16 / 0.035) 0, rgb(9 9 16 / 0.035) 1px, transparent 1px, transparent 6px);
 }
 
 .editorial-events-section--past .editorial-entry__image {
@@ -185,6 +185,14 @@
     grid-column: 1;
 }
 
+@media (min-width: 1024px) {
+    .editorial-entry__media {
+        min-height: 22.25rem;
+        aspect-ratio: auto;
+        align-self: stretch;
+    }
+}
+
 .editorial-entry__image {
     position: absolute;
     inset: 0;
@@ -200,7 +208,7 @@
     display: grid;
     place-items: center;
     background-color: var(--editorial-soft);
-    background-image: repeating-linear-gradient(45deg, rgb(9 9 16 / 0.035) 0, rgb(9 9 16 / 0.035) 1px, transparent 1px, transparent 6px);
+    background-image: repeating-linear-gradient(30deg, rgb(9 9 16 / 0.035) 0, rgb(9 9 16 / 0.035) 1px, transparent 1px, transparent 6px);
 }
 
 .editorial-entry__media .editorial-media-placeholder img,
@@ -219,7 +227,7 @@
     transform: scale(1.025);
 }
 
-.editorial-entry--linked:is(:hover, :focus-within) .editorial-entry__image {
+.editorial-entry:is(:hover, :focus-within) .editorial-entry__image {
     transform: scale(1.035);
 }
 
@@ -233,6 +241,12 @@
 
 .editorial-entry--featured .editorial-entry__body {
     padding-block: 3rem 3.5rem;
+}
+
+@media (min-width: 1024px) {
+    .editorial-entry--featured .editorial-entry__body {
+        padding-block: 2.1875rem;
+    }
 }
 
 .editorial-entry__meta {
@@ -671,7 +685,7 @@
     border: 0;
     border-radius: 3px;
     background-color: var(--editorial-red);
-    background-image: repeating-linear-gradient(45deg, rgb(255 255 255 / 0.08) 0, rgb(255 255 255 / 0.08) 1px, transparent 1px, transparent 6px);
+    background-image: repeating-linear-gradient(30deg, rgb(255 255 255 / 0.08) 0, rgb(255 255 255 / 0.08) 1px, transparent 1px, transparent 6px);
     color: #fff;
     font-size: 1rem;
     font-style: normal;

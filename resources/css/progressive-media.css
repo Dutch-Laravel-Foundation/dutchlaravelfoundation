@@ -1,6 +1,6 @@
 [data-progressive-media-frame] {
     background-color: #fff;
-    background-image: repeating-linear-gradient(45deg, rgb(9 9 16 / 0.035) 0, rgb(9 9 16 / 0.035) 1px, transparent 1px, transparent 6px);
+    background-image: repeating-linear-gradient(30deg, rgb(9 9 16 / 0.035) 0, rgb(9 9 16 / 0.035) 1px, transparent 1px, transparent 6px);
 }
 
 .dlf-inline-progressive-media {

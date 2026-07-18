@@ -125,7 +125,7 @@
     border: 1px solid #24242c;
     border-radius: 3px;
     background-color: var(--dlf-public-ink);
-    background-image: repeating-linear-gradient(45deg, rgb(255 255 255 / 0.08) 0, rgb(255 255 255 / 0.08) 1px, transparent 1px, transparent 6px);
+    background-image: repeating-linear-gradient(30deg, rgb(255 255 255 / 0.08) 0, rgb(255 255 255 / 0.08) 1px, transparent 1px, transparent 6px);
     color: #d4d4d8;
 }
 

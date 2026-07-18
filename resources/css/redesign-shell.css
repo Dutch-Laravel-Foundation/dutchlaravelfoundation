@@ -437,7 +437,7 @@ html.dlf-menu-open {
 
 .dlf-wizard-choice--selected {
     background-color: var(--dlf-red) !important;
-    background-image: repeating-linear-gradient(45deg, rgb(0 0 0 / 7%) 0, rgb(0 0 0 / 7%) 1px, transparent 1px, transparent 5px);
+    background-image: repeating-linear-gradient(30deg, rgb(0 0 0 / 7%) 0, rgb(0 0 0 / 7%) 1px, transparent 1px, transparent 5px);
     color: #fff;
 }
 
@@ -485,7 +485,7 @@ html.dlf-menu-open {
     border: 1px solid var(--dlf-red);
     border-radius: 3px;
     background-color: var(--dlf-red);
-    background-image: repeating-linear-gradient(45deg, rgb(0 0 0 / 7%) 0, rgb(0 0 0 / 7%) 1px, transparent 1px, transparent 5px);
+    background-image: repeating-linear-gradient(30deg, rgb(0 0 0 / 7%) 0, rgb(0 0 0 / 7%) 1px, transparent 1px, transparent 5px);
     color: #fff;
     transform: translateY(-50%);
 }
@@ -494,7 +494,7 @@ html.dlf-menu-open {
     margin-inline: 9px;
     border-color: #2a2a32;
     background-color: var(--dlf-ink);
-    background-image: repeating-linear-gradient(45deg, rgb(255 255 255 / 6%) 0, rgb(255 255 255 / 6%) 1px, transparent 1px, transparent 5px);
+    background-image: repeating-linear-gradient(30deg, rgb(255 255 255 / 6%) 0, rgb(255 255 255 / 6%) 1px, transparent 1px, transparent 5px);
 }
 
 .dlf-cta-row {
@@ -585,7 +585,7 @@ html.dlf-menu-open {
 .dlf-footer-band {
     border-top: 1px solid var(--dlf-line);
     background-color: #fff;
-    background-image: repeating-linear-gradient(45deg, var(--dlf-soft) 0, var(--dlf-soft) 1px, transparent 1px, transparent 5px);
+    background-image: repeating-linear-gradient(30deg, var(--dlf-soft) 0, var(--dlf-soft) 1px, transparent 1px, transparent 5px);
     color: var(--dlf-copy);
     font-size: 14px;
 }

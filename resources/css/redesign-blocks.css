@@ -168,7 +168,7 @@
 }
 
 .dlf-block-split__content {
-    background: #fff repeating-linear-gradient(45deg, #f7f7fb 0, #f7f7fb 1px, transparent 1px, transparent 5px);
+    background: #fff repeating-linear-gradient(30deg, #f7f7fb 0, #f7f7fb 1px, transparent 1px, transparent 5px);
 }
 
 .dlf-block-hero__media,
@@ -343,7 +343,7 @@
 }
 
 .dlf-block--red {
-    background: var(--dlf-red) repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.07) 0, rgba(0, 0, 0, 0.07) 1px, transparent 1px, transparent 5px);
+    background: var(--dlf-red) repeating-linear-gradient(30deg, rgba(0, 0, 0, 0.07) 0, rgba(0, 0, 0, 0.07) 1px, transparent 1px, transparent 5px);
 }
 
 .dlf-block--dark {
@@ -360,7 +360,7 @@
 }
 
 .dlf-block-split.dlf-block--soft .dlf-block-split__content {
-    background: var(--dlf-soft) repeating-linear-gradient(45deg, rgb(9 9 16 / 0.025) 0, rgb(9 9 16 / 0.025) 1px, transparent 1px, transparent 5px);
+    background: var(--dlf-soft) repeating-linear-gradient(30deg, rgb(9 9 16 / 0.025) 0, rgb(9 9 16 / 0.025) 1px, transparent 1px, transparent 5px);
 }
 
 .dlf-block--red h1,
