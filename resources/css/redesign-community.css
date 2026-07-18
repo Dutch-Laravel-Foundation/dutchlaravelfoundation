@@ -564,6 +564,25 @@
         border-left: 0;
         box-shadow: inset 1px 0 0 var(--dlf-line);
     }
+
+    .dlf-internship-detail-page .dlf-community-section--grid .dlf-community-grid-2 {
+        position: relative;
+    }
+
+    .dlf-internship-detail-page .dlf-community-section--grid .dlf-community-grid-2::after {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 1px;
+        background: var(--dlf-line);
+        content: "";
+        pointer-events: none;
+    }
+
+    .dlf-internship-detail-page .dlf-community-section--grid .dlf-community-cell:first-child {
+        border-right: 0;
+    }
 }
 
 .dlf-member-card__body {
