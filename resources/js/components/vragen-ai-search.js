@@ -1,6 +1,35 @@
-const searchTriggers = [...document.querySelectorAll(".js-vragenai-trigger")];
+let initialization;
 
-if (searchTriggers.length > 0) {
+const loadEmbed = () =>
+    new Promise((resolve, reject) => {
+        const existing = document.querySelector(
+            'script[src="https://dlf.vragen.ai/embed.js?deployment=popup"]',
+        );
+
+        if (existing?.dataset.loaded === "true") {
+            resolve();
+            return;
+        }
+
+        const script = existing || document.createElement("script");
+        script.src = "https://dlf.vragen.ai/embed.js?deployment=popup";
+        script.async = true;
+        script.addEventListener(
+            "load",
+            () => {
+                script.dataset.loaded = "true";
+                resolve();
+            },
+            { once: true },
+        );
+        script.addEventListener("error", reject, { once: true });
+
+        if (!existing) {
+            document.head.append(script);
+        }
+    });
+
+const watchPopup = () => {
     let lastTrigger = null;
     let popupWasOpen = document.body.classList.contains("vragenai-popup-open");
 
@@ -16,13 +45,11 @@ if (searchTriggers.length > 0) {
                 lastTrigger = trigger;
             }
         },
-        true
+        true,
     );
 
     new MutationObserver(() => {
-        const popupIsOpen = document.body.classList.contains(
-            "vragenai-popup-open"
-        );
+        const popupIsOpen = document.body.classList.contains("vragenai-popup-open");
 
         if (popupWasOpen && !popupIsOpen) {
             window.dispatchEvent(new CustomEvent("close-vragen-ai"));
@@ -41,4 +68,10 @@ if (searchTriggers.length > 0) {
         attributes: true,
         attributeFilter: ["class"],
     });
+};
+
+export function initVragenAiSearch() {
+    initialization ??= loadEmbed().then(watchPopup);
+
+    return initialization;
 }

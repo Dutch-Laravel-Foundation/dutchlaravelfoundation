@@ -7,7 +7,7 @@
     </div>
     {{ if image }}
         <figure class="dlf-block-split__media" data-progressive-media-frame>
-            <img src="{{ glide src="{image}" fit="crop_focal" width="1600" height="1200" }}" alt="{{ image:alt ?? heading }}" style="object-position: {{ image:focus_css }}" {{ partial:progressive_media_attributes width="1600" height="1200" }}>
+            <img src="{{ glide src="{image}" fit="crop_focal" width="1600" height="1200" format="webp" quality="82" }}" alt="{{ image:alt ?? heading }}" style="object-position: {{ image:focus_css }}" {{ partial:progressive_media_attributes width="1600" height="1200" }}>
         </figure>
     {{ /if }}
 </section>

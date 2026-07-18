@@ -179,7 +179,7 @@
                             <a class="mb-6 block overflow-hidden" href="{{ url }}" aria-label="Bekijk {{ case_title }}" data-progressive-media-frame>
                                 <img
                                     class="aspect-[4/3] w-full object-cover"
-                                    src="{{ glide src="{featured_image}" width="640" height="480" fit="crop_focal" }}"
+                                    src="{{ glide src="{featured_image}" width="640" height="480" fit="crop_focal" format="webp" quality="82" }}"
                                     alt="{{ featured_image:alt ?? case_title }}"
                                     style="object-position: {{ featured_image:focus_css }}"
                                     {{ partial:progressive_media_attributes width="640" height="480" }}

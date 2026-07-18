@@ -24,8 +24,8 @@
             <figure class="editorial-article__figure" data-progressive-media-frame>
                 {{ if featured_image }}
                     <img
-                        src="{{ glide src="{featured_image}" width="1200" height="960" fit="crop_focal" }}"
-                        srcset="{{ glide src="{featured_image}" width="640" height="512" fit="crop_focal" }} 640w, {{ glide src="{featured_image}" width="960" height="768" fit="crop_focal" }} 960w, {{ glide src="{featured_image}" width="1200" height="960" fit="crop_focal" }} 1200w"
+                        src="{{ glide src="{featured_image}" width="1200" height="960" fit="crop_focal" format="webp" quality="82" }}"
+                        srcset="{{ glide src="{featured_image}" width="640" height="512" fit="crop_focal" format="webp" quality="82" }} 640w, {{ glide src="{featured_image}" width="960" height="768" fit="crop_focal" format="webp" quality="82" }} 960w, {{ glide src="{featured_image}" width="1200" height="960" fit="crop_focal" format="webp" quality="82" }} 1200w"
                         sizes="(min-width: 1024px) 576px, 100vw"
                         alt="{{ featured_image:alt ?? title }}"
                         style="object-position: {{ featured_image:focus_css }}"

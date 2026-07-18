@@ -404,7 +404,7 @@
     display: block;
     height: 34px;
     color: #ffa599;
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
     font-size: 3.75rem;
     font-weight: 600;
     line-height: 0.8;
@@ -603,7 +603,7 @@
     border-radius: 3px;
     background: #ffecea;
     color: var(--dlf-red);
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
     font-size: 1.625rem;
     font-weight: 700;
 }

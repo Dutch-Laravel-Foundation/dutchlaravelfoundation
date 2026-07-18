@@ -179,7 +179,7 @@
                             </a>
                         </div>
                         {{ if featured_image }}
-                            <figure data-progressive-media-frame><img src="{{ glide src="{featured_image}" fit="crop_focal" width="1200" height="650" }}" alt="{{ featured_image:alt ?? title }}" style="object-position: {{ featured_image:focus_css }}" {{ partial:progressive_media_attributes width="1200" height="650" }}></figure>
+                            <figure data-progressive-media-frame><img src="{{ glide src="{featured_image}" fit="crop_focal" width="1200" height="650" format="webp" quality="82" }}" alt="{{ featured_image:alt ?? title }}" style="object-position: {{ featured_image:focus_css }}" {{ partial:progressive_media_attributes width="1200" height="650" }}></figure>
                         {{ /if }}
                     </article>
                 {{ /collection:cases }}

@@ -16,7 +16,14 @@
         </div>
     </div>
     <figure class="dlf-home-hero__photo" data-progressive-media-frame>
-        <img src="/assets/redesign/photos/larafest-groepsfoto.jpeg" alt="Laravel developers tijdens een bijeenkomst van de Dutch Laravel Foundation" {{ partial:progressive_media_attributes width="3632" height="2406" loading="eager" fetchpriority="high" }}>
+        <picture>
+            <source
+                type="image/webp"
+                srcset="/assets/redesign/photos/larafest-groepsfoto-640.webp 640w, /assets/redesign/photos/larafest-groepsfoto-1280.webp 1280w, /assets/redesign/photos/larafest-groepsfoto-1920.webp 1920w"
+                sizes="(min-width: 1024px) 50vw, 100vw"
+            >
+            <img src="/assets/redesign/photos/larafest-groepsfoto.jpeg" alt="Laravel developers tijdens een bijeenkomst van de Dutch Laravel Foundation" {{ partial:progressive_media_attributes width="1920" height="1272" loading="eager" fetchpriority="high" }}>
+        </picture>
     </figure>
 </section>
 
@@ -35,7 +42,7 @@
             {{ collection:insights limit="1" sort="date:desc" }}
                 <a class="dlf-home-bento__featured-image" href="{{ url }}" aria-label="Lees {{ title }}" data-progressive-media-frame>
                     {{ if featured_image }}
-                        <img src="{{ glide src="{featured_image}" fit="crop_focal" width="1400" height="760" }}" alt="{{ featured_image:alt ?? title }}" style="object-position: {{ featured_image:focus_css }}" {{ partial:progressive_media_attributes width="1400" height="760" }}>
+                        <img src="{{ glide src="{featured_image}" fit="crop_focal" width="1400" height="760" format="webp" quality="82" }}" alt="{{ featured_image:alt ?? title }}" style="object-position: {{ featured_image:focus_css }}" {{ partial:progressive_media_attributes width="1400" height="760" }}>
                     {{ else }}
                         <img src="/assets/redesign/photos/easi-2025.jpg" alt="" {{ partial:progressive_media_attributes width="2500" height="1405" }}>
                     {{ /if }}
@@ -51,7 +58,7 @@
             {{ collection:knowledge limit="1" sort="date:desc" }}
                 {{ if featured_image }}
                     <a class="dlf-home-bento__knowledge-image" href="{{ url }}" aria-label="Lees {{ title }}" data-progressive-media-frame>
-                        <img src="{{ glide src="{featured_image}" fit="crop_focal" width="1000" height="600" }}" alt="{{ featured_image:alt ?? title }}" style="object-position: {{ featured_image:focus_css }}" {{ partial:progressive_media_attributes width="1000" height="600" }}>
+                        <img src="{{ glide src="{featured_image}" fit="crop_focal" width="1000" height="600" format="webp" quality="82" }}" alt="{{ featured_image:alt ?? title }}" style="object-position: {{ featured_image:focus_css }}" {{ partial:progressive_media_attributes width="1000" height="600" }}>
                     </a>
                 {{ /if }}
                 <article class="dlf-home-bento__knowledge">
@@ -80,14 +87,14 @@
                     {{ collection:partners sort="title" }}
                         {{ partner_title = title }}
                         {{ logo }}
-                            <img src="{{ url }}" alt="{{ alt ?? partner_title }}">
+                            <img src="{{ url }}" alt="{{ alt ?? partner_title }}" loading="lazy" decoding="async">
                         {{ /logo }}
                     {{ /collection:partners }}
                 </div>
                 <div class="dlf-home-partners__group" aria-hidden="true">
                     {{ collection:partners sort="title" }}
                         {{ logo }}
-                            <img src="{{ url }}" alt="">
+                            <img src="{{ url }}" alt="" loading="lazy" decoding="async">
                         {{ /logo }}
                     {{ /collection:partners }}
                 </div>
@@ -105,7 +112,7 @@
             </article>
             <figure data-progressive-media-frame>
                 {{ if featured_image }}
-                    <img src="{{ glide src="{featured_image}" fit="crop_focal" width="1400" height="900" }}" alt="{{ featured_image:alt ?? title }}" style="object-position: {{ featured_image:focus_css }}" {{ partial:progressive_media_attributes width="1400" height="900" }}>
+                    <img src="{{ glide src="{featured_image}" fit="crop_focal" width="1400" height="900" format="webp" quality="82" }}" alt="{{ featured_image:alt ?? title }}" style="object-position: {{ featured_image:focus_css }}" {{ partial:progressive_media_attributes width="1400" height="900" }}>
                 {{ else }}
                     <img src="/assets/redesign/photos/larafest-groepsfoto.jpeg" alt="" {{ partial:progressive_media_attributes width="3632" height="2406" }}>
                 {{ /if }}
@@ -121,28 +128,28 @@
                 <div class="dlf-home-clients__cell" data-client-cell>
                     {{ collection:clients slug:in="de-verbouwcalculator|intersafe" }}
                         <div class="dlf-home-clients__logo" data-client-logo>
-                            <img src="{{ logo }}" alt="{{ title }}">
+                            <img src="{{ logo }}" alt="{{ title }}" loading="lazy" decoding="async">
                         </div>
                     {{ /collection:clients }}
                 </div>
                 <div class="dlf-home-clients__cell" data-client-cell>
                     {{ collection:clients slug:in="dropday|mobiliteitsfabriek" }}
                         <div class="dlf-home-clients__logo" data-client-logo>
-                            <img src="{{ logo }}" alt="{{ title }}">
+                            <img src="{{ logo }}" alt="{{ title }}" loading="lazy" decoding="async">
                         </div>
                     {{ /collection:clients }}
                 </div>
                 <div class="dlf-home-clients__cell" data-client-cell>
                     {{ collection:clients slug:in="eurosafe|avia" }}
                         <div class="dlf-home-clients__logo" data-client-logo>
-                            <img src="{{ logo }}" alt="{{ title }}">
+                            <img src="{{ logo }}" alt="{{ title }}" loading="lazy" decoding="async">
                         </div>
                     {{ /collection:clients }}
                 </div>
                 <div class="dlf-home-clients__cell" data-client-cell>
                     {{ collection:clients slug:in="abn-amro|recirculo" }}
                         <div class="dlf-home-clients__logo" data-client-logo>
-                            <img src="{{ logo }}" alt="{{ title }}">
+                            <img src="{{ logo }}" alt="{{ title }}" loading="lazy" decoding="async">
                         </div>
                     {{ /collection:clients }}
                 </div>
@@ -151,28 +158,28 @@
                 <div class="dlf-home-clients__cell" data-client-cell>
                     {{ collection:clients slug:in="flow-concepts|recoll" }}
                         <div class="dlf-home-clients__logo" data-client-logo>
-                            <img src="{{ logo }}" alt="{{ title }}">
+                            <img src="{{ logo }}" alt="{{ title }}" loading="lazy" decoding="async">
                         </div>
                     {{ /collection:clients }}
                 </div>
                 <div class="dlf-home-clients__cell" data-client-cell>
                     {{ collection:clients slug:in="race-planet|stichting-studiekeuze123" }}
                         <div class="dlf-home-clients__logo" data-client-logo>
-                            <img src="{{ logo }}" alt="{{ title }}">
+                            <img src="{{ logo }}" alt="{{ title }}" loading="lazy" decoding="async">
                         </div>
                     {{ /collection:clients }}
                 </div>
                 <div class="dlf-home-clients__cell" data-client-cell>
                     {{ collection:clients slug:in="youngwize|nva" }}
                         <div class="dlf-home-clients__logo" data-client-logo>
-                            <img src="{{ logo }}" alt="{{ title }}">
+                            <img src="{{ logo }}" alt="{{ title }}" loading="lazy" decoding="async">
                         </div>
                     {{ /collection:clients }}
                 </div>
                 <div class="dlf-home-clients__cell" data-client-cell>
                     {{ collection:clients slug:is="inventum" }}
                         <div class="dlf-home-clients__logo" data-client-logo>
-                            <img src="{{ logo }}" alt="{{ title }}">
+                            <img src="{{ logo }}" alt="{{ title }}" loading="lazy" decoding="async">
                         </div>
                     {{ /collection:clients }}
                 </div>

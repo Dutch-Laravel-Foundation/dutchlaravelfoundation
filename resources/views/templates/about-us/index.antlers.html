@@ -121,7 +121,7 @@
                 <article class="dlf-community-cell dlf-about-board-card">
                     <figure class="dlf-about-board-card__photo" data-progressive-media-frame>
                         {{ if photo }}
-                            <img src="{{ glide src='{photo}' fit='crop_focal' width='240' height='240' }}" alt="{{ title }}" style="object-position: {{ photo:focus_css }}" {{ partial:progressive_media_attributes width="240" height="240" }}>
+                            <img src="{{ glide src='{photo}' fit='crop_focal' width='240' height='240' format='webp' quality='82' }}" alt="{{ title }}" style="object-position: {{ photo:focus_css }}" {{ partial:progressive_media_attributes width="240" height="240" }}>
                         {{ /if }}
                     </figure>
                     <div class="dlf-about-board-card__copy">

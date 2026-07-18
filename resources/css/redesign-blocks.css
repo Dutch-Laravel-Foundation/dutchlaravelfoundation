@@ -51,7 +51,7 @@
 
 .dlf-kicker,
 .dlf-text-link {
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.12em;
@@ -120,7 +120,7 @@
     border: 1px solid currentColor;
     border-radius: 3px;
     background: #fff;
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.12em;

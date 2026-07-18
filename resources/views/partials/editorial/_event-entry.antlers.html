@@ -3,8 +3,8 @@
         {{ if featured_image }}
             <img
                 class="editorial-entry__image{{ if past }} grayscale{{ /if }}"
-                src="{{ glide src="{featured_image}" width="960" height="640" fit="crop_focal" }}"
-                srcset="{{ glide src="{featured_image}" width="640" height="427" fit="crop_focal" }} 640w, {{ glide src="{featured_image}" width="960" height="640" fit="crop_focal" }} 960w"
+                src="{{ glide src="{featured_image}" width="960" height="640" fit="crop_focal" format="webp" quality="82" }}"
+                srcset="{{ glide src="{featured_image}" width="640" height="427" fit="crop_focal" format="webp" quality="82" }} 640w, {{ glide src="{featured_image}" width="960" height="640" fit="crop_focal" format="webp" quality="82" }} 960w"
                 sizes="(min-width: 1024px) 576px, 100vw"
                 alt="{{ featured_image:alt ?? title }}"
                 style="object-position: {{ featured_image:focus_css }}"

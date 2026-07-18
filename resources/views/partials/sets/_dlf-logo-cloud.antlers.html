@@ -3,7 +3,7 @@
     <div class="dlf-logo-grid">
         {{ logos }}
             {{ if link }}<a class="dlf-logo-cell" href="{{ link }}" aria-label="{{ name }}">{{ else }}<div class="dlf-logo-cell">{{ /if }}
-                <img src="{{ logo }}" alt="{{ name }}">
+                <img src="{{ logo }}" alt="{{ name }}" loading="lazy" decoding="async">
             {{ if link }}</a>{{ else }}</div>{{ /if }}
         {{ /logos }}
     </div>

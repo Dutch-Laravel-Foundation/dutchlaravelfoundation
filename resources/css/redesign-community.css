@@ -82,7 +82,7 @@
     display: block;
     margin-bottom: 14px;
     color: var(--dlf-muted);
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: .12em;
@@ -299,7 +299,7 @@
     padding-inline: 22px;
     color: #fff;
     background: var(--dlf-red);
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: .12em;
@@ -400,7 +400,7 @@
 
 .dlf-members-result-count span {
     color: var(--dlf-muted);
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
     font-size: 12px;
     font-variant-numeric: tabular-nums;
     font-weight: 700;
@@ -471,7 +471,7 @@
     color: #fff;
     border-radius: 999px;
     background: var(--dlf-red);
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
     font-size: 11px;
 }
 
@@ -589,7 +589,7 @@
 .dlf-member-card__location {
     margin-top: 6px;
     color: var(--dlf-red);
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: .1em;
@@ -792,7 +792,7 @@
     color: var(--dlf-red) !important;
     border: 0;
     background: transparent;
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: .12em;
@@ -1217,7 +1217,7 @@
 
 .dlf-about-stat strong {
     color: #fff;
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
     font-size: 46px;
     font-weight: 700;
     line-height: 1;
@@ -1322,7 +1322,7 @@
 .dlf-about-timeline__year {
     padding-top: 2px;
     color: var(--dlf-red);
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
     font-size: 15px;
     font-weight: 700;
 }
@@ -1390,7 +1390,7 @@
 
 .dlf-laravel-fact strong {
     color: #fff;
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
     font-size: 44px;
     font-weight: 800;
     line-height: 1;
@@ -1405,7 +1405,7 @@
 
 .dlf-laravel-fact__index {
     color: rgba(255, 255, 255, .45);
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
     font-size: 18px;
     font-weight: 700;
     letter-spacing: .12em;
@@ -1465,7 +1465,7 @@
 
 .dlf-community-text-link {
     color: var(--dlf-red) !important;
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: .12em;
@@ -1937,7 +1937,7 @@
         display: block;
         margin-left: auto;
         color: var(--dlf-muted);
-        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-family: "JetBrains Mono Variable", ui-monospace, monospace;
         font-size: 12px;
         font-variant-numeric: tabular-nums;
         font-weight: 700;

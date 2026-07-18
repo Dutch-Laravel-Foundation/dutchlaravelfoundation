@@ -16,7 +16,7 @@
         class="flex lg:flex-wrap min-w-[1500px] lg:w-full px-7 justify-between lg:px-16 lg:space-x-16 lg:mx-auto  lg:min-w-0 lg:justify-center lg:space-y-12 lg:max-w-6xl mt-8 md:mt-10 relative">
         {{ collection:partners sort="random" }}
         {{ logo }}
-        <img class="h-7 snap-center" src="{{ url }}" alt="{{ alt }}" />
+        <img class="h-7 snap-center" src="{{ url }}" alt="{{ alt }}" loading="lazy" decoding="async" />
         {{ /logo }}
         {{ /collection:partners }}
       </div>

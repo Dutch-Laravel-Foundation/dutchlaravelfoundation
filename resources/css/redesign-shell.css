@@ -23,7 +23,7 @@ html.dlf-menu-open {
     overflow-x: clip;
     background: #fff;
     color: var(--dlf-copy);
-    font-family: "Mulish", ui-sans-serif, system-ui, sans-serif;
+    font-family: "Mulish Variable", ui-sans-serif, system-ui, sans-serif;
     font-size: 16px;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
@@ -338,7 +338,7 @@ html.dlf-menu-open {
     padding-inline: 22px;
     border: 1.5px solid transparent;
     border-radius: 3px;
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.12em;
@@ -513,7 +513,7 @@ html.dlf-menu-open {
     display: block;
     margin-bottom: 12px;
     color: rgb(255 255 255 / 75%);
-    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.12em;
