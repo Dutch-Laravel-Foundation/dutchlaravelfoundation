@@ -1860,6 +1860,19 @@
 }
 
 @media (max-width: 639px) {
+    .dlf-member-detail-internships .dlf-members-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dlf-member-detail-internships .dlf-member-card {
+        border-right: 0;
+    }
+
+    .dlf-member-detail-internships:has(+ .dlf-member-detail-cases),
+    .dlf-member-detail-internships:has(+ .dlf-member-detail-cases) .dlf-members-grid {
+        border-bottom: 0;
+    }
+
     .dlf-lid-content-block {
         padding-bottom: 28px;
     }
