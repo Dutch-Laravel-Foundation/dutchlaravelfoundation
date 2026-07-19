@@ -14,6 +14,52 @@
     display: none !important;
 }
 
+@media (max-width: 1023px) {
+    .dlf-btn,
+    .dlf-button,
+    .dlf-community-button,
+    .editorial-author__link {
+        -webkit-tap-highlight-color: rgb(255 77 65 / 24%);
+    }
+
+    .dlf-btn-face,
+    .dlf-button > span,
+    .dlf-community-button__face,
+    .editorial-author__link-face {
+        transition: transform 90ms ease-out, filter 90ms ease-out, background-color 90ms ease-out, color 90ms ease-out;
+    }
+
+    .dlf-btn:hover .dlf-btn-face,
+    .dlf-button:hover > span,
+    .dlf-community-button:hover .dlf-community-button__face,
+    .editorial-author__link:hover .editorial-author__link-face {
+        transform: none;
+    }
+
+    .dlf-btn:hover .dlf-btn-face--outline-red {
+        background: #fff;
+        color: var(--dlf-red);
+    }
+
+    .dlf-btn:hover .dlf-btn-face--outline-white {
+        background: var(--dlf-red);
+        color: #fff;
+    }
+
+    .dlf-community-button--light:hover .dlf-community-button__face {
+        background: #fff;
+        color: var(--dlf-red);
+    }
+
+    .dlf-btn:active .dlf-btn-face,
+    .dlf-button:active > span,
+    .dlf-community-button:active .dlf-community-button__face,
+    .editorial-author__link:active .editorial-author__link-face {
+        filter: brightness(1.12) saturate(1.05);
+        transform: translateY(2px);
+    }
+}
+
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
