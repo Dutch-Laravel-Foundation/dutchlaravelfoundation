@@ -1,0 +1,68 @@
+title: 'DLF Hero'
+fields:
+  -
+    handle: eyebrow
+    field:
+      display: Bovenregel
+      type: text
+  -
+    handle: heading
+    field:
+      display: Kop
+      type: text
+      validate:
+        - required
+  -
+    handle: heading_level
+    field:
+      display: Kopniveau
+      instructions: 'Gebruik H1 wanneer dit blok de hoofdtitel van de pagina bevat.'
+      type: select
+      default: h2
+      options:
+        h1: 'H1 — paginatitel'
+        h2: 'H2 — sectietitel'
+  -
+    handle: body
+    field:
+      display: Tekst
+      type: bard
+      remove_empty_nodes: true
+  -
+    handle: image
+    field:
+      display: Afbeelding
+      type: assets
+      container: assets
+      mode: grid
+      max_files: 1
+  -
+    handle: primary_label
+    field:
+      display: 'Primaire knoptekst'
+      type: text
+  -
+    handle: primary_link
+    field:
+      display: 'Primaire knoplink'
+      type: link
+  -
+    handle: secondary_label
+    field:
+      display: 'Secundaire knoptekst'
+      type: text
+  -
+    handle: secondary_link
+    field:
+      display: 'Secundaire knoplink'
+      type: link
+  -
+    handle: image_position
+    field:
+      display: Beeldpositie
+      type: select
+      default: right
+      options:
+        right: Rechts
+        left: Links
+        background: Achtergrond

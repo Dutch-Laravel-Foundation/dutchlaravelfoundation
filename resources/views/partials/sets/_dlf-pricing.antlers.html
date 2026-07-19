@@ -1,0 +1,23 @@
+<section class="dlf-block dlf-block-pricing">
+    <header class="dlf-block-heading">
+        {{ if eyebrow }}<p class="dlf-kicker">{{ eyebrow }}</p>{{ /if }}
+        <h2>{{ heading }}</h2>
+        {{ if introduction }}<div class="dlf-prose">{{ introduction }}</div>{{ /if }}
+    </header>
+    <div class="dlf-pricing-grid">
+        {{ plans }}
+            <article class="dlf-price-card {{ if featured }}dlf-price-card--featured{{ /if }}">
+                {{ if featured }}<p class="dlf-kicker">Aanbevolen</p>{{ /if }}
+                <h3>{{ name }}</h3>
+                {{ if price }}<p class="dlf-price-card__price">{{ price }} {{ if suffix }}<small>{{ suffix }}</small>{{ /if }}</p>{{ /if }}
+                {{ if description }}<div class="dlf-prose">{{ description | markdown }}</div>{{ /if }}
+                {{ if features }}
+                    <ul>
+                        {{ features }}<li>{{ feature }}</li>{{ /features }}
+                    </ul>
+                {{ /if }}
+                {{ if button_link && button_label }}<a class="dlf-button dlf-button--primary" href="{{ button_link }}"><span>{{ button_label }}</span></a>{{ /if }}
+            </article>
+        {{ /plans }}
+    </div>
+</section>

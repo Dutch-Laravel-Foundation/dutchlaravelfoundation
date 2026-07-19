@@ -11,7 +11,7 @@ content:
   -
     type: heading
     attrs:
-      level: 1
+      level: 2
     content:
       -
         type: text
@@ -31,16 +31,12 @@ content:
       -
         type: text
         text: ' is een speciale service voor alle leden van de Dutch Laravel Foundation (DLF). De hotline is samen met onze partner Shock Media opgezet om leden te ondersteunen bij allerlei hosting gerelateerde vragen. Van eenvoudige issues tot complexe infrastructuur vraagstukken.'
-      -
-        type: hardBreak
   -
     type: paragraph
     content:
       -
         type: text
         text: 'Shock Media is onze partner op het gebied van hosting en infrastructuur. Dankzij hun jarenlange ervaring met managed hosting, serverbeheer en security kunnen we onze leden deze waardevolle service kosteloos aanbieden. Ook als je applicatie draait op de infrastructuur van een andere hoster.'
-      -
-        type: hardBreak
   -
     type: heading
     attrs:
@@ -55,8 +51,6 @@ content:
       -
         type: text
         text: 'Laravel applicaties en klanten kunnen specifieke eisen stellen op het gebied van performance, beveiliging en schaalbaarheid. Niet elke hoster of developer houdt standaard rekening met die complexiteit. De experts achter de hotline helpen je in dat geval graag op weg.'
-      -
-        type: hardBreak
   -
     type: heading
     attrs:
@@ -129,11 +123,6 @@ content:
                 type: text
                 text: 'Architectuurbeslissingen: bijvoorbeeld over shared hosting vs. VPS, container/cluster-opzet, schaalbaarheid of redundantie.'
   -
-    type: paragraph
-    content:
-      -
-        type: hardBreak
-  -
     type: heading
     attrs:
       level: 2
@@ -167,6 +156,4 @@ content:
       -
         type: text
         text: 'Nog geen lid van de Dutch Laravel Foundation en dus nog geen gratis toegang tot de hotline? Bekijk dan onze informatie over lidmaatschap.'
-  -
-    type: paragraph
 ---

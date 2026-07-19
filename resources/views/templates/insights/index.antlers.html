@@ -1,59 +1,99 @@
-<div class="translate-y-32 lg:translate-y-52 pb-32">
-{{ partial:decoration/floor-background background="floor-top-insights" /}}
-<div class="container mb-auto mx-auto flex flex-col items-left justify-center relative">
-    {{ content }}
-        {{ partial src="sets/autoload" }}
-    {{ /content }}
-
-    {{ highlighted_id = {collection:insights highlight:is="true" limit="1" sort="updated:desc"} pluck('id') }}
-
-    {{ insight_count = { collection:count in="insights" id:not="{ highlighted_id.0 }" } }}
-    <section class="pb-10">
-        {{ if insight_count > 0 }}
-            {{ collection:insights id:not="{ highlighted_id.0 }" limit="1" sort="date:desc" }}
-                <div class="w-full lg:w-11/12">
-                    {{ partial:blocks/image-left-large class="" :image="featured_image" :category="category" link="/insights/{ slug }" }}
-                        {{ date format="d-m-Y" }}
-                        <br/>
-                        <br/>
-                        {{ introduction }}
-                    {{ /partial:blocks/image-left-large }}
-                {{ /collection:insights }}
+<div class="editorial-page">
+    <div class="editorial-rail">
+        <header class="editorial-page__header">
+            <div class="editorial-page__heading">
+                <span class="editorial-eyebrow">Nieuws</span>
+                <h1 class="editorial-page__title">Nieuws uit de community</h1>
+                <p class="editorial-page__intro">Events van de stichting, verhalen van onze leden en kennis uit het Nederlandse Laravel-ecosysteem.</p>
             </div>
-        {{ /if }}
 
-        {{ if insight_count > 1 }}
-            {{ collection:insights id:not="{ highlighted_id.0 }" limit="1" offset="1" sort="date:desc" }}
-                {{ partial:blocks/image-left class="w-full lg:w-11/12! lg:ml-auto" :image="featured_image" :category="category" link="/insights/{ slug }" }}
-                    {{ date format="d-m-Y" }}
-                    <br/>
-                    <br/>
-                {{ introduction }}
-                {{ /partial:blocks/image-left }}
-            {{ /collection:insights }}
-        {{ /if }}
+            <nav class="editorial-filters" aria-label="Filter nieuwsberichten">
+                <a href="/nieuws" {{ unless get:category }}aria-current="page"{{ /unless }}>Alles</a>
+                <a href="/nieuws?category=Leden" {{ if get:category === "Leden" }}aria-current="page"{{ /if }}>Leden</a>
+                <a href="/nieuws?category=Netwerk" {{ if get:category === "Netwerk" }}aria-current="page"{{ /if }}>Netwerk</a>
+                <a href="/nieuws?category=Inspiratie" {{ if get:category === "Inspiratie" }}aria-current="page"{{ /if }}>Inspiratie</a>
+                <a href="/nieuws?category=Bestuur" {{ if get:category === "Bestuur" }}aria-current="page"{{ /if }}>Bestuur</a>
+            </nav>
+        </header>
 
-        {{ if highlighted_id.0 }}
-            {{ collection:insights id:is="{ highlighted_id.0 }" limit="1" }}
-                {{ partial:blocks/image-highlight class="xl:w-11/12" :image="featured_image" category="Mis niet" link="/insights/{ slug }" }}
-                    {{ date format="d-m-Y" }}
-                    <br/>
-                    <br/>
-                    {{ introduction }}
-                {{ /partial:blocks/image-highlight }}
-            {{ /collection:insights }}
-        {{ /if }}
+        {{ collection:insights sort="date:desc" paginate="10" as="articles" category:is="{get:category}" }}
+            {{ if no_results }}
+                <div class="editorial-empty">
+                    <h2>Geen berichten gevonden</h2>
+                    <p>Er zijn nog geen nieuwsberichten in deze categorie.</p>
+                    <a href="/nieuws" class="editorial-text-link">Bekijk al het nieuws</a>
+                </div>
+            {{ else }}
+                <div class="editorial-feed">
+                    {{ articles }}
+                        <article class="editorial-entry editorial-entry--linked {{ switch between="editorial-entry--media-start|editorial-entry--media-end" }} {{ if first }}editorial-entry--featured{{ /if }}">
+                            <a class="editorial-entry__link" href="{{ url }}" aria-label="Lees {{ title }}">
+                            <span class="editorial-entry__media" data-progressive-media-frame>
+                                {{ if featured_image }}
+                                    {{ if first }}
+                                        <img
+                                            class="editorial-entry__image"
+                                            src="{{ glide src="{featured_image}" width="960" height="768" fit="crop_focal" format="webp" quality="82" }}"
+                                            srcset="{{ glide src="{featured_image}" width="640" height="512" fit="crop_focal" format="webp" quality="82" }} 640w, {{ glide src="{featured_image}" width="960" height="768" fit="crop_focal" format="webp" quality="82" }} 960w"
+                                            sizes="(min-width: 1024px) 576px, 100vw"
+                                            alt="{{ featured_image:alt ?? title }}"
+                                            style="object-position: {{ featured_image:focus_css }}"
+                                            {{ partial:progressive_media_attributes width="960" height="768" loading="eager" fetchpriority="high" }}
+                                        >
+                                    {{ else }}
+                                        <img
+                                            class="editorial-entry__image"
+                                            src="{{ glide src="{featured_image}" width="960" height="640" fit="crop_focal" format="webp" quality="82" }}"
+                                            srcset="{{ glide src="{featured_image}" width="640" height="427" fit="crop_focal" format="webp" quality="82" }} 640w, {{ glide src="{featured_image}" width="960" height="640" fit="crop_focal" format="webp" quality="82" }} 960w"
+                                            sizes="(min-width: 1024px) 576px, 100vw"
+                                            alt="{{ featured_image:alt ?? title }}"
+                                            style="object-position: {{ featured_image:focus_css }}"
+                                            {{ partial:progressive_media_attributes width="960" height="640" }}
+                                        >
+                                    {{ /if }}
+                                {{ else }}
+                                    <span class="editorial-media-placeholder" aria-hidden="true"><img src="/assets/uploads/globals/LaravelBrandMark.svg" alt=""></span>
+                                {{ /if }}
+                            </span>
 
-        {{ if insight_count > 2 }}
-            {{ collection:insights id:not="{ highlighted_id.0 }" offset="2" sort="date:desc" }}
-                {{ partial:blocks/image-left class="w-full lg:w-11/12! { switch between='{{ highlighted_id.0 ? "lg:ml-auto|" : "|lg:ml-auto" }}' }" :image="featured_image" :category="category" link="/insights/{ slug }" }}
-                    {{ date format="d-m-Y" }}
-                    <br/>
-                    <br/>
-                    {{ introduction }}
-                {{ /partial:blocks/image-left }}
-            {{ /collection:insights }}
-        {{ /if }}
-    </section>
-</div>
+                            <div class="editorial-entry__body">
+                                <div class="editorial-entry__meta">
+                                    <span class="editorial-entry__category">{{ category }}</span>
+                                    <span class="editorial-entry__dot" aria-hidden="true">·</span>
+                                    <time datetime="{{ date format="Y-m-d" }}">{{ date | iso_format="D MMMM YYYY" }}</time>
+                                </div>
+
+                                {{ if first }}
+                                    <h2 class="editorial-entry__title editorial-entry__title--featured">{{ title }}</h2>
+                                {{ else }}
+                                    <h2 class="editorial-entry__title">{{ title }}</h2>
+                                {{ /if }}
+
+                                {{ if introduction }}
+                                    <p class="editorial-entry__summary">{{ introduction | strip_tags | truncate:240 }}</p>
+                                {{ /if }}
+
+                                <span class="editorial-text-link">Lees meer <span aria-hidden="true">→</span></span>
+                            </div>
+                            </a>
+                        </article>
+                    {{ /articles }}
+                </div>
+
+                {{ paginate }}
+                    {{ if total_pages > 1 }}
+                        <nav class="editorial-pagination" aria-label="Paginering nieuwsberichten">
+                            {{ if prev_page }}
+                                <a class="editorial-pagination__link--newer" href="{{ prev_page }}"><span aria-hidden="true">←</span> Nieuwer</a>
+                            {{ /if }}
+                            <span class="editorial-pagination__status">{{ current_page }} / {{ total_pages }}</span>
+                            {{ if next_page }}
+                                <a class="editorial-pagination__link--older" href="{{ next_page }}">Ouder <span aria-hidden="true">→</span></a>
+                            {{ /if }}
+                        </nav>
+                    {{ /if }}
+                {{ /paginate }}
+            {{ /if }}
+        {{ /collection:insights }}
+    </div>
 </div>

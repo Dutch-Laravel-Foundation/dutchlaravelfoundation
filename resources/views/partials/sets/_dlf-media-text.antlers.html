@@ -1,0 +1,13 @@
+<section class="dlf-block dlf-block-split dlf-block-split--{{ image_position ?? 'right' }} dlf-block--{{ tone ?? 'white' }}">
+    <div class="dlf-block-split__content">
+        {{ if eyebrow }}<p class="dlf-kicker">{{ eyebrow }}</p>{{ /if }}
+        <h2>{{ heading }}</h2>
+        {{ if body }}<div class="dlf-prose">{{ body }}</div>{{ /if }}
+        {{ if link && link_label }}<a class="dlf-text-link" href="{{ link }}">{{ link_label }} <span aria-hidden="true">→</span></a>{{ /if }}
+    </div>
+    {{ if image }}
+        <figure class="dlf-block-split__media" data-progressive-media-frame>
+            <img src="{{ glide src="{image}" fit="crop_focal" width="1600" height="1200" format="webp" quality="82" }}" alt="{{ image:alt ?? heading }}" style="object-position: {{ image:focus_css }}" {{ partial:progressive_media_attributes width="1600" height="1200" }}>
+        </figure>
+    {{ /if }}
+</section>

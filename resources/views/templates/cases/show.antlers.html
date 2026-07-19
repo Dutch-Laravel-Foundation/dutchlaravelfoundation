@@ -1,28 +1,48 @@
-<div class="translate-y-32 lg:translate-y-52 pb-32 md:pb-48">
-    <div class="container mb-auto mx-auto flex flex-col items-left justify-center relative">
-        <article class="relative">
-            <img src="{{ glide src="{featured_image}" fit="crop_focal" width="1500" }}" class="object-cover w-full h-96 lg:h-[48rem] mb" style="object-position:{{ featured_image:focus_css }}">
-            <div class="flex flex-col-reverse w-full lg:flex-row">
-                {{ partial:company/simple :logo="member:logo" :title="member:title" text="Dutch Laravel Foundation lid" class="w-full lg:absolute lg:w-3/12 lg:top-[40rem] lg:right-0 lg:z-20 mb" link="/leden/{ member:slug }" }}
-                <div class="relative w-full lg:w-11/12 lg:mx-auto bg-white lg:-mt-64 min-h-[10rem] px-0 lg:px-10 lg:pt-10 z-10 mb-half">
-                    <div class="w-full lg:w-4/6 mb-half">
-                        <h1>{{ title_long }}</h1>
-                        <div class="mb-half">{{ introduction }}</div>
-                        {{ if client:title }}
-                            {{ partial:blocks/meta-alt title="Opdrachtgever" :text="client:title" class="px-0" }}
-                        {{ /if }}
-                        {{ partial:decoration/line }}
-                        <div class="w-full">
-                            {{ content }}
-                                {{ partial src="sets/autoload" }}
-                            {{ /content }}
-                        </div>
-                    </div>
+{{ case_title = title_long ?? title }}
+
+<div class="editorial-article">
+    <div class="editorial-rail editorial-rail--article">
+        {{ partial:breadcrumb href="/cases" label="Cases" :current="member:title ?? 'Case'" }}
+
+        <header class="editorial-article__hero">
+            <div class="editorial-article__head">
+                <div class="editorial-entry__meta editorial-article__meta">
+                    <span class="editorial-entry__category">{{ member:title ?? "Case" }}</span>
+                    <span class="editorial-entry__dot" aria-hidden="true">·</span>
+                    <time datetime="{{ date format="Y-m-d" }}">{{ date | iso_format="D MMMM YYYY" }}</time>
                 </div>
+                <h1>{{ case_title }}</h1>
+                {{ if introduction }}
+                    <div class="editorial-article__lead">{{ introduction }}</div>
+                {{ /if }}
             </div>
-        </article>
-        <div class="flex w-full px-6 py-10 mx-auto lg:py-0 mb lg:w-11/12 sm:px-0 lg:px-10">
-            {{ partial:buttons/light link="/{{ segment_1 }}" class="w-full sm:w-auto" button_class="w-full sm:w-auto" }}Naar alle cases{{ /partial:buttons/light }}
+
+            <figure class="editorial-article__figure" data-progressive-media-frame>
+                {{ if featured_image }}
+                    <img
+                        src="{{ glide src="{featured_image}" width="1200" height="960" fit="crop_focal" format="webp" quality="82" }}"
+                        srcset="{{ glide src="{featured_image}" width="640" height="512" fit="crop_focal" format="webp" quality="82" }} 640w, {{ glide src="{featured_image}" width="960" height="768" fit="crop_focal" format="webp" quality="82" }} 960w, {{ glide src="{featured_image}" width="1200" height="960" fit="crop_focal" format="webp" quality="82" }} 1200w"
+                        sizes="(min-width: 1024px) 576px, 100vw"
+                        alt="{{ featured_image:alt ?? case_title }}"
+                        style="object-position: {{ featured_image:focus_css }}"
+                        {{ partial:progressive_media_attributes width="1200" height="960" loading="eager" fetchpriority="high" }}
+                    >
+                {{ else }}
+                    <span class="editorial-media-placeholder" aria-hidden="true"><img src="/assets/uploads/globals/LaravelBrandMark.svg" alt=""></span>
+                {{ /if }}
+            </figure>
+        </header>
+
+        <div class="editorial-article__body" data-editorial-article>
+            {{ partial:editorial/toc label="In deze case" }}
+
+            <article class="editorial-article__prose" data-editorial-prose>
+                {{ content }}
+                    {{ partial src="sets/autoload" }}
+                {{ /content }}
+            </article>
         </div>
+
+        {{ partial:editorial/case-attribution }}
     </div>
 </div>

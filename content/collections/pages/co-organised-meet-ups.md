@@ -28,10 +28,6 @@ content:
       -
         type: text
         text: 'Omdat de DLF volledig wordt gerund door vrijwilligers, is het aantal events dat we zelf kunnen organiseren beperkt. Daarom bieden we zowel leden als niet-leden de mogelijkheid om samen met ons een Meet-up te organiseren.'
-      -
-        type: hardBreak
-      -
-        type: hardBreak
   -
     type: heading
     attrs:

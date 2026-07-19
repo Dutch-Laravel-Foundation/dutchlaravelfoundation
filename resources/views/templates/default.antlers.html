@@ -1,7 +1,18 @@
-<div class="translate-y-32 lg:translate-y-52 pb-32 md:pb-56">
-    <div id="content" class="container px-6 lg:px-10 pb-10 mb-auto mx-auto flex flex-col items-left justify-center relative">
-        {{ content }}
-            {{ partial src="sets/autoload" }}
-        {{ /content }}
+<div class="dlf-public-page editorial-article">
+    <div class="editorial-rail editorial-rail--article">
+        <header class="dlf-public-page__hero">
+            <span class="editorial-eyebrow">Dutch Laravel Foundation</span>
+            <h1>{{ title }}</h1>
+        </header>
+
+        <div class="editorial-article__body dlf-public-page__body" data-editorial-article>
+            {{ partial:editorial/toc label="Op deze pagina" }}
+
+            <article class="editorial-article__prose dlf-public-page__prose" data-editorial-prose>
+                {{ content }}
+                    {{ partial src="sets/autoload" }}
+                {{ /content }}
+            </article>
+        </div>
     </div>
 </div>

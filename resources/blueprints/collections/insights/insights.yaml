@@ -87,6 +87,34 @@ tabs:
                     -
                       import: video
           -
+            handle: author_name
+            field:
+              display: Naam auteur
+              type: text
+          -
+            handle: author_role
+            field:
+              display: Rol auteur
+              type: text
+          -
+            handle: author_bio
+            field:
+              display: Biografie auteur
+              type: markdown
+          -
+            handle: author_image
+            field:
+              display: Foto auteur
+              type: assets
+              container: insights
+              mode: grid
+              max_files: 1
+          -
+            handle: author_link
+            field:
+              display: Link auteur
+              type: link
+          -
             handle: highlight_content
             field:
               buttons:
