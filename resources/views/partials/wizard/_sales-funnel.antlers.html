@@ -49,13 +49,13 @@
     {{# Step 1: Choose a product #}}
     <div x-show="step === 0" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
         <section class="dlf-wizard-intro" aria-labelledby="wizard-product-heading">
-            <div class="dlf-wizard-inner max-w-2xl mx-auto px-6 pt-4 sm:px-10 sm:pt-5 md:px-14 md:pt-6">
+            <div class="dlf-wizard-inner max-w-2xl mx-auto px-6 pt-20 sm:px-10 sm:pt-24 md:px-14 md:pt-28">
                 <h2 id="wizard-product-heading" class="!mt-0 !mb-2 text-wrap-balance">Waar kunnen we je mee helpen?</h2>
                 <p class="text-tertiary-light !mb-0">Door een vijftal korte vragen te beantwoorden, helpen we je om een goede Laravel partner voor je project te selecteren. Op basis van je antwoorden mailen we je geheel vrijblijvend onze selectie van de beste Laravel specialisten. Kies allereerst de opties die het beste bij jouw vraag passen.</p>
             </div>
         </section>
 
-        <div class="dlf-wizard-body max-w-2xl mx-auto px-6 pt-8 pb-9 sm:px-10 sm:pt-[2.375rem] sm:pb-[2.625rem] md:px-14">
+        <div class="dlf-wizard-body max-w-2xl mx-auto px-6 pt-8 pb-12 sm:px-10 sm:pt-[2.375rem] sm:pb-14 md:px-14">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" role="radiogroup" aria-label="Product keuze">
                 <template x-for="option in products" :key="option.value">
                     <button
@@ -93,13 +93,13 @@
     {{# Step 2: Description #}}
     <div x-show="step === 1" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
         <section class="dlf-wizard-intro" aria-labelledby="wizard-description-heading">
-            <div class="dlf-wizard-inner max-w-2xl mx-auto px-6 pt-4 sm:px-10 sm:pt-5 md:px-14 md:pt-6">
+            <div class="dlf-wizard-inner max-w-2xl mx-auto px-6 pt-20 sm:px-10 sm:pt-24 md:px-14 md:pt-28">
                 <h2 id="wizard-description-heading" class="!mt-0 !mb-2 text-wrap-balance">Omschrijving van het vraagstuk</h2>
                 <p class="text-tertiary-light !mb-0">Vertel ons meer over het project dat je in gedachte hebt. Hoe meer informatie je ons geeft, hoe beter wij onze leden kunnen matchen.</p>
             </div>
         </section>
 
-        <div class="dlf-wizard-body max-w-2xl mx-auto px-6 pt-8 pb-9 sm:px-10 sm:pt-[2.375rem] sm:pb-[2.625rem] md:px-14">
+        <div class="dlf-wizard-body max-w-2xl mx-auto px-6 pt-8 pb-12 sm:px-10 sm:pt-[2.375rem] sm:pb-14 md:px-14">
             <label for="funnel-description" class="sr-only">Omschrijving</label>
             <textarea
                 id="funnel-description"
@@ -124,13 +124,13 @@
     {{# Step 3: Budget #}}
     <div x-show="step === 2" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
         <section class="dlf-wizard-intro" aria-labelledby="wizard-budget-heading">
-            <div class="dlf-wizard-inner max-w-2xl mx-auto px-6 pt-4 sm:px-10 sm:pt-5 md:px-14 md:pt-6">
+            <div class="dlf-wizard-inner max-w-2xl mx-auto px-6 pt-20 sm:px-10 sm:pt-24 md:px-14 md:pt-28">
                 <h2 id="wizard-budget-heading" class="!mt-0 !mb-2 text-wrap-balance">Wat is je budget?</h2>
                 <p class="text-tertiary-light !mb-0">Ook het budget dat beschikbaar is kan invloed hebben op onze selectie. Selecteer de budgetrange die je in gedachte hebt voor dit project.</p>
             </div>
         </section>
 
-        <div class="dlf-wizard-body max-w-2xl mx-auto px-6 pt-8 pb-9 sm:px-10 sm:pt-[2.375rem] sm:pb-[2.625rem] md:px-14">
+        <div class="dlf-wizard-body max-w-2xl mx-auto px-6 pt-8 pb-12 sm:px-10 sm:pt-[2.375rem] sm:pb-14 md:px-14">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" role="radiogroup" aria-label="Budget selectie">
                 <template x-for="option in budgets" :key="option.value">
                     <button
@@ -155,13 +155,13 @@
     {{# Step 4: Company type #}}
     <div x-show="step === 3" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
         <section class="dlf-wizard-intro" aria-labelledby="wizard-partner-heading">
-            <div class="dlf-wizard-inner max-w-2xl mx-auto px-6 pt-4 sm:px-10 sm:pt-5 md:px-14 md:pt-6">
+            <div class="dlf-wizard-inner max-w-2xl mx-auto px-6 pt-20 sm:px-10 sm:pt-24 md:px-14 md:pt-28">
                 <h2 id="wizard-partner-heading" class="!mt-0 !mb-2 text-wrap-balance">Heb je een voorkeur voor een type partner?</h2>
                 <p class="text-tertiary-light !mb-0">Met welke partij werk je het liefst samen.</p>
             </div>
         </section>
 
-        <div class="dlf-wizard-body max-w-2xl mx-auto px-6 pt-8 pb-9 sm:px-10 sm:pt-[2.375rem] sm:pb-[2.625rem] md:px-14">
+        <div class="dlf-wizard-body max-w-2xl mx-auto px-6 pt-8 pb-12 sm:px-10 sm:pt-[2.375rem] sm:pb-14 md:px-14">
             <div class="grid grid-cols-1 gap-3" role="radiogroup" aria-label="Partnertype selectie">
                 <template x-for="option in companyTypes" :key="option.value">
                     <button
@@ -193,7 +193,7 @@
             </div>
         </section>
 
-        <div class="dlf-wizard-body max-w-2xl mx-auto px-6 pt-8 pb-9 sm:px-10 sm:pt-[2.375rem] sm:pb-[2.625rem] md:px-14">
+        <div class="dlf-wizard-body max-w-2xl mx-auto px-6 pt-8 pb-12 sm:px-10 sm:pt-[2.375rem] sm:pb-14 md:px-14">
             <div class="space-y-8">
                 <div>
                     <label for="funnel-name" class="dlf-form-label">Naam</label>
@@ -245,13 +245,13 @@
     {{# Step 6: Overview #}}
     <div x-show="step === 5" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
         <section class="dlf-wizard-intro" aria-labelledby="wizard-overview-heading">
-            <div class="dlf-wizard-inner max-w-2xl mx-auto px-6 pt-4 sm:px-10 sm:pt-5 md:px-14 md:pt-6">
+            <div class="dlf-wizard-inner max-w-2xl mx-auto px-6 pt-20 sm:px-10 sm:pt-24 md:px-14 md:pt-28">
                 <h2 id="wizard-overview-heading" class="!mt-0 !mb-2 text-wrap-balance">Overzicht van je aanvraag</h2>
                 <p class="text-tertiary-light !mb-0">Controleer je gegevens en verstuur je aanvraag.</p>
             </div>
         </section>
 
-        <div class="dlf-wizard-body max-w-2xl mx-auto px-6 pt-8 pb-9 sm:px-10 sm:pt-[2.375rem] sm:pb-[2.625rem] md:px-14">
+        <div class="dlf-wizard-body max-w-2xl mx-auto px-6 pt-8 pb-12 sm:px-10 sm:pt-[2.375rem] sm:pb-14 md:px-14">
             <div class="border border-gray-200 divide-y divide-gray-200">
             <div class="flex justify-between items-start p-4 sm:p-5">
                 <div class="min-w-0">
