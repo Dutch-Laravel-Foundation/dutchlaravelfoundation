@@ -572,7 +572,7 @@
 }
 
 .editorial-toc li:last-child a {
-    padding-bottom: 0;
+    padding-bottom: 0.125rem;
 }
 
 .editorial-toc a:hover,
@@ -596,6 +596,7 @@
     margin-top: 0;
 }
 
+.editorial-article .editorial-article__prose > :last-child:not(.dlf-block),
 .editorial-article .editorial-article__prose > :last-child:not(.dlf-block) > :last-child {
     margin-bottom: 0;
 }

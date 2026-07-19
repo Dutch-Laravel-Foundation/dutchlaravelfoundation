@@ -103,6 +103,18 @@ class ProgressiveMediaTest extends TestCase
         );
     }
 
+    public function testLarafestArticleUsesLevelTwoSectionHeadingsForTheTableOfContents(): void
+    {
+        $xpath = $this->pageXPath('/nieuws/larafest-2026-security-platforms-en-escape-boxes-aan-zee');
+        $headings = $xpath->query('//article[contains(concat(" ", normalize-space(@class), " "), " editorial-article__prose ")]//h2');
+
+        $this->assertInstanceOf(DOMNodeList::class, $headings);
+        $this->assertCount(3, $headings);
+        $this->assertSame('Worms, packages en Shai-Hulud', trim($headings->item(0)?->textContent ?? ''));
+        $this->assertSame('Praktijkverhalen uit echte platformen', trim($headings->item(1)?->textContent ?? ''));
+        $this->assertSame('Eten, escape boxes en bijpraten', trim($headings->item(2)?->textContent ?? ''));
+    }
+
     public function testTabletArticleHeroUsesTheTallerImageAndArticleCopyWidth(): void
     {
         $stylesheet = file_get_contents(resource_path('css/redesign-editorial.css'));
@@ -253,6 +265,17 @@ class ProgressiveMediaTest extends TestCase
             $this->assertInstanceOf(DOMElement::class, $image);
             $this->assertFalse($image->hasAttribute('data-progressive-media'));
         }
+    }
+
+    public function testDesktopFooterBrandDividerSpansTheFullViewport(): void
+    {
+        $stylesheet = file_get_contents(resource_path('css/redesign-shell.css'));
+
+        $this->assertNotFalse($stylesheet);
+        $this->assertMatchesRegularExpression(
+            '/@media \(min-width:\s*1024px\)\s*\{.*?\.dlf-footer-brand\s*\{[^}]*margin-inline:\s*calc\(50% - 50vw\);[^}]*padding-inline:\s*calc\(50vw - 50%\);/s',
+            $stylesheet,
+        );
     }
 
     public function testInlineArticlePhotographyUsesTheProgressiveMediaContract(): void

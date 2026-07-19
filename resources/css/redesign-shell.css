@@ -659,6 +659,11 @@ html.dlf-menu-open {
     .dlf-footer:has(.dlf-cta-card--dark) :is(.dlf-footer-brand, .dlf-footer-content) {
         margin-inline: 9px;
     }
+
+    .dlf-footer-brand {
+        margin-inline: calc(50% - 50vw);
+        padding-inline: calc(50vw - 50%);
+    }
 }
 
 .dlf-members-column {
