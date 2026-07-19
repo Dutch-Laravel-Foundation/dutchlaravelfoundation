@@ -83,22 +83,13 @@
                 {{ paginate }}
                     {{ if total_pages > 1 }}
                         <nav class="editorial-pagination" aria-label="Paginering nieuwsberichten">
-                            <span class="editorial-pagination__label--desktop">Pagina {{ current_page }} van {{ total_pages }}</span>
-                            <span class="editorial-pagination__label--mobile">{{ current_page }} van {{ total_pages }}</span>
-                            <div class="editorial-pagination__links">
-                                {{ if prev_page }}
-                                    <a class="editorial-pagination__link--newer" href="{{ prev_page }}">
-                                        <span class="editorial-pagination__link-label--desktop"><span aria-hidden="true">←</span> Nieuwere berichten</span>
-                                        <span class="editorial-pagination__link-label--mobile">Nieuwer</span>
-                                    </a>
-                                {{ /if }}
-                                {{ if next_page }}
-                                    <a class="editorial-pagination__link--older" href="{{ next_page }}">
-                                        <span class="editorial-pagination__link-label--desktop">Oudere berichten <span aria-hidden="true">→</span></span>
-                                        <span class="editorial-pagination__link-label--mobile">Ouder</span>
-                                    </a>
-                                {{ /if }}
-                            </div>
+                            {{ if prev_page }}
+                                <a class="editorial-pagination__link--newer" href="{{ prev_page }}"><span aria-hidden="true">←</span> Nieuwer</a>
+                            {{ /if }}
+                            <span class="editorial-pagination__status">{{ current_page }} / {{ total_pages }}</span>
+                            {{ if next_page }}
+                                <a class="editorial-pagination__link--older" href="{{ next_page }}">Ouder <span aria-hidden="true">→</span></a>
+                            {{ /if }}
                         </nav>
                     {{ /if }}
                 {{ /paginate }}

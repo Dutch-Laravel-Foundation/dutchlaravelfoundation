@@ -1260,6 +1260,10 @@ html.dlf-menu-open {
         margin-block: 24px;
     }
 
+    .dlf-footer-bottom > p {
+        text-align: center;
+    }
+
     .dlf-topbar-links > a,
     .dlf-topbar-links > a + span {
         display: none;

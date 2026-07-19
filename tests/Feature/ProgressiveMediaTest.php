@@ -278,6 +278,17 @@ class ProgressiveMediaTest extends TestCase
         );
     }
 
+    public function testMobileFooterCopyrightIsCentered(): void
+    {
+        $stylesheet = file_get_contents(resource_path('css/redesign-shell.css'));
+
+        $this->assertNotFalse($stylesheet);
+        $this->assertMatchesRegularExpression(
+            '/@media \(max-width:\s*639px\)\s*\{.*?\.dlf-footer-bottom\s*>\s*p\s*\{[^}]*text-align:\s*center;/s',
+            $stylesheet,
+        );
+    }
+
     public function testInlineArticlePhotographyUsesTheProgressiveMediaContract(): void
     {
         $uris = [
