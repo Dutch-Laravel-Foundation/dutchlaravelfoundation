@@ -1377,10 +1377,6 @@
 }
 
 /* What is Laravel */
-.dlf-laravel-page {
-    padding-bottom: 139px;
-}
-
 .dlf-laravel-page > .dlf-community-section:first-child .dlf-community-head {
     background-color: #fff;
     background-image: none;
@@ -1517,7 +1513,6 @@
     align-items: center;
     justify-content: space-between;
     gap: 48px;
-    border-block: 1px solid var(--dlf-line);
     padding: 48px 40px 56px;
 }
 
@@ -1532,10 +1527,6 @@
 }
 
 @media (min-width: 1024px) {
-    .dlf-laravel-cta {
-        border-top: 0;
-    }
-
     .dlf-become-member-page > .dlf-community-section:first-child .dlf-community-photo {
         border-left: 1px solid var(--dlf-line);
     }
@@ -1566,12 +1557,6 @@
     .dlf-lid-left > .dlf-lid-content-block:first-child .dlf-lid-benefits {
         margin-top: 65px;
         margin-bottom: -65px;
-    }
-}
-
-@media (min-width: 1024px) and (max-width: 1037px) {
-    .dlf-laravel-page {
-        padding-bottom: 154px;
     }
 }
 
