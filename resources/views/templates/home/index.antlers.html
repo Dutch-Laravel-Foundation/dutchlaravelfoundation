@@ -87,14 +87,14 @@
                     {{ collection:partners sort="title" }}
                         {{ partner_title = title }}
                         {{ logo }}
-                            <img src="{{ url }}" alt="{{ alt ?? partner_title }}" loading="lazy" decoding="async">
+                            <img src="{{ url }}" alt="{{ alt ?? partner_title }}" width="{{ width }}" height="{{ height }}" loading="lazy" decoding="async">
                         {{ /logo }}
                     {{ /collection:partners }}
                 </div>
                 <div class="dlf-home-partners__group" aria-hidden="true">
                     {{ collection:partners sort="title" }}
                         {{ logo }}
-                            <img src="{{ url }}" alt="" loading="lazy" decoding="async">
+                            <img src="{{ url }}" alt="" width="{{ width }}" height="{{ height }}" loading="lazy" decoding="async">
                         {{ /logo }}
                     {{ /collection:partners }}
                 </div>
