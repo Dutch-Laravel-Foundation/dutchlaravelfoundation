@@ -626,6 +626,10 @@
         padding: 28px 0;
     }
 
+    .dlf-home-partners__track {
+        animation-duration: 52.25s;
+    }
+
     .dlf-home-partners__group img {
         height: 20px;
         margin: 0 20px;
