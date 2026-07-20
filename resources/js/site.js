@@ -1,9 +1,16 @@
-import "../css/fonts.css";
 import Headroom from "headroom.js";
-import Alpine from "alpinejs";
+import Alpine from "@alpinejs/csp";
 
 import "./components/header-aware-sticky";
+import {
+    createHeaderMenu,
+    createInternshipsFilter,
+    createMembersFilter,
+    createNavigationDropdown,
+    createSalesFunnelWizard,
+} from "./components/alpine-components";
 import { initProgressiveMedia } from "./components/progressive-media";
+import { initTrackingConsent } from "./components/tracking-consent";
 
 const header = document.querySelector("header");
 const banner = document.querySelector(".banner");
@@ -40,6 +47,11 @@ if (header && !document.documentMode) {
 
 initProgressiveMedia();
 
+Alpine.data("headerMenu", createHeaderMenu);
+Alpine.data("navigationDropdown", createNavigationDropdown);
+Alpine.data("membersFilter", createMembersFilter);
+Alpine.data("internshipsFilter", createInternshipsFilter);
+Alpine.data("salesFunnelWizard", createSalesFunnelWizard);
 window.Alpine = Alpine;
 Alpine.start();
 
@@ -153,10 +165,16 @@ const runWhenIdle = (callback) => {
     window.addEventListener("load", schedule, { once: true });
 };
 
-if (document.documentElement.dataset.environment === "production") {
-    runWhenIdle(() => {
-        void import("./components/deferred-third-parties").then(({ initDeferredThirdParties }) =>
-            initDeferredThirdParties(),
-        );
-    });
-}
+initTrackingConsent({
+    loadTrackers: () => {
+        if (document.documentElement.dataset.environment !== "production") {
+            return;
+        }
+
+        runWhenIdle(() => {
+            void import("./components/deferred-third-parties").then(
+                ({ initDeferredThirdParties }) => initDeferredThirdParties(),
+            );
+        });
+    },
+});

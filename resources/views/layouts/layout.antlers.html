@@ -56,7 +56,7 @@
     {{ vite src="resources/js/site.js|resources/css/tailwind.css" }}
 
     <noscript>
-        <style>[data-progressive-media] { opacity: 1 !important; }</style>
+        <style nonce="{{ csp_nonce }}">[data-progressive-media] { opacity: 1 !important; }</style>
     </noscript>
 
 </head>
@@ -74,6 +74,8 @@
     </div>
 
     {{ partial:footer }}
+
+    {{ partial:tracking_consent }}
 
     {{ dynamic_token }}
 

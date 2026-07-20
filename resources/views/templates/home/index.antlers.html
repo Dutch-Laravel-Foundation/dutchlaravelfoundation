@@ -19,7 +19,7 @@
         <picture>
             <source
                 type="image/webp"
-                srcset="/assets/redesign/photos/larafest-groepsfoto-640.webp 640w, /assets/redesign/photos/larafest-groepsfoto-1280.webp 1280w, /assets/redesign/photos/larafest-groepsfoto-1920.webp 1920w"
+                srcset="/assets/redesign/photos/larafest-groepsfoto-640.webp 640w, /assets/redesign/photos/larafest-groepsfoto-800.webp 800w, /assets/redesign/photos/larafest-groepsfoto-960.webp 960w, /assets/redesign/photos/larafest-groepsfoto-1280.webp 1280w, /assets/redesign/photos/larafest-groepsfoto-1920.webp 1920w"
                 sizes="(min-width: 1024px) 50vw, 100vw"
             >
             <img src="/assets/redesign/photos/larafest-groepsfoto.jpeg" alt="Laravel developers tijdens een bijeenkomst van de Dutch Laravel Foundation" {{ partial:progressive_media_attributes width="1920" height="1272" loading="eager" fetchpriority="high" }}>
@@ -42,7 +42,14 @@
             {{ collection:insights limit="1" sort="date:desc" }}
                 <a class="dlf-home-bento__featured-image" href="{{ url }}" aria-label="Lees {{ title }}" data-progressive-media-frame>
                     {{ if featured_image }}
-                        <img src="{{ glide src="{featured_image}" fit="crop_focal" width="1400" height="760" format="webp" quality="82" }}" alt="{{ featured_image:alt ?? title }}" style="object-position: {{ featured_image:focus_css }}" {{ partial:progressive_media_attributes width="1400" height="760" }}>
+                        <img
+                            src="{{ glide src="{featured_image}" fit="crop_focal" width="800" height="434" format="webp" quality="82" }}"
+                            srcset="{{ glide src="{featured_image}" fit="crop_focal" width="480" height="261" format="webp" quality="82" }} 480w, {{ glide src="{featured_image}" fit="crop_focal" width="720" height="391" format="webp" quality="82" }} 720w, {{ glide src="{featured_image}" fit="crop_focal" width="800" height="434" format="webp" quality="82" }} 800w, {{ glide src="{featured_image}" fit="crop_focal" width="1000" height="543" format="webp" quality="82" }} 1000w, {{ glide src="{featured_image}" fit="crop_focal" width="1400" height="760" format="webp" quality="82" }} 1400w"
+                            sizes="(min-width: 1280px) 640px, (min-width: 1024px) 50vw, 100vw"
+                            alt="{{ featured_image:alt ?? title }}"
+                            style="object-position: {{ featured_image:focus_css }}"
+                            {{ partial:progressive_media_attributes width="1400" height="760" }}
+                        >
                     {{ else }}
                         <img src="/assets/redesign/photos/easi-2025.jpg" alt="" {{ partial:progressive_media_attributes width="2500" height="1405" }}>
                     {{ /if }}
@@ -58,7 +65,14 @@
             {{ collection:knowledge limit="1" sort="date:desc" }}
                 {{ if featured_image }}
                     <a class="dlf-home-bento__knowledge-image" href="{{ url }}" aria-label="Lees {{ title }}" data-progressive-media-frame>
-                        <img src="{{ glide src="{featured_image}" fit="crop_focal" width="1000" height="600" format="webp" quality="82" }}" alt="{{ featured_image:alt ?? title }}" style="object-position: {{ featured_image:focus_css }}" {{ partial:progressive_media_attributes width="1000" height="600" }}>
+                        <img
+                            src="{{ glide src="{featured_image}" fit="crop_focal" width="800" height="480" format="webp" quality="82" }}"
+                            srcset="{{ glide src="{featured_image}" fit="crop_focal" width="480" height="288" format="webp" quality="82" }} 480w, {{ glide src="{featured_image}" fit="crop_focal" width="720" height="432" format="webp" quality="82" }} 720w, {{ glide src="{featured_image}" fit="crop_focal" width="800" height="480" format="webp" quality="82" }} 800w, {{ glide src="{featured_image}" fit="crop_focal" width="1000" height="600" format="webp" quality="82" }} 1000w"
+                            sizes="100vw"
+                            alt="{{ featured_image:alt ?? title }}"
+                            style="object-position: {{ featured_image:focus_css }}"
+                            {{ partial:progressive_media_attributes width="1000" height="600" }}
+                        >
                     </a>
                 {{ /if }}
                 <article class="dlf-home-bento__knowledge">
@@ -87,14 +101,22 @@
                     {{ collection:partners sort="title" }}
                         {{ partner_title = title }}
                         {{ logo }}
-                            <img src="{{ url }}" alt="{{ alt ?? partner_title }}" width="{{ width }}" height="{{ height }}" loading="lazy" decoding="async">
+                            {{ if extension === "svg" }}
+                                <img src="{{ url }}" alt="{{ alt ?? partner_title }}" width="{{ width }}" height="{{ height }}" loading="lazy" decoding="async">
+                            {{ else }}
+                                <img src="{{ glide src="{url}" width="160" format="webp" quality="82" }}" srcset="{{ glide src="{url}" width="160" format="webp" quality="82" }} 160w, {{ glide src="{url}" width="320" format="webp" quality="82" }} 320w" sizes="150px" alt="{{ alt ?? partner_title }}" width="{{ width }}" height="{{ height }}" loading="lazy" decoding="async">
+                            {{ /if }}
                         {{ /logo }}
                     {{ /collection:partners }}
                 </div>
                 <div class="dlf-home-partners__group" aria-hidden="true">
                     {{ collection:partners sort="title" }}
                         {{ logo }}
-                            <img src="{{ url }}" alt="" width="{{ width }}" height="{{ height }}" loading="lazy" decoding="async">
+                            {{ if extension === "svg" }}
+                                <img src="{{ url }}" alt="" width="{{ width }}" height="{{ height }}" loading="lazy" decoding="async">
+                            {{ else }}
+                                <img src="{{ glide src="{url}" width="160" format="webp" quality="82" }}" srcset="{{ glide src="{url}" width="160" format="webp" quality="82" }} 160w, {{ glide src="{url}" width="320" format="webp" quality="82" }} 320w" sizes="150px" alt="" width="{{ width }}" height="{{ height }}" loading="lazy" decoding="async">
+                            {{ /if }}
                         {{ /logo }}
                     {{ /collection:partners }}
                 </div>
@@ -112,7 +134,14 @@
             </article>
             <figure data-progressive-media-frame>
                 {{ if featured_image }}
-                    <img src="{{ glide src="{featured_image}" fit="crop_focal" width="1400" height="900" format="webp" quality="82" }}" alt="{{ featured_image:alt ?? title }}" style="object-position: {{ featured_image:focus_css }}" {{ partial:progressive_media_attributes width="1400" height="900" }}>
+                    <img
+                        src="{{ glide src="{featured_image}" fit="crop_focal" width="800" height="514" format="webp" quality="82" }}"
+                        srcset="{{ glide src="{featured_image}" fit="crop_focal" width="480" height="309" format="webp" quality="82" }} 480w, {{ glide src="{featured_image}" fit="crop_focal" width="720" height="463" format="webp" quality="82" }} 720w, {{ glide src="{featured_image}" fit="crop_focal" width="800" height="514" format="webp" quality="82" }} 800w, {{ glide src="{featured_image}" fit="crop_focal" width="1000" height="643" format="webp" quality="82" }} 1000w, {{ glide src="{featured_image}" fit="crop_focal" width="1400" height="900" format="webp" quality="82" }} 1400w"
+                        sizes="(min-width: 1280px) 640px, (min-width: 1024px) 50vw, 100vw"
+                        alt="{{ featured_image:alt ?? title }}"
+                        style="object-position: {{ featured_image:focus_css }}"
+                        {{ partial:progressive_media_attributes width="1400" height="900" }}
+                    >
                 {{ else }}
                     <img src="/assets/redesign/photos/larafest-groepsfoto.jpeg" alt="" {{ partial:progressive_media_attributes width="3632" height="2406" }}>
                 {{ /if }}
@@ -127,29 +156,41 @@
                 <div class="dlf-home-clients__cell dlf-home-clients__cell--empty" data-client-cell aria-hidden="true"></div>
                 <div class="dlf-home-clients__cell" data-client-cell>
                     {{ collection:clients slug:in="de-verbouwcalculator|intersafe" }}
+                        {{ client_title = title }}
                         <div class="dlf-home-clients__logo" data-client-logo>
-                            <img src="{{ logo }}" alt="{{ title }}" loading="lazy" decoding="async">
+                            {{ logo }}
+                                {{ partial:home_client_logo }}
+                            {{ /logo }}
                         </div>
                     {{ /collection:clients }}
                 </div>
                 <div class="dlf-home-clients__cell" data-client-cell>
                     {{ collection:clients slug:in="dropday|mobiliteitsfabriek" }}
+                        {{ client_title = title }}
                         <div class="dlf-home-clients__logo" data-client-logo>
-                            <img src="{{ logo }}" alt="{{ title }}" loading="lazy" decoding="async">
+                            {{ logo }}
+                                {{ partial:home_client_logo }}
+                            {{ /logo }}
                         </div>
                     {{ /collection:clients }}
                 </div>
                 <div class="dlf-home-clients__cell" data-client-cell>
                     {{ collection:clients slug:in="eurosafe|avia" }}
+                        {{ client_title = title }}
                         <div class="dlf-home-clients__logo" data-client-logo>
-                            <img src="{{ logo }}" alt="{{ title }}" loading="lazy" decoding="async">
+                            {{ logo }}
+                                {{ partial:home_client_logo }}
+                            {{ /logo }}
                         </div>
                     {{ /collection:clients }}
                 </div>
                 <div class="dlf-home-clients__cell" data-client-cell>
                     {{ collection:clients slug:in="abn-amro|recirculo" }}
+                        {{ client_title = title }}
                         <div class="dlf-home-clients__logo" data-client-logo>
-                            <img src="{{ logo }}" alt="{{ title }}" loading="lazy" decoding="async">
+                            {{ logo }}
+                                {{ partial:home_client_logo }}
+                            {{ /logo }}
                         </div>
                     {{ /collection:clients }}
                 </div>
@@ -157,29 +198,41 @@
                 <div class="dlf-home-clients__cell dlf-home-clients__cell--empty" data-client-cell aria-hidden="true"></div>
                 <div class="dlf-home-clients__cell" data-client-cell>
                     {{ collection:clients slug:in="flow-concepts|recoll" }}
+                        {{ client_title = title }}
                         <div class="dlf-home-clients__logo" data-client-logo>
-                            <img src="{{ logo }}" alt="{{ title }}" loading="lazy" decoding="async">
+                            {{ logo }}
+                                {{ partial:home_client_logo }}
+                            {{ /logo }}
                         </div>
                     {{ /collection:clients }}
                 </div>
                 <div class="dlf-home-clients__cell" data-client-cell>
                     {{ collection:clients slug:in="race-planet|stichting-studiekeuze123" }}
+                        {{ client_title = title }}
                         <div class="dlf-home-clients__logo" data-client-logo>
-                            <img src="{{ logo }}" alt="{{ title }}" loading="lazy" decoding="async">
+                            {{ logo }}
+                                {{ partial:home_client_logo }}
+                            {{ /logo }}
                         </div>
                     {{ /collection:clients }}
                 </div>
                 <div class="dlf-home-clients__cell" data-client-cell>
                     {{ collection:clients slug:in="youngwize|nva" }}
+                        {{ client_title = title }}
                         <div class="dlf-home-clients__logo" data-client-logo>
-                            <img src="{{ logo }}" alt="{{ title }}" loading="lazy" decoding="async">
+                            {{ logo }}
+                                {{ partial:home_client_logo }}
+                            {{ /logo }}
                         </div>
                     {{ /collection:clients }}
                 </div>
                 <div class="dlf-home-clients__cell" data-client-cell>
                     {{ collection:clients slug:is="inventum" }}
+                        {{ client_title = title }}
                         <div class="dlf-home-clients__logo" data-client-logo>
-                            <img src="{{ logo }}" alt="{{ title }}" loading="lazy" decoding="async">
+                            {{ logo }}
+                                {{ partial:home_client_logo }}
+                            {{ /logo }}
                         </div>
                     {{ /collection:clients }}
                 </div>

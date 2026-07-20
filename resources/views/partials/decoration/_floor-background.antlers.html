@@ -2,7 +2,20 @@
     <div class="container relative mx-auto">
         <div class="absolute right-[-35rem] md:right-[-45rem] lg:right-[-13rem] top-0 w-[1120px] h-[900px] {class}">
             <div>
-                <img src="/assets/img/backgrounds/{{ background }}.svg" class="w-[1120px] h-[900px]">
+                <img
+                    src="/assets/img/backgrounds/{{ background }}.svg"
+                    class="w-[1120px] h-[900px]"
+                    {{ if background === "floor-filled-light" }}
+                        width="989"
+                        height="795"
+                    {{ elseif background === "floor-mid-half-gray" }}
+                        width="1129"
+                        height="554"
+                    {{ else }}
+                        width="1129"
+                        height="908"
+                    {{ /if }}
+                >
             </div>
         </div>
     </div>

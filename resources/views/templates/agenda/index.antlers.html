@@ -9,8 +9,7 @@
         </header>
 
         <section class="editorial-events-section" aria-label="Aankomende evenementen">
-            {{# Resolve today's date before applying explicit inclusive/exclusive boundaries. #}}
-            {{ collection:events sort="date_start:asc" date_start:gte="{today}" as="upcoming_events" }}
+            {{ collection:events sort="date_start:asc" date_start:is_after="today" as="upcoming_events" }}
                 {{ if no_results }}
                     <div class="editorial-empty">
                         <p>Er staan momenteel geen nieuwe evenementen gepland.</p>
@@ -32,7 +31,7 @@
                 <p class="mb-0! max-w-2xl text-[#525257]">Een overzicht van bijeenkomsten die de foundation eerder organiseerde.</p>
             </header>
 
-            {{ collection:events sort="date_start:desc" date_start:lt="{today}" as="past_events" }}
+            {{ collection:events sort="date_start:desc" date_start:is_before="today" as="past_events" }}
                 {{ if no_results }}
                     <div class="editorial-empty">
                         <p>Er zijn nog geen eerdere evenementen om te tonen.</p>

@@ -1,7 +1,7 @@
 <div
     class="dlf-community-page dlf-members-page"
-    x-data="loadMembers()"
-    x-effect="document.body.classList.toggle('overflow-hidden', filterModalOpen)"
+    x-data="membersFilter"
+    x-effect="syncBodyOverflow"
     @keydown.escape.window="closeFilterModal()"
 >
     <section class="dlf-community-section" aria-labelledby="members-heading">
@@ -13,7 +13,7 @@
                 </div>
                 <div class="dlf-members-intro__copy">
                     <p class="dlf-community-copy">Wil je software laten bouwen met Laravel? Onze leden zijn ervaren bureaus en professionals die er dagelijks mee werken.</p>
-                    <p class="dlf-community-copy">Liever zelf zoeken? Gebruik de filters hieronder. Kom je er niet uit? Mail naar <a href="mailto:info@dutchlaravelfoundation.nl">info@dutchlaravelfoundation.nl</a>.</p>
+                    <p class="dlf-community-copy">Liever zelf zoeken? Gebruik de filters hieronder. Kom je er niet uit? Wij kunnen je helpen om de perfecte match te vinden, <a href="/aanvraag">match je project</a>.</p>
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
             {{ collection:members sort="title" }}
                 <a class="dlf-member-card" href="{{ url }}">
                     <span class="dlf-member-card__logo">
-                        {{ if logo }}<img src="{{ logo | first | url }}" alt="{{ title }}" loading="lazy">{{ /if }}
+                        {{ logo }}<img src="{{ url }}" alt="{{ title }}" loading="lazy">{{ /logo }}
                     </span>
                     <span class="dlf-member-card__body">
                         <span class="dlf-member-card__name">{{ title }}</span>
@@ -69,7 +69,9 @@
             <template x-for="item in firstMembers" :key="item.id">
                 <a class="dlf-member-card" :href="'/leden/' + item.slug">
                     <span class="dlf-member-card__logo">
-                        <img x-show="item.logo" :src="item.logo" :alt="item.title" loading="lazy">
+                        <template x-if="item.logo">
+                            <img :src="item.logo" :alt="item.title" loading="lazy">
+                        </template>
                     </span>
                     <span class="dlf-member-card__body">
                         <span class="dlf-member-card__name" x-text="item.title"></span>
@@ -99,7 +101,9 @@
             <template x-for="item in secondMembers" :key="item.id">
                 <a class="dlf-member-card" :href="'/leden/' + item.slug">
                     <span class="dlf-member-card__logo">
-                        <img x-show="item.logo" :src="item.logo" :alt="item.title" loading="lazy">
+                        <template x-if="item.logo">
+                            <img :src="item.logo" :alt="item.title" loading="lazy">
+                        </template>
                     </span>
                     <span class="dlf-member-card__body">
                         <span class="dlf-member-card__name" x-text="item.title"></span>
@@ -147,7 +151,7 @@
             <div class="dlf-members-dialog__foot">
                 <button type="button" class="dlf-members-clear" @click="resetFilters">Filters wissen</button>
                 <button type="button" class="dlf-community-button" style="width: 184px" @click="closeFilterModal()">
-                    <span class="dlf-community-button__face" x-text="'Toon ' + filteredMembers.length + (filteredMembers.length === 1 ? ' lid' : ' leden')"></span>
+                    <span class="dlf-community-button__face" x-text="filterResultLabel"></span>
                     <span class="dlf-community-button__back" aria-hidden="true"></span>
                 </button>
             </div>
@@ -161,7 +165,9 @@
                 data-id="{{ id }}"
                 data-slug="{{ slug }}"
                 data-title="{{ title | entities }}"
-                data-logo="{{ logo | first | url }}"
+                {{ logo }}
+                data-logo="{{ url }}"
+                {{ /logo }}
                 data-type="{{ type | entities }}"
                 data-employees="{{ employees | entities }}"
                 data-province="{{ province | entities }}"
@@ -171,7 +177,7 @@
     </div>
 </div>
 
-<script>
+<script nonce="{{ csp_nonce }}">
 function loadMembers() {
     const members = Array.from(document.querySelectorAll('#members-data [data-member]'))
         .map((element) => ({ ...element.dataset }))

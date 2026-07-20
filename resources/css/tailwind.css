@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./fonts.css";
 @import "./redesign-shell.css";
 @import "./redesign-blocks.css";
 @import "./redesign-home.css";
@@ -26,7 +27,11 @@
     .dlf-button > span,
     .dlf-community-button__face,
     .editorial-author__link-face {
-        transition: transform 90ms ease-out, filter 90ms ease-out, background-color 90ms ease-out, color 90ms ease-out;
+        transition:
+            transform 90ms ease-out,
+            filter 90ms ease-out,
+            background-color 90ms ease-out,
+            color 90ms ease-out;
     }
 
     .dlf-btn:hover .dlf-btn-face,
@@ -38,17 +43,17 @@
 
     .dlf-btn:hover .dlf-btn-face--outline-red {
         background: #fff;
-        color: var(--dlf-red);
+        color: var(--dlf-red-text);
     }
 
     .dlf-btn:hover .dlf-btn-face--outline-white {
-        background: var(--dlf-red);
+        background: var(--dlf-red-action);
         color: #fff;
     }
 
     .dlf-community-button--light:hover .dlf-community-button__face {
         background: #fff;
-        color: var(--dlf-red);
+        color: var(--dlf-red-text);
     }
 
     .dlf-btn:active .dlf-btn-face,
@@ -117,7 +122,7 @@
     span.meta,
     span.meta-dark {
         @apply mb-3 text-xs font-semibold uppercase break-words md:text-xs text-tertiary-light;
-        letter-spacing: .12em;
+        letter-spacing: 0.12em;
     }
 
     span.meta-dark {
@@ -285,31 +290,21 @@
     }
 
     .button-face-delayed-fill {
-        transition-property: transform, translate, scale, rotate, color, background-color, border-color !important;
+        transition-property:
+            transform, translate, scale, rotate, color, background-color, border-color !important;
         transition-duration:
-            var(--default-transition-duration),
-            var(--default-transition-duration),
-            var(--default-transition-duration),
-            var(--default-transition-duration),
-            var(--default-transition-duration),
-            var(--default-transition-duration),
+            var(--default-transition-duration), var(--default-transition-duration),
+            var(--default-transition-duration), var(--default-transition-duration),
+            var(--default-transition-duration), var(--default-transition-duration),
             var(--default-transition-duration) !important;
         transition-timing-function:
-            var(--default-transition-timing-function),
-            var(--default-transition-timing-function),
-            var(--default-transition-timing-function),
-            var(--default-transition-timing-function),
-            var(--default-transition-timing-function),
-            var(--default-transition-timing-function),
+            var(--default-transition-timing-function), var(--default-transition-timing-function),
+            var(--default-transition-timing-function), var(--default-transition-timing-function),
+            var(--default-transition-timing-function), var(--default-transition-timing-function),
             var(--default-transition-timing-function) !important;
         transition-delay:
-            0ms,
-            0ms,
-            0ms,
-            0ms,
-            var(--default-transition-duration),
-            var(--default-transition-duration),
-            var(--default-transition-duration) !important;
+            0ms, 0ms, 0ms, 0ms, var(--default-transition-duration),
+            var(--default-transition-duration), var(--default-transition-duration) !important;
     }
 
     :is(a, button).group:hover > .button-face-delayed-fill {
@@ -344,7 +339,6 @@
     blockquote p {
         @apply text-lg leading-relaxed;
     }
-
 
     /* Sets */
     .set {
@@ -477,7 +471,6 @@
         display: flex;
         flex-direction: column;
         overflow-y: auto;
-        background-color: #F5F5FA;
+        background-color: #f5f5fa;
     }
-
 }

@@ -31,6 +31,20 @@ sections:
           smartypants: false
           antlers: false
       -
+        handle: eyebrow
+        field:
+          type: text
+          display: Bovenregel
+          instructions: 'Optionele korte bovenregel boven de titel.'
+          localizable: true
+      -
+        handle: benefits
+        field:
+          type: list
+          display: Voordelen
+          instructions: 'Optionele korte voordelen. Wanneer ingevuld vervangen deze de omschrijving.'
+          localizable: true
+      -
         handle: link
         field:
           display: Link
@@ -57,6 +71,17 @@ sections:
         field:
           type: slug
           localizable: true
+      -
+        handle: theme
+        field:
+          options:
+            red: Rood
+            dark: Donker
+          default: red
+          clearable: false
+          searchable: false
+          display: Thema
+          type: select
       -
         handle: button_text
         field:

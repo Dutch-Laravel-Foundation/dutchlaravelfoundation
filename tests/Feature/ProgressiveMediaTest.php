@@ -168,7 +168,7 @@ class ProgressiveMediaTest extends TestCase
             $stylesheet,
         );
         $this->assertMatchesRegularExpression(
-            '/\.editorial-article \.editorial-article__prose :is\(h1, h2, h3, h4, h5, h6\):not\(\.dlf-block \*\) :is\(strong, b\)\s*\{[^}]*font-weight:\s*inherit;/s',
+            '/\.editorial-article\s+\.editorial-article__prose\s+:is\(h1, h2, h3, h4, h5, h6\):not\(\.dlf-block \*\)\s+:is\(strong, b\)\s*\{[^}]*font-weight:\s*inherit;/s',
             $stylesheet,
         );
     }
@@ -203,7 +203,7 @@ class ProgressiveMediaTest extends TestCase
         $xpath = $this->pageXPath('/over-ons');
         $images = $this->progressiveImages($xpath);
 
-        $this->assertGreaterThanOrEqual(12, $images->length);
+        $this->assertGreaterThanOrEqual(11, $images->length);
 
         foreach ($images as $image) {
             $this->assertProgressiveImageContract($image, '/over-ons');

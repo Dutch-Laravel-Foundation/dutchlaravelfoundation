@@ -26,7 +26,7 @@
 
             {{ if member:logo }}
                 <a class="dlf-member-detail-head__logo" href="{{ member:url }}" aria-label="Bekijk het profiel van {{ member:title }}">
-                    <img src="{{ member:logo | first | url }}" alt="">
+                    {{ member:logo }}<img src="{{ url }}" alt="" width="{{ width }}" height="{{ height }}">{{ /member:logo }}
                 </a>
             {{ /if }}
         </div>
@@ -97,4 +97,4 @@
     </section>
 </div>
 
-{{ partial:footer_cta_banner :page_slug="slug" }}
+{{ partial:footer_cta_default }}

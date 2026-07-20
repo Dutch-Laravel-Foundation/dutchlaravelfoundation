@@ -18,13 +18,13 @@
                         {{ authors }}
                             <a class="editorial-article__author-summary-item" href="#editorial-authors">
                                 {{ if photo }}
-                                    <img
-                                        src="{{ glide src="{photo}" width="480" format="webp" quality="82" }}"
-                                        alt="{{ photo:alt ?? title }}"
-                                        loading="lazy"
-                                    >
+                                    {{ glide :src="photo" width="480" format="webp" quality="82" }}
+                                        <img src="{{ url }}" alt="{{ photo:alt ?? title }}" width="{{ width }}" height="{{ height }}" loading="lazy">
+                                    {{ /glide }}
                                 {{ elseif photo_url }}
-                                    <img src="{{ photo_url }}" alt="{{ title }}" loading="lazy">
+                                    {{ glide :src="photo_url" width="480" format="webp" quality="82" }}
+                                        <img src="{{ url }}" alt="{{ title }}" width="{{ width }}" height="{{ height }}" loading="lazy">
+                                    {{ /glide }}
                                 {{ /if }}
                                 <span>
                                     <strong>{{ title }}</strong>
@@ -47,7 +47,7 @@
                         {{ partial:progressive_media_attributes width="1200" height="960" loading="eager" fetchpriority="high" }}
                     >
                 {{ else }}
-                    <span class="editorial-media-placeholder" aria-hidden="true"><img src="/assets/uploads/globals/LaravelBrandMark.svg" alt=""></span>
+                    <span class="editorial-media-placeholder" aria-hidden="true"><img src="/assets/uploads/globals/LaravelBrandMark.svg" width="135" height="140" alt=""></span>
                 {{ /if }}
             </figure>
         </header>

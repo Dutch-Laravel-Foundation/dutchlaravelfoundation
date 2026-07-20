@@ -1,0 +1,15 @@
+<aside
+    class="dlf-public-contact-card dlf-block"
+    aria-label="Contactgegevens Dutch Laravel Foundation"
+>
+    <span class="editorial-eyebrow">Contact</span>
+    <h2>{{ dlf:title }}</h2>
+    <p>{{ dlf:address }}<br />{{ dlf:zipcode }} {{ dlf:city }}</p>
+    <p>
+        <a href='tel:{{ dlf:phone regex_replace="\(0\)|" regex_replace="[^+0-9]|" }}'
+            >{{ dlf:phone }}</a
+        ><br />
+        <a href="mailto:{{ dlf:email }}">{{ dlf:email }}</a>
+    </p>
+    <p>KVK: {{ dlf:coc }}</p>
+</aside>

@@ -10,7 +10,7 @@
 
             {{ if logo }}
                 <div class="dlf-member-detail-head__logo" aria-hidden="true">
-                    <img src="{{ logo | first | url }}" alt="">
+                    {{ logo }}<img src="{{ url }}" alt="" width="{{ width }}" height="{{ height }}">{{ /logo }}
                 </div>
             {{ /if }}
         </div>
@@ -148,9 +148,7 @@
                 {{ collection:internships member:is="{ id }" }}
                     <a class="dlf-member-card" href="{{ url }}">
                         <span class="dlf-member-card__logo">
-                            {{ if member:logo }}
-                                <img src="{{ member:logo | first | url }}" alt="" loading="lazy">
-                            {{ /if }}
+                            {{ logo }}<img src="{{ url }}" alt="" width="{{ width }}" height="{{ height }}" loading="lazy">{{ /logo }}
                         </span>
                         <span class="dlf-member-card__body">
                             <span class="dlf-member-card__name">{{ title }}</span>

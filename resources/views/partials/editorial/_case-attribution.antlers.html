@@ -5,7 +5,7 @@
             <div class="editorial-author__content">
                 {{ if member:logo }}
                     <div class="editorial-case-attribution__logo">
-                        <img src="{{ member:logo | first | url }}" alt="Logo van {{ member:title }}" loading="lazy">
+                        {{ member:logo }}<img src="{{ url }}" alt="Logo van {{ member:title }}" width="{{ width }}" height="{{ height }}" loading="lazy">{{ /member:logo }}
                     </div>
                 {{ /if }}
                 <div class="editorial-author__details">

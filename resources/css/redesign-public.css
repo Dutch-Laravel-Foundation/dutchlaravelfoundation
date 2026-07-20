@@ -1,9 +1,9 @@
 .dlf-public-page {
-    --dlf-public-ink: #090910;
-    --dlf-public-copy: #525257;
-    --dlf-public-muted: #848487;
-    --dlf-public-line: #ececec;
-    --dlf-public-red: #ff2d20;
+    --dlf-public-ink: var(--dlf-ink);
+    --dlf-public-copy: var(--dlf-copy);
+    --dlf-public-muted: var(--dlf-muted);
+    --dlf-public-line: var(--dlf-line);
+    --dlf-public-red: var(--dlf-red-text);
     background: #fff;
     color: var(--dlf-public-copy);
 }
@@ -125,7 +125,13 @@
     border: 1px solid #24242c;
     border-radius: 3px;
     background-color: var(--dlf-public-ink);
-    background-image: repeating-linear-gradient(30deg, rgb(255 255 255 / 0.08) 0, rgb(255 255 255 / 0.08) 1px, transparent 1px, transparent 6px);
+    background-image: repeating-linear-gradient(
+        30deg,
+        rgb(255 255 255 / 0.08) 0,
+        rgb(255 255 255 / 0.08) 1px,
+        transparent 1px,
+        transparent 6px
+    );
     color: #d4d4d8;
 }
 
@@ -154,13 +160,18 @@
 
 .dlf-public-page .dlf-public-contact-card a {
     color: #fff;
-    text-decoration-color: var(--dlf-public-red);
+    text-decoration-line: none;
+    text-decoration-color: currentColor;
     text-underline-offset: 0.2em;
+}
+
+.dlf-public-page .dlf-public-contact-card a:hover {
+    text-decoration-line: underline;
 }
 
 .dlf-public-page .dlf-public-contact-card a:hover,
 .dlf-public-page .dlf-public-contact-card a:focus-visible {
-    color: var(--dlf-public-red);
+    color: #fff;
 }
 
 .dlf-public-actions,
@@ -265,7 +276,7 @@
     place-items: center;
     margin: 0 auto 1.25rem;
     border-radius: 3px;
-    background: var(--dlf-public-red);
+    background: var(--dlf-red-action);
     color: #fff;
     font-size: 1.75rem;
     font-weight: 700;

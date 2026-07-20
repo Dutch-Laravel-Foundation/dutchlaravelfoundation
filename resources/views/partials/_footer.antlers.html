@@ -3,10 +3,10 @@
 <footer class="dlf-footer {{ if page_slug == 'home' }}dlf-footer--home{{ /if }}">
     {{ if call_to_action }}
         {{ call_to_action }}
-            {{ partial:footer_cta_banner :page_slug="page_slug" }}
+            {{ partial:footer_cta_banner }}
         {{ /call_to_action }}
     {{ elseif collection == "members" || collection == "cases" }}
-        {{ partial:footer_cta_banner :page_slug="page_slug" }}
+        {{ partial:footer_cta_default }}
     {{ /if }}
 
     <div class="dlf-footer-band {{ if call_to_action || collection == 'members' || collection == 'cases' }}dlf-footer-band--with-cta{{ /if }}">
@@ -15,7 +15,7 @@
                 <h2>{{ dlf:title }}</h2>
                 <div class="dlf-footer-recognized">
                     <span>Recognized by</span>
-                    <span><img src="/assets/img/laravel-wordmark-white.svg" alt="Laravel" loading="lazy" decoding="async"></span>
+                    <span><img src="/assets/img/laravel-wordmark-white.svg" alt="Laravel" width="1280" height="314" loading="lazy" decoding="async"></span>
                 </div>
             </section>
 
@@ -35,7 +35,7 @@
                     <div class="dlf-footer-socials">
                         {{ collection:socials sort="title" }}
                             <a href="{{ link }}" target="_blank" rel="noopener noreferrer" aria-label="{{ title }}">
-                                <img src="{{ icon }}" alt="" loading="lazy" decoding="async">
+                                {{ icon }}<img src="{{ url }}" alt="" width="{{ width }}" height="{{ height }}" loading="lazy" decoding="async">{{ /icon }}
                             </a>
                         {{ /collection:socials }}
                     </div>
@@ -67,7 +67,7 @@
                                         </label>
                                     {{ /fields }}
                                     <button type="submit" aria-label="Aanmelden">
-                                        <img src="/assets/img/icons/send.svg" alt="">
+                                        <img src="/assets/img/icons/send.svg" alt="" width="16" height="16">
                                     </button>
                                 </div>
                                 {{ captcha }}
@@ -75,7 +75,7 @@
                         {{ /form:newsletter }}
 
                         {{ if newsletter_submitted }}
-                            <script>window.scrollTo(0, document.body.scrollHeight);</script>
+                            <script nonce="{{ csp_nonce }}">window.scrollTo(0, document.body.scrollHeight);</script>
                         {{ /if }}
                     </section>
                 </div>
@@ -86,8 +86,9 @@
                     <div class="dlf-legal-links">
                         {{ nav:legal }}
                             <a href="/{{ page.slug }}">{{ title }}</a>
-                            {{ if !last }}<span aria-hidden="true">|</span>{{ /if }}
+                            <span aria-hidden="true">|</span>
                         {{ /nav:legal }}
+                        <button type="button" data-tracking-consent-settings hidden>Cookievoorkeuren</button>
                     </div>
 
                     <div class="dlf-footer-badges">
