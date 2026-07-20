@@ -16,7 +16,7 @@ class OpenGraphImageTest extends TestCase
 
         $response->assertOk();
         $this->assertStringContainsString(
-            '<meta property="og:image" content="' . config('app.url') . '/og-image.jpg?v=2">',
+            '<meta property="og:image" content="' . config('app.url') . '/og-image.jpg?v=3">',
             $response->getContent(),
         );
         $this->assertStringContainsString(
@@ -24,7 +24,7 @@ class OpenGraphImageTest extends TestCase
             $response->getContent(),
         );
         $this->assertStringContainsString(
-            '<meta name="twitter:image" content="' . config('app.url') . '/og-image.jpg?v=2">',
+            '<meta name="twitter:image" content="' . config('app.url') . '/og-image.jpg?v=3">',
             $response->getContent(),
         );
     }
