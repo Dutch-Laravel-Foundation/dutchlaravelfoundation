@@ -26,6 +26,10 @@ content:
       -
         type: text
         text: 'Graag stellen we de werkgroepen aan je voor.'
+      -
+        type: hardBreak
+      -
+        type: hardBreak
   -
     type: heading
     attrs:
@@ -47,62 +51,45 @@ content:
         type: text
         text: 'Vanuit deze werkgroep wordt gewerkt aan diverse initiatieven die hieraan bijdragen:'
   -
-    type: bulletList
+    type: paragraph
     content:
       -
-        type: listItem
-        content:
-          -
-            type: paragraph
-            content:
-              -
-                type: text
-                text: 'De ontwikkeling van lesmateriaal'
+        type: text
+        text: "·\_\_\_\_\_\_ De ontwikkeling van lesmateriaal"
+  -
+    type: paragraph
+    content:
       -
-        type: listItem
-        content:
-          -
-            type: paragraph
-            content:
-              -
-                type: text
-                text: 'Het geven van gastcolleges'
+        type: text
+        text: "·\_\_\_\_\_\_ Het geven van gastcolleges"
+  -
+    type: paragraph
+    content:
       -
-        type: listItem
-        content:
-          -
-            type: paragraph
-            content:
-              -
-                type: text
-                text: 'Een stagebank met Laravel stageplekken'
+        type: text
+        text: "·\_\_\_\_\_\_ Een stagebank met Laravel stageplekken"
+  -
+    type: paragraph
+    content:
       -
-        type: listItem
-        content:
-          -
-            type: paragraph
-            content:
-              -
-                type: text
-                text: 'Een "how to start with Laravel" pagina met handige en praktische tips voor startende developers'
+        type: text
+        text: "·\_\_\_\_\_\_ Een \"how to start with Laravel\" pagina met handige en praktische tips voor startende developers"
+  -
+    type: paragraph
+    content:
       -
-        type: listItem
-        content:
-          -
-            type: paragraph
-            content:
-              -
-                type: text
-                text: 'Samenwerking met Stichting Praktijk Leren (SPL) voor het MBO-onderwijs'
+        type: text
+        text: "·\_\_\_\_\_\_ Samenwerking met Stichting Praktijk Leren (SPL) voor het MBO-onderwijs"
+  -
+    type: paragraph
+    content:
       -
-        type: listItem
-        content:
-          -
-            type: paragraph
-            content:
-              -
-                type: text
-                text: 'Speciale events voor studenten'
+        type: text
+        text: "·\_\_\_\_\_\_ Speciale events voor studenten"
+      -
+        type: hardBreak
+      -
+        type: hardBreak
   -
     type: heading
     attrs:
@@ -124,72 +111,61 @@ content:
         type: text
         text: 'Dit doet de werkgroep bijvoorbeeld door:'
   -
-    type: bulletList
+    type: paragraph
     content:
       -
-        type: listItem
-        content:
-          -
-            type: paragraph
-            content:
-              -
-                type: text
-                text: 'Regelmatig blogs te publiceren op '
-              -
-                type: text
-                marks:
-                  -
-                    type: link
-                    attrs:
-                      href: 'https://dutchlaravelfoundation.nl/kennis'
-                      rel: null
-                      target: null
-                      title: null
-                text: dutchlaravelfoundation.nl/kennis
+        type: text
+        text: "·\_\_\_\_\_\_ Regelmatig blogs te publiceren op "
       -
-        type: listItem
-        content:
+        type: text
+        marks:
           -
-            type: paragraph
-            content:
-              -
-                type: text
-                text: 'Inspirerende cases te delen op '
-              -
-                type: text
-                marks:
-                  -
-                    type: link
-                    attrs:
-                      href: 'https://dutchlaravelfoundation.nl/cases'
-                      rel: null
-                      target: null
-                      title: null
-                text: dutchlaravelfoundation.nl/cases
+            type: link
+            attrs:
+              href: 'https://dutchlaravelfoundation.nl/kennis'
+              rel: null
+              target: null
+              title: null
+        text: dutchlaravelfoundation.nl/kennis
+  -
+    type: paragraph
+    content:
       -
-        type: listItem
-        content:
-          -
-            type: paragraph
-            content:
-              -
-                type: text
-                text: 'Een eigen podcast'
+        type: text
+        text: "·\_\_\_\_\_\_ Inspirerende cases te delen op "
       -
-        type: listItem
-        content:
+        type: text
+        marks:
           -
-            type: paragraph
-            content:
-              -
-                type: text
-                text: 'Diverse bijdrages op (social) media'
+            type: link
+            attrs:
+              href: 'https://dutchlaravelfoundation.nl/cases'
+              rel: null
+              target: null
+              title: null
+        text: dutchlaravelfoundation.nl/cases
+  -
+    type: paragraph
+    content:
+      -
+        type: text
+        text: "·\_\_\_\_\_\_ Een eigen podcast"
+  -
+    type: paragraph
+    content:
+      -
+        type: text
+        text: "·\_\_\_\_\_\_ Diverse bijdrages op (social) media"
   -
     type: paragraph
     content:
       -
         type: text
         text: 'Uiteraard staat het delen van kennis ook centraal tijdens onze events.'
+      -
+        type: hardBreak
+      -
+        type: hardBreak
   -
     type: heading
     attrs:
@@ -210,6 +186,10 @@ content:
       -
         type: text
         text: 'Deze werkgroep werkt aan concrete handvatten om potentiële opdrachtgevers te ondersteunen. Met name in aanbestedingen leggen we de voordelen van Laravel uit, inspireren we met cases van eerder gebouwde applicaties en beïnvloeden we hun voorkeur voor Laravel.'
+      -
+        type: hardBreak
+      -
+        type: hardBreak
   -
     type: heading
     attrs:
@@ -231,41 +211,33 @@ content:
         type: text
         text: 'Dit doen we door Laravel te promoten richting:'
   -
-    type: bulletList
+    type: paragraph
     content:
       -
-        type: listItem
-        content:
-          -
-            type: paragraph
-            content:
-              -
-                type: text
-                text: 'Potentiële opdrachtgevers (bijvoorbeeld via LinkedIn-campagnes)'
+        type: text
+        text: "·\_\_\_\_\_\_ Potentiële opdrachtgevers (bijvoorbeeld via LinkedIn-campagnes)"
+  -
+    type: paragraph
+    content:
       -
-        type: listItem
-        content:
-          -
-            type: paragraph
-            content:
-              -
-                type: text
-                text: 'Andere developers en bureaus (bijvoorbeeld via meet-ups)'
+        type: text
+        text: "·\_\_\_\_\_\_ Andere developers en bureaus (bijvoorbeeld via meet-ups)"
+  -
+    type: paragraph
+    content:
       -
-        type: listItem
-        content:
-          -
-            type: paragraph
-            content:
-              -
-                type: text
-                text: 'Alle andere geïnteresseerden'
+        type: text
+        text: "·\_\_\_\_\_\_ Alle andere geïnteresseerden"
   -
     type: paragraph
     content:
       -
         type: text
         text: 'Zo werken we aan de naamsbekendheid en voorkeur voor Laravel en laten we de community en het aantal opdrachten gezamenlijk groeien.'
+      -
+        type: hardBreak
+      -
+        type: hardBreak
   -
     type: heading
     attrs:
@@ -360,6 +332,10 @@ content:
       -
         type: text
         text: 'De werkgroep kan aanvullend besluiten om extra events te organiseren. Ook kennen we een samenwerkingsprogramma: andere initiatieven, vanuit leden maar ook vanuit niet-leden, kunnen de DLF vragen om een bijdrage aan hun Laravel meet-up of event. De DLF kan vervolgens een bijdrage leveren in de vorm van sprekers, organisatorische kracht, netwerk of funding.'
+      -
+        type: hardBreak
+      -
+        type: hardBreak
   -
     type: heading
     attrs:
@@ -380,6 +356,10 @@ content:
       -
         type: text
         text: 'Door bepaalde inkoop collectief te doen, kunnen we de kosten voor iedereen verlagen. Zo is er bijvoorbeeld korting op Sentry, PhpStorm, Laracon, Certified, Lettermint, Oh Dear en nog veel meer!'
+      -
+        type: hardBreak
+      -
+        type: hardBreak
   -
     type: heading
     attrs:
@@ -406,6 +386,10 @@ content:
       -
         type: text
         text: 'Ook wordt er internationaal gewerkt aan bijvoorbeeld het uitwisselen van sprekers en het gezamenlijk benaderen van partijen voor ledenvoordeel.'
+      -
+        type: hardBreak
+      -
+        type: hardBreak
   -
     type: heading
     attrs:
@@ -478,6 +462,10 @@ content:
               target: null
               title: null
         text: 'https://github.com/Dutch-Laravel-Foundation/best-practices'
+  -
+    type: paragraph
+  -
+    type: paragraph
   -
     type: heading
     attrs:

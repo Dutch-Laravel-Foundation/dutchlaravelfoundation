@@ -11,7 +11,7 @@ content:
   -
     type: heading
     attrs:
-      level: 2
+      level: 1
     content:
       -
         type: text

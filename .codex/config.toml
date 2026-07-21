@@ -4,9 +4,3 @@ sandbox_mode = "danger-full-access"
 [mcp_servers.laravel-boost]
 command = "php"
 args = ["artisan", "boost:mcp"]
-env = { APP_ENV = "local" }
-
-[mcp_servers.laravel-toolbar]
-command = "php"
-args = ["artisan", "toolbar:mcp"]
-env = { APP_ENV = "local" }

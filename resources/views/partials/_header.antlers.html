@@ -1,108 +1,125 @@
-<header
-    class="dlf-header"
-    x-data="{ mobileOpen: false }"
-    x-init="$watch('mobileOpen', value => document.documentElement.classList.toggle('dlf-menu-open', value))"
-    x-effect="document.querySelectorAll('.dlf-skip-link, #main-content, .dlf-footer, #vragenai-app').forEach(element => element.inert = mobileOpen)"
-    :class="{ 'dlf-header--menu-open': mobileOpen }"
-    @keydown.escape.window="if (mobileOpen) { mobileOpen = false; $nextTick(() => $refs.menuButton.focus()) }"
->
-    <div class="dlf-topbar" :inert="mobileOpen">
-        <div class="dlf-shell-container dlf-topbar-inner">
-            <span class="dlf-topbar-spacer" aria-hidden="true"></span>
-            <span class="dlf-recognized-by">
-                <span>Recognized by</span>
-                <img src="/assets/img/laravel-wordmark-white.svg" alt="Laravel">
-            </span>
-            <span class="dlf-topbar-links">
-                <a href="/aanvraag">Match je project</a>
-                <span aria-hidden="true">|</span>
-                <button class="js-vragenai-trigger" type="button" @click="$dispatch('open-vragen-ai')">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" />
+{{ banner = banner ?? { partial:if_exists src="banners/{ slug }" } }}
+
+{{ menuColor = menuColor ?? (banner ? 'white' : 'black') }}
+
+{{ background = menu_color == 'red' ? 'lg:bg-primary-accent' : 'lg:bg-white' }}
+
+{{ backgroundRecognizedBy = menu_color == 'red' ? 'bg-white' : 'bg-primary-accent' }}
+
+{{ laravelLogoColor = menu_color == 'red' ? 'text-primary-accent' : 'text-white' }}
+
+{{ recognizedByTextColor = menu_color == 'red' ? 'text-black/50' : 'text-white/60' }}
+
+<header class="fixed top-0 left-0 w-screen z-999 {{ background }}">
+
+    {{ partial:recognized-by-laravel backgroundRecognizedBy="{{ backgroundRecognizedBy }}" laravelLogoColor="{{ laravelLogoColor }}" recognizedByTextColor="{{ recognizedByTextColor }}" }}
+
+    {{ partial:vragen_ai}}
+
+    {{# Desktop navigation #}}
+
+    <div class="container mx-auto pt-4 pb-10 justify-between space-x-12 hidden lg:flex">
+        {{ partial:navigation show_home_logo="true" active_class="!text-primary-accent" :style="menuColor == 'white' ?=
+        'contrast'" }}
+    </div>
+
+    {{# Mobile navigation #}}
+    <div class="relative lg:hidden js-alpine-init {{ banner ? 'bg-primary-accent': 'bg-white' }} pb-6" x-data="menu()"
+         x-cloak role="navigation">
+
+        <div class="flex flex-row items-start justify-between w-full px-6 pt-6 pb-0 mx-auto xl:pt-10">
+            <a href="/" class="flex justify-start w-full"><img class="max-w-full max-h-[3rem] xl:max-h-full"
+                    src="{{ banner ? '/assets/img/logo-alt.svg': '/assets/img/logo.svg' }}" alt="Home"></a>
+            {{# Toggle button #}}
+            <div class="z-900 absolute top-7.5 right-24 group cursor-pointer" @click="$dispatch('open-vragen-ai')"
+                x-data>
+                <div
+                    class="{{ if menuColor == 'white' }} text-white {{ else }}text-black group-hover:text-primary-accent {{ /if }}  flex items-center gap-1 text-sm js-vragenai-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-9">
+                        <path fill-rule="evenodd"
+                            d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                            clip-rule="evenodd" />
                     </svg>
-                    <span>Zoeken</span>
-                </button>
-            </span>
-        </div>
-    </div>
-
-    <div class="dlf-shell-container dlf-header-row" :inert="mobileOpen">
-        <a class="dlf-header-logo" href="/" aria-label="{{ dlf:title }} — home">
-            <img src="/assets/img/logo-2025.svg" alt="{{ dlf:title }}">
-        </a>
-
-        {{ partial:navigation }}
-
-        <button
-            class="dlf-mobile-toggle"
-            type="button"
-            aria-controls="dlf-mobile-menu"
-            :aria-expanded="mobileOpen.toString()"
-            aria-label="Menu openen"
-            x-ref="menuButton"
-            @click="mobileOpen = true; $nextTick(() => $refs.closeButton.focus())"
-        >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M3 6h18M3 12h18M3 18h18" />
-            </svg>
-        </button>
-    </div>
-
-    <div
-        id="dlf-mobile-menu"
-        class="dlf-mobile-menu"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Menu"
-        x-cloak
-        x-show="mobileOpen"
-        x-transition.opacity.duration.200ms
-        @keydown.tab="
-            const focusable = [...$el.querySelectorAll('a[href], button:not([disabled]), summary')].filter(element => element.offsetParent !== null);
-            const first = focusable[0];
-            const last = focusable[focusable.length - 1];
-            if ($event.shiftKey && document.activeElement === first) { $event.preventDefault(); last.focus(); }
-            if (!$event.shiftKey && document.activeElement === last) { $event.preventDefault(); first.focus(); }
-        "
-    >
-        <div class="dlf-topbar dlf-mobile-menu-topbar">
-            <div class="dlf-shell-container dlf-topbar-inner">
-                <span class="dlf-recognized-by">
-                    <span>Recognized by</span>
-                    <img src="/assets/img/laravel-wordmark-white.svg" alt="Laravel">
-                </span>
-                <span class="dlf-topbar-links">
-                    <a href="/aanvraag" @click="mobileOpen = false">Match je project</a>
-                    <span aria-hidden="true">|</span>
-                    <button class="js-vragenai-trigger" type="button" @click="mobileOpen = false; $dispatch('open-vragen-ai')">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
-                            <path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" />
-                        </svg>
-                        <span>Zoeken</span>
-                    </button>
-                </span>
+                </div>
             </div>
-        </div>
-
-        <div class="dlf-mobile-menu-header">
-            <a href="/" aria-label="{{ dlf:title }} — home" @click="mobileOpen = false">
-                <img src="/assets/img/logo-2025.svg" alt="{{ dlf:title }}">
-            </a>
-            <button
-                class="dlf-mobile-close"
-                type="button"
-                aria-label="Menu sluiten"
-                x-ref="closeButton"
-                @click="mobileOpen = false; $nextTick(() => $refs.menuButton.focus())"
-            >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="m5 5 14 14M19 5 5 19" />
-                </svg>
+            <button class="z-900 absolute top-7 right-8 xl:right-20 xl:top-[3rem] h-[2.4rem] w-[2.5rem] cursor-pointer"
+                @click="toggleMenu()" disabled x-bind:disabled="disabled">
+                <div class="relative focus:outline-hidden">
+                    <div class="absolute block w-[4rem]">
+                        <span aria-hidden="true"
+                            class="block absolute h-[0.2rem] w-[2.5rem] {{ page.slug == 'home' ? 'bg-white' : 'bg-tertiary-dark' }} transform transition rounded-full duration-300 ease-in-out"
+                            :class="{'rotate-45 bg-white!': open,' -translate-y-3': !open }"></span>
+                        <span aria-hidden="true"
+                            class="block absolute h-[0.2rem] w-[2rem] {{ page.slug == 'home' ? 'bg-white' : 'bg-tertiary-dark' }} transform transition rounded-full duration-300 ease-in-out"
+                            :class="{'opacity-0': open } "></span>
+                        <span aria-hidden="true"
+                            class="block absolute h-[0.2rem] w-[2.5rem] {{ page.slug == 'home' ? 'bg-white' : 'bg-tertiary-dark' }} transform  transition rounded-full duration-300 ease-in-out"
+                            :class="{'-rotate-45 bg-white!': open, ' translate-y-3': !open}"></span>
+                    </div>
+                </div>
             </button>
         </div>
 
-        {{ partial:navigation_mobile }}
+        {{# Mobile menu container with transitions #}}
+        <div class="fixed inset-x-0 top-0 z-50 w-screen h-screen overflow-scroll transition origin-top-right transform"
+            x-show="open" @click.outside="open = false" x-transition:enter="duration-200 ease-out"
+            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+            x-transition:leave="duration-100 ease-in" x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0">
+            <div class="w-full overflow-scroll">
+                <div class="absolute top-0 left-0 flex flex-col w-full min-h-full bg-primary-contrast">
+                    {{ partial:recognized-by-laravel }}
+                    <a class="absolute left-6 top-14" href="/" class="flex justify-start w-full"><img
+                            class="max-w-full max-h-[3rem] xl:max-h-full" src="/assets/img/logo.svg" alt="Home"></a>
+                    {{# Menu items wrapper #}}
+                    <div class="absolute top-11 right-0 z-10">
+                        <button type="button" @click="toggleMenu()" disabled x-bind:disabled="disabled"
+                            class="relative h-[3rem] right-[0.7rem] bottom-[0.2rem] w-[3rem] m-4 text-white uppercase transition duration-150 ease-in-out bg-primary-accent focus:outline-hidden">
+                        </button>
+                    </div>
+                    {{ partial:navigation_mobile show_home_logo="true" active_class="text-primary-accent" class="" }}
+                </div>
+            </div>
+        </div>
     </div>
 </header>
 
-{{ partial:vragen_ai }}
+{{# Optional banner #}}
+{{ banner }}
+
+<script>
+    // Menu toggle
+    function isiOS() {
+        return (
+            ['iPad Simulator', 'iPhone Simulator', 'iPod Simulator', 'iPad', 'iPhone', 'iPod'].includes(navigator.platform) ||
+            (navigator.userAgent.includes('Mac') && 'ontouchend' in document)
+        );
+    }
+
+    function menu() {
+        return {
+            open: false,
+            disabled: true,
+            init() {
+                this.disabled = false;
+            },
+            toggleMenu() {
+                const content = document.querySelector('.frontend');
+                this.disabled = true;
+                this.open = !this.open;
+                if (this.open === true) {
+                    content.style.position = 'fixed';
+                    content.style.top = `-${window.pageYOffset}px`;
+                    // Fixes bug in Safari iOS 15.2 where screen height is not fully filled due to empty space address bar on bottom
+                    if (isiOS() === true) document.documentElement.style.height = window.innerHeight + 'px';
+                } else {
+                    content.style.removeProperty('position');
+                    content.style.removeProperty('top');
+                    window.scrollTo(0, window.pageYOffset);
+                    if (isiOS() === true) document.documentElement.style.removeProperty('height');
+                }
+                this.disabled = false;
+            },
+        };
+    }
+</script>
