@@ -1,48 +1,22 @@
-// Headroom.js
 import Headroom from "headroom.js";
+import Alpine from "@alpinejs/csp";
 
-import hljs from "highlight.js/lib/core";
-import bash from "highlight.js/lib/languages/bash";
-import css from "highlight.js/lib/languages/css";
-import graphql from "highlight.js/lib/languages/graphql";
-import javascript from "highlight.js/lib/languages/javascript";
-import json from "highlight.js/lib/languages/json";
-import php from "highlight.js/lib/languages/php";
-import shell from "highlight.js/lib/languages/shell";
-import sql from "highlight.js/lib/languages/sql";
-import xml from "highlight.js/lib/languages/xml";
-import typescript from "highlight.js/lib/languages/typescript";
+import "./components/header-aware-sticky";
+import {
+    createHeaderMenu,
+    createInternshipsFilter,
+    createMembersFilter,
+    createNavigationDropdown,
+    createSalesFunnelWizard,
+} from "./components/alpine-components";
+import { initProgressiveMedia } from "./components/progressive-media";
+import { initTrackingConsent } from "./components/tracking-consent";
 
-import "highlight.js/styles/github.css";
+const header = document.querySelector("header");
+const banner = document.querySelector(".banner");
 
-hljs.registerLanguage("bash", bash);
-hljs.registerLanguage("css", css);
-hljs.registerLanguage("graphql", graphql);
-hljs.registerLanguage("javascript", javascript);
-hljs.registerLanguage("json", json);
-hljs.registerLanguage("php", php);
-hljs.registerLanguage("shell", shell);
-hljs.registerLanguage("sql", sql);
-hljs.registerLanguage("xml", xml);
-hljs.registerLanguage("typescript", typescript);
-
-window.addEventListener("load", (event) => {
-    document.querySelectorAll("pre code").forEach((el) => {
-        hljs.highlightElement(el);
-    });
-});
-
-var header = document.querySelector("header"),
-    banner = document.querySelector(".banner"),
-    nav = header.querySelector("nav.animated");
-
-var includeBannerHeight = false;
-var bannerHeight = combinedHeaderHeight(includeBannerHeight);
-
-let isIE = /*@cc_on!@*/ false || !!document.documentMode;
-
-if (header != null && isIE === false) {
-    var headerHide = new Headroom(header, {
+if (header && !document.documentMode) {
+    const headerHide = new Headroom(header, {
         offset: 0,
         tolerance: {
             up: 5,
@@ -57,66 +31,150 @@ if (header != null && isIE === false) {
 
     headerHide.init();
 
-    // When the banner has changing heights else you can remove this part
     window.addEventListener(
         "load",
-        function () {
+        () => {
+            const offset = header.offsetHeight + (banner ? banner.offsetHeight : 0);
+
             headerHide.offset = {
-                down: combinedHeaderHeight(includeBannerHeight),
-                up: combinedHeaderHeight(includeBannerHeight),
+                down: offset,
+                up: offset,
             };
         },
-        false
+        { once: true },
     );
 }
 
-function combinedHeaderHeight(includeBanner = true) {
-    return (
-        header.offsetHeight +
-        (includeBanner && banner ? banner.offsetHeight : 0)
-    );
-}
+initProgressiveMedia();
 
-// SwiperJS
-import "./components/swiper";
-
-// AlpineJS
-import Alpine from "alpinejs";
+Alpine.data("headerMenu", createHeaderMenu);
+Alpine.data("navigationDropdown", createNavigationDropdown);
+Alpine.data("membersFilter", createMembersFilter);
+Alpine.data("internshipsFilter", createInternshipsFilter);
+Alpine.data("salesFunnelWizard", createSalesFunnelWizard);
 window.Alpine = Alpine;
 Alpine.start();
 
-// AOS
-import AOS from "aos";
+const loadForSelector = (selector, loader) => {
+    if (document.querySelector(selector)) {
+        void loader();
+    }
+};
 
-let aosElement = document.querySelector("[data-aos]");
+loadForSelector("pre code", () => import("./components/syntax-highlighting"));
+loadForSelector(
+    ".js-swiper, .js-logos-swiper, .js-reviews-swiper",
+    () => import("./components/swiper"),
+);
+loadForSelector("[data-client-logo-wall]", () => import("./components/client-logo-wall"));
+loadForSelector("[data-editorial-article]", () => import("./components/editorial-article"));
+loadForSelector("[data-lid-benefits-marquee]", () => import("./components/lid-benefits-marquee"));
+loadForSelector("[data-aos]", () => import("./components/scroll-animations"));
+loadForSelector(
+    ".top-floor-floating-element-bottom, .top-floor-floating-element-top",
+    () => import("./components/floor-animations"),
+);
 
-if (aosElement) {
-    AOS.init({
-        once: true,
+const vragenAiTriggers = [...document.querySelectorAll(".js-vragenai-trigger")];
+let vragenAiReady = false;
+let vragenAiLoading;
+
+const prepareVragenAi = () => {
+    vragenAiLoading ??= import("./components/vragen-ai-search")
+        .then(({ initVragenAiSearch }) => initVragenAiSearch())
+        .then(() => {
+            vragenAiReady = true;
+        });
+
+    return vragenAiLoading;
+};
+
+vragenAiTriggers.forEach((trigger) => {
+    ["pointerenter", "focusin", "touchstart"].forEach((eventName) => {
+        trigger.addEventListener(eventName, prepareVragenAi, {
+            once: true,
+            passive: true,
+        });
     });
 
-    window.addEventListener("load", AOS.refresh);
-}
+    trigger.addEventListener(
+        "click",
+        async (event) => {
+            if (vragenAiReady) {
+                return;
+            }
 
-// GSAP
-import { gsap } from "gsap";
-
-gsap.to(".top-floor-floating-element-bottom", {
-    y: 20,
-    duration: 5,
-    stagger: {
-        each: 0.6,
-        repeat: -1,
-        yoyo: true,
-    },
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            await prepareVragenAi();
+            trigger.click();
+        },
+        true,
+    );
 });
 
-gsap.to(".top-floor-floating-element-top", {
-    y: -20,
-    duration: 5,
-    stagger: {
-        each: 0.6,
-        repeat: -1,
-        yoyo: true,
+const turnstileWidget = document.querySelector(".cf-turnstile[data-sitekey]");
+
+if (turnstileWidget) {
+    let loadTurnstile;
+    const prepareTurnstile = () => {
+        loadTurnstile ??= import("./components/turnstile");
+
+        return loadTurnstile;
+    };
+    const form = turnstileWidget.closest("form");
+
+    form?.addEventListener("focusin", prepareTurnstile, { once: true });
+    form?.addEventListener("pointerdown", prepareTurnstile, {
+        once: true,
+        passive: true,
+    });
+
+    if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (!entries.some((entry) => entry.isIntersecting)) {
+                    return;
+                }
+
+                observer.disconnect();
+                void prepareTurnstile();
+            },
+            { rootMargin: "600px" },
+        );
+
+        observer.observe(turnstileWidget);
+    }
+}
+
+const runWhenIdle = (callback) => {
+    const schedule = () => {
+        if ("requestIdleCallback" in window) {
+            window.requestIdleCallback(callback, { timeout: 3000 });
+            return;
+        }
+
+        window.setTimeout(callback, 1);
+    };
+
+    if (document.readyState === "complete") {
+        schedule();
+        return;
+    }
+
+    window.addEventListener("load", schedule, { once: true });
+};
+
+initTrackingConsent({
+    loadTrackers: () => {
+        if (document.documentElement.dataset.environment !== "production") {
+            return;
+        }
+
+        runWhenIdle(() => {
+            void import("./components/deferred-third-parties").then(
+                ({ initDeferredThirdParties }) => initDeferredThirdParties(),
+            );
+        });
     },
 });

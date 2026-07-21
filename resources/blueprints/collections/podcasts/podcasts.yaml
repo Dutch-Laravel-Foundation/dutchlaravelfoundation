@@ -96,6 +96,16 @@ tabs:
               default: now
               validate:
                 - required
+          -
+            handle: call_to_action
+            field:
+              max_items: 1
+              mode: select
+              collections:
+                - cta
+              display: 'Call to action'
+              type: entries
+              instructions: 'Shown above the footer on podcast detail pages.'
   seo:
     display: SEO
     sections:

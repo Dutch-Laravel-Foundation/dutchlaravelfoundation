@@ -1,0 +1,35 @@
+<article class="editorial-entry {{ switch between="editorial-entry--media-start|editorial-entry--media-end" }}{{ unless past }}{{ if first }} editorial-entry--featured{{ /if }}{{ /unless }}{{ if past }} editorial-entry--past{{ /if }}">
+    <a class="editorial-entry__media" href="{{ url }}" aria-label="Bekijk {{ title }}" data-progressive-media-frame>
+        {{ if featured_image }}
+            <img
+                class="editorial-entry__image{{ if past }} grayscale{{ /if }}"
+                src="{{ glide src="{featured_image}" width="960" height="640" fit="crop_focal" format="webp" quality="82" }}"
+                srcset="{{ glide src="{featured_image}" width="640" height="427" fit="crop_focal" format="webp" quality="82" }} 640w, {{ glide src="{featured_image}" width="960" height="640" fit="crop_focal" format="webp" quality="82" }} 960w"
+                sizes="(min-width: 1024px) 576px, 100vw"
+                alt="{{ featured_image:alt ?? title }}"
+                style="object-position: {{ featured_image:focus_css }}"
+                {{ partial:progressive_media_attributes width="960" height="640" }}
+            >
+        {{ else }}
+            <span class="editorial-media-placeholder" aria-hidden="true"><img src="/assets/uploads/globals/LaravelBrandMark.svg" width="135" height="140" alt=""></span>
+        {{ /if }}
+    </a>
+
+    <div class="editorial-entry__body">
+        <div class="editorial-entry__meta">
+            {{ if type }}
+                <span class="editorial-entry__category">{{ type }}</span>
+                <span class="editorial-entry__dot" aria-hidden="true">·</span>
+            {{ /if }}
+            <time datetime="{{ date_start format="Y-m-d" }}">{{ date_start | iso_format="D MMMM YYYY" }}</time>
+        </div>
+
+        <h2 class="editorial-entry__title{{ unless past }}{{ if first }} editorial-entry__title--featured{{ /if }}{{ /unless }}"><a href="{{ url }}">{{ title }}</a></h2>
+
+        {{ if introduction }}
+            <p class="editorial-entry__summary">{{ introduction | strip_tags | truncate:240 }}</p>
+        {{ /if }}
+
+        <a class="editorial-text-link" href="{{ url }}">Bekijk evenement <span aria-hidden="true">→</span></a>
+    </div>
+</article>

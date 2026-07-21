@@ -1,35 +1,49 @@
-<div class="translate-y-32 lg:translate-y-52 pb-32 md:pb-48">
-    {{# Top background image #}}
-    {{ partial:decoration/floor-background background="floor-top-about-us" /}}
+<div class="editorial-page editorial-events-page">
+    <div class="editorial-rail">
+        <header class="editorial-page__header">
+            <div class="editorial-page__heading">
+                <span class="editorial-eyebrow">Dutch Laravel Foundation</span>
+                <h1 class="editorial-page__title">{{ title }}</h1>
+                <p class="editorial-page__intro">Ontmoet de Nederlandse Laravel-community tijdens meetups, hackathons, diners en andere evenementen waar kennisdeling en verbinding centraal staan.</p>
+            </div>
+        </header>
 
-    <div class="container mb-auto mx-auto flex flex-col items-left justify-center relative">
-
-        {{ content }}
-            {{ partial src="sets/autoload" }}
-        {{ /content }}
-
-        <section class="mb-half">
-            {{ if { collection:count in="events" sort="date_start:asc" date_start:is_after="{today}" } > 0 }}
-                {{ collection:events sort="date_start:asc" date_start:is_after="{today}" }}
-                    {{ partial:blocks/event :image="image" :category="type" link="/events/{{ slug }}" }}
-                        {{ introduction }}
-                    {{ /partial:blocks/event }}
-                {{ /collection:events }}
-            {{ /if }}
+        <section class="editorial-events-section" aria-label="Aankomende evenementen">
+            {{ collection:events sort="date_start:asc" date_start:is_after="today" as="upcoming_events" }}
+                {{ if no_results }}
+                    <div class="editorial-empty">
+                        <p>Er staan momenteel geen nieuwe evenementen gepland.</p>
+                    </div>
+                {{ else }}
+                    <div class="editorial-feed">
+                        {{ upcoming_events }}
+                            {{ partial:editorial/event-entry }}
+                        {{ /upcoming_events }}
+                    </div>
+                {{ /if }}
+            {{ /collection:events }}
         </section>
 
-        <section class="mb-half">
-            <div class="w-full px-0 set set-double-column lg:w-1/2 lg:mr-auto">
-                <h2>Eerdere evenementen</h2>
-            </div>
-            <p class="w-full md:w-3/4 lg:w-1/2 mb-half">Benieuwd welke evenementen de foundation in het verleden heeft georganiseerd? Zie onderstaand een overzicht van eerdere evenementen.</p>
-            {{ if { collection:count in="events" sort="date_start:desc" date_start:is_before="{today}" } > 0 }}
-                {{ collection:events sort="date_start:desc" date_start:is_before="{today}" }}
-                    {{ partial:blocks/event :image="image" :category="type" link="/events/{{ slug }}" image_class="grayscale" past_event="true" }}
-                        {{ introduction }}
-                    {{ /partial:blocks/event }}
-                {{ /collection:events }}
-            {{ /if }}
+        <section class="editorial-events-section editorial-events-section--past border-t border-[#ececec]" aria-labelledby="past-events-heading">
+            <header class="editorial-events-section__header border-b border-[#ececec] px-6 pt-20 pb-10 lg:px-10 lg:pt-28">
+                <span class="editorial-eyebrow">Terugblik</span>
+                <h2 id="past-events-heading" class="mt-0! mb-3! text-2xl! font-semibold! leading-tight! text-[#090910]!">Eerdere evenementen</h2>
+                <p class="mb-0! max-w-2xl text-[#525257]">Een overzicht van bijeenkomsten die de foundation eerder organiseerde.</p>
+            </header>
+
+            {{ collection:events sort="date_start:desc" date_start:is_before="today" as="past_events" }}
+                {{ if no_results }}
+                    <div class="editorial-empty">
+                        <p>Er zijn nog geen eerdere evenementen om te tonen.</p>
+                    </div>
+                {{ else }}
+                    <div class="editorial-feed">
+                        {{ past_events }}
+                            {{ partial:editorial/event-entry past="true" }}
+                        {{ /past_events }}
+                    </div>
+                {{ /if }}
+            {{ /collection:events }}
         </section>
     </div>
 </div>

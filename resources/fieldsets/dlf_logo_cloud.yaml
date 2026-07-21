@@ -1,0 +1,40 @@
+title: 'DLF Logo-overzicht'
+fields:
+  -
+    handle: heading
+    field:
+      display: Kop
+      type: text
+      validate:
+        - required
+  -
+    handle: logos
+    field:
+      display: Logo's
+      type: grid
+      mode: stacked
+      reorderable: true
+      add_row: 'Logo toevoegen'
+      fields:
+        -
+          handle: logo
+          field:
+            display: Logo
+            type: assets
+            container: assets
+            mode: grid
+            max_files: 1
+            validate:
+              - required
+        -
+          handle: name
+          field:
+            display: Naam
+            type: text
+            validate:
+              - required
+        -
+          handle: link
+          field:
+            display: Link
+            type: link
