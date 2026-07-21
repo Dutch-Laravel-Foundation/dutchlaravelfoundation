@@ -1,11 +1,19 @@
 @keyframes dlf-home-marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
 }
 
 @keyframes dlf-home-hero-zoom-out {
-    from { transform: scale(1.2); }
-    to { transform: scale(1.1); }
+    from {
+        transform: scale(1.2);
+    }
+    to {
+        transform: scale(1.1);
+    }
 }
 
 .dlf-footer {
@@ -25,7 +33,8 @@
     align-items: center;
     overflow: hidden;
     border-right: 1px solid var(--dlf-line);
-    background: #fff repeating-linear-gradient(30deg, #f7f7fb 0, #f7f7fb 1px, transparent 1px, transparent 5px);
+    background: #fff
+        repeating-linear-gradient(30deg, #f7f7fb 0, #f7f7fb 1px, transparent 1px, transparent 5px);
 }
 
 .dlf-home-hero__copy > div {
@@ -172,10 +181,12 @@
 }
 
 .dlf-home-bento:has(
-    .dlf-home-bento__featured-image:hover,
-    .dlf-home-bento__featured-copy:hover,
-    .dlf-home-bento__featured-copy:focus-within
-) .dlf-home-bento__featured-image img {
+        .dlf-home-bento__featured-image:hover,
+        .dlf-home-bento__featured-copy:hover,
+        .dlf-home-bento__featured-copy:focus-within
+    )
+    .dlf-home-bento__featured-image
+    img {
     transform: scale(1.035);
 }
 
@@ -194,7 +205,7 @@
 
 .dlf-home-bento h3 a:hover,
 .dlf-home-highlight h2 a:hover {
-    color: var(--dlf-red);
+    color: var(--dlf-red-text);
 }
 
 .dlf-home-bento h3 {
@@ -240,8 +251,8 @@
 .dlf-home-bento__about {
     grid-column: 2;
     grid-row: 2;
-    background: var(--dlf-red);
-    color: rgba(255, 255, 255, 0.9);
+    background: var(--dlf-red-action);
+    color: #fff;
 }
 
 .dlf-home-bento__about h3,
@@ -275,7 +286,8 @@
 .dlf-home-partners__spacer {
     width: max(24px, calc((100vw - var(--dlf-max)) / 2));
     flex: none;
-    background: #fff repeating-linear-gradient(30deg, #f7f7fb 0, #f7f7fb 1px, transparent 1px, transparent 5px);
+    background: #fff
+        repeating-linear-gradient(30deg, #f7f7fb 0, #f7f7fb 1px, transparent 1px, transparent 5px);
 }
 
 .dlf-home-partners h2 {
@@ -286,7 +298,8 @@
     margin: 0;
     padding: 48px 42px;
     border-right: 1px solid var(--dlf-line);
-    background: #fff repeating-linear-gradient(30deg, #f7f7fb 0, #f7f7fb 1px, transparent 1px, transparent 5px);
+    background: #fff
+        repeating-linear-gradient(30deg, #f7f7fb 0, #f7f7fb 1px, transparent 1px, transparent 5px);
     color: var(--dlf-black);
     font-size: 1.0625rem;
     font-weight: 700;
@@ -447,6 +460,8 @@
 
 .dlf-home-clients__logo img {
     display: block;
+    width: auto;
+    height: auto;
     max-width: 132px;
     max-height: 36px;
     padding-inline: 16px;
@@ -624,6 +639,10 @@
 
     .dlf-home-partners__marquee {
         padding: 28px 0;
+    }
+
+    .dlf-home-partners__track {
+        animation-duration: 52.25s;
     }
 
     .dlf-home-partners__group img {

@@ -1,9 +1,9 @@
-const loadScript = (source, attributes = {}) => {
-    if (document.querySelector(`script[src="${source}"]`)) {
+const loadScript = (documentRoot, source, attributes = {}) => {
+    if (documentRoot.querySelector(`script[src="${source}"]`)) {
         return;
     }
 
-    const script = document.createElement("script");
+    const script = documentRoot.createElement("script");
     script.src = source;
     script.async = true;
 
@@ -11,53 +11,56 @@ const loadScript = (source, attributes = {}) => {
         script.setAttribute(name, value);
     });
 
-    document.head.append(script);
+    documentRoot.head.append(script);
 };
 
-const initGoogleTagManager = () => {
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
+const initGoogleTagManager = (documentRoot, browserWindow) => {
+    browserWindow.dataLayer = browserWindow.dataLayer || [];
+    browserWindow.dataLayer.push({
         "gtm.start": Date.now(),
         event: "gtm.js",
     });
-    loadScript("https://www.googletagmanager.com/gtm.js?id=GTM-N75FRC56");
+    loadScript(documentRoot, "https://www.googletagmanager.com/gtm.js?id=GTM-N75FRC56");
 };
 
-const initLeadinfo = () => {
+const initLeadinfo = (documentRoot, browserWindow) => {
     const namespace = "leadinfo";
 
-    if (window[namespace]) {
+    if (browserWindow[namespace]) {
         return;
     }
 
-    window.GlobalLeadinfoNamespace = window.GlobalLeadinfoNamespace || [];
-    window.GlobalLeadinfoNamespace.push(namespace);
-    window[namespace] = (...parameters) => {
-        window[namespace].q.push(parameters);
+    browserWindow.GlobalLeadinfoNamespace = browserWindow.GlobalLeadinfoNamespace || [];
+    browserWindow.GlobalLeadinfoNamespace.push(namespace);
+    browserWindow[namespace] = (...parameters) => {
+        browserWindow[namespace].q.push(parameters);
     };
-    window[namespace].q = [];
-    window[namespace].t = Date.now();
-    loadScript("https://cdn.leadinfo.net/ping.js");
+    browserWindow[namespace].q = [];
+    browserWindow[namespace].t = Date.now();
+    loadScript(documentRoot, "https://cdn.leadinfo.net/ping.js");
 };
 
-const initLinkedIn = () => {
-    window._linkedin_partner_id = "8379674";
-    window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
-    window._linkedin_data_partner_ids.push(window._linkedin_partner_id);
-    window.lintrk =
-        window.lintrk ||
+const initLinkedIn = (documentRoot, browserWindow) => {
+    browserWindow._linkedin_partner_id = "8379674";
+    browserWindow._linkedin_data_partner_ids = browserWindow._linkedin_data_partner_ids || [];
+    browserWindow._linkedin_data_partner_ids.push(browserWindow._linkedin_partner_id);
+    browserWindow.lintrk =
+        browserWindow.lintrk ||
         ((...parameters) => {
-            window.lintrk.q.push(parameters);
+            browserWindow.lintrk.q.push(parameters);
         });
-    window.lintrk.q = window.lintrk.q || [];
-    loadScript("https://snap.licdn.com/li.lms-analytics/insight.min.js");
+    browserWindow.lintrk.q = browserWindow.lintrk.q || [];
+    loadScript(documentRoot, "https://snap.licdn.com/li.lms-analytics/insight.min.js");
 };
 
-export function initDeferredThirdParties() {
-    initGoogleTagManager();
-    initLeadinfo();
-    initLinkedIn();
-    loadScript("https://cdn.usefathom.com/script.js", {
+export function initDeferredThirdParties({
+    document: documentRoot = document,
+    window: browserWindow = window,
+} = {}) {
+    initGoogleTagManager(documentRoot, browserWindow);
+    initLeadinfo(documentRoot, browserWindow);
+    initLinkedIn(documentRoot, browserWindow);
+    loadScript(documentRoot, "https://cdn.usefathom.com/script.js", {
         "data-site": "XTVPLNKC",
     });
 }

@@ -1,0 +1,5 @@
+{{ if extension === "svg" }}
+    <img src="{{ url }}" alt="{{ client_title }}" width="{{ width }}" height="{{ height }}" loading="lazy" decoding="async">
+{{ else }}
+    <img src="{{ glide src="{url}" width="160" format="webp" quality="82" }}" srcset="{{ glide src="{url}" width="160" format="webp" quality="82" }} 160w, {{ glide src="{url}" width="320" format="webp" quality="82" }} 320w" sizes="132px" alt="{{ client_title }}" width="{{ width }}" height="{{ height }}" loading="lazy" decoding="async">
+{{ /if }}

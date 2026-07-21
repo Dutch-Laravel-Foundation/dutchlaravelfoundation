@@ -1,34 +1,45 @@
 <header
     class="dlf-header"
-    x-data="{ mobileOpen: false }"
-    x-init="$watch('mobileOpen', value => document.documentElement.classList.toggle('dlf-menu-open', value))"
-    x-effect="document.querySelectorAll('.dlf-skip-link, #main-content, .dlf-footer, #vragenai-app').forEach(element => element.inert = mobileOpen)"
+    x-data="headerMenu"
     :class="{ 'dlf-header--menu-open': mobileOpen }"
-    @keydown.escape.window="if (mobileOpen) { mobileOpen = false; $nextTick(() => $refs.menuButton.focus()) }"
+    @keydown.escape.window="closeMobileMenuAndRestoreFocus"
 >
     <div class="dlf-topbar" :inert="mobileOpen">
         <div class="dlf-shell-container dlf-topbar-inner">
-            <span class="dlf-topbar-spacer" aria-hidden="true"></span>
+            <button
+                class="dlf-topbar-search js-vragenai-trigger"
+                type="button"
+                @click="$dispatch('open-vragen-ai')"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+                    <path
+                        fill-rule="evenodd"
+                        d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+                <span>Zoeken</span>
+            </button>
             <span class="dlf-recognized-by">
                 <span>Recognized by</span>
-                <img src="/assets/img/laravel-wordmark-white.svg" alt="Laravel">
+                <img
+                    src="/assets/img/laravel-wordmark-white.svg"
+                    alt="Laravel"
+                    width="1280"
+                    height="314"
+                />
             </span>
             <span class="dlf-topbar-links">
                 <a href="/aanvraag">Match je project</a>
-                <span aria-hidden="true">|</span>
-                <button class="js-vragenai-trigger" type="button" @click="$dispatch('open-vragen-ai')">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" />
-                    </svg>
-                    <span>Zoeken</span>
-                </button>
+                <span class="dlf-topbar-separator" aria-hidden="true">|</span>
+                <a href="/contact">Contact</a>
             </span>
         </div>
     </div>
 
     <div class="dlf-shell-container dlf-header-row" :inert="mobileOpen">
         <a class="dlf-header-logo" href="/" aria-label="{{ dlf:title }} — home">
-            <img src="/assets/img/logo-2025.svg" alt="{{ dlf:title }}">
+            <img src="/assets/img/logo-2025.svg" alt="{{ dlf:title }}" width="562" height="236" />
         </a>
 
         {{ partial:navigation }}
@@ -40,9 +51,14 @@
             :aria-expanded="mobileOpen.toString()"
             aria-label="Menu openen"
             x-ref="menuButton"
-            @click="mobileOpen = true; $nextTick(() => $refs.closeButton.focus())"
+            @click="openMobileMenu"
         >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+            >
                 <path d="M3 6h18M3 12h18M3 18h18" />
             </svg>
         </button>
@@ -57,45 +73,63 @@
         x-cloak
         x-show="mobileOpen"
         x-transition.opacity.duration.200ms
-        @keydown.tab="
-            const focusable = [...$el.querySelectorAll('a[href], button:not([disabled]), summary')].filter(element => element.offsetParent !== null);
-            const first = focusable[0];
-            const last = focusable[focusable.length - 1];
-            if ($event.shiftKey && document.activeElement === first) { $event.preventDefault(); last.focus(); }
-            if (!$event.shiftKey && document.activeElement === last) { $event.preventDefault(); first.focus(); }
-        "
+        @keydown.tab="trapMobileMenuFocus($event)"
     >
         <div class="dlf-topbar dlf-mobile-menu-topbar">
             <div class="dlf-shell-container dlf-topbar-inner">
+                <button
+                    class="dlf-topbar-search js-vragenai-trigger"
+                    type="button"
+                    @click="closeMobileMenuAndOpenSearch"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+                        <path
+                            fill-rule="evenodd"
+                            d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                            clip-rule="evenodd"
+                        />
+                    </svg>
+                    <span>Zoeken</span>
+                </button>
                 <span class="dlf-recognized-by">
                     <span>Recognized by</span>
-                    <img src="/assets/img/laravel-wordmark-white.svg" alt="Laravel">
+                    <img
+                        src="/assets/img/laravel-wordmark-white.svg"
+                        alt="Laravel"
+                        width="1280"
+                        height="314"
+                    />
                 </span>
                 <span class="dlf-topbar-links">
-                    <a href="/aanvraag" @click="mobileOpen = false">Match je project</a>
-                    <span aria-hidden="true">|</span>
-                    <button class="js-vragenai-trigger" type="button" @click="mobileOpen = false; $dispatch('open-vragen-ai')">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
-                            <path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" />
-                        </svg>
-                        <span>Zoeken</span>
-                    </button>
+                    <a href="/aanvraag" @click="closeMobileMenu">Match je project</a>
+                    <span class="dlf-topbar-separator" aria-hidden="true">|</span>
+                    <a href="/contact" @click="closeMobileMenu">Contact</a>
                 </span>
             </div>
         </div>
 
         <div class="dlf-mobile-menu-header">
-            <a href="/" aria-label="{{ dlf:title }} — home" @click="mobileOpen = false">
-                <img src="/assets/img/logo-2025.svg" alt="{{ dlf:title }}">
+            <a href="/" aria-label="{{ dlf:title }} — home" @click="closeMobileMenu">
+                <img
+                    src="/assets/img/logo-2025.svg"
+                    alt="{{ dlf:title }}"
+                    width="562"
+                    height="236"
+                />
             </a>
             <button
                 class="dlf-mobile-close"
                 type="button"
                 aria-label="Menu sluiten"
                 x-ref="closeButton"
-                @click="mobileOpen = false; $nextTick(() => $refs.menuButton.focus())"
+                @click="closeMobileMenuAndRestoreFocus"
             >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden="true"
+                >
                     <path d="m5 5 14 14M19 5 5 19" />
                 </svg>
             </button>

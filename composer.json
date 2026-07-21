@@ -9,6 +9,8 @@
         "laravel/framework": "^13.0",
         "laravel/tinker": "^3.0",
         "pecotamic/sitemap": "^1.4",
+        "spatie/laravel-csp": "^3.26",
+        "spatie/laravel-health": "^1.40",
         "statamic/cms": "^6.0"
     },
     "require-dev": {

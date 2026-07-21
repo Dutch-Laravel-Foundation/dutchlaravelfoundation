@@ -23,7 +23,7 @@
     {{ if meta_description_text }}
     <meta property="og:description" content="{{ meta_description_text }}">
     {{ /if }}
-    {{ opengraph_image = opengraph:opengraph_image ?? "/og-image.jpg" }}
+    {{ opengraph_image = opengraph:opengraph_image ?? "/og-image.jpg?v=3" }}
     {{ if collection == "knowledge" || collection == "insights" }}
         {{ if featured_image }}
             {{ opengraph_image = featured_image:url }}
@@ -56,7 +56,7 @@
     {{ vite src="resources/js/site.js|resources/css/tailwind.css" }}
 
     <noscript>
-        <style>[data-progressive-media] { opacity: 1 !important; }</style>
+        <style nonce="{{ csp_nonce }}">[data-progressive-media] { opacity: 1 !important; }</style>
     </noscript>
 
 </head>
@@ -74,6 +74,8 @@
     </div>
 
     {{ partial:footer }}
+
+    {{ partial:tracking_consent }}
 
     {{ dynamic_token }}
 

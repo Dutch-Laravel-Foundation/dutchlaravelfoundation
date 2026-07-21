@@ -2,8 +2,8 @@
 
 <div
     class="dlf-community-page dlf-internships-page"
-    x-data="loadInternships()"
-    x-effect="document.body.classList.toggle('overflow-hidden', filterModalOpen)"
+    x-data="internshipsFilter"
+    x-effect="syncBodyOverflow"
     @keydown.escape.window="closeFilterModal()"
 >
     {{ content }}
@@ -59,7 +59,7 @@
                 {{ if member }}
                     <a class="dlf-member-card" href="{{ url }}">
                         <span class="dlf-member-card__logo">
-                            {{ if member:logo }}<img src="{{ member:logo | first | url }}" alt="" loading="lazy">{{ /if }}
+                            {{ member:logo }}<img src="{{ url }}" alt="" width="{{ width }}" height="{{ height }}" loading="lazy">{{ /member:logo }}
                         </span>
                         <span class="dlf-member-card__body">
                             <span class="dlf-member-card__name">{{ title }}</span>
@@ -80,7 +80,9 @@
             <template x-for="item in filteredInternships" :key="item.id">
                 <a class="dlf-member-card" :href="item.url">
                     <span class="dlf-member-card__logo">
-                        <img x-show="item.logo" :src="item.logo" alt="" loading="lazy">
+                        <template x-if="item.logo">
+                            <img :src="item.logo" alt="" :width="item.logoWidth" :height="item.logoHeight" loading="lazy">
+                        </template>
                     </span>
                     <span class="dlf-member-card__body">
                         <span class="dlf-member-card__name" x-text="item.title"></span>
@@ -142,7 +144,7 @@
             <div class="dlf-members-dialog__foot">
                 <button type="button" class="dlf-members-clear" @click="resetFilters()">Filters wissen</button>
                 <button type="button" class="dlf-community-button" style="width: 196px" @click="closeFilterModal()">
-                    <span class="dlf-community-button__face" x-text="'Toon ' + resultLabel"></span>
+                    <span class="dlf-community-button__face" x-text="filterResultLabel"></span>
                     <span class="dlf-community-button__back" aria-hidden="true"></span>
                 </button>
             </div>
@@ -160,7 +162,11 @@
                     data-title="{{ title | entities }}"
                     data-member-id="{{ member:id }}"
                     data-member-title="{{ member:title | entities }}"
-                    data-logo="{{ if member:logo }}{{ member:logo | first | url }}{{ /if }}"
+                    {{ member:logo }}
+                    data-logo="{{ url }}"
+                    data-logo-width="{{ width }}"
+                    data-logo-height="{{ height }}"
+                    {{ /member:logo }}
                     data-employees="{{ member:employees | entities }}"
                     data-province="{{ member:province | entities }}"
                     data-city="{{ member:city | entities }}"
@@ -173,10 +179,10 @@
 </div>
 
 {{ unless call_to_action }}
-    {{ partial:footer_cta_banner :page_slug="slug" }}
+    {{ partial:footer_cta_default }}
 {{ /unless }}
 
-<script>
+<script nonce="{{ csp_nonce }}">
 function loadInternships() {
     const internships = Array.from(document.querySelectorAll('#internships-data [data-internship]'))
         .map((element) => ({ ...element.dataset }));

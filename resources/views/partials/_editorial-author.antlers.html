@@ -5,11 +5,9 @@
             <div class="editorial-author__content">
                 {{ if author_image }}
                     <div class="editorial-author__portrait">
-                        <img
-                            src="{{ glide src="{author_image}" width="480" format="webp" quality="82" }}"
-                            alt="{{ author_image:alt ?? author_name }}"
-                            loading="lazy"
-                        >
+                        {{ glide :src="author_image" width="480" format="webp" quality="82" }}
+                            <img src="{{ url }}" alt="{{ author_image:alt ?? author_name }}" width="{{ width }}" height="{{ height }}" loading="lazy">
+                        {{ /glide }}
                     </div>
                 {{ /if }}
 

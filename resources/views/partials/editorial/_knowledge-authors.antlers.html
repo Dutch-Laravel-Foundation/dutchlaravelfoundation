@@ -13,15 +13,15 @@
                 <div class="editorial-author__content">
                     {{ if photo }}
                         <div class="editorial-author__portrait">
-                            <img
-                                src="{{ glide src="{photo}" width="960" format="webp" quality="82" }}"
-                                alt="{{ photo:alt ?? title }}"
-                                loading="lazy"
-                            >
+                            {{ glide :src="photo" width="960" format="webp" quality="82" }}
+                                <img src="{{ url }}" alt="{{ photo:alt ?? title }}" width="{{ width }}" height="{{ height }}" loading="lazy">
+                            {{ /glide }}
                         </div>
                     {{ elseif photo_url }}
                         <div class="editorial-author__portrait">
-                            <img src="{{ photo_url }}" alt="{{ title }}" loading="lazy">
+                            {{ glide :src="photo_url" width="960" format="webp" quality="82" }}
+                                <img src="{{ url }}" alt="{{ title }}" width="{{ width }}" height="{{ height }}" loading="lazy">
+                            {{ /glide }}
                         </div>
                     {{ /if }}
 
@@ -35,7 +35,7 @@
                                 {{ if linkedin_url }}
                                     <a class="editorial-author__link" href="{{ linkedin_url }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn van {{ title }}">
                                         <span class="editorial-author__link-face">
-                                            <img class="editorial-author__icon" src="/assets/redesign/socials/linkedin.svg" alt="">
+                                            <img class="editorial-author__icon" src="/assets/redesign/socials/linkedin.svg" width="24" height="24" alt="">
                                         </span>
                                     </a>
                                 {{ /if }}

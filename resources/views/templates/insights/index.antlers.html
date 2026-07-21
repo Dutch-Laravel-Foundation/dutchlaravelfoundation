@@ -34,8 +34,8 @@
                                         <img
                                             class="editorial-entry__image"
                                             src="{{ glide src="{featured_image}" width="960" height="768" fit="crop_focal" format="webp" quality="82" }}"
-                                            srcset="{{ glide src="{featured_image}" width="640" height="512" fit="crop_focal" format="webp" quality="82" }} 640w, {{ glide src="{featured_image}" width="960" height="768" fit="crop_focal" format="webp" quality="82" }} 960w"
-                                            sizes="(min-width: 1024px) 576px, 100vw"
+                                            srcset="{{ glide src="{featured_image}" width="480" height="384" fit="crop_focal" format="webp" quality="82" }} 480w, {{ glide src="{featured_image}" width="640" height="512" fit="crop_focal" format="webp" quality="82" }} 640w, {{ glide src="{featured_image}" width="960" height="768" fit="crop_focal" format="webp" quality="82" }} 960w"
+                                            sizes="(min-width: 1024px) 576px, calc(100vw - 48px)"
                                             alt="{{ featured_image:alt ?? title }}"
                                             style="object-position: {{ featured_image:focus_css }}"
                                             {{ partial:progressive_media_attributes width="960" height="768" loading="eager" fetchpriority="high" }}
@@ -44,15 +44,15 @@
                                         <img
                                             class="editorial-entry__image"
                                             src="{{ glide src="{featured_image}" width="960" height="640" fit="crop_focal" format="webp" quality="82" }}"
-                                            srcset="{{ glide src="{featured_image}" width="640" height="427" fit="crop_focal" format="webp" quality="82" }} 640w, {{ glide src="{featured_image}" width="960" height="640" fit="crop_focal" format="webp" quality="82" }} 960w"
-                                            sizes="(min-width: 1024px) 576px, 100vw"
+                                            srcset="{{ glide src="{featured_image}" width="480" height="320" fit="crop_focal" format="webp" quality="82" }} 480w, {{ glide src="{featured_image}" width="640" height="427" fit="crop_focal" format="webp" quality="82" }} 640w, {{ glide src="{featured_image}" width="960" height="640" fit="crop_focal" format="webp" quality="82" }} 960w"
+                                            sizes="(min-width: 1024px) 576px, calc(100vw - 48px)"
                                             alt="{{ featured_image:alt ?? title }}"
                                             style="object-position: {{ featured_image:focus_css }}"
                                             {{ partial:progressive_media_attributes width="960" height="640" }}
                                         >
                                     {{ /if }}
                                 {{ else }}
-                                    <span class="editorial-media-placeholder" aria-hidden="true"><img src="/assets/uploads/globals/LaravelBrandMark.svg" alt=""></span>
+                                    <span class="editorial-media-placeholder" aria-hidden="true"><img src="/assets/uploads/globals/LaravelBrandMark.svg" width="135" height="140" alt=""></span>
                                 {{ /if }}
                             </span>
 
