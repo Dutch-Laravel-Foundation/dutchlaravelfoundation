@@ -61,7 +61,7 @@
                                 {{ /if }}
 
                                 {{ if introduction }}
-                                    <p class="editorial-entry__summary">{{ introduction | strip_tags | truncate:240 }}</p>
+                                    <p class="editorial-entry__summary">{{ introduction | strip_tags | safe_truncate:240:"..." }}</p>
                                 {{ /if }}
 
                                 <a class="editorial-text-link" href="{{ url }}">Bekijk case <span aria-hidden="true">→</span></a>

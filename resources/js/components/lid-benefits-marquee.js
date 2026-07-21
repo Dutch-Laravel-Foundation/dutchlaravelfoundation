@@ -8,9 +8,28 @@ export const initializeBenefitsScroller = (scroller) => {
     }
 
     scroller.tabIndex = 0;
-    scroller.scrollLeft = window.matchMedia(SINGLE_ROW_QUERY).matches
-        ? 0
-        : Math.max(0, scroller.scrollWidth - scroller.clientWidth);
+    const usesSingleRow = window.matchMedia(SINGLE_ROW_QUERY).matches;
+    const endItemCount = Number.parseInt(scroller.dataset?.lidBenefitsAlignEndItems ?? "", 10);
+    const firstAlignedItem = scroller.children[scroller.children.length - endItemCount];
+
+    if (usesSingleRow) {
+        scroller.scrollLeft = 0;
+    } else if (endItemCount > 0 && firstAlignedItem) {
+        scroller.scrollLeft = 0;
+        const firstItemLeft = scroller.children[0].getBoundingClientRect().left;
+
+        scroller.scrollLeft = Math.max(
+            0,
+            firstAlignedItem.getBoundingClientRect().left -
+                firstItemLeft,
+        );
+        scroller.style.setProperty(
+            "--dlf-lid-benefits-alignment-offset",
+            `${firstItemLeft - firstAlignedItem.getBoundingClientRect().left}px`,
+        );
+    } else {
+        scroller.scrollLeft = Math.max(0, scroller.scrollWidth - scroller.clientWidth);
+    }
 
     const updateFadeState = () => {
         const maxScroll = Math.max(0, scroller.scrollWidth - scroller.clientWidth);

@@ -490,6 +490,21 @@ export const createSalesFunnelWizard = () => ({
         delete this.errors[field];
     },
 
+    selectProduct(product) {
+        this.data.product = this.data.product === product ? "" : product;
+        this.clearError("product");
+    },
+
+    selectBudget(budget) {
+        this.data.budget = budget;
+        this.clearError("budget");
+    },
+
+    selectCompanyType(companyType) {
+        this.data.company_type = companyType;
+        this.clearError("company_type");
+    },
+
     nextStep() {
         if (!this.validate()) return;
         this.trackStepComplete(this.step);

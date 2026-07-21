@@ -10,6 +10,41 @@ globalThis.window = {
 const { initializeBenefitsScroller } = await import("./lid-benefits-marquee");
 
 describe("member benefits scroller", () => {
+    it("uses exact item positions when aligning the final visible items", () => {
+        const toggleClass = mock(() => {});
+        const setProperty = mock(() => {});
+        let scrollLeft = 0;
+        const scroller = {
+            children: [],
+            classList: { toggle: toggleClass },
+            clientWidth: 400,
+            dataset: { lidBenefitsAlignEndItems: "2" },
+            scrollWidth: 1200,
+            style: { setProperty },
+            tabIndex: -1,
+            addEventListener: mock(() => {}),
+        };
+        Object.defineProperty(scroller, "scrollLeft", {
+            get: () => scrollLeft,
+            set: (value) => {
+                scrollLeft = Math.round(value);
+            },
+        });
+        scroller.children = [0, 399.75, 799.5, 1199.25].map((left) => ({
+            getBoundingClientRect: () => ({ left: left - scrollLeft }),
+        }));
+
+        window.matchMedia = mock(() => ({ matches: false }));
+
+        initializeBenefitsScroller(scroller);
+
+        expect(scroller.scrollLeft).toBe(800);
+        expect(setProperty).toHaveBeenCalledWith(
+            "--dlf-lid-benefits-alignment-offset",
+            "0.5px",
+        );
+    });
+
     it("starts at the left edge when benefits use one row", () => {
         const toggleClass = mock(() => {});
         const scroller = {

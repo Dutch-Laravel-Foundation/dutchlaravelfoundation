@@ -70,7 +70,7 @@
                                 {{ /if }}
 
                                 {{ if introduction }}
-                                    <p class="editorial-entry__summary">{{ introduction | strip_tags | truncate:240 }}</p>
+                                    <p class="editorial-entry__summary">{{ introduction | strip_tags | safe_truncate:240:"..." }}</p>
                                 {{ /if }}
 
                                 <span class="editorial-text-link">Lees meer <span aria-hidden="true">→</span></span>

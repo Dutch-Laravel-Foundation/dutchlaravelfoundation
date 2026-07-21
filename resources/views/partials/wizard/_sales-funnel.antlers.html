@@ -62,7 +62,7 @@
                         type="button"
                         role="radio"
                         :aria-checked="data.product === option.value"
-                        @click="data.product = data.product === option.value ? '' : option.value; clearError('product')"
+                        @click="selectProduct(option.value)"
                         class="relative p-4 sm:p-5 rounded border-[1.5px] text-left transition-colors focus-visible:ring-2 focus-visible:ring-primary-accent focus-visible:ring-offset-2 outline-none flex items-start"
                         :class="data.product === option.value
                             ? 'dlf-wizard-choice--selected border-primary-accent'
@@ -137,13 +137,13 @@
                         type="button"
                         role="radio"
                         :aria-checked="data.budget === option.value"
-                        @click="data.budget = option.value; clearError('budget')"
+                        @click="selectBudget(option.value)"
                         class="relative p-6 rounded border-[1.5px] text-center transition-colors focus-visible:ring-2 focus-visible:ring-primary-accent focus-visible:ring-offset-2 outline-none"
                         :class="data.budget === option.value
                             ? 'dlf-wizard-choice--selected border-primary-accent'
                             : 'border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50'"
                     >
-                        <span class="block text-lg font-bold text-tertiary-dark" x-text="option.label"></span>
+                        <span class="block text-lg font-medium text-tertiary-dark" x-text="option.label"></span>
                     </button>
                 </template>
             </div>
@@ -168,13 +168,13 @@
                         type="button"
                         role="radio"
                         :aria-checked="data.company_type === option.value"
-                        @click="data.company_type = option.value; clearError('company_type')"
+                        @click="selectCompanyType(option.value)"
                         class="relative p-6 rounded border-[1.5px] text-center transition-colors focus-visible:ring-2 focus-visible:ring-primary-accent focus-visible:ring-offset-2 outline-none"
                         :class="data.company_type === option.value
                             ? 'dlf-wizard-choice--selected border-primary-accent'
                             : 'border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50'"
                     >
-                        <span class="block text-lg font-bold text-tertiary-dark" x-text="option.label"></span>
+                        <span class="block text-lg font-medium text-tertiary-dark" x-text="option.label"></span>
                         <span class="block text-sm text-tertiary-light mt-1" x-text="option.description"></span>
                     </button>
                 </template>
@@ -319,14 +319,14 @@
     {{# Navigation #}}
     <div class="dlf-wizard-navigation w-full py-14 sm:py-16 md:py-20">
         <div class="max-w-2xl mx-auto px-6 pb-0 sm:px-10 md:px-14 flex justify-between items-center">
-            <div class="flex items-center gap-4">
+            <div x-show="step > 0" class="dlf-wizard-secondary-actions flex items-center gap-4">
             <button
                 type="button"
                 x-show="step > 0"
                 @click="prevStep()"
-                class="inline-flex items-center gap-2 text-sm font-bold text-tertiary-dark hover:text-primary-accent transition-colors px-4 py-2.5 -ml-4 focus-visible:ring-2 focus-visible:ring-primary-accent rounded outline-none"
+                class="inline-flex items-center gap-1 text-sm font-medium text-tertiary-dark hover:text-primary-accent transition-colors px-4 py-2.5 -ml-4 focus-visible:ring-2 focus-visible:ring-primary-accent rounded outline-none"
             >
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <svg class="relative top-px w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                 </svg>
                 Vorige
@@ -342,13 +342,13 @@
             </button>
             </div>
 
-            <div x-show="step === 0"></div>
+            <div x-show="step === 0" class="dlf-wizard-navigation-spacer"></div>
 
             <template x-if="step < totalSteps - 1">
                 <button
                     type="button"
                     @click="nextStep()"
-                    class="dlf-btn ml-auto"
+                    class="dlf-wizard-primary-action dlf-btn ml-auto"
                 >
                     <span class="dlf-btn-face dlf-btn-face--red">Volgende</span>
                     <span class="dlf-btn-shadow dlf-btn-shadow--red" aria-hidden="true"></span>
@@ -359,7 +359,7 @@
                 <button
                     type="submit"
                     @click="trackSubmit()"
-                    class="dlf-btn ml-auto"
+                    class="dlf-wizard-primary-action dlf-btn ml-auto"
                 >
                     <span class="dlf-btn-face dlf-btn-face--red">Verstuur aanvraag</span>
                     <span class="dlf-btn-shadow dlf-btn-shadow--red" aria-hidden="true"></span>
@@ -525,6 +525,21 @@
 
             clearError(field) {
                 delete this.errors[field];
+            },
+
+            selectProduct(product) {
+                this.data.product = this.data.product === product ? '' : product;
+                this.clearError('product');
+            },
+
+            selectBudget(budget) {
+                this.data.budget = budget;
+                this.clearError('budget');
+            },
+
+            selectCompanyType(companyType) {
+                this.data.company_type = companyType;
+                this.clearError('company_type');
             },
 
             nextStep() {

@@ -4,7 +4,7 @@
             <div class="editorial-page__heading">
                 <span class="editorial-eyebrow">Kennis</span>
                 <h1 class="editorial-page__title">Kennis uit de community</h1>
-                <p class="editorial-page__intro">Verdieping, praktijkkennis en best practices uit het Nederlandse Laravel-ecosysteem — van toegankelijkheid en security tot performance en tooling.</p>
+                <p class="editorial-page__intro">Verdieping, praktijkkennis en best practices uit het Nederlandse Laravel-ecosysteem over toegankelijkheid, security, performance en tooling.</p>
             </div>
 
             <nav class="editorial-filters" aria-label="Filter kennisartikelen">
@@ -70,7 +70,7 @@
                                 {{ /if }}
 
                                 {{ if introduction }}
-                                    <p class="editorial-entry__summary">{{ introduction | strip_tags | truncate:240 }}</p>
+                                    <p class="editorial-entry__summary">{{ introduction | strip_tags | safe_truncate:240:"..." }}</p>
                                 {{ /if }}
 
                                 <span class="editorial-text-link">Lees meer <span aria-hidden="true">→</span></span>

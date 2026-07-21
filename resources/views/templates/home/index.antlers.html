@@ -129,7 +129,7 @@
             <article>
                 <p class="dlf-kicker">Mis het niet</p>
                 <h2 id="highlight-heading"><a href="{{ url }}">{{ title }}</a></h2>
-                <div class="dlf-home-excerpt">{{ introduction | markdown | strip_tags | safe_truncate:360 }}</div>
+                <div class="dlf-home-excerpt">{{ introduction | markdown | strip_tags }}</div>
                 <a class="dlf-text-link" href="{{ url }}">Lees meer <span aria-hidden="true">→</span></a>
             </article>
             <figure data-progressive-media-frame>

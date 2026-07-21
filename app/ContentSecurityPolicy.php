@@ -55,6 +55,7 @@ final readonly class ContentSecurityPolicy implements Preset
                 'https://cdn.usefathom.com',
                 'https://app.vragen.ai',
                 'https://dlf.vragen.ai',
+                'https://i.ytimg.com',
             ])
             ->add(Directive::CONNECT, [
                 Keyword::SELF,
