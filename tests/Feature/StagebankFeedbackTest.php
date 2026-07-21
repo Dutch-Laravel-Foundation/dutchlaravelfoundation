@@ -45,4 +45,18 @@ class StagebankFeedbackTest extends TestCase
         $this->assertNotFalse($template);
         $this->assertStringNotContainsString('x-text="item.member_title"', $template);
     }
+
+    public function testStagebankOverviewRendersMemberLogos(): void
+    {
+        $this->get('/stagebank')
+            ->assertOk()
+            ->assertSee('data-logo="/assets/uploads/members/ux-logo.svg"', false);
+    }
+
+    public function testInternshipDetailRendersTheMemberLogo(): void
+    {
+        $this->get('/stagebank/ux')
+            ->assertOk()
+            ->assertSee('<img src="/assets/uploads/members/ux-logo.svg"', false);
+    }
 }

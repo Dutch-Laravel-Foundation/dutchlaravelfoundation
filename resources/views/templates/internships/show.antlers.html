@@ -26,7 +26,7 @@
 
             {{ if member:logo }}
                 <a class="dlf-member-detail-head__logo" href="{{ member:url }}" aria-label="Bekijk het profiel van {{ member:title }}">
-                    {{ member:logo }}<img src="{{ url }}" alt="" width="{{ width }}" height="{{ height }}">{{ /member:logo }}
+                    <img src="{{ member:logo | first | url }}" alt="">
                 </a>
             {{ /if }}
         </div>

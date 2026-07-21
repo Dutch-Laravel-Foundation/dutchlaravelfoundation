@@ -59,7 +59,7 @@
                 {{ if member }}
                     <a class="dlf-member-card" href="{{ url }}">
                         <span class="dlf-member-card__logo">
-                            {{ member:logo }}<img src="{{ url }}" alt="" width="{{ width }}" height="{{ height }}" loading="lazy">{{ /member:logo }}
+                            <img src="{{ member:logo | first | url }}" alt="" loading="lazy">
                         </span>
                         <span class="dlf-member-card__body">
                             <span class="dlf-member-card__name">{{ title }}</span>
@@ -81,7 +81,7 @@
                 <a class="dlf-member-card" :href="item.url">
                     <span class="dlf-member-card__logo">
                         <template x-if="item.logo">
-                            <img :src="item.logo" alt="" :width="item.logoWidth" :height="item.logoHeight" loading="lazy">
+                            <img :src="item.logo" alt="" loading="lazy">
                         </template>
                     </span>
                     <span class="dlf-member-card__body">
@@ -162,11 +162,7 @@
                     data-title="{{ title | entities }}"
                     data-member-id="{{ member:id }}"
                     data-member-title="{{ member:title | entities }}"
-                    {{ member:logo }}
-                    data-logo="{{ url }}"
-                    data-logo-width="{{ width }}"
-                    data-logo-height="{{ height }}"
-                    {{ /member:logo }}
+                    data-logo="{{ member:logo | first | url }}"
                     data-employees="{{ member:employees | entities }}"
                     data-province="{{ member:province | entities }}"
                     data-city="{{ member:city | entities }}"
