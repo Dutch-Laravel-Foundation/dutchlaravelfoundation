@@ -1463,7 +1463,6 @@
     min-height: 140px;
     flex: none;
     overflow: hidden;
-    border: 1px solid var(--dlf-line);
     border-radius: 4px;
     background: #f5f5fa;
 }
@@ -2232,15 +2231,10 @@
         padding-inline: 0;
     }
 
-    .dlf-about-event {
-        padding-top: 0;
-    }
-
     .dlf-about-event__image {
-        width: calc(100% + 48px);
+        width: 100%;
         min-height: 0;
         aspect-ratio: 16 / 9;
-        margin-inline: -24px;
     }
 
     .dlf-about-board-grid {
