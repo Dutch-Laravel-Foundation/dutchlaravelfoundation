@@ -1,4 +1,0 @@
-interface:
-  display_name: "Building DLF Pages"
-  short_description: "Build pages in the DLF design system"
-  default_prompt: "Use $building-dlf-pages to build a new Dutch Laravel Foundation page."

@@ -25,7 +25,6 @@
     update_search_index
     finalize_deployment
     reset_php_cache
-    warm_static_cache
     cleanup_old_releases
 @endstory
 
@@ -191,12 +190,6 @@
     echo "📍 Location: {{ $newDeploymentPath }}"
     echo "🕐 Time: $(date '+%Y-%m-%d %H:%M:%S')"
     echo "=========================================="
-@endtask
-
-@task('warm_static_cache', ['on' => 'web'])
-    cd {{ $newDeploymentPath }}
-    php please static:clear
-    php please static:warm
 @endtask
 
 @task('reset_php_cache', ['on' => 'web'])

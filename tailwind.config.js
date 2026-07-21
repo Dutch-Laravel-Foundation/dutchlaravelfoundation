@@ -22,7 +22,7 @@ module.exports = {
             "4xl": "2000px",
         },
         fontFamily: {
-            sans: ["Mulish Variable", "sans-serif"],
+            sans: ["Mulish", "sans-serif"],
         },
         fontSize: {
             xs: [
