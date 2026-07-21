@@ -45,7 +45,7 @@ describe("member benefits scroller", () => {
         );
     });
 
-    it("starts at the left edge when benefits use one row", () => {
+    it("starts at the right edge when benefits use one row", () => {
         const toggleClass = mock(() => {});
         const scroller = {
             children: [{}, {}],
@@ -63,9 +63,9 @@ describe("member benefits scroller", () => {
 
         initializeBenefitsScroller(scroller);
 
-        expect(scroller.scrollLeft).toBe(0);
-        expect(toggleClass).toHaveBeenCalledWith("can-scroll-left", false);
-        expect(toggleClass).toHaveBeenCalledWith("can-scroll-right", true);
+        expect(scroller.scrollLeft).toBe(800);
+        expect(toggleClass).toHaveBeenCalledWith("can-scroll-left", true);
+        expect(toggleClass).toHaveBeenCalledWith("can-scroll-right", false);
     });
 
     it("keeps one finite set of benefits and supports keyboard scrolling", () => {

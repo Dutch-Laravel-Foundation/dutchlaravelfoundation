@@ -13,7 +13,7 @@ export const initializeBenefitsScroller = (scroller) => {
     const firstAlignedItem = scroller.children[scroller.children.length - endItemCount];
 
     if (usesSingleRow) {
-        scroller.scrollLeft = 0;
+        scroller.scrollLeft = Math.max(0, scroller.scrollWidth - scroller.clientWidth);
     } else if (endItemCount > 0 && firstAlignedItem) {
         scroller.scrollLeft = 0;
         const firstItemLeft = scroller.children[0].getBoundingClientRect().left;
