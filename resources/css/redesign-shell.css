@@ -945,12 +945,11 @@ html.dlf-menu-open {
     bottom: 0;
     left: 0;
     width: 100%;
-    border-top: 3px solid var(--dlf-red-action-hover);
-    background-color: var(--dlf-red-action);
+    background-color: var(--dlf-ink);
     background-image: repeating-linear-gradient(
         30deg,
-        rgb(0 0 0 / 7%) 0,
-        rgb(0 0 0 / 7%) 1px,
+        rgb(255 255 255 / 6%) 0,
+        rgb(255 255 255 / 6%) 1px,
         transparent 1px,
         transparent 5px
     );
@@ -1026,10 +1025,23 @@ html.dlf-menu-open {
 
 .dlf-tracking-consent__button--reject {
     width: 44px;
+    opacity: 0.3;
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dlf-tracking-consent__button--reject:is(:hover, :focus-visible) {
+    opacity: 1;
 }
 
 .dlf-tracking-consent__button--reject .dlf-btn-face {
     padding-inline: 0;
+    background: transparent;
+}
+
+.dlf-tracking-consent__button--reject:hover .dlf-btn-face {
+    border-color: var(--dlf-red-action);
+    background: var(--dlf-red-action);
+    color: #fff;
 }
 
 .dlf-tracking-consent__reject-icon {
@@ -1491,6 +1503,7 @@ html.dlf-menu-open {
 @media (prefers-reduced-motion: reduce) {
     .dlf-header,
     .dlf-btn-face,
+    .dlf-tracking-consent__button--reject,
     .dlf-nav-chevron,
     .dlf-mobile-nav-chevron,
     .dlf-skip-link {
