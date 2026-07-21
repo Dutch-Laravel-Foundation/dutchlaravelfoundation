@@ -8,7 +8,8 @@
 
 This site exposes content to LLMs and agent frameworks:
 
-- `robots.txt` — AI bot rules and Cloudflare Content Signals
+- `robots.txt` — crawl rules for search engines and AI bots
+- `Content-Signal` response header — Cloudflare content-use preferences
 - `/llms.txt` and `/llms-full.txt` — index and full dump of curated content
 - Markdown negotiation — append `.md` to any content URL, or send `Accept: text/markdown`
 

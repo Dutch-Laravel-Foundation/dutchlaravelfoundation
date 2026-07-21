@@ -47,11 +47,11 @@ class RobotsTxtTest extends TestCase
         }
     }
 
-    public function testRobotsTxtDeclaresContentSignals(): void
+    public function testRobotsTxtOnlyContainsSupportedDirectives(): void
     {
         $body = $this->get('/robots.txt')->getContent();
 
-        $this->assertStringContainsString('Content-Signal: search=yes, ai-train=no, ai-input=yes', $body);
+        $this->assertStringNotContainsString('Content-Signal:', $body);
     }
 
     public function testRobotsTxtIncludesSitemap(): void

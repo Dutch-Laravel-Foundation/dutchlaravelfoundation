@@ -33,9 +33,6 @@ class RobotsController extends Controller
 
         $lines[] = 'Allow: /';
         $lines[] = '';
-        $lines[] = '# Cloudflare Content Signals (AI policy declaration)';
-        $lines[] = 'Content-Signal: search=yes, ai-train=no, ai-input=yes';
-        $lines[] = '';
         $lines[] = 'Sitemap: ' . rtrim(config('app.url'), '/') . '/sitemap.xml';
 
         return response(implode("\n", $lines) . "\n", 200, [

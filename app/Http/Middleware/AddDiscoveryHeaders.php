@@ -14,6 +14,11 @@ class AddDiscoveryHeaders
     {
         $response = $next($request);
 
+        $response->headers->set(
+            'Content-Signal',
+            'search=yes, ai-train=no, ai-input=yes',
+        );
+
         $contentType = (string) $response->headers->get('Content-Type', '');
 
         if (! str_starts_with($contentType, 'text/html')) {
