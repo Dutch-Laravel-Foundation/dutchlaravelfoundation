@@ -4,4 +4,5 @@ blueprint: pages
 title: 'Aanbesteding opstellen, beoordelen of erop inschrijven?'
 template: templates/landings-page/aanbesteding
 menu_color: red
+call_to_action: 0911307d-63b5-46b0-b4be-7db77caa33d2
 ---

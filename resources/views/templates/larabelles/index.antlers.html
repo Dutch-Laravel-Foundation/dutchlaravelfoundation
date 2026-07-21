@@ -1,26 +1,33 @@
-<div class="translate-y-32 lg:translate-y-52 pb-32 md:pb-48">
-    {{ partial:decoration/floor-background background="floor-top-about-us" /}}
-
-    <div class="container mb-auto mx-auto flex flex-col items-left justify-center relative px-6 lg:px-10">
-        <h1 class="text-3xl lg:text-4xl font-bold">{{ title }}</h1>
-
-        <div class="max-w-3xl prose prose-lg">
-            {{ content }}
-            {{ partial src="sets/autoload" }}
-            {{ /content }}
-        </div>
-
-        <div class=" flex justify-start max-w-3xl mt-8">
-            <img src="/assets/img/larabelles-mission.png" alt="Our Mission – Elevating Our Community, Connecting and Engaging, Resource Sharing" >
-        </div>
-
-        <div class="flex items-center gap-4 pt-12 pb-24">
-            <div class="flex-shrink-0">
-                {{ partial:buttons/primary link="https://www.larabelles.com/" target="_blank" class="w-full sm:w-auto" button_class="w-full sm:w-auto" }}Sluit je aan bij de Larabelles{{ /partial:buttons/primary }}
+<div class="dlf-public-page dlf-public-page--larabelles editorial-article">
+    <div class="editorial-rail editorial-rail--article">
+        <header class="dlf-public-page__hero dlf-public-page__hero--split">
+            <div>
+                <span class="editorial-eyebrow">Community</span>
+                <h1>{{ title }}</h1>
+                <p>Een internationale community die vrouwelijke Laravel-developers met elkaar verbindt, ondersteunt en zichtbaar maakt.</p>
             </div>
-            <a href="https://www.larabelles.com/" target="_blank" rel="noopener noreferrer" class="inline-block">
-                <img src="/assets/img/larabelles.png" alt="Larabelles" class="h-12 lg:h-14 w-auto">
-            </a>
+            <img src="/assets/img/larabelles.png" alt="Larabelles" width="320" height="120">
+        </header>
+
+        <div class="editorial-article__body dlf-public-page__body" data-editorial-article>
+            {{ partial:editorial/toc label="Op deze pagina" }}
+
+            <article class="editorial-article__prose dlf-public-page__prose" data-editorial-prose>
+                {{ content }}
+                    {{ partial src="sets/autoload" }}
+                {{ /content }}
+
+                <figure class="dlf-larabelles-mission" data-progressive-media-frame>
+                    <img src="/assets/img/larabelles-mission.png" alt="Our Mission – Elevating Our Community, Connecting and Engaging, Resource Sharing" {{ partial:progressive_media_attributes width="1024" height="369" }}>
+                </figure>
+
+                <div class="dlf-public-actions">
+                    <a class="dlf-btn" href="https://www.larabelles.com/" target="_blank" rel="noopener noreferrer">
+                        <span class="dlf-btn-face dlf-btn-face--red">Sluit je aan bij de Larabelles</span>
+                        <span class="dlf-btn-shadow dlf-btn-shadow--red" aria-hidden="true"></span>
+                    </a>
+                </div>
+            </article>
         </div>
     </div>
 </div>

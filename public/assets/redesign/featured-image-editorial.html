@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="nl">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>DLF Featured Image — Editorial Split</title>
+        <style>
+            @font-face {
+                font-family: "Mulish";
+                font-style: normal;
+                font-weight: 200 1000;
+                src: url("/build/assets/mulish-latin-wght-normal-WL5YNY-W.woff2") format("woff2");
+            }
+
+            @font-face {
+                font-family: "JetBrains Mono";
+                font-style: normal;
+                font-weight: 100 800;
+                src: url("/build/assets/jetbrains-mono-latin-wght-normal-B9CIFXIH.woff2")
+                    format("woff2");
+            }
+
+            :root {
+                color-scheme: light;
+                font-family: "Mulish", sans-serif;
+                background: #d8d8dc;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                min-width: 1200px;
+                min-height: 630px;
+                margin: 0;
+                display: grid;
+                place-items: center;
+            }
+
+            .canvas {
+                position: relative;
+                display: grid;
+                width: 1200px;
+                height: 630px;
+                grid-template-columns: 55% 45%;
+                overflow: hidden;
+                background: #ff2d20;
+                color: #fff;
+            }
+
+            .copy {
+                position: relative;
+                z-index: 2;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                padding: 58px;
+                background:
+                    repeating-linear-gradient(
+                        30deg,
+                        rgba(0, 0, 0, 0.09) 0,
+                        rgba(0, 0, 0, 0.09) 1px,
+                        transparent 1px,
+                        transparent 5px
+                    ),
+                    #ff2d20;
+            }
+
+            .brand {
+                width: 245px;
+                height: auto;
+                display: block;
+                filter: invert(1) grayscale(1) contrast(100);
+                mix-blend-mode: screen;
+            }
+
+            .eyebrow {
+                margin: 0 0 18px;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 14px;
+                font-weight: 500;
+                letter-spacing: 0.2em;
+                line-height: 1;
+                text-transform: uppercase;
+            }
+
+            h1 {
+                max-width: 540px;
+                margin: 0;
+                font-size: 53px;
+                font-weight: 520;
+                letter-spacing: -0.045em;
+                line-height: 1.2;
+                transform: translateX(-4px);
+            }
+
+            .intro {
+                max-width: 475px;
+                margin: 24px 0 0;
+                font-size: 20px;
+                font-weight: 450;
+                line-height: 1.65;
+            }
+
+            .photo {
+                position: relative;
+                min-width: 0;
+                overflow: hidden;
+                background: #090910;
+            }
+
+            .photo img {
+                width: 100%;
+                height: 100%;
+                display: block;
+                object-fit: cover;
+                object-position: 52% center;
+                filter: contrast(1.04) saturate(0.92);
+                transform: scale(1.01);
+            }
+
+            .photo::after {
+                position: absolute;
+                z-index: 1;
+                right: 18px;
+                bottom: 18px;
+                width: 65px;
+                height: 65px;
+                border-right: 2px solid rgba(255, 255, 255, 0.8);
+                border-bottom: 2px solid rgba(255, 255, 255, 0.8);
+                content: "";
+            }
+
+            .edition {
+                position: absolute;
+                z-index: 2;
+                top: 0;
+                right: 0;
+                display: grid;
+                place-items: center;
+                padding: 20px;
+                border: 1px solid rgba(255, 255, 255, 0.7);
+                background:
+                    repeating-linear-gradient(
+                        30deg,
+                        rgba(255, 255, 255, 0.09) 0,
+                        rgba(255, 255, 255, 0.09) 1px,
+                        transparent 1px,
+                        transparent 5px
+                    ),
+                    #090910;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 11px;
+                font-weight: 500;
+                letter-spacing: 0.14em;
+                text-transform: uppercase;
+                white-space: nowrap;
+                writing-mode: vertical-rl;
+            }
+        </style>
+    </head>
+    <body>
+        <main class="canvas" aria-label="Featured image concept: editorial split">
+            <section class="copy">
+                <img
+                    class="brand"
+                    src="/assets/redesign/logo-2025.svg"
+                    alt="Dutch Laravel Foundation"
+                />
+                <div class="copy-text">
+                    <p class="eyebrow">Laravel community voor Nederland &amp; België</p>
+                    <h1>De kennis- en brancheorganisatie voor Laravel developers</h1>
+                    <p class="intro">
+                        Voor organisaties en professionals die investeren in kennis, kwaliteit en
+                        een sterke community.
+                    </p>
+                </div>
+            </section>
+            <section class="photo" aria-label="De Laravel-community tijdens Larafest">
+                <img
+                    src="/assets/redesign/photos/larafest-groepsfoto-1280.webp"
+                    alt="Groepsfoto van de Laravel-community tijdens Larafest"
+                />
+                <span class="edition">Dutch Laravel Foundation</span>
+            </section>
+        </main>
+    </body>
+</html>

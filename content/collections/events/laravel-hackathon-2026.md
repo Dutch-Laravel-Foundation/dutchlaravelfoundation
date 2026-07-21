@@ -40,9 +40,8 @@ content:
         marks:
           - type: bold
         text: Locatie
-      - type: hardBreak
       - type: text
-        text: 'Dit jaar zijn we voor de Hackathon welkom bij DLF-lid SWIS te Leiden!'
+        text: ': Dit jaar zijn we voor de Hackathon welkom bij DLF-lid SWIS te Leiden!'
   -
     type: paragraph
     content:
@@ -51,9 +50,8 @@ content:
         marks:
           - type: bold
         text: Talk
-      - type: hardBreak
       - type: text
-        text: 'To be announced!'
+        text: ': To be announced!'
   -
     type: paragraph
     content:
@@ -62,9 +60,8 @@ content:
         marks:
           - type: bold
         text: 'Let op!'
-      - type: hardBreak
       - type: text
-        text: 'Zorg dat je laptop zo ver als mogelijk is opgeladen en je een oplaadsnoer en telefoonsnoer meeneemt!'
+        text: ' Zorg dat je laptop zo ver als mogelijk is opgeladen en je een oplaadsnoer en telefoonsnoer meeneemt!'
   -
     type: paragraph
     content:
@@ -156,9 +153,8 @@ content:
         marks:
           - type: bold
         text: 'Meedoen?'
-      - type: hardBreak
       - type: text
-        text: 'Je kunt als individuele deelnemer meedoen, dan delen wij je in een team in. Of je kunt je samen met je collega’s als bedrijfsteam aanmelden. In dat geval geldt dat een team maximaal uit maximaal 6 developers bestaat.'
+        text: ' Je kunt als individuele deelnemer meedoen, dan delen wij je in een team in. Of je kunt je samen met je collega’s als bedrijfsteam aanmelden. In dat geval geldt dat een team maximaal uit maximaal 6 developers bestaat.'
   -
     type: paragraph
     content:

@@ -1,27 +1,50 @@
-<div class="w-full px-6 pt-[1.5rem] pb-6 border-b border-gray-200">
-    <a href="{{ homepage }}" class="flex justify-start w-full {{ class }}">
-        <img class="max-w-full max-h-[3rem] xl:max-h-full" src="{{ nav_logo }}" alt="{{ title }}">
-    </a>
-</div>
-
-<div class=" px-7">
-    {{ nav:main }}
-        <li class="{{ if depth == 1 }} list-none {{else}} flex items-center gap-2.5 before:content-['■'] before:text-primary-accent before:text-sm {{ /if }}">
-            <a href="{{ url }}"
-                class=" flex w-full items-center h-auto border-b border-transparent  {{if is_current or is_parent}} {{active_class}} {{ /if }} {{if depth == 1}} font-bold mt-7 {{else}} mt-0.5 {{ /if }} {{ class }}">
-                {{title }}
-            </a>
-            {{ if children }}
-                <ul
-                    class="flex flex-col space-y-2 mt-3">
-                    {{*recursive children* }}
-                </ul>
+<nav class="dlf-mobile-navigation" aria-label="Mobiele hoofdnavigatie">
+    <ul class="dlf-mobile-nav-list">
+        {{ nav:main }}
+            {{ if depth == 1 }}
+                <li class="dlf-mobile-nav-item">
+                    {{ if children }}
+                        <details class="dlf-mobile-nav-group" {{ if is_parent }}open{{ /if }}>
+                            <summary class="dlf-mobile-nav-link {{ if is_current or is_parent }}dlf-mobile-nav-link--active{{ /if }}">
+                                <span>{{ title }}</span>
+                                <svg class="dlf-mobile-nav-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                                </svg>
+                            </summary>
+                            <ul class="dlf-mobile-submenu">
+                                {{ *recursive children* }}
+                            </ul>
+                        </details>
+                    {{ else }}
+                        <a
+                            class="dlf-mobile-nav-link {{ if is_current }}dlf-mobile-nav-link--active{{ /if }}"
+                            href="{{ url }}"
+                            {{ if is_current }}aria-current="page"{{ /if }}
+                            @click="closeMobileMenu"
+                        >{{ title }}</a>
+                    {{ /if }}
+                </li>
+            {{ elseif depth == 2 }}
+                <li>
+                    <a
+                        class="dlf-mobile-submenu-link {{ if is_current }}dlf-mobile-submenu-link--active{{ /if }}"
+                        href="{{ url }}"
+                        {{ if is_current }}aria-current="page"{{ /if }}
+                        @click="closeMobileMenu"
+                    >{{ title }}</a>
+                </li>
             {{ /if }}
-        </li>
-    {{ /nav:main }}
-</div>
+        {{ /nav:main }}
+    </ul>
 
-<div class="px-7 mt-10">
-    {{ partial:buttons/primary-border-alt background_class="border-primary-accent group-hover:!bg-white" class="bg-primary-accent !text-white border-primary-accent group-hover:text-primary-accent"
-    link="/lid-worden" type="button" }}Lid worden{{ /partial:buttons/primary-border-alt }}
-</div>
+    <div class="dlf-mobile-actions">
+        <a class="dlf-btn dlf-mobile-action" href="/aanvraag" @click="closeMobileMenu">
+            <span class="dlf-btn-face dlf-btn-face--outline-red">Match je project</span>
+            <span class="dlf-btn-shadow dlf-btn-shadow--red" aria-hidden="true"></span>
+        </a>
+        <a class="dlf-btn dlf-mobile-action" href="/lid-worden" @click="closeMobileMenu">
+            <span class="dlf-btn-face dlf-btn-face--red">Lid worden</span>
+            <span class="dlf-btn-shadow dlf-btn-shadow--red" aria-hidden="true"></span>
+        </a>
+    </div>
+</nav>
