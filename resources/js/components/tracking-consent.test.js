@@ -49,6 +49,8 @@ function makeConsentUi() {
         accept,
         banner,
         document: {
+            cookie: "",
+            location: { hostname: "example.test" },
             querySelector: (selector) => elements[selector] ?? null,
         },
         reject,
@@ -88,6 +90,35 @@ describe("tracking consent", () => {
         expect(loadTrackers).not.toHaveBeenCalled();
         expect(ui.banner.hidden).toBeTrue();
         expect(ui.settings.hidden).toBeFalse();
+    });
+
+    it("clears stale tracker cookies when consent is rejected", () => {
+        const ui = makeConsentUi();
+        const clearTrackerCookies = mock(() => {});
+
+        initTrackingConsent({
+            document: ui.document,
+            storage: makeStorage({
+                version: TRACKING_CONSENT_VERSION,
+                choice: "rejected",
+            }),
+            clearTrackerCookies,
+        });
+
+        expect(clearTrackerCookies).toHaveBeenCalledTimes(1);
+    });
+
+    it("clears stale tracker cookies while consent is undecided", () => {
+        const ui = makeConsentUi();
+        const clearTrackerCookies = mock(() => {});
+
+        initTrackingConsent({
+            document: ui.document,
+            storage: makeStorage(),
+            clearTrackerCookies,
+        });
+
+        expect(clearTrackerCookies).toHaveBeenCalledTimes(1);
     });
 
     it("loads trackers when current-version consent was accepted", () => {
@@ -179,6 +210,30 @@ describe("tracking consent", () => {
 
         expect(ui.banner.focus).toHaveBeenCalledTimes(1);
         expect(clearTrackerCookies).toHaveBeenCalledTimes(1);
+        expect(reload).toHaveBeenCalledTimes(1);
+    });
+
+    it("reloads after accepting and withdrawing consent on the same page", () => {
+        const ui = makeConsentUi();
+        const clearTrackerCookies = mock(() => {});
+        const reload = mock(() => {});
+
+        initTrackingConsent({
+            document: ui.document,
+            storage: makeStorage({
+                version: TRACKING_CONSENT_VERSION,
+                choice: "rejected",
+            }),
+            clearTrackerCookies,
+            loadTrackers: () => {},
+            reload,
+        });
+        ui.settings.click();
+        ui.accept.click();
+        ui.settings.click();
+        ui.reject.click();
+
+        expect(clearTrackerCookies).toHaveBeenCalledTimes(2);
         expect(reload).toHaveBeenCalledTimes(1);
     });
 });

@@ -236,10 +236,23 @@ export const createMembersFilter = ({
     };
 };
 
-export const createInternshipsFilter = ({ document: documentRoot = document } = {}) => {
+export const createInternshipsFilter = ({
+    document: documentRoot = document,
+    random = Math.random,
+} = {}) => {
     const internships = [
         ...documentRoot.querySelectorAll("#internships-data [data-internship]"),
     ].map((element) => ({ ...element.dataset }));
+
+    for (let index = internships.length - 1; index > 0; index--) {
+        const randomIndex = Math.floor(random() * (index + 1));
+
+        [internships[index], internships[randomIndex]] = [
+            internships[randomIndex],
+            internships[index],
+        ];
+    }
+
     const provinces = [
         ...new Set(internships.map((internship) => internship.province).filter(Boolean)),
     ].sort((left, right) => left.localeCompare(right, "nl"));

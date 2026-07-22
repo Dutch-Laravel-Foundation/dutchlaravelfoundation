@@ -21,8 +21,6 @@ describe("deferred third parties", () => {
             "https://www.googletagmanager.com/gtm.js?id=GTM-N75FRC56",
             "https://cdn.leadinfo.net/ping.js",
             "https://snap.licdn.com/li.lms-analytics/insight.min.js",
-            "https://cdn.usefathom.com/script.js",
         ]);
-        expect(scripts[3]["data-site"]).toBe("XTVPLNKC");
     });
 });

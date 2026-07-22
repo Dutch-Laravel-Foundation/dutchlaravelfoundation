@@ -60,7 +60,4 @@ export function initDeferredThirdParties({
     initGoogleTagManager(documentRoot, browserWindow);
     initLeadinfo(documentRoot, browserWindow);
     initLinkedIn(documentRoot, browserWindow);
-    loadScript(documentRoot, "https://cdn.usefathom.com/script.js", {
-        "data-site": "XTVPLNKC",
-    });
 }

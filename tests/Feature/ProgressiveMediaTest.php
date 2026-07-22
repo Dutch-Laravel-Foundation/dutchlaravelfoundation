@@ -75,7 +75,7 @@ class ProgressiveMediaTest extends TestCase
 
         $this->assertNotFalse($stylesheet);
         $this->assertMatchesRegularExpression(
-            '/\.editorial-rail\s*\{[^}]*padding-bottom:\s*10rem;/s',
+            '/\.editorial-rail\s*\{[^}]*padding-bottom:\s*var\(--dlf-footer-cta-stage-padding,\s*10rem\);/s',
             $stylesheet,
         );
         $this->assertDoesNotMatchRegularExpression(

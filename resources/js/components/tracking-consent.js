@@ -2,16 +2,7 @@ export const TRACKING_CONSENT_STORAGE_KEY = "dlf_tracking_consent";
 export const TRACKING_CONSENT_VERSION = 1;
 
 const validChoices = new Set(["accepted", "rejected"]);
-const trackingCookiePrefixes = [
-    "_ga",
-    "_gid",
-    "_gat",
-    "_gcl_",
-    "_li_",
-    "li_",
-    "leadinfo",
-    "fathom",
-];
+const trackingCookiePrefixes = ["_ga", "_gid", "_gat", "_gcl_", "_li_", "li_", "leadinfo"];
 
 const readConsent = (storage) => {
     try {
@@ -63,7 +54,11 @@ export function initTrackingConsent({
     document: documentRoot = document,
     storage = window.localStorage,
     loadTrackers = () => {},
-    clearTrackerCookies = () => clearTrackingCookies(),
+    clearTrackerCookies = () =>
+        clearTrackingCookies({
+            document: documentRoot,
+            hostname: documentRoot.location?.hostname ?? "",
+        }),
     reload = () => window.location.reload(),
 } = {}) {
     const banner = documentRoot.querySelector("[data-tracking-consent-banner]");
@@ -78,6 +73,10 @@ export function initTrackingConsent({
     const initialChoice = readConsent(storage);
     let trackersLoaded = false;
     let openedFromSettings = false;
+
+    if (initialChoice !== "accepted") {
+        clearTrackerCookies();
+    }
 
     const startTrackers = () => {
         if (trackersLoaded) {
@@ -119,7 +118,7 @@ export function initTrackingConsent({
 
         clearTrackerCookies();
 
-        if (initialChoice === "accepted") {
+        if (trackersLoaded) {
             reload();
             return;
         }

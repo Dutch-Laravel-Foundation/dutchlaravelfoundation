@@ -1,8 +1,10 @@
 <div class="editorial-article editorial-event">
-    <div class="editorial-rail editorial-rail--article">
+    <div class="editorial-rail editorial-rail--article" data-dlf-footer-cta-stage>
         {{ partial:breadcrumb href="/agenda" label="Agenda" :current="type ?? 'Evenement'" }}
 
-        <header class="editorial-article__hero">
+        <header
+            class="editorial-article__hero dlf-divider-section dlf-divider-split dlf-divider-split--stacked-reversed"
+        >
             <div class="editorial-article__head">
                 <div class="editorial-entry__meta editorial-article__meta">
                     {{ if type }}
@@ -37,7 +39,7 @@
             </figure>
         </header>
 
-        <div class="editorial-article__body" data-editorial-article>
+        <div class="editorial-article__body dlf-divider-section" data-editorial-article>
             {{ partial:editorial/toc label="Op deze pagina" }}
 
             <article class="editorial-article__prose" data-editorial-prose>

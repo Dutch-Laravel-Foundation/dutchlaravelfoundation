@@ -54,7 +54,6 @@ final class ContentSecurityPolicyTest extends TestCase
             'https://collector.leadinfo.net',
             'https://snap.licdn.com',
             'https://px.ads.linkedin.com',
-            'https://cdn.usefathom.com',
             'https://challenges.cloudflare.com',
             'https://app.vragen.ai',
             'https://dlf.vragen.ai',

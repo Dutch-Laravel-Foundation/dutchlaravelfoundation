@@ -1,6 +1,6 @@
 <div class="editorial-page editorial-page--podcasts">
-    <div class="editorial-rail">
-        <header class="editorial-page__header">
+    <div class="editorial-rail" data-dlf-footer-cta-stage>
+        <header class="editorial-page__header dlf-divider-section">
             <div class="editorial-page__heading">
                 <span class="editorial-eyebrow">Podcast</span>
                 <h1 class="editorial-page__title">Gesprekken uit de Laravel-community</h1>
@@ -31,12 +31,12 @@
 
         {{ collection:podcasts sort="published_at:desc" paginate="10" as="episodes" }}
             {{ if no_results }}
-                <div class="editorial-empty">
+                <div class="editorial-empty dlf-divider-section">
                     <h2>Binnenkort beschikbaar</h2>
                     <p>Nieuwe afleveringen verschijnen hier zodra ze zijn gepubliceerd.</p>
                 </div>
             {{ else }}
-                <div class="editorial-feed">
+                <div class="editorial-feed dlf-divider-section dlf-divider-list">
                     {{ episodes }}
                         <article class="editorial-entry {{ switch between="editorial-entry--media-start|editorial-entry--media-end" }} {{ if first }}editorial-entry--featured{{ /if }}">
                             <a class="editorial-entry__media" href="{{ url }}" aria-label="Beluister {{ title }}" data-progressive-media-frame>
@@ -83,7 +83,7 @@
 
                 {{ paginate }}
                     {{ if total_pages > 1 }}
-                        <nav class="editorial-pagination" aria-label="Paginering podcasts">
+                        <nav class="editorial-pagination dlf-divider-section" aria-label="Paginering podcasts">
                             {{ if prev_page }}
                                 <a class="editorial-pagination__link--newer" href="{{ prev_page }}"><span aria-hidden="true">←</span> Nieuwer</a>
                             {{ /if }}
@@ -98,5 +98,3 @@
         {{ /collection:podcasts }}
     </div>
 </div>
-
-{{ partial:footer_cta_default }}

@@ -22,12 +22,8 @@
     position: relative;
     width: min(100%, 72rem);
     margin-inline: auto;
-    padding-bottom: 10rem;
+    padding-bottom: var(--dlf-footer-cta-stage-padding, 10rem);
     border-inline: 1px solid var(--editorial-line);
-}
-
-.editorial-page--cases .editorial-rail {
-    padding-bottom: 12rem;
 }
 
 .editorial-page__header {
@@ -383,7 +379,6 @@
     align-items: center;
     gap: 2rem;
     padding: 1.5rem 2.5rem;
-    border-top: 1px solid var(--editorial-line);
     color: var(--editorial-muted);
     font-size: 0.75rem;
     font-weight: 700;
@@ -570,7 +565,7 @@
     color: var(--editorial-muted);
     font-family: "Mulish Variable", ui-sans-serif, system-ui, sans-serif;
     font-size: 0.8125rem;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0;
     line-height: 1.45;
     text-transform: none;
@@ -719,7 +714,7 @@
     color: var(--editorial-red);
     text-decoration-line: underline;
     text-decoration-thickness: 1px;
-    text-underline-offset: 0.18em;
+    text-underline-offset: 3px;
 }
 
 .editorial-article .editorial-article__prose a:not(.dlf-block *):hover {
@@ -873,7 +868,6 @@
 
 .editorial-author {
     position: relative;
-    border-top: 1px solid var(--editorial-line);
     background: #fff;
     scroll-margin-top: 8rem;
 }
@@ -906,7 +900,6 @@
 .editorial-author__list--multiple {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    border-bottom: 1px solid var(--editorial-line);
 }
 
 .editorial-author__list--multiple .editorial-author__grid {
@@ -939,11 +932,9 @@
 
 .editorial-case-attribution__logo {
     display: grid;
-    width: 10rem;
-    min-height: 5rem;
-    padding: 1rem;
+    width: 20rem;
+    min-height: 10rem;
     place-items: center;
-    border: 1px solid var(--editorial-line);
     border-radius: 4px;
     background: #fff;
 }
@@ -951,8 +942,15 @@
 .editorial-case-attribution__logo img {
     display: block;
     width: 100%;
-    max-height: 4rem;
+    max-height: 8rem;
     object-fit: contain;
+}
+
+.editorial-case-attribution .editorial-author__link {
+    display: inline-flex;
+    width: auto;
+    height: 3rem;
+    margin-top: 1.75rem;
 }
 
 .editorial-author__portrait {
@@ -1248,11 +1246,13 @@
         width: 100%;
     }
 
-    .editorial-case-attribution .editorial-author__link {
-        display: inline-flex;
-        width: auto;
-        height: 3rem;
-        margin-top: 1.75rem;
+    .editorial-case-attribution__logo {
+        width: 10rem;
+        min-height: 5rem;
+    }
+
+    .editorial-case-attribution__logo img {
+        max-height: 4rem;
     }
 }
 

@@ -1,8 +1,8 @@
-<div class="dlf-community-page dlf-member-detail-page">
-    <section class="dlf-community-section" aria-labelledby="member-heading">
+<div class="dlf-community-page dlf-member-detail-page" data-dlf-footer-cta-stage>
+    <section class="dlf-community-section dlf-divider-section" aria-labelledby="member-heading">
         {{ partial:breadcrumb href="/leden" label="Leden" :current="title" }}
 
-        <div class="dlf-community-head dlf-member-detail-head{{ if logo }} dlf-member-detail-head--with-logo{{ /if }}">
+        <div class="dlf-community-head dlf-member-detail-head dlf-divider-split{{ if logo }} dlf-member-detail-head--with-logo{{ /if }}">
             <div class="dlf-member-detail-head__copy">
                 <span class="dlf-community-kicker">{{ type ?? "Lid" }}</span>
                 <h1 id="member-heading" class="dlf-community-title">{{ title }}</h1>
@@ -16,8 +16,13 @@
         </div>
     </section>
 
-    <section class="dlf-community-section dlf-community-section--grid" aria-label="Bedrijfsprofiel">
-        <div class="dlf-community-grid-2">
+    <section
+        class="dlf-community-section dlf-community-section--grid dlf-divider-section"
+        aria-label="Bedrijfsprofiel"
+    >
+        <div
+            class="dlf-community-grid-2 dlf-divider-grid dlf-divider-grid--desktop-2 dlf-divider-grid--desktop-leading-owns-rule dlf-divider-grid--tablet-1 dlf-divider-grid--mobile-1"
+        >
             <article class="dlf-community-cell">
                 <h2 class="dlf-community-heading">Over</h2>
 
@@ -139,12 +144,17 @@
     </section>
 
     {{ if { collection:count in="internships" member:is="{ id }" } > 0 }}
-        <section class="dlf-community-section dlf-member-detail-internships" aria-labelledby="member-internships-heading">
+        <section
+            class="dlf-community-section dlf-member-detail-internships dlf-divider-section"
+            aria-labelledby="member-internships-heading"
+        >
             <div class="dlf-community-head dlf-community-head--compact">
                 <span class="dlf-community-kicker">Stagebank</span>
                 <h2 id="member-internships-heading" class="dlf-community-heading">Beschikbare stages bij {{ title }}</h2>
             </div>
-            <div class="dlf-members-grid dlf-fill-grid">
+            <div
+                class="dlf-members-grid dlf-fill-grid dlf-divider-region dlf-divider-grid dlf-divider-grid--fill dlf-divider-grid--desktop-2 dlf-divider-grid--tablet-2 dlf-divider-grid--mobile-1"
+            >
                 {{ collection:internships member:is="{ id }" }}
                     <a class="dlf-member-card" href="{{ url }}">
                         <span class="dlf-member-card__logo">
@@ -159,17 +169,23 @@
                         </span>
                     </a>
                 {{ /collection:internships }}
+                <span class="dlf-divider-grid__filler" aria-hidden="true"></span>
             </div>
         </section>
     {{ /if }}
 
     {{ if { collection:count in="cases" member:is="{ id }" } > 0 }}
-        <section class="dlf-community-section dlf-community-section--grid dlf-member-detail-cases" aria-labelledby="member-cases-heading">
+        <section
+            class="dlf-community-section dlf-community-section--grid dlf-member-detail-cases dlf-divider-section"
+            aria-labelledby="member-cases-heading"
+        >
             <div class="dlf-community-head dlf-community-head--compact">
                 <span class="dlf-community-kicker">Cases</span>
                 <h2 id="member-cases-heading" class="dlf-community-heading">Werk van {{ title }}</h2>
             </div>
-            <div class="dlf-member-cases-grid dlf-fill-grid">
+            <div
+                class="dlf-member-cases-grid dlf-fill-grid dlf-divider-region dlf-divider-grid dlf-divider-grid--fill dlf-divider-grid--desktop-2 dlf-divider-grid--tablet-1 dlf-divider-grid--mobile-1"
+            >
                 {{ collection:cases member:is="{ id }" limit="3" }}
                     {{ case_title = title_long ?? title }}
                     <article class="dlf-community-cell">
@@ -191,6 +207,7 @@
                         <a class="dlf-community-text-link" href="{{ url }}">Bekijk case <span aria-hidden="true">→</span></a>
                     </article>
                 {{ /collection:cases }}
+                <span class="dlf-divider-grid__filler" aria-hidden="true"></span>
             </div>
         </section>
     {{ /if }}

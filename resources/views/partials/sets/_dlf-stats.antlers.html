@@ -1,16 +1,24 @@
-<section class="dlf-block dlf-block-stats">
+<section class="dlf-block dlf-block-stats dlf-divider-section">
     <header class="dlf-block-heading">
-        {{ if eyebrow }}<p class="dlf-kicker">{{ eyebrow }}</p>{{ /if }}
+        {{ if eyebrow }}
+        <p class="dlf-kicker">{{ eyebrow }}</p>
+        {{ /if }}
         <h2>{{ heading }}</h2>
-        {{ if introduction }}<div class="dlf-prose">{{ introduction }}</div>{{ /if }}
+        {{ if introduction }}
+        <div class="dlf-prose">{{ introduction }}</div>
+        {{ /if }}
     </header>
-    <div class="dlf-stats-grid">
+    <div
+        class="dlf-stats-grid dlf-divider-grid dlf-divider-grid--framed dlf-divider-grid--desktop-3 dlf-divider-grid--tablet-2 dlf-divider-grid--mobile-1"
+    >
         {{ stats }}
-            <article class="dlf-stat">
-                <strong>{{ value }}</strong>
-                <h3>{{ label }}</h3>
-                {{ if context }}<p>{{ context }}</p>{{ /if }}
-            </article>
+        <article class="dlf-stat">
+            <strong>{{ value }}</strong>
+            <h3>{{ label }}</h3>
+            {{ if context }}
+            <p>{{ context }}</p>
+            {{ /if }}
+        </article>
         {{ /stats }}
     </div>
 </section>

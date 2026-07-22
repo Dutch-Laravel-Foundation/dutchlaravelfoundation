@@ -58,13 +58,13 @@
 
 .dlf-public-page__body {
     padding-top: 4.5rem;
-    padding-bottom: 2.5rem;
+    padding-bottom: 5rem;
 }
 
 .dlf-public-page .editorial-toc {
     font-family: "Mulish Variable", ui-sans-serif, system-ui, sans-serif;
     font-size: 0.8125rem;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0;
     text-transform: none;
 }

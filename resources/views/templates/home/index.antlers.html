@@ -1,4 +1,7 @@
-<section class="dlf-home-hero" aria-labelledby="home-heading">
+<section
+    class="dlf-home-hero dlf-divider-section dlf-divider-split"
+    aria-labelledby="home-heading"
+>
     <div class="dlf-home-hero__copy">
         <div>
             <h1 id="home-heading">{{ header_title ?? title }}</h1>
@@ -27,8 +30,11 @@
     </figure>
 </section>
 
-<main class="dlf-home-main dlf-rails">
-    <section class="dlf-home-current" aria-labelledby="current-heading">
+<main class="dlf-home-main dlf-rails" data-dlf-footer-cta-stage>
+    <section
+        class="dlf-home-current dlf-divider-section dlf-divider-section--yield-to-next"
+        aria-labelledby="current-heading"
+    >
         <header class="dlf-home-section-head">
             <h2 id="current-heading">Actueel binnen de community</h2>
             <nav aria-label="Actuele publicaties">
@@ -92,7 +98,10 @@
         </div>
     </section>
 
-    <section class="dlf-home-partners" aria-labelledby="partners-heading">
+    <section
+        class="dlf-home-partners dlf-divider-section dlf-divider-section--full-bleed-top"
+        aria-labelledby="partners-heading"
+    >
         <div class="dlf-home-partners__spacer" aria-hidden="true"></div>
         <h2 id="partners-heading">Onze partners</h2>
         <div class="dlf-home-partners__marquee">
@@ -125,7 +134,10 @@
     </section>
 
     {{ collection:insights highlight:is="true" sort="date:desc" limit="1" }}
-        <section class="dlf-home-highlight" aria-labelledby="highlight-heading">
+        <section
+            class="dlf-home-highlight dlf-divider-section dlf-divider-split dlf-divider-split--stacked-reversed"
+            aria-labelledby="highlight-heading"
+        >
             <article>
                 <p class="dlf-kicker">Mis het niet</p>
                 <h2 id="highlight-heading"><a href="{{ url }}">{{ title }}</a></h2>
@@ -149,7 +161,11 @@
         </section>
     {{ /collection:insights }}
 
-    <section class="dlf-home-clients" aria-labelledby="clients-heading" data-client-logo-wall>
+    <section
+        class="dlf-home-clients dlf-divider-section"
+        aria-labelledby="clients-heading"
+        data-client-logo-wall
+    >
         <div class="dlf-home-clients__lanes">
             <div class="dlf-home-clients__grid">
                 <div class="dlf-home-clients__cell dlf-home-clients__cell--empty" data-client-cell aria-hidden="true"></div>

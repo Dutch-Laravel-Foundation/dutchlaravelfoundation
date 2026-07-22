@@ -10,7 +10,7 @@ Extend the established redesign instead of inventing a parallel page system. Mat
 ## Start with evidence
 
 1. Work from the Git repository root containing this skill. Confirm the current branch/worktree and preserve all unrelated and uncommitted work.
-2. Read the final corrections in [foundations.md](references/foundations.md), then scan the map and selected family in [page-families.md](references/page-families.md). Load other sections only when relevant.
+2. Read the final corrections in [foundations.md](references/foundations.md), the divider contract in [dividers.md](references/dividers.md), then scan the map and selected family in [page-families.md](references/page-families.md). Load other sections only when relevant.
 3. Inspect the target entry, its closest canonical rendered page, that page's blueprint, Antlers template/partials, scoped CSS, and interaction JavaScript before editing.
 4. Record the reported viewport and whether the direction is viewport-specific. Measure the target and its nearest alignment/spacing reference in the browser before changing CSS.
 5. Use Orbit for the project lifecycle and `https://new-design.dutchlaravelfoundation.test` for browser review unless the task explicitly excludes Orbit.
@@ -43,7 +43,12 @@ Keep author-controlled content in the host family's existing Bard stream. The re
 ## Compose the page
 
 - Keep the global layout, header/navigation, and footer. Configure `call_to_action`; the footer already renders the reusable CTA banner, so never render a second copy in a page template.
-- Continue the 1152px bordered rail and its flush grids. Assign each divider to one edge so adjacent cells do not create double borders or gaps.
+- Every page-content stack ends with one continuous bottom divider before footer CTA staging. A simple final section owns it; a final section marked `dlf-divider-section--composite-tail` yields only to explicit `dlf-divider-tail-segment` children that cover the complete edge. The footer band's top rule is a separate boundary and never substitutes for the final content divider.
+- A full-width structural grid, list, split, or region ending flush with a section yields its bottom edge to the section. Never let both the nested owner and section draw adjacent terminal rules.
+- Mark every compatible page-family rail exactly once with `data-dlf-footer-cta-stage`, even when the current page has no footer CTA; the marker is inert without a banner and keeps future CMS CTA choices on the shared path. When a floating CTA is present, that owner reserves the measured tail. Its clear vertical gap—from the final content divider to the CTA card’s top edge—must equal the CTA card’s horizontal inset at that viewport. Use the shared measured stage variable; never approximate this with fixed page or route padding.
+- Continue the 1152px bordered rail and use the primitives in [dividers.md](references/dividers.md) for structural sections, grids, lists, and splits. Every shared edge must have exactly one owner.
+- Draw structural edges only through the divider primitives' border ownership. Never layer an inset shadow or pseudo-element line onto a primitive-owned edge.
+- If a shorter sticky trailing pane cannot cover a desktop grid row, use the documented leading-owner grid state so the full-height pane owns the shared vertical rule. Do not patch the component with a local border.
 - Let one page family own the shell. A shared block may own its internal `dlf-*` classes and button, but do not import a second page-family namespace. Do not introduce another root token set, container primitive, button system, or near-duplicate component.
 - Use balanced section padding and the established spacing scale. Avoid generic oversized whitespace or card padding.
 - Express alignment as an invariant: name the shared edge, gap, height, or padding that must match. Use existing rail insets or spacing tokens instead of visually close one-off values.
@@ -51,6 +56,7 @@ Keep author-controlled content in the host family's existing Bard stream. The re
 - Preserve supplied SVG/icon geometry and the asset family already used by the page family. Recolor existing artwork; never replace it with an approximation.
 - Treat desktop, tablet, and mobile as designed states. Scope a viewport-specific correction inside the narrowest matching media query, preserve useful content, and keep mobile-only rules from leaking upward.
 - Apply a repeated-item correction to the whole owning grid or component state, not only the selected example. Keep intentional first/last-item differences explicit.
+- Never use `last-child`, `nth-last-child`, or final-row selectors to repair responsive structural grid borders. Declare the grid's column count at desktop, tablet, and mobile and let the shared divider primitive place internal edges.
 
 ## Avoid redesign drift
 
@@ -60,11 +66,16 @@ Do not add generic intro stripes, floating divider fragments, isolated decorativ
 
 Use the `agent-browser` skill after frontend changes. Start at the exact reported viewport, then check both sides of every affected breakpoint and one unaffected control viewport. For a mobile-only task, desktop is a required regression check.
 
+Run the divider audit from [dividers.md](references/dividers.md) for the changed route. Run its canonical-page mode whenever a shared divider primitive or reusable layout component changes.
+
 Verify:
 
 - header, navigation, footer, and full-page border continuity;
+- terminal ownership: one continuous bottom divider closes the page content before CTA staging, including incomplete dynamic grids and filler cells;
+- footer CTA ownership and geometry: a banner page has exactly one stage owner; the final-divider-to-card gap equals the card’s side inset on both sides of the 1024px layout change, while the later footer-band top rule remains a separate edge;
 - content order, grid collapse, equal or intentionally unequal padding, image crop, and horizontal overflow;
 - computed insets, gaps, line heights, and bounding boxes against the reference element named in the feedback;
+- computed red color, visible underline, and white owning surface for inline text links, with a component-link and inverse-surface regression check;
 - hover, focus, keyboard, form, menu, filter, FAQ, and other changed interactions;
 - header-aware sticky behavior and TOC active state while scrolling;
 - reduced motion, semantic landmarks, heading order, alt text, and contrast;

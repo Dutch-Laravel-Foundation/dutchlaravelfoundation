@@ -3,7 +3,7 @@ id: 127b3714-39f4-4e69-93ad-7ed96eea14cb
 blueprint: pages
 title: 'Privacy- en cookieverklaring Stichting Laravel'
 updated_by: 8d873b47-ad86-4fd3-9e95-27842ea80beb
-updated_at: 1655282102
+updated_at: 1784704696
 template: templates/privacy-statement/index
 content:
   -
@@ -14,7 +14,7 @@ content:
         marks:
           -
             type: italic
-        text: '19 juni 2019'
+        text: '22 juli 2026'
   -
     type: paragraph
     content:
@@ -119,19 +119,25 @@ content:
     content:
       -
         type: text
-        text: Contactformulier
+        text: 'Contact- en Matchformulier'
   -
     type: paragraph
     content:
       -
         type: text
-        text: 'Met het contactformulier kun je ons vragen stellen of aanvragen doen.'
+        text: 'Met het contactformulier kun je ons vragen stellen. Hiervoor verwerken wij je naam, bedrijfsnaam, e-mailadres en bericht, zodat we je vraag kunnen beantwoorden.'
   -
     type: paragraph
     content:
       -
         type: text
-        text: 'Hiervoor gebruiken wij je telefoonnummer, e-mailadres en NAW-gegevens. Deze hebben wij nodig vanwege het feit dat we contact met je op moeten nemen. Wij bewaren deze informatie totdat we zeker weten dat je tevreden bent met onze reactie en zes maanden daarna. Zo kunnen we bij vervolgvragen de informatie er makkelijk bij pakken. Ook kunnen we zo onze klantenservice trainen om nog beter te worden.'
+        text: 'Met het Matchformulier kun je ons vragen om een passende Laravel-partner te vinden. Hiervoor verwerken wij de door jou gekozen dienst, je omschrijving van de aanvraag, budgetindicatie, het gewenste type bedrijf, je naam, bedrijfsnaam en e-mailadres. Een conceptaanvraag wordt maximaal zeven dagen lokaal in je browser bewaard en na verzending of het wissen van het formulier verwijderd.'
+  -
+    type: paragraph
+    content:
+      -
+        type: text
+        text: 'Wij bewaren ingezonden contact- en Matchaanvragen totdat we zeker weten dat de aanvraag is afgehandeld en maximaal zes maanden daarna. Wanneer dit nodig is om een match tot stand te brengen, kunnen wij de gegevens uit je aanvraag delen met één of meer passende leden van Stichting Laravel. Zij mogen deze gegevens alleen gebruiken om op je aanvraag te reageren.'
   -
     type: heading
     attrs:
@@ -204,7 +210,7 @@ content:
     content:
       -
         type: text
-        text: 'Met uitzondering van de partijen die nodig zijn om de hierboven genoemde diensten te leveren, geven wij je persoonsgegevens onder geen voorwaarde aan andere bedrijven of instellingen, behalve als wij dat wettelijk verplicht zijn (bijvoorbeeld als de politie dat eist bij een vermoeden van een misdrijf).'
+        text: 'Wij delen je persoonsgegevens alleen met partijen die nodig zijn om de hierboven genoemde diensten te leveren, waaronder passende leden voor een Matchaanvraag en leveranciers die namens ons gegevens verwerken. Daarnaast delen wij gegevens wanneer wij daartoe wettelijk verplicht zijn, bijvoorbeeld als de politie dit eist bij een vermoeden van een misdrijf.'
   -
     type: heading
     attrs:
@@ -212,19 +218,19 @@ content:
     content:
       -
         type: text
-        text: Statistieken
+        text: 'Cookies en vergelijkbare technieken'
   -
     type: paragraph
     content:
       -
         type: text
-        text: 'Wij houden statistieken bij over het gebruik van onze website'
+        text: 'Wij gebruiken noodzakelijke cookies en lokale browseropslag om de website veilig en goed te laten werken. Hieronder vallen onder meer de websitesessie, beveiliging tegen vervalste verzoeken, je cookievoorkeur en een tijdelijk concept van het Matchformulier. Deze technieken zijn functioneel en worden niet voor advertenties gebruikt.'
   -
     type: paragraph
     content:
       -
         type: text
-        text: 'In onze website zijn social media buttons opgenomen. Hiermee verzamelen de beheerders van deze diensten je persoonsgegevens.'
+        text: 'Analytische en marketingdiensten worden pas geladen nadat je daarvoor toestemming hebt gegeven via de cookiebanner. Je kunt je keuze later intrekken via Cookievoorkeuren onderaan de website. Bij intrekking verwijderen wij, voor zover technisch mogelijk, de bij ons bekende trackingcookies en laden wij deze diensten niet opnieuw.'
   -
     type: heading
     attrs:
@@ -232,13 +238,43 @@ content:
     content:
       -
         type: text
-        text: Cookies
+        text: 'Analytische en marketingdiensten'
   -
     type: paragraph
     content:
       -
         type: text
-        text: 'Onze website gebruikt technische cookies. Cookies zijn kleine bestandjes waar we informatie in kunnen opslaan zodat je die niet steeds hoeft in te vullen. Maar we kunnen er ook mee zien dat je ons weer bezoekt. Je kunt via je browser het plaatsen van cookies uitschakelen, maar sommige dingen van onze website werken dan niet goed meer.'
+        text: 'Na je toestemming gebruiken wij de volgende diensten:'
+  -
+    type: bullet_list
+    content:
+      -
+        type: list_item
+        content:
+          -
+            type: paragraph
+            content:
+              -
+                type: text
+                text: 'Google Tag Manager en Google Analytics: om te meten hoe de website wordt gebruikt. Google Analytics kan onder meer _ga-cookies plaatsen en verwerkt gegevens over je bezoek, apparaat en globale locatie.'
+      -
+        type: list_item
+        content:
+          -
+            type: paragraph
+            content:
+              -
+                type: text
+                text: 'Leadinfo: om zakelijke websitebezoeken te herkennen en inzicht te krijgen in welke organisaties onze website bezoeken. Leadinfo verwerkt hiervoor onder meer het IP-adres en kan analytische cookies plaatsen.'
+      -
+        type: list_item
+        content:
+          -
+            type: paragraph
+            content:
+              -
+                type: text
+                text: 'LinkedIn Insight Tag: om het bereik en de resultaten van onze LinkedIn-campagnes te meten. LinkedIn kan hierbij onder meer de bezochte URL, verwijzende pagina, het IP-adres en browser- en apparaatgegevens verwerken.'
   -
     type: heading
     attrs:
@@ -246,13 +282,33 @@ content:
     content:
       -
         type: text
-        text: 'Google Analytics'
+        text: 'Beveiliging van formulieren'
   -
     type: paragraph
     content:
       -
         type: text
-        text: 'Wij gebruiken Google Analytics om bij te houden hoe bezoekers onze website gebruiken. Wij hebben een verwerkersovereenkomst met Google gesloten. Daarin staan strikte afspraken over wat zij mogen bijhouden. Wij hebben Google niet toegestaan de verkregen Analytics informatie te gebruiken voor andere Google diensten. Wij laten Google de IP-adressen anonimiseren.'
+        text: 'Onze formulieren gebruiken Cloudflare Turnstile om misbruik en spam te voorkomen. Cloudflare verwerkt hiervoor technische browser- en apparaatgegevens en kan een strikt noodzakelijke beveiligingscookie plaatsen. Deze controle is nodig om een formulier veilig te kunnen verzenden.'
+  -
+    type: heading
+    attrs:
+      level: 2
+    content:
+      -
+        type: text
+        text: 'Ingesloten media en externe links'
+  -
+    type: paragraph
+    content:
+      -
+        type: text
+        text: 'Sommige pagina’s bevatten video’s van YouTube of Vimeo. Wanneer zo’n video wordt geladen, ontvangen deze platforms technische gegevens zoals je IP-adres, browserinformatie en de pagina die je bezoekt. Zij kunnen daarbij cookies of vergelijkbare technieken gebruiken volgens hun eigen privacy- en cookiebeleid.'
+  -
+    type: paragraph
+    content:
+      -
+        type: text
+        text: 'Links naar externe platforms, waaronder LinkedIn, Spotify en YouTube, laden die diensten niet zolang je niet op de link klikt. Zodra je een externe link opent, is het privacy- en cookiebeleid van dat platform van toepassing.'
   -
     type: heading
     attrs:

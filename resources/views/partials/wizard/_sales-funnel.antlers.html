@@ -143,7 +143,7 @@
                             ? 'dlf-wizard-choice--selected border-primary-accent'
                             : 'border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50'"
                     >
-                        <span class="block text-lg font-medium text-tertiary-dark" x-text="option.label"></span>
+                        <span class="block text-lg font-semibold text-tertiary-dark" x-text="option.label"></span>
                     </button>
                 </template>
             </div>
@@ -174,7 +174,7 @@
                             ? 'dlf-wizard-choice--selected border-primary-accent'
                             : 'border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50'"
                     >
-                        <span class="block text-lg font-medium text-tertiary-dark" x-text="option.label"></span>
+                        <span class="block text-lg font-semibold text-tertiary-dark" x-text="option.label"></span>
                         <span class="block text-sm text-tertiary-light mt-1" x-text="option.description"></span>
                     </button>
                 </template>
@@ -256,7 +256,7 @@
             <div class="flex justify-between items-start p-4 sm:p-5">
                 <div class="min-w-0">
                     <span class="block text-xs font-semibold uppercase tracking-wider text-tertiary-light">Product</span>
-                    <span class="block text-tertiary-dark font-medium mt-1" x-text="productLabel"></span>
+                    <span class="block text-tertiary-dark font-semibold mt-1" x-text="productLabel"></span>
                 </div>
                 <button type="button" @click="goToStep(0)" class="text-primary-accent text-sm font-semibold hover:underline flex-shrink-0 ml-4 focus-visible:ring-2 focus-visible:ring-primary-accent rounded outline-none">Wijzig</button>
             </div>
@@ -264,7 +264,7 @@
             <div class="flex justify-between items-start p-4 sm:p-5">
                 <div class="min-w-0">
                     <span class="block text-xs font-semibold uppercase tracking-wider text-tertiary-light">Omschrijving</span>
-                    <span class="block text-tertiary-dark font-medium mt-1 break-words" x-text="data.description"></span>
+                    <span class="block text-tertiary-dark font-semibold mt-1 break-words" x-text="data.description"></span>
                 </div>
                 <button type="button" @click="goToStep(1)" class="text-primary-accent text-sm font-semibold hover:underline flex-shrink-0 ml-4 focus-visible:ring-2 focus-visible:ring-primary-accent rounded outline-none">Wijzig</button>
             </div>
@@ -272,7 +272,7 @@
             <div class="flex justify-between items-start p-4 sm:p-5">
                 <div class="min-w-0">
                     <span class="block text-xs font-semibold uppercase tracking-wider text-tertiary-light">Budget</span>
-                    <span class="block text-tertiary-dark font-medium mt-1" x-text="budgetLabel"></span>
+                    <span class="block text-tertiary-dark font-semibold mt-1" x-text="budgetLabel"></span>
                 </div>
                 <button type="button" @click="goToStep(2)" class="text-primary-accent text-sm font-semibold hover:underline flex-shrink-0 ml-4 focus-visible:ring-2 focus-visible:ring-primary-accent rounded outline-none">Wijzig</button>
             </div>
@@ -280,7 +280,7 @@
             <div class="flex justify-between items-start p-4 sm:p-5">
                 <div class="min-w-0">
                     <span class="block text-xs font-semibold uppercase tracking-wider text-tertiary-light">Voorkeur partnertype</span>
-                    <span class="block text-tertiary-dark font-medium mt-1" x-text="companyTypeLabel"></span>
+                    <span class="block text-tertiary-dark font-semibold mt-1" x-text="companyTypeLabel"></span>
                 </div>
                 <button type="button" @click="goToStep(3)" class="text-primary-accent text-sm font-semibold hover:underline flex-shrink-0 ml-4 focus-visible:ring-2 focus-visible:ring-primary-accent rounded outline-none">Wijzig</button>
             </div>
@@ -288,7 +288,7 @@
             <div class="flex justify-between items-start p-4 sm:p-5">
                 <div class="min-w-0">
                     <span class="block text-xs font-semibold uppercase tracking-wider text-tertiary-light">Naam</span>
-                    <span class="block text-tertiary-dark font-medium mt-1" x-text="data.name"></span>
+                    <span class="block text-tertiary-dark font-semibold mt-1" x-text="data.name"></span>
                 </div>
                 <button type="button" @click="goToStep(4)" class="text-primary-accent text-sm font-semibold hover:underline flex-shrink-0 ml-4 focus-visible:ring-2 focus-visible:ring-primary-accent rounded outline-none">Wijzig</button>
             </div>
@@ -296,7 +296,7 @@
             <div class="flex justify-between items-start p-4 sm:p-5">
                 <div class="min-w-0">
                     <span class="block text-xs font-semibold uppercase tracking-wider text-tertiary-light">Bedrijfsnaam</span>
-                    <span class="block text-tertiary-dark font-medium mt-1" x-text="data.company_name"></span>
+                    <span class="block text-tertiary-dark font-semibold mt-1" x-text="data.company_name"></span>
                 </div>
                 <button type="button" @click="goToStep(4)" class="text-primary-accent text-sm font-semibold hover:underline flex-shrink-0 ml-4 focus-visible:ring-2 focus-visible:ring-primary-accent rounded outline-none">Wijzig</button>
             </div>
@@ -304,7 +304,7 @@
             <div class="flex justify-between items-start p-4 sm:p-5">
                 <div class="min-w-0">
                     <span class="block text-xs font-semibold uppercase tracking-wider text-tertiary-light">E-mailadres</span>
-                    <span class="block text-tertiary-dark font-medium mt-1" x-text="data.email"></span>
+                    <span class="block text-tertiary-dark font-semibold mt-1" x-text="data.email"></span>
                 </div>
                 <button type="button" @click="goToStep(4)" class="text-primary-accent text-sm font-semibold hover:underline flex-shrink-0 ml-4 focus-visible:ring-2 focus-visible:ring-primary-accent rounded outline-none">Wijzig</button>
             </div>
@@ -324,7 +324,7 @@
                 type="button"
                 x-show="step > 0"
                 @click="prevStep()"
-                class="inline-flex items-center gap-1 text-sm font-medium text-tertiary-dark hover:text-primary-accent transition-colors px-4 py-2.5 -ml-4 focus-visible:ring-2 focus-visible:ring-primary-accent rounded outline-none"
+                class="inline-flex items-center gap-1 text-sm font-semibold text-tertiary-dark hover:text-primary-accent transition-colors px-4 py-2.5 -ml-4 focus-visible:ring-2 focus-visible:ring-primary-accent rounded outline-none"
             >
                 <svg class="relative top-px w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>

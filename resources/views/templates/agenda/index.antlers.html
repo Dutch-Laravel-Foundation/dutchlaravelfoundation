@@ -1,6 +1,6 @@
 <div class="editorial-page editorial-events-page">
-    <div class="editorial-rail">
-        <header class="editorial-page__header">
+    <div class="editorial-rail" data-dlf-footer-cta-stage>
+        <header class="editorial-page__header dlf-divider-section">
             <div class="editorial-page__heading">
                 <span class="editorial-eyebrow">Dutch Laravel Foundation</span>
                 <h1 class="editorial-page__title">{{ title }}</h1>
@@ -8,14 +8,17 @@
             </div>
         </header>
 
-        <section class="editorial-events-section" aria-label="Aankomende evenementen">
+        <section
+            class="editorial-events-section dlf-divider-section"
+            aria-label="Aankomende evenementen"
+        >
             {{ collection:events sort="date_start:asc" date_start:is_after="today" as="upcoming_events" }}
                 {{ if no_results }}
                     <div class="editorial-empty">
                         <p>Er staan momenteel geen nieuwe evenementen gepland.</p>
                     </div>
                 {{ else }}
-                    <div class="editorial-feed">
+                    <div class="editorial-feed dlf-divider-list">
                         {{ upcoming_events }}
                             {{ partial:editorial/event-entry }}
                         {{ /upcoming_events }}
@@ -24,7 +27,10 @@
             {{ /collection:events }}
         </section>
 
-        <section class="editorial-events-section editorial-events-section--past border-t border-[#ececec]" aria-labelledby="past-events-heading">
+        <section
+            class="editorial-events-section editorial-events-section--past dlf-divider-section border-t border-[#ececec]"
+            aria-labelledby="past-events-heading"
+        >
             <header class="editorial-events-section__header border-b border-[#ececec] px-6 pt-20 pb-10 lg:px-10 lg:pt-28">
                 <span class="editorial-eyebrow">Terugblik</span>
                 <h2 id="past-events-heading" class="mt-0! mb-3! text-2xl! font-semibold! leading-tight! text-[#090910]!">Eerdere evenementen</h2>
@@ -37,7 +43,7 @@
                         <p>Er zijn nog geen eerdere evenementen om te tonen.</p>
                     </div>
                 {{ else }}
-                    <div class="editorial-feed">
+                    <div class="editorial-feed dlf-divider-list">
                         {{ past_events }}
                             {{ partial:editorial/event-entry past="true" }}
                         {{ /past_events }}

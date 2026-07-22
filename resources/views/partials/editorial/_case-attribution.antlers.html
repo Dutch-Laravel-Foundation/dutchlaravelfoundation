@@ -1,11 +1,11 @@
 {{ if member:title || client:title }}
-    <section class="editorial-author editorial-case-attribution" aria-labelledby="case-attribution-title">
+    <section class="editorial-author editorial-case-attribution dlf-divider-section" aria-labelledby="case-attribution-title">
         <span class="editorial-author__label">Projectinformatie</span>
         <div class="editorial-author__grid">
             <div class="editorial-author__content">
                 {{ if member:logo }}
                     <div class="editorial-case-attribution__logo">
-                        {{ member:logo }}<img src="{{ url }}" alt="Logo van {{ member:title }}" width="{{ width }}" height="{{ height }}" loading="lazy">{{ /member:logo }}
+                        <img src="{{ member:logo | first | url }}" alt="Logo van {{ member:title }}" width="128" height="64" loading="lazy">
                     </div>
                 {{ /if }}
                 <div class="editorial-author__details">

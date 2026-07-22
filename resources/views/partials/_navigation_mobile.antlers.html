@@ -17,7 +17,7 @@
                         </details>
                     {{ else }}
                         <a
-                            class="dlf-mobile-nav-link {{ if is_current }}dlf-mobile-nav-link--active{{ /if }}"
+                            class="dlf-mobile-nav-link {{ if is_current or is_parent }}dlf-mobile-nav-link--active{{ /if }}"
                             href="{{ url }}"
                             {{ if is_current }}aria-current="page"{{ /if }}
                             @click="closeMobileMenu"

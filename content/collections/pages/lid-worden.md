@@ -294,6 +294,26 @@ content:
                       target: _blank
                       title: null
                 text: NativePHP
+      -
+        type: listItem
+        content:
+          -
+            type: paragraph
+            content:
+              -
+                type: text
+                text: '20% korting op je eerste project met '
+              -
+                type: text
+                marks:
+                  -
+                    type: link
+                    attrs:
+                      href: 'https://laravelshift.com/'
+                      rel: null
+                      target: _blank
+                      title: null
+                text: 'Laravel Shift'
   -
     type: bulletList
     content:
@@ -305,7 +325,7 @@ content:
             content:
               -
                 type: text
-                text: "Aanvullende kortingen momenteel in ontwikkeling. Zo hebben we lopende gesprekken met onder andere,\_"
+                text: 'Aanvullende kortingen zijn momenteel in ontwikkeling. Zo hebben we lopende gesprekken met '
               -
                 type: text
                 marks:
@@ -314,16 +334,7 @@ content:
                 text: Laracasts
               -
                 type: text
-                text: ",\_"
-              -
-                type: text
-                marks:
-                  -
-                    type: bold
-                text: 'Laravel Shift'
-              -
-                type: text
-                text: "\_en andere partners."
+                text: ' en andere partners.'
               -
                 type: hardBreak
               -

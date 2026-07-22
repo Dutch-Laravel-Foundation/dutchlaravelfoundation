@@ -1,8 +1,10 @@
 <div class="editorial-article editorial-article--podcast">
-    <div class="editorial-rail editorial-rail--article">
+    <div class="editorial-rail editorial-rail--article" data-dlf-footer-cta-stage>
         {{ partial:breadcrumb href="/podcast" label="Podcast" current="Aflevering" }}
 
-        <header class="editorial-article__hero">
+        <header
+            class="editorial-article__hero dlf-divider-section dlf-divider-split dlf-divider-split--stacked-reversed"
+        >
             <div class="editorial-article__head">
                 <div class="editorial-entry__meta editorial-article__meta">
                     <span class="editorial-entry__category">Podcast</span>
@@ -32,7 +34,7 @@
             </figure>
         </header>
 
-        <div class="editorial-article__body editorial-podcast__body">
+        <div class="editorial-article__body editorial-podcast__body dlf-divider-section">
             <article
                 class="editorial-article__prose editorial-podcast__content"
                 x-data="{ activeTab: 'description' }"

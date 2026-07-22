@@ -10,6 +10,7 @@ import {
     createSalesFunnelWizard,
 } from "./components/alpine-components";
 import { initProgressiveMedia } from "./components/progressive-media";
+import { initFooterCtaStage } from "./components/footer-cta-stage";
 import { initTrackingConsent } from "./components/tracking-consent";
 
 const header = document.querySelector("header");
@@ -46,6 +47,7 @@ if (header && !document.documentMode) {
 }
 
 initProgressiveMedia();
+initFooterCtaStage();
 
 Alpine.data("headerMenu", createHeaderMenu);
 Alpine.data("navigationDropdown", createNavigationDropdown);

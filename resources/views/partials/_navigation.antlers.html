@@ -32,7 +32,7 @@
                 {{ else }}
                     <li class="dlf-nav-item">
                         <a
-                            class="dlf-nav-link {{ if is_current }}dlf-nav-link--active{{ /if }}"
+                            class="dlf-nav-link {{ if is_current or is_parent }}dlf-nav-link--active{{ /if }}"
                             href="{{ url }}"
                             {{ if is_current }}aria-current="page"{{ /if }}
                         >{{ title }}</a>

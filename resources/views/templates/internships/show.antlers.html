@@ -1,21 +1,23 @@
-<div class="dlf-community-page dlf-internship-detail-page">
-    <section class="dlf-community-section" aria-labelledby="internship-heading">
+<div class="dlf-community-page dlf-internship-detail-page" data-dlf-footer-cta-stage>
+    <section
+        class="dlf-community-section dlf-divider-section"
+        aria-labelledby="internship-heading"
+    >
         {{ partial:breadcrumb href="/stagebank" label="Stagebank" :current="title" }}
 
-        <div class="dlf-community-head dlf-member-detail-head{{ if member:logo }} dlf-member-detail-head--with-logo{{ /if }}">
+        <div class="dlf-community-head dlf-member-detail-head dlf-divider-split{{ if member:logo }} dlf-member-detail-head--with-logo{{ /if }}">
             <div class="dlf-member-detail-head__copy">
-                <span class="dlf-community-kicker">Stage bij {{ member:title }}</span>
                 <h1 id="internship-heading" class="dlf-community-title">{{ title }}</h1>
                 <dl class="dlf-detail-properties">
                     {{ if member:city || member:province }}
                         <div>
-                            <dt class="dlf-community-kicker mb-1!">Locatie</dt>
+                            <dt class="dlf-community-kicker mb-0.5!">Locatie</dt>
                             <dd class="m-0 text-base text-tertiary-dark">{{ arr({ member:city }, { member:province }) | remove_empty | list }}</dd>
                         </div>
                     {{ /if }}
                     {{ if member:website }}
                         <div>
-                            <dt class="dlf-community-kicker mb-1!">Website</dt>
+                            <dt class="dlf-community-kicker mb-0.5!">Website</dt>
                             <dd class="m-0 text-base">
                                 <a class="dlf-member-detail-head__website" href="https://{{ member:website }}" target="_blank" rel="noopener noreferrer">{{ member:website }}</a>
                             </dd>
@@ -32,8 +34,13 @@
         </div>
     </section>
 
-    <section class="dlf-community-section dlf-community-section--grid" aria-label="Stage-informatie">
-        <div class="dlf-community-grid-2">
+    <section
+        class="dlf-community-section dlf-community-section--grid dlf-divider-section"
+        aria-label="Stage-informatie"
+    >
+        <div
+            class="dlf-community-grid-2 dlf-divider-grid dlf-divider-grid--desktop-2 dlf-divider-grid--desktop-leading-owns-rule dlf-divider-grid--tablet-1 dlf-divider-grid--mobile-1"
+        >
             <article class="dlf-community-cell">
                 <h2 class="dlf-community-heading">Over deze stage</h2>
                 <div id="content" class="content dlf-community-copy">
@@ -96,5 +103,3 @@
         </div>
     </section>
 </div>
-
-{{ partial:footer_cta_default }}

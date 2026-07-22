@@ -2,34 +2,37 @@
 
 <div
     class="dlf-community-page dlf-internships-page"
+    data-dlf-footer-cta-stage
     x-data="internshipsFilter"
     x-effect="syncBodyOverflow"
     @keydown.escape.window="closeFilterModal()"
 >
-    {{ content }}
-        {{ if type == "double_column" }}
-            <section class="dlf-community-section" aria-labelledby="internships-heading">
-                <div class="dlf-community-head">
-                    <div class="dlf-members-intro">
-                        <div>
-                            <span class="dlf-community-kicker">{{ page_title }}</span>
-                            <h1 id="internships-heading" class="dlf-community-title">{{ heading | strip_tags }}</h1>
-                        </div>
-                        <div class="dlf-members-intro__copy dlf-community-copy">
-                            {{ left }}
-                                {{ partial src="sets/autoload" }}
-                            {{ /left }}
-                            {{ right }}
-                                {{ partial src="sets/autoload" }}
-                            {{ /right }}
-                        </div>
-                    </div>
+    {{ content }} {{ if type == "double_column" }}
+    <section
+        class="dlf-community-section dlf-divider-section"
+        aria-labelledby="internships-heading"
+    >
+        <div class="dlf-community-head">
+            <div class="dlf-members-intro">
+                <div>
+                    <span class="dlf-community-kicker">{{ page_title }}</span>
+                    <h1 id="internships-heading" class="dlf-community-title">
+                        {{ heading | strip_tags }}
+                    </h1>
                 </div>
-            </section>
-        {{ /if }}
-    {{ /content }}
+                <div class="dlf-members-intro__copy dlf-community-copy">
+                    {{ left }} {{ partial src="sets/autoload" }} {{ /left }} {{ right }} {{ partial
+                    src="sets/autoload" }} {{ /right }}
+                </div>
+            </div>
+        </div>
+    </section>
+    {{ /if }} {{ /content }}
 
-    <section class="dlf-community-section" aria-label="Stages zoeken en filteren">
+    <section
+        class="dlf-community-section dlf-divider-section"
+        aria-label="Stages zoeken en filteren"
+    >
         <div class="dlf-members-toolbar">
             <div class="dlf-members-result-count" aria-live="polite">
                 <span x-text="resultLabel"></span>
@@ -44,44 +47,76 @@
                 aria-haspopup="dialog"
                 aria-controls="internship-filter-dialog"
             >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                    <path d="M2 4.75A.75.75 0 0 1 2.75 4h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 4.75ZM4 8a.75.75 0 0 1 .75-.75h6.5a.75.75 0 0 1 0 1.5h-6.5A.75.75 0 0 1 4 8Zm2.25 3.25a.75.75 0 0 0 0 1.5h3.5a.75.75 0 0 0 0-1.5h-3.5Z" />
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    aria-hidden="true"
+                >
+                    <path
+                        d="M2 4.75A.75.75 0 0 1 2.75 4h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 4.75ZM4 8a.75.75 0 0 1 .75-.75h6.5a.75.75 0 0 1 0 1.5h-6.5A.75.75 0 0 1 4 8Zm2.25 3.25a.75.75 0 0 0 0 1.5h3.5a.75.75 0 0 0 0-1.5h-3.5Z"
+                    />
                 </svg>
                 <span>Filters</span>
-                <span class="dlf-members-filter-count" x-show="activeFilterCount" x-text="activeFilterCount" x-cloak></span>
+                <span
+                    class="dlf-members-filter-count"
+                    x-show="activeFilterCount"
+                    x-text="activeFilterCount"
+                    x-cloak
+                ></span>
             </button>
         </div>
     </section>
 
-    <section class="dlf-members-fallback" aria-label="Beschikbare stages" x-show="false">
-        <div class="dlf-members-grid dlf-fill-grid">
-            {{ collection:internships }}
-                {{ if member }}
-                    <a class="dlf-member-card" href="{{ url }}">
-                        <span class="dlf-member-card__logo">
-                            <img src="{{ member:logo | first | url }}" alt="" loading="lazy">
-                        </span>
-                        <span class="dlf-member-card__body">
-                            <span class="dlf-member-card__name">{{ title }}</span>
-                            <span class="dlf-member-card__location">{{ member:city }}{{ if member:city && member:province }}, {{ /if }}{{ member:province }}</span>
-                        </span>
-                    </a>
-                {{ /if }}
-            {{ /collection:internships }}
+    <section
+        class="dlf-members-fallback dlf-divider-section"
+        aria-label="Beschikbare stages"
+        x-show="false"
+    >
+        <div
+            class="dlf-members-grid dlf-fill-grid dlf-divider-grid dlf-divider-grid--fill dlf-divider-grid--desktop-4 dlf-divider-grid--tablet-2 dlf-divider-grid--mobile-2"
+        >
+            {{ collection:internships }} {{ if member }}
+            <a class="dlf-member-card" href="{{ url }}">
+                <span class="dlf-member-card__logo">
+                    <img src="{{ member:logo | first | url }}" alt="" loading="lazy" />
+                </span>
+                <span class="dlf-member-card__body">
+                    <span class="dlf-member-card__name">{{ title }}</span>
+                    <span class="dlf-member-card__location"
+                        >{{ member:city }}{{ if member:city && member:province }}, {{ /if }}{{
+                        member:province }}</span
+                    >
+                </span>
+            </a>
+            {{ /if }} {{ /collection:internships }}
+            <span class="dlf-divider-grid__filler" aria-hidden="true"></span>
         </div>
     </section>
 
-    <div class="dlf-members-empty" x-show="filteredInternships.length === 0" x-cloak aria-live="polite">
+    <div
+        class="dlf-members-empty"
+        x-show="filteredInternships.length === 0"
+        x-cloak
+        aria-live="polite"
+    >
         Er zijn geen stages gevonden die voldoen aan je zoekopdracht.
     </div>
 
-    <section aria-label="Beschikbare stages" x-show="filteredInternships.length > 0" x-cloak>
-        <div class="dlf-members-grid dlf-fill-grid">
+    <section
+        class="dlf-divider-section"
+        aria-label="Beschikbare stages"
+        x-show="filteredInternships.length > 0"
+        x-cloak
+    >
+        <div
+            class="dlf-members-grid dlf-fill-grid dlf-divider-grid dlf-divider-grid--fill dlf-divider-grid--desktop-4 dlf-divider-grid--tablet-2 dlf-divider-grid--mobile-2"
+        >
             <template x-for="item in filteredInternships" :key="item.id">
                 <a class="dlf-member-card" :href="item.url">
                     <span class="dlf-member-card__logo">
                         <template x-if="item.logo">
-                            <img :src="item.logo" alt="" loading="lazy">
+                            <img :src="item.logo" alt="" loading="lazy" />
                         </template>
                     </span>
                     <span class="dlf-member-card__body">
@@ -90,10 +125,17 @@
                     </span>
                 </a>
             </template>
+            <span class="dlf-divider-grid__filler" aria-hidden="true"></span>
         </div>
     </section>
 
-    <div class="dlf-members-modal" x-show="filterModalOpen" x-transition.opacity x-cloak @click.self="closeFilterModal()">
+    <div
+        class="dlf-members-modal"
+        x-show="filterModalOpen"
+        x-transition.opacity
+        x-cloak
+        @click.self="closeFilterModal()"
+    >
         <div
             id="internship-filter-dialog"
             class="dlf-members-dialog"
@@ -110,7 +152,9 @@
                     x-ref="filterClose"
                     @click="closeFilterModal()"
                     aria-label="Filters sluiten"
-                >&times;</button>
+                >
+                    &times;
+                </button>
             </div>
             <div class="dlf-members-dialog__body">
                 <div class="dlf-members-filter-group" x-show="provinces.length > 1">
@@ -137,13 +181,22 @@
                             :class="{ 'is-active': filter.sbb.includes('true') }"
                             :aria-pressed="filter.sbb.includes('true')"
                             @click="toggleFilter('sbb', 'true')"
-                        >SBB erkend</button>
+                        >
+                            SBB erkend
+                        </button>
                     </div>
                 </div>
             </div>
             <div class="dlf-members-dialog__foot">
-                <button type="button" class="dlf-members-clear" @click="resetFilters()">Filters wissen</button>
-                <button type="button" class="dlf-community-button" style="width: 196px" @click="closeFilterModal()">
+                <button type="button" class="dlf-members-clear" @click="resetFilters()">
+                    Filters wissen
+                </button>
+                <button
+                    type="button"
+                    class="dlf-community-button"
+                    style="width: 196px"
+                    @click="closeFilterModal()"
+                >
                     <span class="dlf-community-button__face" x-text="filterResultLabel"></span>
                     <span class="dlf-community-button__back" aria-hidden="true"></span>
                 </button>
@@ -152,125 +205,119 @@
     </div>
 
     <div id="internships-data" hidden>
-        {{ collection:internships }}
-            {{ if member }}
-                <i
-                    data-internship
-                    data-id="{{ id }}"
-                    data-slug="{{ slug }}"
-                    data-url="{{ url }}"
-                    data-title="{{ title | entities }}"
-                    data-member-id="{{ member:id }}"
-                    data-member-title="{{ member:title | entities }}"
-                    data-logo="{{ member:logo | first | url }}"
-                    data-employees="{{ member:employees | entities }}"
-                    data-province="{{ member:province | entities }}"
-                    data-city="{{ member:city | entities }}"
-                    data-sbb="{{ member:sbb ? 'true' : 'false' }}"
-                ></i>
-            {{ /if }}
-        {{ /collection:internships }}
+        {{ collection:internships }} {{ if member }}
+        <i
+            data-internship
+            data-id="{{ id }}"
+            data-slug="{{ slug }}"
+            data-url="{{ url }}"
+            data-title="{{ title | entities }}"
+            data-member-id="{{ member:id }}"
+            data-member-title="{{ member:title | entities }}"
+            data-logo="{{ member:logo | first | url }}"
+            data-employees="{{ member:employees | entities }}"
+            data-province="{{ member:province | entities }}"
+            data-city="{{ member:city | entities }}"
+            data-sbb="{{ member:sbb ? 'true' : 'false' }}"
+        ></i>
+        {{ /if }} {{ /collection:internships }}
     </div>
-
 </div>
 
-{{ unless call_to_action }}
-    {{ partial:footer_cta_default }}
-{{ /unless }}
-
 <script nonce="{{ csp_nonce }}">
-function loadInternships() {
-    const internships = Array.from(document.querySelectorAll('#internships-data [data-internship]'))
-        .map((element) => ({ ...element.dataset }));
+    function loadInternships() {
+        const internships = Array.from(
+            document.querySelectorAll("#internships-data [data-internship]"),
+        ).map((element) => ({ ...element.dataset }));
 
-    const provinces = [...new Set(internships.map((internship) => internship.province).filter(Boolean))]
-        .sort((left, right) => left.localeCompare(right, 'nl'));
+        const provinces = [
+            ...new Set(internships.map((internship) => internship.province).filter(Boolean)),
+        ].sort((left, right) => left.localeCompare(right, "nl"));
 
-    return {
-        filterModalOpen: false,
-        internships,
-        provinces,
-        hasSbb: internships.some((internship) => internship.sbb === 'true'),
-        filter: {
-            provinces: [],
-            sbb: [],
-        },
-        openFilterModal() {
-            this.filterModalOpen = true;
-            this.$nextTick(() => this.$refs.filterClose?.focus());
-        },
-        closeFilterModal() {
-            if (!this.filterModalOpen) {
-                return;
-            }
-
-            this.filterModalOpen = false;
-            this.$nextTick(() => this.$refs.filterTrigger?.focus());
-        },
-        trapFilterFocus(event) {
-            const focusable = Array.from(event.currentTarget.querySelectorAll(
-                'button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'
-            )).filter((element) => element.offsetParent !== null);
-
-            if (focusable.length === 0) {
-                return;
-            }
-
-            const first = focusable[0];
-            const last = focusable[focusable.length - 1];
-
-            if (event.shiftKey && document.activeElement === first) {
-                event.preventDefault();
-                last.focus();
-            } else if (!event.shiftKey && document.activeElement === last) {
-                event.preventDefault();
-                first.focus();
-            }
-        },
-        toggleFilter(group, value) {
-            const index = this.filter[group].indexOf(value);
-
-            if (index === -1) {
-                this.filter[group].push(value);
-
-                return;
-            }
-
-            this.filter[group].splice(index, 1);
-        },
-        resetFilters() {
-            this.filter = {
+        return {
+            filterModalOpen: false,
+            internships,
+            provinces,
+            hasSbb: internships.some((internship) => internship.sbb === "true"),
+            filter: {
                 provinces: [],
                 sbb: [],
-            };
-        },
-        location(internship) {
-            return [internship.city, internship.province].filter(Boolean).join(', ');
-        },
-        get activeFilterCount() {
-            return this.filter.provinces.length + this.filter.sbb.length;
-        },
-        get filteredInternships() {
-            return this.internships.filter((internship) => {
-                const provinceMatches = this.filter.provinces.length === 0
-                    || this.filter.provinces.includes(internship.province);
-                const sbbMatches = this.filter.sbb.length === 0
-                    || internship.sbb === 'true';
+            },
+            openFilterModal() {
+                this.filterModalOpen = true;
+                this.$nextTick(() => this.$refs.filterClose?.focus());
+            },
+            closeFilterModal() {
+                if (!this.filterModalOpen) {
+                    return;
+                }
 
-                return provinceMatches && sbbMatches;
-            });
-        },
-        get resultLabel() {
-            const count = String(this.filteredInternships.length).padStart(2, '0');
+                this.filterModalOpen = false;
+                this.$nextTick(() => this.$refs.filterTrigger?.focus());
+            },
+            trapFilterFocus(event) {
+                const focusable = Array.from(
+                    event.currentTarget.querySelectorAll(
+                        'button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])',
+                    ),
+                ).filter((element) => element.offsetParent !== null);
 
-            return count + (this.filteredInternships.length === 1 ? ' stage' : ' stages');
-        },
-    };
-}
+                if (focusable.length === 0) {
+                    return;
+                }
+
+                const first = focusable[0];
+                const last = focusable[focusable.length - 1];
+
+                if (event.shiftKey && document.activeElement === first) {
+                    event.preventDefault();
+                    last.focus();
+                } else if (!event.shiftKey && document.activeElement === last) {
+                    event.preventDefault();
+                    first.focus();
+                }
+            },
+            toggleFilter(group, value) {
+                const index = this.filter[group].indexOf(value);
+
+                if (index === -1) {
+                    this.filter[group].push(value);
+
+                    return;
+                }
+
+                this.filter[group].splice(index, 1);
+            },
+            resetFilters() {
+                this.filter = {
+                    provinces: [],
+                    sbb: [],
+                };
+            },
+            location(internship) {
+                return [internship.city, internship.province].filter(Boolean).join(", ");
+            },
+            get activeFilterCount() {
+                return this.filter.provinces.length + this.filter.sbb.length;
+            },
+            get filteredInternships() {
+                return this.internships.filter((internship) => {
+                    const provinceMatches =
+                        this.filter.provinces.length === 0 ||
+                        this.filter.provinces.includes(internship.province);
+                    const sbbMatches = this.filter.sbb.length === 0 || internship.sbb === "true";
+
+                    return provinceMatches && sbbMatches;
+                });
+            },
+            get resultLabel() {
+                const count = String(this.filteredInternships.length).padStart(2, "0");
+
+                return count + (this.filteredInternships.length === 1 ? " stage" : " stages");
+            },
+        };
+    }
 </script>
 
-{{ content }}
-    {{ unless type == "double_column" }}
-        {{ partial src="sets/autoload" }}
-    {{ /unless }}
+{{ content }} {{ unless type == "double_column" }} {{ partial src="sets/autoload" }} {{ /unless }}
 {{ /content }}

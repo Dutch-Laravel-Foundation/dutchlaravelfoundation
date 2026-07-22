@@ -44,7 +44,6 @@ class PublicPagePerformanceTest extends TestCase
         $this->assertStringNotContainsString('unpkg.com/aos', $layout);
         $this->assertStringNotContainsString('googletagmanager.com/gtm.js', $layout);
         $this->assertStringNotContainsString('cdn.leadinfo.net/ping.js', $layout);
-        $this->assertStringNotContainsString('cdn.usefathom.com/script.js', $layout);
         $this->assertStringNotContainsString('snap.licdn.com/li.lms-analytics', $layout);
         $this->assertStringNotContainsString('{{ captcha:head }}', $layout);
         $this->assertStringContainsString('data-environment="{{ environment }}"', $layout);

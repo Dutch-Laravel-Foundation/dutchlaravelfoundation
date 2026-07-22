@@ -1,6 +1,6 @@
 <div class="editorial-page">
-    <div class="editorial-rail">
-        <header class="editorial-page__header">
+    <div class="editorial-rail" data-dlf-footer-cta-stage>
+        <header class="editorial-page__header dlf-divider-section">
             <div class="editorial-page__heading">
                 <span class="editorial-eyebrow">Nieuws</span>
                 <h1 class="editorial-page__title">Nieuws uit de community</h1>
@@ -18,13 +18,13 @@
 
         {{ collection:insights sort="date:desc" paginate="10" as="articles" category:is="{get:category}" }}
             {{ if no_results }}
-                <div class="editorial-empty">
+                <div class="editorial-empty dlf-divider-section">
                     <h2>Geen berichten gevonden</h2>
                     <p>Er zijn nog geen nieuwsberichten in deze categorie.</p>
                     <a href="/nieuws" class="editorial-text-link">Bekijk al het nieuws</a>
                 </div>
             {{ else }}
-                <div class="editorial-feed">
+                <div class="editorial-feed dlf-divider-section dlf-divider-list">
                     {{ articles }}
                         <article class="editorial-entry editorial-entry--linked {{ switch between="editorial-entry--media-start|editorial-entry--media-end" }} {{ if first }}editorial-entry--featured{{ /if }}">
                             <a class="editorial-entry__link" href="{{ url }}" aria-label="Lees {{ title }}">
@@ -82,7 +82,7 @@
 
                 {{ paginate }}
                     {{ if total_pages > 1 }}
-                        <nav class="editorial-pagination" aria-label="Paginering nieuwsberichten">
+                        <nav class="editorial-pagination dlf-divider-section" aria-label="Paginering nieuwsberichten">
                             {{ if prev_page }}
                                 <a class="editorial-pagination__link--newer" href="{{ prev_page }}"><span aria-hidden="true">←</span> Nieuwer</a>
                             {{ /if }}

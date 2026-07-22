@@ -67,6 +67,14 @@
     margin-bottom: 0;
 }
 
+.dlf-block--white .dlf-prose a:not(:where(.dlf-button, .dlf-btn, .dlf-text-link)) {
+    color: var(--dlf-red-text);
+    text-decoration-line: underline;
+    text-decoration-color: currentColor;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
 .dlf-text-link {
     display: inline-flex;
     gap: 0.45rem;

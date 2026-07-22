@@ -1,10 +1,11 @@
 <div
     class="dlf-community-page dlf-members-page"
+    data-dlf-footer-cta-stage
     x-data="membersFilter"
     x-effect="syncBodyOverflow"
     @keydown.escape.window="closeFilterModal()"
 >
-    <section class="dlf-community-section" aria-labelledby="members-heading">
+    <section class="dlf-community-section dlf-divider-section" aria-labelledby="members-heading">
         <div class="dlf-community-head">
             <div class="dlf-members-intro">
                 <div>
@@ -19,7 +20,7 @@
         </div>
     </section>
 
-    <section class="dlf-community-section" aria-label="Leden zoeken en filteren">
+    <section class="dlf-community-section dlf-divider-section" aria-label="Leden zoeken en filteren">
         <div class="dlf-members-toolbar">
             <div class="dlf-members-result-count dlf-members-result-count--desktop" aria-live="polite">
                 <span x-text="resultLabel"></span>
@@ -42,8 +43,10 @@
         </div>
     </section>
 
-    <section class="dlf-members-fallback" aria-label="Onze leden" x-show="false">
-        <div class="dlf-members-grid dlf-fill-grid">
+    <section class="dlf-members-fallback dlf-divider-section" aria-label="Onze leden" x-show="false">
+        <div
+            class="dlf-members-grid dlf-fill-grid dlf-divider-grid dlf-divider-grid--fill dlf-divider-grid--desktop-4 dlf-divider-grid--tablet-2 dlf-divider-grid--mobile-2"
+        >
             {{ collection:members sort="title" }}
                 <a class="dlf-member-card" href="{{ url }}">
                     <span class="dlf-member-card__logo">
@@ -57,6 +60,7 @@
                     </span>
                 </a>
             {{ /collection:members }}
+            <span class="dlf-divider-grid__filler" aria-hidden="true"></span>
         </div>
     </section>
 
@@ -64,8 +68,15 @@
         Er zijn geen leden gevonden die voldoen aan je zoekopdracht.
     </div>
 
-    <section aria-label="Onze leden" x-show="filteredMembers.length > 0" x-cloak>
-        <div class="dlf-members-grid dlf-fill-grid">
+    <section
+        class="dlf-divider-section"
+        aria-label="Onze leden"
+        x-show="filteredMembers.length > 0"
+        x-cloak
+    >
+        <div
+            class="dlf-members-grid dlf-fill-grid dlf-divider-grid dlf-divider-grid--fill dlf-divider-grid--desktop-4 dlf-divider-grid--tablet-2 dlf-divider-grid--mobile-2"
+        >
             <template x-for="item in firstMembers" :key="item.id">
                 <a class="dlf-member-card" :href="'/leden/' + item.slug">
                     <span class="dlf-member-card__logo">
@@ -81,9 +92,14 @@
                     </span>
                 </a>
             </template>
+            <span class="dlf-divider-grid__filler" aria-hidden="true"></span>
         </div>
 
-        <div class="dlf-community-red-band" x-show="showMatchBanner" x-cloak>
+        <div
+            class="dlf-community-red-band dlf-divider-region dlf-divider-theme-inverse"
+            x-show="showMatchBanner"
+            x-cloak
+        >
             <div class="dlf-community-red-inner dlf-members-match">
                 <div class="dlf-members-match__copy">
                     <span class="dlf-community-kicker" style="color: rgba(255, 255, 255, .75)">Match je project</span>
@@ -97,7 +113,10 @@
             </div>
         </div>
 
-        <div class="dlf-members-grid dlf-fill-grid" x-show="secondMembers.length > 0">
+        <div
+            class="dlf-members-grid dlf-fill-grid dlf-divider-region dlf-divider-grid dlf-divider-grid--fill dlf-divider-grid--desktop-4 dlf-divider-grid--tablet-2 dlf-divider-grid--mobile-2"
+            x-show="secondMembers.length > 0"
+        >
             <template x-for="item in secondMembers" :key="item.id">
                 <a class="dlf-member-card" :href="'/leden/' + item.slug">
                     <span class="dlf-member-card__logo">
@@ -113,6 +132,7 @@
                     </span>
                 </a>
             </template>
+            <span class="dlf-divider-grid__filler" aria-hidden="true"></span>
         </div>
     </section>
 

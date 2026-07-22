@@ -93,7 +93,7 @@
     position: relative;
     width: min(100%, var(--dlf-max));
     margin: 0 auto;
-    padding-bottom: 104px;
+    padding-bottom: var(--dlf-footer-cta-stage-padding, 139px);
 }
 
 .dlf-home-main::before,

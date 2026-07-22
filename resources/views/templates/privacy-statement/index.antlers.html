@@ -1,11 +1,14 @@
 <div class="dlf-public-page dlf-public-page--legal editorial-article">
-    <div class="editorial-rail editorial-rail--article">
-        <header class="dlf-public-page__hero">
+    <div class="editorial-rail editorial-rail--article" data-dlf-footer-cta-stage>
+        <header class="dlf-public-page__hero dlf-divider-section">
             <span class="editorial-eyebrow">Juridisch</span>
             <h1>{{ title }}</h1>
         </header>
 
-        <div class="editorial-article__body dlf-public-page__body" data-editorial-article>
+        <div
+            class="editorial-article__body dlf-public-page__body dlf-divider-section"
+            data-editorial-article
+        >
             {{ partial:editorial/toc label="In deze verklaring" }}
 
             <article class="editorial-article__prose dlf-public-page__prose" data-editorial-prose>

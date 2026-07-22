@@ -1,5 +1,5 @@
-<div class="dlf-community-page dlf-about-page">
-    <section class="dlf-community-section" aria-labelledby="about-heading">
+<div class="dlf-community-page dlf-about-page" data-dlf-footer-cta-stage>
+    <section class="dlf-community-section dlf-divider-section" aria-labelledby="about-heading">
         <div class="dlf-community-head">
             <span class="dlf-community-kicker">{{ title }}</span>
             <h1 id="about-heading" class="dlf-community-title">
@@ -14,13 +14,15 @@
     </section>
 
     <section
-        class="dlf-community-section dlf-community-section--grid dlf-about-work"
+        class="dlf-community-section dlf-community-section--grid dlf-about-work dlf-divider-section"
         aria-labelledby="about-work-heading"
     >
         <div class="dlf-about-red-head">
             <h2 id="about-work-heading">Wat we doen</h2>
         </div>
-        <div class="dlf-community-grid-2">
+        <div
+            class="dlf-community-grid-2 dlf-divider-region dlf-divider-grid dlf-divider-grid--desktop-2 dlf-divider-grid--tablet-1 dlf-divider-grid--mobile-1"
+        >
             <article class="dlf-community-cell">
                 <span class="dlf-community-icon"
                     ><img
@@ -85,7 +87,7 @@
     </section>
 
     <section
-        class="dlf-community-section dlf-community-grid-2 dlf-about-story"
+        class="dlf-community-section dlf-community-grid-2 dlf-about-story dlf-divider-section dlf-divider-split dlf-divider-split--stacked-reversed"
         aria-labelledby="about-story-heading"
     >
         <div class="dlf-about-story-copy">
@@ -119,14 +121,19 @@
         </figure>
     </section>
 
-    <section class="dlf-community-red-band" aria-label="Dutch Laravel Foundation in cijfers">
-        <div class="dlf-community-red-inner dlf-about-stats">
+    <section
+        class="dlf-community-red-band dlf-divider-section dlf-divider-theme-inverse"
+        aria-label="Dutch Laravel Foundation in cijfers"
+    >
+        <div
+            class="dlf-community-red-inner dlf-about-stats dlf-divider-grid dlf-divider-grid--desktop-4 dlf-divider-grid--tablet-1 dlf-divider-grid--mobile-1"
+        >
             <div class="dlf-about-stat">
                 <strong>{{ collection:count in="members" }}+</strong>
                 <span>aangesloten leden</span>
             </div>
             <div class="dlf-about-stat">
-                <strong>3</strong>
+                <strong>4</strong>
                 <span>events per jaar</span>
             </div>
             <div class="dlf-about-stat">
@@ -141,18 +148,20 @@
     </section>
 
     <section
-        class="dlf-community-section dlf-community-section--grid"
+        class="dlf-community-section dlf-community-section--grid dlf-divider-section"
         aria-labelledby="about-events-heading"
     >
         <div class="dlf-community-head dlf-community-head--divided">
             <span class="dlf-community-kicker">Events</span>
             <h2 id="about-events-heading" class="dlf-community-heading">Wat we organiseren</h2>
             <p class="dlf-community-intro">
-                Ieder jaar organiseren we drie vaste evenementen voor onze leden: LaraFest, de
-                Laravel Hackathon en het CxO-diner.
+                Ieder jaar organiseren we vier vaste evenementen voor onze leden: LaraFest, de
+                Laravel Hackathon, het CxO-diner en meetups.
             </p>
         </div>
-        <div class="dlf-community-grid-3">
+        <div
+            class="dlf-community-grid-2 dlf-divider-region dlf-divider-grid dlf-divider-grid--desktop-2 dlf-divider-grid--tablet-1 dlf-divider-grid--mobile-1"
+        >
             <article class="dlf-community-cell dlf-about-event">
                 <figure class="dlf-about-event__image" data-progressive-media-frame>
                     <img
@@ -211,10 +220,31 @@
                 </figure>
                 <div>
                     <span class="dlf-community-kicker" style="color: #ff2d20">CxO-diner</span>
-                    <h3>Doorpraten op bestuursniveau</h3>
+                    <h3>Doorpraten op managementniveau</h3>
                     <p class="dlf-community-feature-copy">
-                        Bestuurders van onze leden schuiven aan voor gesprekken over de toekomst van
-                        maatwerksoftware en de rol van Laravel.
+                        Het management van onze leden schuift aan voor gesprekken over de toekomst
+                        van maatwerksoftware en de rol van Laravel.
+                    </p>
+                </div>
+            </article>
+            <article class="dlf-community-cell dlf-about-event">
+                <figure class="dlf-about-event__image" data-progressive-media-frame>
+                    <img
+                        src="/assets/uploads/events/laravel-meetup.jpeg"
+                        alt="Bezoekers tijdens een Laravel meetup"
+                        {{
+                        partial:progressive_media_attributes
+                        width="3000"
+                        height="2000"
+                        }}
+                    />
+                </figure>
+                <div>
+                    <span class="dlf-community-kicker" style="color: #ff2d20">Meetups</span>
+                    <h3>Samen kennis delen</h3>
+                    <p class="dlf-community-feature-copy">
+                        Technische talks, praktijkverhalen en ontmoetingen bij Laravel-bedrijven
+                        door het hele land.
                     </p>
                 </div>
             </article>
@@ -222,7 +252,7 @@
     </section>
 
     <section
-        class="dlf-community-section dlf-community-section--grid dlf-about-benefits"
+        class="dlf-community-section dlf-community-section--grid dlf-about-benefits dlf-divider-section"
         aria-labelledby="about-benefits-heading"
     >
         <div class="dlf-community-head">
@@ -239,9 +269,7 @@
             >
         </div>
         <div
-            class="dlf-lid-benefits dlf-about-benefits-slider"
-            data-lid-benefits-marquee
-            data-lid-benefits-align-end-items="3"
+            class="dlf-lid-benefits dlf-lid-benefits--overview dlf-about-benefits-overview dlf-divider-region dlf-divider-grid dlf-divider-grid--column-rules-only dlf-divider-grid--desktop-4 dlf-divider-grid--tablet-2 dlf-divider-grid--mobile-1"
             aria-label="Voordelen voor leden"
         >
             <article class="dlf-lid-benefit">
@@ -363,7 +391,7 @@
     </section>
 
     <section
-        class="dlf-community-section dlf-community-section--grid dlf-about-board"
+        class="dlf-community-section dlf-community-section--grid dlf-about-board dlf-divider-section"
         aria-labelledby="about-board-heading"
     >
         <div class="dlf-community-head dlf-community-head--divided">
@@ -376,7 +404,9 @@
                 werk inzetten voor de community.
             </p>
         </div>
-        <div class="dlf-community-grid-4 dlf-about-board-grid dlf-fill-grid">
+        <div
+            class="dlf-community-grid-4 dlf-about-board-grid dlf-fill-grid dlf-divider-region dlf-divider-grid dlf-divider-grid--fill dlf-divider-grid--desktop-4 dlf-divider-grid--tablet-3 dlf-divider-grid--mobile-2"
+        >
             {{ collection:board sort="title" }}
             <article class="dlf-community-cell dlf-about-board-card">
                 <figure class="dlf-about-board-card__photo" data-progressive-media-frame>
@@ -399,11 +429,12 @@
                 </div>
             </article>
             {{ /collection:board }}
+            <span class="dlf-divider-grid__filler" aria-hidden="true"></span>
         </div>
     </section>
 
     <section
-        class="dlf-community-section dlf-about-milestones"
+        class="dlf-community-section dlf-about-milestones dlf-divider-section"
         aria-labelledby="about-milestones-heading"
     >
         <div class="dlf-community-head dlf-community-head--compact">
@@ -412,41 +443,79 @@
                 Belangrijke momenten
             </h2>
         </div>
-        <div class="dlf-about-timeline">
+        <div class="dlf-about-timeline dlf-divider-region dlf-divider-list">
             <div class="dlf-about-timeline__row">
                 <span class="dlf-about-timeline__year">2019</span>
                 <div>
-                    <h3>Oprichting van de stichting</h3>
+                    <h3>Eerste Laravel Hackathon</h3>
                     <p>
-                        Zeven bedrijven richten met goedkeuring van Taylor Otwell de Dutch Laravel
-                        Foundation op.
+                        De eerste Laravel Hackathon vormt het lanceringsevenement van de Dutch
+                        Laravel Foundation.
                     </p>
+                </div>
+            </div>
+            <div class="dlf-about-timeline__row">
+                <span class="dlf-about-timeline__year">2020</span>
+                <div>
+                    <h3>Online meetups en eerste showcase</h3>
+                    <p>
+                        De DLF organiseert diverse online meetups en publiceert de eerste showcase
+                        op de website.
+                    </p>
+                </div>
+            </div>
+            <div class="dlf-about-timeline__row">
+                <span class="dlf-about-timeline__year">2021</span>
+                <div>
+                    <h3>Online meetups</h3>
+                    <p>De DLF blijft de community samenbrengen met diverse online meetups.</p>
                 </div>
             </div>
             <div class="dlf-about-timeline__row">
                 <span class="dlf-about-timeline__year">2022</span>
                 <div>
-                    <h3>Eerste LaraFest &amp; LarAward</h3>
+                    <h3>Eerste LaraFest, LarAward en CxO-diner</h3>
                     <p>
-                        De eerste editie van LaraFest vindt plaats in Zandvoort. Tijdens het
-                        evenement wordt ook de eerste LarAward uitgereikt.
+                        De eerste edities van LaraFest, de LarAward en het CxO-diner vinden plaats.
                     </p>
                 </div>
             </div>
             <div class="dlf-about-timeline__row">
-                <span class="dlf-about-timeline__year">2026</span>
+                <span class="dlf-about-timeline__year">2023</span>
                 <div>
-                    <h3>Onderwijsinitiatieven</h3>
+                    <h3>Reguliere events en Larabelles</h3>
                     <p>
-                        De stichting start samen met Stichting Praktijkleren initiatieven voor het
-                        mbo, waaronder studiemateriaal, gastlessen en een stagebank.
+                        Naast de reguliere evenementen start de DLF een samenwerking met Larabelles.
+                    </p>
+                </div>
+            </div>
+            <div class="dlf-about-timeline__row">
+                <span class="dlf-about-timeline__year">2024</span>
+                <div>
+                    <h3>Nieuwe partnerships</h3>
+                    <p>
+                        De stichting gaat verschillende nieuwe partnerships aan, onder andere met
+                        JetBrains en Laravel Certified.
+                    </p>
+                </div>
+            </div>
+            <div class="dlf-about-timeline__row">
+                <span class="dlf-about-timeline__year">2025</span>
+                <div>
+                    <h3>Samenwerking met Shock Media</h3>
+                    <p>
+                        De DLF start een samenwerking met Shock Media en brengt een bezoek aan
+                        Laravel Live Denmark.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="dlf-about-partners" aria-labelledby="about-partners-heading">
+    <section
+        class="dlf-about-partners dlf-divider-section dlf-divider-section--composite-tail"
+        aria-labelledby="about-partners-heading"
+    >
         <div class="dlf-community-head dlf-community-head--divided">
             <span class="dlf-community-kicker">Founding partners</span>
             <h2 id="about-partners-heading" class="dlf-community-heading">
@@ -457,7 +526,9 @@
                 Dutch Laravel Foundation.
             </p>
         </div>
-        <div class="dlf-members-grid">
+        <div
+            class="dlf-members-grid dlf-divider-region dlf-divider-grid dlf-divider-tail-segment dlf-divider-grid--desktop-4 dlf-divider-grid--tablet-2 dlf-divider-grid--mobile-2"
+        >
             {{ collection:members founding_partner:is="true" sort="title" }}
             <a href="/leden/{{ slug }}" class="dlf-member-card">
                 <span class="dlf-member-card__logo">

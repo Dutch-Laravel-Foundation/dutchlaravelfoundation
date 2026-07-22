@@ -1,4 +1,6 @@
-<section class="dlf-block dlf-block-hero dlf-block-hero--{{ image_position ?? 'right' }}">
+<section
+    class="dlf-block dlf-block-hero dlf-block-hero--{{ image_position ?? 'right' }} dlf-divider-section dlf-divider-split{{ if image_position == 'left' }} dlf-divider-split--desktop-reversed{{ /if }}"
+>
     <div class="dlf-block-hero__content">
         {{ if eyebrow }}<p class="dlf-kicker">{{ eyebrow }}</p>{{ /if }}
         {{ if heading_level === 'h1' }}

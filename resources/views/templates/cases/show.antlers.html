@@ -1,15 +1,15 @@
 {{ case_title = title_long ?? title }}
 
 <div class="editorial-article">
-    <div class="editorial-rail editorial-rail--article">
+    <div class="editorial-rail editorial-rail--article" data-dlf-footer-cta-stage>
         {{ partial:breadcrumb href="/cases" label="Cases" :current="member:title ?? 'Case'" }}
 
-        <header class="editorial-article__hero">
+        <header
+            class="editorial-article__hero dlf-divider-section dlf-divider-split dlf-divider-split--stacked-reversed"
+        >
             <div class="editorial-article__head">
                 <div class="editorial-entry__meta editorial-article__meta">
                     <span class="editorial-entry__category">{{ member:title ?? "Case" }}</span>
-                    <span class="editorial-entry__dot" aria-hidden="true">·</span>
-                    <time datetime="{{ date format="Y-m-d" }}">{{ date | iso_format="D MMMM YYYY" }}</time>
                 </div>
                 <h1>{{ case_title }}</h1>
                 {{ if introduction }}
@@ -33,7 +33,7 @@
             </figure>
         </header>
 
-        <div class="editorial-article__body" data-editorial-article>
+        <div class="editorial-article__body dlf-divider-section" data-editorial-article>
             {{ partial:editorial/toc label="In deze case" }}
 
             <article class="editorial-article__prose" data-editorial-prose>

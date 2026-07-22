@@ -1,6 +1,6 @@
 <div class="editorial-page editorial-page--cases">
-    <div class="editorial-rail">
-        <header class="editorial-page__header">
+    <div class="editorial-rail" data-dlf-footer-cta-stage>
+        <header class="editorial-page__header dlf-divider-section">
             <div class="editorial-page__heading">
                 <span class="editorial-eyebrow">Cases</span>
                 <h1 class="editorial-page__title">Cases uit de community</h1>
@@ -10,12 +10,12 @@
 
         {{ collection:cases sort="date:desc" as="case_entries" }}
             {{ if no_results }}
-                <div class="editorial-empty">
+                <div class="editorial-empty dlf-divider-section">
                     <h2>Geen cases gevonden</h2>
                     <p>Er zijn op dit moment geen cases beschikbaar.</p>
                 </div>
             {{ else }}
-                <div class="editorial-feed">
+                <div class="editorial-feed dlf-divider-section dlf-divider-list">
                     {{ case_entries }}
                         {{ case_title = title_long ?? title }}
                         <article class="editorial-entry {{ switch between="editorial-entry--media-start|editorial-entry--media-end" }} {{ if first }}editorial-entry--featured{{ /if }}">
@@ -50,8 +50,6 @@
                             <div class="editorial-entry__body">
                                 <div class="editorial-entry__meta">
                                     <span class="editorial-entry__category">{{ member:title ?? "Case" }}</span>
-                                    <span class="editorial-entry__dot" aria-hidden="true">·</span>
-                                    <time datetime="{{ date format="Y-m-d" }}">{{ date | iso_format="D MMMM YYYY" }}</time>
                                 </div>
 
                                 {{ if first }}

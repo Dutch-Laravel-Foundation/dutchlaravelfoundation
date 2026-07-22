@@ -1,8 +1,10 @@
 <div class="editorial-article">
-    <div class="editorial-rail editorial-rail--article">
+    <div class="editorial-rail editorial-rail--article" data-dlf-footer-cta-stage>
         {{ partial:breadcrumb href="/kennis" label="Kennis" :current="category" }}
 
-        <header class="editorial-article__hero">
+        <header
+            class="editorial-article__hero dlf-divider-section dlf-divider-split dlf-divider-split--stacked-reversed"
+        >
             <div class="editorial-article__head">
                 <div class="editorial-entry__meta editorial-article__meta">
                     <span class="editorial-entry__category">{{ category }}</span>
@@ -52,7 +54,7 @@
             </figure>
         </header>
 
-        <div class="editorial-article__body" data-editorial-article>
+        <div class="editorial-article__body dlf-divider-section" data-editorial-article>
             {{ partial:editorial/toc label="In dit artikel" }}
 
             <article class="editorial-article__prose" data-editorial-prose>

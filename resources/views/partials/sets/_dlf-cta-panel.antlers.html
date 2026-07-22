@@ -1,13 +1,26 @@
-<section class="dlf-block dlf-cta-panel dlf-block--{{ tone ?? 'red' }}">
+<section
+    class="dlf-block dlf-cta-panel dlf-block--{{ tone ?? 'red' }} dlf-divider-section{{ unless tone }} dlf-divider-theme-inverse{{ /unless }}{{ if tone == 'red' || tone == 'dark' }} dlf-divider-theme-inverse{{ /if }}"
+>
     <div>
-        {{ if eyebrow }}<p class="dlf-kicker">{{ eyebrow }}</p>{{ /if }}
+        {{ if eyebrow }}
+        <p class="dlf-kicker">{{ eyebrow }}</p>
+        {{ /if }}
         <h2>{{ heading }}</h2>
-        {{ if body }}<div class="dlf-prose">{{ body }}</div>{{ /if }}
+        {{ if body }}
+        <div class="dlf-prose">{{ body }}</div>
+        {{ /if }}
     </div>
     {{ if primary_link || secondary_link }}
-        <div class="dlf-actions">
-            {{ if primary_link && primary_label }}<a class="dlf-button dlf-button--light" href="{{ primary_link }}"><span>{{ primary_label }}</span></a>{{ /if }}
-            {{ if secondary_link && secondary_label }}<a class="dlf-text-link" href="{{ secondary_link }}">{{ secondary_label }} <span aria-hidden="true">→</span></a>{{ /if }}
-        </div>
+    <div class="dlf-actions">
+        {{ if primary_link && primary_label }}<a
+            class="dlf-button dlf-button--light"
+            href="{{ primary_link }}"
+            ><span>{{ primary_label }}</span></a
+        >{{ /if }} {{ if secondary_link && secondary_label }}<a
+            class="dlf-text-link"
+            href="{{ secondary_link }}"
+            >{{ secondary_label }} <span aria-hidden="true">→</span></a
+        >{{ /if }}
+    </div>
     {{ /if }}
 </section>

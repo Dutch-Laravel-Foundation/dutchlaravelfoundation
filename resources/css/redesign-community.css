@@ -7,7 +7,7 @@
     position: relative;
     width: min(100%, 1152px);
     margin-inline: auto;
-    padding-bottom: 144px;
+    padding-bottom: var(--dlf-footer-cta-stage-padding, 144px);
     color: var(--dlf-copy);
     background: #fff;
 }
@@ -115,9 +115,12 @@
     text-wrap: pretty;
 }
 
-.dlf-community-intro a {
+.dlf-community-intro a,
+.dlf-community-copy a,
+.dlf-detail-properties a {
     color: var(--dlf-red-text);
     text-decoration: underline;
+    text-decoration-color: currentColor;
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
 }
@@ -169,7 +172,6 @@
 }
 
 .dlf-fill-grid {
-    border-bottom: 1px solid var(--dlf-line);
     background: #fff
         repeating-linear-gradient(30deg, #f7f7fb 0, #f7f7fb 1px, transparent 1px, transparent 5px);
 }
@@ -389,7 +391,6 @@
     min-height: 284px;
     padding: 40px;
     place-items: center;
-    border-left: 1px solid var(--dlf-line);
 }
 
 .dlf-member-detail-head__logo img {
@@ -581,34 +582,9 @@
 }
 
 @media (min-width: 1024px) {
-    :is(.dlf-member-detail-page, .dlf-internship-detail-page) .dlf-member-detail-head__logo {
-        border-left: 0;
-        box-shadow: inset 1px 0 0 var(--dlf-line);
-    }
-
-    :is(.dlf-member-detail-page, .dlf-internship-detail-page)
-        .dlf-community-section--grid
-        .dlf-community-grid-2 {
-        position: relative;
-    }
-
-    :is(.dlf-member-detail-page, .dlf-internship-detail-page)
-        .dlf-community-section--grid
-        .dlf-community-grid-2::after {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 50%;
-        width: 1px;
-        background: var(--dlf-line);
-        content: "";
-        pointer-events: none;
-    }
-
-    :is(.dlf-member-detail-page, .dlf-internship-detail-page)
-        .dlf-community-section--grid
-        .dlf-community-cell:first-child {
-        border-right: 0;
+    .dlf-internship-detail-page .dlf-member-detail-head__copy .dlf-detail-properties {
+        gap: 16px;
+        padding-top: 4px;
     }
 }
 
@@ -658,11 +634,6 @@
 }
 
 @media (min-width: 1024px) {
-    .dlf-member-detail-internships,
-    .dlf-member-detail-internships .dlf-members-grid {
-        border-bottom: 0;
-    }
-
     .dlf-member-detail-internships .dlf-member-card__body {
         padding: 20px 40px 40px;
     }
@@ -1033,6 +1004,33 @@
     outline-offset: -2px;
 }
 
+.dlf-lid-benefits--overview {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+    grid-auto-columns: auto;
+    overflow: visible;
+    cursor: default;
+    scroll-padding-left: 0;
+    scrollbar-width: none;
+    touch-action: auto;
+    user-select: auto;
+}
+
+.dlf-become-member-page .dlf-lid-benefits--overview {
+    margin-inline: -48px;
+    padding-left: 0;
+    border-left: 1px solid var(--dlf-line);
+}
+
+.dlf-lid-benefits--overview .dlf-lid-benefit:nth-child(2) {
+    border-left: 0;
+}
+
+.dlf-lid-benefits--overview .dlf-lid-benefit:nth-child(odd) {
+    border-left: 1px solid var(--dlf-line);
+}
+
 .dlf-lid-benefit {
     min-width: 0;
     padding: 48px 48px 26px;
@@ -1206,15 +1204,6 @@
     color: rgba(255, 255, 255, 0.7);
 }
 
-.dlf-lid-tax {
-    padding: 4px 9px;
-    color: #fff;
-    border-radius: 3px;
-    background: rgba(255, 255, 255, 0.16);
-    font-size: 11px;
-    font-weight: 600;
-}
-
 .dlf-lid-price {
     padding-block: 16px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.18);
@@ -1385,28 +1374,27 @@
     border-left: 1px solid var(--dlf-line);
 }
 
+.dlf-about-benefits .dlf-about-benefits-overview {
+    width: auto;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin: 0;
+    padding-left: 0;
+    border-top: 1px solid var(--dlf-line);
+}
+
+.dlf-about-benefits .dlf-about-benefits-overview .dlf-lid-benefit {
+    padding: 40px;
+    border-top: 0;
+    border-left: 0;
+    transform: none;
+}
+
 .dlf-about-benefits .dlf-text-link {
     color: var(--dlf-red-text);
 }
 
-.dlf-about-board,
-.dlf-about-board .dlf-about-board-grid {
-    border-bottom: 0;
-}
-
-.dlf-about-board.dlf-community-section--grid
-    > .dlf-about-board-grid
-    > .dlf-about-board-card:nth-child(4) {
-    border-bottom: 1px solid var(--dlf-line);
-}
-
 .dlf-about-milestones .dlf-community-head--compact {
     padding-bottom: 14px;
-    border-top: 1px solid var(--dlf-line);
-}
-
-.dlf-about-work .dlf-community-grid-2 {
-    border-bottom: 1px solid var(--dlf-line);
 }
 
 .dlf-about-story-copy,
@@ -1463,7 +1451,7 @@
     min-height: 140px;
     flex: none;
     overflow: hidden;
-    border-radius: 4px;
+    border-radius: 3px;
     background: #f5f5fa;
 }
 
@@ -1564,10 +1552,6 @@
 }
 
 /* What is Laravel */
-.dlf-laravel-page {
-    padding-bottom: 139px;
-}
-
 .dlf-laravel-page > .dlf-community-section:first-child .dlf-community-head {
     background-color: #fff;
     background-image: none;
@@ -1575,17 +1559,10 @@
 
 .dlf-laravel-page .dlf-community-head--compact {
     padding-top: 64px;
-    border-bottom: 1px solid var(--dlf-line);
-}
-
-.dlf-laravel-page .dlf-laravel-benefits,
-.dlf-laravel-page .dlf-laravel-reading {
-    border-bottom: 0;
 }
 
 .dlf-laravel-explanation {
     padding: 48px 40px 56px;
-    border-right: 1px solid var(--dlf-line);
 }
 
 .dlf-laravel-facts {
@@ -1660,7 +1637,7 @@
     margin-bottom: 8px !important;
     color: var(--dlf-ink) !important;
     font-size: 17px !important;
-    font-weight: 700 !important;
+    font-weight: 600 !important;
 }
 
 .dlf-laravel-link {
@@ -1725,11 +1702,17 @@
 }
 
 @media (min-width: 1024px) {
+    .dlf-lid-benefits--overview {
+        border-top: 1px solid var(--dlf-line);
+    }
+
+    .dlf-about-benefits .dlf-about-benefits-overview {
+        border-top: 1px solid var(--dlf-line);
+        border-left: 1px solid var(--dlf-line);
+    }
+
     .dlf-about-benefits .dlf-about-benefits-slider {
-        --dlf-lid-benefits-start: max(
-            0px,
-            calc((100vw - min(100vw, 1152px)) / 2)
-        );
+        --dlf-lid-benefits-start: max(0px, calc((100vw - min(100vw, 1152px)) / 2));
         --dlf-lid-benefit-width: calc(100% / 3);
     }
 
@@ -1743,7 +1726,6 @@
         aspect-ratio: 16 / 9;
     }
 
-    .dlf-about-page .dlf-community-section--grid:has(+ .dlf-about-benefits) .dlf-about-event,
     .dlf-about-page .dlf-community-section--grid:has(+ .dlf-about-board),
     .dlf-about-page .dlf-community-section--grid:has(+ .dlf-about-board) .dlf-about-event {
         border-bottom: 0;
@@ -1757,13 +1739,17 @@
         border-left: 1px solid var(--dlf-line);
     }
 
+    .dlf-become-member-page .dlf-lid-hero-copy {
+        border-bottom: 0;
+    }
+
     .dlf-lid-left > .dlf-lid-content-block:first-child {
-        padding-block: 49px;
+        padding-block: 46px;
     }
 
     .dlf-lid-left > .dlf-lid-content-block:first-child .dlf-lid-benefits {
-        margin-top: 49px;
-        margin-bottom: -49px;
+        margin-top: 46px;
+        margin-bottom: -46px;
     }
 
     .dlf-member-detail-sidebar {
@@ -1776,19 +1762,13 @@
 
 @media (min-width: 1121px) {
     .dlf-lid-left > .dlf-lid-content-block:first-child {
-        padding-top: 66px;
-        padding-bottom: 65px;
+        padding-top: 63px;
+        padding-bottom: 62px;
     }
 
     .dlf-lid-left > .dlf-lid-content-block:first-child .dlf-lid-benefits {
-        margin-top: 65px;
-        margin-bottom: -65px;
-    }
-}
-
-@media (min-width: 1024px) and (max-width: 1037px) {
-    .dlf-laravel-page {
-        padding-bottom: 154px;
+        margin-top: 62px;
+        margin-bottom: -62px;
     }
 }
 
@@ -1829,11 +1809,6 @@
 
     .dlf-community-heading {
         font-size: 26px !important;
-    }
-
-    .dlf-member-detail-internships:has(+ .dlf-member-detail-cases),
-    .dlf-member-detail-internships:has(+ .dlf-member-detail-cases) .dlf-members-grid {
-        border-bottom: 0;
     }
 
     .dlf-members-page > .dlf-community-section:has(.dlf-members-toolbar) {
@@ -1893,17 +1868,6 @@
         border-bottom: 0;
     }
 
-    .dlf-about-page .dlf-community-section--grid > .dlf-about-board-grid > .dlf-about-board-card {
-        border-bottom: 1px solid var(--dlf-line);
-    }
-
-    .dlf-about-page
-        .dlf-community-section--grid
-        > .dlf-about-board-grid
-        > .dlf-about-board-card:last-child {
-        border-bottom: 0;
-    }
-
     .dlf-community-red-inner {
         padding-inline: 24px;
     }
@@ -1939,8 +1903,6 @@
     .dlf-member-detail-head__logo {
         min-height: 220px;
         padding: 32px 24px;
-        border-top: 1px solid var(--dlf-line);
-        border-left: 0;
     }
 
     .dlf-members-grid {
@@ -1988,6 +1950,14 @@
         margin: 24px -24px -40px;
     }
 
+    .dlf-lid-benefits--overview {
+        padding-left: 0;
+    }
+
+    .dlf-become-member-page .dlf-lid-benefits--overview {
+        margin-inline: -24px;
+    }
+
     .dlf-lid-benefit:nth-child(2) {
         border-left: 0;
     }
@@ -1999,6 +1969,11 @@
     .dlf-lid-benefit:first-child {
         padding-left: 0;
         border-left: 0;
+    }
+
+    .dlf-lid-benefits--overview .dlf-lid-benefit:first-child {
+        padding-left: 24px;
+        border-left: 1px solid var(--dlf-line);
     }
 
     .dlf-lid-events-photo {
@@ -2063,10 +2038,6 @@
         padding-top: 44px;
     }
 
-    .dlf-laravel-facts {
-        border-top: 1px solid var(--dlf-line);
-    }
-
     .dlf-laravel-fact {
         padding: 40px 24px;
     }
@@ -2129,6 +2100,10 @@
 }
 
 @media (min-width: 640px) and (max-width: 1023px) {
+    .dlf-about-benefits .dlf-about-benefits-overview {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .dlf-about-page .dlf-community-section--grid > .dlf-community-grid-2 > .dlf-about-event {
         padding-block: 28px;
     }
@@ -2150,13 +2125,6 @@
         padding: 24px;
     }
 
-    .dlf-about-page
-        .dlf-community-section--grid
-        > .dlf-about-board-grid
-        > .dlf-about-board-card:not(:nth-child(3n)) {
-        border-right: 1px solid var(--dlf-line);
-    }
-
     .dlf-about-board-card__photo {
         width: 120px;
         height: 120px;
@@ -2165,6 +2133,14 @@
 }
 
 @media (max-width: 639px) {
+    .dlf-about-benefits .dlf-about-benefits-overview {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .dlf-about-benefits .dlf-about-benefits-overview .dlf-lid-benefit {
+        padding: 32px 24px;
+    }
+
     .dlf-about-benefits .dlf-about-benefits-slider {
         --dlf-lid-benefit-width: min(78vw, 320px);
         --dlf-lid-benefits-start: 24px;
@@ -2223,6 +2199,18 @@
         border-bottom: 0;
     }
 
+    .dlf-lid-benefits--overview {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .dlf-lid-benefits--overview .dlf-lid-benefit {
+        border-bottom: 1px solid var(--dlf-line);
+    }
+
+    .dlf-lid-benefits--overview .dlf-lid-benefit:nth-child(n) {
+        border-left: 1px solid var(--dlf-line);
+    }
+
     .dlf-lid-events-block {
         padding-bottom: 0;
     }
@@ -2246,13 +2234,6 @@
         flex-direction: column;
         align-items: flex-start;
         padding-block: 28px;
-    }
-
-    .dlf-about-page
-        .dlf-community-section--grid
-        > .dlf-about-board-grid
-        > .dlf-about-board-card:nth-child(odd) {
-        border-right: 1px solid var(--dlf-line);
     }
 
     .dlf-about-board-card__photo {
@@ -2372,12 +2353,6 @@
 
     .dlf-laravel-fact strong {
         font-size: 36px;
-    }
-}
-
-@media (max-width: 535px) {
-    .dlf-member-detail-internships:has(+ .dlf-member-detail-cases) .dlf-members-grid {
-        border-bottom: 1px solid var(--dlf-line);
     }
 }
 

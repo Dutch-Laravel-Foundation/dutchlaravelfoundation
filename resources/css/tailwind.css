@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "./fonts.css";
 @import "./redesign-shell.css";
+@import "./redesign-dividers.css";
 @import "./redesign-blocks.css";
 @import "./redesign-home.css";
 @import "./redesign-landing.css";
@@ -97,6 +98,15 @@
 
     .container {
         @apply px-4 sm:px-6 lg:px-10 xl:px-0 !max-w-6xl w-full mx-auto;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-weight: 600 !important;
     }
 
     h1 {

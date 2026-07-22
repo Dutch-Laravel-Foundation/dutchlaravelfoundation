@@ -1,4 +1,6 @@
-<section class="dlf-block dlf-block-split dlf-block-split--{{ image_position ?? 'right' }} dlf-block--{{ tone ?? 'white' }}">
+<section
+    class="dlf-block dlf-block-split dlf-block-split--{{ image_position ?? 'right' }} dlf-block--{{ tone ?? 'white' }} dlf-divider-section dlf-divider-split{{ if image_position == 'left' }} dlf-divider-split--desktop-reversed{{ /if }}{{ if tone == 'red' || tone == 'dark' }} dlf-divider-theme-inverse{{ /if }}"
+>
     <div class="dlf-block-split__content">
         {{ if eyebrow }}<p class="dlf-kicker">{{ eyebrow }}</p>{{ /if }}
         <h2>{{ heading }}</h2>

@@ -34,7 +34,6 @@ final readonly class ContentSecurityPolicy implements Preset
                 'https://www.googletagmanager.com',
                 'https://cdn.leadinfo.net',
                 'https://snap.licdn.com',
-                'https://cdn.usefathom.com',
                 'https://challenges.cloudflare.com',
                 'https://app.vragen.ai',
                 'https://dlf.vragen.ai',
@@ -52,7 +51,6 @@ final readonly class ContentSecurityPolicy implements Preset
                 'https://www.googletagmanager.com',
                 'https://www.google-analytics.com',
                 'https://px.ads.linkedin.com',
-                'https://cdn.usefathom.com',
                 'https://app.vragen.ai',
                 'https://dlf.vragen.ai',
                 'https://i.ytimg.com',
@@ -66,7 +64,6 @@ final readonly class ContentSecurityPolicy implements Preset
                 'https://collector.leadinfo.net',
                 'https://collector4.leadinfo.net',
                 'https://px.ads.linkedin.com',
-                'https://cdn.usefathom.com',
                 'https://app.vragen.ai',
                 'https://dlf.vragen.ai',
             ])
