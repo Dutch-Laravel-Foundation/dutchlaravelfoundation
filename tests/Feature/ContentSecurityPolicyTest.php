@@ -60,6 +60,7 @@ final class ContentSecurityPolicyTest extends TestCase
             'https://www.youtube.com',
             'https://i.ytimg.com',
             'https://player.vimeo.com',
+            'https://open.spotify.com',
         ] as $origin) {
             $this->assertStringContainsString($origin, $policy);
         }

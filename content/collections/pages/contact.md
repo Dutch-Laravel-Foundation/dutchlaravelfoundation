@@ -2,6 +2,7 @@
 id: 35fe78ba-35d3-44a4-b514-55167c5e514c
 blueprint: pages
 title: Contact
+meta_description: 'Neem contact op met de Dutch Laravel Foundation voor vragen over Laravel, lidmaatschap, samenwerkingen of onze activiteiten.'
 template: templates/contact/index
 updated_by: 8d873b47-ad86-4fd3-9e95-27842ea80beb
 updated_at: 1653472779

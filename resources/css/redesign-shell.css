@@ -13,6 +13,7 @@
     --dlf-soft: #f7f7fb;
     --dlf-focus: #090910;
     --dlf-topbar-copy: #fff;
+    --dlf-body-font-size: 15px;
 }
 
 html {
@@ -30,7 +31,7 @@ html.dlf-menu-open {
     background: #fff;
     color: var(--dlf-copy);
     font-family: "Mulish Variable", ui-sans-serif, system-ui, sans-serif;
-    font-size: 16px;
+    font-size: var(--dlf-body-font-size);
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
 }
@@ -448,6 +449,11 @@ html.dlf-menu-open {
     fill: currentColor;
 }
 
+.dlf-btn-icon--brand {
+    width: 1.3125rem;
+    height: 1.3125rem;
+}
+
 .dlf-btn-face--spotify {
     border-color: #1db954;
     background: #1db954;
@@ -620,7 +626,7 @@ html.dlf-menu-open {
     text-transform: uppercase;
 }
 
-.dlf-cta-card h3 {
+.dlf-cta-card h2 {
     margin: 0 0 20px;
     color: #fff;
     font-size: 28px;
@@ -1124,6 +1130,80 @@ html.dlf-menu-open {
     font-weight: 500;
 }
 
+.dlf-consent-embed {
+    position: relative;
+    overflow: hidden;
+    background-color: #f7f7f8;
+    background-image: repeating-linear-gradient(
+        30deg,
+        rgb(9 9 16 / 3.5%) 0,
+        rgb(9 9 16 / 3.5%) 1px,
+        transparent 1px,
+        transparent 6px
+    );
+}
+
+.dlf-consent-embed__placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 24px;
+    background-color: #f7f7f8;
+    background-image: repeating-linear-gradient(
+        30deg,
+        rgb(9 9 16 / 3.5%) 0,
+        rgb(9 9 16 / 3.5%) 1px,
+        transparent 1px,
+        transparent 6px
+    );
+    color: var(--dlf-ink);
+    text-align: center;
+}
+
+.dlf-consent-embed__placeholder[hidden] {
+    display: none;
+}
+
+.dlf-consent-embed__eyebrow {
+    margin-bottom: 8px;
+    color: var(--dlf-red-text);
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.dlf-consent-embed__placeholder p {
+    max-width: 28rem;
+    margin: 0;
+    font-size: var(--dlf-body-font-size);
+    line-height: 1.5;
+}
+
+.dlf-consent-embed__placeholder button {
+    margin-top: 12px;
+    border: 0;
+    background: transparent;
+    color: var(--dlf-red-text);
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.dlf-consent-embed__placeholder button:hover,
+.dlf-consent-embed__placeholder button:focus-visible {
+    color: var(--dlf-ink);
+}
+
 .dlf-footer-badges {
     display: flex;
     align-items: center;
@@ -1440,7 +1520,7 @@ html.dlf-menu-open {
         gap: 24px;
     }
 
-    .dlf-cta-card h3 {
+    .dlf-cta-card h2 {
         font-size: 24px;
     }
 

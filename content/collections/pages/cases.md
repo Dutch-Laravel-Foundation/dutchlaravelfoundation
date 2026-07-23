@@ -2,6 +2,7 @@
 id: fedf1b6c-91e0-4ec7-920d-5d05d3007f22
 blueprint: pages
 title: Cases
+meta_description: 'Bekijk cases van Nederlandse organisaties en ontdek welke maatwerkapplicaties en digitale platforms onze leden met Laravel bouwen.'
 template: templates/cases/index
 updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
 updated_at: 1744140442

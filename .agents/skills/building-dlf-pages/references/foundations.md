@@ -6,7 +6,8 @@ This is the stable design contract for the new-design worktree. It distills the 
 
 These normative decisions override conflicting handoff text and page-local implementations. Keep a broader normalization outside the task's scope visible rather than silently rewriting the site.
 
-- Body copy follows the homepage's Mulish treatment. Headings are semibold, not bold.
+- Ordinary body copy follows the homepage's Mulish treatment at `15px` on every viewport. Editorial detail intro copy matches that `15px` tier; editorial index intros remain `16px` on mobile. Headings, navigation, metadata, controls, and other intentional leads keep their component scale. Headings are semibold, not bold.
+- Editorial detail titles are the page's single H1. Authored top-level chapters use H2, their subsections use H3, and deeper levels continue without skipping a rank. Correct the stored Bard heading level rather than visually restyling an invalid element.
 - Remove content-authored `<br>` elements and decorative embedded bold; CSS owns wrapping, spacing, and hierarchy.
 - Generic intro sections are white and unstriped. The homepage is the intro exception.
 - Reuse the reduced-width editorial TOC: desktop-sticky, active-section aware, and synchronized with the header's offset and animation.
@@ -72,7 +73,8 @@ Diagonal stripes belong to the homepage, global footer/CTA, deliberate red/black
 - A smaller viewport does not automatically mean one column. Preserve useful density with two- or three-column grids when the item composition and minimum content width support it; change the internal composition at the breakpoint instead of stretching sparse cards.
 - At smaller sizes, outer rail borders commonly disappear and grids become one ordered column with horizontal dividers. Preserve useful labels, data, and actions; do not hide content for layout convenience.
 - Scope review feedback to its stated viewport. Put mobile-only corrections under the appropriate `max-width` rule and verify that tablet and desktop computed styles are unchanged.
-- When a side rail or TOC disappears, keep editorial prose at the established readable maximum width and center it until the viewport becomes narrower than that measure.
+- When a side rail or TOC disappears, keep editorial prose centered at its `580px` desktop/tablet maximum until the viewport becomes narrower than that measure. Mobile prose remains fluid within the family inset.
+- On mobile editorial details, compare the visible leading gap before the first authored element with the terminal gap after the last authored element. When the article starts with a chapter heading inside Bard's `.set` wrapper, normalize that nested first-heading margin so it does not stack a full ordinary heading margin on top of the body padding.
 - Use horizontal scrolling for compact filter/tab rows that cannot wrap cleanly. Hide the scrollbar visually without disabling scrolling and add an edge fade that indicates more content.
 - Keep semantic tokens together: model city and province as separate spans and prevent a hyphenated province from breaking internally. Set a deliberate compact line height when the full location still wraps.
 - Truncate values only in interfaces that require one-line rows; preserve the full value with an accessible tooltip/title. Do not truncate editorial copy.
@@ -83,7 +85,7 @@ Diagonal stripes belong to the homepage, global footer/CTA, deliberate red/black
 
 - Reuse the button belonging to the host family. Existing `.dlf-btn`, `.dlf-button`, and `.dlf-community-button` systems are intentional legacy boundaries; do not add a fourth or normalize all three as collateral work.
 - Shared DLF Bard sets are registered but are full-rail, not universal prose blocks: `dlf_hero`, `dlf_stats`, `dlf_feature_grid`, `dlf_media_text`, `dlf_quote`, `dlf_cta_panel`, `dlf_logo_cloud`, `dlf_card_grid`, and `dlf_pricing`.
-- Use those blocks only in a rail-level block stream. In the default 38rem prose stream, use its ordinary Bard sets unless a deliberate breakout adapter is part of the task and browser-verified.
+- Use those blocks only in a rail-level block stream. In the default `580px` desktop/tablet prose stream, use its ordinary Bard sets unless a deliberate breakout adapter is part of the task and browser-verified.
 - If a shared DLF block is valid in the host, let it keep its internal component/button namespace; do not import another page family's CSS to restyle it.
 - Photos follow their block's crop with `object-fit: cover`; logos use `contain`. Provide intrinsic dimensions, responsive sources where supported, meaningful alt text, and lazy loading below the fold.
 - In split media/text rows, make media match the content-side height at that breakpoint. On mobile, use the family's full-width or 16:9 treatment and remove the owning container inset instead of compensating with arbitrary offsets.

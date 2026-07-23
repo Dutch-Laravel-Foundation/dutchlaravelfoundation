@@ -52,9 +52,18 @@ class ProgressiveMediaTest extends TestCase
         $this->assertStringNotContainsString('#media-800x450', $result);
     }
 
+    public function testItAddsAnEmptyAltAttributeWhenEditorialContentOmitsOne(): void
+    {
+        $html = '<p><img src="/assets/uploads/assets/vragen-ai-dashboard.jpg"></p>';
+
+        $result = (new ProgressiveMedia())->index($html);
+
+        $this->assertStringContainsString('alt=""', $result);
+    }
+
     public function testItLeavesSvgAndAlreadyEnhancedImagesAlone(): void
     {
-        $html = '<p><img src="/assets/img/proven-secure.svg" alt=""><img src="/photo.jpg" data-progressive-media loading="eager"></p>';
+        $html = '<p><img src="/assets/img/proven-secure.svg" alt=""><img src="/photo.jpg" alt="" data-progressive-media loading="eager"></p>';
 
         $result = (new ProgressiveMedia())->index($html);
 

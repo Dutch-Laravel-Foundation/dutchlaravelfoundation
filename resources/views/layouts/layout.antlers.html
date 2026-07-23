@@ -5,24 +5,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {{ site_title = meta_title ?? title }}
-    {{ site_name = seo:meta_title ?? site:name }}
-    <title>{{ if site_title }}{{ site_title }} - {{ /if }}{{ site_name }}</title>
-    <meta property="og:title" content="{{ if site_title }}{{ site_title }} - {{ /if }}{{ site_name }}">
-    {{ meta_description_text = meta_description ? meta_description : seo:meta_description }}
-    {{ if meta_description_text }}
-    <meta name="description" content="{{ meta_description_text }}">
-    {{ /if }}
+    <title>{{ seo_metadata:title }}</title>
+    <meta name="description" content="{{ seo_metadata:description }}">
+    <link rel="canonical" href="{{ seo_metadata:canonical }}">
+    <meta property="og:title" content="{{ seo_metadata:title }}">
     {{ meta_keywords_text = meta_keywords ? meta_keywords : seo:meta_keywords }}
     {{ if meta_keywords_text }}
     <meta name="keywords" content="{{ meta_keywords_text }}">
     {{ /if }}
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ current_url }}">
-    {{ meta_description_text = meta_description ? meta_description : seo:meta_description }}
-    {{ if meta_description_text }}
-    <meta property="og:description" content="{{ meta_description_text }}">
-    {{ /if }}
+    <meta property="og:type" content="{{ seo_metadata:open_graph_type }}">
+    <meta property="og:url" content="{{ seo_metadata:canonical }}">
+    <meta property="og:description" content="{{ seo_metadata:description }}">
     {{ opengraph_image = opengraph:opengraph_image ?? "/og-image.jpg?v=4" }}
     {{ if collection == "knowledge" || collection == "insights" }}
         {{ if featured_image }}
@@ -40,11 +33,10 @@
     {{ /if }}
     <meta property="og:image" content="{{ social_image_url }}">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ if site_title }}{{ site_title }} - {{ /if }}{{ site_name }}">
-    {{ if meta_description_text }}
-    <meta name="twitter:description" content="{{ meta_description_text }}">
-    {{ /if }}
+    <meta name="twitter:title" content="{{ seo_metadata:title }}">
+    <meta name="twitter:description" content="{{ seo_metadata:description }}">
     <meta name="twitter:image" content="{{ social_image_url }}">
+    <script type="application/ld+json" nonce="{{ csp_nonce }}">{{ seo_metadata:json_ld }}</script>
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">

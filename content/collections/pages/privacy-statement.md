@@ -2,6 +2,7 @@
 id: 127b3714-39f4-4e69-93ad-7ed96eea14cb
 blueprint: pages
 title: 'Privacy- en cookieverklaring Stichting Laravel'
+meta_description: 'Lees hoe de Dutch Laravel Foundation persoonsgegevens, formulieren, cookies en externe media verwerkt en welke keuzes je daarbij hebt.'
 updated_by: 8d873b47-ad86-4fd3-9e95-27842ea80beb
 updated_at: 1784704696
 template: templates/privacy-statement/index
@@ -302,7 +303,7 @@ content:
     content:
       -
         type: text
-        text: 'Sommige pagina’s bevatten video’s van YouTube of Vimeo. Wanneer zo’n video wordt geladen, ontvangen deze platforms technische gegevens zoals je IP-adres, browserinformatie en de pagina die je bezoekt. Zij kunnen daarbij cookies of vergelijkbare technieken gebruiken volgens hun eigen privacy- en cookiebeleid.'
+        text: 'Sommige pagina’s bevatten video’s van YouTube of Vimeo of een audiospeler van Spotify. We laden deze ingesloten media pas nadat je toestemming hebt gegeven via de cookiebanner. Vanaf dat moment ontvangen deze platforms technische gegevens zoals je IP-adres, browserinformatie en de pagina die je bezoekt. Zij kunnen daarbij cookies of vergelijkbare technieken gebruiken volgens hun eigen privacy- en cookiebeleid.'
   -
     type: paragraph
     content:

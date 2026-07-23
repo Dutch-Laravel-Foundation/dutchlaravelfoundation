@@ -2,6 +2,7 @@
 id: 82d17488-9b4d-4298-98d2-b97b4e4ee880
 blueprint: events
 title: 'Laravel Hackathon'
+meta_description: 'Bekijk het programma en resultaat van de eerste Laravel Hackathon, waar zeven teams in acht uur een werkende applicatie bouwden.'
 introduction: 'Op 21 juni gingen 7 development teams de strijd met elkaar aan. In 8 uur dienden de teams een werkende applicatie te realiseren met gebruik van het open source PHP framework Laravel. De deelnemers moesten vervolgens deze applicatie presenteren aan alle deelnemers en een professionele jury.'
 featured_image: hackathon.jpeg
 type: Meetup

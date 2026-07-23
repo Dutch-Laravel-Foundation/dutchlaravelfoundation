@@ -299,7 +299,7 @@
 .dlf-bm-split p {
     max-width: 480px;
     margin: 0;
-    font-size: 1rem;
+    font-size: var(--dlf-body-font-size);
     line-height: 1.6;
 }
 
@@ -755,7 +755,7 @@
 
 .dlf-bm-narrative p:last-child {
     margin: 0;
-    font-size: 1rem;
+    font-size: var(--dlf-body-font-size);
     line-height: 1.7;
 }
 

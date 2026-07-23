@@ -27,30 +27,33 @@
                 <h2 class="dlf-community-heading">Over</h2>
 
                 {{ if video }}
-                    <div class="relative mb-8 aspect-video overflow-hidden bg-black">
+                    <div class="dlf-consent-embed relative mb-8 aspect-video overflow-hidden bg-black">
                         {{ if video | is_embeddable }}
                             {{ video_url = video | embed_url }}
                             {{ if video | contains:'youtube' || video | contains:'youtu.be' }}
                                 <iframe
                                     class="absolute inset-0 h-full w-full"
-                                    src="{{ video_url }}?rel=0&modestbranding=1"
+                                    data-consent-src="{{ video_url }}?rel=0&modestbranding=1"
                                     title="Video van {{ title }}"
                                     referrerpolicy="strict-origin-when-cross-origin"
                                     allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
                                     allowfullscreen
                                     loading="lazy"
+                                    hidden
                                 ></iframe>
                             {{ else }}
                                 <iframe
                                     class="absolute inset-0 h-full w-full"
-                                    src="{{ video_url }}&byline=0&color=ff2d20&title=0&transparent=1"
+                                    data-consent-src="{{ video_url }}&byline=0&color=ff2d20&title=0&transparent=1"
                                     title="Video van {{ title }}"
                                     referrerpolicy="strict-origin-when-cross-origin"
                                     allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
                                     allowfullscreen
                                     loading="lazy"
+                                    hidden
                                 ></iframe>
                             {{ /if }}
+                            {{ partial:embed_consent }}
                         {{ else }}
                             <video
                                 class="absolute inset-0 h-full w-full"

@@ -2,6 +2,7 @@
 id: fbdd13d8-526d-4152-8ef4-53d8e9fba3c4
 blueprint: pages
 title: Werkgroepen
+meta_description: 'Lees welke DLF-werkgroepen kennis delen over best practices, onderwijs, inclusiviteit en Laravel binnen de overheid.'
 template: templates/default
 menu_color: white
 call_to_action: ee5d33de-9a24-4860-92dd-3503740b62af

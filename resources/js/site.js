@@ -14,11 +14,14 @@ import { initFooterCtaStage } from "./components/footer-cta-stage";
 import { initTrackingConsent } from "./components/tracking-consent";
 
 const header = document.querySelector("header");
-const banner = document.querySelector(".banner");
 
 if (header && !document.documentMode) {
+    const offset = {
+        down: header.offsetHeight,
+        up: header.offsetHeight,
+    };
     const headerHide = new Headroom(header, {
-        offset: 0,
+        offset,
         tolerance: {
             up: 5,
             down: 0,
@@ -32,18 +35,12 @@ if (header && !document.documentMode) {
 
     headerHide.init();
 
-    window.addEventListener(
-        "load",
-        () => {
-            const offset = header.offsetHeight + (banner ? banner.offsetHeight : 0);
+    const headerSizeObserver = new ResizeObserver(() => {
+        offset.down = header.offsetHeight;
+        offset.up = header.offsetHeight;
+    });
 
-            headerHide.offset = {
-                down: offset,
-                up: offset,
-            };
-        },
-        { once: true },
-    );
+    headerSizeObserver.observe(header);
 }
 
 initProgressiveMedia();

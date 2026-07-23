@@ -28,6 +28,28 @@ const storeConsent = (storage, choice) => {
     );
 };
 
+const loadConsentEmbeds = (documentRoot) => {
+    documentRoot.querySelectorAll("[data-consent-src]").forEach((embed) => {
+        const source = embed.getAttribute("data-consent-src");
+
+        if (!source) {
+            return;
+        }
+
+        embed.setAttribute("src", source);
+        embed.removeAttribute("data-consent-src");
+        embed.hidden = false;
+    });
+
+    documentRoot.querySelectorAll("[data-consent-placeholder]").forEach((placeholder) => {
+        placeholder.hidden = true;
+    });
+
+    documentRoot.querySelectorAll("[data-consent-fallback]").forEach((fallback) => {
+        fallback.hidden = true;
+    });
+};
+
 export function clearTrackingCookies({
     document: documentRoot = document,
     hostname = window.location.hostname,
@@ -62,39 +84,44 @@ export function initTrackingConsent({
     reload = () => window.location.reload(),
 } = {}) {
     const banner = documentRoot.querySelector("[data-tracking-consent-banner]");
-    const settings = documentRoot.querySelector("[data-tracking-consent-settings]");
+    const settings = documentRoot.querySelectorAll("[data-tracking-consent-settings]");
     const accept = documentRoot.querySelector("[data-tracking-consent-accept]");
     const reject = documentRoot.querySelector("[data-tracking-consent-reject]");
 
-    if (!banner || !settings || !accept || !reject) {
+    if (!banner || settings.length === 0 || !accept || !reject) {
         return;
     }
 
     const initialChoice = readConsent(storage);
-    let trackersLoaded = false;
+    let thirdPartiesLoaded = false;
     let openedFromSettings = false;
 
     if (initialChoice !== "accepted") {
         clearTrackerCookies();
     }
 
-    const startTrackers = () => {
-        if (trackersLoaded) {
+    const startThirdParties = () => {
+        if (thirdPartiesLoaded) {
             return;
         }
 
-        trackersLoaded = true;
+        thirdPartiesLoaded = true;
+        loadConsentEmbeds(documentRoot);
         loadTrackers();
     };
 
     const showBanner = () => {
         banner.hidden = false;
-        settings.hidden = true;
+        settings.forEach((control) => {
+            control.hidden = true;
+        });
     };
 
     const hideBanner = () => {
         banner.hidden = true;
-        settings.hidden = false;
+        settings.forEach((control) => {
+            control.hidden = false;
+        });
     };
 
     const choose = (choice) => {
@@ -107,10 +134,10 @@ export function initTrackingConsent({
         hideBanner();
 
         if (choice === "accepted") {
-            startTrackers();
+            startThirdParties();
 
             if (openedFromSettings) {
-                settings.focus();
+                settings[0].focus();
             }
 
             return;
@@ -118,20 +145,22 @@ export function initTrackingConsent({
 
         clearTrackerCookies();
 
-        if (trackersLoaded) {
+        if (thirdPartiesLoaded) {
             reload();
             return;
         }
 
         if (openedFromSettings) {
-            settings.focus();
+            settings[0].focus();
         }
     };
 
-    settings.addEventListener("click", () => {
-        openedFromSettings = true;
-        showBanner();
-        banner.focus();
+    settings.forEach((control) => {
+        control.addEventListener("click", () => {
+            openedFromSettings = true;
+            showBanner();
+            banner.focus();
+        });
     });
     accept.addEventListener("click", () => choose("accepted"));
     reject.addEventListener("click", () => choose("rejected"));
@@ -144,6 +173,6 @@ export function initTrackingConsent({
     hideBanner();
 
     if (initialChoice === "accepted") {
-        startTrackers();
+        startThirdParties();
     }
 }

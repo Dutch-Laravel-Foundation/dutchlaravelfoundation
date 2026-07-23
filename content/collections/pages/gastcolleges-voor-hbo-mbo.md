@@ -2,6 +2,7 @@
 id: ad21bc8a-e46a-4e99-93cf-1b112c7cc789
 blueprint: pages
 title: 'Gastcolleges voor HBO & MBO'
+meta_description: 'Nodig de Dutch Laravel Foundation uit voor een gastcollege en laat studenten kennismaken met Laravel en werken als developer.'
 template: templates/default
 menu_color: white
 call_to_action: 6bc4ea55-2728-4615-8d45-75d49d29d157

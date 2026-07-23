@@ -2,6 +2,7 @@
 id: 7840f9f9-3fba-4608-b877-250f18e634b2
 blueprint: pages
 title: Nieuws
+meta_description: 'Blijf op de hoogte van nieuws, samenwerkingen, leden en evenementen uit de Nederlandse Laravel-community.'
 template: templates/insights/index
 updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
 updated_at: 1744138311

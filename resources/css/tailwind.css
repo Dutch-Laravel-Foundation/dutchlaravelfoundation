@@ -126,7 +126,8 @@
     }
 
     p {
-        @apply mb-3 text-base break-words;
+        @apply mb-3 break-words;
+        font-size: var(--dlf-body-font-size);
     }
 
     span.meta,

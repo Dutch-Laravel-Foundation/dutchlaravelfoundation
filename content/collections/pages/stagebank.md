@@ -2,6 +2,7 @@
 id: stagebank-page
 blueprint: pages
 title: Stagebank
+meta_description: 'Vind een Laravel-stage bij aangesloten organisaties en doe praktijkervaring op binnen de Nederlandse Laravel-community.'
 slug: stagebank
 template: templates/internships/index
 updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57

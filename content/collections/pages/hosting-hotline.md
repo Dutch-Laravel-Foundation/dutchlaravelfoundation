@@ -2,6 +2,7 @@
 id: 201dbb24-5f6f-4c35-8de1-ba599424e035
 blueprint: pages
 title: 'Hosting Hotline'
+meta_description: 'DLF-leden krijgen kosteloze hulp bij urgente hostingproblemen via de Hosting Hotline van onze managed-hostingpartner.'
 template: templates/default
 menu_color: white
 call_to_action: 6bc4ea55-2728-4615-8d45-75d49d29d157

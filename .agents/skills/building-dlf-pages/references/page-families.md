@@ -50,7 +50,7 @@ If editors must repeat/reorder content that no compatible set represents, first 
 - Start ordinary pages from `templates/default`: white unstriped intro, 1152px outer rail, narrow prose, reduced desktop TOC, and footer-owned CTA.
 - Keep the ordinary public-information body's desktop terminal padding at `80px` or more so the last authored content does not crowd the section's closing divider. Set it on the shared body owner; do not depend on the last Bard node's margin.
 - Keep author/facts/media/related content in the order of the closest detail type. Remove authored line breaks and visual bold.
-- Keep long-form prose at the established `38rem` measure when the TOC is hidden on tablet; only shrink when the viewport and page inset require it.
+- Keep long-form prose at a `580px` maximum on desktop/tablet, including when the TOC is hidden; mobile remains fluid within the page inset.
 - On index pages, use the shared horizontally scrollable mobile filter row with its right-edge fade and the shared one-line `newer / count / older` pagination. Keep list-ending space balanced before the footer CTA.
 - Reuse the detail page's author portrait and channel-button treatments on related index/summary surfaces rather than rebuilding lighter substitutes.
 - A logo-led split hero may follow `/larabelles` only when co-branding is central. Add a TOC only by adopting the established long-form template/behavior, never a second script.

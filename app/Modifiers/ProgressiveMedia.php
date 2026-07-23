@@ -35,7 +35,16 @@ final class ProgressiveMedia extends Modifier
         }
 
         foreach (iterator_to_array($images) as $image) {
-            if (! $image instanceof DOMElement || $image->hasAttribute('data-progressive-media')) {
+            if (! $image instanceof DOMElement) {
+                continue;
+            }
+
+            if (! $image->hasAttribute('alt')) {
+                $image->setAttribute('alt', '');
+                $enhanced = true;
+            }
+
+            if ($image->hasAttribute('data-progressive-media')) {
                 continue;
             }
 

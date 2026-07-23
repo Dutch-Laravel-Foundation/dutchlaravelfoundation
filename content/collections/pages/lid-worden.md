@@ -2,6 +2,7 @@
 id: 3e84afec-448e-4805-8eed-8e209475a28e
 blueprint: pages
 title: 'Lid worden'
+meta_description: 'Word lid van de Dutch Laravel Foundation en profiteer van kennisuitwisseling, events, een keurmerk, leads, partnerships en kortingen.'
 template: templates/become-member/index
 updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
 updated_at: 1765382914

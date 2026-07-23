@@ -59,7 +59,7 @@
 
 .dlf-prose {
     color: inherit;
-    font-size: 1rem;
+    font-size: var(--dlf-body-font-size);
     line-height: 1.65;
 }
 

@@ -2,6 +2,7 @@
 id: 621e1068-bdee-4c09-b75c-7b95b0465a45
 blueprint: pages
 title: Larabelles
+meta_description: 'Ontdek Larabelles, de internationale community die vrouwen en genderdiverse developers binnen het Laravel-ecosysteem verbindt en ondersteunt.'
 template: templates/larabelles/index
 call_to_action: ee5d33de-9a24-4860-92dd-3503740b62af
 menu_color: white

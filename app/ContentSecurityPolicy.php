@@ -72,6 +72,7 @@ final readonly class ContentSecurityPolicy implements Preset
                 'https://www.youtube.com',
                 'https://www.youtube-nocookie.com',
                 'https://player.vimeo.com',
+                'https://open.spotify.com',
             ])
             ->add(Directive::UPGRADE_INSECURE_REQUESTS, Value::NO_VALUE);
 

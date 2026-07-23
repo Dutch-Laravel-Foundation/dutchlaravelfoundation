@@ -2,6 +2,7 @@
 id: daf82db3-b203-41a9-8dc4-14e6cc4aa423
 blueprint: pages
 title: Nieuwsbrief
+meta_description: 'Meld je aan voor de nieuwsbrief van de Dutch Laravel Foundation en ontvang nieuws over Laravel, events en de community.'
 template: templates/newsletter/index
 call_to_action: ee5d33de-9a24-4860-92dd-3503740b62af
 updated_by: 8d873b47-ad86-4fd3-9e95-27842ea80beb
