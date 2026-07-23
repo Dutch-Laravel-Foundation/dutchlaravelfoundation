@@ -65,10 +65,14 @@ final class EnvoyDeploymentTest extends TestCase
 
     public function testItIgnoresRebuildableGlideDerivatives(): void
     {
-        $gitignore = file_get_contents(dirname(__DIR__, 2) . '/.gitignore');
+        $projectPath = dirname(__DIR__, 2);
+        $gitignore = file_get_contents($projectPath . '/.gitignore');
+        $statamicGitignore = file_get_contents($projectPath . '/storage/statamic/.gitignore');
 
         $this->assertIsString($gitignore);
+        $this->assertIsString($statamicGitignore);
         $this->assertStringContainsString('/storage/statamic/glide/', $gitignore);
+        $this->assertStringNotContainsString('!glide', $statamicGitignore);
     }
 
     public function testItCompilesForInspectionWithoutConnectingToProduction(): void
