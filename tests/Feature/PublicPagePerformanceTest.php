@@ -20,17 +20,29 @@ class PublicPagePerformanceTest extends TestCase
         $this->assertSame(public_path('static'), config('statamic.static_caching.strategies.full.path'));
     }
 
-    public function testDeploymentResetsPhpBeforeWarmingStaticPages(): void
+    public function testDeploymentWarmsBeforeActivationAndChecksHealthBeforeCleanup(): void
     {
         $deployment = file_get_contents(base_path('Envoy.blade.php'));
 
         $this->assertNotFalse($deployment);
         $this->assertStringContainsString('php please static:clear', $deployment);
         $this->assertStringContainsString('php please static:warm', $deployment);
-        $this->assertLessThan(
-            strpos($deployment, "    warm_static_cache\n"),
-            strpos($deployment, "    reset_php_cache\n"),
-        );
+
+        $staticWarm = strpos($deployment, 'php please static:warm');
+        $activation = strpos($deployment, 'activate_release "$RELEASE_PATH"');
+        $opcacheReset = strpos($deployment, "\n    reset_opcache\n");
+        $healthCheck = strpos($deployment, "\n    check_health\n");
+        $cleanup = strpos($deployment, '    if ! cleanup_releases');
+
+        $this->assertNotFalse($staticWarm);
+        $this->assertNotFalse($activation);
+        $this->assertNotFalse($opcacheReset);
+        $this->assertNotFalse($healthCheck);
+        $this->assertNotFalse($cleanup);
+        $this->assertLessThan($activation, $staticWarm);
+        $this->assertLessThan($opcacheReset, $activation);
+        $this->assertLessThan($healthCheck, $opcacheReset);
+        $this->assertLessThan($cleanup, $healthCheck);
     }
 
     public function testSharedLayoutKeepsNonCriticalThirdPartiesOffTheCriticalPath(): void
