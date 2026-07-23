@@ -282,8 +282,8 @@
     php please static:clear
     php please static:warm
 
-    printf '%s\n' "$REVISION" > "$RELEASE_PATH/.revision"
-    printf '%s\n' "$PREVIOUS_RELEASE" > "$RELEASE_PATH/.previous-release"
+    printf '%s\n' "$REVISION" > "$RELEASE_PATH/.git/deployed-revision"
+    printf '%s\n' "$PREVIOUS_RELEASE" > "$RELEASE_PATH/.git/previous-release"
 
     activate_release "$RELEASE_PATH"
     ACTIVATED=1
