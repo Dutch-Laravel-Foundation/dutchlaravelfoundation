@@ -2,240 +2,301 @@
 
 @setup
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-    $dotenv->load();
-    $deploymentTime = date('Y-m-d-His');
-    $deploymentDir = "deployment-{$deploymentTime}";
+    $dotenv->safeLoad();
+
+    $revision = $revision ?? '';
     $basePath = env('DEPLOY_PATH');
-    $currentPath = "{$basePath}/current";
-    $newDeploymentPath = "{$basePath}/{$deploymentDir}";
+    $server = env('DEPLOY_SERVER');
+
+    if (! is_string($basePath) || ! str_starts_with($basePath, '/')) {
+        throw new InvalidArgumentException('DEPLOY_PATH must be an absolute path.');
+    }
+
+    if (! is_string($server) || $server === '') {
+        throw new InvalidArgumentException('DEPLOY_SERVER is required.');
+    }
+
+    if ($revision !== '' && ! preg_match('/\A[0-9a-f]{40}\z/', $revision)) {
+        throw new InvalidArgumentException('The --revision argument must be a full lowercase commit SHA.');
+    }
+
+    $deploymentTime = date('Y-m-d-His');
+    $shortRevision = $revision === '' ? 'revision-required' : substr($revision, 0, 12);
+    $releaseName = "deployment-{$deploymentTime}-{$shortRevision}";
+    $releasePath = "{$basePath}/{$releaseName}";
 @endsetup
 
-@servers(['web' => [env('DEPLOY_SERVER')]])
+@servers(['web' => [$server]])
 
 @story('deploy')
-    check_and_commit
-    create_deployment_directory
-    clone_repository
-    install_composer_dependencies
-    install_npm_dependencies
-    build_assets
-    symlink_env
-    symlink_folders
-    optimize_application
-    update_search_index
-    finalize_deployment
-    reset_php_cache
-    warm_static_cache
-    cleanup_old_releases
+    deploy_release
 @endstory
 
-@task('check_and_commit', ['on' => 'web'])
-    echo "=========================================="
-    echo "📋 Step 1: Checking current deployment status"
-    echo "=========================================="
+@task('deploy_release', ['on' => 'web'])
+    set -Eeuo pipefail
 
-    cd {{ $currentPath }}
+    BASE_PATH={{ escapeshellarg($basePath) }}
+    RELEASE_NAME={{ escapeshellarg($releaseName) }}
+    RELEASE_PATH={{ escapeshellarg($releasePath) }}
+    REVISION={{ escapeshellarg($revision) }}
+    REPOSITORY='git@github.com:Dutch-Laravel-Foundation/dutchlaravelfoundation.git'
+    HEALTH_URL='https://dutchlaravelfoundation.nl/up'
+    KEEP_RELEASES=6
+    CURRENT_PATH="$BASE_PATH/current"
+    LOCK_PATH="$BASE_PATH/.deployment-lock"
+    SWITCH_LINK="$BASE_PATH/.current-$RELEASE_NAME"
+    PREVIOUS_RELEASE=''
+    FPM_SOCKET=''
+    ACTIVATED=0
+    HEALTHY=0
 
-    echo "🔍 Checking git status..."
-    if [[ -n $(git status --porcelain) ]]; then
-        echo "⚠️  Uncommitted changes detected"
-        echo "📝 Committing changes..."
-        git add .
-        git commit -m "committing changes before deployment"
-        echo "⬆️  Pushing changes to origin/main..."
-        git push origin main
-        echo "✅ Changes committed and pushed"
-    else
-        echo "✅ Working directory is clean"
+    activate_release() {
+        local target="$1"
+
+        rm -f "$SWITCH_LINK"
+        ln -s "$target" "$SWITCH_LINK"
+        mv -Tf "$SWITCH_LINK" "$CURRENT_PATH"
+    }
+
+    discover_fpm_socket() {
+        FPM_SOCKET=$(
+            find /run/php \
+                -maxdepth 1 \
+                -type s \
+                -name 'dutchlaravelfoundation.nl-php*-fpm.sock' \
+                -print \
+                | sort -V \
+                | tail -n 1
+        )
+
+        if [ -z "$FPM_SOCKET" ]; then
+            echo 'No Dutch Laravel Foundation PHP-FPM socket was found.' >&2
+            return 1
+        fi
+    }
+
+    reset_opcache() {
+        discover_fpm_socket
+        cachetool opcache:reset --fcgi="$FPM_SOCKET"
+    }
+
+    rollback_release() {
+        if [ -z "$PREVIOUS_RELEASE" ] || [ ! -d "$PREVIOUS_RELEASE" ]; then
+            echo 'The previous release is unavailable; automatic rollback is impossible.' >&2
+            return 1
+        fi
+
+        echo "Rolling back to $PREVIOUS_RELEASE"
+        activate_release "$PREVIOUS_RELEASE"
+        reset_opcache
+        echo "Rollback completed: $PREVIOUS_RELEASE"
+    }
+
+    check_health() {
+        local attempt=1
+        local maximum_attempts=12
+
+        while [ "$attempt" -le "$maximum_attempts" ]; do
+            if curl \
+                --fail \
+                --silent \
+                --show-error \
+                --location \
+                --max-time 10 \
+                "$HEALTH_URL" \
+                >/dev/null; then
+                return 0
+            fi
+
+            if [ "$attempt" -lt "$maximum_attempts" ]; then
+                sleep 5
+            fi
+
+            attempt=$((attempt + 1))
+        done
+
+        echo "Health check failed after $maximum_attempts attempts: $HEALTH_URL" >&2
+        return 1
+    }
+
+    cleanup_releases() {
+        local current_release
+        local release
+        local -a releases
+
+        current_release=$(readlink -f "$CURRENT_PATH")
+        mapfile -t releases < <(
+            find "$BASE_PATH" \
+                -mindepth 1 \
+                -maxdepth 1 \
+                -type d \
+                -name 'deployment-*' \
+                -printf '%T@ %p\n' \
+                | sort -rn \
+                | cut -d' ' -f2-
+        )
+
+        for release in "${releases[@]:$KEEP_RELEASES}"; do
+            if [ "$release" = "$current_release" ] || [ "$release" = "$PREVIOUS_RELEASE" ]; then
+                continue
+            fi
+
+            case "$release" in
+                "$BASE_PATH"/deployment-*)
+                    echo "Removing old release: $release"
+                    rm -rf -- "$release"
+                    ;;
+                *)
+                    echo "Refusing to remove unexpected release path: $release" >&2
+                    return 1
+                    ;;
+            esac
+        done
+    }
+
+    finish_deployment() {
+        local status=$?
+
+        trap - EXIT
+
+        if [ "$status" -ne 0 ] && [ "$ACTIVATED" -eq 1 ] && [ "$HEALTHY" -eq 0 ]; then
+            rollback_release || true
+        fi
+
+        rm -f "$SWITCH_LINK"
+        rm -f "$LOCK_PATH/revision" "$LOCK_PATH/pid"
+
+        if ! rmdir "$LOCK_PATH"; then
+            echo "Unable to remove deployment lock: $LOCK_PATH" >&2
+            status=1
+        fi
+
+        exit "$status"
+    }
+
+    case "$REVISION" in
+        ''|*[!0-9a-f]*)
+            echo 'Deployment requires --revision=<full-lowercase-commit-sha>.' >&2
+            exit 1
+            ;;
+    esac
+
+    if [ "${#REVISION}" -ne 40 ]; then
+        echo 'Deployment requires --revision=<full-lowercase-commit-sha>.' >&2
+        exit 1
     fi
 
-    echo ""
-@endtask
+    if [ ! -d "$BASE_PATH" ]; then
+        echo "Deployment path does not exist: $BASE_PATH" >&2
+        exit 1
+    fi
 
-@task('create_deployment_directory', ['on' => 'web'])
-    echo "=========================================="
-    echo "📁 Step 2: Creating deployment directory"
-    echo "=========================================="
+    if ! mkdir "$LOCK_PATH"; then
+        echo "Another deployment holds the lock: $LOCK_PATH" >&2
+        exit 1
+    fi
 
-    echo "📂 Creating directory: {{ $deploymentDir }}"
-    cd {{ $basePath }}
-    mkdir {{ $deploymentDir }}
-    echo "✅ Deployment directory created at {{ $newDeploymentPath }}"
-    echo ""
-@endtask
+    trap finish_deployment EXIT
+    printf '%s\n' "$REVISION" > "$LOCK_PATH/revision"
+    printf '%s\n' "$$" > "$LOCK_PATH/pid"
 
-@task('clone_repository', ['on' => 'web'])
-    echo "=========================================="
-    echo "🔄 Step 3: Cloning repository"
-    echo "=========================================="
+    if [ ! -f "$BASE_PATH/.env" ]; then
+        echo "Shared environment file is missing: $BASE_PATH/.env" >&2
+        exit 1
+    fi
 
-    cd {{ $newDeploymentPath }}
-    echo "📥 Pulling latest code from repository..."
-    git clone git@github.com:Dutch-Laravel-Foundation/dutchlaravelfoundation.git .
-    git checkout main
-    echo "✅ Repository cloned successfully"
-    echo ""
-@endtask
+    if [ ! -d "$BASE_PATH/forms" ] || [ ! -d "$BASE_PATH/users" ]; then
+        echo 'Shared forms or users directory is missing.' >&2
+        exit 1
+    fi
 
-@task('install_composer_dependencies', ['on' => 'web'])
-    echo "=========================================="
-    echo "📦 Step 4: Installing Composer dependencies"
-    echo "=========================================="
+    PREVIOUS_RELEASE=$(readlink -f "$CURRENT_PATH" || true)
 
-    cd {{ $newDeploymentPath }}
-    echo "🎼 Running composer install..."
-    composer install --no-dev \
+    if [ -z "$PREVIOUS_RELEASE" ] || [ ! -d "$PREVIOUS_RELEASE" ]; then
+        echo 'A valid current release is required for automatic rollback.' >&2
+        exit 1
+    fi
+
+    if [ -d "$PREVIOUS_RELEASE/.git" ]; then
+        if [ -n "$(git -C "$PREVIOUS_RELEASE" status --porcelain --untracked-files=all)" ]; then
+            echo "Current release is dirty: $PREVIOUS_RELEASE" >&2
+            git -C "$PREVIOUS_RELEASE" status --short >&2
+            exit 1
+        fi
+
+        git -C "$PREVIOUS_RELEASE" fetch --quiet --prune origin
+
+        if ! git -C "$PREVIOUS_RELEASE" branch --remotes --contains HEAD \
+            | grep -q '[^[:space:]]'; then
+            echo 'Current release contains commits that are not present on any origin branch.' >&2
+            exit 1
+        fi
+    fi
+
+    if [ -e "$RELEASE_PATH" ]; then
+        echo "Release path already exists: $RELEASE_PATH" >&2
+        exit 1
+    fi
+
+    echo "Preparing revision $REVISION in $RELEASE_PATH"
+    git clone --no-checkout "$REPOSITORY" "$RELEASE_PATH"
+    cd "$RELEASE_PATH"
+    git fetch --quiet origin main
+
+    if [ "$(git rev-parse origin/main)" != "$REVISION" ]; then
+        echo 'Requested revision is not the current origin/main tip.' >&2
+        exit 1
+    fi
+
+    git checkout --detach "$REVISION"
+
+    if [ "$(git rev-parse HEAD)" != "$REVISION" ]; then
+        echo 'Checked-out release does not match the requested revision.' >&2
+        exit 1
+    fi
+
+    git config remote.pushDefault origin
+    git config remote.origin.push 'HEAD:refs/heads/main'
+
+    rm -f .env
+    rm -rf storage/forms users
+    mkdir -p storage
+    ln -s "$BASE_PATH/.env" .env
+    ln -s "$BASE_PATH/forms" storage/forms
+    ln -s "$BASE_PATH/users" users
+
+    composer install \
+        --no-dev \
         --optimize-autoloader \
         --prefer-dist \
         --no-interaction
-    echo "✅ Composer dependencies installed"
-    echo ""
-@endtask
 
-@task('install_npm_dependencies', ['on' => 'web'])
-    echo "=========================================="
-    echo "📦 Step 4: Installing NPM dependencies"
-    echo "=========================================="
-
-    cd {{ $newDeploymentPath }}
-    echo "🎼 Running npm install..."
     npm ci
-    echo "✅ NPM dependencies installed"
-    echo ""
-@endtask
-
-@task('build_assets', ['on' => 'web'])
-    echo "=========================================="
-    echo "🎨 Step 5: Building frontend assets"
-    echo "=========================================="
-
-    cd {{ $newDeploymentPath }}
-    echo "⚡ Running npm run build..."
     npm run build
-    echo "✅ Assets built successfully"
-    echo ""
-@endtask
 
-@task('symlink_env', ['on' => 'web'])
-    echo "=========================================="
-    echo "🔗 Step 6: Symlinking environment file"
-    echo "=========================================="
-
-    cd {{ $newDeploymentPath }}
-    echo "🔗 Creating symlink for .env file..."
-    ln -sf {{ $basePath }}/.env .env
-    echo "✅ Environment file symlinked"
-    echo ""
-@endtask
-
-@task('symlink_folders', ['on' => 'web'])
-    echo "=========================================="
-    echo "🔗 Step 7: Symlinking folder"
-    echo "=========================================="
-
-    cd {{ $newDeploymentPath }}
-    echo "🔗 Creating symlink for .forms file..."
-    rm -rf storage/forms && ln -sf {{ $basePath }}/forms storage/forms
-    echo "✅ Forms folder symlinked"
-
-    echo "🔗 Creating symlink for .users file..."
-    rm -rf users && ln -sf {{ $basePath }}/users users
-    echo "✅ Users folder symlinked"
-
-    echo ""
-@endtask
-
-@task('optimize_application', ['on' => 'web'])
-    echo "=========================================="
-    echo "⚡ Step 8: Optimizing application"
-    echo "=========================================="
-
-    cd {{ $newDeploymentPath }}
-    echo "🚀 Running php artisan optimize..."
     php artisan optimize:clear
     php artisan optimize
-    echo "✅ Application optimized"
-    echo ""
-@endtask
-
-@task('update_search_index', ['on' => 'web'])
-    echo "=========================================="
-    echo "🔍 Step 9: Updating Statamic caches and search"
-    echo "=========================================="
-
-    cd {{ $newDeploymentPath }}
-    echo "📚 Warming up Stache cache..."
     php please stache:clear
     php please stache:warm
-    echo "🔎 Updating search indexes..."
     php please search:update --all
-    echo "✅ Caches and search indexes updated"
-    echo ""
-@endtask
-
-@task('finalize_deployment', ['on' => 'web'])
-    echo "=========================================="
-    echo "🎉 Step 10: Finalizing deployment"
-    echo "=========================================="
-
-    cd {{ $basePath }}
-    echo "🔗 Updating 'current' symlink to new deployment..."
-    ln -sfn {{ $newDeploymentPath }} current
-    echo "✅ Symlink updated"
-
-    echo ""
-    echo "=========================================="
-    echo "🎊 DEPLOYMENT COMPLETED SUCCESSFULLY!"
-    echo "=========================================="
-    echo "📂 Deployment: {{ $deploymentDir }}"
-    echo "📍 Location: {{ $newDeploymentPath }}"
-    echo "🕐 Time: $(date '+%Y-%m-%d %H:%M:%S')"
-    echo "=========================================="
-@endtask
-
-@task('warm_static_cache', ['on' => 'web'])
-    cd {{ $newDeploymentPath }}
     php please static:clear
     php please static:warm
-@endtask
 
-@task('reset_php_cache', ['on' => 'web'])
-    echo "=========================================="
-    echo "🔄 Step 11: Resetting PHP OPcache"
-    echo "=========================================="
+    printf '%s\n' "$REVISION" > "$RELEASE_PATH/.revision"
+    printf '%s\n' "$PREVIOUS_RELEASE" > "$RELEASE_PATH/.previous-release"
 
-    echo "🧹 Clearing OPcache via PHP-FPM socket..."
-    cachetool opcache:reset --fcgi=/run/php/dutchlaravelfoundation.nl-php8.5-fpm.sock
-    echo "✅ OPcache reset successfully"
-    echo ""
-@endtask
+    activate_release "$RELEASE_PATH"
+    ACTIVATED=1
 
-@task('cleanup_old_releases', ['on' => 'web'])
-    echo "=========================================="
-    echo "🧹 Step 12: Cleaning up old releases"
-    echo "=========================================="
+    reset_opcache
+    check_health
+    HEALTHY=1
 
-    cd {{ $basePath }}
-
-    # Count deployment directories (excluding 'current' symlink)
-    RELEASE_COUNT=$(ls -1d deployment-* 2>/dev/null | wc -l)
-    echo "📊 Found $RELEASE_COUNT release(s)"
-
-    # Keep only the 5 most recent releases
-    if [ $RELEASE_COUNT -gt 5 ]; then
-        echo "🗑️  Removing old releases (keeping 5 most recent)..."
-
-        # List directories by modification time, skip the 5 newest, and remove the rest
-        ls -1td deployment-* | tail -n +6 | while read dir; do
-            echo "   🗑️  Removing: $dir"
-            rm -rf "$dir"
-        done
-
-        REMOVED_COUNT=$((RELEASE_COUNT - 5))
-        echo "✅ Removed $REMOVED_COUNT old release(s)"
-    else
-        echo "✅ No cleanup needed (5 or fewer releases present)"
+    if ! cleanup_releases; then
+        echo 'Release cleanup failed after a healthy activation; manual cleanup is required.' >&2
     fi
 
-    echo ""
+    echo "Deployed revision: $REVISION"
+    echo "Release: $RELEASE_PATH"
+    echo "Previous release: $PREVIOUS_RELEASE"
 @endtask
