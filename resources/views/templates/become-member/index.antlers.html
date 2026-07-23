@@ -1,110 +1,397 @@
-<div class="translate-y-32 lg:translate-y-52 pb-32 md:pb-48">
-    {{# Top background image #}}
-    {{ partial:decoration/floor-background background="floor-top-members" /}}
+<div class="dlf-community-page dlf-become-member-page" data-dlf-footer-cta-stage>
+    <section
+        class="dlf-community-section dlf-lid-grid dlf-divider-section dlf-divider-split"
+        aria-labelledby="become-member-heading"
+    >
+        <div class="dlf-lid-hero-copy">
+            <span class="dlf-community-kicker">{{ title }}</span>
+            <h1 id="become-member-heading" class="dlf-community-title">
+                Word lid van de Dutch Laravel Foundation en geniet van veel voordelen
+            </h1>
+            <p class="dlf-community-intro">
+                Zowel bureaus, ZZP’ers als ontwikkelteams die met Laravel werken kunnen lid worden
+                van de Dutch Laravel Foundation. Naast toegang tot een groot netwerk van Laravel
+                specialisten krijg je exclusief toegang tot Laravel events en een keurmerk voor je
+                organisatie. Bureaus en ZZP’ers krijgen daarnaast toegang tot leads van potentiële
+                opdrachtgevers.
+            </p>
+        </div>
+        <figure class="dlf-community-photo" data-progressive-media-frame>
+            <img
+                src="/assets/img/developers-achter-bureau.jpg"
+                alt="Laravel developers aan het werk"
+                {{
+                partial:progressive_media_attributes
+                width="2048"
+                height="1366"
+                loading="eager"
+                fetchpriority="high"
+                }}
+            />
+        </figure>
+    </section>
 
-    <div class="container px-3 lg:px-10 mb-auto mx-auto flex flex-col items-left justify-center relative">
-        <div class="w-full px-6 sm:px-12 fixed bottom-4 left-0 z-0 lg:hidden">
-            <a href="#member-form" class="w-full">
-                {{ partial:buttons/primary type="submit" class="w-full " button_class="w-full" }}
-                Word lid
-                {{/partial:buttons/primary }}
-            </a>
-        </div>
-        <div class="w-full text-center max-w-6xl mx-auto">
-            <h1>Word lid van de Dutch Laravel Foundation en geniet van <span
-                    class="relative before:h-2 before:w-full before:bg-primary-accent before:absolute before:-bottom-1 before:left-0">veel</span>
-                voordelen</h1>
-        </div>
-        <div class="grid grid-cols-1 lg:grid-cols-9 gap-0 lg:gap-20 items-start mt-0 mb-8  md:my-12">
-            <div class="col-span-1 lg:col-span-4 benefits">
-                {{ content }}
-                {{ partial src="sets/autoload" }}
-                {{ /content }}
+    <section
+        class="dlf-lid-grid dlf-divider-section dlf-divider-section--composite-tail dlf-divider-split"
+        aria-label="Voordelen en lidmaatschapsformulier"
+    >
+        <div class="dlf-lid-left dlf-divider-list">
+            <div class="dlf-lid-content-block">
+                <span class="dlf-community-kicker">Voordelen voor leden</span>
+                <h2 class="dlf-community-heading dlf-community-heading--small">
+                    Als lid kun je rekenen op de volgende voordelen
+                </h2>
+                <p class="dlf-community-intro">
+                    Van kennisdeling en exclusieve events tot een keurmerk, leads en scherpe
+                    groepskortingen op tooling.
+                </p>
+                <div
+                    class="dlf-lid-benefits dlf-lid-benefits--overview dlf-divider-region dlf-divider-grid dlf-divider-grid--desktop-2 dlf-divider-grid--tablet-2 dlf-divider-grid--mobile-1"
+                    aria-label="Voordelen voor leden"
+                >
+                    <article class="dlf-lid-benefit">
+                        <span class="dlf-community-icon"
+                            ><img
+                                src="/assets/img/boosting-knowledge.svg"
+                                width="44"
+                                height="44"
+                                alt=""
+                                loading="lazy"
+                        /></span>
+                        <strong class="dlf-lid-benefit__title">Kennisuitwisseling</strong>
+                        <span class="dlf-lid-benefit__copy"
+                            >Voor developers en managers tijdens leuke events.</span
+                        >
+                    </article>
+                    <article class="dlf-lid-benefit">
+                        <span class="dlf-community-icon"
+                            ><img
+                                src="/assets/img/assuring-quality.svg"
+                                width="44"
+                                height="44"
+                                alt=""
+                                loading="lazy"
+                        /></span>
+                        <strong class="dlf-lid-benefit__title">Keurmerk voor je organisatie</strong>
+                        <span class="dlf-lid-benefit__copy"
+                            >Laat opdrachtgevers en sollicitanten zien dat je bij de Laravel
+                            community hoort.</span
+                        >
+                    </article>
+                    <article class="dlf-lid-benefit">
+                        <span class="dlf-community-icon"
+                            ><img
+                                src="/assets/img/proven-secure.svg"
+                                width="44"
+                                height="44"
+                                alt=""
+                                loading="lazy"
+                        /></span>
+                        <strong class="dlf-lid-benefit__title">Promotie van het framework</strong>
+                        <span class="dlf-lid-benefit__copy"
+                            >Onder potentiële opdrachtgevers, overheid en onderwijs.</span
+                        >
+                    </article>
+                    <article class="dlf-lid-benefit">
+                        <span class="dlf-community-icon"
+                            ><img
+                                src="/assets/img/available-developers.svg"
+                                width="46"
+                                height="44"
+                                alt=""
+                                loading="lazy"
+                        /></span>
+                        <strong class="dlf-lid-benefit__title">Leads &amp; projecten</strong>
+                        <span class="dlf-lid-benefit__copy"
+                            >Word gematcht met opdrachtgevers via
+                            <a href="/aanvraag">Match je project</a>.</span
+                        >
+                    </article>
+                    <article class="dlf-lid-benefit">
+                        <span class="dlf-community-icon"
+                            ><img
+                                src="/assets/img/development-speed.svg"
+                                width="44"
+                                height="44"
+                                alt=""
+                                loading="lazy"
+                        /></span>
+                        <strong class="dlf-lid-benefit__title">Kortingen</strong>
+                        <span class="dlf-lid-benefit__copy"
+                            >Op deelname aan Laracon en het Laravel Certified Program.</span
+                        >
+                    </article>
+                    <article class="dlf-lid-benefit">
+                        <span class="dlf-community-icon"
+                            ><img
+                                src="/assets/img/enterprise-ready.svg"
+                                width="44"
+                                height="44"
+                                alt=""
+                                loading="lazy"
+                        /></span>
+                        <strong class="dlf-lid-benefit__title">Werkgroepen</strong>
+                        <span class="dlf-lid-benefit__copy"
+                            >Over best practices, onderwijs, diversiteit en Laravel binnen de
+                            overheid.</span
+                        >
+                    </article>
+                    <article class="dlf-lid-benefit">
+                        <span class="dlf-community-icon"
+                            ><img
+                                src="/assets/img/future-proof.svg"
+                                width="44"
+                                height="44"
+                                alt=""
+                                loading="lazy"
+                        /></span>
+                        <strong class="dlf-lid-benefit__title">Hosting Hotline</strong>
+                        <span class="dlf-lid-benefit__copy"
+                            >Kosteloze hosting-hulp van onze managed hosting expert.</span
+                        >
+                    </article>
+                    <article class="dlf-lid-benefit">
+                        <span class="dlf-community-icon"
+                            ><img
+                                src="/assets/img/proven-secure.svg"
+                                width="44"
+                                height="44"
+                                alt=""
+                                loading="lazy"
+                        /></span>
+                        <strong class="dlf-lid-benefit__title">Partnertarief Shock Media</strong>
+                        <span class="dlf-lid-benefit__copy"
+                            >Scherp partnertarief en welkomskorting op managed hosting.</span
+                        >
+                    </article>
+                </div>
             </div>
 
-            <div
-                class="col-span-1 lg:col-span-5 self-start sticky top-0 pt-10 pb-12 md:pt-20 sm:pb-20 md:pb-12 bg-white lg:bg-transparent xl:py-0 -mb-12 lg:-mb-20 xl:mb-0">
+            <div class="dlf-lid-content-block dlf-lid-events-block">
+                <span class="dlf-community-kicker">Events</span>
+                <h2 class="dlf-community-heading dlf-community-heading--small">
+                    Toegang tot leuke DLF events
+                </h2>
+                <ul class="dlf-lid-list">
+                    <li>
+                        <span
+                            ><strong>CxO diner.</strong> Een interactieve avond met andere agency
+                            leaders. Onder het genot van heerlijk eten en drinken bespreken we alles
+                            over het runnen van een eigen onderneming.</span
+                        >
+                    </li>
+                    <li>
+                        <span
+                            ><strong>LaraFest.</strong> Een zomers evenement met techtalks, BBQ,
+                            drankjes en de uitreiking van de LaraAward voor het meest innovatieve
+                            project.</span
+                        >
+                    </li>
+                    <li>
+                        <span><strong>Meetups</strong> door het hele land.</span>
+                    </li>
+                    <li>
+                        <span><strong>De jaarlijkse Laravel hackathon.</strong></span>
+                    </li>
+                </ul>
+                <figure class="dlf-lid-events-photo" data-progressive-media-frame>
+                    <img
+                        src="/assets/uploads/assets/Bitmap@2x.jpg"
+                        alt="Bezoekers tijdens een Dutch Laravel Foundation event"
+                        {{
+                        partial:progressive_media_attributes
+                        width="1336"
+                        height="830"
+                        }}
+                    />
+                </figure>
+            </div>
 
-                <div id="member-form"
-                    class=" border-1 border-gray-100 p-1 bg-gray-100/20 rounded-2xl shadow-xl shadow-gray-200/50 backdrop-blur-xl ">
-                    <div class="bg-white border-1 border-gray-200/60 p-4 md:p-8 rounded-xl shadow-xl shadow-gray-200/50">
-                        <div class="grid grid-cols-1 gap-4 sm:gap-0 xs:grid-cols-2 border-b border-gray-100 pb-8 mb-8">
-                            <div class="flex flex-col">
-                                <strong class="text-black">ZZP</strong>
-                                <span class="text-black">€ 450,- per jaar</span>
-                            </div>
-                            <div class="flex flex-col">
-                                <strong class="text-black">Bureau's & ontwikkelteams</strong>
-                                <span class="text-black">€ 1.250.- per jaar</span>
-                            </div>
-                        </div>
+            <div class="dlf-lid-content-block">
+                <span class="dlf-community-kicker">Kortingen op tooling</span>
+                <h2 class="dlf-community-heading dlf-community-heading--small">
+                    Kortingen op tooling
+                </h2>
+                <ul class="dlf-lid-list" style="margin-bottom: 20px">
+                    <li>
+                        <span
+                            ><strong>20% korting</strong> op nieuwe JetBrains’
+                            PhpStorm-licenties.</span
+                        >
+                    </li>
+                    <li>
+                        <span><strong>Proefperiode van 3 maanden</strong> bij Sentry.</span>
+                    </li>
+                    <li>
+                        <span><strong>30% korting</strong> op een abonnement bij Lettermint.</span>
+                    </li>
+                    <li>
+                        <span><strong>30% korting</strong> op een abonnement bij Oh Dear.</span>
+                    </li>
+                    <li>
+                        <span
+                            ><strong>20% korting</strong> op een Pro of Max licentie bij
+                            NativePHP.</span
+                        >
+                    </li>
+                    <li>
+                        <span
+                            ><strong>20% korting</strong> op je eerste project met Laravel
+                            Shift.</span
+                        >
+                    </li>
+                </ul>
+                <p class="dlf-community-feature-copy">
+                    Aanvullende kortingen zijn momenteel in ontwikkeling. Zo hebben we lopende
+                    gesprekken met Laracasts en andere partners.
+                </p>
+            </div>
 
-                        {{ form:become_member redirect="/lid-worden" }}
+            <div class="dlf-lid-content-block">
+                <span class="dlf-community-kicker">Laravel Company Certified</span>
+                <h2 class="dlf-community-heading dlf-community-heading--small">
+                    Extra voordeel als je Laravel Company Certified bent
+                </h2>
+                <div class="dlf-lid-certified-list">
+                    <div>
+                        <span class="dlf-lid-checkmark" aria-hidden="true">✓</span
+                        ><span
+                            ><strong>€ 250,- korting</strong> op de lidmaatschapsfee van de DLF
+                            (eenmalig).</span
+                        >
+                    </div>
+                    <div>
+                        <span class="dlf-lid-checkmark" aria-hidden="true">✓</span
+                        ><span
+                            ><strong>25% korting</strong> op het Developer Certification examen —
+                            van € 249,- voor € 186,75 per examen.</span
+                        >
+                    </div>
+                    <div>
+                        <span class="dlf-lid-checkmark" aria-hidden="true">✓</span
+                        ><span
+                            ><strong>25% korting</strong> op een jaar Company Certification — van €
+                            799,- voor € 599,-, inclusief één Developer Certification examen.</span
+                        >
+                    </div>
+                    <div>
+                        <span class="dlf-lid-checkmark" aria-hidden="true">✓</span
+                        ><span
+                            >Daarna betaal je als gecertificeerd bedrijf nog maar
+                            <strong>€ 99,-</strong> per Developer Certification examen, in plaats
+                            van € 249,-.</span
+                        >
+                    </div>
+                </div>
+            </div>
 
-                            {{ if success }}
-                                <div class="px-6 sm:px-0">
-                                    {{ partial:forms/success }}
-                                </div>
-                            {{ else }}
+            <div class="dlf-lid-reason dlf-divider-tail-segment">
+                <div class="dlf-lid-reason__copy">
+                    <span class="dlf-community-kicker">De echte reden</span>
+                    <h2 class="dlf-community-heading dlf-community-heading--small">
+                        Uiteraard zijn de voordelen fijn, maar die zijn niet het belangrijkste
+                    </h2>
+                    <p class="dlf-community-copy">
+                        De echte reden om lid te worden, naar onze mening, is onze community. Stuk
+                        voor stuk Laravel fanaten die het leuk vinden om kennis te delen en te
+                        sparren. Het is een ideale manier om je netwerk te vergroten, en een mooie
+                        manier om wat terug te doen voor Laravel in Nederland.
+                    </p>
+                    <p class="dlf-community-copy">
+                        Alle inkomsten vloeien direct in initiatieven die aansluiten bij de
+                        bovenstaande gedachte.
+                    </p>
+                </div>
+            </div>
+        </div>
 
-                            {{ if errors }}
-                                <div class="p-6 mb-6 bg-primary-accent text-primary-contrast">
-                                    {{ errors }}
-                                    {{ value }}<br>
-                                    {{ /errors }}
-                                </div>
-                            {{ /if }}
-
-                            <input type="text" class="hidden" name="{{ honeypot ?? 'honeypot' }}">
-
-                        <div
-                            class="flex flex-col pb-10 space-y-6 sm:pb-0 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:px-0">
-                            {{ fields }}
-                            {{ if handle != 'agree' }}
-
-                            <div class="{{ type == "textarea" ?='col-span-2' }}">
-                                <label for="{{ handle }}"><span class="meta">{{ display }}</span></label>
-                                {{ if instructions_position == 'above' }}
-                                {{ instructions }}
-                                {{ /if }}
-                                {{# Add ID to field #}}
-                                {{ field = field regex_replace="^<([a-z]+)|<\\1 id='{ handle }'" }}
-                                                                            {{ if instructions_position == 'below' }}
-                                                                                {{ instructions }}
-                                                                            {{ /if }}
-                                                                            {{ if error }}
-                                                                                <p class=" text-sm text-primary-accent">{{
-                                    error }}</p>
-                                    {{ /if }}
-                            </div>
-                            {{ else }}
-                                <div class="flex flex-col justify-between col-span-2 lg:flex-row">
-                                    <div class="flex flex-row w-full text-tertiary-light ">
-                                        {{ field replace="<br>|" }}
-                                        <span class="ml-2">{{ display regex_replace="(privacy statement)|<a
-                                                href='/privacy-statement' target='_blank'>\\1</a>"
-                                            }}
-                                        </span>
-                                    </div>
-                                </div>
-                                {{ captcha }}
-                                <div class="col-span-2 mt-4">
-                                    {{ partial:buttons/primary type="submit" class="w-full " button_class="w-full" }}Versturen{{
-                                    /partial:buttons/primary }}
-                                </div>
-                            {{ /if }}
-                            {{ /fields }}
-                        </div>
-                        {{ /if }}
-                        {{ /form:become_member }}
+        <aside
+            class="dlf-lid-right dlf-divider-tail-segment"
+            id="member-form"
+            aria-label="Aanmelden als lid"
+        >
+            <div class="dlf-lid-form">
+                <div class="dlf-lid-pricing">
+                    <div class="dlf-lid-pricing__top">
+                        <span class="dlf-community-kicker">Lidmaatschap</span>
+                    </div>
+                    <div class="dlf-lid-price">
+                        <span
+                            ><strong class="dlf-lid-price__type">ZZP</strong
+                            ><span class="dlf-lid-price__period">per jaar</span></span
+                        >
+                        <strong class="dlf-lid-price__amount">€ 450,-</strong>
+                    </div>
+                    <div class="dlf-lid-price">
+                        <span
+                            ><strong class="dlf-lid-price__type"
+                                >Bureaus &amp; ontwikkelteams</strong
+                            ><span class="dlf-lid-price__period">per jaar</span></span
+                        >
+                        <strong class="dlf-lid-price__amount">€ 1.250,-</strong>
                     </div>
                 </div>
 
-            </div>
-        </div>
+                <div class="dlf-member-form">
+                    {{ form:become_member redirect="/lid-worden" }} {{ if success }}
+                    <div role="status">
+                        <h2 class="dlf-community-heading dlf-community-heading--small">
+                            Bedankt voor je interesse!
+                        </h2>
+                        <p class="dlf-community-copy">
+                            Wij nemen zo spoedig mogelijk contact met je op.
+                        </p>
+                    </div>
+                    {{ else }} {{ if errors }}
+                    <div class="dlf-member-form__errors" role="alert">
+                        {{ errors }}{{ value }}<br />{{ /errors }}
+                    </div>
+                    {{ /if }}
 
-        <div class="w-full mb-12">
-            {{ partial:partners }}
-        </div>
-    </div>
+                    <input
+                        type="text"
+                        class="hidden"
+                        name="{{ honeypot ?? 'honeypot' }}"
+                        tabindex="-1"
+                        autocomplete="off"
+                    />
+
+                    <div class="dlf-member-form__fields">
+                        {{ fields }} {{ if handle != 'agree' }}
+                        <label class="dlf-form-group">
+                            <span class="dlf-form-label">{{ display }}</span>
+                            {{ if instructions_position == 'above' }}{{ instructions }}{{ /if }} {{
+                            field = field regex_replace="^<([a-z]+)|<\1 class='dlf-form-field'" }}
+                            {{ if instructions_position == 'below' }}{{ instructions }}{{ /if }} {{
+                            if error }}
+                            <p class="dlf-member-form__error">{{ error }}</p>
+                            {{ /if }}
+                        </label>
+                        {{ else }}
+                        <label class="dlf-member-form__agree">
+                            {{ field replace="<br />|" }}
+                            <span
+                                >{{ display regex_replace="(privacy statement)|<a
+                                    href="/privacy-statement"
+                                    target="_blank"
+                                    >\1</a
+                                >" }}</span
+                            >
+                        </label>
+                        {{ if error }}
+                        <p class="dlf-member-form__error">{{ error }}</p>
+                        {{ /if }} {{ /if }} {{ /fields }} {{ captcha }}
+                        <button type="submit" class="dlf-community-button">
+                            <span class="dlf-community-button__face">Versturen</span>
+                            <span class="dlf-community-button__back" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                    {{ /if }} {{ /form:become_member }}
+                </div>
+            </div>
+        </aside>
+    </section>
 </div>
+
+{{ content }} {{ if type | starts_with:'dlf_' }} {{ partial src="sets/autoload" }} {{ /if }} {{
+/content }}

@@ -2,6 +2,7 @@
 id: 599530a8-0398-4b27-806b-72196f8d80f0
 blueprint: pages
 title: 'Co-organised Meet-ups'
+meta_description: 'Organiseer samen met de Dutch Laravel Foundation een lokale meetup en breng Laravel-developers bij elkaar om kennis te delen.'
 template: templates/default
 menu_color: white
 call_to_action: 6bc4ea55-2728-4615-8d45-75d49d29d157
@@ -28,10 +29,6 @@ content:
       -
         type: text
         text: 'Omdat de DLF volledig wordt gerund door vrijwilligers, is het aantal events dat we zelf kunnen organiseren beperkt. Daarom bieden we zowel leden als niet-leden de mogelijkheid om samen met ons een Meet-up te organiseren.'
-      -
-        type: hardBreak
-      -
-        type: hardBreak
   -
     type: heading
     attrs:

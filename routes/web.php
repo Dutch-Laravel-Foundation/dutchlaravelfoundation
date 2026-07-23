@@ -2,9 +2,21 @@
 
 use App\Http\Controllers\Agents\LlmsController;
 use App\Http\Controllers\Agents\RobotsController;
+use App\Http\Controllers\SecurityTxtController;
+use App\Http\Middleware\EnsureOhDearHealthEndpointIsProduction;
 use Illuminate\Support\Facades\Route;
+use Spatie\Health\Http\Controllers\HealthCheckJsonResultsController;
+use Spatie\Health\Http\Middleware\RequiresSecret;
+
+Route::middleware([
+    EnsureOhDearHealthEndpointIsProduction::class,
+    RequiresSecret::class,
+])
+    ->get('/oh-dear-health-check-results', HealthCheckJsonResultsController::class)
+    ->name('oh-dear-health-check-results');
 
 Route::get('/robots.txt', RobotsController::class);
+Route::get('/.well-known/security.txt', SecurityTxtController::class);
 Route::get('/llms.txt', [LlmsController::class, 'index']);
 Route::get('/llms-full.txt', [LlmsController::class, 'full']);
 

@@ -1,75 +1,268 @@
-<div class="container mb-auto mx-auto mt-16 flex flex-col items-left justify-center relative">
-    {{ number_of_member_insights = { collection:count in="insights" } }}
-    {{ if number_of_member_insights > 0 }}
-    <section class="relative w-full mb">
-        {{ collection:insights limit="1" sort="date:desc" }}
-        <div class="w-full xl:w-11/12 lg:-mt-10 xl:-mt-40 ">
-            {{ partial:blocks/image-left-large class="" :image="featured_image" :category="category" link="/insights/{
-            slug }" }}
-            {{ introduction }}
-            {{ /partial:blocks/image-left-large }}
-        </div>
-        {{ /collection:insights }}
-
-        {{ partial:partners }}
-
-        {{# Background image #}}
-        <div
-            class="absolute z-[-1] flex items-center justify-center sm:top-[12rem] top-[20rem] md:top-[10rem] lg:top-[-4rem] left-[-28rem]">
-            <div>
-                <img src="/assets/img/backgrounds/floor-mid-half-gray.svg" class="w-[1000px] h-[600px]">
+<section
+    class="dlf-home-hero dlf-divider-section dlf-divider-split"
+    aria-labelledby="home-heading"
+>
+    <div class="dlf-home-hero__copy">
+        <div>
+            <h1 id="home-heading">{{ header_title ?? title }}</h1>
+            <div class="dlf-home-hero__intro">{{ header_content }}</div>
+            <div class="dlf-actions">
+                <a class="dlf-btn" href="/lid-worden">
+                    <span class="dlf-btn-face dlf-btn-face--red">Voor ontwikkelaars</span>
+                    <span class="dlf-btn-shadow dlf-btn-shadow--red" aria-hidden="true"></span>
+                </a>
+                <a class="dlf-btn" href="/een-eigen-systeem-laten-bouwen-is-betaalbaarder-dan-je-denkt">
+                    <span class="dlf-btn-face dlf-btn-face--outline-red">Voor opdrachtgevers</span>
+                    <span class="dlf-btn-shadow dlf-btn-shadow--red" aria-hidden="true"></span>
+                </a>
             </div>
         </div>
+    </div>
+    <figure class="dlf-home-hero__photo" data-progressive-media-frame>
+        <picture>
+            <source
+                type="image/webp"
+                srcset="/assets/redesign/photos/larafest-groepsfoto-640.webp 640w, /assets/redesign/photos/larafest-groepsfoto-800.webp 800w, /assets/redesign/photos/larafest-groepsfoto-960.webp 960w, /assets/redesign/photos/larafest-groepsfoto-1280.webp 1280w, /assets/redesign/photos/larafest-groepsfoto-1920.webp 1920w"
+                sizes="(min-width: 1024px) 50vw, 100vw"
+            >
+            <img src="/assets/redesign/photos/larafest-groepsfoto.jpeg" alt="Laravel developers tijdens een bijeenkomst van de Dutch Laravel Foundation" {{ partial:progressive_media_attributes width="1920" height="1272" loading="eager" fetchpriority="high" }}>
+        </picture>
+    </figure>
+</section>
+
+<main class="dlf-home-main dlf-rails" data-dlf-footer-cta-stage>
+    <section
+        class="dlf-home-current dlf-divider-section dlf-divider-section--yield-to-next"
+        aria-labelledby="current-heading"
+    >
+        <header class="dlf-home-section-head">
+            <h2 id="current-heading">Actueel binnen de community</h2>
+            <nav aria-label="Actuele publicaties">
+                <a class="dlf-text-link" href="/nieuws">Al het nieuws <span aria-hidden="true">→</span></a>
+                <span aria-hidden="true"></span>
+                <a class="dlf-text-link" href="/kennis">Alle kennisartikelen <span aria-hidden="true">→</span></a>
+            </nav>
+        </header>
+
+        <div class="dlf-home-bento">
+            {{ collection:insights limit="1" sort="date:desc" }}
+                <a class="dlf-home-bento__featured-image" href="{{ url }}" aria-label="Lees {{ title }}" data-progressive-media-frame>
+                    {{ if featured_image }}
+                        <img
+                            src="{{ glide src="{featured_image}" fit="crop_focal" width="800" height="434" format="webp" quality="82" }}"
+                            srcset="{{ glide src="{featured_image}" fit="crop_focal" width="480" height="261" format="webp" quality="82" }} 480w, {{ glide src="{featured_image}" fit="crop_focal" width="720" height="391" format="webp" quality="82" }} 720w, {{ glide src="{featured_image}" fit="crop_focal" width="800" height="434" format="webp" quality="82" }} 800w, {{ glide src="{featured_image}" fit="crop_focal" width="1000" height="543" format="webp" quality="82" }} 1000w, {{ glide src="{featured_image}" fit="crop_focal" width="1400" height="760" format="webp" quality="82" }} 1400w"
+                            sizes="(min-width: 1280px) 640px, (min-width: 1024px) 50vw, 100vw"
+                            alt="{{ featured_image:alt ?? title }}"
+                            style="object-position: {{ featured_image:focus_css }}"
+                            {{ partial:progressive_media_attributes width="1400" height="760" }}
+                        >
+                    {{ else }}
+                        <img src="/assets/redesign/photos/easi-2025.jpg" alt="" {{ partial:progressive_media_attributes width="2500" height="1405" }}>
+                    {{ /if }}
+                </a>
+                <a class="dlf-home-bento__featured-copy" href="{{ url }}">
+                    <p class="dlf-kicker">{{ category ?? 'Nieuws' }}</p>
+                    <h3>{{ title }}</h3>
+                    <div class="dlf-home-excerpt">{{ introduction | markdown | strip_tags | safe_truncate:260 }}</div>
+                    <span class="dlf-text-link">Lees meer <span aria-hidden="true">→</span></span>
+                </a>
+            {{ /collection:insights }}
+
+            {{ collection:knowledge limit="1" sort="date:desc" }}
+                {{ if featured_image }}
+                    <a class="dlf-home-bento__knowledge-image" href="{{ url }}" aria-label="Lees {{ title }}" data-progressive-media-frame>
+                        <img
+                            src="{{ glide src="{featured_image}" fit="crop_focal" width="800" height="480" format="webp" quality="82" }}"
+                            srcset="{{ glide src="{featured_image}" fit="crop_focal" width="480" height="288" format="webp" quality="82" }} 480w, {{ glide src="{featured_image}" fit="crop_focal" width="720" height="432" format="webp" quality="82" }} 720w, {{ glide src="{featured_image}" fit="crop_focal" width="800" height="480" format="webp" quality="82" }} 800w, {{ glide src="{featured_image}" fit="crop_focal" width="1000" height="600" format="webp" quality="82" }} 1000w"
+                            sizes="100vw"
+                            alt="{{ featured_image:alt ?? title }}"
+                            style="object-position: {{ featured_image:focus_css }}"
+                            {{ partial:progressive_media_attributes width="1000" height="600" }}
+                        >
+                    </a>
+                {{ /if }}
+                <article class="dlf-home-bento__knowledge">
+                    <p class="dlf-kicker">Kennis</p>
+                    <h3><a href="{{ url }}">{{ title }}</a></h3>
+                    <div class="dlf-home-excerpt">{{ introduction | markdown | strip_tags | safe_truncate:240 }}</div>
+                    <a class="dlf-text-link" href="{{ url }}">Lees artikel <span aria-hidden="true">→</span></a>
+                </article>
+            {{ /collection:knowledge }}
+
+            <article class="dlf-home-bento__about">
+                <p class="dlf-kicker">Over ons</p>
+                <h3>Een initiatief om het gebruik van Laravel in Nederland verder te professionaliseren.</h3>
+                <p>Met goedkeuring van Taylor Otwell heeft een zevental bedrijven het initiatief genomen; in juni 2019 is de Dutch Laravel Foundation opgericht.</p>
+                <a class="dlf-text-link" href="/over-ons">Lees meer over ons <span aria-hidden="true">→</span></a>
+            </article>
+        </div>
     </section>
-    {{ /if }}
 
-    {{ if { collection:count in="insights" highlight:is="true" sort="updated:desc" limit="1" } > 0 }}
-    <div class="flex flex-row ">
-        {{ collection:insights highlight:is="true" limit="1" }}
-        {{ partial:blocks/image-highlight-text :image="featured_image" category="Mis niet" link="/insights/{ slug }" }}
-        {{ introduction }}
-        {{ /partial:blocks/image-highlight-text }}
-        {{ /collection:insights }}
-    </div>
-    {{ /if }}
-
-    <div class="p-6 mb-20 bg-secondary-light lg:p-10">
-        {{ content }}
-        {{ partial src="sets/autoload" }}
-        {{ /content }}
-    </div>
-
-    <div class="flex justify-center mb-10 md:mb-20">
-        <h3 class="block w-full px-6 text-center sm:w-2/3 xl:w-1/2 lg:px-10">Klanten van onze leden die vertrouwen op
-            het Laravel framework</h3>
-    </div>
-
-    <div class="flex justify-center h-24 mb-20">
-        <div class="absolute w-screen -ml-[50vw] left-1/2 h-24 overflow-hidden">
-            <div class="w-full h-full js-logos-swiper">
-                <div class="flex swiper-wrapper">
-                    {{ collection:clients logo:isset="true" }}
-                    <div class="flex items-center justify-center px-4 mx-auto swiper-slide">
-                        <img src="{{ logo }}" alt="{{ title }} logo" class="max-h-24">
-                    </div>
-                    {{ /collection:clients }}
-
-                    {{# Temporarily add a 2nd and 3rd loop for filling clients,
-                    and use full width with the SwiperJS loop that needs at least 6 items,
-                    and currently there are 3 actual clients #}}
-                    {{ collection:clients logo:isset="true" }}
-                    <div class="flex items-center justify-center px-4 mx-auto swiper-slide">
-                        <img src="{{ logo }}" alt="{{ title }} logo" class="max-h-24">
-                    </div>
-                    {{ /collection:clients }}
-                    {{ collection:clients logo:isset="true" }}
-                    <div class="flex items-center justify-center px-4 mx-auto swiper-slide">
-                        <img src="{{ logo }}" alt="{{ title }} logo" class="max-h-24">
-                    </div>
-                    {{ /collection:clients }}
-                    {{# End 2nd and 3rd loop #}}
+    <section
+        class="dlf-home-partners dlf-divider-section dlf-divider-section--full-bleed-top"
+        aria-labelledby="partners-heading"
+    >
+        <div class="dlf-home-partners__spacer" aria-hidden="true"></div>
+        <h2 id="partners-heading">Onze partners</h2>
+        <div class="dlf-home-partners__marquee">
+            <div class="dlf-home-partners__track">
+                <div class="dlf-home-partners__group">
+                    {{ collection:partners sort="title" }}
+                        {{ partner_title = title }}
+                        {{ logo }}
+                            {{ if extension === "svg" }}
+                                <img src="{{ url }}" alt="{{ alt ?? partner_title }}" width="{{ width }}" height="{{ height }}" loading="lazy" decoding="async">
+                            {{ else }}
+                                <img src="{{ glide src="{url}" width="160" format="webp" quality="82" }}" srcset="{{ glide src="{url}" width="160" format="webp" quality="82" }} 160w, {{ glide src="{url}" width="320" format="webp" quality="82" }} 320w" sizes="150px" alt="{{ alt ?? partner_title }}" width="{{ width }}" height="{{ height }}" loading="lazy" decoding="async">
+                            {{ /if }}
+                        {{ /logo }}
+                    {{ /collection:partners }}
+                </div>
+                <div class="dlf-home-partners__group" aria-hidden="true">
+                    {{ collection:partners sort="title" }}
+                        {{ logo }}
+                            {{ if extension === "svg" }}
+                                <img src="{{ url }}" alt="" width="{{ width }}" height="{{ height }}" loading="lazy" decoding="async">
+                            {{ else }}
+                                <img src="{{ glide src="{url}" width="160" format="webp" quality="82" }}" srcset="{{ glide src="{url}" width="160" format="webp" quality="82" }} 160w, {{ glide src="{url}" width="320" format="webp" quality="82" }} 320w" sizes="150px" alt="" width="{{ width }}" height="{{ height }}" loading="lazy" decoding="async">
+                            {{ /if }}
+                        {{ /logo }}
+                    {{ /collection:partners }}
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
+
+    {{ collection:insights highlight:is="true" sort="date:desc" limit="1" }}
+        <section
+            class="dlf-home-highlight dlf-divider-section dlf-divider-split dlf-divider-split--stacked-reversed"
+            aria-labelledby="highlight-heading"
+        >
+            <article>
+                <p class="dlf-kicker">Mis het niet</p>
+                <h2 id="highlight-heading"><a href="{{ url }}">{{ title }}</a></h2>
+                <div class="dlf-home-excerpt">{{ introduction | markdown | strip_tags }}</div>
+                <a class="dlf-text-link" href="{{ url }}">Lees meer <span aria-hidden="true">→</span></a>
+            </article>
+            <figure data-progressive-media-frame>
+                {{ if featured_image }}
+                    <img
+                        src="{{ glide src="{featured_image}" fit="crop_focal" width="800" height="514" format="webp" quality="82" }}"
+                        srcset="{{ glide src="{featured_image}" fit="crop_focal" width="480" height="309" format="webp" quality="82" }} 480w, {{ glide src="{featured_image}" fit="crop_focal" width="720" height="463" format="webp" quality="82" }} 720w, {{ glide src="{featured_image}" fit="crop_focal" width="800" height="514" format="webp" quality="82" }} 800w, {{ glide src="{featured_image}" fit="crop_focal" width="1000" height="643" format="webp" quality="82" }} 1000w, {{ glide src="{featured_image}" fit="crop_focal" width="1400" height="900" format="webp" quality="82" }} 1400w"
+                        sizes="(min-width: 1280px) 640px, (min-width: 1024px) 50vw, 100vw"
+                        alt="{{ featured_image:alt ?? title }}"
+                        style="object-position: {{ featured_image:focus_css }}"
+                        {{ partial:progressive_media_attributes width="1400" height="900" }}
+                    >
+                {{ else }}
+                    <img src="/assets/redesign/photos/larafest-groepsfoto.jpeg" alt="" {{ partial:progressive_media_attributes width="3632" height="2406" }}>
+                {{ /if }}
+            </figure>
+        </section>
+    {{ /collection:insights }}
+
+    <section
+        class="dlf-home-clients dlf-divider-section"
+        aria-labelledby="clients-heading"
+        data-client-logo-wall
+    >
+        <div class="dlf-home-clients__lanes">
+            <div class="dlf-home-clients__grid">
+                <div class="dlf-home-clients__cell dlf-home-clients__cell--empty" data-client-cell aria-hidden="true"></div>
+                <div class="dlf-home-clients__cell dlf-home-clients__cell--empty" data-client-cell aria-hidden="true"></div>
+                <div class="dlf-home-clients__cell" data-client-cell>
+                    {{ collection:clients slug:in="de-verbouwcalculator|intersafe" }}
+                        {{ client_title = title }}
+                        <div class="dlf-home-clients__logo" data-client-logo>
+                            {{ logo }}
+                                {{ partial:home_client_logo }}
+                            {{ /logo }}
+                        </div>
+                    {{ /collection:clients }}
+                </div>
+                <div class="dlf-home-clients__cell" data-client-cell>
+                    {{ collection:clients slug:in="dropday|mobiliteitsfabriek" }}
+                        {{ client_title = title }}
+                        <div class="dlf-home-clients__logo" data-client-logo>
+                            {{ logo }}
+                                {{ partial:home_client_logo }}
+                            {{ /logo }}
+                        </div>
+                    {{ /collection:clients }}
+                </div>
+                <div class="dlf-home-clients__cell" data-client-cell>
+                    {{ collection:clients slug:in="eurosafe|avia" }}
+                        {{ client_title = title }}
+                        <div class="dlf-home-clients__logo" data-client-logo>
+                            {{ logo }}
+                                {{ partial:home_client_logo }}
+                            {{ /logo }}
+                        </div>
+                    {{ /collection:clients }}
+                </div>
+                <div class="dlf-home-clients__cell" data-client-cell>
+                    {{ collection:clients slug:in="abn-amro|recirculo" }}
+                        {{ client_title = title }}
+                        <div class="dlf-home-clients__logo" data-client-logo>
+                            {{ logo }}
+                                {{ partial:home_client_logo }}
+                            {{ /logo }}
+                        </div>
+                    {{ /collection:clients }}
+                </div>
+                <div class="dlf-home-clients__cell dlf-home-clients__cell--empty" data-client-cell aria-hidden="true"></div>
+                <div class="dlf-home-clients__cell dlf-home-clients__cell--empty" data-client-cell aria-hidden="true"></div>
+                <div class="dlf-home-clients__cell" data-client-cell>
+                    {{ collection:clients slug:in="flow-concepts|recoll" }}
+                        {{ client_title = title }}
+                        <div class="dlf-home-clients__logo" data-client-logo>
+                            {{ logo }}
+                                {{ partial:home_client_logo }}
+                            {{ /logo }}
+                        </div>
+                    {{ /collection:clients }}
+                </div>
+                <div class="dlf-home-clients__cell" data-client-cell>
+                    {{ collection:clients slug:in="race-planet|stichting-studiekeuze123" }}
+                        {{ client_title = title }}
+                        <div class="dlf-home-clients__logo" data-client-logo>
+                            {{ logo }}
+                                {{ partial:home_client_logo }}
+                            {{ /logo }}
+                        </div>
+                    {{ /collection:clients }}
+                </div>
+                <div class="dlf-home-clients__cell" data-client-cell>
+                    {{ collection:clients slug:in="youngwize|nva" }}
+                        {{ client_title = title }}
+                        <div class="dlf-home-clients__logo" data-client-logo>
+                            {{ logo }}
+                                {{ partial:home_client_logo }}
+                            {{ /logo }}
+                        </div>
+                    {{ /collection:clients }}
+                </div>
+                <div class="dlf-home-clients__cell" data-client-cell>
+                    {{ collection:clients slug:is="inventum" }}
+                        {{ client_title = title }}
+                        <div class="dlf-home-clients__logo" data-client-logo>
+                            {{ logo }}
+                                {{ partial:home_client_logo }}
+                            {{ /logo }}
+                        </div>
+                    {{ /collection:clients }}
+                </div>
+            </div>
+            <div class="dlf-home-clients__fade" aria-hidden="true"></div>
+        </div>
+        <header class="dlf-home-clients__label">
+            <h2 id="clients-heading">Klanten van onze leden die vertrouwen op het Laravel framework</h2>
+        </header>
+    </section>
+</main>
+
+{{ content }}
+    {{ if type | starts_with:'dlf_' }}
+        {{ partial src="sets/autoload" }}
+    {{ /if }}
+{{ /content }}

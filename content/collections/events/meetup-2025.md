@@ -23,7 +23,7 @@ content:
   -
     type: heading
     attrs:
-      level: 3
+      level: 2
     content:
       -
         type: text
@@ -61,7 +61,7 @@ content:
   -
     type: heading
     attrs:
-      level: 3
+      level: 2
     content:
       -
         type: text
@@ -109,7 +109,7 @@ content:
   -
     type: heading
     attrs:
-      level: 3
+      level: 2
     content:
       -
         type: text

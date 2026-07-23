@@ -11,7 +11,7 @@ The wizard pushes these events to `window.dataLayer`:
 | `sales_funnel_step_view` | A step becomes visible | `funnel_step`, `funnel_step_name` |
 | `sales_funnel_step_complete` | User advances past a step | `funnel_step`, `funnel_step_name` |
 | `sales_funnel_submit` | Form is submitted | `funnel_product`, `funnel_budget`, `funnel_company_type` |
-| `sales_funnel_abandoned` | Page unload without submission | `funnel_step`, `funnel_step_name`, `funnel_last_completed_step` |
+| `sales_funnel_abandonment` | Page unload without submission | `funnel_step`, `funnel_step_name` |
 
 ---
 
@@ -27,7 +27,7 @@ These tell GTM how to read the data from the `dataLayer.push()` calls.
 
 Go to **Variables** > **User-Defined Variables** > **New**
 
-Create these 6 variables (type: **Data Layer Variable**):
+Create these 5 variables (type: **Data Layer Variable**):
 
 | Variable Name | Data Layer Variable Name |
 |---|---|
@@ -36,7 +36,6 @@ Create these 6 variables (type: **Data Layer Variable**):
 | `DLV - Funnel Product` | `funnel_product` |
 | `DLV - Funnel Budget` | `funnel_budget` |
 | `DLV - Funnel Company Type` | `funnel_company_type` |
-| `DLV - Last Completed Step` | `funnel_last_completed_step` |
 
 For each: **New** > Variable type: **Data Layer Variable** > enter the name from the right column > **Save**.
 
@@ -55,7 +54,7 @@ Create 4 triggers (type: **Custom Event**):
 | `Sales Funnel - Step View` | `sales_funnel_step_view` |
 | `Sales Funnel - Step Complete` | `sales_funnel_step_complete` |
 | `Sales Funnel - Submit` | `sales_funnel_submit` |
-| `Sales Funnel - Abandoned` | `sales_funnel_abandoned` |
+| `Sales Funnel - Abandonment` | `sales_funnel_abandonment` |
 
 For each: **New** > Trigger type: **Custom Event** > paste the event name > **Save**.
 
@@ -106,16 +105,15 @@ Create 4 tags (type: **Google Analytics: GA4 Event**):
   - `company_type` = `{{DLV - Funnel Company Type}}`
 - Trigger: `Sales Funnel - Submit`
 
-### Tag 4: Funnel Abandoned
+### Tag 4: Funnel Abandonment
 
 - Tag type: Google Analytics: GA4 Event
 - Measurement ID: your `G-XXXXXXXXXX`
-- Event Name: `sales_funnel_abandoned`
+- Event Name: `sales_funnel_abandonment`
 - Event Parameters:
   - `step_number` = `{{DLV - Funnel Step}}`
   - `step_name` = `{{DLV - Funnel Step Name}}`
-  - `last_completed_step` = `{{DLV - Last Completed Step}}`
-- Trigger: `Sales Funnel - Abandoned`
+- Trigger: `Sales Funnel - Abandonment`
 
 ---
 

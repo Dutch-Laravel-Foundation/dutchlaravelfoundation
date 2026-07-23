@@ -1,0 +1,26 @@
+<section class="dlf-block dlf-block-cards dlf-divider-section">
+    <header class="dlf-block-heading">
+        {{ if eyebrow }}<p class="dlf-kicker">{{ eyebrow }}</p>{{ /if }}
+        <h2>{{ heading }}</h2>
+        {{ if introduction }}<div class="dlf-prose">{{ introduction }}</div>{{ /if }}
+    </header>
+    <div
+        class="dlf-card-grid dlf-divider-grid dlf-divider-grid--framed dlf-divider-grid--desktop-2 dlf-divider-grid--tablet-2 dlf-divider-grid--mobile-1"
+    >
+        {{ cards }}
+            <article class="dlf-content-card">
+                {{ if image }}
+                    <figure class="dlf-content-card__media" data-progressive-media-frame>
+                        <img class="dlf-content-card__image" src="{{ glide src="{image}" fit="crop_focal" width="800" height="512" format="webp" quality="82" }}" srcset="{{ glide src="{image}" fit="crop_focal" width="480" height="307" format="webp" quality="82" }} 480w, {{ glide src="{image}" fit="crop_focal" width="720" height="461" format="webp" quality="82" }} 720w, {{ glide src="{image}" fit="crop_focal" width="800" height="512" format="webp" quality="82" }} 800w, {{ glide src="{image}" fit="crop_focal" width="1000" height="640" format="webp" quality="82" }} 1000w" sizes="(min-width: 1280px) 384px, (min-width: 768px) 50vw, 100vw" alt="{{ image:alt ?? heading }}" style="object-position: {{ image:focus_css }}" {{ partial:progressive_media_attributes width="1000" height="640" }}>
+                    </figure>
+                {{ /if }}
+                <div class="dlf-content-card__body">
+                    {{ if eyebrow }}<p class="dlf-kicker">{{ eyebrow }}</p>{{ /if }}
+                    <h3>{{ heading }}</h3>
+                    {{ if body }}<div class="dlf-prose">{{ body | markdown }}</div>{{ /if }}
+                    {{ if link && link_label }}<a class="dlf-text-link" href="{{ link }}">{{ link_label }} <span aria-hidden="true">→</span></a>{{ /if }}
+                </div>
+            </article>
+        {{ /cards }}
+    </div>
+</section>

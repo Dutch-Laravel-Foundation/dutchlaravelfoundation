@@ -1,46 +1,128 @@
-<div class="translate-y-32 lg:translate-y-52 pb-32 md:pb-48">
-    <div class="container mb-auto mx-auto flex flex-col items-left justify-center relative">
-        <article id="content" class="mb-half">
-            <div class="relative w-full aspect-video mb-6 lg:mb-8 bg-secondary-light overflow-hidden">
-                {{ if video_url | is_embeddable }}
-                    <iframe class="absolute inset-0 w-full h-full" referrerpolicy="strict-origin-when-cross-origin" src="{{ video_url | embed_url }}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" allowfullscreen></iframe>
-                {{ else }}
-                    <video class="absolute inset-0 w-full h-full" src="{{ video_url | embed_url }}" controls></video>
-                {{ /if }}
-            </div>
+<div class="editorial-article editorial-article--podcast">
+    <div class="editorial-rail editorial-rail--article" data-dlf-footer-cta-stage>
+        {{ partial:breadcrumb href="/podcast" label="Podcast" current="Aflevering" }}
 
-            <div class="relative w-full lg:w-11/12 lg:mx-auto bg-white min-h-[10rem] px-6 sm:px-0 lg:p-10 z-10" x-data="{ activeTab: 'description' }">
-                <span class="meta">Podcast</span>
+        <header
+            class="editorial-article__hero dlf-divider-section dlf-divider-split dlf-divider-split--stacked-reversed"
+        >
+            <div class="editorial-article__head">
+                <div class="editorial-entry__meta editorial-article__meta">
+                    <span class="editorial-entry__category">Podcast</span>
+                    {{ if published_at }}
+                        <span class="editorial-entry__dot" aria-hidden="true">·</span>
+                        <time datetime="{{ published_at format="Y-m-d" }}">{{ published_at | iso_format="D MMMM YYYY" }}</time>
+                    {{ /if }}
+                </div>
                 <h1>{{ title }}</h1>
-                {{ if published_at }}
-                    <span class="block mb-8">{{ published_at format="d-m-Y" }}</span>
+                {{ if summary }}
+                    <p class="editorial-article__lead">{{ summary }}</p>
                 {{ /if }}
-
-                <div class="mb-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                    {{ partial:buttons/youtube :link="video_url" class="w-full sm:w-auto" button_class="w-full sm:w-auto" }}YouTube{{ /partial:buttons/youtube }}
-                    {{ partial:buttons/spotify :link="spotify_url" class="w-full sm:w-auto" button_class="w-full sm:w-auto" }}Spotify{{ /partial:buttons/spotify }}
-                </div>
-
-                <div class="mb-10 flex flex-wrap gap-3 border-b border-secondary-light" role="tablist" aria-label="Podcast content">
-                    <button type="button" id="description-tab" class="px-4 py-3 font-bold cursor-pointer border-b-2" x-bind:class="activeTab === 'description' ? 'border-primary-accent text-primary-accent' : 'border-transparent text-black/50'" x-on:click="activeTab = 'description'" x-bind:aria-selected="activeTab === 'description'" aria-controls="description-panel" role="tab">
-                        Samenvatting
-                    </button>
-                    <button type="button" id="transcript-tab" class="px-4 py-3 font-bold cursor-pointer border-b-2" x-bind:class="activeTab === 'transcript' ? 'border-primary-accent text-primary-accent' : 'border-transparent text-black/50'" x-on:click="activeTab = 'transcript'" x-bind:aria-selected="activeTab === 'transcript'" aria-controls="transcript-panel" role="tab">
-                        Transcript
-                    </button>
-                </div>
-
-                <div id="description-panel" class="w-full" x-show="activeTab === 'description'" role="tabpanel" aria-labelledby="description-tab">
-                    {{ description }}
-                </div>
-
-                <div id="transcript-panel" class="w-full" x-show="activeTab === 'transcript'" role="tabpanel" aria-labelledby="transcript-tab" x-cloak>
-                    {{ transcript }}
+                <div class="editorial-podcast__actions" aria-label="Podcastkanalen">
+                    <a class="dlf-btn" href="{{ video_url }}" target="_blank" rel="noopener noreferrer">
+                        <span class="dlf-btn-face dlf-btn-face--red">
+                            {{ partial:icons/youtube class="dlf-btn-icon dlf-btn-icon--brand" }}
+                            Bekijk op YouTube
+                        </span>
+                        <span class="dlf-btn-shadow dlf-btn-shadow--red" aria-hidden="true"></span>
+                    </a>
+                    <a
+                        class="dlf-btn"
+                        href="{{ spotify_url }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <span class="dlf-btn-face dlf-btn-face--spotify">
+                            {{ partial:icons/spotify class="dlf-btn-icon dlf-btn-icon--brand" }}
+                            Luister op Spotify
+                        </span>
+                        <span class="dlf-btn-shadow dlf-btn-shadow--spotify" aria-hidden="true"></span>
+                    </a>
                 </div>
             </div>
-        </article>
-        <div class="flex w-full px-6 mx-auto mb lg:w-11/12 sm:px-0 lg:px-10">
-            {{ partial:buttons/light link="/{{ segment_1 }}" }}Naar alle podcasts{{ /partial:buttons/light }}
+
+            <figure
+                class="dlf-consent-embed editorial-article__figure editorial-podcast__media"
+            >
+                {{ if video_url | is_embeddable }}
+                    <iframe
+                        data-consent-src="{{ video_url | embed_url }}"
+                        title="{{ title }}"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+                        allowfullscreen
+                        hidden
+                    ></iframe>
+                    {{ partial:embed_consent }}
+                {{ else }}
+                    <video src="{{ video_url | embed_url }}" controls preload="metadata" aria-label="{{ title }}"></video>
+                {{ /if }}
+            </figure>
+        </header>
+
+        <div class="editorial-article__body editorial-podcast__body dlf-divider-section">
+            <article
+                class="editorial-article__prose editorial-podcast__content"
+                x-data="{ activeTab: 'description' }"
+                data-editorial-prose
+            >
+                {{ spotify_embed_url = spotify_url | replace:'open.spotify.com/':'open.spotify.com/embed/' }}
+                <iframe
+                    class="editorial-podcast__spotify-embed"
+                    title="Luister naar {{ title }} op Spotify"
+                    data-consent-src="{{ spotify_embed_url }}"
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"
+                    hidden
+                ></iframe>
+
+                <div class="editorial-podcast__tabs" role="tablist" aria-label="Inhoud aflevering">
+                    <button
+                        id="podcast-description-tab"
+                        type="button"
+                        role="tab"
+                        aria-controls="podcast-description-panel"
+                        :aria-selected="(activeTab === 'description').toString()"
+                        :tabindex="activeTab === 'description' ? 0 : -1"
+                        :class="{ 'is-active': activeTab === 'description' }"
+                        x-ref="descriptionTab"
+                        @click="activeTab = 'description'"
+                        @keydown.right.prevent="activeTab = 'transcript'; $nextTick(() => $refs.transcriptTab.focus())"
+                        @keydown.end.prevent="activeTab = 'transcript'; $nextTick(() => $refs.transcriptTab.focus())"
+                    >Samenvatting</button>
+                    <button
+                        id="podcast-transcript-tab"
+                        type="button"
+                        role="tab"
+                        aria-controls="podcast-transcript-panel"
+                        :aria-selected="(activeTab === 'transcript').toString()"
+                        :tabindex="activeTab === 'transcript' ? 0 : -1"
+                        :class="{ 'is-active': activeTab === 'transcript' }"
+                        x-ref="transcriptTab"
+                        @click="activeTab = 'transcript'"
+                        @keydown.left.prevent="activeTab = 'description'; $nextTick(() => $refs.descriptionTab.focus())"
+                        @keydown.home.prevent="activeTab = 'description'; $nextTick(() => $refs.descriptionTab.focus())"
+                    >Transcript</button>
+                </div>
+
+                <section
+                    id="podcast-description-panel"
+                    role="tabpanel"
+                    aria-labelledby="podcast-description-tab"
+                    x-show="activeTab === 'description'"
+                >
+                    {{ description }}
+                </section>
+
+                <section
+                    id="podcast-transcript-panel"
+                    role="tabpanel"
+                    aria-labelledby="podcast-transcript-tab"
+                    x-show="activeTab === 'transcript'"
+                    x-cloak
+                >
+                    {{ transcript }}
+                </section>
+            </article>
         </div>
     </div>
 </div>

@@ -2,6 +2,7 @@
 id: 645047c0-702b-40fd-9f72-621e0803318b
 blueprint: pages
 title: 'Onze leden'
+meta_description: 'Vind ervaren Nederlandse Laravel-bureaus, zelfstandigen en ontwikkelteams die lid zijn van de Dutch Laravel Foundation.'
 template: templates/members/index
 updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
 updated_at: 1768977187

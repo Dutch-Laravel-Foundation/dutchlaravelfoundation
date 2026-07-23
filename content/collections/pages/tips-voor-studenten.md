@@ -2,6 +2,7 @@
 id: 23ab10f2-7db6-4c8b-b138-c73b73f7e557
 blueprint: pages
 title: 'Tips voor studenten'
+meta_description: 'Praktische tips voor studenten die Laravel willen leren, stage-ervaring zoeken en zich willen ontwikkelen binnen de community.'
 template: templates/default
 menu_color: white
 call_to_action: 6bc4ea55-2728-4615-8d45-75d49d29d157
@@ -11,7 +12,7 @@ content:
   -
     type: heading
     attrs:
-      level: 1
+      level: 2
     content:
       -
         type: text

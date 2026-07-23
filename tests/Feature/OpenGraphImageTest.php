@@ -16,7 +16,7 @@ class OpenGraphImageTest extends TestCase
 
         $response->assertOk();
         $this->assertStringContainsString(
-            '<meta property="og:image" content="' . config('app.url') . '/og-image.jpg">',
+            '<meta property="og:image" content="' . config('app.url') . '/og-image.jpg?v=4">',
             $response->getContent(),
         );
         $this->assertStringContainsString(
@@ -24,7 +24,7 @@ class OpenGraphImageTest extends TestCase
             $response->getContent(),
         );
         $this->assertStringContainsString(
-            '<meta name="twitter:image" content="' . config('app.url') . '/og-image.jpg">',
+            '<meta name="twitter:image" content="' . config('app.url') . '/og-image.jpg?v=4">',
             $response->getContent(),
         );
     }
@@ -37,6 +37,14 @@ class OpenGraphImageTest extends TestCase
         $this->assertGreaterThanOrEqual(600, $height);
         $this->assertSame(IMAGETYPE_JPEG, $type);
         $this->assertLessThan(5 * 1024 * 1024, filesize(public_path('og-image.jpg')));
+    }
+
+    public function testDefaultOpenGraphImageUsesBaselineJpegEncoding(): void
+    {
+        $image = file_get_contents(public_path('og-image.jpg'));
+
+        $this->assertTrue(str_contains($image, "\xFF\xC0"));
+        $this->assertFalse(str_contains($image, "\xFF\xC2"));
     }
 
     public function testKnowledgeArticlesUseTheirFeaturedImageAsTheOpenGraphImage(): void

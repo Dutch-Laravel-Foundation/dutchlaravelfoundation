@@ -2,6 +2,7 @@
 id: c2893d75-5eb2-4840-b20d-d222a9155b4c
 blueprint: pages
 title: 'Over ons'
+meta_description: 'Maak kennis met de Dutch Laravel Foundation, onze missie, activiteiten, partners, het bestuur en de belangrijkste mijlpalen sinds 2019.'
 template: templates/about-us/index
 updated_by: 8d873b47-ad86-4fd3-9e95-27842ea80beb
 updated_at: 1655317215

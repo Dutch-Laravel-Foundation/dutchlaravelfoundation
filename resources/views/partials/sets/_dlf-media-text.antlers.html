@@ -1,0 +1,15 @@
+<section
+    class="dlf-block dlf-block-split dlf-block-split--{{ image_position ?? 'right' }} dlf-block--{{ tone ?? 'white' }} dlf-divider-section dlf-divider-split{{ if image_position == 'left' }} dlf-divider-split--desktop-reversed{{ /if }}{{ if tone == 'red' || tone == 'dark' }} dlf-divider-theme-inverse{{ /if }}"
+>
+    <div class="dlf-block-split__content">
+        {{ if eyebrow }}<p class="dlf-kicker">{{ eyebrow }}</p>{{ /if }}
+        <h2>{{ heading }}</h2>
+        {{ if body }}<div class="dlf-prose">{{ body }}</div>{{ /if }}
+        {{ if link && link_label }}<a class="dlf-text-link" href="{{ link }}">{{ link_label }} <span aria-hidden="true">→</span></a>{{ /if }}
+    </div>
+    {{ if image }}
+        <figure class="dlf-block-split__media" data-progressive-media-frame>
+            <img src="{{ glide src="{image}" fit="crop_focal" width="960" height="720" format="webp" quality="82" }}" srcset="{{ glide src="{image}" fit="crop_focal" width="480" height="360" format="webp" quality="82" }} 480w, {{ glide src="{image}" fit="crop_focal" width="720" height="540" format="webp" quality="82" }} 720w, {{ glide src="{image}" fit="crop_focal" width="960" height="720" format="webp" quality="82" }} 960w, {{ glide src="{image}" fit="crop_focal" width="1600" height="1200" format="webp" quality="82" }} 1600w" sizes="(min-width: 1024px) 50vw, 100vw" alt="{{ image:alt ?? heading }}" style="object-position: {{ image:focus_css }}" {{ partial:progressive_media_attributes width="1600" height="1200" }}>
+        </figure>
+    {{ /if }}
+</section>

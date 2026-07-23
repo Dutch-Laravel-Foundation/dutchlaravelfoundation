@@ -2,6 +2,7 @@
 id: 03aa1ce0-5b6a-42bc-b339-4972338cdada
 blueprint: pages
 title: Agenda
+meta_description: 'Bekijk aankomende Laravel-meetups, LaraFest en andere evenementen van de Dutch Laravel Foundation.'
 template: templates/agenda/index
 updated_by: 8d873b47-ad86-4fd3-9e95-27842ea80beb
 updated_at: 1655319107

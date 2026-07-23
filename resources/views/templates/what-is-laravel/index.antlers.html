@@ -1,41 +1,229 @@
-<div class="translate-y-32 lg:translate-y-52 pb-32 md:pb-48 relative">
-    {{ partial:decoration/floor-background background="floor-top-what-is-laravel" /}}
+<div class="dlf-community-page dlf-laravel-page" data-dlf-footer-cta-stage>
+    <section class="dlf-community-section dlf-divider-section" aria-labelledby="laravel-heading">
+        <div class="dlf-community-head">
+            <span class="dlf-community-kicker">Laravel</span>
+            <h1 id="laravel-heading" class="dlf-community-title">{{ title }}</h1>
+            <p class="dlf-community-intro">
+                Laravel is een
+                <a href="https://laravel.com" target="_blank" rel="noopener noreferrer"
+                    >open source PHP framework</a
+                >
+                voor het bouwen van maatwerk webapplicaties. Denk aan interne tools en platforms met
+                miljoenen gebruikers.
+            </p>
+        </div>
+    </section>
 
-    <div class="container mb-auto px-4 lg:px-0 mx-auto flex flex-col items-left justify-center relative">
-        {{ content }}
-            {{ partial src="sets/autoload" :first="first" :last="last" }}
-        {{ /content }}
-
-        {{ review_count = { collection:count in="reviews" } }}
-        {{ if review_count > 0 }}
-            <div
-                class="w-full {{ review_count > 1 ?= 'swiper js-reviews-swiper' }} relative bg-secondary-light mb"
-                data-loop="true"
-                spaceBetween="0"
+    <section
+        class="dlf-community-section dlf-laravel-split dlf-divider-section dlf-divider-split"
+        aria-labelledby="laravel-explanation-heading"
+    >
+        <div class="dlf-laravel-explanation">
+            <h2
+                id="laravel-explanation-heading"
+                class="dlf-community-heading dlf-community-heading--small"
             >
-                <div class="swiper-wrapper">
-                {{ client_name = null }}
-                {{ collection:reviews sort="random" }}
-                    {{ client_name = null }}
-                    {{ client }}
-                        {{ client_name = title }}
-                    {{ /client }}
-                    <div class="swiper-slide">
-                        <div class="w-full px-6 py-6 sm:px-10 sm:py-10 md:px-0 md:py-16 md:w-2/3 xl:w-3/4 4xl:w-10/12 mx-auto h-[24rem] max-h-[24rem] sm:h-[16rem] sm:max-h-[16rem] md:h-[20rem] md:max-h-[20rem] flex flex-col justify-between">
-                            <h3>{{ content regex_replace="^<p>|<p>&quot;" regex_replace="</p>$|&quot;</p>" }}</h3>
-                            <div class="flex flex-col items-baseline lg:flex-row">
-                                <h4 class="mb-0">{{ title }}</h4>
-                                <span class="meta lg:ml-4 mb-0!">{{ arr({ function }, { client_name }) | remove_empty | list }}</span>
-                            </div>
-                        </div>
-                    </div>
-                {{ /collection:reviews }}
+                Het meest gebruikte PHP framework ter wereld
+            </h2>
+            <p class="dlf-community-copy">
+                Laravel bestaat sinds 2011 en biedt kant-en-klare onderdelen voor veelvoorkomende
+                functies, zoals authenticatie, databasekoppelingen, e-mail en wachtrijen. Daardoor
+                kunnen developers sneller bouwen en meer aandacht besteden aan wat een applicatie
+                uniek maakt.
+            </p>
+            <p class="dlf-community-copy">
+                Het framework werkt met duidelijke conventies, waardoor code herkenbaar en goed
+                overdraagbaar blijft. Het volwassen ecosysteem voor testen, hosting, deployment en
+                monitoring groeit mee met een project, van een eerste MVP tot een bedrijfskritisch
+                platform.
+            </p>
+        </div>
+        <div class="dlf-laravel-facts">
+            <div class="dlf-laravel-fact">
+                <div>
+                    <strong>2011</strong
+                    ><span class="dlf-laravel-fact__copy"
+                        >eerste release, gemaakt door Taylor Otwell</span
+                    >
+                </div>
+                <span class="dlf-laravel-fact__index">01</span>
             </div>
-            {{ if review_count > 1 }}
-                {{ partial:buttons/swiper class="swiper-button-prev" button_class="" background_class="" }}<img src="/assets/img/icons/left.svg">{{ /partial:buttons/swiper }}
-                {{ partial:buttons/swiper class="swiper-button-next" button_class="" background_class="" }}<img src="/assets/img/icons/right.svg">{{ /partial:buttons/swiper }}
-            {{ /if }}
+            <div class="dlf-laravel-fact">
+                <div>
+                    <strong>#1</strong
+                    ><span class="dlf-laravel-fact__copy"
+                        >meest gebruikte PHP framework wereldwijd</span
+                    >
+                </div>
+                <span class="dlf-laravel-fact__index">02</span>
             </div>
-        {{ /if }}
-    </div>
+            <div class="dlf-laravel-fact">
+                <div>
+                    <strong>{{ collection:count in="members" }}+</strong
+                    ><span class="dlf-laravel-fact__copy"
+                        >Nederlandse Laravel specialisten aangesloten bij de foundation</span
+                    >
+                </div>
+                <span class="dlf-laravel-fact__index">03</span>
+            </div>
+        </div>
+    </section>
+
+    <section
+        class="dlf-community-section dlf-laravel-benefits dlf-divider-section"
+        aria-labelledby="laravel-benefits-heading"
+    >
+        <div class="dlf-community-head dlf-community-head--compact">
+            <h2
+                id="laravel-benefits-heading"
+                class="dlf-community-heading dlf-community-heading--small"
+            >
+                Waarom organisaties voor Laravel kiezen
+            </h2>
+        </div>
+        <div
+            class="dlf-community-grid-3 dlf-divider-region dlf-divider-grid dlf-divider-grid--desktop-3 dlf-divider-grid--tablet-1 dlf-divider-grid--mobile-1"
+        >
+            <article class="dlf-community-cell dlf-laravel-feature">
+                <span class="dlf-community-icon"
+                    ><img
+                        src="/assets/img/development-speed.svg"
+                        width="44"
+                        height="44"
+                        alt=""
+                        loading="lazy"
+                /></span>
+                <h3>Snelle ontwikkeling</h3>
+                <p class="dlf-community-feature-copy">
+                    Veelgebruikte functionaliteit zit ingebouwd, waardoor een eerste versie snel
+                    live staat.
+                </p>
+            </article>
+            <article class="dlf-community-cell dlf-laravel-feature">
+                <span class="dlf-community-icon"
+                    ><img
+                        src="/assets/img/proven-secure.svg"
+                        width="44"
+                        height="44"
+                        alt=""
+                        loading="lazy"
+                /></span>
+                <h3>Bewezen veilig</h3>
+                <p class="dlf-community-feature-copy">
+                    Bescherming tegen veelvoorkomende kwetsbaarheden zit standaard in het framework.
+                </p>
+            </article>
+            <article class="dlf-community-cell dlf-laravel-feature">
+                <span class="dlf-community-icon"
+                    ><img
+                        src="/assets/img/future-proof.svg"
+                        width="44"
+                        height="44"
+                        alt=""
+                        loading="lazy"
+                /></span>
+                <h3>Toekomstvast</h3>
+                <p class="dlf-community-feature-copy">
+                    Voorspelbare releases en duidelijke upgradepaden houden applicaties jarenlang
+                    bij de tijd.
+                </p>
+            </article>
+            <article class="dlf-community-cell dlf-laravel-feature">
+                <span class="dlf-community-icon"
+                    ><img
+                        src="/assets/img/enterprise-ready.svg"
+                        width="44"
+                        height="44"
+                        alt=""
+                        loading="lazy"
+                /></span>
+                <h3>Enterprise-ready</h3>
+                <p class="dlf-community-feature-copy">
+                    Schaalt van MVP tot bedrijfskritisch platform, met tooling voor testen en
+                    monitoring.
+                </p>
+            </article>
+            <article class="dlf-community-cell dlf-laravel-feature">
+                <span class="dlf-community-icon"
+                    ><img
+                        src="/assets/img/boosting-knowledge.svg"
+                        width="44"
+                        height="44"
+                        alt=""
+                        loading="lazy"
+                /></span>
+                <h3>Sterke community</h3>
+                <p class="dlf-community-feature-copy">
+                    Een wereldwijde community deelt kennis via documentatie, packages en
+                    conferenties.
+                </p>
+            </article>
+            <article class="dlf-community-cell dlf-laravel-feature">
+                <span class="dlf-community-icon"
+                    ><img
+                        src="/assets/img/available-developers.svg"
+                        width="46"
+                        height="44"
+                        alt=""
+                        loading="lazy"
+                /></span>
+                <h3>Beschikbare developers</h3>
+                <p class="dlf-community-feature-copy">
+                    In Nederland werken meer dan 5.000 Laravel developers, waardoor je nooit vastzit
+                    aan één partij.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section
+        class="dlf-community-section dlf-laravel-reading dlf-divider-section"
+        aria-labelledby="laravel-reading-heading"
+    >
+        <div class="dlf-community-head dlf-community-head--compact">
+            <h2
+                id="laravel-reading-heading"
+                class="dlf-community-heading dlf-community-heading--small"
+            >
+                Verder lezen over Laravel
+            </h2>
+        </div>
+        <div
+            class="dlf-community-grid-3 dlf-divider-region dlf-divider-grid dlf-divider-grid--desktop-3 dlf-divider-grid--tablet-1 dlf-divider-grid--mobile-1"
+        >
+            <article class="dlf-community-cell dlf-laravel-link">
+                <span class="dlf-community-kicker">Cases</span>
+                <h3><a href="/cases">Bekijk wat Nederlandse organisaties met Laravel bouwen</a></h3>
+                <p>
+                    Ontdek maatwerkapplicaties en digitale platforms die dagelijks met Laravel
+                    worden aangedreven.
+                </p>
+                <a href="/cases" class="dlf-community-text-link"
+                    >Bekijk cases <span aria-hidden="true">→</span></a
+                >
+            </article>
+            <article class="dlf-community-cell dlf-laravel-link">
+                <span class="dlf-community-kicker">Kennis</span>
+                <h3><a href="/kennis">Verdiep je in het framework en zijn ecosysteem</a></h3>
+                <p>
+                    Praktische kennis voor beslissers en developers, gedeeld door specialisten uit
+                    onze community.
+                </p>
+                <a href="/kennis" class="dlf-community-text-link"
+                    >Lees meer <span aria-hidden="true">→</span></a
+                >
+            </article>
+            <article class="dlf-community-cell dlf-laravel-link">
+                <span class="dlf-community-kicker">Aanbestedingen</span>
+                <h3><a href="/aanbestedingen">Laravel opnemen in je aanbesteding of tender</a></h3>
+                <p>Handvatten voor overheden en organisaties die open source maatwerk uitvragen.</p>
+                <a href="/aanbestedingen" class="dlf-community-text-link"
+                    >Lees meer <span aria-hidden="true">→</span></a
+                >
+            </article>
+        </div>
+    </section>
 </div>
+
+{{ content }} {{ if type | starts_with:'dlf_' }} {{ partial src="sets/autoload" }} {{ /if }} {{
+/content }}

@@ -1,0 +1,18 @@
+<section class="dlf-block dlf-block-logos dlf-divider-section">
+    <h2>{{ heading }}</h2>
+    <div
+        class="dlf-logo-grid dlf-divider-grid dlf-divider-grid--framed dlf-divider-grid--desktop-5 dlf-divider-grid--tablet-3 dlf-divider-grid--mobile-2"
+    >
+        {{ logos }}
+            {{ if link }}<a class="dlf-logo-cell" href="{{ link }}" aria-label="{{ name }}">{{ else }}<div class="dlf-logo-cell">{{ /if }}
+                {{ logo }}
+                    {{ if extension === "svg" }}
+                        <img src="{{ url }}" alt="{{ name }}" width="{{ width }}" height="{{ height }}" loading="lazy" decoding="async">
+                    {{ else }}
+                        <img src="{{ glide src="{url}" width="240" format="webp" quality="82" }}" srcset="{{ glide src="{url}" width="240" format="webp" quality="82" }} 240w, {{ glide src="{url}" width="480" format="webp" quality="82" }} 480w" sizes="240px" alt="{{ name }}" width="{{ width }}" height="{{ height }}" loading="lazy" decoding="async">
+                    {{ /if }}
+                {{ /logo }}
+            {{ if link }}</a>{{ else }}</div>{{ /if }}
+        {{ /logos }}
+    </div>
+</section>

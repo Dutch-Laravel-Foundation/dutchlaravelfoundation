@@ -1,37 +1,100 @@
-<div class="translate-y-32 lg:translate-y-52 pb-32">
-    {{ partial:decoration/floor-background background="floor-top-knowledge" /}}
-    <div class="container mb-auto mx-auto flex flex-col items-left justify-center relative">
-        {{ content }}
-            {{ partial src="sets/autoload" }}
-        {{ /content }}
-
-        <div class="w-full md:w-3/4 lg:w-1/2 mb-half">
-            <p>Bekijk talks, interviews en andere video's ook direct via onze kanalen.</p>
-            <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                {{ partial:buttons/youtube link="https://www.youtube.com/@DutchLaravelFoundation" class="w-full sm:w-auto" button_class="w-full sm:w-auto" }}YouTube{{ /partial:buttons/youtube }}
-                {{ partial:buttons/spotify link="https://open.spotify.com/show/28cbLx8VKFE0j3xdbRhxsO" class="w-full sm:w-auto" button_class="w-full sm:w-auto" }}Spotify{{ /partial:buttons/spotify }}
+<div class="editorial-page editorial-page--podcasts">
+    <div class="editorial-rail" data-dlf-footer-cta-stage>
+        <header class="editorial-page__header dlf-divider-section">
+            <div class="editorial-page__heading">
+                <span class="editorial-eyebrow">Podcast</span>
+                <h1 class="editorial-page__title">Gesprekken uit de Laravel-community</h1>
+                <p class="editorial-page__intro">Talks, interviews en praktijkverhalen over Laravel, softwareontwikkeling en de mensen achter de Nederlandse community.</p>
             </div>
-        </div>
 
-        <section class="pb-10">
-            {{ if { collection:count in="podcasts" } > 0 }}
-                {{ collection:podcasts sort="published_at:desc" }}
-                    <div class="block-image-left-large group-image-hover relative flex flex-col lg:flex-row w-full mb" data-aos="fade-up" data-aos-delay="250">
-                        <figure class="w-full overflow-hidden lg:absolute bg-secondary-light h-96 lg:w-1/2">
-                            <img class="object-cover w-full h-full max-w-full max-h-full" src="{{ thumbnail_url }}" alt="{{ title }}">
-                        </figure>
-                        {{ partial:blocks/base class="lg:ml-[33.33333%] w-full lg:w-2/3 lg:mt-48 z-10 pb-16!" :title="title" link="/podcast/{ slug }" category="Podcast" }}
-                            <span class="block mb-4 text-sm text-black/50">{{ published_at format="d-m-Y" }}</span>
-                            <p>{{ summary }}</p>
-                            {{ partial:buttons/more link="/podcast/{ slug }" class="" button_class="" background_class="" }}
-                        {{ /partial:blocks/base }}
-                    </div>
-                {{ /collection:podcasts }}
+            <nav class="editorial-channel-links" aria-label="Beluister de DLF podcast">
+                <a href="https://www.youtube.com/@DutchLaravelFoundation" target="_blank" rel="noopener noreferrer">YouTube <span aria-hidden="true">↗</span></a>
+                <a href="https://open.spotify.com/show/28cbLx8VKFE0j3xdbRhxsO" target="_blank" rel="noopener noreferrer">Spotify <span aria-hidden="true">↗</span></a>
+            </nav>
+            <nav class="editorial-channel-actions" aria-label="Beluister de DLF podcast">
+                <a class="dlf-btn" href="https://www.youtube.com/@DutchLaravelFoundation" target="_blank" rel="noopener noreferrer">
+                    <span class="dlf-btn-face dlf-btn-face--red">
+                        {{ partial:icons/youtube class="dlf-btn-icon dlf-btn-icon--brand" }}
+                        YouTube
+                    </span>
+                    <span class="dlf-btn-shadow dlf-btn-shadow--red" aria-hidden="true"></span>
+                </a>
+                <a class="dlf-btn" href="https://open.spotify.com/show/28cbLx8VKFE0j3xdbRhxsO" target="_blank" rel="noopener noreferrer">
+                    <span class="dlf-btn-face dlf-btn-face--spotify">
+                        {{ partial:icons/spotify class="dlf-btn-icon dlf-btn-icon--brand" }}
+                        Spotify
+                    </span>
+                    <span class="dlf-btn-shadow dlf-btn-shadow--spotify" aria-hidden="true"></span>
+                </a>
+            </nav>
+        </header>
+
+        {{ collection:podcasts sort="published_at:desc" paginate="10" as="episodes" }}
+            {{ if no_results }}
+                <div class="editorial-empty dlf-divider-section">
+                    <h2>Binnenkort beschikbaar</h2>
+                    <p>Nieuwe afleveringen verschijnen hier zodra ze zijn gepubliceerd.</p>
+                </div>
             {{ else }}
-                {{ partial:blocks/base class="w-full lg:w-11/12" title="Binnenkort beschikbaar" category="Podcast" }}
-                    <p>Nieuwe afleveringen verschijnen hier zodra de eerste video's met transcript zijn gepubliceerd.</p>
-                {{ /partial:blocks/base }}
+                <div class="editorial-feed dlf-divider-section dlf-divider-list">
+                    {{ episodes }}
+                        <article class="editorial-entry {{ switch between="editorial-entry--media-start|editorial-entry--media-end" }} {{ if first }}editorial-entry--featured{{ /if }}">
+                            <a class="editorial-entry__media" href="{{ url }}" aria-label="Beluister {{ title }}" data-progressive-media-frame>
+                                {{ if thumbnail_url }}
+                                    <img
+                                        class="editorial-entry__image"
+                                        src="{{ thumbnail_url }}"
+                                        alt="{{ title }}"
+                                        {{ if first }}
+                                            {{ partial:progressive_media_attributes width="1280" height="720" loading="eager" fetchpriority="high" }}
+                                        {{ else }}
+                                            {{ partial:progressive_media_attributes width="1280" height="720" }}
+                                        {{ /if }}
+                                    >
+                                {{ else }}
+                                    <span class="editorial-media-placeholder" aria-hidden="true"><img src="/assets/uploads/globals/LaravelBrandMark.svg" width="135" height="140" alt=""></span>
+                                {{ /if }}
+                            </a>
+
+                            <div class="editorial-entry__body">
+                                <div class="editorial-entry__meta">
+                                    <span class="editorial-entry__category">Podcast</span>
+                                    {{ if published_at }}
+                                        <span class="editorial-entry__dot" aria-hidden="true">·</span>
+                                        <time datetime="{{ published_at format="Y-m-d" }}">{{ published_at | iso_format="D MMMM YYYY" }}</time>
+                                    {{ /if }}
+                                </div>
+
+                                {{ if first }}
+                                    <h2 class="editorial-entry__title editorial-entry__title--featured"><a href="{{ url }}">{{ title }}</a></h2>
+                                {{ else }}
+                                    <h2 class="editorial-entry__title"><a href="{{ url }}">{{ title }}</a></h2>
+                                {{ /if }}
+
+                                {{ if summary }}
+                                    <p class="editorial-entry__summary">{{ summary | strip_tags | truncate:240 }}</p>
+                                {{ /if }}
+
+                                <a class="editorial-text-link" href="{{ url }}">Bekijk aflevering <span aria-hidden="true">→</span></a>
+                            </div>
+                        </article>
+                    {{ /episodes }}
+                </div>
+
+                {{ paginate }}
+                    {{ if total_pages > 1 }}
+                        <nav class="editorial-pagination dlf-divider-section" aria-label="Paginering podcasts">
+                            {{ if prev_page }}
+                                <a class="editorial-pagination__link--newer" href="{{ prev_page }}"><span aria-hidden="true">←</span> Nieuwer</a>
+                            {{ /if }}
+                            <span class="editorial-pagination__status">{{ current_page }} / {{ total_pages }}</span>
+                            {{ if next_page }}
+                                <a class="editorial-pagination__link--older" href="{{ next_page }}">Ouder <span aria-hidden="true">→</span></a>
+                            {{ /if }}
+                        </nav>
+                    {{ /if }}
+                {{ /paginate }}
             {{ /if }}
-        </section>
+        {{ /collection:podcasts }}
     </div>
 </div>

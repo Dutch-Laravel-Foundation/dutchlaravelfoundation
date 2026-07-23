@@ -1,0 +1,75 @@
+<section class="dlf-cta-section" aria-labelledby="footer-cta-title">
+    <div class="dlf-cta-card {{ if theme == 'dark' }}dlf-cta-card--dark{{ /if }}">
+        <div class="dlf-cta-row">
+            <div class="dlf-cta-copy">
+                {{ if eyebrow }}
+                <span class="dlf-eyebrow">{{ eyebrow }}</span>
+                {{ /if }}
+
+                <h2 id="footer-cta-title">{{ title }}</h2>
+
+                {{ if benefits }}
+                <div class="dlf-cta-benefits">
+                    {{ benefits }}
+                    <span>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 16 16"
+                            aria-hidden="true"
+                        >
+                            <path
+                                fill-rule="evenodd"
+                                d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"
+                                clip-rule="evenodd"
+                            />
+                        </svg>
+                        {{ value }}
+                    </span>
+                    {{ /benefits }}
+                </div>
+                {{ elseif description }}
+                <div class="dlf-cta-description">{{ description }}</div>
+                {{ /if }}
+            </div>
+
+            {{ if link || link_2 }}
+            <div class="dlf-cta-actions">
+                {{ if link_2 }}
+                <a class="dlf-btn" href="{{ link_2 }}">
+                    <span
+                        class="dlf-btn-face {{ if theme == 'dark' }}{{ if button_style_2 == 'dark' }}dlf-btn-face--white{{ elseif button_style_2 == 'light' }}dlf-btn-face--white{{ elseif button_style_2 == 'light-alt' }}dlf-btn-face--outline-white{{ else }}dlf-btn-face--red{{ /if }}{{ else }}{{ if button_style_2 == 'dark' || button_style_2 == 'light-alt' }}dlf-btn-face--outline-white{{ else }}dlf-btn-face--white{{ /if }}{{ /if }}"
+                        >{{ button_text_2 }}</span
+                    >
+                    <span
+                        class="dlf-btn-shadow {{ if theme == 'dark' && button_style_2 == 'primary' }}dlf-btn-shadow--red{{ else }}dlf-btn-shadow--white{{ /if }}"
+                        aria-hidden="true"
+                    ></span>
+                </a>
+                {{ /if }} {{ if link }} {{ if link | ends_with:'.pdf' }}
+                <a class="dlf-btn" href="{{ link }}" download>
+                    <span
+                        class="dlf-btn-face {{ if theme == 'dark' }}{{ if button_style == 'primary' }}dlf-btn-face--red{{ elseif button_style == 'light-alt' }}dlf-btn-face--outline-white{{ else }}dlf-btn-face--white{{ /if }}{{ else }}{{ if button_style == 'dark' || button_style == 'light-alt' }}dlf-btn-face--outline-white{{ else }}dlf-btn-face--white{{ /if }}{{ /if }}"
+                        >{{ button_text }}</span
+                    >
+                    <span
+                        class="dlf-btn-shadow {{ if theme == 'dark' && button_style == 'primary' }}dlf-btn-shadow--red{{ else }}dlf-btn-shadow--white{{ /if }}"
+                        aria-hidden="true"
+                    ></span>
+                </a>
+                {{ else }}
+                <a class="dlf-btn" href="{{ link }}">
+                    <span
+                        class="dlf-btn-face {{ if theme == 'dark' }}{{ if button_style == 'primary' }}dlf-btn-face--red{{ elseif button_style == 'light-alt' }}dlf-btn-face--outline-white{{ else }}dlf-btn-face--white{{ /if }}{{ else }}{{ if button_style == 'dark' || button_style == 'light-alt' }}dlf-btn-face--outline-white{{ else }}dlf-btn-face--white{{ /if }}{{ /if }}"
+                        >{{ button_text }}</span
+                    >
+                    <span
+                        class="dlf-btn-shadow {{ if theme == 'dark' && button_style == 'primary' }}dlf-btn-shadow--red{{ else }}dlf-btn-shadow--white{{ /if }}"
+                        aria-hidden="true"
+                    ></span>
+                </a>
+                {{ /if }} {{ /if }}
+            </div>
+            {{ /if }}
+        </div>
+    </div>
+</section>

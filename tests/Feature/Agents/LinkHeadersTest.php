@@ -26,6 +26,14 @@ class LinkHeadersTest extends TestCase
         $this->assertStringContainsString('/sitemap.xml', (string) $link);
     }
 
+    public function testResponsesDeclareContentSignals(): void
+    {
+        $this->get('/')->assertHeader(
+            'Content-Signal',
+            'search=yes, ai-train=no, ai-input=yes',
+        );
+    }
+
     public function testLinkHeadersOnlyAppearOnHtmlResponses(): void
     {
         $link = $this->get('/robots.txt')->headers->get('Link');

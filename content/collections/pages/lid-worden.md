@@ -2,10 +2,11 @@
 id: 3e84afec-448e-4805-8eed-8e209475a28e
 blueprint: pages
 title: 'Lid worden'
+meta_description: 'Word lid van de Dutch Laravel Foundation en profiteer van kennisuitwisseling, events, een keurmerk, leads, partnerships en kortingen.'
 template: templates/become-member/index
 updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
 updated_at: 1765382914
-call_to_action: c3238da9-592c-4906-9b11-183e37e4b2d3
+call_to_action: b941cb26-13cf-4be4-a9db-5e981092d627
 content:
   -
     type: paragraph
@@ -294,6 +295,26 @@ content:
                       target: _blank
                       title: null
                 text: NativePHP
+      -
+        type: listItem
+        content:
+          -
+            type: paragraph
+            content:
+              -
+                type: text
+                text: '20% korting op je eerste project met '
+              -
+                type: text
+                marks:
+                  -
+                    type: link
+                    attrs:
+                      href: 'https://laravelshift.com/'
+                      rel: null
+                      target: _blank
+                      title: null
+                text: 'Laravel Shift'
   -
     type: bulletList
     content:
@@ -305,7 +326,7 @@ content:
             content:
               -
                 type: text
-                text: "Aanvullende kortingen momenteel in ontwikkeling. Zo hebben we lopende gesprekken met onder andere,\_"
+                text: 'Aanvullende kortingen zijn momenteel in ontwikkeling. Zo hebben we lopende gesprekken met '
               -
                 type: text
                 marks:
@@ -314,16 +335,7 @@ content:
                 text: Laracasts
               -
                 type: text
-                text: ",\_"
-              -
-                type: text
-                marks:
-                  -
-                    type: bold
-                text: 'Laravel Shift'
-              -
-                type: text
-                text: "\_en andere partners."
+                text: ' en andere partners.'
               -
                 type: hardBreak
               -

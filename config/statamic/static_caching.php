@@ -3,6 +3,18 @@
 use Statamic\StaticCaching\Replacers\NoCacheReplacer;
 use Statamic\StaticCaching\Replacers\CsrfTokenReplacer;
 
+$staticCachingEnabled = filter_var(
+    env('STATAMIC_STATIC_CACHING_ENABLED', env('APP_ENV') === 'production'),
+    FILTER_VALIDATE_BOOL,
+);
+$staticCachingStrategy = env('STATAMIC_STATIC_CACHING_STRATEGY', 'full');
+
+if (! $staticCachingEnabled) {
+    $staticCachingStrategy = 'null';
+} elseif (in_array($staticCachingStrategy, [null, 'null'], true)) {
+    $staticCachingStrategy = 'full';
+}
+
 return [
 
     /*
@@ -15,7 +27,7 @@ return [
     |
     */
 
-    'strategy' => env('STATAMIC_STATIC_CACHING_STRATEGY', 'null'),
+    'strategy' => $staticCachingStrategy,
 
     /*
     |--------------------------------------------------------------------------
@@ -56,9 +68,10 @@ return [
     */
 
     'exclude' => [
+        '/aanvraag*',
         '/contact*',
-        '/leden*',
         '/lid-worden*',
+        '/newsletter*',
     ],
 
     /*

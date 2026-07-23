@@ -54,6 +54,11 @@ return [
             'path' => base_path('cache'),
         ],
 
+        'static_cache' => [
+            'driver' => 'file',
+            'path' => base_path('cache/static'),
+        ],
+
         'memcached' => [
             'driver' => 'memcached',
             'persistent_id' => env('MEMCACHED_PERSISTENT_ID'),

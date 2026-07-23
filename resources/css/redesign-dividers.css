@@ -1,0 +1,302 @@
+.dlf-divider-section {
+    --dlf-divider-color: var(--dlf-line);
+    border-top: 0 !important;
+    border-bottom: 1px solid var(--dlf-divider-color) !important;
+}
+
+.dlf-divider-section--yield-to-next {
+    border-bottom: 0 !important;
+}
+
+.dlf-divider-section--full-bleed-top {
+    border-top: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+}
+
+.dlf-divider-region {
+    border-top: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+}
+
+.dlf-divider-section > :has(+ .dlf-divider-region) {
+    border-bottom: 0 !important;
+}
+
+.dlf-divider-theme-inverse {
+    --dlf-divider-color: rgb(255 255 255 / 22%);
+}
+
+.dlf-divider-grid > * {
+    border-top: 0 !important;
+    border-right: 0 !important;
+    border-bottom: 0 !important;
+    border-left: 0 !important;
+}
+
+.dlf-divider-grid__filler {
+    display: none;
+    min-width: 0;
+    grid-column: span var(--dlf-divider-fill-span, 1) !important;
+}
+
+.dlf-divider-grid--framed {
+    border: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+}
+
+.dlf-divider-list > * {
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+}
+
+.dlf-divider-list > * + * {
+    border-top: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+}
+
+.dlf-divider-split > * {
+    border-top: 0 !important;
+    border-right: 0 !important;
+    border-bottom: 0 !important;
+    border-left: 0 !important;
+}
+
+@media (min-width: 1024px) {
+    .dlf-divider-section--composite-tail {
+        border-bottom: 0 !important;
+    }
+
+    .dlf-divider-tail-segment {
+        border-bottom: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+    }
+
+    .dlf-divider-grid--fill:is(
+            .dlf-divider-grid--desktop-2,
+            .dlf-divider-grid--desktop-3,
+            .dlf-divider-grid--desktop-4,
+            .dlf-divider-grid--desktop-5,
+            .dlf-divider-grid--desktop-6
+        )
+        > .dlf-divider-grid__filler {
+        display: block;
+    }
+
+    .dlf-divider-grid--fill.dlf-divider-grid--desktop-2
+        > .dlf-divider-grid__filler:nth-child(2n + 1 of :not(template)),
+    .dlf-divider-grid--fill.dlf-divider-grid--desktop-3
+        > .dlf-divider-grid__filler:nth-child(3n + 1 of :not(template)),
+    .dlf-divider-grid--fill.dlf-divider-grid--desktop-4
+        > .dlf-divider-grid__filler:nth-child(4n + 1 of :not(template)),
+    .dlf-divider-grid--fill.dlf-divider-grid--desktop-5
+        > .dlf-divider-grid__filler:nth-child(5n + 1 of :not(template)),
+    .dlf-divider-grid--fill.dlf-divider-grid--desktop-6
+        > .dlf-divider-grid__filler:nth-child(6n + 1 of :not(template)) {
+        display: none;
+    }
+
+    .dlf-divider-grid--fill.dlf-divider-grid--desktop-3
+        > .dlf-divider-grid__filler:nth-child(3n + 2 of :not(template)) {
+        --dlf-divider-fill-span: 2;
+    }
+
+    .dlf-divider-grid--fill.dlf-divider-grid--desktop-4
+        > .dlf-divider-grid__filler:nth-child(4n + 2 of :not(template)) {
+        --dlf-divider-fill-span: 3;
+    }
+
+    .dlf-divider-grid--fill.dlf-divider-grid--desktop-4
+        > .dlf-divider-grid__filler:nth-child(4n + 3 of :not(template)) {
+        --dlf-divider-fill-span: 2;
+    }
+
+    .dlf-divider-grid--fill.dlf-divider-grid--desktop-5
+        > .dlf-divider-grid__filler:nth-child(5n + 2 of :not(template)) {
+        --dlf-divider-fill-span: 4;
+    }
+
+    .dlf-divider-grid--fill.dlf-divider-grid--desktop-5
+        > .dlf-divider-grid__filler:nth-child(5n + 3 of :not(template)) {
+        --dlf-divider-fill-span: 3;
+    }
+
+    .dlf-divider-grid--fill.dlf-divider-grid--desktop-5
+        > .dlf-divider-grid__filler:nth-child(5n + 4 of :not(template)) {
+        --dlf-divider-fill-span: 2;
+    }
+
+    .dlf-divider-grid--fill.dlf-divider-grid--desktop-6
+        > .dlf-divider-grid__filler:nth-child(6n + 2 of :not(template)) {
+        --dlf-divider-fill-span: 5;
+    }
+
+    .dlf-divider-grid--fill.dlf-divider-grid--desktop-6
+        > .dlf-divider-grid__filler:nth-child(6n + 3 of :not(template)) {
+        --dlf-divider-fill-span: 4;
+    }
+
+    .dlf-divider-grid--fill.dlf-divider-grid--desktop-6
+        > .dlf-divider-grid__filler:nth-child(6n + 4 of :not(template)) {
+        --dlf-divider-fill-span: 3;
+    }
+
+    .dlf-divider-grid--fill.dlf-divider-grid--desktop-6
+        > .dlf-divider-grid__filler:nth-child(6n + 5 of :not(template)) {
+        --dlf-divider-fill-span: 2;
+    }
+
+    .dlf-divider-grid--desktop-1 > :nth-child(n + 2 of :not(template)) {
+        border-top: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+    }
+
+    .dlf-divider-grid--desktop-2 > :nth-child(2n of :not(template)) {
+        border-left: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+    }
+
+    .dlf-divider-grid--desktop-leading-owns-rule.dlf-divider-grid--desktop-2
+        > :nth-child(2n + 1 of :not(template)) {
+        border-right: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+    }
+
+    .dlf-divider-grid--desktop-leading-owns-rule.dlf-divider-grid--desktop-2
+        > :nth-child(2n of :not(template)) {
+        border-left: 0 !important;
+    }
+
+    .dlf-divider-grid--desktop-2 > :nth-child(n + 3 of :not(template)) {
+        border-top: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+    }
+
+    .dlf-divider-grid--desktop-3 > :not(template):not(:nth-child(3n + 1 of :not(template))) {
+        border-left: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+    }
+
+    .dlf-divider-grid--desktop-3 > :nth-child(n + 4 of :not(template)) {
+        border-top: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+    }
+
+    .dlf-divider-grid--desktop-4 > :not(template):not(:nth-child(4n + 1 of :not(template))) {
+        border-left: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+    }
+
+    .dlf-divider-grid--desktop-4 > :nth-child(n + 5 of :not(template)) {
+        border-top: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+    }
+
+    .dlf-divider-grid--desktop-5 > :not(template):not(:nth-child(5n + 1 of :not(template))) {
+        border-left: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+    }
+
+    .dlf-divider-grid--desktop-5 > :nth-child(n + 6 of :not(template)) {
+        border-top: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+    }
+
+    .dlf-divider-grid--desktop-6 > :not(template):not(:nth-child(6n + 1 of :not(template))) {
+        border-left: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+    }
+
+    .dlf-divider-grid--desktop-6 > :nth-child(n + 7 of :not(template)) {
+        border-top: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+    }
+
+    .dlf-divider-grid.dlf-divider-grid--column-rules-only > :nth-child(n) {
+        border-top: 0 !important;
+    }
+
+    .dlf-divider-split > :nth-child(n + 2) {
+        border-left: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+    }
+
+    .dlf-divider-split--desktop-reversed > :first-child {
+        border-left: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+    }
+
+    .dlf-divider-split--desktop-reversed > :nth-child(n + 2) {
+        border-left: 0 !important;
+    }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+    .dlf-divider-grid--fill:is(.dlf-divider-grid--tablet-2, .dlf-divider-grid--tablet-3)
+        > .dlf-divider-grid__filler {
+        display: block;
+    }
+
+    .dlf-divider-grid--fill.dlf-divider-grid--tablet-2
+        > .dlf-divider-grid__filler:nth-child(2n + 1 of :not(template)),
+    .dlf-divider-grid--fill.dlf-divider-grid--tablet-3
+        > .dlf-divider-grid__filler:nth-child(3n + 1 of :not(template)) {
+        display: none;
+    }
+
+    .dlf-divider-grid--fill.dlf-divider-grid--tablet-3
+        > .dlf-divider-grid__filler:nth-child(3n + 2 of :not(template)) {
+        --dlf-divider-fill-span: 2;
+    }
+
+    .dlf-divider-grid--tablet-1 > :nth-child(n + 2 of :not(template)) {
+        border-top: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+    }
+
+    .dlf-divider-grid--tablet-2 > :nth-child(2n of :not(template)) {
+        border-left: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+    }
+
+    .dlf-divider-grid--tablet-2 > :nth-child(n + 3 of :not(template)) {
+        border-top: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+    }
+
+    .dlf-divider-grid--tablet-3 > :not(template):not(:nth-child(3n + 1 of :not(template))) {
+        border-left: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+    }
+
+    .dlf-divider-grid--tablet-3 > :nth-child(n + 4 of :not(template)) {
+        border-top: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+    }
+
+    .dlf-divider-grid.dlf-divider-grid--column-rules-only > :nth-child(n) {
+        border-top: 0 !important;
+    }
+
+    .dlf-divider-split > :nth-child(n + 2) {
+        border-top: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+    }
+
+    .dlf-divider-split--stacked-reversed > :first-child {
+        border-top: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+    }
+
+    .dlf-divider-split--stacked-reversed > :nth-child(n + 2) {
+        border-top: 0 !important;
+    }
+}
+
+@media (max-width: 639px) {
+    .dlf-divider-grid--fill.dlf-divider-grid--mobile-2 > .dlf-divider-grid__filler {
+        display: block;
+    }
+
+    .dlf-divider-grid--fill.dlf-divider-grid--mobile-2
+        > .dlf-divider-grid__filler:nth-child(2n + 1 of :not(template)) {
+        display: none;
+    }
+
+    .dlf-divider-grid--mobile-1 > :nth-child(n + 2 of :not(template)) {
+        border-top: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+    }
+
+    .dlf-divider-grid--mobile-2 > :nth-child(2n of :not(template)) {
+        border-left: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+    }
+
+    .dlf-divider-grid--mobile-2 > :nth-child(n + 3 of :not(template)) {
+        border-top: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+    }
+
+    .dlf-divider-split > :nth-child(n + 2) {
+        border-top: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+    }
+
+    .dlf-divider-split--stacked-reversed > :first-child {
+        border-top: 1px solid var(--dlf-divider-color, var(--dlf-line)) !important;
+    }
+
+    .dlf-divider-split--stacked-reversed > :nth-child(n + 2) {
+        border-top: 0 !important;
+    }
+}

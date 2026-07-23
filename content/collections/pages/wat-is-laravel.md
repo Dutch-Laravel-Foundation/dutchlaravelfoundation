@@ -2,6 +2,7 @@
 id: b343e99d-f01e-4cd1-8587-cf8e99ccec76
 blueprint: pages
 title: 'Wat is Laravel?'
+meta_description: 'Laravel is een populair open-source PHP-framework voor veilige, schaalbare webapplicaties. Ontdek waarom organisaties en developers ervoor kiezen.'
 template: templates/what-is-laravel/index
 updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
 updated_at: 1776339328

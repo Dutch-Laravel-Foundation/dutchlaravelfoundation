@@ -1,0 +1,33 @@
+<section class="dlf-block dlf-block-features dlf-divider-section">
+    <header class="dlf-block-heading">
+        {{ if eyebrow }}
+        <p class="dlf-kicker">{{ eyebrow }}</p>
+        {{ /if }}
+        <h2>{{ heading }}</h2>
+        {{ if introduction }}
+        <div class="dlf-prose">{{ introduction }}</div>
+        {{ /if }}
+    </header>
+    <div
+        class="dlf-feature-grid dlf-feature-grid--{{ columns ?? '3' }} dlf-divider-grid dlf-divider-grid--framed dlf-divider-grid--desktop-{{ columns ?? '3' }} dlf-divider-grid--tablet-2 dlf-divider-grid--mobile-1"
+    >
+        {{ features }}
+        <article class="dlf-feature-card">
+            {{ icon }}<img
+                class="dlf-feature-card__icon"
+                src="{{ url }}"
+                alt=""
+                width="{{ width }}"
+                height="{{ height }}"
+                aria-hidden="true"
+            />{{ /icon }}
+            <h3>{{ heading }}</h3>
+            {{ if body }}
+            <div class="dlf-prose">{{ body | markdown }}</div>
+            {{ /if }} {{ if link && link_label }}<a class="dlf-text-link" href="{{ link }}"
+                >{{ link_label }} <span aria-hidden="true">→</span></a
+            >{{ /if }}
+        </article>
+        {{ /features }}
+    </div>
+</section>

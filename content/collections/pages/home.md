@@ -76,7 +76,8 @@ header_content:
       -
         type: text
         text: 'De Dutch Laravel Foundation zorgt voor de promotie van Laravel en stimuleert kennisuitwisseling tussen Laravel developers in Nederland. Opdrachtgevers van webapplicaties kunnen via de stichting geschikte Laravel developers vinden.'
-meta_title: 'Dutch Laravel Foundation - Stichting voor promotie en kennisdeling over Laravel'
+meta_title: 'Dutch Laravel Foundation | Laravel-community Nederland'
+meta_description: 'De Dutch Laravel Foundation stimuleert het gebruik van Laravel en verbindt developers, organisaties en opdrachtgevers in Nederland.'
 menu_color: red
 content:
   -
