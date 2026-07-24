@@ -12,6 +12,7 @@ export default (mode) => {
             laravel({
                 input: ["resources/css/tailwind.css", "resources/js/site.js"],
                 refresh: true,
+                ...(appUrl ? { detectTls: false } : {}),
             }),
         ],
         server: appUrl

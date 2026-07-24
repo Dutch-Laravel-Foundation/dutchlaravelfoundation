@@ -51,7 +51,6 @@ final class OhDearApplicationHealthTest extends TestCase
         $this->assertSame($names, array_values(array_unique($names)));
         $this->assertEqualsCanonicalizing([
             'ApplicationBoot',
-            'DatabaseConnection',
             'Cache',
             'MailTransport',
             'UsedDiskSpace',

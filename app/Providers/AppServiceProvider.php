@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Health\Checks\Checks\CacheCheck;
-use Spatie\Health\Checks\Checks\DatabaseCheck;
 use Spatie\Health\Checks\Checks\EnvironmentCheck;
 use Spatie\Health\Checks\Checks\UsedDiskSpaceCheck;
 use Spatie\Health\Facades\Health;
@@ -41,9 +40,6 @@ class AppServiceProvider extends ServiceProvider
                 ->expectEnvironment('production')
                 ->name('ApplicationBoot')
                 ->label('Application'),
-            DatabaseCheck::new()
-                ->name('DatabaseConnection')
-                ->label('Database'),
             CacheCheck::new()
                 ->name('Cache')
                 ->label('Cache'),
