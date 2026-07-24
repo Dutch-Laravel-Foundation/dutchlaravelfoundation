@@ -113,7 +113,8 @@ export function initTrackingConsent({
     const showBanner = () => {
         banner.hidden = false;
         settings.forEach((control) => {
-            control.hidden = true;
+            control.hidden =
+                control.getAttribute("data-tracking-consent-embed-settings") === null;
         });
     };
 

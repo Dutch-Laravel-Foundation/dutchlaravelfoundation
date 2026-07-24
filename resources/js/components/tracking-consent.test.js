@@ -267,8 +267,10 @@ describe("tracking consent", () => {
         expect(ui.settings.focus).not.toHaveBeenCalled();
     });
 
-    it("opens consent settings from an embed placeholder", () => {
-        const embedSettings = new FakeElement();
+    it("keeps the embed action available when reopening consent after rejection", () => {
+        const embedSettings = new FakeElement({
+            "data-tracking-consent-embed-settings": "",
+        });
         const ui = makeConsentUi({ additionalSettings: [embedSettings] });
 
         initTrackingConsent({
@@ -282,7 +284,7 @@ describe("tracking consent", () => {
 
         expect(ui.banner.hidden).toBeFalse();
         expect(ui.settings.hidden).toBeTrue();
-        expect(embedSettings.hidden).toBeTrue();
+        expect(embedSettings.hidden).toBeFalse();
     });
 
     it("reloads after withdrawing previously accepted consent", () => {

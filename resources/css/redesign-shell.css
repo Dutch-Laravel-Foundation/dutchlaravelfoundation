@@ -1171,7 +1171,7 @@ html.dlf-menu-open {
     margin-bottom: 8px;
     color: var(--dlf-red-text);
     font-family: "JetBrains Mono Variable", ui-monospace, monospace;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -1189,13 +1189,15 @@ html.dlf-menu-open {
     border: 0;
     background: transparent;
     color: var(--dlf-red-text);
-    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
+    font-family: inherit;
+    font-size: var(--dlf-body-font-size);
+    font-weight: 400;
+    letter-spacing: normal;
+    line-height: 1.5;
     text-decoration: underline;
+    text-decoration-thickness: 1px;
     text-underline-offset: 3px;
-    text-transform: uppercase;
+    text-transform: none;
     cursor: pointer;
 }
 
