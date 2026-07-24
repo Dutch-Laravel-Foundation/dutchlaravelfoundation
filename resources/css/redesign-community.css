@@ -1278,6 +1278,14 @@
     text-transform: none !important;
 }
 
+.dlf-member-form__agree a {
+    color: var(--dlf-red-text);
+    text-decoration-line: underline;
+    text-decoration-color: currentColor;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
 .dlf-member-form__error {
     margin: 6px 0 0 !important;
     color: var(--dlf-red-text);
@@ -1609,7 +1617,7 @@
     max-width: 300px;
     margin-top: 4px;
     color: rgba(255, 255, 255, 0.9);
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .dlf-laravel-fact__index {

@@ -659,7 +659,7 @@ html.dlf-menu-open {
     align-items: center;
     gap: 8px;
     color: rgb(255 255 255 / 95%);
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .dlf-cta-benefits svg {
@@ -833,7 +833,7 @@ html.dlf-menu-open {
 .dlf-footer-right > p {
     margin: 0 0 20px;
     color: var(--dlf-copy);
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .dlf-footer-socials {
@@ -878,7 +878,7 @@ html.dlf-menu-open {
 .dlf-newsletter > p {
     margin: 0 0 16px;
     color: var(--dlf-copy);
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .dlf-newsletter-field {
@@ -980,7 +980,7 @@ html.dlf-menu-open {
     align-self: flex-end;
     margin: 0;
     color: var(--dlf-copy);
-    font-size: 14px;
+    font-size: 15px;
     text-align: right;
 }
 
@@ -1070,7 +1070,7 @@ html.dlf-menu-open {
 .dlf-tracking-consent p {
     margin: 0;
     color: rgb(255 255 255 / 88%);
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.55;
 }
 

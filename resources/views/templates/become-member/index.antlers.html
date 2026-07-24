@@ -370,13 +370,7 @@
                         {{ else }}
                         <label class="dlf-member-form__agree">
                             {{ field replace="<br />|" }}
-                            <span
-                                >{{ display regex_replace="(privacy statement)|<a
-                                    href="/privacy-statement"
-                                    target="_blank"
-                                    >\1</a
-                                >" }}</span
-                            >
+                            <span>{{ display regex_replace="(privacy statement)|<a href='/privacy-statement' target='_blank'>\1</a>" }}</span>
                         </label>
                         {{ if error }}
                         <p class="dlf-member-form__error">{{ error }}</p>

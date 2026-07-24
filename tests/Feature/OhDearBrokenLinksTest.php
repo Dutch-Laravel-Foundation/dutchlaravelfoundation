@@ -70,4 +70,12 @@ class OhDearBrokenLinksTest extends TestCase
             ->assertOk()
             ->assertDontSee('href="https://"', false);
     }
+
+    public function test_member_form_renders_a_valid_privacy_statement_link(): void
+    {
+        $this->get('/lid-worden')
+            ->assertOk()
+            ->assertSee("href='/privacy-statement'", false)
+            ->assertDontSee('href=.</span', false);
+    }
 }
