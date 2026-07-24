@@ -75,6 +75,28 @@ final class EnvoyDeploymentTest extends TestCase
         $this->assertStringNotContainsString('!glide', $statamicGitignore);
     }
 
+    public function testItStoresReleaseRecordsOutsideTheWorkingTree(): void
+    {
+        $recipe = $this->recipe();
+
+        $this->assertStringContainsString(
+            '> "$RELEASE_PATH/.git/deployed-revision"',
+            $recipe,
+        );
+        $this->assertStringContainsString(
+            '> "$RELEASE_PATH/.git/previous-release"',
+            $recipe,
+        );
+        $this->assertStringNotContainsString(
+            '> "$RELEASE_PATH/.revision"',
+            $recipe,
+        );
+        $this->assertStringNotContainsString(
+            '> "$RELEASE_PATH/.previous-release"',
+            $recipe,
+        );
+    }
+
     public function testItCompilesForInspectionWithoutConnectingToProduction(): void
     {
         $projectPath = dirname(__DIR__, 2);
