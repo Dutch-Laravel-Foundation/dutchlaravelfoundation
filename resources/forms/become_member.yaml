@@ -7,9 +7,11 @@ email:
     subject: 'DLF Aanmelding: {{ company_name }}'
     reply_to: '{{ email }}'
     cc: info@dutchlaravelfoundation.nl
+    html: mail/become-member-notification
+    markdown: true
   -
     id: fCy9iuUO
     to: '{{ email }}'
     subject: 'Je aanmelding bij Dutch Laravel Foundation'
     html: mail/become-member
-    text: mail/become-member
+    markdown: true
