@@ -62,8 +62,7 @@
 }
 
 .best-practices-search:focus-within {
-    outline: 3px solid var(--editorial-focus);
-    outline-offset: -3px;
+    border-bottom-color: var(--editorial-red);
 }
 
 .best-practices-categories {
