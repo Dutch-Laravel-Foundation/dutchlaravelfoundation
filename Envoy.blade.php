@@ -5,6 +5,13 @@
     $dotenv->safeLoad();
 
     $revision = $revision ?? '';
+
+    if ($revision === '') {
+        $gitRevision = new Symfony\Component\Process\Process(['git', 'rev-parse', 'HEAD'], __DIR__);
+        $gitRevision->mustRun();
+        $revision = trim($gitRevision->getOutput());
+    }
+
     $basePath = env('DEPLOY_PATH');
     $server = env('DEPLOY_SERVER');
 

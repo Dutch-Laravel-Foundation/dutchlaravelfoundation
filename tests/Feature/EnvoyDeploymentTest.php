@@ -31,6 +31,43 @@ final class EnvoyDeploymentTest extends TestCase
         $this->assertStringContainsString('git rev-parse HEAD', $recipe);
     }
 
+    public function testItUsesTheCurrentRevisionWhenTheArgumentIsOmitted(): void
+    {
+        $projectPath = dirname(__DIR__, 2);
+        $revisionProcess = new Process(['git', 'rev-parse', 'HEAD'], $projectPath);
+        $revisionProcess->mustRun();
+        $currentRevision = trim($revisionProcess->getOutput());
+        $compiledBefore = glob($projectPath . '/Envoy*.php') ?: [];
+        $process = new Process([
+            PHP_BINARY,
+            'vendor/bin/envoy',
+            'run',
+            'deploy',
+            '--pretend',
+        ], $projectPath, [
+            'DEPLOY_PATH' => '/tmp/dlf-deploy-contract',
+            'DEPLOY_SERVER' => 'deploy@example.invalid',
+        ]);
+
+        try {
+            $process->run();
+        } finally {
+            $compiledAfter = glob($projectPath . '/Envoy*.php') ?: [];
+
+            foreach (array_diff($compiledAfter, $compiledBefore) as $compiledFile) {
+                unlink($compiledFile);
+            }
+        }
+
+        $this->assertSame(
+            1,
+            $process->getExitCode(),
+            $process->getErrorOutput().$process->getOutput(),
+        );
+        $this->assertSame('', $process->getErrorOutput());
+        $this->assertStringContainsString($currentRevision, $process->getOutput());
+    }
+
     public function testItLinksPersistentStateBeforeComposerHooksRun(): void
     {
         $recipe = $this->recipe();
