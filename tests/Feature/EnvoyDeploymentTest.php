@@ -83,6 +83,32 @@ final class EnvoyDeploymentTest extends TestCase
         $this->assertAppearsBefore('ln -s "$BASE_PATH/users" users', 'composer install', $recipe);
     }
 
+    public function testItValidatesManagedLinksBeforeIgnoringTheirGitDifferences(): void
+    {
+        $recipe = $this->recipe();
+
+        $this->assertStringContainsString(
+            'validate_managed_link "$PREVIOUS_RELEASE/.env" "$BASE_PATH/.env"',
+            $recipe,
+        );
+        $this->assertStringContainsString(
+            'validate_managed_link "$PREVIOUS_RELEASE/storage/forms" "$BASE_PATH/forms"',
+            $recipe,
+        );
+        $this->assertStringContainsString(
+            'validate_managed_link "$PREVIOUS_RELEASE/users" "$BASE_PATH/users"',
+            $recipe,
+        );
+        $this->assertStringContainsString('":(exclude).env"', $recipe);
+        $this->assertStringContainsString('":(exclude)storage/forms"', $recipe);
+        $this->assertStringContainsString('":(exclude)users"', $recipe);
+        $this->assertAppearsBefore(
+            'validate_managed_link "$PREVIOUS_RELEASE/storage/forms" "$BASE_PATH/forms"',
+            'CURRENT_STATUS=$(',
+            $recipe,
+        );
+    }
+
     public function testItRequiresProductionCommitsToExistOnOriginMain(): void
     {
         $recipe = $this->recipe();

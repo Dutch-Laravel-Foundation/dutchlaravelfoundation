@@ -100,6 +100,26 @@
         echo "Rollback completed: $PREVIOUS_RELEASE"
     }
 
+    validate_managed_link() {
+        local link_path="$1"
+        local expected_target="$2"
+        local resolved_link
+        local resolved_target
+
+        if [ ! -L "$link_path" ]; then
+            echo "Managed path is not a symbolic link: $link_path" >&2
+            return 1
+        fi
+
+        resolved_link=$(readlink -f "$link_path")
+        resolved_target=$(readlink -f "$expected_target")
+
+        if [ "$resolved_link" != "$resolved_target" ]; then
+            echo "Managed link has an unexpected target: $link_path -> $resolved_link" >&2
+            return 1
+        fi
+    }
+
     check_health() {
         local attempt=1
         local maximum_attempts=12
@@ -225,6 +245,10 @@
         exit 1
     fi
 
+    validate_managed_link "$PREVIOUS_RELEASE/.env" "$BASE_PATH/.env"
+    validate_managed_link "$PREVIOUS_RELEASE/storage/forms" "$BASE_PATH/forms"
+    validate_managed_link "$PREVIOUS_RELEASE/users" "$BASE_PATH/users"
+
     if [ -d "$PREVIOUS_RELEASE/.git" ]; then
         CURRENT_STATUS=$(
             git -C "$PREVIOUS_RELEASE" status \
@@ -233,7 +257,10 @@
                 -- \
                 . \
                 ":(exclude).revision" \
-                ":(exclude).previous-release"
+                ":(exclude).previous-release" \
+                ":(exclude).env" \
+                ":(exclude)storage/forms" \
+                ":(exclude)users"
         )
 
         if [ -n "$CURRENT_STATUS" ]; then
