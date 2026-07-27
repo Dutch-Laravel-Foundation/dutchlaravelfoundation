@@ -1033,7 +1033,7 @@
 
 .dlf-lid-benefit {
     min-width: 0;
-    padding: 48px 48px 26px;
+    padding: 48px;
     border-right: 1px solid var(--dlf-line);
     border-bottom: 1px solid var(--dlf-line);
 }
