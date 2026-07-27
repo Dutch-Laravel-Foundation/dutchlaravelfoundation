@@ -228,8 +228,13 @@
         @apply w-full !bg-[#FEFEFE] border !border-[#ECECEC] ring-0! focus:!border-primary-accent !shadow-md shadow-gray-100/70;
     }
 
-    .dlf-members-search input {
+    .dlf-members-search input,
+    .best-practices-search input {
         @apply !shadow-none;
+    }
+
+    .best-practices-search input {
+        @apply !bg-transparent;
     }
 
     .dlf-form-group,

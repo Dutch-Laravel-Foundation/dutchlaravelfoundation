@@ -111,9 +111,9 @@
                     <template x-for="item in filteredPractices" :key="item.url">
                         <a class="best-practice-row" :href="item.url">
                             <span class="best-practice-row__body">
-                                <span class="best-practice-row__category" x-text="item.categoryTitle"></span>
+                                <span class="editorial-entry__meta" x-text="item.categoryTitle"></span>
                                 <strong x-text="item.title"></strong>
-                                <span x-text="item.summary"></span>
+                                <span class="best-practice-row__summary" x-text="item.summary"></span>
                             </span>
                         </a>
                     </template>
@@ -123,9 +123,9 @@
                     {{ collection:best_practices sort="title_nl" }}
                         <a class="best-practice-row" href="{{ url }}">
                             <span class="best-practice-row__body">
-                                <span class="best-practice-row__category">{{ category_title }}</span>
+                                <span class="editorial-entry__meta">{{ category_title }}</span>
                                 <strong>{{ title_nl }}</strong>
-                                <span>{{ summary_nl }}</span>
+                                <span class="best-practice-row__summary">{{ summary_nl }}</span>
                             </span>
                         </a>
                     {{ /collection:best_practices }}

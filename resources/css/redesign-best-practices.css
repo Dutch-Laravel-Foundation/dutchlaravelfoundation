@@ -1,6 +1,6 @@
 .best-practices-directory {
     display: grid;
-    grid-template-columns: 18rem minmax(0, 1fr);
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
 }
 
 .best-practices-filters {
@@ -28,6 +28,7 @@
     min-height: 4.25rem;
     align-items: center;
     border-bottom: 1px solid var(--editorial-line);
+    box-shadow: none;
 }
 
 .best-practices-search svg {
@@ -42,16 +43,18 @@
     pointer-events: none;
 }
 
-.best-practices-search input {
+.best-practices-index .best-practices-search input {
     width: 100%;
     min-height: 4.25rem;
     padding: 0 2.5rem 0 5rem;
     border: 0;
     outline: 0;
-    background: transparent;
+    box-shadow: none !important;
+    background: transparent !important;
     color: var(--editorial-ink);
     font: inherit;
     font-size: var(--dlf-body-font-size);
+    appearance: none;
 }
 
 .best-practices-search input::placeholder {
@@ -151,33 +154,21 @@
     text-decoration: none;
 }
 
-.best-practice-row__category {
-    margin-bottom: 0.1rem;
-    color: var(--editorial-muted);
-    font-family:
-        "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.6875rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    line-height: 1.45;
-    text-transform: uppercase;
-}
-
 .best-practice-row__body {
-    display: flex;
     min-width: 0;
-    flex-direction: column;
-    gap: 0.4rem;
 }
 
 .best-practice-row__body strong {
+    display: block;
     color: var(--editorial-ink);
     font-size: 1.0625rem;
     font-weight: 600;
     line-height: 1.4;
 }
 
-.best-practice-row__body > span {
+.best-practice-row__summary {
+    display: block;
+    margin-top: 0.4rem;
     color: var(--editorial-body);
     font-size: var(--dlf-body-font-size);
     line-height: 1.6;
@@ -363,7 +354,7 @@
         padding: 1.375rem 1.25rem;
     }
 
-    .best-practice-row__body > span {
+    .best-practice-row__summary {
         display: -webkit-box;
         overflow: hidden;
         -webkit-box-orient: vertical;
