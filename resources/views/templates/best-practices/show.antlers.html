@@ -115,6 +115,12 @@
                 </header>
 
                 <div class="best-practice-detail__skill-content">
+                    <div class="best-practice-detail__skill-copy">
+                        <span class="best-practice-detail__label">Skill</span>
+                        <h2>Laravel Boost skill</h2>
+                        <p>Gebruik deze skill om de richtlijn rechtstreeks toe te passen met een AI-assistent.</p>
+                    </div>
+
                     <div class="best-practice-detail__skill-code" data-code-copy>
                         <button
                             type="button"
@@ -145,12 +151,5 @@
                 </div>
             </section>
         {{ /if }}
-
-        <footer class="best-practice-detail__source dlf-divider-section">
-            <span>Deze richtlijn wordt periodiek gesynchroniseerd vanuit de openbare bron.</span>
-            {{ if github_url }}
-                <a href="{{ github_url }}" target="_blank" rel="noopener noreferrer">Bekijk bron op GitHub ↗</a>
-            {{ /if }}
-        </footer>
     </div>
 </div>

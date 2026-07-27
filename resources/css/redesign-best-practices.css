@@ -363,7 +363,30 @@
 
 .best-practice-detail__skill-content {
     min-width: 0;
-    grid-column: 2 / -1;
+    grid-column: 2;
+}
+
+.best-practice-detail__skill-copy {
+    margin-bottom: 2rem;
+}
+
+.best-practice-detail__skill-copy .best-practice-detail__label {
+    margin-bottom: 0.75rem;
+}
+
+.best-practice-detail__skill-copy h2 {
+    margin: 0 0 0.75rem;
+    color: var(--editorial-ink);
+    font-size: 1.6875rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.best-practice-detail__skill-copy p {
+    margin: 0;
+    color: var(--editorial-copy);
+    font-size: var(--dlf-body-font-size);
+    line-height: 1.7;
 }
 
 .best-practice-detail__skill-code {
@@ -442,23 +465,6 @@
 .best-practice-detail__skill-references {
     max-width: 580px;
     margin-top: 3rem;
-}
-
-.best-practice-detail__source {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-    padding: 1.5rem 2.5rem;
-    color: var(--editorial-muted);
-    font-size: 0.8125rem;
-}
-
-.best-practice-detail__source a {
-    flex: none;
-    color: var(--editorial-red);
-    font-weight: 700;
-    text-underline-offset: 0.2em;
 }
 
 .best-practice-reference {
@@ -570,6 +576,10 @@
     .best-practice-detail__skill-intro {
         margin-bottom: 1.5rem;
     }
+
+    .best-practice-detail__skill-copy h2 {
+        font-size: 1.5rem;
+    }
 }
 
 @media (max-width: 639px) {
@@ -595,13 +605,6 @@
         overflow: hidden;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 3;
-    }
-
-    .best-practice-detail__source {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 0.75rem;
-        padding: 1.5rem;
     }
 
     .best-practice-detail__skill-code pre code {
