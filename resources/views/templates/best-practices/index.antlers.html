@@ -37,7 +37,6 @@
                     data-category="{{ category_slug }}"
                     data-category-title="{{ category_title }}"
                     data-url="{{ url }}"
-                    data-has-skill="{{ has_skill ? 'true' : 'false' }}"
                 ></span>
             {{ /collection:best_practices }}
         </div>
@@ -48,19 +47,17 @@
         >
             <aside class="best-practices-filters" aria-label="Best practices filteren">
                 <label class="best-practices-search">
-                    <span>Zoeken</span>
-                    <span class="best-practices-search__control">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <circle cx="11" cy="11" r="6.5"></circle>
-                            <path d="m16 16 4 4"></path>
-                        </svg>
-                        <input
-                            type="search"
-                            placeholder="Zoek een best practice"
-                            autocomplete="off"
-                            x-model.debounce.150ms="query"
-                        >
-                    </span>
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="11" cy="11" r="6.5"></circle>
+                        <path d="m16 16 4 4"></path>
+                    </svg>
+                    <input
+                        type="search"
+                        aria-label="Zoek een best practice"
+                        placeholder="Zoek een best practice"
+                        autocomplete="off"
+                        x-model.debounce.150ms="query"
+                    >
                 </label>
 
                 <div class="best-practices-categories">
@@ -113,16 +110,10 @@
                 <div class="best-practices-results__list dlf-divider-list" x-show="filteredPractices.length > 0" x-cloak>
                     <template x-for="item in filteredPractices" :key="item.url">
                         <a class="best-practice-row" :href="item.url">
-                            <span class="best-practice-row__category" x-text="item.categoryTitle"></span>
                             <span class="best-practice-row__body">
+                                <span class="best-practice-row__category" x-text="item.categoryTitle"></span>
                                 <strong x-text="item.title"></strong>
                                 <span x-text="item.summary"></span>
-                            </span>
-                            <span class="best-practice-row__meta">
-                                <small x-show="item.hasSkill === 'true'">Skill</small>
-                                <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M5 12h14M13 6l6 6-6 6"></path>
-                                </svg>
                             </span>
                         </a>
                     </template>
@@ -131,8 +122,8 @@
                 <div class="best-practices-results__fallback dlf-divider-list" x-show="false">
                     {{ collection:best_practices sort="title_nl" }}
                         <a class="best-practice-row" href="{{ url }}">
-                            <span class="best-practice-row__category">{{ category_title }}</span>
                             <span class="best-practice-row__body">
+                                <span class="best-practice-row__category">{{ category_title }}</span>
                                 <strong>{{ title_nl }}</strong>
                                 <span>{{ summary_nl }}</span>
                             </span>

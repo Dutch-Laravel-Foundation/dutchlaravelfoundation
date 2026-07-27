@@ -91,12 +91,14 @@ export const createNavigationDropdown = () => ({
 });
 
 export const createBestPracticesFilter = ({ document: documentRoot = document } = {}) => {
-    const practices = [...documentRoot.querySelectorAll("#best-practices-data [data-practice]")].map(
-        (element) => ({ ...element.dataset }),
-    );
+    const practices = [
+        ...documentRoot.querySelectorAll("#best-practices-data [data-practice]"),
+    ].map((element) => ({ ...element.dataset }));
     const categories = [
         ...documentRoot.querySelectorAll("#best-practice-category-data [data-category]"),
-    ].map((element) => ({ ...element.dataset }));
+    ]
+        .map((element) => ({ ...element.dataset }))
+        .filter((category) => Number(category.count) > 0);
 
     return {
         query: "",
