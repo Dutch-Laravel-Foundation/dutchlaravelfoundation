@@ -1,19 +1,20 @@
 <div
-    class="best-practices-index"
+    class="editorial-page best-practices-index"
     data-best-practice-filter
     x-data="bestPracticesFilter"
 >
     <div class="editorial-rail" data-dlf-footer-cta-stage>
-        <section class="best-practices-index__intro dlf-divider-section" aria-labelledby="best-practices-heading">
-            <span class="best-practices-kicker">Laravel</span>
-            <h1 id="best-practices-heading">Best practices</h1>
-            <p>
-                Praktische richtlijnen voor herkenbare, onderhoudbare en veilige Laravel-applicaties.
-                Samengesteld voor developers en teams die hun afspraken concreet willen maken.
-            </p>
-        </section>
+        <header class="editorial-page__header dlf-divider-section">
+            <div class="editorial-page__heading">
+                <span class="editorial-eyebrow">Laravel</span>
+                <h1 id="best-practices-heading" class="editorial-page__title">Best practices</h1>
+                <p class="editorial-page__intro">
+                    Praktische richtlijnen voor herkenbare, onderhoudbare en veilige Laravel-applicaties.
+                    Samengesteld voor developers en teams die hun afspraken concreet willen maken.
+                </p>
+            </div>
+        </header>
 
-        <section class="best-practices-index__directory dlf-divider-section">
         <div id="best-practice-category-data" hidden>
             {{ taxonomy:best_practice_categories sort="title_nl" }}
                 <span
@@ -41,100 +42,104 @@
             {{ /collection:best_practices }}
         </div>
 
-        <aside class="best-practices-filters" aria-label="Best practices filteren">
-            <label class="best-practices-search">
-                <span>Zoeken</span>
-                <span class="best-practices-search__control">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <circle cx="11" cy="11" r="6.5"></circle>
-                        <path d="m16 16 4 4"></path>
-                    </svg>
-                    <input
-                        type="search"
-                        placeholder="Zoek een best practice"
-                        autocomplete="off"
-                        x-model.debounce.150ms="query"
-                    >
-                </span>
-            </label>
+        <section
+            class="best-practices-directory dlf-divider-section dlf-divider-grid dlf-divider-grid--desktop-2 dlf-divider-grid--desktop-leading-owns-rule dlf-divider-grid--tablet-1 dlf-divider-grid--mobile-1"
+            aria-labelledby="best-practices-heading"
+        >
+            <aside class="best-practices-filters" aria-label="Best practices filteren">
+                <label class="best-practices-search">
+                    <span>Zoeken</span>
+                    <span class="best-practices-search__control">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="11" cy="11" r="6.5"></circle>
+                            <path d="m16 16 4 4"></path>
+                        </svg>
+                        <input
+                            type="search"
+                            placeholder="Zoek een best practice"
+                            autocomplete="off"
+                            x-model.debounce.150ms="query"
+                        >
+                    </span>
+                </label>
 
-            <div class="best-practices-categories">
-                <span class="best-practices-categories__label">Categorieën</span>
-                <div class="best-practices-categories__scroll">
-                    <button
-                        type="button"
-                        data-category-value=""
-                        :class="{ 'is-active': category === '' }"
-                        :aria-pressed="category === ''"
-                        @click="selectCategory"
-                    >
-                        <span>Alles</span>
-                        <small x-text="practices.length"></small>
-                    </button>
-                    <template x-for="item in categories" :key="item.slug">
+                <div class="best-practices-categories">
+                    <span class="best-practices-categories__label">Categorieën</span>
+                    <div class="best-practices-categories__scroll">
                         <button
                             type="button"
-                            :data-category-value="item.slug"
-                            :class="{ 'is-active': category === item.slug }"
-                            :aria-pressed="category === item.slug"
+                            data-category-value=""
+                            :class="{ 'is-active': category === '' }"
+                            :aria-pressed="category === ''"
                             @click="selectCategory"
                         >
-                            <span x-text="item.title"></span>
-                            <small x-text="item.count"></small>
+                            <span>Alles</span>
+                            <small x-text="practices.length"></small>
                         </button>
+                        <template x-for="item in categories" :key="item.slug">
+                            <button
+                                type="button"
+                                :data-category-value="item.slug"
+                                :class="{ 'is-active': category === item.slug }"
+                                :aria-pressed="category === item.slug"
+                                @click="selectCategory"
+                            >
+                                <span x-text="item.title"></span>
+                                <small x-text="item.count"></small>
+                            </button>
+                        </template>
+                    </div>
+                </div>
+            </aside>
+
+            <div class="best-practices-results">
+                <header class="best-practices-results__header">
+                    <p aria-live="polite" x-text="resultLabel">23 best practices</p>
+                    <button
+                        type="button"
+                        x-show="hasActiveFilters"
+                        x-cloak
+                        @click="reset"
+                    >
+                        Wis filters
+                    </button>
+                </header>
+
+                <div class="best-practices-results__empty" x-show="filteredPractices.length === 0" x-cloak>
+                    <strong>Geen best practices gevonden</strong>
+                    <p>Probeer een andere zoekterm of wis de filters.</p>
+                </div>
+
+                <div class="best-practices-results__list dlf-divider-list" x-show="filteredPractices.length > 0" x-cloak>
+                    <template x-for="item in filteredPractices" :key="item.url">
+                        <a class="best-practice-row" :href="item.url">
+                            <span class="best-practice-row__category" x-text="item.categoryTitle"></span>
+                            <span class="best-practice-row__body">
+                                <strong x-text="item.title"></strong>
+                                <span x-text="item.summary"></span>
+                            </span>
+                            <span class="best-practice-row__meta">
+                                <small x-show="item.hasSkill === 'true'">Skill</small>
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M5 12h14M13 6l6 6-6 6"></path>
+                                </svg>
+                            </span>
+                        </a>
                     </template>
                 </div>
-            </div>
-        </aside>
 
-        <div class="best-practices-results">
-            <header class="best-practices-results__header">
-                <p aria-live="polite" x-text="resultLabel">23 best practices</p>
-                <button
-                    type="button"
-                    x-show="hasActiveFilters"
-                    x-cloak
-                    @click="reset"
-                >
-                    Wis filters
-                </button>
-            </header>
-
-            <div class="best-practices-results__empty" x-show="filteredPractices.length === 0" x-cloak>
-                <strong>Geen best practices gevonden</strong>
-                <p>Probeer een andere zoekterm of wis de filters.</p>
+                <div class="best-practices-results__fallback dlf-divider-list" x-show="false">
+                    {{ collection:best_practices sort="title_nl" }}
+                        <a class="best-practice-row" href="{{ url }}">
+                            <span class="best-practice-row__category">{{ category_title }}</span>
+                            <span class="best-practice-row__body">
+                                <strong>{{ title_nl }}</strong>
+                                <span>{{ summary_nl }}</span>
+                            </span>
+                        </a>
+                    {{ /collection:best_practices }}
+                </div>
             </div>
-
-            <div class="best-practices-results__list" x-show="filteredPractices.length > 0" x-cloak>
-                <template x-for="item in filteredPractices" :key="item.url">
-                    <a class="best-practice-row" :href="item.url">
-                        <span class="best-practice-row__category" x-text="item.categoryTitle"></span>
-                        <span class="best-practice-row__body">
-                            <strong x-text="item.title"></strong>
-                            <span x-text="item.summary"></span>
-                        </span>
-                        <span class="best-practice-row__meta">
-                            <small x-show="item.hasSkill === 'true'">Skill</small>
-                            <svg viewBox="0 0 24 24" aria-hidden="true">
-                                <path d="M5 12h14M13 6l6 6-6 6"></path>
-                            </svg>
-                        </span>
-                    </a>
-                </template>
-            </div>
-
-            <div class="best-practices-results__fallback" x-show="false">
-                {{ collection:best_practices sort="title_nl" }}
-                    <a class="best-practice-row" href="{{ url }}">
-                        <span class="best-practice-row__category">{{ category_title }}</span>
-                        <span class="best-practice-row__body">
-                            <strong>{{ title_nl }}</strong>
-                            <span>{{ summary_nl }}</span>
-                        </span>
-                    </a>
-                {{ /collection:best_practices }}
-            </div>
-        </div>
         </section>
     </div>
 </div>

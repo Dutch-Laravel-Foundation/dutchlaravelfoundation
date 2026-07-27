@@ -2,39 +2,47 @@
     <div class="editorial-rail editorial-rail--article" data-dlf-footer-cta-stage>
         {{ partial:breadcrumb href="/best-practices" label="Best practices" :current="category_title" }}
 
-        <header class="best-practice-detail__hero dlf-divider-section">
-            <div class="best-practice-detail__heading">
-                <span class="best-practices-kicker">{{ category_title }}</span>
+        <header class="editorial-article__hero best-practice-detail__hero dlf-divider-section dlf-divider-split">
+            <div class="editorial-article__head">
+                <div class="editorial-entry__meta editorial-article__meta">
+                    <span class="editorial-entry__category">{{ category_title }}</span>
+                </div>
                 {{ if get:lang == "en" }}
                     <h1>{{ title_en }}</h1>
-                    <p>{{ summary_en }}</p>
+                    <div class="editorial-article__lead">{{ summary_en }}</div>
                 {{ else }}
                     <h1>{{ title_nl ?? title_en }}</h1>
-                    <p>{{ summary_nl ?? summary_en }}</p>
+                    <div class="editorial-article__lead">{{ summary_nl ?? summary_en }}</div>
                 {{ /if }}
             </div>
 
-            <div class="best-practice-detail__controls">
-                <nav class="best-practice-switcher" aria-label="Weergave">
-                    <a
-                        href="{{ url }}{{ if get:lang == 'en' }}?lang=en{{ /if }}"
-                        {{ unless get:view == "skill" }}aria-current="page"{{ /unless }}
-                    >Best practice</a>
-                    {{ if has_skill }}
+            <aside class="best-practice-detail__panel" aria-label="Weergave-instellingen">
+                <div class="best-practice-detail__control">
+                    <span class="best-practice-detail__label">Inhoud</span>
+                    <nav class="best-practice-switcher" aria-label="Inhoud">
                         <a
-                            href="{{ url }}?view=skill"
-                            {{ if get:view == "skill" }}aria-current="page"{{ /if }}
-                        >Skill</a>
-                    {{ /if }}
-                </nav>
+                            href="{{ url }}{{ if get:lang == 'en' }}?lang=en{{ /if }}"
+                            {{ unless get:view == "skill" }}aria-current="page"{{ /unless }}
+                        >Best practice</a>
+                        {{ if has_skill }}
+                            <a
+                                href="{{ url }}?view=skill"
+                                {{ if get:view == "skill" }}aria-current="page"{{ /if }}
+                            >Skill</a>
+                        {{ /if }}
+                    </nav>
+                </div>
 
                 {{ unless get:view == "skill" }}
-                    <nav class="best-practice-language" aria-label="Taal">
-                        <a href="{{ url }}" {{ unless get:lang == "en" }}aria-current="page"{{ /unless }}>NL</a>
-                        <a href="{{ url }}?lang=en" {{ if get:lang == "en" }}aria-current="page"{{ /if }}>EN</a>
-                    </nav>
+                    <div class="best-practice-detail__control">
+                        <span class="best-practice-detail__label">Taal</span>
+                        <nav class="best-practice-language" aria-label="Taal">
+                            <a href="{{ url }}" {{ unless get:lang == "en" }}aria-current="page"{{ /unless }}>Nederlands</a>
+                            <a href="{{ url }}?lang=en" {{ if get:lang == "en" }}aria-current="page"{{ /if }}>English</a>
+                        </nav>
+                    </div>
                 {{ /unless }}
-            </div>
+            </aside>
         </header>
 
         <div class="editorial-article__body best-practice-detail__body dlf-divider-section" data-editorial-article>
@@ -61,7 +69,7 @@
             </article>
         </div>
 
-        <footer class="best-practice-detail__source">
+        <footer class="best-practice-detail__source dlf-divider-section">
             <span>Deze richtlijn wordt periodiek gesynchroniseerd vanuit de openbare bron.</span>
             {{ if get:view == "skill" && skill_github_url }}
                 <a href="{{ skill_github_url }}" target="_blank" rel="noopener noreferrer">Bekijk skill op GitHub ↗</a>
