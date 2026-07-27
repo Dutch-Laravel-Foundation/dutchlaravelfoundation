@@ -55,7 +55,7 @@
 .best-practices-search {
     position: relative;
     display: flex;
-    min-height: 4.25rem;
+    height: 4.25rem;
     align-items: center;
     border-bottom: 1px solid var(--editorial-line);
     box-shadow: none;
@@ -75,7 +75,7 @@
 
 .best-practices-index .best-practices-search input {
     width: 100%;
-    min-height: 4.25rem;
+    height: 100%;
     padding: 0 2.5rem 0 5rem;
     border: 0;
     outline: 0;
@@ -91,8 +91,8 @@
     color: var(--editorial-muted);
 }
 
-.best-practices-search:focus-within {
-    border-bottom-color: var(--editorial-red);
+.best-practices-search:focus-within svg {
+    stroke: var(--editorial-ink);
 }
 
 .best-practices-categories {
