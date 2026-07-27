@@ -90,6 +90,63 @@ export const createNavigationDropdown = () => ({
     },
 });
 
+export const createBestPracticesFilter = ({ document: documentRoot = document } = {}) => {
+    const practices = [...documentRoot.querySelectorAll("#best-practices-data [data-practice]")].map(
+        (element) => ({ ...element.dataset }),
+    );
+    const categories = [
+        ...documentRoot.querySelectorAll("#best-practice-category-data [data-category]"),
+    ].map((element) => ({ ...element.dataset }));
+
+    return {
+        query: "",
+        category: "",
+        practices,
+        categories,
+
+        selectCategory(event) {
+            this.category = event.currentTarget.dataset.categoryValue;
+        },
+
+        reset() {
+            this.query = "";
+            this.category = "";
+        },
+
+        get hasActiveFilters() {
+            return this.query.trim() !== "" || this.category !== "";
+        },
+
+        get filteredPractices() {
+            const query = this.query.trim().toLocaleLowerCase("nl");
+
+            return this.practices.filter((practice) => {
+                const searchable = [
+                    practice.title,
+                    practice.titleEn,
+                    practice.summary,
+                    practice.summaryEn,
+                    practice.categoryTitle,
+                ]
+                    .filter(Boolean)
+                    .join(" ")
+                    .toLocaleLowerCase("nl");
+
+                return (
+                    (query === "" || searchable.includes(query)) &&
+                    (this.category === "" || practice.category === this.category)
+                );
+            });
+        },
+
+        get resultLabel() {
+            const count = this.filteredPractices.length;
+
+            return `${count} ${count === 1 ? "best practice" : "best practices"}`;
+        },
+    };
+};
+
 const trapFocus = (event, documentRoot) => {
     const focusable = [
         ...event.currentTarget.querySelectorAll(

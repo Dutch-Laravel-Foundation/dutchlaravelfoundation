@@ -1,0 +1,46 @@
+title: 'Best practice category'
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              display: Titel
+              read_only: true
+          -
+            handle: title_nl
+            field:
+              type: text
+              display: 'Nederlandse titel'
+              read_only: true
+          -
+            handle: title_en
+            field:
+              type: text
+              display: 'Engelse titel'
+              read_only: true
+          -
+            handle: practice_count
+            field:
+              type: integer
+              display: Aantal
+              read_only: true
+          -
+            handle: source_path
+            field:
+              type: text
+              read_only: true
+          -
+            handle: source_sha
+            field:
+              type: text
+              read_only: true
+          -
+            handle: github_url
+            field:
+              type: link
+              read_only: true

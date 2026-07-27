@@ -3,6 +3,7 @@ import Alpine from "@alpinejs/csp";
 
 import "./components/header-aware-sticky";
 import {
+    createBestPracticesFilter,
     createHeaderMenu,
     createInternshipsFilter,
     createMembersFilter,
@@ -48,6 +49,7 @@ initFooterCtaStage();
 
 Alpine.data("headerMenu", createHeaderMenu);
 Alpine.data("navigationDropdown", createNavigationDropdown);
+Alpine.data("bestPracticesFilter", createBestPracticesFilter);
 Alpine.data("membersFilter", createMembersFilter);
 Alpine.data("internshipsFilter", createInternshipsFilter);
 Alpine.data("salesFunnelWizard", createSalesFunnelWizard);

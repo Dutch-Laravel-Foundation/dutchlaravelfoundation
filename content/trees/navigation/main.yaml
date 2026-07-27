@@ -8,6 +8,10 @@ tree:
         id: a3439037-a3be-4fd8-ac30-71d05725cd3c
         entry: b343e99d-f01e-4cd1-8587-cf8e99ccec76
       -
+        id: e7c1a8d2-6b34-4f90-8a17-2d9c5f3b4e21
+        entry: 65cc1c09-8303-5da7-9ec6-0e157b9a0207
+        title: 'Best practices'
+      -
         id: cc80b938-34b4-4526-8ff1-e1f0ee043c9d
         entry: fedf1b6c-91e0-4ec7-920d-5d05d3007f22
         title: Cases

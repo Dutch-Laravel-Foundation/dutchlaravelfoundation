@@ -1,0 +1,488 @@
+.best-practices-index,
+.best-practice-detail {
+    --best-practices-ink: var(--dlf-ink, #19191d);
+    --best-practices-copy: var(--dlf-copy, #46464c);
+    --best-practices-muted: var(--dlf-muted, #737378);
+    --best-practices-line: var(--dlf-line, #ececec);
+    --best-practices-soft: var(--dlf-soft, #f7f7f8);
+    --best-practices-red: var(--dlf-red, #ff2d20);
+    color: var(--best-practices-copy);
+}
+
+.best-practices-kicker {
+    display: inline-flex;
+    margin-bottom: 1rem;
+    color: var(--best-practices-red);
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.best-practices-index__intro {
+    padding: 5.5rem 2.5rem 4.5rem;
+}
+
+.best-practices-index__intro h1,
+.best-practice-detail__heading h1 {
+    max-width: 48rem;
+    margin: 0;
+    color: var(--best-practices-ink);
+    font-size: clamp(2.75rem, 6vw, 5.25rem);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 0.98;
+    text-wrap: balance;
+}
+
+.best-practices-index__intro p {
+    max-width: 44rem;
+    margin: 1.75rem 0 0;
+    font-size: 1.125rem;
+    line-height: 1.7;
+    text-wrap: pretty;
+}
+
+.best-practices-index__directory {
+    display: grid;
+    grid-template-columns: 17.5rem minmax(0, 1fr);
+    border-bottom: 1px solid var(--best-practices-line);
+    padding: 0;
+}
+
+.best-practices-filters {
+    align-self: stretch;
+    padding: 2.5rem 2rem 5rem 0;
+    border-right: 1px solid var(--best-practices-line);
+}
+
+.best-practices-search > span:first-child,
+.best-practices-categories__label {
+    display: block;
+    margin-bottom: 0.75rem;
+    color: var(--best-practices-ink);
+    font-size: 0.8125rem;
+    font-weight: 600;
+}
+
+.best-practices-search__control {
+    position: relative;
+    display: block;
+}
+
+.best-practices-search__control svg {
+    position: absolute;
+    top: 50%;
+    left: 0.875rem;
+    width: 1rem;
+    height: 1rem;
+    fill: none;
+    stroke: var(--best-practices-muted);
+    stroke-linecap: round;
+    stroke-width: 1.75;
+    transform: translateY(-50%);
+}
+
+.best-practices-search input {
+    width: 100%;
+    height: 2.875rem;
+    padding: 0 0.875rem 0 2.5rem;
+    border: 1px solid var(--best-practices-line);
+    border-radius: 4px;
+    background: #fff;
+    color: var(--best-practices-ink);
+    font-size: 0.875rem;
+}
+
+.best-practices-search input:focus {
+    border-color: var(--best-practices-red);
+    outline: 2px solid rgb(255 45 32 / 14%);
+    outline-offset: 1px;
+}
+
+.best-practices-categories {
+    margin-top: 2.25rem;
+}
+
+.best-practices-categories__scroll {
+    display: flex;
+    flex-direction: column;
+}
+
+.best-practices-categories button {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.7rem 0;
+    border: 0;
+    border-bottom: 1px solid var(--best-practices-line);
+    background: transparent;
+    color: var(--best-practices-muted);
+    cursor: pointer;
+    font-size: 0.8125rem;
+    line-height: 1.35;
+    text-align: left;
+}
+
+.best-practices-categories button:first-child {
+    border-top: 1px solid var(--best-practices-line);
+}
+
+.best-practices-categories button:hover,
+.best-practices-categories button.is-active {
+    color: var(--best-practices-red);
+}
+
+.best-practices-categories button.is-active {
+    font-weight: 600;
+}
+
+.best-practices-categories small {
+    color: inherit;
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
+    font-size: 0.6875rem;
+}
+
+.best-practices-results {
+    min-width: 0;
+    padding: 2.5rem 0 5rem 2.5rem;
+}
+
+.best-practices-results__header {
+    display: flex;
+    min-height: 2.875rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid var(--best-practices-ink);
+}
+
+.best-practices-results__header p {
+    margin: 0;
+    color: var(--best-practices-ink);
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.best-practices-results__header button {
+    border: 0;
+    background: transparent;
+    color: var(--best-practices-red);
+    cursor: pointer;
+    font-size: 0.8125rem;
+    font-weight: 600;
+}
+
+.best-practices-results__list,
+.best-practices-results__fallback {
+    display: flex;
+    flex-direction: column;
+}
+
+.best-practice-row {
+    display: grid;
+    grid-template-columns: 9rem minmax(0, 1fr) auto;
+    gap: 1.5rem;
+    align-items: start;
+    padding: 1.6rem 0;
+    border-bottom: 1px solid var(--best-practices-line);
+    color: inherit;
+    text-decoration: none;
+}
+
+.best-practice-row__category,
+.best-practice-row__meta small {
+    padding-top: 0.18rem;
+    color: var(--best-practices-muted);
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    line-height: 1.45;
+    text-transform: uppercase;
+}
+
+.best-practice-row__body {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.best-practice-row__body strong {
+    color: var(--best-practices-ink);
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.best-practice-row__body > span {
+    color: var(--best-practices-muted);
+    font-size: 0.9375rem;
+    line-height: 1.55;
+}
+
+.best-practice-row__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.best-practice-row__meta small {
+    padding: 0.25rem 0.45rem;
+    border: 1px solid var(--best-practices-line);
+    border-radius: 4px;
+}
+
+.best-practice-row__meta svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    fill: none;
+    stroke: var(--best-practices-ink);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.5;
+    transition: transform 160ms ease;
+}
+
+.best-practice-row:hover .best-practice-row__body strong,
+.best-practice-row:focus-visible .best-practice-row__body strong {
+    color: var(--best-practices-red);
+}
+
+.best-practice-row:hover .best-practice-row__meta svg {
+    transform: translateX(0.2rem);
+}
+
+.best-practices-results__empty {
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.best-practices-results__empty strong {
+    display: block;
+    color: var(--best-practices-ink);
+}
+
+.best-practices-results__empty p {
+    margin: 0.5rem 0 0;
+}
+
+.best-practice-detail__hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 2rem;
+    align-items: end;
+    padding: 4.5rem 2.5rem 3rem;
+}
+
+.best-practice-detail__heading h1 {
+    max-width: 50rem;
+    font-size: clamp(2.25rem, 5vw, 4rem);
+    line-height: 1.04;
+}
+
+.best-practice-detail__heading p {
+    max-width: 44rem;
+    margin: 1.5rem 0 0;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+}
+
+.best-practice-detail__controls {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.875rem;
+}
+
+.best-practice-switcher,
+.best-practice-language {
+    display: inline-flex;
+    padding: 0.2rem;
+    border: 1px solid var(--best-practices-line);
+    border-radius: 4px;
+    background: var(--best-practices-soft);
+}
+
+.best-practice-switcher a,
+.best-practice-language a {
+    padding: 0.55rem 0.75rem;
+    border-radius: 3px;
+    color: var(--best-practices-muted);
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.best-practice-switcher a[aria-current="page"],
+.best-practice-language a[aria-current="page"] {
+    background: #fff;
+    color: var(--best-practices-red);
+}
+
+.best-practice-detail__source {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 1.5rem 2.5rem;
+    border-bottom: 1px solid var(--best-practices-line);
+    color: var(--best-practices-muted);
+    font-size: 0.8125rem;
+}
+
+.best-practice-detail__source a {
+    flex: none;
+    color: var(--best-practices-red);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.best-practice-reference {
+    margin-top: 1rem;
+    border-top: 1px solid var(--best-practices-line);
+}
+
+.best-practice-reference summary {
+    padding: 1rem 0;
+    color: var(--best-practices-ink);
+    cursor: pointer;
+    font-weight: 600;
+}
+
+@media (max-width: 1023px) {
+    .best-practices-index__directory {
+        grid-template-columns: 14rem minmax(0, 1fr);
+    }
+
+    .best-practices-filters {
+        padding-right: 1.5rem;
+    }
+
+    .best-practices-results {
+        padding-left: 1.5rem;
+    }
+
+    .best-practice-row {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 0.75rem 1rem;
+    }
+
+    .best-practice-row__category {
+        grid-column: 1 / -1;
+        padding: 0;
+    }
+
+    .best-practice-detail__hero {
+        grid-template-columns: 1fr;
+    }
+
+    .best-practice-detail__controls {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 767px) {
+    .best-practices-index__intro {
+        padding: 3.5rem 1.25rem 3rem;
+    }
+
+    .best-practices-index__intro h1 {
+        font-size: 2.75rem;
+    }
+
+    .best-practices-index__directory {
+        display: block;
+    }
+
+    .best-practices-filters {
+        padding: 1.5rem 1.25rem 0;
+        border-right: 0;
+    }
+
+    .best-practices-categories {
+        margin-top: 1.5rem;
+    }
+
+    .best-practices-categories__scroll {
+        overflow-x: auto;
+        flex-direction: row;
+        gap: 0.5rem;
+        margin: 0 -1.25rem;
+        padding: 0 1.25rem 1rem;
+        scrollbar-width: none;
+    }
+
+    .best-practices-categories__scroll::-webkit-scrollbar {
+        display: none;
+    }
+
+    .best-practices-categories button,
+    .best-practices-categories button:first-child {
+        width: auto;
+        flex: none;
+        gap: 0.6rem;
+        padding: 0.65rem 0.75rem;
+        border: 1px solid var(--best-practices-line);
+        border-radius: 4px;
+        background: #fff;
+        white-space: nowrap;
+    }
+
+    .best-practices-categories button.is-active {
+        border-color: var(--best-practices-red);
+    }
+
+    .best-practices-results {
+        padding: 1.5rem 1.25rem 3.5rem;
+        border-top: 1px solid var(--best-practices-line);
+    }
+
+    .best-practice-row {
+        padding: 1.35rem 0;
+    }
+
+    .best-practice-row__meta small {
+        display: none;
+    }
+
+    .best-practice-row__body > span {
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+
+    .best-practice-detail__hero {
+        padding: 3rem 1.25rem 2rem;
+    }
+
+    .best-practice-detail__heading h1 {
+        font-size: 2.35rem;
+    }
+
+    .best-practice-detail__controls {
+        overflow-x: auto;
+        margin: 0 -1.25rem;
+        padding: 0 1.25rem 0.25rem;
+    }
+
+    .best-practice-detail__source {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1.5rem 1.25rem;
+    }
+}

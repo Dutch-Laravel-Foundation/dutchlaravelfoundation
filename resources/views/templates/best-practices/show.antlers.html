@@ -1,0 +1,73 @@
+<div class="editorial-article best-practice-detail">
+    <div class="editorial-rail editorial-rail--article" data-dlf-footer-cta-stage>
+        {{ partial:breadcrumb href="/best-practices" label="Best practices" :current="category_title" }}
+
+        <header class="best-practice-detail__hero dlf-divider-section">
+            <div class="best-practice-detail__heading">
+                <span class="best-practices-kicker">{{ category_title }}</span>
+                {{ if get:lang == "en" }}
+                    <h1>{{ title_en }}</h1>
+                    <p>{{ summary_en }}</p>
+                {{ else }}
+                    <h1>{{ title_nl ?? title_en }}</h1>
+                    <p>{{ summary_nl ?? summary_en }}</p>
+                {{ /if }}
+            </div>
+
+            <div class="best-practice-detail__controls">
+                <nav class="best-practice-switcher" aria-label="Weergave">
+                    <a
+                        href="{{ url }}{{ if get:lang == 'en' }}?lang=en{{ /if }}"
+                        {{ unless get:view == "skill" }}aria-current="page"{{ /unless }}
+                    >Best practice</a>
+                    {{ if has_skill }}
+                        <a
+                            href="{{ url }}?view=skill"
+                            {{ if get:view == "skill" }}aria-current="page"{{ /if }}
+                        >Skill</a>
+                    {{ /if }}
+                </nav>
+
+                {{ unless get:view == "skill" }}
+                    <nav class="best-practice-language" aria-label="Taal">
+                        <a href="{{ url }}" {{ unless get:lang == "en" }}aria-current="page"{{ /unless }}>NL</a>
+                        <a href="{{ url }}?lang=en" {{ if get:lang == "en" }}aria-current="page"{{ /if }}>EN</a>
+                    </nav>
+                {{ /unless }}
+            </div>
+        </header>
+
+        <div class="editorial-article__body best-practice-detail__body dlf-divider-section" data-editorial-article>
+            {{ partial:editorial/toc label="{get:view === 'skill' ? 'In deze skill' : 'In deze best practice'}" }}
+
+            <article class="editorial-article__prose" data-editorial-prose>
+                {{ if get:view == "skill" && has_skill }}
+                    {{ skill_content }}
+
+                    {{ if skill_references }}
+                        <h2>Referenties</h2>
+                        {{ skill_references }}
+                            <details class="best-practice-reference">
+                                <summary>{{ title }}</summary>
+                                <div>{{ content }}</div>
+                            </details>
+                        {{ /skill_references }}
+                    {{ /if }}
+                {{ elseif get:lang == "en" }}
+                    {{ content_en }}
+                {{ else }}
+                    {{ content_nl ?? content_en }}
+                {{ /if }}
+            </article>
+        </div>
+
+        <footer class="best-practice-detail__source">
+            <span>Deze richtlijn wordt periodiek gesynchroniseerd vanuit de openbare bron.</span>
+            {{ if get:view == "skill" && skill_github_url }}
+                <a href="{{ skill_github_url }}" target="_blank" rel="noopener noreferrer">Bekijk skill op GitHub ↗</a>
+            {{ elseif github_url }}
+                <a href="{{ github_url }}" target="_blank" rel="noopener noreferrer">Bekijk bron op GitHub ↗</a>
+            {{ /if }}
+        </footer>
+    </div>
+</div>

@@ -1,0 +1,187 @@
+title: 'Best practices'
+tabs:
+  main:
+    display: Inhoud
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              display: Titel
+              read_only: true
+          -
+            handle: title_nl
+            field:
+              type: text
+              display: 'Nederlandse titel'
+              read_only: true
+          -
+            handle: title_en
+            field:
+              type: text
+              display: 'Engelse titel'
+              read_only: true
+          -
+            handle: summary_nl
+            field:
+              type: textarea
+              display: 'Nederlandse samenvatting'
+              read_only: true
+          -
+            handle: summary_en
+            field:
+              type: textarea
+              display: 'Engelse samenvatting'
+              read_only: true
+          -
+            handle: content_nl
+            field:
+              type: markdown
+              display: 'Nederlandse richtlijn'
+              read_only: true
+          -
+            handle: content_en
+            field:
+              type: markdown
+              display: 'Engelse richtlijn'
+              read_only: true
+          -
+            handle: chapters_nl
+            field:
+              type: grid
+              display: 'Nederlandse hoofdstukken'
+              read_only: true
+              fields:
+                -
+                  handle: title
+                  field:
+                    type: text
+                -
+                  handle: anchor
+                  field:
+                    type: text
+          -
+            handle: chapters_en
+            field:
+              type: grid
+              display: 'Engelse hoofdstukken'
+              read_only: true
+              fields:
+                -
+                  handle: title
+                  field:
+                    type: text
+                -
+                  handle: anchor
+                  field:
+                    type: text
+  skill:
+    display: Skill
+    sections:
+      -
+        fields:
+          -
+            handle: has_skill
+            field:
+              type: toggle
+              display: 'Heeft skill'
+              read_only: true
+          -
+            handle: skill_content
+            field:
+              type: markdown
+              display: Skill
+              read_only: true
+          -
+            handle: skill_references
+            field:
+              type: grid
+              display: Referenties
+              read_only: true
+              fields:
+                -
+                  handle: path
+                  field:
+                    type: text
+                -
+                  handle: title
+                  field:
+                    type: text
+                -
+                  handle: content
+                  field:
+                    type: markdown
+  source:
+    display: Bron
+    sections:
+      -
+        fields:
+          -
+            handle: best_practice_categories
+            field:
+              type: terms
+              taxonomies:
+                - best_practice_categories
+              max_items: 1
+              display: Categorie
+              read_only: true
+          -
+            handle: category_slug
+            field:
+              type: text
+              read_only: true
+          -
+            handle: category_title
+            field:
+              type: text
+              read_only: true
+          -
+            handle: category_title_en
+            field:
+              type: text
+              read_only: true
+          -
+            handle: source_path
+            field:
+              type: text
+              read_only: true
+          -
+            handle: source_sha
+            field:
+              type: text
+              read_only: true
+          -
+            handle: github_url
+            field:
+              type: link
+              read_only: true
+          -
+            handle: skill_source_path
+            field:
+              type: text
+              read_only: true
+          -
+            handle: skill_github_url
+            field:
+              type: link
+              read_only: true
+  sidebar:
+    display: Zijbalk
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: false
+              validate: 'max:200'
+  seo:
+    display: SEO
+    sections:
+      -
+        fields:
+          -
+            import: seo
