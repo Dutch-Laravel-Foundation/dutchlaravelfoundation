@@ -1,3 +1,30 @@
+.best-practices-index .editorial-page__header {
+    display: grid;
+    align-items: center;
+    grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.best-practices-intro__github {
+    display: grid;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-right: 2.5rem;
+    color: var(--editorial-ink);
+    place-items: center;
+    text-decoration: none;
+    transition: color 180ms ease;
+}
+
+.best-practices-intro__github:hover {
+    color: var(--editorial-red);
+}
+
+.best-practices-intro__github svg {
+    width: 1.75rem;
+    height: 1.75rem;
+    fill: currentColor;
+}
+
 .best-practices-directory {
     display: grid;
     grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
@@ -278,6 +305,10 @@
 }
 
 @media (max-width: 1023px) {
+    .best-practices-intro__github {
+        margin-right: 1.5rem;
+    }
+
     .best-practices-directory {
         grid-template-columns: minmax(0, 1fr);
     }
@@ -365,5 +396,11 @@
         flex-direction: column;
         gap: 0.75rem;
         padding: 1.5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .best-practices-intro__github {
+        transition: none;
     }
 }
