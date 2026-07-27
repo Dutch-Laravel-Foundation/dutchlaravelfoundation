@@ -49,9 +49,13 @@
             {{ partial:editorial/toc label="In deze best practice" }}
 
             <aside class="best-practice-detail__language-sidebar" aria-label="Taal">
-                <span class="best-practice-detail__label">Taal</span>
                 <nav class="best-practice-language" aria-label="Kies een taal">
-                    <a href="{{ url }}" {{ unless get:lang == "en" }}aria-current="page"{{ /unless }}>
+                    <a
+                        href="{{ url }}"
+                        aria-label="Nederlands"
+                        title="Nederlands"
+                        {{ unless get:lang == "en" }}aria-current="page"{{ /unless }}
+                    >
                         <span class="best-practice-language__flag" aria-hidden="true">
                             <svg viewBox="0 0 24 16">
                                 <path fill="#ae1c28" d="M0 0h24v5.333H0z"></path>
@@ -59,9 +63,13 @@
                                 <path fill="#21468b" d="M0 10.667h24V16H0z"></path>
                             </svg>
                         </span>
-                        <span>Nederlands</span>
                     </a>
-                    <a href="{{ url }}?lang=en" {{ if get:lang == "en" }}aria-current="page"{{ /if }}>
+                    <a
+                        href="{{ url }}?lang=en"
+                        aria-label="English"
+                        title="English"
+                        {{ if get:lang == "en" }}aria-current="page"{{ /if }}
+                    >
                         <span class="best-practice-language__flag" aria-hidden="true">
                             <svg viewBox="0 0 24 16">
                                 <path fill="#012169" d="M0 0h24v16H0z"></path>
@@ -71,7 +79,6 @@
                                 <path stroke="#c8102e" stroke-width="3" d="M12 0v16M0 8h24"></path>
                             </svg>
                         </span>
-                        <span>English</span>
                     </a>
                 </nav>
             </aside>
