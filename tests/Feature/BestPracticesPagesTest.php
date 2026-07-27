@@ -19,6 +19,7 @@ final class BestPracticesPagesTest extends TestCase
             ->assertSee('/best-practices/routing-use-form-request-classes', false)
             ->assertSee('href="https://github.com/Dutch-Laravel-Foundation/best-practices"', false)
             ->assertSee('aria-label="Bekijk de best practices op GitHub"', false)
+            ->assertSee('Help ons deze best practices op GitHub te verbeteren')
             ->assertSee('data-best-practice-filter', false);
     }
 

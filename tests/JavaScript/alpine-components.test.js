@@ -76,3 +76,30 @@ test("best practice categories without practices are omitted", () => {
         ["routing"],
     );
 });
+
+test("best practice search can be cleared and refocused", () => {
+    const documentRoot = {
+        querySelectorAll() {
+            return [];
+        },
+    };
+    const filter = createBestPracticesFilter({ document: documentRoot });
+    let focused = false;
+
+    filter.query = "routing";
+    filter.$refs = {
+        search: {
+            focus() {
+                focused = true;
+            },
+        },
+    };
+    filter.$nextTick = (callback) => callback();
+
+    assert.equal(typeof filter.clearQuery, "function");
+
+    filter.clearQuery();
+
+    assert.equal(filter.query, "");
+    assert.equal(focused, true);
+});

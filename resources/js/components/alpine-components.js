@@ -115,6 +115,11 @@ export const createBestPracticesFilter = ({ document: documentRoot = document } 
             this.category = "";
         },
 
+        clearQuery() {
+            this.query = "";
+            this.$nextTick(() => this.$refs.search.focus());
+        },
+
         get hasActiveFilters() {
             return this.query.trim() !== "" || this.category !== "";
         },
