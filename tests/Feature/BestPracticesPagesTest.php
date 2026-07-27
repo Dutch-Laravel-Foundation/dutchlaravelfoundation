@@ -39,16 +39,32 @@ final class BestPracticesPagesTest extends TestCase
             ->assertSee('Gebruik Form Request-classes')
             ->assertSee('Menselijke begeleiding')
             ->assertDontSee('Human Guidance')
-            ->assertSee('href="'.$url.'?lang=en"', false);
+            ->assertSee('href="'.$url.'?lang=en"', false)
+            ->assertSee('class="best-practice-detail__language-sidebar"', false)
+            ->assertSee('class="best-practice-language__flag"', false);
     }
 
-    public function testDetailExposesItsSkillAsASeparateView(): void
+    public function testDetailDisplaysItsSkillAtTheBottom(): void
     {
         $url = '/best-practices/routing-use-form-request-classes';
 
         $this->get($url)
             ->assertOk()
-            ->assertSee('Skill')
-            ->assertSee('href="'.$url.'?view=skill"', false);
+            ->assertSee('id="best-practice-skill"', false)
+            ->assertSee('Laravel Boost skill')
+            ->assertSee('Core Guidance')
+            ->assertSee('Bekijk SKILL.md op GitHub')
+            ->assertDontSee('?view=skill');
+    }
+
+    public function testDetailLinksToTheDutchMarkdownTranslation(): void
+    {
+        $this->get('/best-practices/routing-use-form-request-classes')
+            ->assertOk()
+            ->assertSee('Help ons deze best practice in het Nederlands te verbeteren')
+            ->assertSee(
+                'href="https://github.com/Dutch-Laravel-Foundation/best-practices/edit/main/routing/use-form-request-classes/translations/nl.md"',
+                false,
+            );
     }
 }

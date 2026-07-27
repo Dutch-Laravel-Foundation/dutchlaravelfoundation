@@ -1,3 +1,5 @@
+{{ translation_edit_path = source_path | replace:'BEST_PRACTICE.md':'translations/nl.md' }}
+
 <div class="editorial-article best-practice-detail">
     <div class="editorial-rail editorial-rail--article" data-dlf-footer-cta-stage>
         {{ partial:breadcrumb href="/best-practices" label="Best practices" :current="category_title" }}
@@ -16,40 +18,91 @@
                 {{ /if }}
             </div>
 
-            <aside class="best-practice-detail__panel" aria-label="Weergave-instellingen">
-                <div class="best-practice-detail__control">
-                    <span class="best-practice-detail__label">Inhoud</span>
-                    <nav class="best-practice-switcher" aria-label="Inhoud">
-                        <a
-                            href="{{ url }}{{ if get:lang == 'en' }}?lang=en{{ /if }}"
-                            {{ unless get:view == "skill" }}aria-current="page"{{ /unless }}
-                        >Best practice</a>
-                        {{ if has_skill }}
-                            <a
-                                href="{{ url }}?view=skill"
-                                {{ if get:view == "skill" }}aria-current="page"{{ /if }}
-                            >Skill</a>
-                        {{ /if }}
-                    </nav>
-                </div>
+            <aside class="best-practice-detail__contribute" aria-label="Draag bij via GitHub">
+                {{ if github_url }}
+                    <a
+                        class="best-practices-intro__github"
+                        href="{{ github_url }}"
+                        aria-label="Bekijk deze best practice op GitHub"
+                        title="Bekijk deze best practice op GitHub"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 1C5.923 1 1 5.923 1 12c0 4.867 3.149 8.979 7.521 10.436.55.096.756-.233.756-.522 0-.262-.013-1.128-.013-2.049-3.059.559-3.705-1.297-3.705-1.297-.5-1.271-1.221-1.61-1.221-1.61-.998-.681.076-.667.076-.667 1.102.077 1.682 1.132 1.682 1.132.979 1.678 2.568 1.193 3.195.912.099-.709.383-1.193.697-1.467-2.442-.278-5.01-1.221-5.01-5.433 0-1.2.429-2.182 1.132-2.952-.114-.278-.491-1.397.107-2.912 0 0 .923-.295 3.025 1.127A10.5 10.5 0 0 1 12 6.844a10.5 10.5 0 0 1 2.756.371c2.102-1.422 3.023-1.127 3.023-1.127.6 1.515.223 2.634.11 2.912.705.77 1.13 1.752 1.13 2.952 0 4.223-2.572 5.151-5.021 5.424.394.34.744 1.01.744 2.037 0 1.47-.013 2.655-.013 3.015 0 .289.198.623.762.517C19.854 20.974 23 16.865 23 12c0-6.077-4.923-11-11-11Z"></path>
+                        </svg>
+                    </a>
+                {{ /if }}
 
-                {{ unless get:view == "skill" }}
-                    <div class="best-practice-detail__control">
-                        <span class="best-practice-detail__label">Taal</span>
-                        <nav class="best-practice-language" aria-label="Taal">
-                            <a href="{{ url }}" {{ unless get:lang == "en" }}aria-current="page"{{ /unless }}>Nederlands</a>
-                            <a href="{{ url }}?lang=en" {{ if get:lang == "en" }}aria-current="page"{{ /if }}>English</a>
-                        </nav>
-                    </div>
-                {{ /unless }}
+                <div class="best-practice-detail__contribute-copy">
+                    <span class="best-practice-detail__label">GitHub</span>
+                    <a
+                        href="https://github.com/Dutch-Laravel-Foundation/best-practices/edit/main/{{ translation_edit_path }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >Help ons deze best practice in het Nederlands te verbeteren</a>
+                </div>
             </aside>
         </header>
 
         <div class="editorial-article__body best-practice-detail__body dlf-divider-section" data-editorial-article>
-            {{ partial:editorial/toc label="{get:view === 'skill' ? 'In deze skill' : 'In deze best practice'}" }}
+            {{ partial:editorial/toc label="In deze best practice" }}
+
+            <aside class="best-practice-detail__language-sidebar" aria-label="Taal">
+                <span class="best-practice-detail__label">Taal</span>
+                <nav class="best-practice-language" aria-label="Kies een taal">
+                    <a href="{{ url }}" {{ unless get:lang == "en" }}aria-current="page"{{ /unless }}>
+                        <span class="best-practice-language__flag" aria-hidden="true">
+                            <svg viewBox="0 0 24 16">
+                                <path fill="#ae1c28" d="M0 0h24v5.333H0z"></path>
+                                <path fill="#fff" d="M0 5.333h24v5.334H0z"></path>
+                                <path fill="#21468b" d="M0 10.667h24V16H0z"></path>
+                            </svg>
+                        </span>
+                        <span>Nederlands</span>
+                    </a>
+                    <a href="{{ url }}?lang=en" {{ if get:lang == "en" }}aria-current="page"{{ /if }}>
+                        <span class="best-practice-language__flag" aria-hidden="true">
+                            <svg viewBox="0 0 24 16">
+                                <path fill="#012169" d="M0 0h24v16H0z"></path>
+                                <path stroke="#fff" stroke-width="3.2" d="m0 0 24 16M24 0 0 16"></path>
+                                <path stroke="#c8102e" stroke-width="1.6" d="m0 0 24 16M24 0 0 16"></path>
+                                <path stroke="#fff" stroke-width="5" d="M12 0v16M0 8h24"></path>
+                                <path stroke="#c8102e" stroke-width="3" d="M12 0v16M0 8h24"></path>
+                            </svg>
+                        </span>
+                        <span>English</span>
+                    </a>
+                </nav>
+            </aside>
 
             <article class="editorial-article__prose" data-editorial-prose>
-                {{ if get:view == "skill" && has_skill }}
+                {{ if get:lang == "en" }}
+                    {{ content_en }}
+                {{ else }}
+                    {{ content_nl ?? content_en }}
+                {{ /if }}
+            </article>
+        </div>
+
+        {{ if has_skill }}
+            <section
+                id="best-practice-skill"
+                class="best-practice-detail__skill dlf-divider-section"
+                aria-label="Laravel Boost skill"
+            >
+                <header class="best-practice-detail__skill-intro">
+                    <span class="best-practice-detail__label">Skill</span>
+                    <strong>Laravel Boost skill</strong>
+                    <p>Gebruik deze skill om de richtlijn rechtstreeks toe te passen met een AI-assistent.</p>
+                    {{ if skill_github_url }}
+                        <a href="{{ skill_github_url }}" target="_blank" rel="noopener noreferrer">
+                            Bekijk SKILL.md op GitHub
+                        </a>
+                    {{ /if }}
+                </header>
+
+                <article class="editorial-article__prose best-practice-detail__skill-prose">
                     {{ skill_content }}
 
                     {{ if skill_references }}
@@ -61,19 +114,13 @@
                             </details>
                         {{ /skill_references }}
                     {{ /if }}
-                {{ elseif get:lang == "en" }}
-                    {{ content_en }}
-                {{ else }}
-                    {{ content_nl ?? content_en }}
-                {{ /if }}
-            </article>
-        </div>
+                </article>
+            </section>
+        {{ /if }}
 
         <footer class="best-practice-detail__source dlf-divider-section">
             <span>Deze richtlijn wordt periodiek gesynchroniseerd vanuit de openbare bron.</span>
-            {{ if get:view == "skill" && skill_github_url }}
-                <a href="{{ skill_github_url }}" target="_blank" rel="noopener noreferrer">Bekijk skill op GitHub ↗</a>
-            {{ elseif github_url }}
+            {{ if github_url }}
                 <a href="{{ github_url }}" target="_blank" rel="noopener noreferrer">Bekijk bron op GitHub ↗</a>
             {{ /if }}
         </footer>
