@@ -60,6 +60,16 @@ const initializeEditorialArticle = (root) => {
         sections.push(author);
     }
 
+    const additionalSections = [...article.querySelectorAll("[data-editorial-toc-section]")].filter(
+        (section) => !sections.includes(section),
+    );
+    const additionalSectionOffset = sections.length;
+
+    additionalSections.forEach((section, index) => {
+        section.id = createHeadingId(section, additionalSectionOffset + index, usedIds);
+    });
+    sections.push(...additionalSections);
+
     if (!sections.length) {
         return;
     }
@@ -69,7 +79,9 @@ const initializeEditorialArticle = (root) => {
         const link = document.createElement("a");
 
         link.href = `#${section.id}`;
-        link.textContent = section === author ? "Over de auteur" : section.textContent.trim();
+        link.textContent =
+            section.dataset.editorialTocLabel ||
+            (section === author ? "Over de auteur" : section.textContent.trim());
         item.append(link);
         list.append(item);
 

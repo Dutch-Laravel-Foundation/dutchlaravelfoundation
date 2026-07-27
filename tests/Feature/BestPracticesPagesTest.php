@@ -69,7 +69,10 @@ final class BestPracticesPagesTest extends TestCase
             ->assertSee('class="language-markdown"', false)
             ->assertSee('## Core Guidance')
             ->assertDontSee('<h2>Core Guidance</h2>', false)
-            ->assertSee('Bekijk op GitHub')
+            ->assertSee('data-editorial-toc-section', false)
+            ->assertSee('data-editorial-toc-label="Laravel Boost Skill"', false)
+            ->assertSee('aria-label="Bekijk Laravel Boost skill op GitHub"', false)
+            ->assertDontSee('<span>Bekijk op GitHub</span>', false)
             ->assertDontSee('?view=skill');
     }
 
