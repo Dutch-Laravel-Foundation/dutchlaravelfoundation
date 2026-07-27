@@ -51,9 +51,11 @@ final class BestPracticesPagesTest extends TestCase
         $this->get($url)
             ->assertOk()
             ->assertSee('id="best-practice-skill"', false)
-            ->assertSee('Laravel Boost skill')
-            ->assertSee('Core Guidance')
-            ->assertSee('Bekijk SKILL.md op GitHub')
+            ->assertSee('data-code-copy', false)
+            ->assertSee('class="language-markdown"', false)
+            ->assertSee('## Core Guidance')
+            ->assertDontSee('<h2>Core Guidance</h2>', false)
+            ->assertSee('Bekijk op GitHub')
             ->assertDontSee('?view=skill');
     }
 
