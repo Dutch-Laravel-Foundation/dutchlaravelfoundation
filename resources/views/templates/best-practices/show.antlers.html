@@ -10,6 +10,15 @@
                     <span class="editorial-entry__category">{{ category_title }}</span>
                 </div>
                 <h1>{{ title_nl }}</h1>
+                {{ if synced_at }}
+                    <p class="best-practice-detail__updated">
+                        Voor het laatst bijgewerkt op:
+                        <time
+                            datetime="{{ synced_at | format('c') }}"
+                            title="{{ synced_at | iso_format('D MMMM YYYY [om] HH:mm') }}"
+                        >{{ synced_at | relative }}</time>
+                    </p>
+                {{ /if }}
             </div>
 
             <aside class="best-practice-detail__contribute" aria-label="Draag bij via GitHub">

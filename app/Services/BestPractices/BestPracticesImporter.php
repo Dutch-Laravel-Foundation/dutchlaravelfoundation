@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\BestPractices;
 
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
@@ -75,6 +76,8 @@ final readonly class BestPracticesImporter
             ]);
 
             foreach ($practiceFiles as $practicePath) {
+                $entrySlug = "{$categorySlug}-".basename(dirname($practicePath));
+                $entryPath = "{$entriesPath}/{$entrySlug}.md";
                 $entry = $this->entryData(
                     sourcePath: $sourcePath,
                     practicePath: $practicePath,
@@ -84,9 +87,9 @@ final readonly class BestPracticesImporter
                     sourceSha: $sourceSha,
                     githubBaseUrl: $githubBaseUrl,
                 );
-                $entrySlug = "{$categorySlug}-".basename(dirname($practicePath));
+                $entry['synced_at'] = $this->syncedAt($entryPath, $entry);
 
-                $entryFiles["{$entriesPath}/{$entrySlug}.md"] = $this->frontMatterFile($entry);
+                $entryFiles[$entryPath] = $this->frontMatterFile($entry);
                 $practiceCount++;
             }
         }
@@ -374,6 +377,46 @@ final readonly class BestPracticesImporter
             2,
             Yaml::DUMP_MULTI_LINE_LITERAL_BLOCK | Yaml::DUMP_EMPTY_ARRAY_AS_SEQUENCE,
         );
+    }
+
+    /**
+     * @param array<string, mixed> $entry
+     */
+    private function syncedAt(string $entryPath, array $entry): int
+    {
+        $existingEntry = $this->frontMatterData($entryPath);
+        $existingSyncedAt = $existingEntry['synced_at'] ?? null;
+
+        unset($existingEntry['synced_at']);
+
+        if (is_int($existingSyncedAt) && $existingEntry === $entry) {
+            return $existingSyncedAt;
+        }
+
+        return Date::now()->timestamp;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function frontMatterData(string $path): array
+    {
+        if (! File::exists($path)) {
+            return [];
+        }
+
+        $contents = File::get($path);
+
+        if (
+            ! is_string($contents)
+            || preg_match('/^---\n(.*?)\n---\n$/s', $contents, $matches) !== 1
+        ) {
+            return [];
+        }
+
+        $data = Yaml::parse($matches[1]);
+
+        return is_array($data) ? $data : [];
     }
 
     /**

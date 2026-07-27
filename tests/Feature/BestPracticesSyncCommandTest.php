@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Yaml\Yaml;
 use Tests\TestCase;
@@ -31,6 +32,7 @@ final class BestPracticesSyncCommandTest extends TestCase
 
     protected function tearDown(): void
     {
+        Date::setTestNow();
         File::deleteDirectory($this->sourcePath);
         File::deleteDirectory(dirname($this->entriesPath));
 
@@ -39,6 +41,8 @@ final class BestPracticesSyncCommandTest extends TestCase
 
     public function testItImportsNestedMultilingualPracticesAndSkills(): void
     {
+        Date::setTestNow('2026-07-22 10:15:00');
+
         $this->writeSourceFile('routing/README.md', "# Routing\n");
         $this->writeSourceFile('documentation/README.md', "# Documentation\n");
         $this->writeSourceFile(
@@ -91,6 +95,7 @@ final class BestPracticesSyncCommandTest extends TestCase
         $this->assertSame('Routing', $entry['category_title']);
         $this->assertSame('routing/use-form-requests/BEST_PRACTICE.md', $entry['source_path']);
         $this->assertSame('abc1234', $entry['source_sha']);
+        $this->assertSame(Date::now()->timestamp, $entry['synced_at']);
         $this->assertSame(
             'https://github.com/Dutch-Laravel-Foundation/best-practices/blob/abc1234/routing/use-form-requests/BEST_PRACTICE.md',
             $entry['github_url'],
@@ -153,6 +158,7 @@ final class BestPracticesSyncCommandTest extends TestCase
             'skill_content',
             'skill_references',
             'source_sha',
+            'synced_at',
         ] as $handle) {
             $this->assertArrayHasKey($handle, $fields);
         }
@@ -160,6 +166,8 @@ final class BestPracticesSyncCommandTest extends TestCase
 
     public function testImportIsIdempotentAndRemovesStaleFiles(): void
     {
+        Date::setTestNow('2026-07-22 10:15:00');
+
         $this->writeSourceFile('testing/README.md', "# Testing\n");
         $this->writeSourceFile(
             'testing/use-pest/BEST_PRACTICE.md',
@@ -181,18 +189,34 @@ final class BestPracticesSyncCommandTest extends TestCase
         $entryPath = "{$this->entriesPath}/testing-use-pest.md";
         $firstHash = hash_file('sha256', $entryPath);
         $entry = $this->parseFrontMatter($entryPath);
+        $firstSyncedAt = Date::now()->timestamp;
 
         $this->assertFalse($entry['has_skill']);
         $this->assertNull($entry['title_nl']);
         $this->assertNull($entry['content_nl']);
+        $this->assertSame($firstSyncedAt, $entry['synced_at']);
         $this->assertFileDoesNotExist("{$this->entriesPath}/stale.md");
         $this->assertFileDoesNotExist("{$this->taxonomyPath}/stale.yaml");
 
+        Date::setTestNow('2026-07-27 10:15:00');
+
         $this->assertSame(0, Artisan::call('best-practices:sync', $arguments));
         $this->assertSame($firstHash, hash_file('sha256', $entryPath));
+        $this->assertSame($firstSyncedAt, $this->parseFrontMatter($entryPath)['synced_at']);
         $this->assertStringContainsString(
             'Changed files: 0; deleted stale files: 0.',
             Artisan::output(),
+        );
+
+        $this->writeSourceFile(
+            'testing/use-pest/BEST_PRACTICE.md',
+            "# Use Pest\n\n## Introduction\n\nWrite focused and maintainable tests.\n",
+        );
+
+        $this->assertSame(0, Artisan::call('best-practices:sync', $arguments));
+        $this->assertSame(
+            Date::now()->timestamp,
+            $this->parseFrontMatter($entryPath)['synced_at'],
         );
     }
 

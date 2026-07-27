@@ -153,6 +153,13 @@ tabs:
               type: text
               read_only: true
           -
+            handle: synced_at
+            field:
+              type: date
+              display: 'Laatst bijgewerkt'
+              time_enabled: true
+              read_only: true
+          -
             handle: github_url
             field:
               type: link

@@ -136,4 +136,5 @@ skill_content: |-
 skill_source_path: code-standards/use-automation-to-adhere-to-a-standard/skill/SKILL.md
 skill_github_url: 'https://github.com/Dutch-Laravel-Foundation/best-practices/blob/c7034be11f69954eac43e50486b6e5bebde98c46/code-standards/use-automation-to-adhere-to-a-standard/skill/SKILL.md'
 skill_references: []
+synced_at: 1785159222
 ---

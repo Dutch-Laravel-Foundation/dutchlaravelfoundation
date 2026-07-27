@@ -282,6 +282,13 @@
     min-height: 0;
 }
 
+.best-practice-detail__updated {
+    margin: 0;
+    color: var(--editorial-muted);
+    font-size: 0.8125rem;
+    line-height: 1.5;
+}
+
 .best-practice-detail__contribute {
     display: flex;
     flex-direction: column;

@@ -62,6 +62,8 @@ final class BestPracticesPagesTest extends TestCase
 
         $this->get($url)
             ->assertOk()
+            ->assertSee('class="best-practice-detail__updated"', false)
+            ->assertSee('Voor het laatst bijgewerkt op:')
             ->assertSee('id="best-practice-skill"', false)
             ->assertSee('data-code-copy', false)
             ->assertSee('class="language-markdown"', false)
