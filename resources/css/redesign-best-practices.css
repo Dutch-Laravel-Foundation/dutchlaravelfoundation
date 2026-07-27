@@ -1,6 +1,6 @@
 .best-practices-index .editorial-page__header {
     display: grid;
-    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
 }
 
 .best-practices-intro__github-panel {
@@ -30,7 +30,7 @@
 
 .best-practices-directory {
     display: grid;
-    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
 }
 
 .best-practices-filters {
