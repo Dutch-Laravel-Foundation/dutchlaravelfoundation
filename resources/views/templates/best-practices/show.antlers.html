@@ -2,12 +2,22 @@
 
 <div class="editorial-article best-practice-detail">
     <div class="editorial-rail editorial-rail--article" data-dlf-footer-cta-stage>
-        {{ partial:breadcrumb href="/best-practices" label="Best practices" :current="category_title" }}
+        {{ partial:breadcrumb
+            href="/best-practices"
+            label="Best practices"
+            :current="category_title"
+            current_href="/best-practices?category={category_slug}"
+        }}
 
         <header class="editorial-article__hero best-practice-detail__hero dlf-divider-section dlf-divider-split">
             <div class="editorial-article__head">
                 <div class="editorial-entry__meta editorial-article__meta">
-                    <span class="editorial-entry__category">{{ category_title }}</span>
+                    <a
+                        class="editorial-entry__category"
+                        href="/best-practices?category={{ category_slug }}"
+                    >
+                        {{ category_title }}
+                    </a>
                 </div>
                 <h1>{{ title_nl }}</h1>
                 {{ if synced_at }}

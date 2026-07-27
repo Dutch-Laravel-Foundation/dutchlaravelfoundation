@@ -282,6 +282,14 @@
     min-height: 0;
 }
 
+.best-practice-detail a.editorial-entry__category {
+    text-decoration: none;
+}
+
+.best-practice-detail a.editorial-entry__category:hover {
+    color: var(--editorial-ink);
+}
+
 .best-practice-detail__updated {
     margin: 0;
     color: var(--editorial-muted);

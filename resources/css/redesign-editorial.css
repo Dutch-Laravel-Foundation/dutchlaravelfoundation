@@ -440,6 +440,14 @@
     color: var(--editorial-red, var(--dlf-red, #ff2d20));
 }
 
+.editorial-breadcrumb a.editorial-breadcrumb__current {
+    text-decoration: none;
+}
+
+.editorial-breadcrumb a.editorial-breadcrumb__current:hover {
+    color: var(--editorial-ink, var(--dlf-ink, #202020));
+}
+
 .editorial-breadcrumb .editorial-breadcrumb__separator {
     color: var(--editorial-line, var(--dlf-line, #ececec));
 }

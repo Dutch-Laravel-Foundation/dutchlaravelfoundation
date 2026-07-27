@@ -82,4 +82,16 @@ final class BestPracticesPagesTest extends TestCase
                 false,
             );
     }
+
+    public function testDetailCategoryLinksToTheFilteredOverview(): void
+    {
+        $response = $this->get('/best-practices/routing-use-form-request-classes')
+            ->assertOk()
+            ->assertSee('href="/best-practices?category=routing"', false);
+
+        $this->assertSame(
+            2,
+            substr_count($response->getContent(), 'href="/best-practices?category=routing"'),
+        );
+    }
 }

@@ -90,7 +90,10 @@ export const createNavigationDropdown = () => ({
     },
 });
 
-export const createBestPracticesFilter = ({ document: documentRoot = document } = {}) => {
+export const createBestPracticesFilter = ({
+    document: documentRoot = document,
+    window: windowRoot = globalThis.window,
+} = {}) => {
     const practices = [
         ...documentRoot.querySelectorAll("#best-practices-data [data-practice]"),
     ].map((element) => ({ ...element.dataset }));
@@ -99,25 +102,75 @@ export const createBestPracticesFilter = ({ document: documentRoot = document } 
     ]
         .map((element) => ({ ...element.dataset }))
         .filter((category) => Number(category.count) > 0);
+    const initialUrl = new URL(
+        windowRoot?.location?.href ?? "http://localhost/best-practices",
+    );
+    const requestedCategory = initialUrl.searchParams.get("category") ?? "";
 
     return {
-        query: "",
-        category: "",
+        query: initialUrl.searchParams.get("search") ?? "",
+        category: categories.some(
+            (category) => category.slug === requestedCategory,
+        )
+            ? requestedCategory
+            : "",
         practices,
         categories,
 
+        init() {
+            this.$watch("query", () => this.updateUrl("replaceState"));
+            windowRoot?.addEventListener?.("popstate", () => {
+                const url = new URL(windowRoot.location.href);
+                const category = url.searchParams.get("category") ?? "";
+
+                this.category = categories.some((item) => item.slug === category)
+                    ? category
+                    : "";
+                this.query = url.searchParams.get("search") ?? "";
+            });
+        },
+
         selectCategory(event) {
             this.category = event.currentTarget.dataset.categoryValue;
+            this.updateUrl("pushState");
         },
 
         reset() {
             this.query = "";
             this.category = "";
+            this.updateUrl("pushState");
         },
 
         clearQuery() {
             this.query = "";
             this.$nextTick(() => this.$refs.search.focus());
+        },
+
+        updateUrl(method) {
+            if (
+                !windowRoot?.location?.href ||
+                typeof windowRoot.history?.[method] !== "function"
+            ) {
+                return;
+            }
+
+            const url = new URL(windowRoot.location.href);
+
+            if (this.category) {
+                url.searchParams.set("category", this.category);
+            } else {
+                url.searchParams.delete("category");
+            }
+
+            const query = this.query.trim();
+
+            if (query) {
+                url.searchParams.set("search", query);
+            } else {
+                url.searchParams.delete("search");
+            }
+
+            windowRoot.history[method]({}, "", url);
         },
 
         get hasActiveFilters() {
