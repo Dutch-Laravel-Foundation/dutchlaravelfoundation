@@ -22,12 +22,22 @@ final class BestPracticesPagesTest extends TestCase
             ->assertSee('data-best-practice-filter', false);
     }
 
-    public function testOverviewShowsTheBecomeMemberBanner(): void
+    public function testOverviewShowsTheBestPracticesMemberBanner(): void
     {
         $this->get('/best-practices')
             ->assertOk()
-            ->assertSee('Word ook lid van de Dutch Laravel Foundation')
-            ->assertSee('href="/lid-worden"', false);
+            ->assertSee('Vind een Laravel-partij die best practices toepast')
+            ->assertSee('Bekijk onze leden')
+            ->assertSee('href="/leden"', false);
+    }
+
+    public function testDetailShowsTheBestPracticesMemberBanner(): void
+    {
+        $this->get('/best-practices/routing-use-form-request-classes')
+            ->assertOk()
+            ->assertSee('Vind een Laravel-partij die best practices toepast')
+            ->assertSee('Bekijk onze leden')
+            ->assertSee('href="/leden"', false);
     }
 
     public function testDetailDefaultsToDutchAndExposesEnglishOption(): void

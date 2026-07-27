@@ -1,16 +1,21 @@
 {{ page_slug = slug }}
 {{ uses_default_footer_cta = collection == "members" || collection == "cases" || collection == "insights" || collection == "internships" || collection == "podcasts" || page_slug == "stagebank" || page_slug == "podcast" }}
+{{ uses_best_practices_footer_cta = collection == "best_practices" }}
 
 <footer class="dlf-footer {{ if page_slug == 'home' }}dlf-footer--home{{ /if }}">
     {{ if call_to_action }}
         {{ call_to_action }}
             {{ partial:footer_cta_banner }}
         {{ /call_to_action }}
+    {{ elseif uses_best_practices_footer_cta }}
+        {{ collection:cta id:is="ec7033f9-92e2-4d61-9434-8b375add4fb1" limit="1" }}
+            {{ partial:footer_cta_banner }}
+        {{ /collection:cta }}
     {{ elseif uses_default_footer_cta }}
         {{ partial:footer_cta_default }}
     {{ /if }}
 
-    <div class="dlf-footer-band {{ if call_to_action || uses_default_footer_cta }}dlf-footer-band--with-cta{{ /if }}">
+    <div class="dlf-footer-band {{ if call_to_action || uses_best_practices_footer_cta || uses_default_footer_cta }}dlf-footer-band--with-cta{{ /if }}">
         <div class="dlf-footer-inner">
             <section class="dlf-footer-brand" aria-label="{{ dlf:title }}">
                 <h2>{{ dlf:title }}</h2>
