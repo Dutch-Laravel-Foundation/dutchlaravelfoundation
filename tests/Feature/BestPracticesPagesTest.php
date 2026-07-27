@@ -40,18 +40,20 @@ final class BestPracticesPagesTest extends TestCase
             ->assertSee('href="/leden"', false);
     }
 
-    public function testDetailDefaultsToDutchAndExposesEnglishOption(): void
+    public function testDetailOnlyDisplaysTheDutchBestPractice(): void
     {
         $url = '/best-practices/routing-use-form-request-classes';
 
-        $this->get($url)
-            ->assertOk()
-            ->assertSee('Gebruik Form Request-classes')
-            ->assertSee('Menselijke begeleiding')
-            ->assertDontSee('Human Guidance')
-            ->assertSee('href="'.$url.'?lang=en"', false)
-            ->assertSee('class="best-practice-detail__language-sidebar"', false)
-            ->assertSee('class="best-practice-language__flag"', false);
+        foreach ([$url, $url.'?lang=en'] as $detailUrl) {
+            $this->get($detailUrl)
+                ->assertOk()
+                ->assertSee('Gebruik Form Request-classes')
+                ->assertSee('Menselijke begeleiding')
+                ->assertDontSee('<h1>Use Form Request Classes</h1>', false)
+                ->assertDontSee('Human Guidance')
+                ->assertDontSee('class="best-practice-detail__language-sidebar"', false)
+                ->assertDontSee('class="best-practice-language__flag"', false);
+        }
     }
 
     public function testDetailDisplaysItsSkillAtTheBottom(): void

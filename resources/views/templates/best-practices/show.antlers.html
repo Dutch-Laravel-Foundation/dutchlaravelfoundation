@@ -9,13 +9,8 @@
                 <div class="editorial-entry__meta editorial-article__meta">
                     <span class="editorial-entry__category">{{ category_title }}</span>
                 </div>
-                {{ if get:lang == "en" }}
-                    <h1>{{ title_en }}</h1>
-                    <div class="editorial-article__lead">{{ summary_en }}</div>
-                {{ else }}
-                    <h1>{{ title_nl ?? title_en }}</h1>
-                    <div class="editorial-article__lead">{{ summary_nl ?? summary_en }}</div>
-                {{ /if }}
+                <h1>{{ title_nl }}</h1>
+                <div class="editorial-article__lead">{{ summary_nl }}</div>
             </div>
 
             <aside class="best-practice-detail__contribute" aria-label="Draag bij via GitHub">
@@ -35,7 +30,6 @@
                 {{ /if }}
 
                 <div class="best-practice-detail__contribute-copy">
-                    <span class="best-practice-detail__label">GitHub</span>
                     <a
                         href="https://github.com/Dutch-Laravel-Foundation/best-practices/edit/main/{{ translation_edit_path }}"
                         target="_blank"
@@ -48,47 +42,8 @@
         <div class="editorial-article__body best-practice-detail__body dlf-divider-section" data-editorial-article>
             {{ partial:editorial/toc label="In deze best practice" }}
 
-            <aside class="best-practice-detail__language-sidebar" aria-label="Taal">
-                <nav class="best-practice-language" aria-label="Kies een taal">
-                    <a
-                        href="{{ url }}"
-                        aria-label="Nederlands"
-                        title="Nederlands"
-                        {{ unless get:lang == "en" }}aria-current="page"{{ /unless }}
-                    >
-                        <span class="best-practice-language__flag" aria-hidden="true">
-                            <svg viewBox="0 0 24 16">
-                                <path fill="#ae1c28" d="M0 0h24v5.333H0z"></path>
-                                <path fill="#fff" d="M0 5.333h24v5.334H0z"></path>
-                                <path fill="#21468b" d="M0 10.667h24V16H0z"></path>
-                            </svg>
-                        </span>
-                    </a>
-                    <a
-                        href="{{ url }}?lang=en"
-                        aria-label="English"
-                        title="English"
-                        {{ if get:lang == "en" }}aria-current="page"{{ /if }}
-                    >
-                        <span class="best-practice-language__flag" aria-hidden="true">
-                            <svg viewBox="0 0 24 16">
-                                <path fill="#012169" d="M0 0h24v16H0z"></path>
-                                <path stroke="#fff" stroke-width="3.2" d="m0 0 24 16M24 0 0 16"></path>
-                                <path stroke="#c8102e" stroke-width="1.6" d="m0 0 24 16M24 0 0 16"></path>
-                                <path stroke="#fff" stroke-width="5" d="M12 0v16M0 8h24"></path>
-                                <path stroke="#c8102e" stroke-width="3" d="M12 0v16M0 8h24"></path>
-                            </svg>
-                        </span>
-                    </a>
-                </nav>
-            </aside>
-
             <article class="editorial-article__prose" data-editorial-prose>
-                {{ if get:lang == "en" }}
-                    {{ content_en }}
-                {{ else }}
-                    {{ content_nl ?? content_en }}
-                {{ /if }}
+                {{ content_nl }}
             </article>
         </div>
 
