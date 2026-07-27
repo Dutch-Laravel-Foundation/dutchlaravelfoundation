@@ -20,6 +20,14 @@ final class BestPracticesPagesTest extends TestCase
             ->assertSee('data-best-practice-filter', false);
     }
 
+    public function testOverviewShowsTheBecomeMemberBanner(): void
+    {
+        $this->get('/best-practices')
+            ->assertOk()
+            ->assertSee('Word ook lid van de Dutch Laravel Foundation')
+            ->assertSee('href="/lid-worden"', false);
+    }
+
     public function testDetailDefaultsToDutchAndExposesEnglishOption(): void
     {
         $url = '/best-practices/routing-use-form-request-classes';
