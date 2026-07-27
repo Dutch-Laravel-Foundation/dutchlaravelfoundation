@@ -11,23 +11,29 @@ final class EnvoyDeploymentTest extends TestCase
 {
     private const REVISION = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
 
-    public function testItRemovesUnsafeFloatingDeploymentBehavior(): void
+    public function testItDoesNotCommitProductionChangesDuringDeployment(): void
     {
         $recipe = $this->recipe();
 
         $this->assertStringNotContainsString('check_and_commit', $recipe);
-        $this->assertStringNotContainsString('git checkout main', $recipe);
         $this->assertStringNotContainsString('git push origin main', $recipe);
+        $this->assertStringNotContainsString('remote.origin.push', $recipe);
         $this->assertStringNotContainsString('committing changes before deployment', $recipe);
     }
 
-    public function testItDeploysOnlyAnExplicitDetachedRevision(): void
+    public function testItDeploysTheValidatedRevisionOnTrackingMain(): void
     {
         $recipe = $this->recipe();
 
         $this->assertStringContainsString('$revision', $recipe);
         $this->assertStringContainsString('REVISION=', $recipe);
-        $this->assertStringContainsString('git checkout --detach', $recipe);
+        $this->assertStringContainsString(
+            'git clone --branch main --single-branch "$REPOSITORY" "$RELEASE_PATH"',
+            $recipe,
+        );
+        $this->assertStringNotContainsString('git clone --no-checkout', $recipe);
+        $this->assertStringNotContainsString('git checkout -B main', $recipe);
+        $this->assertStringNotContainsString('git checkout --detach', $recipe);
         $this->assertStringContainsString('git rev-parse HEAD', $recipe);
     }
 
@@ -75,6 +81,56 @@ final class EnvoyDeploymentTest extends TestCase
         $this->assertAppearsBefore('ln -s "$BASE_PATH/.env" .env', 'composer install', $recipe);
         $this->assertAppearsBefore('ln -s "$BASE_PATH/forms" storage/forms', 'composer install', $recipe);
         $this->assertAppearsBefore('ln -s "$BASE_PATH/users" users', 'composer install', $recipe);
+    }
+
+    public function testItRequiresProductionCommitsToExistOnOriginMain(): void
+    {
+        $recipe = $this->recipe();
+
+        $this->assertStringContainsString(
+            'git -C "$PREVIOUS_RELEASE" merge-base --is-ancestor HEAD origin/main',
+            $recipe,
+        );
+        $this->assertStringNotContainsString(
+            'branch --remotes --contains HEAD',
+            $recipe,
+        );
+    }
+
+    public function testItKeepsReleaseMetadataOutOfTheWorkingTree(): void
+    {
+        $recipe = $this->recipe();
+
+        $this->assertStringContainsString('":(exclude).revision"', $recipe);
+        $this->assertStringContainsString('":(exclude).previous-release"', $recipe);
+        $this->assertStringNotContainsString(
+            '> "$RELEASE_PATH/.revision"',
+            $recipe,
+        );
+        $this->assertStringNotContainsString(
+            '> "$RELEASE_PATH/.previous-release"',
+            $recipe,
+        );
+    }
+
+    public function testItAbortsWhenMainAdvancesWhileTheReleaseBuilds(): void
+    {
+        $recipe = $this->recipe();
+
+        $this->assertStringContainsString(
+            'origin/main advanced while the release was building.',
+            $recipe,
+        );
+        $this->assertAppearsBefore(
+            'php please static:warm',
+            'origin/main advanced while the release was building.',
+            $recipe,
+        );
+        $this->assertAppearsBefore(
+            'origin/main advanced while the release was building.',
+            'activate_release "$RELEASE_PATH"',
+            $recipe,
+        );
     }
 
     public function testItLocksWarmsChecksAndRollsBackBeforeCleanup(): void
