@@ -511,6 +511,10 @@
 }
 
 @media (min-width: 1024px) {
+    .best-practice-detail__hero {
+        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    }
+
     .best-practices-filters__sticky {
         position: sticky;
         top: var(--dlf-header-visible-height, 0px);
