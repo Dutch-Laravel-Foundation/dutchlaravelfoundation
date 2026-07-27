@@ -62,45 +62,47 @@
             aria-labelledby="best-practices-heading"
         >
             <aside class="best-practices-filters" aria-label="Best practices filteren">
-                <label class="best-practices-search">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <circle cx="11" cy="11" r="6.5"></circle>
-                        <path d="m16 16 4 4"></path>
-                    </svg>
-                    <input
-                        type="search"
-                        aria-label="Zoek een best practice"
-                        placeholder="Zoek een best practice"
-                        autocomplete="off"
-                        x-model.debounce.150ms="query"
-                    >
-                </label>
-
-                <div class="best-practices-categories">
-                    <span class="best-practices-categories__label">Categorieën</span>
-                    <div class="best-practices-categories__scroll">
-                        <button
-                            type="button"
-                            data-category-value=""
-                            :class="{ 'is-active': category === '' }"
-                            :aria-pressed="category === ''"
-                            @click="selectCategory"
+                <div class="best-practices-filters__sticky">
+                    <label class="best-practices-search">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="11" cy="11" r="6.5"></circle>
+                            <path d="m16 16 4 4"></path>
+                        </svg>
+                        <input
+                            type="search"
+                            aria-label="Zoek een best practice"
+                            placeholder="Zoek een best practice"
+                            autocomplete="off"
+                            x-model.debounce.150ms="query"
                         >
-                            <span>Alles</span>
-                            <small x-text="practices.length"></small>
-                        </button>
-                        <template x-for="item in categories" :key="item.slug">
+                    </label>
+
+                    <div class="best-practices-categories">
+                        <span class="best-practices-categories__label">Categorieën</span>
+                        <div class="best-practices-categories__scroll">
                             <button
                                 type="button"
-                                :data-category-value="item.slug"
-                                :class="{ 'is-active': category === item.slug }"
-                                :aria-pressed="category === item.slug"
+                                data-category-value=""
+                                :class="{ 'is-active': category === '' }"
+                                :aria-pressed="category === ''"
                                 @click="selectCategory"
                             >
-                                <span x-text="item.title"></span>
-                                <small x-text="item.count"></small>
+                                <span>Alles</span>
+                                <small x-text="practices.length"></small>
                             </button>
-                        </template>
+                            <template x-for="item in categories" :key="item.slug">
+                                <button
+                                    type="button"
+                                    :data-category-value="item.slug"
+                                    :class="{ 'is-active': category === item.slug }"
+                                    :aria-pressed="category === item.slug"
+                                    @click="selectCategory"
+                                >
+                                    <span x-text="item.title"></span>
+                                    <small x-text="item.count"></small>
+                                </button>
+                            </template>
+                        </div>
                     </div>
                 </div>
             </aside>
