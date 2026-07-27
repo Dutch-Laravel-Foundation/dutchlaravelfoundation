@@ -339,7 +339,7 @@
     display: grid;
     grid-template-columns: 5fr 6fr;
     gap: 56px;
-    align-items: start;
+    align-items: center;
 }
 
 .dlf-members-intro__copy {
