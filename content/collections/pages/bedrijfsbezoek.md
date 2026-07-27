@@ -1,10 +1,10 @@
 ---
 id: 6286ea8c-43ae-4089-bfd6-b8f897b1034f
-published: false
 blueprint: pages
 title: Bedrijfsbezoek
+call_to_action: c3238da9-592c-4906-9b11-183e37e4b2d3
 updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
-updated_at: 1785136110
+updated_at: 1785136220
 content:
   -
     type: heading
