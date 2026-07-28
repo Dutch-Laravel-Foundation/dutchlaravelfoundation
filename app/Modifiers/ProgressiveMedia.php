@@ -61,7 +61,6 @@ final class ProgressiveMedia extends Modifier
             $image->setAttribute('decoding', 'async');
             $image->setAttribute('data-progressive-media', '');
             $image->setAttribute('data-media-state', 'loading');
-            $image->setAttribute('onload', "try{var entries=performance.getEntriesByName(this.currentSrc);var entry=entries[entries.length-1];if(entry&&new window.URL(this.currentSrc,location.href).origin===location.origin&&entry.transferSize===0&&entry.decodedBodySize>0){this.dataset.mediaCached=''}}catch(error){}this.dataset.mediaState='loaded'");
             $this->wrap($document, $image);
             $enhanced = true;
         }

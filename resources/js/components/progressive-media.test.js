@@ -1,9 +1,6 @@
 import { describe, expect, it, mock } from "bun:test";
 
-import {
-    initProgressiveMedia,
-    revealProgressiveImage,
-} from "./progressive-media";
+import { initProgressiveMedia, revealProgressiveImage } from "./progressive-media";
 
 function makeImage({ complete = false, naturalWidth = 0 } = {}) {
     const image = new EventTarget();
@@ -23,6 +20,20 @@ describe("progressive media", () => {
 
         expect(image.decode).toHaveBeenCalledTimes(1);
         expect(image.dataset.mediaState).toBe("loaded");
+    });
+
+    it("marks a same-origin memory-cached image without an inline handler", async () => {
+        const image = makeImage({ complete: true, naturalWidth: 1200 });
+        image.currentSrc = "https://dutchlaravelfoundation.test/assets/photo.jpg";
+        const performanceApi = {
+            getEntriesByName: mock(() => [{ transferSize: 0, decodedBodySize: 1200 }]),
+        };
+        const currentLocation = new URL("https://dutchlaravelfoundation.test/lid-worden");
+
+        await revealProgressiveImage(image, performanceApi, currentLocation);
+
+        expect(performanceApi.getEntriesByName).toHaveBeenCalledWith(image.currentSrc);
+        expect(image.dataset.mediaCached).toBe("");
     });
 
     it("waits for a pending image before decoding and revealing it", async () => {
@@ -66,9 +77,7 @@ describe("progressive media", () => {
 
         await initProgressiveMedia(root);
 
-        expect(root.querySelectorAll).toHaveBeenCalledWith(
-            "[data-progressive-media]",
-        );
+        expect(root.querySelectorAll).toHaveBeenCalledWith("[data-progressive-media]");
         expect(image.dataset.mediaState).toBe("loaded");
     });
 });

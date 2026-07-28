@@ -9,15 +9,36 @@ export function waitForImageLoad(image) {
 
     return new Promise((resolve, reject) => {
         image.addEventListener("load", resolve, { once: true });
-        image.addEventListener(
-            "error",
-            () => reject(new Error("Image failed to load")),
-            { once: true },
-        );
+        image.addEventListener("error", () => reject(new Error("Image failed to load")), {
+            once: true,
+        });
     });
 }
 
-export async function revealProgressiveImage(image) {
+function markCachedImage(image, performanceApi, currentLocation) {
+    try {
+        const entries = performanceApi?.getEntriesByName(image.currentSrc) ?? [];
+        const entry = entries[entries.length - 1];
+        const imageUrl = new URL(image.currentSrc, currentLocation?.href);
+
+        if (
+            entry &&
+            imageUrl.origin === currentLocation?.origin &&
+            entry.transferSize === 0 &&
+            entry.decodedBodySize > 0
+        ) {
+            image.dataset.mediaCached = "";
+        }
+    } catch {
+        // Resource timing is an optional enhancement.
+    }
+}
+
+export async function revealProgressiveImage(
+    image,
+    performanceApi = globalThis.performance,
+    currentLocation = globalThis.location,
+) {
     try {
         await waitForImageLoad(image);
     } catch {
@@ -25,6 +46,8 @@ export async function revealProgressiveImage(image) {
 
         return;
     }
+
+    markCachedImage(image, performanceApi, currentLocation);
 
     if (typeof image.decode === "function") {
         try {
@@ -39,8 +62,6 @@ export async function revealProgressiveImage(image) {
 
 export function initProgressiveMedia(root = document) {
     return Promise.all(
-        [...root.querySelectorAll("[data-progressive-media]")].map(
-            revealProgressiveImage,
-        ),
+        [...root.querySelectorAll("[data-progressive-media]")].map(revealProgressiveImage),
     );
 }

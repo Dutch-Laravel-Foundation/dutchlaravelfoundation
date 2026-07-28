@@ -22,10 +22,7 @@ class ProgressiveMediaTest extends TestCase
         $this->assertStringContainsString('decoding="async"', $result);
         $this->assertStringContainsString('data-progressive-media=""', $result);
         $this->assertStringContainsString('data-media-state="loading"', $result);
-        $this->assertStringContainsString('performance.getEntriesByName(this.currentSrc)', $result);
-        $this->assertStringContainsString('new window.URL(this.currentSrc,location.href)', $result);
-        $this->assertStringContainsString("this.dataset.mediaCached=''", $result);
-        $this->assertStringContainsString("this.dataset.mediaState='loaded'", $result);
+        $this->assertStringNotContainsString('onload=', $result);
     }
 
     public function testItMapsProductionAssetUrlsToLocalDimensions(): void
