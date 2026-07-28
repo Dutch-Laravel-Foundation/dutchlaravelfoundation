@@ -19,7 +19,7 @@ return [
     'report_only_to' => '',
     'reporting_endpoints' => [],
     'enabled' => env('CSP_ENABLED', true),
-    'enabled_while_hot_reloading' => true,
+    'enabled_while_hot_reloading' => env('CSP_ENABLED_WHILE_HOT_RELOADING', false),
     'nonce_generator' => ViteNonceGenerator::class,
     'nonce_enabled' => true,
 ];

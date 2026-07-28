@@ -472,7 +472,7 @@
     border-left: 1px solid var(--dlf-line);
     background: transparent;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 500;
     cursor: pointer;
 }
 
@@ -493,6 +493,7 @@
     background: var(--dlf-red-action);
     font-family: "JetBrains Mono Variable", ui-monospace, monospace;
     font-size: 11px;
+    font-weight: 700;
 }
 
 .dlf-member-card {
