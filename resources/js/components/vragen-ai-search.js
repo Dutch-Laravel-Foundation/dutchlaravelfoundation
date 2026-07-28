@@ -1,5 +1,7 @@
 let initialization;
 
+const initialQuestionPlaceholder = "Waar ben je naar op zoek?";
+
 const loadEmbed = () =>
     new Promise((resolve, reject) => {
         const existing = document.querySelector(
@@ -32,6 +34,41 @@ const loadEmbed = () =>
 const watchPopup = () => {
     let lastTrigger = null;
     let popupWasOpen = document.body.classList.contains("vragenai-popup-open");
+    const popupRoot = document.querySelector("#vragenai-app");
+
+    const decoratePopup = () => {
+        const popup = popupRoot?.querySelector(".vragenai-popup");
+        const header = popup?.querySelector(".vragenai-popup__header");
+
+        if (!popup || !header) {
+            return;
+        }
+
+        if (!header.querySelector(".dlf-vragenai-title")) {
+            const title = document.createElement("h2");
+            title.className = "dlf-vragenai-title";
+            title.textContent = "Zoeken";
+
+            popup.setAttribute("aria-label", title.textContent);
+            header.prepend(title);
+        }
+
+        const questionInput = popup.querySelector(".vragenai-question-form__input");
+        const hasThread = popup.querySelector(".vragenai-app--has-thread");
+
+        if (questionInput && !hasThread) {
+            questionInput.placeholder = initialQuestionPlaceholder;
+        }
+    };
+
+    decoratePopup();
+
+    if (popupRoot) {
+        new MutationObserver(decoratePopup).observe(popupRoot, {
+            childList: true,
+            subtree: true,
+        });
+    }
 
     document.addEventListener(
         "click",

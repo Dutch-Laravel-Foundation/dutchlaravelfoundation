@@ -52,7 +52,7 @@ Keep author-controlled content in the host family's existing Bard stream. The re
 - Let one page family own the shell. A shared block may own its internal `dlf-*` classes and button, but do not import a second page-family namespace. Do not introduce another root token set, container primitive, button system, or near-duplicate component.
 - Use balanced section padding and the established spacing scale. Avoid generic oversized whitespace or card padding.
 - Express alignment as an invariant: name the shared edge, gap, height, or padding that must match. Use existing rail insets or spacing tokens instead of visually close one-off values.
-- Keep body copy consistent with the homepage; headings are semibold. Remove content-authored `<br>` elements and embedded bold styling when layout or hierarchy should provide the emphasis.
+- Keep body copy consistent with the homepage; headings use medium (`500`) weight, not semibold or bold. Remove content-authored `<br>` elements and embedded bold styling when layout or hierarchy should provide the emphasis.
 - Preserve supplied SVG/icon geometry and the asset family already used by the page family. Recolor existing artwork; never replace it with an approximation.
 - Treat desktop, tablet, and mobile as designed states. Scope a viewport-specific correction inside the narrowest matching media query, preserve useful content, and keep mobile-only rules from leaking upward.
 - Apply a repeated-item correction to the whole owning grid or component state, not only the selected example. Keep intentional first/last-item differences explicit.

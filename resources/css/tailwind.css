@@ -446,6 +446,7 @@
     }
 
     #vragenai-app {
+        --dlf-vragenai-control-radius: 0.3rem;
         --vragenai-color-primary: #ff2d20;
     }
 
@@ -453,17 +454,52 @@
         @apply h-[calc(100vh-1.5rem)] sm:!max-h-[800px] !rounded-2xl;
     }
 
+    #vragenai-app .dlf-vragenai-title {
+        margin: 0;
+        color: #090910;
+        font-family: inherit;
+        font-size: 1.5rem;
+        font-weight: 500 !important;
+        line-height: 1.25;
+    }
+
+    #vragenai-app
+        .vragenai-popup:not(:has(.vragenai-app--has-thread))
+        .vragenai-popup__header:has(.dlf-vragenai-title) {
+        align-items: center;
+        justify-content: flex-start !important;
+        margin-bottom: 1.5rem !important;
+    }
+
+    #vragenai-app
+        .vragenai-popup:has(.vragenai-app--has-thread)
+        .dlf-vragenai-title {
+        display: none;
+    }
+
     .vragenai-question-form,
     .vragenai-question-form:focus {
-        border-radius: 0.3rem !important;
+        border-radius: var(--dlf-vragenai-control-radius) !important;
         outline-color: #ff2d20 !important;
     }
 
-    #vragenai-app .vragenai-popup {
+    #vragenai-app .vragenai-questions__item-action {
+        border-radius: var(--dlf-vragenai-control-radius) !important;
+    }
+
+    #vragenai-app .vragenai-search-results-item__title,
+    #vragenai-app .vragenai-run-source__title {
+        color: var(--vragenai-color-primary) !important;
     }
 
     .vragenai-question-form-container--attached {
         @apply !pb-0.5;
+    }
+
+    @media (max-width: 639px) {
+        #vragenai-app .dlf-vragenai-title {
+            font-size: 1.25rem;
+        }
     }
 
     /* Filter modal (mobile) – above header (z-999); backdrop and panel full screen */
