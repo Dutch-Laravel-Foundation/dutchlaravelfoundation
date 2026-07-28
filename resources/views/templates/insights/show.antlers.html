@@ -9,7 +9,7 @@
                 <div class="editorial-entry__meta editorial-article__meta">
                     <span class="editorial-entry__category">{{ category }}</span>
                     <span class="editorial-entry__dot" aria-hidden="true">·</span>
-                    <time datetime="{{ date format="Y-m-d" }}">{{ date | iso_format="D MMMM YYYY" }}</time>
+                    <time datetime="{{ date format="Y-m-d" }}">{{ date | iso_format("D MMMM YYYY") }}</time>
                 </div>
                 <h1>{{ title }}</h1>
                 {{ if introduction }}

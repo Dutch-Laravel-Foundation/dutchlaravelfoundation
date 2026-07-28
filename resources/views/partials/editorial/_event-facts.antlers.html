@@ -15,7 +15,7 @@
         {{ if date_start }}
             <div class="grid grid-cols-1 gap-1 border-b border-[#ececec] px-6 py-4 sm:grid-cols-[10rem_1fr] sm:gap-6">
                 <dt class="font-semibold text-[#090910]">Datum</dt>
-                <dd class="m-0! capitalize"><time datetime="{{ date_start format="Y-m-d" }}">{{ date_start | iso_format="dddd D MMMM YYYY" }}</time></dd>
+                <dd class="m-0! capitalize"><time datetime="{{ date_start format="Y-m-d" }}">{{ date_start | iso_format("dddd D MMMM YYYY") }}</time></dd>
             </div>
         {{ /if }}
 

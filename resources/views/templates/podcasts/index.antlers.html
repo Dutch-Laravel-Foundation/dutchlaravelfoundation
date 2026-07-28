@@ -61,7 +61,7 @@
                                     <span class="editorial-entry__category">Podcast</span>
                                     {{ if published_at }}
                                         <span class="editorial-entry__dot" aria-hidden="true">·</span>
-                                        <time datetime="{{ published_at format="Y-m-d" }}">{{ published_at | iso_format="D MMMM YYYY" }}</time>
+                                        <time datetime="{{ published_at format="Y-m-d" }}">{{ published_at | iso_format("D MMMM YYYY") }}</time>
                                     {{ /if }}
                                 </div>
 

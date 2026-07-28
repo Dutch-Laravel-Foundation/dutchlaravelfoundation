@@ -21,7 +21,7 @@
                 <span class="editorial-entry__category">{{ type }}</span>
                 <span class="editorial-entry__dot" aria-hidden="true">·</span>
             {{ /if }}
-            <time datetime="{{ date_start format="Y-m-d" }}">{{ date_start | iso_format="D MMMM YYYY" }}</time>
+            <time datetime="{{ date_start format="Y-m-d" }}">{{ date_start | iso_format("D MMMM YYYY") }}</time>
         </div>
 
         <h2 class="editorial-entry__title{{ unless past }}{{ if first }} editorial-entry__title--featured{{ /if }}{{ /unless }}"><a href="{{ url }}">{{ title }}</a></h2>
