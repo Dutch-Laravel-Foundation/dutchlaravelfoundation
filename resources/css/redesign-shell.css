@@ -464,6 +464,32 @@ html.dlf-menu-open {
     color: #1db954;
 }
 
+.dlf-form-success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.dlf-form-success__icon {
+    display: flex;
+    width: 3.25rem;
+    height: 3.25rem;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    border-radius: 3px;
+    background: #ffecea;
+}
+
+.dlf-form-success__icon img {
+    display: block;
+    width: 1.875rem;
+    height: 1.875rem;
+}
+
 .dlf-wizard-choice--selected {
     background-color: var(--dlf-red-action) !important;
     background-image: repeating-linear-gradient(
@@ -504,8 +530,6 @@ html.dlf-menu-open {
 }
 
 .dlf-aanvraag-thanks__content {
-    display: grid;
-    align-content: center;
     padding: 5rem 3.5rem;
     background: #fff;
 }

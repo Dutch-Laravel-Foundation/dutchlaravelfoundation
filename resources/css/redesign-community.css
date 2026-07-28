@@ -1243,6 +1243,10 @@
     padding: 41px 49px 0;
 }
 
+.dlf-member-form:has(.dlf-form-success) {
+    padding-top: 64px;
+}
+
 .dlf-member-form__fields {
     display: flex;
     flex-direction: column;

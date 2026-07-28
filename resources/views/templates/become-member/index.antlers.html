@@ -334,7 +334,15 @@
 
                 <div class="dlf-member-form">
                     {{ form:become_member redirect="/lid-worden" }} {{ if success }}
-                    <div role="status">
+                    <div class="dlf-form-success" role="status">
+                        <span class="dlf-form-success__icon" aria-hidden="true">
+                            <img
+                                src="/assets/img/development-speed.svg"
+                                width="44"
+                                height="44"
+                                alt=""
+                            />
+                        </span>
                         <h2 class="dlf-community-heading dlf-community-heading--small">
                             Bedankt voor je interesse!
                         </h2>

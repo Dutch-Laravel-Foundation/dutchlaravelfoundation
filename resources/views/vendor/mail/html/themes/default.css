@@ -11,6 +11,7 @@ body *:not(html):not(style):not(br):not(tr):not(code) {
 body {
     -webkit-text-size-adjust: none;
     background-color: #ff2d20;
+    background-image: linear-gradient(#ff2d20, #ff2d20);
     color: #52525b;
     height: 100%;
     line-height: 1.4;
@@ -81,6 +82,7 @@ img {
     -premailer-cellspacing: 0;
     -premailer-width: 100%;
     background-color: #ff2d20;
+    background-image: linear-gradient(#ff2d20, #ff2d20);
     margin: 0;
     padding: 0;
     width: 100%;
@@ -90,6 +92,8 @@ img {
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
     -premailer-width: 100%;
+    background-color: #ff2d20;
+    background-image: linear-gradient(#ff2d20, #ff2d20);
     margin: 0;
     padding: 0;
     width: 100%;
@@ -98,6 +102,8 @@ img {
 /* Header */
 
 .header {
+    background-color: #ff2d20;
+    background-image: linear-gradient(#ff2d20, #ff2d20);
     padding: 25px 0;
     text-align: center;
 }
@@ -126,6 +132,7 @@ img {
     -premailer-cellspacing: 0;
     -premailer-width: 100%;
     background-color: #ff2d20;
+    background-image: linear-gradient(#ff2d20, #ff2d20);
     border-bottom: 1px solid #ff2d20;
     border-top: 1px solid #ff2d20;
     margin: 0;
@@ -165,11 +172,17 @@ img {
 
 /* Footer */
 
+.footer-wrapper {
+    background-color: #ff2d20;
+    background-image: linear-gradient(#ff2d20, #ff2d20);
+}
+
 .footer {
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
     -premailer-width: 570px;
     background-color: #ff2d20;
+    background-image: linear-gradient(#ff2d20, #ff2d20);
     margin: 0 auto;
     padding: 0;
     text-align: center;

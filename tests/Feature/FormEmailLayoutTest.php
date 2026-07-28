@@ -48,7 +48,23 @@ final class FormEmailLayoutTest extends TestCase
                 $this->assertIsString($text);
                 $this->assertStringContainsString('class="wrapper"', $html);
                 $this->assertStringContainsString('class="inner-body"', $html);
+                $this->assertStringContainsString(
+                    'class="wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation" bgcolor="#ff2d20"',
+                    $html,
+                );
+                $this->assertStringContainsString(
+                    'class="body" width="100%" cellpadding="0" cellspacing="0" bgcolor="#ff2d20"',
+                    $html,
+                );
                 $this->assertStringContainsString('background-color: #ff2d20', $html);
+                $this->assertStringContainsString(
+                    'background-image: linear-gradient(#ff2d20, #ff2d20)',
+                    $html,
+                );
+                $this->assertMatchesRegularExpression(
+                    '/<td class="footer-wrapper"[^>]*bgcolor="#ff2d20"[^>]*>/',
+                    $html,
+                );
                 $this->assertStringContainsString('/assets/redesign/logo-email.png', $html);
                 $this->assertNotSame('', trim($text));
 

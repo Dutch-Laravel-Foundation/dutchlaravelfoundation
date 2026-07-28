@@ -20,8 +20,15 @@
             <div class="dlf-member-form dlf-contact-form">
                 {{ form:contact redirect="/contact" }}
                     {{ if success }}
-                        <div class="dlf-contact-form__success" role="status">
-                            <span class="dlf-public-success__mark" aria-hidden="true">✓</span>
+                        <div class="dlf-form-success dlf-contact-form__success" role="status">
+                            <span class="dlf-form-success__icon" aria-hidden="true">
+                                <img
+                                    src="/assets/img/development-speed.svg"
+                                    width="44"
+                                    height="44"
+                                    alt=""
+                                >
+                            </span>
                             <h2>Bedankt voor je bericht</h2>
                             <p>We nemen zo snel mogelijk contact met je op.</p>
                         </div>
