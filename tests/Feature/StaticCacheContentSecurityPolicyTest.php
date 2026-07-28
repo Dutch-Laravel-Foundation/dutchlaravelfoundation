@@ -53,6 +53,14 @@ final class StaticCacheContentSecurityPolicyTest extends TestCase
             $this->assertStringContainsString('nonce="STATAMIC_CSP_NONCE"', $tag);
         }
 
+        preg_match_all('/\bnonce=(["\'])(.*?)\1/i', $cachedContent, $cachedNonces);
+
+        $this->assertNotEmpty($cachedNonces[2]);
+
+        foreach ($cachedNonces[2] as $nonce) {
+            $this->assertSame('STATAMIC_CSP_NONCE', $nonce);
+        }
+
         $cacheHit = $this->get('/stagebank');
 
         $cacheHit->assertOk();
@@ -70,6 +78,14 @@ final class StaticCacheContentSecurityPolicyTest extends TestCase
 
         $nonce = $matches[1];
         $content = (string) $response->getContent();
+
+        preg_match_all('/\bnonce=(["\'])(.*?)\1/i', $content, $responseNonces);
+
+        $this->assertNotEmpty($responseNonces[2]);
+
+        foreach ($responseNonces[2] as $responseNonce) {
+            $this->assertSame($nonce, $responseNonce);
+        }
 
         preg_match_all(
             '/<style\b[^>]*>|<script\b(?![^>]*\bsrc=)[^>]*>/',

@@ -29,7 +29,7 @@ final class CspNonceReplacer implements Replacer
         }
 
         $content = preg_replace_callback(
-            '/<(?:script|style)\b[^>]*>/i',
+            '/<[^>]*\bnonce=(["\']).*?\1[^>]*>|<(?:script|style)\b[^>]*>/i',
             static function (array $matches) use ($nonce): string {
                 $tag = $matches[0];
 
