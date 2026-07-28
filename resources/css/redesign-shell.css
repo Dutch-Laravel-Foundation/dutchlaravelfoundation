@@ -489,11 +489,65 @@ html.dlf-menu-open {
     color: var(--dlf-red-text) !important;
 }
 
+.dlf-aanvraag-thanks {
+    background: #fff;
+}
+
+.dlf-aanvraag-thanks__rail {
+    display: grid;
+    width: 100%;
+    max-width: 1152px;
+    min-height: 29rem;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 42rem) minmax(0, 1fr);
+    margin-inline: auto;
+    border-inline: 1px solid var(--dlf-line);
+}
+
+.dlf-aanvraag-thanks__content {
+    display: grid;
+    align-content: center;
+    padding: 5rem 3.5rem;
+    background: #fff;
+}
+
+.dlf-aanvraag-thanks__content h1 {
+    margin: 0 0 0.5rem;
+    font-size: 2.25rem;
+    font-weight: 600;
+    line-height: 1.333;
+}
+
+.dlf-aanvraag-thanks__content p {
+    margin: 0;
+    color: var(--dlf-copy);
+}
+
 .dlf-wizard-navigation {
     padding-block: 1.75rem;
 }
 
+@media (max-width: 767px) {
+    .dlf-aanvraag-thanks__content h1 {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+    }
+}
+
 @media (max-width: 639px) {
+    .dlf-aanvraag-thanks__rail {
+        min-height: 23rem;
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .dlf-aanvraag-thanks__content {
+        min-height: 23rem;
+        padding: 4rem 1.5rem;
+    }
+
+    .dlf-aanvraag-thanks__side {
+        display: none;
+    }
+
     .dlf-wizard-navigation {
         padding-block-start: 0;
     }

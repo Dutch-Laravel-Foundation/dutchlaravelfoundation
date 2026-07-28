@@ -5,6 +5,13 @@
     $dotenv->safeLoad();
 
     $revision = $revision ?? '';
+
+    if ($revision === '') {
+        $gitRevision = new Symfony\Component\Process\Process(['git', 'rev-parse', 'HEAD'], __DIR__);
+        $gitRevision->mustRun();
+        $revision = trim($gitRevision->getOutput());
+    }
+
     $basePath = env('DEPLOY_PATH');
     $server = env('DEPLOY_SERVER');
 
@@ -46,6 +53,7 @@
     LOCK_PATH="$BASE_PATH/.deployment-lock"
     SWITCH_LINK="$BASE_PATH/.current-$RELEASE_NAME"
     PREVIOUS_RELEASE=''
+    CURRENT_STATUS=''
     FPM_SOCKET=''
     ACTIVATED=0
     HEALTHY=0
@@ -90,6 +98,26 @@
         activate_release "$PREVIOUS_RELEASE"
         reset_opcache
         echo "Rollback completed: $PREVIOUS_RELEASE"
+    }
+
+    validate_managed_link() {
+        local link_path="$1"
+        local expected_target="$2"
+        local resolved_link
+        local resolved_target
+
+        if [ ! -L "$link_path" ]; then
+            echo "Managed path is not a symbolic link: $link_path" >&2
+            return 1
+        fi
+
+        resolved_link=$(readlink -f "$link_path")
+        resolved_target=$(readlink -f "$expected_target")
+
+        if [ "$resolved_link" != "$resolved_target" ]; then
+            echo "Managed link has an unexpected target: $link_path -> $resolved_link" >&2
+            return 1
+        fi
     }
 
     check_health() {
@@ -217,18 +245,34 @@
         exit 1
     fi
 
+    validate_managed_link "$PREVIOUS_RELEASE/.env" "$BASE_PATH/.env"
+    validate_managed_link "$PREVIOUS_RELEASE/storage/forms" "$BASE_PATH/forms"
+    validate_managed_link "$PREVIOUS_RELEASE/users" "$BASE_PATH/users"
+
     if [ -d "$PREVIOUS_RELEASE/.git" ]; then
-        if [ -n "$(git -C "$PREVIOUS_RELEASE" status --porcelain --untracked-files=all)" ]; then
+        CURRENT_STATUS=$(
+            git -C "$PREVIOUS_RELEASE" status \
+                --porcelain \
+                --untracked-files=all \
+                -- \
+                . \
+                ":(exclude).revision" \
+                ":(exclude).previous-release" \
+                ":(exclude).env" \
+                ":(exclude)storage/forms" \
+                ":(exclude)users"
+        )
+
+        if [ -n "$CURRENT_STATUS" ]; then
             echo "Current release is dirty: $PREVIOUS_RELEASE" >&2
-            git -C "$PREVIOUS_RELEASE" status --short >&2
+            printf '%s\n' "$CURRENT_STATUS" >&2
             exit 1
         fi
 
         git -C "$PREVIOUS_RELEASE" fetch --quiet --prune origin
 
-        if ! git -C "$PREVIOUS_RELEASE" branch --remotes --contains HEAD \
-            | grep -q '[^[:space:]]'; then
-            echo 'Current release contains commits that are not present on any origin branch.' >&2
+        if ! git -C "$PREVIOUS_RELEASE" merge-base --is-ancestor HEAD origin/main; then
+            echo 'Current release contains commits that are not present on origin/main.' >&2
             exit 1
         fi
     fi
@@ -239,24 +283,18 @@
     fi
 
     echo "Preparing revision $REVISION in $RELEASE_PATH"
-    git clone --no-checkout "$REPOSITORY" "$RELEASE_PATH"
+    git clone --branch main --single-branch "$REPOSITORY" "$RELEASE_PATH"
     cd "$RELEASE_PATH"
-    git fetch --quiet origin main
 
     if [ "$(git rev-parse origin/main)" != "$REVISION" ]; then
         echo 'Requested revision is not the current origin/main tip.' >&2
         exit 1
     fi
 
-    git checkout --detach "$REVISION"
-
     if [ "$(git rev-parse HEAD)" != "$REVISION" ]; then
         echo 'Checked-out release does not match the requested revision.' >&2
         exit 1
     fi
-
-    git config remote.pushDefault origin
-    git config remote.origin.push 'HEAD:refs/heads/main'
 
     rm -f .env
     rm -rf storage/forms users
@@ -282,8 +320,12 @@
     php please static:clear
     php please static:warm
 
-    printf '%s\n' "$REVISION" > "$RELEASE_PATH/.revision"
-    printf '%s\n' "$PREVIOUS_RELEASE" > "$RELEASE_PATH/.previous-release"
+    git fetch --quiet origin main
+
+    if [ "$(git rev-parse origin/main)" != "$(git rev-parse HEAD)" ]; then
+        echo 'origin/main advanced while the release was building.' >&2
+        exit 1
+    fi
 
     activate_release "$RELEASE_PATH"
     ACTIVATED=1

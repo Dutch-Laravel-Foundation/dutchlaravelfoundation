@@ -3,9 +3,7 @@ import laravel from "laravel-vite-plugin";
 
 export default (mode) => {
     process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
-    const appUrl = process.env.VITE_APP_URL
-        ? new URL(process.env.VITE_APP_URL)
-        : null;
+    const appUrl = process.env.VITE_APP_URL ? new URL(process.env.VITE_APP_URL) : null;
 
     return defineConfig({
         plugins: [
@@ -15,13 +13,18 @@ export default (mode) => {
                 ...(appUrl ? { detectTls: false } : {}),
             }),
         ],
-        server: appUrl
-            ? {
-                  hmr: {
-                      host: appUrl.hostname,
-                      protocol: "wss",
-                  },
-              }
-            : {},
+        server: {
+            watch: {
+                ignored: ["**/.worktrees/**", "**/vendor/**"],
+            },
+            ...(appUrl
+                ? {
+                      hmr: {
+                          host: appUrl.hostname,
+                          protocol: "wss",
+                      },
+                  }
+                : {}),
+        },
     });
 };

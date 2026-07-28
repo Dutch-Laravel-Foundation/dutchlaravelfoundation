@@ -5,8 +5,10 @@ email:
     to: info@dutchlaravelfoundation.nl
     subject: 'DLF contact: {{ name }}'
     reply_to: '{{ email }}'
+    html: mail/contact-notification
+    markdown: true
   -
     to: '{{ email }}'
     subject: 'Je bericht aan Dutch Laravel Foundation'
     html: mail/contact
-    text: mail/contact
+    markdown: true

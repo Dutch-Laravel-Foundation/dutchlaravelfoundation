@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\AddPublicContentSecurityPolicyHeaders;
+use App\Http\Middleware\RedirectWwwToCanonicalHost;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -13,10 +14,11 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->trustProxies(at: '*');
+        $middleware->prepend(RedirectWwwToCanonicalHost::class);
+        $middleware->append(AddPublicContentSecurityPolicyHeaders::class);
         $middleware->appendToGroup('web', [
             \App\Http\Middleware\AddDiscoveryHeaders::class,
             \App\Http\Middleware\ServeMarkdown::class,
-            AddPublicContentSecurityPolicyHeaders::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

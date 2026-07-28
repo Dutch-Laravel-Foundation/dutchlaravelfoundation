@@ -27,10 +27,7 @@ class ProgressiveMediaTest extends TestCase
         $this->assertStringContainsString('decoding="async"', $partial);
         $this->assertStringContainsString('data-progressive-media', $partial);
         $this->assertStringContainsString('data-media-state="loading"', $partial);
-        $this->assertStringContainsString('performance.getEntriesByName(this.currentSrc)', $partial);
-        $this->assertStringContainsString('new window.URL(this.currentSrc,location.href)', $partial);
-        $this->assertStringContainsString("this.dataset.mediaCached=''", $partial);
-        $this->assertStringContainsString("this.dataset.mediaState='loaded'", $partial);
+        $this->assertStringNotContainsString('onload=', $partial);
 
         foreach ($this->antlersTemplates() as $path) {
             if ($path === $partialPath) {
@@ -315,10 +312,7 @@ class ProgressiveMediaTest extends TestCase
         $this->assertSame('loading', $image->getAttribute('data-media-state'), $context);
         $this->assertContains($image->getAttribute('loading'), ['eager', 'lazy'], $context);
         $this->assertSame('async', $image->getAttribute('decoding'), $context);
-        $this->assertStringContainsString('performance.getEntriesByName(this.currentSrc)', $image->getAttribute('onload'), $context);
-        $this->assertStringContainsString('new window.URL(this.currentSrc,location.href)', $image->getAttribute('onload'), $context);
-        $this->assertStringContainsString("this.dataset.mediaCached=''", $image->getAttribute('onload'), $context);
-        $this->assertStringContainsString("this.dataset.mediaState='loaded'", $image->getAttribute('onload'), $context);
+        $this->assertFalse($image->hasAttribute('onload'), $context);
         $this->assertMatchesRegularExpression('/^[1-9][0-9]*$/', $image->getAttribute('width'), $context);
         $this->assertMatchesRegularExpression('/^[1-9][0-9]*$/', $image->getAttribute('height'), $context);
         $this->assertInstanceOf(DOMElement::class, $image->parentNode, $context);

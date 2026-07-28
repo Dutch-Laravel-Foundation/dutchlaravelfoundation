@@ -20,5 +20,7 @@ public/mix-manifest.json
 .claude
 .worktrees/
 users/
-storage/forms/
+/storage/form-submissions/*
+!/storage/form-submissions/*/
+!/storage/form-submissions/*/.gitignore
 /storage/statamic/glide/

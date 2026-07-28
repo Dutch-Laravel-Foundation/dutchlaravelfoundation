@@ -7,4 +7,4 @@ email:
     subject: 'DLF Aanvraag: {{ name }} - {{ product_label }}'
     reply_to: '{{ email }}'
     html: mail/sales-funnel
-    text: mail/sales-funnel
+    markdown: true

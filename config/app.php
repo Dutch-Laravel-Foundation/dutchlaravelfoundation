@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Statamic'),
+    'name' => env('APP_NAME', 'Dutch Laravel Foundation'),
 
     /*
     |--------------------------------------------------------------------------
