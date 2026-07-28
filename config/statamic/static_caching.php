@@ -1,5 +1,6 @@
 <?php
 
+use App\StaticCaching\Replacers\CspNonceReplacer;
 use Statamic\StaticCaching\Replacers\NoCacheReplacer;
 use Statamic\StaticCaching\Replacers\CsrfTokenReplacer;
 
@@ -111,6 +112,7 @@ return [
     'replacers' => [
         CsrfTokenReplacer::class,
         NoCacheReplacer::class,
+        CspNonceReplacer::class,
     ],
 
 ];
