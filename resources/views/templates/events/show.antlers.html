@@ -26,12 +26,12 @@
             <figure class="editorial-article__figure" data-progressive-media-frame>
                 {{ if featured_image }}
                     <img
-                        src="{{ glide src="{featured_image}" width="1200" height="960" fit="crop_focal" format="webp" quality="82" }}"
-                        srcset="{{ glide src="{featured_image}" width="640" height="512" fit="crop_focal" format="webp" quality="82" }} 640w, {{ glide src="{featured_image}" width="960" height="768" fit="crop_focal" format="webp" quality="82" }} 960w, {{ glide src="{featured_image}" width="1200" height="960" fit="crop_focal" format="webp" quality="82" }} 1200w"
+                        src="{{ glide src="{featured_image}" width="1200" format="webp" quality="82" }}"
+                        srcset="{{ glide src="{featured_image}" width="640" format="webp" quality="82" }} 640w, {{ glide src="{featured_image}" width="960" format="webp" quality="82" }} 960w, {{ glide src="{featured_image}" width="1200" format="webp" quality="82" }} 1200w"
                         sizes="(min-width: 1024px) 576px, 100vw"
                         alt="{{ featured_image:alt ?? title }}"
                         style="object-position: {{ featured_image:focus_css }}"
-                        {{ partial:progressive_media_attributes width="1200" height="960" loading="eager" fetchpriority="high" }}
+                        {{ partial:progressive_media_attributes :width="featured_image:width" :height="featured_image:height" loading="eager" fetchpriority="high" }}
                     >
                 {{ else }}
                     <span class="editorial-media-placeholder" aria-hidden="true"><img src="/assets/uploads/globals/LaravelBrandMark.svg" width="135" height="140" alt=""></span>

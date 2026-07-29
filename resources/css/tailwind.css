@@ -16,6 +16,13 @@
     display: none !important;
 }
 
+@layer utilities {
+    .dlf-nowrap {
+        display: inline-block;
+        white-space: nowrap;
+    }
+}
+
 @media (max-width: 1023px) {
     .dlf-btn,
     .dlf-button,

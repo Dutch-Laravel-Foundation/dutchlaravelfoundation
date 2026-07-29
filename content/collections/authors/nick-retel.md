@@ -4,7 +4,7 @@ blueprint: author
 title: 'Nick Retel'
 job_title: 'Freelance developer'
 photo: nick-retel.jpg
-description: 'Nick Retel is freelance developer en bestuurslid van de Dutch Laravel Foundation. Hij werkt onder andere voor Oh Dear.'
+description: 'Nick Retel is een freelance developer en bestuurslid van de Dutch Laravel Foundation'
 linkedin_url: 'https://www.linkedin.com/in/nckrtl/'
-website_url: 'https://ohdear.app/'
+website_url: 'https://nckrtl.com'
 ---
