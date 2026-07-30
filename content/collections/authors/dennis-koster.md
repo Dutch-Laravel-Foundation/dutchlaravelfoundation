@@ -8,5 +8,5 @@ description: 'Dennis Koster is Lead Developer bij Endeavour en bestuurslid van d
 linkedin_url: 'https://www.linkedin.com/in/dennis-koster-688b7b48/'
 website_url: 'https://endeavour.nl'
 updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
-updated_at: 1785418198
+updated_at: 1785418229
 ---
