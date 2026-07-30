@@ -6,4 +6,7 @@ job_title: 'Information Security Officer bij Shock Media'
 description: 'Timo Feenstra is Information Security Officer bij Shock Media. Vanuit zijn expertise schrijft hij over hosting en het beveiligen van Laravel-applicaties.'
 linkedin_url: 'https://www.linkedin.com/in/timofeenstra/'
 website_url: 'https://www.shockmedia.nl/'
+photo: timo-feenstra.jpg
+updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
+updated_at: 1785417831
 ---
