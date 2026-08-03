@@ -57,7 +57,7 @@ content_nl: |-
   - Jobs die gebruikersgerichte operaties verwerken waarbij duplicaten of fouten zichtbaar zijn
 
   <a name="less-suitable"></a>
-  ### Minder geschikt
+  ### Minder geschikt voor
 
   - Jobs die de `sync`-queue-driver gebruiken (alleen development/testing)
   - Eenvoudige fire-and-forget-jobs waarbij fouten acceptabel zijn
@@ -73,7 +73,7 @@ content_nl: |-
       public $timeout = 120;
   }
 
-  // config/queue.php — retry_after must be longer than any job timeout
+  // config/queue.php, retry_after must be longer than any job timeout
   // retry_after: 180 ← safely longer
   ```
 
@@ -223,7 +223,7 @@ content_en: |-
       public $timeout = 120;
   }
 
-  // config/queue.php — retry_after must be longer than any job timeout
+  // config/queue.php, retry_after must be longer than any job timeout
   // retry_after: 180 ← safely longer
   ```
 
@@ -375,5 +375,5 @@ skill_content: |-
 skill_source_path: project-structure-and-code-architecture/configure-queued-jobs-properly/skill/SKILL.md
 skill_github_url: 'https://github.com/Dutch-Laravel-Foundation/best-practices/blob/c7034be11f69954eac43e50486b6e5bebde98c46/project-structure-and-code-architecture/configure-queued-jobs-properly/skill/SKILL.md'
 skill_references: []
-synced_at: 1785159222
+synced_at: 1785231871
 ---

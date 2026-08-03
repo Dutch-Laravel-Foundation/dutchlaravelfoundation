@@ -1,8 +1,8 @@
 ---
 id: 7cba1a23-2b45-582b-831e-ef6ef4b55813
 blueprint: best_practices
-title: 'Voorkom Veelvoorkomende Kwetsbaarheden'
-title_nl: 'Voorkom Veelvoorkomende Kwetsbaarheden'
+title: 'Voorkom veelvoorkomende kwetsbaarheden'
+title_nl: 'Voorkom veelvoorkomende kwetsbaarheden'
 title_en: 'Prevent Common Vulnerabilities'
 summary_nl: 'Laravel biedt ingebouwde bescherming tegen de meest voorkomende kwetsbaarheden in webapplicaties, maar deze moeten correct worden gebruikt. Dit behandelt essentiële beveiligingspraktijken zoals bescherming tegen mass assignment, het voorkom...'
 summary_en: 'Laravel provides built-in protections against the most common web application vulnerabilities, but they need to be used correctly. This covers essential security practices including mass assignment protection, SQL injection prevention, XSS...'
@@ -11,13 +11,13 @@ chapters_nl:
     anchor: introductie
   - title: Waarom
     anchor: waarom
-  - title: 'Geschikt Voor'
+  - title: 'Geschikt voor'
     anchor: geschikt-voor
-  - title: 'Minder Geschikt'
-    anchor: minder-geschikt
+  - title: 'Minder geschikt voor'
+    anchor: minder-geschikt-voor
   - title: Voorbeelden
     anchor: voorbeelden
-  - title: 'Meer Info'
+  - title: 'Meer info'
     anchor: meer-info
 chapters_en:
   - title: Introduction
@@ -41,27 +41,27 @@ content_nl: |-
   <a name="why"></a>
   ## Waarom
 
-  - **Defense in depth**: Elke praktijk pakt een andere aanvalsvector aan — samen dekken ze de OWASP Top 10-risico's die relevant zijn voor Laravel-applicaties
+  - **Defense in depth**: Elke praktijk pakt een andere aanvalsvector aan, samen dekken ze de OWASP Top 10-risico's die relevant zijn voor Laravel-applicaties
   - **Framework-ondersteuning**: Laravel biedt alle tools al; je hoeft ze alleen consistent te gebruiken
   - **Gegevensbescherming**: Het versleutelen van gevoelige velden en het buiten de code houden van secrets beschermt tegen datalekken
   - **Beschikbaarheid**: Rate limiting voorkomt brute-force-aanvallen en misbruik van authenticatie- en API-endpoints
 
   <a name="suitable-for"></a>
-  ## Geschikt Voor
+  ## Geschikt voor
 
   - Alle Laravel-applicaties, ongeacht de omvang
   - Applicaties die gebruikersinvoer, authenticatie of bestandsuploads verwerken
   - Applicaties die gevoelige gegevens opslaan (API-sleutels, tokens, persoonlijke informatie)
 
   <a name="less-suitable"></a>
-  ## Minder Geschikt
+  ## Minder geschikt voor
 
-  - N.v.t. — deze praktijken zijn van toepassing op elke Laravel-applicatie
+  - N.v.t., deze praktijken zijn van toepassing op elke Laravel-applicatie
 
   <a name="examples"></a>
   ## Voorbeelden
 
-  ### Bescherming tegen Mass Assignment
+  ### Bescherming tegen mass assignment
 
   Elk model moet `$fillable` (whitelist) of `$guarded` (blacklist) definiëren:
 
@@ -100,7 +100,7 @@ content_nl: |-
   User::whereRaw('LOWER(name) = ?', [strtolower($request->name)])->get();
   ```
 
-  ### Escape Output om XSS te Voorkomen
+  ### Escape output om XSS te voorkomen
 
   Gebruik `{{ }}` voor HTML-escaping. Gebruik `{!! !!}` alleen voor vertrouwde, vooraf gesaniteerde content:
 
@@ -123,7 +123,7 @@ content_nl: |-
   </form>
   ```
 
-  ### Rate Limiting voor Auth- en API-routes
+  ### Rate limiting voor auth- en API-routes
 
   ```php
   RateLimiter::for('login', function (Request $request) {
@@ -133,7 +133,7 @@ content_nl: |-
   Route::post('/login', LoginController::class)->middleware('throttle:login');
   ```
 
-  ### Valideer Bestandsuploads
+  ### Valideer bestandsuploads
 
   Valideer MIME-type, extensie en grootte. Vertrouw nooit door de client aangeleverde bestandsnamen:
 
@@ -152,7 +152,7 @@ content_nl: |-
   $path = $request->file('avatar')->store('avatars', 'public');
   ```
 
-  ### Versleutel Gevoelige Databasevelden
+  ### Versleutel gevoelige databasevelden
 
   Gebruik de `encrypted`-cast voor API-sleutels en tokens, en markeer het attribuut als `hidden`:
 
@@ -171,7 +171,7 @@ content_nl: |-
   }
   ```
 
-  ### Controleer Dependencies
+  ### Controleer dependencies
 
   Voer `composer audit` periodiek uit en automatiseer het in CI:
 
@@ -180,15 +180,15 @@ content_nl: |-
   ```
 
   <a name="more-info"></a>
-  ## Meer Info
+  ## Meer info
 
   - [Laravel Security-documentatie](https://laravel.com/docs/security)
   - [Laravel CSRF-bescherming](https://laravel.com/docs/csrf)
   - [Laravel Rate Limiting](https://laravel.com/docs/rate-limiting)
   - [Laravel Encryption-documentatie](https://laravel.com/docs/encryption)
-  - [Gebruik Policies en Gates voor Autorisatie](../../../project-structure-and-code-architecture/use-policies-and-gates-for-authorization/translations/nl.md) — voor autorisatiepatronen
-  - [Implementeer Content Security Policy (CSP)](../../implement-content-security-policy/translations/nl.md) — voor aanvullende XSS-bescherming via security headers
-  - [Gebruik Configuratie op de Juiste Manier](../../../project-structure-and-code-architecture/use-configuration-properly/translations/nl.md) — voor het buiten de code houden van secrets
+  - [Gebruik Policies en Gates voor Autorisatie](../../../project-structure-and-code-architecture/use-policies-and-gates-for-authorization/translations/nl.md)
+  - [Implementeer Content Security Policy (CSP)](../../implement-content-security-policy/translations/nl.md)
+  - [Gebruik Configuratie op de Juiste Manier](../../../project-structure-and-code-architecture/use-configuration-properly/translations/nl.md)
   - [Laravel Boost Best Practices PR](https://github.com/laravel/boost/pull/628)
 content_en: |-
   <a name="introduction"></a>
@@ -199,7 +199,7 @@ content_en: |-
   <a name="why"></a>
   ## Why
 
-  - **Defense in depth**: Each practice addresses a different attack vector — together they cover the OWASP Top 10 risks relevant to Laravel applications
+  - **Defense in depth**: Each practice addresses a different attack vector, together they cover the OWASP Top 10 risks relevant to Laravel applications
   - **Framework support**: Laravel already provides all the tools; you just need to use them consistently
   - **Data protection**: Encrypting sensitive fields and keeping secrets out of code protects against data breaches
   - **Availability**: Rate limiting prevents brute-force attacks and abuse of authentication and API endpoints
@@ -214,7 +214,7 @@ content_en: |-
   <a name="less-suitable"></a>
   ## Less Suitable
 
-  - N/A — these practices apply to every Laravel application
+  - N/A, these practices apply to every Laravel application
 
   <a name="examples"></a>
   ## Examples
@@ -344,9 +344,9 @@ content_en: |-
   - [Laravel CSRF Protection](https://laravel.com/docs/csrf)
   - [Laravel Rate Limiting](https://laravel.com/docs/rate-limiting)
   - [Laravel Encryption Documentation](https://laravel.com/docs/encryption)
-  - [Use Policies and Gates for Authorization](../../project-structure-and-code-architecture/use-policies-and-gates-for-authorization/BEST_PRACTICE.md) — for authorization patterns
-  - [Implement Content Security Policy (CSP)](../implement-content-security-policy/BEST_PRACTICE.md) — for additional XSS protection via security headers
-  - [Use Configuration Properly](../../project-structure-and-code-architecture/use-configuration-properly/BEST_PRACTICE.md) — for keeping secrets out of code
+  - [Use Policies and Gates for Authorization](../../project-structure-and-code-architecture/use-policies-and-gates-for-authorization/BEST_PRACTICE.md), for authorization patterns
+  - [Implement Content Security Policy (CSP)](../implement-content-security-policy/BEST_PRACTICE.md), for additional XSS protection via security headers
+  - [Use Configuration Properly](../../project-structure-and-code-architecture/use-configuration-properly/BEST_PRACTICE.md), for keeping secrets out of code
   - [Laravel Boost Best Practices PR](https://github.com/laravel/boost/pull/628)
 best_practice_categories:
   - security-and-authentication
@@ -366,7 +366,7 @@ skill_content: |-
 
   ## Why It Matters
 
-  - **Defense in depth**: Each practice addresses a different attack vector — together they cover the OWASP Top 10 risks relevant to Laravel applications
+  - **Defense in depth**: Each practice addresses a different attack vector, together they cover the OWASP Top 10 risks relevant to Laravel applications
   - **Framework support**: Laravel already provides all the tools; you just need to use them consistently
   - **Data protection**: Encrypting sensitive fields and keeping secrets out of code protects against data breaches
   - **Availability**: Rate limiting prevents brute-force attacks and abuse of authentication and API endpoints
@@ -379,7 +379,7 @@ skill_content: |-
 
   ## Be Careful When
 
-  - N/A — these practices apply to every Laravel application
+  - N/A, these practices apply to every Laravel application
 
   ## Canonical Source
 
@@ -404,5 +404,5 @@ skill_content: |-
 skill_source_path: security-and-authentication/prevent-common-vulnerabilities/skill/SKILL.md
 skill_github_url: 'https://github.com/Dutch-Laravel-Foundation/best-practices/blob/c7034be11f69954eac43e50486b6e5bebde98c46/security-and-authentication/prevent-common-vulnerabilities/skill/SKILL.md'
 skill_references: []
-synced_at: 1785159222
+synced_at: 1785231871
 ---

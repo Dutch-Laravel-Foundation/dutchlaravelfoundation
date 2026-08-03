@@ -1,8 +1,8 @@
 ---
 id: b30ea772-a967-52e7-abfb-37dc05f8d477
 blueprint: best_practices
-title: 'Houd Commands Klein en Verplaats Business Logic naar Jobs'
-title_nl: 'Houd Commands Klein en Verplaats Business Logic naar Jobs'
+title: 'Houd commands klein en verplaats business logic naar jobs'
+title_nl: 'Houd commands klein en verplaats business logic naar jobs'
 title_en: 'Keep Commands Small and Defer Business Logic to Jobs'
 summary_nl: 'Laravel console commands moeten lichtgewicht blijven en gericht zijn op het afhandelen van command-line input/output, terwijl complexe business logic naar queued jobs verplaatst moet worden. Dit architectuurpatroon scheidt de verantwoordeli...'
 summary_en: 'Laravel console commands should be kept lightweight and focused on handling command-line input/output, while complex business logic should be deferred to queued jobs. This architectural pattern separates concerns between the command layer (...'
@@ -11,15 +11,15 @@ chapters_nl:
     anchor: introductie
   - title: Waarom
     anchor: waarom
-  - title: 'Geschikt Voor'
+  - title: 'Geschikt voor'
     anchor: geschikt-voor
-  - title: 'Minder Geschikt'
-    anchor: minder-geschikt
+  - title: 'Minder geschikt voor'
+    anchor: minder-geschikt-voor
   - title: Implementatie
     anchor: implementatie
-  - title: 'Veelvoorkomende Valkuilen'
+  - title: 'Veelvoorkomende valkuilen'
     anchor: veelvoorkomende-valkuilen
-  - title: 'Meer Info'
+  - title: 'Meer info'
     anchor: meer-info
 chapters_en:
   - title: Introduction
@@ -58,7 +58,7 @@ content_nl: |-
   - **Beter Testen**: Business logic in jobs kan onafhankelijk van command-line-aspecten getest worden, wat leidt tot meer gerichte en onderhoudbare tests.
 
   <a name="suitable-for"></a>
-  ## Geschikt Voor
+  ## Geschikt voor
 
   - **Geplande Commands**: Taken die op een schema draaien en dataverwerking, imports, exports of andere tijdrovende operaties uitvoeren
   - **Langlopende Operaties**: Commands die grote datasets verwerken, meerdere API-calls maken of complexe berekeningen uitvoeren
@@ -67,7 +67,7 @@ content_nl: |-
   - **Resource-Intensieve Taken**: Operaties die significant geheugen of CPU-resources verbruiken
 
   <a name="less-suitable"></a>
-  ## Minder Geschikt
+  ## Minder geschikt voor
 
   - **Interactieve Commands**: Commands die tijdens de uitvoering gebruikersinvoer of realtime feedback vereisen
   - **Eenvoudige Database Queries**: Snelle operaties zoals het legen van de cache of eenvoudige database-opschoningen die binnen enkele seconden klaar zijn
@@ -144,7 +144,7 @@ content_nl: |-
   }
   ```
 
-  ### Geplande Commands met Jobs
+  ### Geplande commands met jobs
 
   ```php
   // In app/Console/Kernel.php
@@ -161,7 +161,7 @@ content_nl: |-
   }
   ```
 
-  ### Dubbele Jobs Voorkomen
+  ### Dubbele jobs voorkomen
 
   Gebruik voor geplande commands unieke jobs om overlap te voorkomen:
 
@@ -183,9 +183,9 @@ content_nl: |-
   ```
 
   <a name="common-pitfalls"></a>
-  ## Veelvoorkomende Valkuilen
+  ## Veelvoorkomende valkuilen
 
-  ### De Sync Queue Driver Gebruiken
+  ### De sync queue driver gebruiken
   De belangrijkste valkuil is het gebruik van de standaard `sync`-driver, die jobs synchroon uitvoert en zo het hele doel van dit patroon tenietdoet:
 
   ```php
@@ -206,7 +206,7 @@ content_nl: |-
   Zorg er altijd voor dat je queue-connection geconfigureerd is voor asynchrone verwerking wanneer je dit patroon implementeert.
 
   <a name="more-info"></a>
-  ## Meer Info
+  ## Meer info
 
   - [Laravel Queue Documentation](https://laravel.com/docs/queues)
   - [Laravel Task Scheduling Documentation](https://laravel.com/docs/scheduling)
@@ -214,7 +214,7 @@ content_nl: |-
   - [Supervisor Configuration for Laravel](https://laravel.com/docs/queues#supervisor-configuration)
   - [Laravel Horizon for Queue Monitoring](https://laravel.com/docs/horizon)
   - [Laravel Queue Workers Documentation](https://laravel.com/docs/queues#running-the-queue-worker)
-  - [Configure Queued Jobs Properly](../../configure-queued-jobs-properly/translations/nl.md) — voor geavanceerde jobconfiguratie zoals backoff, rate limiting en batching
+  - [Configure Queued Jobs Properly](../../configure-queued-jobs-properly/translations/nl.md)
 content_en: |-
   <a name="introduction"></a>
   ## Introduction
@@ -393,7 +393,7 @@ content_en: |-
   - [Supervisor Configuration for Laravel](https://laravel.com/docs/queues#supervisor-configuration)
   - [Laravel Horizon for Queue Monitoring](https://laravel.com/docs/horizon)
   - [Laravel Queue Workers Documentation](https://laravel.com/docs/queues#running-the-queue-worker)
-  - [Configure Queued Jobs Properly](../configure-queued-jobs-properly/BEST_PRACTICE.md) — for advanced job configuration like backoff, rate limiting, and batching
+  - [Configure Queued Jobs Properly](../configure-queued-jobs-properly/BEST_PRACTICE.md), for advanced job configuration like backoff, rate limiting, and batching
 best_practice_categories:
   - project-structure-and-code-architecture
 category_slug: project-structure-and-code-architecture
@@ -457,5 +457,5 @@ skill_content: |-
 skill_source_path: project-structure-and-code-architecture/keep-commands-small-defer-to-jobs/skill/SKILL.md
 skill_github_url: 'https://github.com/Dutch-Laravel-Foundation/best-practices/blob/c7034be11f69954eac43e50486b6e5bebde98c46/project-structure-and-code-architecture/keep-commands-small-defer-to-jobs/skill/SKILL.md'
 skill_references: []
-synced_at: 1785159222
+synced_at: 1785231871
 ---

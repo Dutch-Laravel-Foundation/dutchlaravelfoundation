@@ -1,8 +1,8 @@
 ---
 id: 3cd031de-3526-5620-80bf-b7d7e53e7184
 blueprint: best_practices
-title: 'Gebruik Route Model Binding'
-title_nl: 'Gebruik Route Model Binding'
+title: 'Gebruik route model binding'
+title_nl: 'Gebruik route model binding'
 title_en: 'Use Route Model Binding'
 summary_nl: 'Laravels impliciete route model binding resolveert Eloquent-modellen automatisch vanuit route-parameters, waardoor handmatige findOrFail()-aanroepen overbodig worden. In combinatie met scoped bindings voor geneste resources en resource cont...'
 summary_en: "Laravel's implicit route model binding automatically resolves Eloquent models from route parameters, eliminating manual findOrFail() calls. Combined with scoped bindings for nested resources and resource controllers, this keeps routing code..."
@@ -11,13 +11,13 @@ chapters_nl:
     anchor: introductie
   - title: Waarom
     anchor: waarom
-  - title: 'Geschikt Voor'
+  - title: 'Geschikt voor'
     anchor: geschikt-voor
-  - title: 'Minder Geschikt'
-    anchor: minder-geschikt
+  - title: 'Minder geschikt voor'
+    anchor: minder-geschikt-voor
   - title: Voorbeelden
     anchor: voorbeelden
-  - title: 'Meer Info'
+  - title: 'Meer info'
     anchor: meer-info
 chapters_en:
   - title: Introduction
@@ -41,13 +41,13 @@ content_nl: |-
   <a name="why"></a>
   ## Waarom
 
-  - **Minder boilerplate**: Geen handmatige `findOrFail()`- of `find()`-aanroepen nodig — Laravel resolveert het model automatisch
+  - **Minder boilerplate**: Geen handmatige `findOrFail()`- of `find()`-aanroepen nodig, Laravel resolveert het model automatisch
   - **Automatische 404-afhandeling**: Als het model niet gevonden wordt, geeft Laravel een 404-response terug zonder extra code
   - **Afdwingen van parent-child-relaties**: Scoped bindings zorgen ervoor dat geneste resources daadwerkelijk bij hun parent horen, wat ongeautoriseerde toegang voorkomt
   - **RESTful consistentie**: Resource controllers dwingen standaard CRUD-naamgevingsconventies af in de hele applicatie
 
   <a name="suitable-for"></a>
-  ## Geschikt Voor
+  ## Geschikt voor
 
   - Elke route die op een specifieke model-instantie werkt
   - Geneste resource-routes (bijv. `/users/{user}/posts/{post}`)
@@ -55,7 +55,7 @@ content_nl: |-
   - Applicaties waar consistente URL-patronen de developer experience verbeteren
 
   <a name="less-suitable"></a>
-  ## Minder Geschikt
+  ## Minder geschikt voor
 
   - Routes die aangepaste resolutielogica nodig hebben die verder gaat dan eenvoudige key-lookups
   - Endpoints die niet op specifieke model-instanties werken
@@ -64,7 +64,7 @@ content_nl: |-
   <a name="examples"></a>
   ## Voorbeelden
 
-  ### Impliciete Route Model Binding
+  ### Impliciete route model binding
 
   ```php
   // Slecht: handmatige resolutie
@@ -80,7 +80,7 @@ content_nl: |-
   }
   ```
 
-  ### Scoped Bindings voor Geneste Resources
+  ### Scoped bindings voor geneste resources
 
   Dwing parent-child-relaties automatisch af:
 
@@ -90,7 +90,7 @@ content_nl: |-
   })->scopeBindings();
   ```
 
-  ### Gebruik Resource Controllers
+  ### Gebruik resource controllers
 
   ```php
   Route::resource('posts', PostController::class);
@@ -98,12 +98,12 @@ content_nl: |-
   ```
 
   <a name="more-info"></a>
-  ## Meer Info
+  ## Meer info
 
   - [Laravel Route Model Binding Documentatie](https://laravel.com/docs/routing#route-model-binding)
   - [Laravel Resource Controllers Documentatie](https://laravel.com/docs/controllers#resource-controllers)
-  - [Gebruik Action Classes voor Bedrijfslogica](../../../project-structure-and-code-architecture/use-action-classes-for-business-logic/translations/nl.md) — houd controllers dun door logica te extraheren naar action classes
-  - [Gebruik Form Request Classes](../../use-form-request-classes/translations/nl.md) — extraheer validatie uit controllers naar Form Requests
+  - [Gebruik Action Classes voor Bedrijfslogica](../../../project-structure-and-code-architecture/use-action-classes-for-business-logic/translations/nl.md)
+  - [Gebruik Form Request Classes](../../use-form-request-classes/translations/nl.md)
   - [Laravel Boost Best Practices PR](https://github.com/laravel/boost/pull/628)
 content_en: |-
   <a name="introduction"></a>
@@ -114,7 +114,7 @@ content_en: |-
   <a name="why"></a>
   ## Why
 
-  - **Less boilerplate**: No need for manual `findOrFail()` or `find()` calls — Laravel resolves the model automatically
+  - **Less boilerplate**: No need for manual `findOrFail()` or `find()` calls, Laravel resolves the model automatically
   - **Automatic 404 handling**: If the model isn't found, Laravel returns a 404 response without any extra code
   - **Parent-child enforcement**: Scoped bindings ensure nested resources actually belong to their parent, preventing unauthorized access
   - **RESTful consistency**: Resource controllers enforce standard CRUD naming conventions across the application
@@ -175,8 +175,8 @@ content_en: |-
 
   - [Laravel Route Model Binding Documentation](https://laravel.com/docs/routing#route-model-binding)
   - [Laravel Resource Controllers Documentation](https://laravel.com/docs/controllers#resource-controllers)
-  - [Use Action Classes for Business Logic](../../project-structure-and-code-architecture/use-action-classes-for-business-logic/BEST_PRACTICE.md) — keep controllers thin by extracting logic to action classes
-  - [Use Form Request Classes](../use-form-request-classes/BEST_PRACTICE.md) — extract validation from controllers into Form Requests
+  - [Use Action Classes for Business Logic](../../project-structure-and-code-architecture/use-action-classes-for-business-logic/BEST_PRACTICE.md), keep controllers thin by extracting logic to action classes
+  - [Use Form Request Classes](../use-form-request-classes/BEST_PRACTICE.md), extract validation from controllers into Form Requests
   - [Laravel Boost Best Practices PR](https://github.com/laravel/boost/pull/628)
 best_practice_categories:
   - routing
@@ -196,7 +196,7 @@ skill_content: |-
 
   ## Why It Matters
 
-  - **Less boilerplate**: No need for manual `findOrFail()` or `find()` calls — Laravel resolves the model automatically
+  - **Less boilerplate**: No need for manual `findOrFail()` or `find()` calls, Laravel resolves the model automatically
   - **Automatic 404 handling**: If the model isn't found, Laravel returns a 404 response without any extra code
   - **Parent-child enforcement**: Scoped bindings ensure nested resources actually belong to their parent, preventing unauthorized access
   - **RESTful consistency**: Resource controllers enforce standard CRUD naming conventions across the application
@@ -237,5 +237,5 @@ skill_content: |-
 skill_source_path: routing/use-route-model-binding/skill/SKILL.md
 skill_github_url: 'https://github.com/Dutch-Laravel-Foundation/best-practices/blob/c7034be11f69954eac43e50486b6e5bebde98c46/routing/use-route-model-binding/skill/SKILL.md'
 skill_references: []
-synced_at: 1785159222
+synced_at: 1785231871
 ---

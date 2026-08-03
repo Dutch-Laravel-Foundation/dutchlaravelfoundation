@@ -1,8 +1,8 @@
 ---
 id: 24d6667f-8d69-5eec-b77f-1721b0866e0b
 blueprint: best_practices
-title: 'Houd je aan een Standaard met Automatisering'
-title_nl: 'Houd je aan een Standaard met Automatisering'
+title: 'Houd je aan een standaard met automatisering'
+title_nl: 'Houd je aan een standaard met automatisering'
 title_en: 'Use Automation to Adhere to a Standard'
 summary_nl: "Het naleven van een bepaalde standaard kan handmatig of via geautomatiseerde tooling. Deze tooling kan de vorm aannemen van IDE-plugins, git hooks of CI/CD-stappen. Doordat de ontwikkelaar niet hoeft na te 'denken' over de *exacte* regels d..."
 summary_en: "Adhering to a given standard can be done manually or via automated tooling. This tooling can come in the form of IDE plugins, git hooks, CI/CD steps. The fact that the developer doesn't have to 'think' about the *exact* rules defined in the..."
@@ -11,11 +11,11 @@ chapters_nl:
     anchor: introductie
   - title: Waarom
     anchor: waarom
-  - title: 'Geschikt Voor'
+  - title: 'Geschikt voor'
     anchor: geschikt-voor
-  - title: 'Minder Geschikt'
-    anchor: minder-geschikt
-  - title: 'Meer Info'
+  - title: 'Minder geschikt voor'
+    anchor: minder-geschikt-voor
+  - title: 'Meer info'
     anchor: meer-info
 chapters_en:
   - title: Introduction
@@ -41,21 +41,21 @@ content_nl: |-
   - Automatisering zorgt voor een consistente toepassing van de gekozen standaard in de volledige codebase. Wanneer regels worden aangepast en/of bijgewerkt, kan automatisering opnieuw zorgen voor een consistente toepassing van de updates.
 
   <a name="suitable-for"></a>
-  ## Geschikt Voor
+  ## Geschikt voor
 
   - Middelgrote tot grote projecten
 
   <a name="less-suitable"></a>
-  ## Minder Geschikt
+  ## Minder geschikt voor
 
   - Voor kleinere projecten kan de IDE-integratie of het af en toe handmatig draaien van een tool volstaan om consistentie te waarborgen.
 
   <a name="more-info"></a>
-  ## Meer Info
+  ## Meer info
 
   - [Laravel Pint Documentatie](https://laravel.com/docs/pint)
   - [Laravel Pint GitHub Action](https://github.com/marketplace/actions/laravel-pint)
-  - [Houd je aan een Enkele Standaard](../../adhere-to-a-single-standard/translations/nl.md) — kies welke standaard je afdwingt
+  - [Houd je aan een Enkele Standaard](../../adhere-to-a-single-standard/translations/nl.md)
 content_en: |-
   <a name="introduction"></a>
   ## Introduction
@@ -83,7 +83,7 @@ content_en: |-
 
   - [Laravel Pint Documentation](https://laravel.com/docs/pint)
   - [Laravel Pint GitHub Action](https://github.com/marketplace/actions/laravel-pint)
-  - [Adhere to a Single Standard](../adhere-to-a-single-standard/BEST_PRACTICE.md) — choose which standard to enforce
+  - [Adhere to a Single Standard](../adhere-to-a-single-standard/BEST_PRACTICE.md), choose which standard to enforce
 best_practice_categories:
   - code-standards
 category_slug: code-standards
@@ -136,5 +136,5 @@ skill_content: |-
 skill_source_path: code-standards/use-automation-to-adhere-to-a-standard/skill/SKILL.md
 skill_github_url: 'https://github.com/Dutch-Laravel-Foundation/best-practices/blob/c7034be11f69954eac43e50486b6e5bebde98c46/code-standards/use-automation-to-adhere-to-a-standard/skill/SKILL.md'
 skill_references: []
-synced_at: 1785159222
+synced_at: 1785231871
 ---

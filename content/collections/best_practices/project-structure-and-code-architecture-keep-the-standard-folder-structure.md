@@ -1,8 +1,8 @@
 ---
 id: 17f5f2d9-e957-5a9f-b9a2-055e431b8e23
 blueprint: best_practices
-title: 'Houd de Standaard Mappenstructuur Aan'
-title_nl: 'Houd de Standaard Mappenstructuur Aan'
+title: 'Houd de standaard mappenstructuur aan'
+title_nl: 'Houd de standaard mappenstructuur aan'
 title_en: 'Keep the Standard Folder Structure'
 summary_nl: 'Laravel heeft een standaard mappenstructuur. De structuur kan naar wens worden aangepast, maar het is over het algemeen niet aan te raden om hier te veel van af te wijken.'
 summary_en: 'Laravel has a standard folder structure. The structure can be adjusted as desired, but it is generally not recommended to deviate too much from this.'
@@ -11,11 +11,11 @@ chapters_nl:
     anchor: introductie
   - title: Waarom
     anchor: waarom
-  - title: 'Geschikt Voor'
+  - title: 'Geschikt voor'
     anchor: geschikt-voor
-  - title: 'Minder Geschikt'
-    anchor: minder-geschikt
-  - title: 'Meer Informatie'
+  - title: 'Minder geschikt voor'
+    anchor: minder-geschikt-voor
+  - title: 'Meer informatie'
     anchor: meer-informatie
 chapters_en:
   - title: Introduction
@@ -42,22 +42,22 @@ content_nl: |-
   - Je project is beter compatibel met packages. Doordat alles staat waar het hoort, kom je minder fouten tegen.
 
   <a name="suitable-for"></a>
-  ## Geschikt Voor
+  ## Geschikt voor
 
   - Kleine tot middelgrote projecten
 
   <a name="less-suitable"></a>
-  ## Minder Geschikt
+  ## Minder geschikt voor
 
   - Grote projecten. Voor grote projecten kan het nuttig zijn om met modules te werken.
 
   <a name="more-info"></a>
-  ## Meer Informatie
+  ## Meer informatie
 
   - [Laravel Folder Structure Explained (YouTube)](https://www.youtube.com/watch?v=KBigS5vLwZk)
-  - [Laravel Best Practices — Stick to the Default Folder Structure](https://benjamincrozat.com/laravel-best-practices#stick-to-the-default-folder-structure)
-  - [Laravel Architecture Best Practices — Keep the Default Folder Structure](https://benjamincrozat.com/laravel-architecture-best-practices#keep-the-default-folder-structure)
-  - [Use Action Classes for Business Logic](../../use-action-classes-for-business-logic/translations/nl.md) — voor het organiseren van business logic binnen de standaard structuur
+  - [Laravel Best Practices, Stick to the Default Folder Structure](https://benjamincrozat.com/laravel-best-practices#stick-to-the-default-folder-structure)
+  - [Laravel Architecture Best Practices, Keep the Default Folder Structure](https://benjamincrozat.com/laravel-architecture-best-practices#keep-the-default-folder-structure)
+  - [Use Action Classes for Business Logic](../../use-action-classes-for-business-logic/translations/nl.md)
 content_en: |-
   <a name="introduction"></a>
   ## Introduction
@@ -85,9 +85,9 @@ content_en: |-
   ## More Info
 
   - [Laravel Folder Structure Explained (YouTube)](https://www.youtube.com/watch?v=KBigS5vLwZk)
-  - [Laravel Best Practices — Stick to the Default Folder Structure](https://benjamincrozat.com/laravel-best-practices#stick-to-the-default-folder-structure)
-  - [Laravel Architecture Best Practices — Keep the Default Folder Structure](https://benjamincrozat.com/laravel-architecture-best-practices#keep-the-default-folder-structure)
-  - [Use Action Classes for Business Logic](../use-action-classes-for-business-logic/BEST_PRACTICE.md) — for organizing business logic within the standard structure
+  - [Laravel Best Practices, Stick to the Default Folder Structure](https://benjamincrozat.com/laravel-best-practices#stick-to-the-default-folder-structure)
+  - [Laravel Architecture Best Practices, Keep the Default Folder Structure](https://benjamincrozat.com/laravel-architecture-best-practices#keep-the-default-folder-structure)
+  - [Use Action Classes for Business Logic](../use-action-classes-for-business-logic/BEST_PRACTICE.md), for organizing business logic within the standard structure
 best_practice_categories:
   - project-structure-and-code-architecture
 category_slug: project-structure-and-code-architecture
@@ -141,5 +141,5 @@ skill_content: |-
 skill_source_path: project-structure-and-code-architecture/keep-the-standard-folder-structure/skill/SKILL.md
 skill_github_url: 'https://github.com/Dutch-Laravel-Foundation/best-practices/blob/c7034be11f69954eac43e50486b6e5bebde98c46/project-structure-and-code-architecture/keep-the-standard-folder-structure/skill/SKILL.md'
 skill_references: []
-synced_at: 1785159222
+synced_at: 1785231871
 ---

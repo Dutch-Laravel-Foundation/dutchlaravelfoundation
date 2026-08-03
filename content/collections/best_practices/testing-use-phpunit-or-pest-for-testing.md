@@ -11,15 +11,15 @@ chapters_nl:
     anchor: introductie
   - title: Waarom
     anchor: waarom
-  - title: 'Geschikt Voor'
+  - title: 'Geschikt voor'
     anchor: geschikt-voor
-  - title: 'Minder Geschikt'
-    anchor: minder-geschikt
+  - title: 'Minder geschikt voor'
+    anchor: minder-geschikt-voor
   - title: Voorbeelden
     anchor: voorbeelden
-  - title: 'Kiezen Tussen PHPUnit en Pest'
+  - title: 'Kiezen tussen PHPUnit en Pest'
     anchor: kiezen-tussen-phpunit-en-pest
-  - title: 'Meer Info'
+  - title: 'Meer info'
     anchor: meer-info
 chapters_en:
   - title: Introduction
@@ -53,7 +53,7 @@ content_nl: |-
   - **Continue verbetering**: Beide frameworks ontvangen regelmatig updates en verbeteringen samen met Laravel-releases
 
   <a name="suitable-for"></a>
-  ## Geschikt Voor
+  ## Geschikt voor
 
   - Alle Laravel-applicaties die geautomatiseerd testen vereisen
   - Projecten waar teamleden de voorkeur geven aan traditioneel testen in xUnit-stijl (PHPUnit)
@@ -63,7 +63,7 @@ content_nl: |-
   - Nieuwe projecten die op zoek zijn naar een schone, expressieve testsyntax (Pest)
 
   <a name="less-suitable"></a>
-  ## Minder Geschikt
+  ## Minder geschikt voor
 
   - Applicaties met bestaande testsuites in andere PHP-testframeworks (hoewel migratie mogelijk is)
   - Projecten met specifieke eisen voor alternatieve testtools die niet compatibel zijn met de testarchitectuur van Laravel
@@ -125,7 +125,7 @@ content_nl: |-
   ```
 
   <a name="choosing-between-phpunit-and-pest"></a>
-  ## Kiezen Tussen PHPUnit en Pest
+  ## Kiezen tussen PHPUnit en Pest
 
   **Kies PHPUnit als:**
   - Je team al bekend is met traditioneel testen in xUnit-stijl
@@ -142,7 +142,7 @@ content_nl: |-
   **Let op:** Beide frameworks kunnen naast elkaar bestaan in hetzelfde project, wat een geleidelijke migratie mogelijk maakt indien gewenst.
 
   <a name="more-info"></a>
-  ## Meer Info
+  ## Meer info
 
   - [Laravel Testing Documentation](https://laravel.com/docs/testing)
   - [PHPUnit Documentation](https://phpunit.de/documentation.html)
@@ -327,5 +327,5 @@ skill_content: |-
 skill_source_path: testing/use-phpunit-or-pest-for-testing/skill/SKILL.md
 skill_github_url: 'https://github.com/Dutch-Laravel-Foundation/best-practices/blob/c7034be11f69954eac43e50486b6e5bebde98c46/testing/use-phpunit-or-pest-for-testing/skill/SKILL.md'
 skill_references: []
-synced_at: 1785159222
+synced_at: 1785231076
 ---

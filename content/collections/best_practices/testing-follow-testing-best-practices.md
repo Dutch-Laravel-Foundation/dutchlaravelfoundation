@@ -1,19 +1,19 @@
 ---
 id: f3c8de7d-02ae-5629-a2f2-47d02fa4f892
 blueprint: best_practices
-title: 'Volg Best Practices voor Testen'
-title_nl: 'Volg Best Practices voor Testen'
+title: 'Volg best practices voor testen'
+title_nl: 'Volg best practices voor testen'
 title_en: 'Follow Testing Best Practices'
 summary_nl: 'Gebruik de test-helpers en -patronen van Laravel die suites sneller, duidelijker en minder foutgevoelig maken.'
 summary_en: 'Use Laravel’s testing helpers and patterns that make suites faster, clearer, and less error-prone.'
 chapters_nl:
   - title: Beschrijving
     anchor: beschrijving
-  - title: 'Aanbevolen Situatie'
+  - title: 'Aanbevolen situatie'
     anchor: aanbevolen-situatie
-  - title: 'Menselijke Begeleiding'
+  - title: 'Menselijke begeleiding'
     anchor: menselijke-begeleiding
-  - title: 'Boost Guideline'
+  - title: 'Boost guideline'
     anchor: boost-guideline
 chapters_en:
   - title: Description
@@ -31,12 +31,12 @@ content_nl: |-
   Gebruik de test-helpers en -patronen van Laravel die suites sneller, duidelijker en minder foutgevoelig maken.
 
   <a name="recommended-situation"></a>
-  ## Aanbevolen Situatie
+  ## Aanbevolen situatie
 
   Gebruik dit bij het schrijven of onderhouden van tests in een Laravel-applicatie.
 
   <a name="human-guidance"></a>
-  ## Menselijke Begeleiding
+  ## Menselijke begeleiding
 
   Naast het kiezen van een testframework (zie [Gebruik PHPUnit of Pest](../../use-phpunit-or-pest-for-testing/translations/nl.md)) zijn er verschillende Laravel-specifieke testpatronen die de snelheid, betrouwbaarheid en expressiviteit van tests verbeteren. Denk aan het gebruik van `LazilyRefreshDatabase` voor performance, model-assertions voor duidelijkheid, factory states voor leesbaarheid, en het correct ordenen van fakes om te voorkomen dat model events breken.
 
@@ -49,7 +49,7 @@ content_nl: |-
   - **Correct gedrag**: `Event::fake()` na de factory-setup aanroepen voorkomt dat model events die factories nodig hebben stilzwijgend breken
 
   <a name="suitable-for"></a>
-  ### Geschikt Voor
+  ### Geschikt voor
 
   - Alle Laravel-applicaties met testsuites
   - Teams die hun CI/CD-pipelines willen versnellen
@@ -57,7 +57,7 @@ content_nl: |-
   - Applicaties met event-gedreven of queue-gebaseerd gedrag dat getest moet worden
 
   <a name="less-suitable"></a>
-  ### Minder Geschikt
+  ### Minder geschikt voor
 
   - Zeer kleine testsuites waar snelheidsoptimalisaties niet merkbaar zijn
   - Projecten die de ingebouwde testfuncties van Laravel niet gebruiken
@@ -75,7 +75,7 @@ content_nl: |-
   use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
   ```
 
-  #### Gebruik Model-assertions
+  #### Gebruik model-assertions
 
   ```php
   // Bad: raw database assertion
@@ -85,7 +85,7 @@ content_nl: |-
   $this->assertModelExists($user);
   ```
 
-  #### Gebruik Factory States en Sequences
+  #### Gebruik factory states en sequences
 
   Benoemde states maken tests zelfdocumenterend:
 
@@ -97,7 +97,7 @@ content_nl: |-
   User::factory()->unverified()->create();
   ```
 
-  #### Roep `Event::fake()` Aan na de Factory-setup
+  #### Roep `Event::fake()` aan na de factory-setup
 
   Model-factories vertrouwen op model events (bijv. `creating` om UUID's te genereren). Als je `Event::fake()` vóór de factory-aanroepen plaatst, worden die events onderdrukt en ontstaan er kapotte modellen:
 
@@ -111,11 +111,11 @@ content_nl: |-
   Event::fake();
   ```
 
-  #### Gebruik `Exceptions::fake()` voor Exception-assertions
+  #### Gebruik `Exceptions::fake()` voor exception-assertions
 
   Gebruik in plaats van `withoutExceptionHandling()` liever `Exceptions::fake()` om te controleren dat de juiste exception werd gerapporteerd terwijl het request normaal wordt voltooid.
 
-  #### Gebruik `recycle()` om Relatie-instanties te Delen
+  #### Gebruik `recycle()` om relatie-instanties te delen
 
   Zonder `recycle()` maken geneste factories afzonderlijke instanties van dezelfde conceptuele entiteit:
 
@@ -126,7 +126,7 @@ content_nl: |-
   ```
 
   <a name="more-info"></a>
-  ### Meer Info
+  ### Meer info
 
   - [Laravel Testing Documentation](https://laravel.com/docs/testing)
   - [Laravel Database Testing Documentation](https://laravel.com/docs/database-testing)
@@ -136,7 +136,7 @@ content_nl: |-
   - [Laravel Boost Best Practices PR](https://github.com/laravel/boost/pull/628)
 
   <a name="boost-guideline"></a>
-  ## Boost Guideline
+  ## Boost guideline
 
   ```md
   ---
@@ -327,5 +327,5 @@ skill_content: |-
 skill_source_path: testing/follow-testing-best-practices/skill/SKILL.md
 skill_github_url: 'https://github.com/Dutch-Laravel-Foundation/best-practices/blob/c7034be11f69954eac43e50486b6e5bebde98c46/testing/follow-testing-best-practices/skill/SKILL.md'
 skill_references: []
-synced_at: 1785159222
+synced_at: 1785231076
 ---

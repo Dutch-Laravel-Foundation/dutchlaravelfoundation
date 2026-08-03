@@ -13,7 +13,7 @@ chapters_nl:
     anchor: aanbevolen-situatie
   - title: 'Menselijke begeleiding'
     anchor: menselijke-begeleiding
-  - title: 'Boost Guideline'
+  - title: 'Boost guideline'
     anchor: boost-guideline
 chapters_en:
   - title: Description
@@ -57,7 +57,7 @@ content_nl: |-
   - Applicaties met meerdere integratiepunten (payment providers, verzendservices, enz.)
 
   <a name="less-suitable"></a>
-  ### Minder geschikt
+  ### Minder geschikt voor
 
   - Eenvoudige CRUD-operaties die maar op één plek worden gebruikt
   - Operaties waarbij één Eloquent-aanroep volstaat
@@ -148,7 +148,7 @@ content_nl: |-
   - [Laravel Boost Best Practices PR](https://github.com/laravel/boost/pull/628)
 
   <a name="boost-guideline"></a>
-  ## Boost Guideline
+  ## Boost guideline
 
   ```md
   ---
@@ -351,5 +351,5 @@ skill_content: |-
 skill_source_path: project-structure-and-code-architecture/use-action-classes-for-business-logic/skill/SKILL.md
 skill_github_url: 'https://github.com/Dutch-Laravel-Foundation/best-practices/blob/c7034be11f69954eac43e50486b6e5bebde98c46/project-structure-and-code-architecture/use-action-classes-for-business-logic/skill/SKILL.md'
 skill_references: []
-synced_at: 1785159222
+synced_at: 1785231076
 ---

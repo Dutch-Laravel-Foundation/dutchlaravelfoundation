@@ -1,8 +1,8 @@
 ---
 id: cce8b5d6-a1c1-5d22-83f2-459887cc8398
 blueprint: best_practices
-title: 'Houd Vast aan Eén Testframework'
-title_nl: 'Houd Vast aan Eén Testframework'
+title: 'Houd vast aan één testframework'
+title_nl: 'Houd vast aan één testframework'
 title_en: 'Stick to One Testing Framework'
 summary_nl: 'Hoewel Pest bovenop PHPUnit is gebouwd en de twee frameworks technisch compatibel zijn, brengt het mengen van beide teststijlen in hetzelfde Laravel-project onnodige complexiteit en verwarring met zich mee. Een consistente testaanpak waarbi...'
 summary_en: 'While Pest is built on top of PHPUnit and the two frameworks are technically compatible, mixing both testing styles in the same Laravel project introduces unnecessary complexity and confusion. A consistent testing approach using either PHPU...'
@@ -11,13 +11,13 @@ chapters_nl:
     anchor: introductie
   - title: Waarom
     anchor: waarom
-  - title: 'Geschikt Voor'
+  - title: 'Geschikt voor'
     anchor: geschikt-voor
-  - title: 'Minder Geschikt'
-    anchor: minder-geschikt
-  - title: 'Omgaan met Bestaande Gemengde Testsuites'
+  - title: 'Minder geschikt voor'
+    anchor: minder-geschikt-voor
+  - title: 'Omgaan met bestaande gemengde testsuites'
     anchor: omgaan-met-bestaande-gemengde-testsuites
-  - title: 'Wat Er Geconverteerd Wordt (PHPUnit naar Pest)'
+  - title: 'Wat er geconverteerd wordt (PHPUnit naar Pest)'
     anchor: wat-er-geconverteerd-wordt-phpunit-naar-pest
   - title: Uitzonderingen
     anchor: uitzonderingen
@@ -29,7 +29,7 @@ chapters_nl:
     anchor: testing
   - title: Testing
     anchor: testing
-  - title: 'Meer Informatie'
+  - title: 'Meer informatie'
     anchor: meer-informatie
 chapters_en:
   - title: Introduction
@@ -74,7 +74,7 @@ content_nl: |-
   - **Vereenvoudigde CI/CD-pipelines**: Geen noodzaak om meerdere test runners of speciale configuraties af te handelen
 
   <a name="suitable-for"></a>
-  ## Geschikt Voor
+  ## Geschikt voor
 
   - Alle Laravel-projecten, ongeacht de omvang
   - Teams met meerdere ontwikkelaars
@@ -83,13 +83,13 @@ content_nl: |-
   - Open-sourceprojecten waar externe bijdragers duidelijke richtlijnen nodig hebben
 
   <a name="less-suitable"></a>
-  ## Minder Geschikt
+  ## Minder geschikt voor
 
   - Projecten die actief migreren van PHPUnit naar Pest (een tijdelijke gemengde toestand is acceptabel tijdens de overgang)
   - Monorepo's waar verschillende packages legitieme redenen hebben om verschillende frameworks te gebruiken (hoewel consistentie ook hier over het algemeen beter is)
 
   <a name="handling-existing-mixed-test-suites"></a>
-  ## Omgaan met Bestaande Gemengde Testsuites
+  ## Omgaan met bestaande gemengde testsuites
 
   Als je een project overneemt of momenteel hebt met gemengde PHPUnit- en Pest-tests, overweeg dan om te migreren naar één enkel framework:
 
@@ -121,7 +121,7 @@ content_nl: |-
   - Overweeg deze route als het team een sterke voorkeur heeft voor class-gebaseerd testen
 
   <a name="what-gets-converted"></a>
-  ## Wat Er Geconverteerd Wordt (PHPUnit naar Pest)
+  ## Wat er geconverteerd wordt (PHPUnit naar Pest)
 
   Bij het gebruik van geautomatiseerde conversietools:
   - ✅ Lifecycle-methoden (`setUp`, `tearDown`) → Pest-hooks (`beforeEach`, `afterEach`)
@@ -146,7 +146,7 @@ content_nl: |-
   <a name="examples"></a>
   ## Voorbeelden
 
-  ### ❌ Slecht: Gemengde Testsuite
+  ### ❌ Slecht: gemengde testsuite
 
   ```
   tests/
@@ -159,7 +159,7 @@ content_nl: |-
       └── OrderTest.php                # PHPUnit class
   ```
 
-  ### ✅ Goed: Consistente PHPUnit-Testsuite
+  ### ✅ Goed: consistente PHPUnit-testsuite
 
   ```
   tests/
@@ -172,7 +172,7 @@ content_nl: |-
       └── OrderTest.php
   ```
 
-  ### ✅ Goed: Consistente Pest-Testsuite
+  ### ✅ Goed: consistente Pest-testsuite
 
   ```
   tests/
@@ -220,7 +220,7 @@ content_nl: |-
   ```
 
   <a name="more-info"></a>
-  ## Meer Informatie
+  ## Meer informatie
 
   - [Migreren van PHPUnit naar Pest](https://pestphp.com/docs/migrating-from-phpunit-guide)
   - [Pest Converter door Laravel Shift](https://laravelshift.com/phpunit-to-pest-converter)
@@ -459,5 +459,5 @@ skill_content: |-
 skill_source_path: testing/stick-to-one-testing-framework/skill/SKILL.md
 skill_github_url: 'https://github.com/Dutch-Laravel-Foundation/best-practices/blob/c7034be11f69954eac43e50486b6e5bebde98c46/testing/stick-to-one-testing-framework/skill/SKILL.md'
 skill_references: []
-synced_at: 1785159222
+synced_at: 1785231076
 ---

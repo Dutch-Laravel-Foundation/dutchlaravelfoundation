@@ -11,13 +11,13 @@ chapters_nl:
     anchor: introductie
   - title: Waarom
     anchor: waarom
-  - title: 'Geschikt Voor'
+  - title: 'Geschikt voor'
     anchor: geschikt-voor
-  - title: 'Minder Geschikt'
-    anchor: minder-geschikt
+  - title: 'Minder geschikt voor'
+    anchor: minder-geschikt-voor
   - title: Voorbeelden
     anchor: voorbeelden
-  - title: 'Meer Info'
+  - title: 'Meer info'
     anchor: meer-info
 chapters_en:
   - title: Introduction
@@ -48,7 +48,7 @@ content_nl: |-
   - **Stabiliteit op lange termijn** - Migraties moeten voor onbepaalde tijd reproduceerbaar zijn. Het gebruik van models breekt deze garantie zodra het model verandert.
 
   <a name="suitable-for"></a>
-  ## Geschikt Voor
+  ## Geschikt voor
 
   - **Alle migraties** - Gebruik Query Builder of ruwe SQL voor elke datamanipulatie in migraties
   - **Data seeden tijdens migraties** - Gebruik de DB-facade in plaats van models om initiële data te vullen
@@ -56,7 +56,7 @@ content_nl: |-
   - **Verse installaties** - Zorgt ervoor dat migraties correct worden uitgevoerd in nieuwe omgevingen, ongeacht modelwijzigingen
 
   <a name="less-suitable"></a>
-  ## Minder Geschikt
+  ## Minder geschikt voor
 
   - **Database seeders** - Seeders zijn bedoeld voor testdata en kunnen veilig Eloquent-models gebruiken, omdat ze apart worden uitgevoerd en geen deel uitmaken van de migratiegeschiedenis
   - **Eenmalige scripts** - Voor scripts die niet opnieuw worden uitgevoerd, kan het gebruik van models acceptabel zijn (hoewel nog steeds niet aanbevolen)
@@ -110,12 +110,12 @@ content_nl: |-
   ```
 
   <a name="more-info"></a>
-  ## Meer Info
+  ## Meer info
 
   - [Laravel Migrations Documentation](https://laravel.com/docs/migrations)
   - [Laravel Query Builder Documentation](https://laravel.com/docs/queries)
   - [Laravel Database Seeding Documentation](https://laravel.com/docs/seeding)
-  - [Write Effective Migrations](../../write-effective-migrations/translations/nl.md) — voor algemene best practices voor migraties zoals indexering, omkeerbaarheid en gerichte migraties
+  - [Write Effective Migrations](../../write-effective-migrations/translations/nl.md)
 content_en: |-
   <a name="introduction"></a>
   ## Introduction
@@ -199,7 +199,7 @@ content_en: |-
   - [Laravel Migrations Documentation](https://laravel.com/docs/migrations)
   - [Laravel Query Builder Documentation](https://laravel.com/docs/queries)
   - [Laravel Database Seeding Documentation](https://laravel.com/docs/seeding)
-  - [Write Effective Migrations](../write-effective-migrations/BEST_PRACTICE.md) — for general migration best practices like indexing, reversibility, and focused migrations
+  - [Write Effective Migrations](../write-effective-migrations/BEST_PRACTICE.md), for general migration best practices like indexing, reversibility, and focused migrations
 best_practice_categories:
   - database-and-eloquent-orm
 category_slug: database-and-eloquent-orm
@@ -259,5 +259,5 @@ skill_content: |-
 skill_source_path: database-and-eloquent-orm/avoid-eloquent-models-in-migrations/skill/SKILL.md
 skill_github_url: 'https://github.com/Dutch-Laravel-Foundation/best-practices/blob/c7034be11f69954eac43e50486b6e5bebde98c46/database-and-eloquent-orm/avoid-eloquent-models-in-migrations/skill/SKILL.md'
 skill_references: []
-synced_at: 1785159222
+synced_at: 1785231871
 ---

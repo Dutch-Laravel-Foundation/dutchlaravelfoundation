@@ -1,8 +1,8 @@
 ---
 id: 579c5355-3e76-5906-9790-0bca947736e8
 blueprint: best_practices
-title: 'Gebruik Policies en Gates voor Autorisatie'
-title_nl: 'Gebruik Policies en Gates voor Autorisatie'
+title: 'Gebruik policies en gates voor autorisatie'
+title_nl: 'Gebruik policies en gates voor autorisatie'
 title_en: 'Use Policies and Gates for Authorization'
 summary_nl: 'Policies en gates zijn standaardcomponenten binnen Laravel die gebruikt kunnen worden om te bepalen of een actie uitgevoerd mag worden.'
 summary_en: 'Policies and gates are standard components within Laravel that can be used to determine whether an action may be performed.'
@@ -11,11 +11,11 @@ chapters_nl:
     anchor: introductie
   - title: Waarom
     anchor: waarom
-  - title: 'Geschikt Voor'
+  - title: 'Geschikt voor'
     anchor: geschikt-voor
-  - title: 'Minder Geschikt'
-    anchor: minder-geschikt
-  - title: 'Meer Info'
+  - title: 'Minder geschikt voor'
+    anchor: minder-geschikt-voor
+  - title: 'Meer info'
     anchor: meer-info
 chapters_en:
   - title: Introduction
@@ -43,21 +43,21 @@ content_nl: |-
   - First class citizen binnen Laravel, wat betekent dat het goed onderhouden wordt, en policies en gates kunnen ook in unit tests gebruikt worden.
 
   <a name="suitable-for"></a>
-  ## Geschikt Voor
+  ## Geschikt voor
 
   - Vrijwel elke Laravel-applicatie
 
   <a name="less-suitable"></a>
-  ## Minder Geschikt
+  ## Minder geschikt voor
 
   - Voor kleinere applicaties kan het wat onnodige overhead veroorzaken om zeer strikte policies en gates toe te passen. Het kan dan nuttiger zijn om autorisatie met losse if-statements te regelen
 
   <a name="more-info"></a>
-  ## Meer Info
+  ## Meer info
 
   - [Laravel Authorization Documentation](https://laravel.com/docs/authorization)
-  - [Spatie Laravel Permission Package](https://spatie.be/docs/laravel-permission/v6/introduction) — sla rollen en permissies op in de database
-  - [Prevent Common Vulnerabilities](../../../security-and-authentication/prevent-common-vulnerabilities/translations/nl.md) — voor aanvullende beveiligingspraktijken zoals mass assignment-bescherming en CSRF
+  - [Spatie Laravel Permission Package](https://spatie.be/docs/laravel-permission/v6/introduction)
+  - [Prevent Common Vulnerabilities](../../../security-and-authentication/prevent-common-vulnerabilities/translations/nl.md)
 content_en: |-
   <a name="introduction"></a>
   ## Introduction
@@ -86,8 +86,8 @@ content_en: |-
   ## More Info
 
   - [Laravel Authorization Documentation](https://laravel.com/docs/authorization)
-  - [Spatie Laravel Permission Package](https://spatie.be/docs/laravel-permission/v6/introduction) — save roles and permissions to the database
-  - [Prevent Common Vulnerabilities](../../security-and-authentication/prevent-common-vulnerabilities/BEST_PRACTICE.md) — for additional security practices like mass assignment protection and CSRF
+  - [Spatie Laravel Permission Package](https://spatie.be/docs/laravel-permission/v6/introduction), save roles and permissions to the database
+  - [Prevent Common Vulnerabilities](../../security-and-authentication/prevent-common-vulnerabilities/BEST_PRACTICE.md), for additional security practices like mass assignment protection and CSRF
 best_practice_categories:
   - project-structure-and-code-architecture
 category_slug: project-structure-and-code-architecture
@@ -142,5 +142,5 @@ skill_content: |-
 skill_source_path: project-structure-and-code-architecture/use-policies-and-gates-for-authorization/skill/SKILL.md
 skill_github_url: 'https://github.com/Dutch-Laravel-Foundation/best-practices/blob/c7034be11f69954eac43e50486b6e5bebde98c46/project-structure-and-code-architecture/use-policies-and-gates-for-authorization/skill/SKILL.md'
 skill_references: []
-synced_at: 1785159222
+synced_at: 1785231871
 ---

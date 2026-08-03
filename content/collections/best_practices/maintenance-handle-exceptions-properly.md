@@ -1,23 +1,23 @@
 ---
 id: e84e8688-f715-5984-8c4f-9fdd601b161a
 blueprint: best_practices
-title: 'Ga correct om met Exceptions'
-title_nl: 'Ga correct om met Exceptions'
+title: 'Ga correct om met exceptions'
+title_nl: 'Ga correct om met exceptions'
 title_en: 'Handle Exceptions Properly'
-summary_nl: 'Laravel biedt flexibele exception handling via twee benaderingen: het co-loceren van gedrag op exception-classes of het centraliseren ervan in bootstrap/app.php. Beide benaderingen werken — de sleutel is er één kiezen en die consistent toep...'
-summary_en: 'Laravel provides flexible exception handling through two approaches: co-locating behavior on exception classes or centralizing it in bootstrap/app.php. Either approach works — the key is picking one and applying it consistently. Beyond that...'
+summary_nl: 'Laravel biedt flexibele exception handling via twee benaderingen: het co-loceren van gedrag op exception-classes of het centraliseren ervan in bootstrap/app.php. Beide benaderingen werken, de sleutel is er één kiezen en die consistent toepa...'
+summary_en: 'Laravel provides flexible exception handling through two approaches: co-locating behavior on exception classes or centralizing it in bootstrap/app.php. Either approach works, the key is picking one and applying it consistently. Beyond that,...'
 chapters_nl:
   - title: Introductie
     anchor: introductie
   - title: Waarom
     anchor: waarom
-  - title: 'Geschikt Voor'
+  - title: 'Geschikt voor'
     anchor: geschikt-voor
-  - title: 'Minder Geschikt'
-    anchor: minder-geschikt
+  - title: 'Minder geschikt voor'
+    anchor: minder-geschikt-voor
   - title: Voorbeelden
     anchor: voorbeelden
-  - title: 'Meer Info'
+  - title: 'Meer info'
     anchor: meer-info
 chapters_en:
   - title: Introduction
@@ -36,7 +36,7 @@ content_nl: |-
   <a name="introduction"></a>
   ## Introductie
 
-  Laravel biedt flexibele exception handling via twee benaderingen: het co-loceren van gedrag op exception-classes of het centraliseren ervan in `bootstrap/app.php`. Beide benaderingen werken — de sleutel is er één kiezen en die consistent toepassen. Daarnaast biedt Laravel tools om ruis te onderdrukken (throttling, deduplicatie), correcte API-foutformaten af te dwingen en gestructureerde context aan exceptions te koppelen.
+  Laravel biedt flexibele exception handling via twee benaderingen: het co-loceren van gedrag op exception-classes of het centraliseren ervan in `bootstrap/app.php`. Beide benaderingen werken, de sleutel is er één kiezen en die consistent toepassen. Daarnaast biedt Laravel tools om ruis te onderdrukken (throttling, deduplicatie), correcte API-foutformaten af te dwingen en gestructureerde context aan exceptions te koppelen.
 
   <a name="why"></a>
   ## Waarom
@@ -47,7 +47,7 @@ content_nl: |-
   - **Beter debuggen**: Gestructureerde context op exception-classes levert rijke metadata in logregels op zonder handmatige logging
 
   <a name="suitable-for"></a>
-  ## Geschikt Voor
+  ## Geschikt voor
 
   - Applicaties met custom exception-typen
   - API's die consistente JSON-foutresponses nodig hebben
@@ -55,7 +55,7 @@ content_nl: |-
   - Applicaties met veel verkeer waar het aantal errors de logging kan overweldigen
 
   <a name="less-suitable"></a>
-  ## Minder Geschikt
+  ## Minder geschikt voor
 
   - Eenvoudige applicaties waar de standaard exception handling voldoende is
   - Prototypes in een vroeg stadium waar gestructureerde error handling overhead toevoegt
@@ -63,9 +63,9 @@ content_nl: |-
   <a name="examples"></a>
   ## Voorbeelden
 
-  ### Kies Eén Benadering en Wees Consistent
+  ### Kies één benadering en wees consistent
 
-  **Co-locatie op de exception-class** — houdt gedrag naast de definitie:
+  **Co-locatie op de exception-class**, houdt gedrag naast de definitie:
 
   ```php
   class InvalidOrderException extends Exception
@@ -79,7 +79,7 @@ content_nl: |-
   }
   ```
 
-  **Gecentraliseerd in `bootstrap/app.php`** — alle exception handling op één plek:
+  **Gecentraliseerd in `bootstrap/app.php`**, alle exception handling op één plek:
 
   ```php
   ->withExceptions(function (Exceptions $exceptions) {
@@ -91,7 +91,7 @@ content_nl: |-
 
   Bekijk de bestaande codebase en volg het patroon dat al is vastgelegd.
 
-  ### Gebruik `ShouldntReport` voor Exceptions Die Nooit Gelogd Mogen Worden
+  ### Gebruik `ShouldntReport` voor exceptions die nooit gelogd mogen worden
 
   ```php
   class PodcastProcessingException extends Exception implements ShouldntReport {}
@@ -107,7 +107,7 @@ content_nl: |-
   });
   ```
 
-  ### Voeg Gestructureerde Context toe aan Exceptions
+  ### Voeg gestructureerde context toe aan exceptions
 
   ```php
   class InvalidOrderException extends Exception
@@ -121,7 +121,7 @@ content_nl: |-
 
   Laravel neemt deze data automatisch op in de logregel.
 
-  ### Throttle Exceptions met een Hoog Volume
+  ### Throttle exceptions met een hoog volume
 
   Eén falende integratie kan error tracking overspoelen. Gebruik `throttle()` om per exception-type te rate-limiten.
 
@@ -130,7 +130,7 @@ content_nl: |-
   Voorkomt dat dezelfde exception-instantie meerdere keren wordt gelogd wanneer `report($e)` in meerdere catch-blocks wordt aangeroepen.
 
   <a name="more-info"></a>
-  ## Meer Info
+  ## Meer info
 
   - [Laravel Error Handling Documentatie](https://laravel.com/docs/errors)
   - [Laravel Boost Best Practices PR](https://github.com/laravel/boost/pull/628)
@@ -138,7 +138,7 @@ content_en: |-
   <a name="introduction"></a>
   ## Introduction
 
-  Laravel provides flexible exception handling through two approaches: co-locating behavior on exception classes or centralizing it in `bootstrap/app.php`. Either approach works — the key is picking one and applying it consistently. Beyond that, Laravel offers tools for suppressing noise (throttling, deduplication), forcing correct API error formats, and attaching structured context to exceptions.
+  Laravel provides flexible exception handling through two approaches: co-locating behavior on exception classes or centralizing it in `bootstrap/app.php`. Either approach works, the key is picking one and applying it consistently. Beyond that, Laravel offers tools for suppressing noise (throttling, deduplication), forcing correct API error formats, and attaching structured context to exceptions.
 
   <a name="why"></a>
   ## Why
@@ -167,7 +167,7 @@ content_en: |-
 
   ### Choose One Approach and Be Consistent
 
-  **Co-location on the exception class** — keeps behavior alongside the definition:
+  **Co-location on the exception class**, keeps behavior alongside the definition:
 
   ```php
   class InvalidOrderException extends Exception
@@ -181,7 +181,7 @@ content_en: |-
   }
   ```
 
-  **Centralized in `bootstrap/app.php`** — all exception handling in one place:
+  **Centralized in `bootstrap/app.php`**, all exception handling in one place:
 
   ```php
   ->withExceptions(function (Exceptions $exceptions) {
@@ -250,7 +250,7 @@ skill_content: |-
 
   ## Core Guidance
 
-  Laravel provides flexible exception handling through two approaches: co-locating behavior on exception classes or centralizing it in `bootstrap/app.php`. Either approach works — the key is picking one and applying it consistently. Beyond that, Laravel offers tools for suppressing noise (throttling, deduplication), forcing correct API error formats, and attaching structured context to exceptions.
+  Laravel provides flexible exception handling through two approaches: co-locating behavior on exception classes or centralizing it in `bootstrap/app.php`. Either approach works, the key is picking one and applying it consistently. Beyond that, Laravel offers tools for suppressing noise (throttling, deduplication), forcing correct API error formats, and attaching structured context to exceptions.
 
   ## Why It Matters
 
@@ -294,5 +294,5 @@ skill_content: |-
 skill_source_path: maintenance/handle-exceptions-properly/skill/SKILL.md
 skill_github_url: 'https://github.com/Dutch-Laravel-Foundation/best-practices/blob/c7034be11f69954eac43e50486b6e5bebde98c46/maintenance/handle-exceptions-properly/skill/SKILL.md'
 skill_references: []
-synced_at: 1785159222
+synced_at: 1785231871
 ---

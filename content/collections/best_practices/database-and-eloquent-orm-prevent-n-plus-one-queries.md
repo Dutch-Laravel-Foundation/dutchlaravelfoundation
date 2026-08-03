@@ -1,19 +1,19 @@
 ---
 id: a626898f-5101-508d-ac3f-48f5f2aeb4fb
 blueprint: best_practices
-title: 'Voorkom N+1 Queries'
-title_nl: 'Voorkom N+1 Queries'
+title: 'Voorkom N+1 queries'
+title_nl: 'Voorkom N+1 queries'
 title_en: 'Prevent N+1 Queries'
 summary_nl: 'Voorkom lazy loading van Eloquent-relaties in loops door gerelateerde data en counts vooraf eager te laden.'
 summary_en: 'Prevent Eloquent relationship lazy loading in loops by eager loading related data and counts up front.'
 chapters_nl:
   - title: Omschrijving
     anchor: omschrijving
-  - title: 'Aanbevolen Situatie'
+  - title: 'Aanbevolen situatie'
     anchor: aanbevolen-situatie
-  - title: 'Menselijke Begeleiding'
+  - title: 'Menselijke begeleiding'
     anchor: menselijke-begeleiding
-  - title: 'Boost Guideline'
+  - title: 'Boost guideline'
     anchor: boost-guideline
 chapters_en:
   - title: Description
@@ -31,12 +31,12 @@ content_nl: |-
   Voorkom lazy loading van Eloquent-relaties in loops door gerelateerde data en counts vooraf eager te laden.
 
   <a name="recommended-situation"></a>
-  ## Aanbevolen Situatie
+  ## Aanbevolen situatie
 
   Gebruik dit wanneer code collecties van modellen weergeeft of verwerkt en gerelateerde Eloquent-data nodig heeft.
 
   <a name="human-guidance"></a>
-  ## Menselijke Begeleiding
+  ## Menselijke begeleiding
 
   N+1 query-problemen behoren tot de meest voorkomende performanceproblemen in Laravel-applicaties. Ze ontstaan wanneer code een collectie modellen laadt en vervolgens op elk model afzonderlijk een relatie aanspreekt, wat resulteert in één query voor de collectie plus één query per model. Laravel biedt verschillende tools om dit te voorkomen, waaronder eager loading met `with()`, `preventLazyLoading()`, `withCount()` en het selectief laden van kolommen.
 
@@ -49,7 +49,7 @@ content_nl: |-
   - **Lager geheugengebruik**: Door alleen de benodigde kolommen te selecteren voorkom je dat grote tekst- of JSON-velden onnodig worden geladen
 
   <a name="suitable-for"></a>
-  ### Geschikt Voor
+  ### Geschikt voor
 
   - Elke applicatie die relaties laadt op collecties van modellen
   - Views of API-responses die gerelateerde modeldata weergeven
@@ -57,7 +57,7 @@ content_nl: |-
   - Projecten met meerdere ontwikkelaars waar N+1 problemen makkelijk worden geïntroduceerd
 
   <a name="less-suitable"></a>
-  ### Minder Geschikt
+  ### Minder geschikt voor
 
   - Eenvoudige applicaties met minimale relaties
   - Opzoekacties op een enkel model waarbij slechts één gerelateerde query wordt uitgevoerd
@@ -65,10 +65,10 @@ content_nl: |-
   <a name="examples"></a>
   ### Voorbeelden
 
-  #### Laad Relaties Altijd Eager
+  #### Laad relaties altijd eager
 
   ```php
-  // Slecht: N+1 — voert 1 + N queries uit
+  // Slecht: N+1, voert 1 + N queries uit
   $posts = Post::all();
   foreach ($posts as $post) {
       echo $post->author->name;
@@ -92,7 +92,7 @@ content_nl: |-
   }])->get();
   ```
 
-  #### Voorkom Lazy Loading Tijdens Ontwikkeling
+  #### Voorkom lazy loading tijdens ontwikkeling
 
   Schakel dit in binnen `AppServiceProvider::boot()` om N+1 problemen tijdens ontwikkeling op te vangen:
 
@@ -105,7 +105,7 @@ content_nl: |-
 
   Dit gooit een `LazyLoadingViolationException` wanneer een relatie wordt aangesproken zonder eager te zijn geladen.
 
-  #### Gebruik `withCount()` voor het Tellen van Relaties
+  #### Gebruik `withCount()` voor het tellen van relaties
 
   ```php
   // Slecht: laadt volledige collecties alleen maar om ze te tellen
@@ -121,7 +121,7 @@ content_nl: |-
   }
   ```
 
-  #### Selecteer Alleen de Benodigde Kolommen
+  #### Selecteer alleen de benodigde kolommen
 
   ```php
   // Slecht: SELECT * op beide tabellen
@@ -136,17 +136,17 @@ content_nl: |-
   Wanneer je kolommen selecteert op eager-geladen relaties, voeg dan altijd de foreign key-kolom toe, anders matcht de relatie niet.
 
   <a name="more-info"></a>
-  ### Meer Informatie
+  ### Meer informatie
 
   - [Laravel Eager Loading Documentatie](https://laravel.com/docs/eloquent-relationships#eager-loading)
   - [Laravel `preventLazyLoading` Documentatie](https://laravel.com/docs/eloquent-relationships#preventing-lazy-loading)
   - [Laravel Counting Related Models](https://laravel.com/docs/eloquent-relationships#counting-related-models)
-  - [Gebruik Chunking voor Grote Datasets](../../use-chunking-for-large-datasets/translations/nl.md) — voor het efficiënt verwerken van grote collecties
-  - [Gebruik Eloquent Scopes en Casts](../../use-eloquent-scopes-and-casts/translations/nl.md) — voor herbruikbare query-constraints
+  - [Gebruik Chunking voor Grote Datasets](../../use-chunking-for-large-datasets/translations/nl.md)
+  - [Gebruik Eloquent Scopes en Casts](../../use-eloquent-scopes-and-casts/translations/nl.md)
   - [Laravel Boost Best Practices PR](https://github.com/laravel/boost/pull/628)
 
   <a name="boost-guideline"></a>
-  ## Boost Guideline
+  ## Boost guideline
 
   ```md
   ---
@@ -204,7 +204,7 @@ content_en: |-
   #### Always Eager Load Relationships
 
   ```php
-  // Bad: N+1 — executes 1 + N queries
+  // Bad: N+1, executes 1 + N queries
   $posts = Post::all();
   foreach ($posts as $post) {
       echo $post->author->name;
@@ -277,8 +277,8 @@ content_en: |-
   - [Laravel Eager Loading Documentation](https://laravel.com/docs/eloquent-relationships#eager-loading)
   - [Laravel `preventLazyLoading` Documentation](https://laravel.com/docs/eloquent-relationships#preventing-lazy-loading)
   - [Laravel Counting Related Models](https://laravel.com/docs/eloquent-relationships#counting-related-models)
-  - [Use Chunking for Large Datasets](../use-chunking-for-large-datasets/BEST_PRACTICE.md) — for processing large collections efficiently
-  - [Use Eloquent Scopes and Casts](../use-eloquent-scopes-and-casts/BEST_PRACTICE.md) — for reusable query constraints
+  - [Use Chunking for Large Datasets](../use-chunking-for-large-datasets/BEST_PRACTICE.md), for processing large collections efficiently
+  - [Use Eloquent Scopes and Casts](../use-eloquent-scopes-and-casts/BEST_PRACTICE.md), for reusable query constraints
   - [Laravel Boost Best Practices PR](https://github.com/laravel/boost/pull/628)
 
   <a name="boost-guideline"></a>
@@ -347,5 +347,5 @@ skill_content: |-
 skill_source_path: database-and-eloquent-orm/prevent-n-plus-one-queries/skill/SKILL.md
 skill_github_url: 'https://github.com/Dutch-Laravel-Foundation/best-practices/blob/c7034be11f69954eac43e50486b6e5bebde98c46/database-and-eloquent-orm/prevent-n-plus-one-queries/skill/SKILL.md'
 skill_references: []
-synced_at: 1785159222
+synced_at: 1785231871
 ---

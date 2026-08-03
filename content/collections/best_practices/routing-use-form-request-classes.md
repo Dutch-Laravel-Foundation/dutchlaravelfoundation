@@ -45,7 +45,7 @@ content_nl: |-
 
   - **Scheiding van verantwoordelijkheden**: Validatielogica leeft in een eigen class en vervuilt de controllermethoden niet
   - **Herbruikbaarheid**: Dezelfde Form Request kan in meerdere controllers of acties worden gebruikt
-  - **Automatische uitvoering**: Het type-hinten van de Form Request voert validatie en autorisatie automatisch uit — geen handmatige `validate()`-aanroep nodig
+  - **Automatische uitvoering**: Het type-hinten van de Form Request voert validatie en autorisatie automatisch uit, geen handmatige `validate()`-aanroep nodig
   - **Veiligheid**: Het gebruik van `$request->validated()` zorgt ervoor dat alleen gevalideerde data aan mass operations wordt doorgegeven, waardoor niet-gevalideerde velden niet kunnen doorlekken
 
   <a name="suitable-for"></a>
@@ -57,7 +57,7 @@ content_nl: |-
   - API's waar consistente validatie-foutmeldingen belangrijk zijn
 
   <a name="less-suitable"></a>
-  ### Minder geschikt
+  ### Minder geschikt voor
 
   - Extreem eenvoudige endpoints met één of twee triviale validatieregels
   - Closure-gebaseerde routes in prototyping- of testscenario's
@@ -138,8 +138,8 @@ content_nl: |-
 
   - [Laravel Form Request Validation Documentation](https://laravel.com/docs/validation#form-request-validation)
   - [Laravel Validation Rules Documentation](https://laravel.com/docs/validation#available-validation-rules)
-  - [Use Route Model Binding](../../use-route-model-binding/translations/nl.md) — voor automatische model-resolutie in controllers
-  - [Use Action Classes for Business Logic](../../../project-structure-and-code-architecture/use-action-classes-for-business-logic/translations/nl.md) — voor het uithalen van businesslogica uit controllers
+  - [Use Route Model Binding](../../use-route-model-binding/translations/nl.md)
+  - [Use Action Classes for Business Logic](../../../project-structure-and-code-architecture/use-action-classes-for-business-logic/translations/nl.md)
   - [Laravel Boost Best Practices PR](https://github.com/laravel/boost/pull/628)
 
   <a name="boost-guideline"></a>
@@ -178,7 +178,7 @@ content_en: |-
 
   - **Separation of concerns**: Validation logic lives in its own class, not cluttering controller methods
   - **Reusability**: The same Form Request can be used across multiple controllers or actions
-  - **Automatic execution**: Type-hinting the Form Request triggers validation and authorization automatically — no manual `validate()` call needed
+  - **Automatic execution**: Type-hinting the Form Request triggers validation and authorization automatically, no manual `validate()` call needed
   - **Safety**: Using `$request->validated()` ensures only validated data is passed to mass operations, preventing unvalidated fields from leaking through
 
   <a name="suitable-for"></a>
@@ -271,8 +271,8 @@ content_en: |-
 
   - [Laravel Form Request Validation Documentation](https://laravel.com/docs/validation#form-request-validation)
   - [Laravel Validation Rules Documentation](https://laravel.com/docs/validation#available-validation-rules)
-  - [Use Route Model Binding](../use-route-model-binding/BEST_PRACTICE.md) — for automatic model resolution in controllers
-  - [Use Action Classes for Business Logic](../../project-structure-and-code-architecture/use-action-classes-for-business-logic/BEST_PRACTICE.md) — for extracting business logic from controllers
+  - [Use Route Model Binding](../use-route-model-binding/BEST_PRACTICE.md), for automatic model resolution in controllers
+  - [Use Action Classes for Business Logic](../../project-structure-and-code-architecture/use-action-classes-for-business-logic/BEST_PRACTICE.md), for extracting business logic from controllers
   - [Laravel Boost Best Practices PR](https://github.com/laravel/boost/pull/628)
 
   <a name="boost-guideline"></a>
@@ -341,5 +341,5 @@ skill_content: |-
 skill_source_path: routing/use-form-request-classes/skill/SKILL.md
 skill_github_url: 'https://github.com/Dutch-Laravel-Foundation/best-practices/blob/c7034be11f69954eac43e50486b6e5bebde98c46/routing/use-form-request-classes/skill/SKILL.md'
 skill_references: []
-synced_at: 1785159222
+synced_at: 1785231871
 ---

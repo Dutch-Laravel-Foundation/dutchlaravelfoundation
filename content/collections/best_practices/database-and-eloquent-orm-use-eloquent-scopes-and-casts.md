@@ -13,8 +13,8 @@ chapters_nl:
     anchor: waarom
   - title: 'Geschikt voor'
     anchor: geschikt-voor
-  - title: 'Minder geschikt'
-    anchor: minder-geschikt
+  - title: 'Minder geschikt voor'
+    anchor: minder-geschikt-voor
   - title: Voorbeelden
     anchor: voorbeelden
   - title: 'Meer info'
@@ -54,10 +54,10 @@ content_nl: |-
   - Applicaties die Blade of API-responses gebruiken die datums formatteren
 
   <a name="less-suitable"></a>
-  ## Minder geschikt
+  ## Minder geschikt voor
 
   - Eenmalige queries die nergens worden hergebruikt
-  - Global scopes moeten spaarzaam worden gebruikt — geef voor de meeste filterbehoeften de voorkeur aan local scopes
+  - Global scopes moeten spaarzaam worden gebruikt, geef voor de meeste filterbehoeften de voorkeur aan local scopes
 
   <a name="examples"></a>
   ## Voorbeelden
@@ -81,7 +81,7 @@ content_nl: |-
   $articles = Article::whereHas('user', fn ($q) => $q->active())->get();
   ```
 
-  ### Global scopes — spaarzaam gebruiken
+  ### Global scopes, spaarzaam gebruiken
 
   Global scopes passen elke query op het model stilzwijgend aan, wat debuggen bemoeilijkt. Reserveer ze voor werkelijk universele constraints zoals soft deletes of multi-tenancy. Geef voor al het andere de voorkeur aan local scopes.
 
@@ -161,7 +161,7 @@ content_en: |-
   ## Less Suitable
 
   - One-off queries that aren't reused anywhere
-  - Global scopes should be used sparingly — prefer local scopes for most filtering needs
+  - Global scopes should be used sparingly, prefer local scopes for most filtering needs
 
   <a name="examples"></a>
   ## Examples
@@ -185,7 +185,7 @@ content_en: |-
   $articles = Article::whereHas('user', fn ($q) => $q->active())->get();
   ```
 
-  ### Global Scopes — Use Sparingly
+  ### Global Scopes, Use Sparingly
 
   Global scopes silently modify every query on the model, making debugging difficult. Reserve them for truly universal constraints like soft deletes or multi-tenancy. Prefer local scopes for everything else.
 
@@ -272,7 +272,7 @@ skill_content: |-
   ## Be Careful When
 
   - One-off queries that aren't reused anywhere
-  - Global scopes should be used sparingly — prefer local scopes for most filtering needs
+  - Global scopes should be used sparingly, prefer local scopes for most filtering needs
 
   ## Canonical Source
 
@@ -297,5 +297,5 @@ skill_content: |-
 skill_source_path: database-and-eloquent-orm/use-eloquent-scopes-and-casts/skill/SKILL.md
 skill_github_url: 'https://github.com/Dutch-Laravel-Foundation/best-practices/blob/c7034be11f69954eac43e50486b6e5bebde98c46/database-and-eloquent-orm/use-eloquent-scopes-and-casts/skill/SKILL.md'
 skill_references: []
-synced_at: 1785159222
+synced_at: 1785231871
 ---

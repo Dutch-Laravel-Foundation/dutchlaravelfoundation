@@ -11,11 +11,11 @@ chapters_nl:
     anchor: introductie
   - title: Waarom
     anchor: waarom
-  - title: 'Geschikt Voor'
+  - title: 'Geschikt voor'
     anchor: geschikt-voor
-  - title: 'Minder Geschikt'
-    anchor: minder-geschikt
-  - title: 'Meer Info'
+  - title: 'Minder geschikt voor'
+    anchor: minder-geschikt-voor
+  - title: 'Meer info'
     anchor: meer-info
 chapters_en:
   - title: Introduction
@@ -42,21 +42,21 @@ content_nl: |-
   - De uniformiteit die door de gekozen standaard wordt afgedwongen heeft als bijkomend effect dat je je ook aan meer gangbare coding guidelines uit de industrie houdt.
 
   <a name="suitable-for"></a>
-  ## Geschikt Voor
+  ## Geschikt voor
 
   - Projecten van elke omvang
 
   <a name="less-suitable"></a>
-  ## Minder Geschikt
+  ## Minder geschikt voor
 
   - N.v.t.
 
   <a name="more-info"></a>
-  ## Meer Info
+  ## Meer info
 
   - [PER Coding Style](https://www.php-fig.org/per/coding-style/)
   - [PSR-12: Extended Coding Style Guide](https://www.php-fig.org/psr/psr-12/)
-  - [Use Automation to Adhere to a Standard](../../use-automation-to-adhere-to-a-standard/translations/nl.md) — dwing de door jou gekozen standaard af met tooling
+  - [Use Automation to Adhere to a Standard](../../use-automation-to-adhere-to-a-standard/translations/nl.md)
 content_en: |-
   <a name="introduction"></a>
   ## Introduction
@@ -85,7 +85,7 @@ content_en: |-
 
   - [PER Coding Style](https://www.php-fig.org/per/coding-style/)
   - [PSR-12: Extended Coding Style Guide](https://www.php-fig.org/psr/psr-12/)
-  - [Use Automation to Adhere to a Standard](../use-automation-to-adhere-to-a-standard/BEST_PRACTICE.md) — enforce your chosen standard with tooling
+  - [Use Automation to Adhere to a Standard](../use-automation-to-adhere-to-a-standard/BEST_PRACTICE.md), enforce your chosen standard with tooling
 best_practice_categories:
   - code-standards
 category_slug: code-standards
@@ -139,5 +139,5 @@ skill_content: |-
 skill_source_path: code-standards/adhere-to-a-single-standard/skill/SKILL.md
 skill_github_url: 'https://github.com/Dutch-Laravel-Foundation/best-practices/blob/c7034be11f69954eac43e50486b6e5bebde98c46/code-standards/adhere-to-a-single-standard/skill/SKILL.md'
 skill_references: []
-synced_at: 1785159222
+synced_at: 1785231871
 ---

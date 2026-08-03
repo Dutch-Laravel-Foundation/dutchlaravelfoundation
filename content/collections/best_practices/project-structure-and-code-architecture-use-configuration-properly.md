@@ -11,13 +11,13 @@ chapters_nl:
     anchor: introductie
   - title: Waarom
     anchor: waarom
-  - title: 'Geschikt Voor'
+  - title: 'Geschikt voor'
     anchor: geschikt-voor
-  - title: 'Minder Geschikt'
-    anchor: minder-geschikt
+  - title: 'Minder geschikt voor'
+    anchor: minder-geschikt-voor
   - title: Voorbeelden
     anchor: voorbeelden
-  - title: 'Meer Info'
+  - title: 'Meer info'
     anchor: meer-info
 chapters_en:
   - title: Introduction
@@ -41,27 +41,27 @@ content_nl: |-
   <a name="why"></a>
   ## Waarom
 
-  - **Compatibiliteit met caching**: Directe `env()`-aanroepen geven `null` terug wanneer de config gecachet is — het gebruik van `config()` werkt altijd correct
+  - **Compatibiliteit met caching**: Directe `env()`-aanroepen geven `null` terug wanneer de config gecachet is, het gebruik van `config()` werkt altijd correct
   - **Gecentraliseerde instellingen**: Alle configuratie staat in config-bestanden, waardoor het eenvoudig is om te vinden en te controleren wat de applicatie gebruikt
   - **Betrouwbare environment-checks**: `App::environment()` en `app()->isProduction()` werken ongeacht het cachen van configuratie, in tegenstelling tot `env('APP_ENV')`
   - **Veiligheid bij refactoren**: Het gebruik van class-constanten in plaats van magische strings voor model-states en -types maakt refactoren in de IDE mogelijk en elimineert bugs door typefouten
 
   <a name="suitable-for"></a>
-  ## Geschikt Voor
+  ## Geschikt voor
 
   - Alle Laravel-applicaties
   - Applicaties die uitgerold worden met `config:cache` (oftewel de meeste productieomgevingen)
   - Projecten met meerdere omgevingen (local, staging, production)
 
   <a name="less-suitable"></a>
-  ## Minder Geschikt
+  ## Minder geschikt voor
 
-  - N.v.t. — deze praktijken zijn van toepassing op elke Laravel-applicatie
+  - N.v.t., deze praktijken zijn van toepassing op elke Laravel-applicatie
 
   <a name="examples"></a>
   ## Voorbeelden
 
-  ### `env()` Alleen in Config-bestanden
+  ### `env()` alleen in config-bestanden
 
   ```php
   // Slecht: geeft null terug wanneer de config gecachet is
@@ -75,7 +75,7 @@ content_nl: |-
   $key = config('services.key');
   ```
 
-  ### Gebruik `App::environment()` voor Environment-checks
+  ### Gebruik `App::environment()` voor environment-checks
 
   ```php
   // Slecht: gaat stuk met config-caching
@@ -83,11 +83,12 @@ content_nl: |-
 
   // Goed: altijd betrouwbaar
   if (app()->isProduction()) {
+
   // of
   if (App::environment('production')) {
   ```
 
-  ### Gebruik Constanten in plaats van Magische Strings
+  ### Gebruik constanten in plaats van magische strings
 
   ```php
   // Slecht: foutgevoelige magische string
@@ -97,16 +98,16 @@ content_nl: |-
   return $this->type === self::TYPE_NORMAL;
   ```
 
-  ### Gebruik Taalbestanden Wanneer Ze Al Aanwezig Zijn
+  ### Gebruik taalbestanden wanneer ze al aanwezig zijn
 
-  Als de applicatie al taalbestanden gebruikt voor lokalisatie, gebruik dan ook `__()` voor strings die aan gebruikers getoond worden. Introduceer geen taalbestanden puur voor Engelstalige apps — eenvoudige string-literals volstaan daar prima:
+  Als de applicatie al taalbestanden gebruikt voor lokalisatie, gebruik dan ook `__()` voor strings die aan gebruikers getoond worden. Introduceer geen taalbestanden puur voor Engelstalige apps, eenvoudige string-literals volstaan daar prima:
 
   ```php
   // Alleen wanneer er al lang-bestanden in het project bestaan
   return back()->with('message', __('app.article_added'));
   ```
 
-  ### Gebruik Versleutelde Env voor Productiegeheimen
+  ### Gebruik versleutelde env voor productiegeheimen
 
   Sla productiegeheimen nooit op in platte `.env`-bestanden in versiebeheer:
 
@@ -118,12 +119,12 @@ content_nl: |-
   Geef bij cloud-deployments de voorkeur aan de native secret store van het platform (AWS Secrets Manager, Vault, enz.) en injecteer deze tijdens runtime.
 
   <a name="more-info"></a>
-  ## Meer Info
+  ## Meer info
 
   - [Laravel Configuration Documentation](https://laravel.com/docs/configuration)
   - [Laravel Environment Configuration](https://laravel.com/docs/configuration#environment-configuration)
   - [Laravel Encryption Documentation](https://laravel.com/docs/encryption)
-  - [Prevent Common Vulnerabilities](../../../security-and-authentication/prevent-common-vulnerabilities/translations/nl.md) — voor het veilig houden van geheimen en het versleutelen van gevoelige velden
+  - [Prevent Common Vulnerabilities](../../../security-and-authentication/prevent-common-vulnerabilities/translations/nl.md)
   - [Laravel Boost Best Practices PR](https://github.com/laravel/boost/pull/628)
 content_en: |-
   <a name="introduction"></a>
@@ -134,7 +135,7 @@ content_en: |-
   <a name="why"></a>
   ## Why
 
-  - **Caching compatibility**: Direct `env()` calls return `null` when config is cached — using `config()` always works correctly
+  - **Caching compatibility**: Direct `env()` calls return `null` when config is cached, using `config()` always works correctly
   - **Centralized settings**: All configuration lives in config files, making it easy to find and audit what the application uses
   - **Reliable environment checks**: `App::environment()` and `app()->isProduction()` work regardless of config caching, unlike `env('APP_ENV')`
   - **Refactoring safety**: Using class constants instead of magic strings for model states and types makes IDE refactoring possible and eliminates typo-related bugs
@@ -149,7 +150,7 @@ content_en: |-
   <a name="less-suitable"></a>
   ## Less Suitable
 
-  - N/A — these practices apply to every Laravel application
+  - N/A, these practices apply to every Laravel application
 
   <a name="examples"></a>
   ## Examples
@@ -192,7 +193,7 @@ content_en: |-
 
   ### Use Language Files When Already Present
 
-  If the application already uses language files for localization, use `__()` for user-facing strings too. Do not introduce language files purely for English-only apps — simple string literals are fine there:
+  If the application already uses language files for localization, use `__()` for user-facing strings too. Do not introduce language files purely for English-only apps, simple string literals are fine there:
 
   ```php
   // Only when lang files already exist in the project
@@ -216,7 +217,7 @@ content_en: |-
   - [Laravel Configuration Documentation](https://laravel.com/docs/configuration)
   - [Laravel Environment Configuration](https://laravel.com/docs/configuration#environment-configuration)
   - [Laravel Encryption Documentation](https://laravel.com/docs/encryption)
-  - [Prevent Common Vulnerabilities](../../security-and-authentication/prevent-common-vulnerabilities/BEST_PRACTICE.md) — for keeping secrets secure and encrypting sensitive fields
+  - [Prevent Common Vulnerabilities](../../security-and-authentication/prevent-common-vulnerabilities/BEST_PRACTICE.md), for keeping secrets secure and encrypting sensitive fields
   - [Laravel Boost Best Practices PR](https://github.com/laravel/boost/pull/628)
 best_practice_categories:
   - project-structure-and-code-architecture
@@ -236,7 +237,7 @@ skill_content: |-
 
   ## Why It Matters
 
-  - **Caching compatibility**: Direct `env()` calls return `null` when config is cached — using `config()` always works correctly
+  - **Caching compatibility**: Direct `env()` calls return `null` when config is cached, using `config()` always works correctly
   - **Centralized settings**: All configuration lives in config files, making it easy to find and audit what the application uses
   - **Reliable environment checks**: `App::environment()` and `app()->isProduction()` work regardless of config caching, unlike `env('APP_ENV')`
   - **Refactoring safety**: Using class constants instead of magic strings for model states and types makes IDE refactoring possible and eliminates typo-related bugs
@@ -249,7 +250,7 @@ skill_content: |-
 
   ## Be Careful When
 
-  - N/A — these practices apply to every Laravel application
+  - N/A, these practices apply to every Laravel application
 
   ## Canonical Source
 
@@ -274,5 +275,5 @@ skill_content: |-
 skill_source_path: project-structure-and-code-architecture/use-configuration-properly/skill/SKILL.md
 skill_github_url: 'https://github.com/Dutch-Laravel-Foundation/best-practices/blob/c7034be11f69954eac43e50486b6e5bebde98c46/project-structure-and-code-architecture/use-configuration-properly/skill/SKILL.md'
 skill_references: []
-synced_at: 1785159222
+synced_at: 1785231871
 ---

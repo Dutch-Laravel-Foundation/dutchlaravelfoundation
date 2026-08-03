@@ -1,23 +1,23 @@
 ---
 id: f98718e0-c3ab-59da-9a37-489837b76d48
 blueprint: best_practices
-title: 'Gebruik Chunking voor Grote Datasets'
-title_nl: 'Gebruik Chunking voor Grote Datasets'
+title: 'Gebruik chunking voor grote datasets'
+title_nl: 'Gebruik chunking voor grote datasets'
 title_en: 'Use Chunking for Large Datasets'
-summary_nl: 'Duizenden records tegelijk in het geheugen laden kan leiden tot geheugenuitputting en trage responstijden. Laravel biedt verschillende chunking- en lazy collection-strategieën — chunk(), chunkById(), cursor(), lazy() en lazyById() — die elk...'
-summary_en: 'Loading thousands of records into memory at once can cause memory exhaustion and slow response times. Laravel provides several chunking and lazy collection strategies — chunk(), chunkById(), cursor(), lazy(), and lazyById() — each suited to...'
+summary_nl: 'Duizenden records tegelijk in het geheugen laden kan leiden tot geheugenuitputting en trage responstijden. Laravel biedt verschillende chunking- en lazy collection-strategieën, chunk(), chunkById(), cursor(), lazy() en lazyById(), die elk g...'
+summary_en: 'Loading thousands of records into memory at once can cause memory exhaustion and slow response times. Laravel provides several chunking and lazy collection strategies, chunk(), chunkById(), cursor(), lazy(), and lazyById(), each suited to d...'
 chapters_nl:
   - title: Introductie
     anchor: introductie
   - title: Waarom
     anchor: waarom
-  - title: 'Geschikt Voor'
+  - title: 'Geschikt voor'
     anchor: geschikt-voor
-  - title: 'Minder Geschikt'
-    anchor: minder-geschikt
+  - title: 'Minder geschikt voor'
+    anchor: minder-geschikt-voor
   - title: Voorbeelden
     anchor: voorbeelden
-  - title: 'Meer Informatie'
+  - title: 'Meer informatie'
     anchor: meer-informatie
 chapters_en:
   - title: Introduction
@@ -36,7 +36,7 @@ content_nl: |-
   <a name="introduction"></a>
   ## Introductie
 
-  Duizenden records tegelijk in het geheugen laden kan leiden tot geheugenuitputting en trage responstijden. Laravel biedt verschillende chunking- en lazy collection-strategieën — `chunk()`, `chunkById()`, `cursor()`, `lazy()` en `lazyById()` — die elk geschikt zijn voor andere scenario's, afhankelijk van of je relaties nodig hebt, records aan het wijzigen bent, of geheugenefficiëntie prioriteit geeft.
+  Duizenden records tegelijk in het geheugen laden kan leiden tot geheugenuitputting en trage responstijden. Laravel biedt verschillende chunking- en lazy collection-strategieën, `chunk()`, `chunkById()`, `cursor()`, `lazy()` en `lazyById()`, die elk geschikt zijn voor andere scenario's, afhankelijk van of je relaties nodig hebt, records aan het wijzigen bent, of geheugenefficiëntie prioriteit geeft.
 
   <a name="why"></a>
   ## Waarom
@@ -47,7 +47,7 @@ content_nl: |-
   - **Ondersteuning voor relaties**: `lazy()` ondersteunt eager loading terwijl er toch gechunkt wordt, in tegenstelling tot `cursor()`
 
   <a name="suitable-for"></a>
-  ## Geschikt Voor
+  ## Geschikt voor
 
   - Batchverwerking van grote datasets (imports, exports, notificaties)
   - Geplande commands die veel records verwerken
@@ -55,7 +55,7 @@ content_nl: |-
   - Elke operatie die over meer dan een paar honderd records itereert
 
   <a name="less-suitable"></a>
-  ## Minder Geschikt
+  ## Minder geschikt voor
 
   - Kleine datasets waarbij het prima is om alle records tegelijk te laden
   - Queries die van nature een beperkt aantal records teruggeven
@@ -63,7 +63,7 @@ content_nl: |-
   <a name="examples"></a>
   ## Voorbeelden
 
-  ### Basis Chunking
+  ### Basis chunking
 
   ```php
   // Bad: loads everything into memory
@@ -80,7 +80,7 @@ content_nl: |-
   });
   ```
 
-  ### Gebruik `chunkById()` Wanneer je Records Wijzigt
+  ### Gebruik `chunkById()` wanneer je records wijzigt
 
   Standaard `chunk()` gebruikt `OFFSET`, wat verschuift wanneer rijen veranderen. `chunkById()` gebruikt `id > last_id`, wat veilig is tegen mutatie:
 
@@ -90,10 +90,10 @@ content_nl: |-
   });
   ```
 
-  ### Kiezen Tussen `cursor()` en `lazy()`
+  ### Kiezen tussen `cursor()` en `lazy()`
 
-  - `cursor()` — één model tegelijk in het geheugen, maar kan geen relaties eager-loaden (risico op N+1)
-  - `lazy()` — gechunkte paginatie die een platte `LazyCollection` teruggeeft, ondersteunt eager loading
+  - `cursor()`, één model tegelijk in het geheugen, maar kan geen relaties eager-loaden (risico op N+1)
+  - `lazy()`, gechunkte paginatie die een platte `LazyCollection` teruggeeft, ondersteunt eager loading
 
   ```php
   // Good: attribute-only work, maximum memory efficiency
@@ -107,9 +107,9 @@ content_nl: |-
   }
   ```
 
-  ### Gebruik `lazyById()` Wanneer je Wijzigt Tijdens het Itereren
+  ### Gebruik `lazyById()` wanneer je wijzigt tijdens het itereren
 
-  `lazy()` gebruikt offset-paginatie — het wijzigen van records tijdens het itereren kan ze overslaan of dubbel verwerken. `lazyById()` gebruikt `id > last_id`, veilig tegen mutatie:
+  `lazy()` gebruikt offset-paginatie, het wijzigen van records tijdens het itereren kan ze overslaan of dubbel verwerken. `lazyById()` gebruikt `id > last_id`, veilig tegen mutatie:
 
   ```php
   User::where('needs_update', true)->lazyById()->each(function ($user) {
@@ -118,17 +118,17 @@ content_nl: |-
   ```
 
   <a name="more-info"></a>
-  ## Meer Informatie
+  ## Meer informatie
 
   - [Laravel Chunking Results Documentation](https://laravel.com/docs/eloquent#chunking-results)
   - [Laravel Lazy Collections Documentation](https://laravel.com/docs/eloquent#lazy-collection)
-  - [Prevent N+1 Queries](../../prevent-n-plus-one-queries/translations/nl.md) — voor eager loading en query-optimalisatie
+  - [Prevent N+1 Queries](../../prevent-n-plus-one-queries/translations/nl.md)
   - [Laravel Boost Best Practices PR](https://github.com/laravel/boost/pull/628)
 content_en: |-
   <a name="introduction"></a>
   ## Introduction
 
-  Loading thousands of records into memory at once can cause memory exhaustion and slow response times. Laravel provides several chunking and lazy collection strategies — `chunk()`, `chunkById()`, `cursor()`, `lazy()`, and `lazyById()` — each suited to different scenarios depending on whether you need relationships, are modifying records, or prioritize memory efficiency.
+  Loading thousands of records into memory at once can cause memory exhaustion and slow response times. Laravel provides several chunking and lazy collection strategies, `chunk()`, `chunkById()`, `cursor()`, `lazy()`, and `lazyById()`, each suited to different scenarios depending on whether you need relationships, are modifying records, or prioritize memory efficiency.
 
   <a name="why"></a>
   ## Why
@@ -184,8 +184,8 @@ content_en: |-
 
   ### Choosing Between `cursor()` and `lazy()`
 
-  - `cursor()` — one model in memory at a time, but cannot eager-load relationships (N+1 risk)
-  - `lazy()` — chunked pagination returning a flat `LazyCollection`, supports eager loading
+  - `cursor()`, one model in memory at a time, but cannot eager-load relationships (N+1 risk)
+  - `lazy()`, chunked pagination returning a flat `LazyCollection`, supports eager loading
 
   ```php
   // Good: attribute-only work, maximum memory efficiency
@@ -201,7 +201,7 @@ content_en: |-
 
   ### Use `lazyById()` When Updating During Iteration
 
-  `lazy()` uses offset pagination — updating records during iteration can skip or double-process. `lazyById()` uses `id > last_id`, safe against mutation:
+  `lazy()` uses offset pagination, updating records during iteration can skip or double-process. `lazyById()` uses `id > last_id`, safe against mutation:
 
   ```php
   User::where('needs_update', true)->lazyById()->each(function ($user) {
@@ -214,7 +214,7 @@ content_en: |-
 
   - [Laravel Chunking Results Documentation](https://laravel.com/docs/eloquent#chunking-results)
   - [Laravel Lazy Collections Documentation](https://laravel.com/docs/eloquent#lazy-collection)
-  - [Prevent N+1 Queries](../prevent-n-plus-one-queries/BEST_PRACTICE.md) — for eager loading and query optimization
+  - [Prevent N+1 Queries](../prevent-n-plus-one-queries/BEST_PRACTICE.md), for eager loading and query optimization
   - [Laravel Boost Best Practices PR](https://github.com/laravel/boost/pull/628)
 best_practice_categories:
   - database-and-eloquent-orm
@@ -230,7 +230,7 @@ skill_content: |-
 
   ## Core Guidance
 
-  Loading thousands of records into memory at once can cause memory exhaustion and slow response times. Laravel provides several chunking and lazy collection strategies — `chunk()`, `chunkById()`, `cursor()`, `lazy()`, and `lazyById()` — each suited to different scenarios depending on whether you need relationships, are modifying records, or prioritize memory efficiency.
+  Loading thousands of records into memory at once can cause memory exhaustion and slow response times. Laravel provides several chunking and lazy collection strategies, `chunk()`, `chunkById()`, `cursor()`, `lazy()`, and `lazyById()`, each suited to different scenarios depending on whether you need relationships, are modifying records, or prioritize memory efficiency.
 
   ## Why It Matters
 
@@ -274,5 +274,5 @@ skill_content: |-
 skill_source_path: database-and-eloquent-orm/use-chunking-for-large-datasets/skill/SKILL.md
 skill_github_url: 'https://github.com/Dutch-Laravel-Foundation/best-practices/blob/c7034be11f69954eac43e50486b6e5bebde98c46/database-and-eloquent-orm/use-chunking-for-large-datasets/skill/SKILL.md'
 skill_references: []
-synced_at: 1785159222
+synced_at: 1785231871
 ---

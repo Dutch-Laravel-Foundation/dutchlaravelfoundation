@@ -11,11 +11,11 @@ chapters_nl:
     anchor: introductie
   - title: Waarom
     anchor: waarom
-  - title: 'Geschikt Voor'
+  - title: 'Geschikt voor'
     anchor: geschikt-voor
-  - title: 'Minder Geschikt'
-    anchor: minder-geschikt
-  - title: 'Meer Info'
+  - title: 'Minder geschikt voor'
+    anchor: minder-geschikt-voor
+  - title: 'Meer info'
     anchor: meer-info
 chapters_en:
   - title: Introduction
@@ -45,7 +45,7 @@ content_nl: |-
   - **Compliance-eisen** - Veel securitystandaarden vereisen inmiddels een CSP-implementatie
 
   <a name="suitable-for"></a>
-  ## Geschikt Voor
+  ## Geschikt voor
 
   - Alle Laravel-applicaties, met name die gevoelige data verwerken
   - Applicaties met door gebruikers gegenereerde content
@@ -54,22 +54,22 @@ content_nl: |-
   - Publiek toegankelijke webapplicaties
 
   <a name="less-suitable"></a>
-  ## Minder Geschikt
+  ## Minder geschikt voor
 
   - Legacy-applicaties met veel inline scripts die niet gerefactord kunnen worden
   - Applicaties in een vroeg ontwikkelstadium met snel veranderende contentbronnen
   - Interne tools met zeer gecontroleerde gebruikerstoegang (hoewel nog steeds aanbevolen)
 
   <a name="more-info"></a>
-  ## Meer Info
+  ## Meer info
 
-  - [Spatie Laravel CSP Package](https://github.com/spatie/laravel-csp) — aanbevolen Laravel-implementatie
+  - [Spatie Laravel CSP Package](https://github.com/spatie/laravel-csp)
   - [MDN Content Security Policy Documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
   - [CSP Level 3 Specification](https://www.w3.org/TR/CSP3/)
   - [Google CSP Evaluator](https://csp-evaluator.withgoogle.com/)
   - [OWASP CSP Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html)
   - [Dutch Laravel Foundation CSP Guide](https://dutchlaravelfoundation.nl/kennis/verbeter-de-beveiliging-van-je-laravel-applicatie-met-csp-content-security-policies)
-  - [Prevent Common Vulnerabilities](../../prevent-common-vulnerabilities/translations/nl.md) — voor XSS-output-escaping, CSRF, SQL-injectie en andere securitypraktijken
+  - [Prevent Common Vulnerabilities](../../prevent-common-vulnerabilities/translations/nl.md)
 content_en: |-
   <a name="introduction"></a>
   ## Introduction
@@ -105,13 +105,13 @@ content_en: |-
   <a name="more-info"></a>
   ## More Info
 
-  - [Spatie Laravel CSP Package](https://github.com/spatie/laravel-csp) — recommended Laravel implementation
+  - [Spatie Laravel CSP Package](https://github.com/spatie/laravel-csp), recommended Laravel implementation
   - [MDN Content Security Policy Documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
   - [CSP Level 3 Specification](https://www.w3.org/TR/CSP3/)
   - [Google CSP Evaluator](https://csp-evaluator.withgoogle.com/)
   - [OWASP CSP Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html)
   - [Dutch Laravel Foundation CSP Guide](https://dutchlaravelfoundation.nl/kennis/verbeter-de-beveiliging-van-je-laravel-applicatie-met-csp-content-security-policies)
-  - [Prevent Common Vulnerabilities](../prevent-common-vulnerabilities/BEST_PRACTICE.md) — for XSS output escaping, CSRF, SQL injection, and other security practices
+  - [Prevent Common Vulnerabilities](../prevent-common-vulnerabilities/BEST_PRACTICE.md), for XSS output escaping, CSRF, SQL injection, and other security practices
 best_practice_categories:
   - security-and-authentication
 category_slug: security-and-authentication
@@ -174,5 +174,5 @@ skill_content: |-
 skill_source_path: security-and-authentication/implement-content-security-policy/skill/SKILL.md
 skill_github_url: 'https://github.com/Dutch-Laravel-Foundation/best-practices/blob/c7034be11f69954eac43e50486b6e5bebde98c46/security-and-authentication/implement-content-security-policy/skill/SKILL.md'
 skill_references: []
-synced_at: 1785159222
+synced_at: 1785231871
 ---

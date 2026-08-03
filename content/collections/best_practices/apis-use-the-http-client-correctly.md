@@ -1,8 +1,8 @@
 ---
 id: 13e2ac3c-3ec9-516f-8fee-4e7d37d6e1ae
 blueprint: best_practices
-title: 'Gebruik de HTTP Client op de Juiste Manier'
-title_nl: 'Gebruik de HTTP Client op de Juiste Manier'
+title: 'Gebruik de HTTP Client op de juiste manier'
+title_nl: 'Gebruik de HTTP Client op de juiste manier'
 title_en: 'Use the HTTP Client Correctly'
 summary_nl: "De HTTP Client van Laravel (gebouwd op Guzzle) biedt een vloeiende interface voor het maken van HTTP-requests naar externe API's. Correct gebruik betekent het instellen van expliciete timeouts, het implementeren van retry met backoff, het c..."
 summary_en: "Laravel's HTTP Client (built on Guzzle) provides a fluent interface for making HTTP requests to external APIs. Using it correctly means setting explicit timeouts, implementing retry with backoff, handling errors properly, using request pool..."
@@ -11,13 +11,13 @@ chapters_nl:
     anchor: introductie
   - title: Waarom
     anchor: waarom
-  - title: 'Geschikt Voor'
+  - title: 'Geschikt voor'
     anchor: geschikt-voor
-  - title: 'Minder Geschikt'
-    anchor: minder-geschikt
+  - title: 'Minder geschikt voor'
+    anchor: minder-geschikt-voor
   - title: Voorbeelden
     anchor: voorbeelden
-  - title: 'Meer Informatie'
+  - title: 'Meer informatie'
     anchor: meer-informatie
 chapters_en:
   - title: Introduction
@@ -43,19 +43,19 @@ content_nl: |-
 
   - **Snel falen**: Expliciete timeouts voorkomen dat requests 30+ seconden blijven hangen op API's die niet reageren
   - **Weerbaarheid**: Retry met exponentiële backoff vangt tijdelijke fouten netjes op zonder externe services te overbelasten
-  - **Correctheid**: De HTTP Client gooit standaard geen exception bij 4xx/5xx — fouten moeten expliciet worden afgehandeld om te voorkomen dat foutresponsbodies stilzwijgend als data worden gebruikt
+  - **Correctheid**: De HTTP Client gooit standaard geen exception bij 4xx/5xx, fouten moeten expliciet worden afgehandeld om te voorkomen dat foutresponsbodies stilzwijgend als data worden gebruikt
   - **Prestaties**: `Http::pool()` voert onafhankelijke requests gelijktijdig uit, waardoor sequentiële wachttijden verdwijnen
   - **Betrouwbaarheid van tests**: `Http::fake()` met `preventStrayRequests()` zorgt ervoor dat tests nooit echte API's raken en vangt niet-gemockte calls op
 
   <a name="suitable-for"></a>
-  ## Geschikt Voor
+  ## Geschikt voor
 
   - Elke applicatie die communiceert met externe API's
   - Services die integreren met betaalproviders, e-mailservices of externe databronnen
   - Applicaties waar betrouwbaarheid en prestaties van API's van belang zijn
 
   <a name="less-suitable"></a>
-  ## Minder Geschikt
+  ## Minder geschikt voor
 
   - Interne service-naar-service communicatie waarvoor een dedicated client library wordt aangeboden
   - Eenvoudige bestandsdownloads of eenmalige scripts waar robuustheid niet cruciaal is
@@ -63,7 +63,7 @@ content_nl: |-
   <a name="examples"></a>
   ## Voorbeelden
 
-  ### Stel Altijd Expliciete Timeouts In
+  ### Stel altijd expliciete timeouts in
 
   ```php
   // Slecht: standaard timeout van 30 seconden
@@ -88,7 +88,7 @@ content_nl: |-
   $response = Http::github()->get('/repos/laravel/framework');
   ```
 
-  ### Gebruik Retry met Backoff voor Externe API's
+  ### Gebruik retry met backoff voor externe API's
 
   ```php
   // Slecht: geen retry bij tijdelijke fout
@@ -100,7 +100,7 @@ content_nl: |-
       ->post('https://api.stripe.com/v1/charges', $data);
   ```
 
-  ### Handel Fouten Expliciet Af
+  ### Handel fouten expliciet af
 
   ```php
   // Slecht: zou een foutresponsbody als data kunnen gebruiken
@@ -128,7 +128,7 @@ content_nl: |-
   $response->throw();
   ```
 
-  ### Gebruik Request Pooling voor Gelijktijdige Requests
+  ### Gebruik request pooling voor gelijktijdige requests
 
   ```php
   // Slecht: sequentiële requests
@@ -147,7 +147,7 @@ content_nl: |-
   $posts = $responses['posts']->json();
   ```
 
-  ### Fake HTTP-calls in Tests
+  ### Fake HTTP-calls in tests
 
   ```php
   it('syncs user from API', function () {
@@ -170,11 +170,11 @@ content_nl: |-
   ```
 
   <a name="more-info"></a>
-  ## Meer Informatie
+  ## Meer informatie
 
   - [Laravel HTTP Client Documentatie](https://laravel.com/docs/http-client)
   - [Laravel HTTP Client Testing Documentatie](https://laravel.com/docs/http-client#testing)
-  - [Volg Testing Best Practices](../../../testing/follow-testing-best-practices/translations/nl.md) — voor algemene testpatronen
+  - [Volg Testing Best Practices](../../../testing/follow-testing-best-practices/translations/nl.md)
   - [Laravel Boost Best Practices PR](https://github.com/laravel/boost/pull/628)
 content_en: |-
   <a name="introduction"></a>
@@ -187,7 +187,7 @@ content_en: |-
 
   - **Fail fast**: Explicit timeouts prevent requests from hanging for 30+ seconds on unresponsive APIs
   - **Resilience**: Retry with exponential backoff handles transient failures gracefully without overwhelming external services
-  - **Correctness**: The HTTP Client does not throw on 4xx/5xx by default — errors must be handled explicitly to avoid silently using error response bodies as data
+  - **Correctness**: The HTTP Client does not throw on 4xx/5xx by default, errors must be handled explicitly to avoid silently using error response bodies as data
   - **Performance**: `Http::pool()` runs independent requests concurrently, eliminating sequential wait times
   - **Test reliability**: `Http::fake()` with `preventStrayRequests()` ensures tests never hit real APIs and catches unmocked calls
 
@@ -318,7 +318,7 @@ content_en: |-
 
   - [Laravel HTTP Client Documentation](https://laravel.com/docs/http-client)
   - [Laravel HTTP Client Testing Documentation](https://laravel.com/docs/http-client#testing)
-  - [Follow Testing Best Practices](../../testing/follow-testing-best-practices/BEST_PRACTICE.md) — for general testing patterns
+  - [Follow Testing Best Practices](../../testing/follow-testing-best-practices/BEST_PRACTICE.md), for general testing patterns
   - [Laravel Boost Best Practices PR](https://github.com/laravel/boost/pull/628)
 best_practice_categories:
   - apis
@@ -340,7 +340,7 @@ skill_content: |-
 
   - **Fail fast**: Explicit timeouts prevent requests from hanging for 30+ seconds on unresponsive APIs
   - **Resilience**: Retry with exponential backoff handles transient failures gracefully without overwhelming external services
-  - **Correctness**: The HTTP Client does not throw on 4xx/5xx by default — errors must be handled explicitly to avoid silently using error response bodies as data
+  - **Correctness**: The HTTP Client does not throw on 4xx/5xx by default, errors must be handled explicitly to avoid silently using error response bodies as data
   - **Performance**: `Http::pool()` runs independent requests concurrently, eliminating sequential wait times
   - **Test reliability**: `Http::fake()` with `preventStrayRequests()` ensures tests never hit real APIs and catches unmocked calls
 
@@ -378,5 +378,5 @@ skill_content: |-
 skill_source_path: apis/use-the-http-client-correctly/skill/SKILL.md
 skill_github_url: 'https://github.com/Dutch-Laravel-Foundation/best-practices/blob/c7034be11f69954eac43e50486b6e5bebde98c46/apis/use-the-http-client-correctly/skill/SKILL.md'
 skill_references: []
-synced_at: 1785159222
+synced_at: 1785231871
 ---

@@ -4,20 +4,20 @@ blueprint: best_practices
 title: 'Effectieve migrations schrijven'
 title_nl: 'Effectieve migrations schrijven'
 title_en: 'Write Effective Migrations'
-summary_nl: 'Migrations vormen de versiebeheer voor je databaseschema. Goed geschreven migrations zijn gericht, omkeerbaar en bevatten vanaf het begin de juiste indexering. Omdat migrations bevroren momentopnames zijn, vragen ze om speciale discipline —...'
-summary_en: 'Migrations are the version control for your database schema. Well-written migrations are focused, reversible, and include proper indexing from the start. Since migrations are frozen snapshots in time, they require special discipline — once...'
+summary_nl: 'Migrations vormen de versiebeheer voor je databaseschema. Goed geschreven migrations zijn gericht, omkeerbaar en bevatten vanaf het begin de juiste indexering. Omdat migrations bevroren momentopnames zijn, vragen ze om speciale discipline,...'
+summary_en: 'Migrations are the version control for your database schema. Well-written migrations are focused, reversible, and include proper indexing from the start. Since migrations are frozen snapshots in time, they require special discipline, once d...'
 chapters_nl:
   - title: Introductie
     anchor: introductie
   - title: Waarom
     anchor: waarom
-  - title: 'Geschikt Voor'
+  - title: 'Geschikt voor'
     anchor: geschikt-voor
-  - title: 'Minder Geschikt'
-    anchor: minder-geschikt
+  - title: 'Minder geschikt voor'
+    anchor: minder-geschikt-voor
   - title: Voorbeelden
     anchor: voorbeelden
-  - title: 'Meer Info'
+  - title: 'Meer info'
     anchor: meer-info
 chapters_en:
   - title: Introduction
@@ -36,7 +36,7 @@ content_nl: |-
   <a name="introduction"></a>
   ## Introductie
 
-  Migrations vormen de versiebeheer voor je databaseschema. Goed geschreven migrations zijn gericht, omkeerbaar en bevatten vanaf het begin de juiste indexering. Omdat migrations bevroren momentopnames zijn, vragen ze om speciale discipline — zodra ze naar productie zijn uitgerold, mogen ze nooit meer worden gewijzigd.
+  Migrations vormen de versiebeheer voor je databaseschema. Goed geschreven migrations zijn gericht, omkeerbaar en bevatten vanaf het begin de juiste indexering. Omdat migrations bevroren momentopnames zijn, vragen ze om speciale discipline, zodra ze naar productie zijn uitgerold, mogen ze nooit meer worden gewijzigd.
 
   <a name="why"></a>
   ## Waarom
@@ -48,21 +48,21 @@ content_nl: |-
   - **Duidelijkheid**: Eén verantwoordelijkheid per migration maakt het eenvoudig om te herkennen wat er wanneer is veranderd
 
   <a name="suitable-for"></a>
-  ## Geschikt Voor
+  ## Geschikt voor
 
   - Alle Laravel-applicaties die migrations gebruiken
   - Teams met meerdere developers die aan hetzelfde databaseschema werken
   - Projecten met CI/CD-pipelines die migrations uitvoeren
 
   <a name="less-suitable"></a>
-  ## Minder Geschikt
+  ## Minder geschikt voor
 
-  - N.v.t. — deze praktijken gelden voor elk project dat Laravel-migrations gebruikt
+  - N.v.t., deze praktijken gelden voor elk project dat Laravel-migrations gebruikt
 
   <a name="examples"></a>
   ## Voorbeelden
 
-  ### Gebruik `constrained()` voor Foreign Keys
+  ### Gebruik `constrained()` voor foreign keys
 
   ```php
   $table->foreignId('user_id')->constrained()->cascadeOnDelete();
@@ -71,7 +71,7 @@ content_nl: |-
   $table->foreignId('author_id')->constrained('users');
   ```
 
-  ### Wijzig Uitgerolde Migrations Nooit
+  ### Wijzig uitgerolde migrations nooit
 
   ```php
   // Bad: editing a migration that already ran in production
@@ -85,7 +85,7 @@ content_nl: |-
   });
   ```
 
-  ### Voeg Indexes toe in de Migration
+  ### Voeg indexes toe in de migration
 
   ```php
   // Bad: no indexes on frequently queried columns
@@ -106,7 +106,7 @@ content_nl: |-
   });
   ```
 
-  ### Spiegel Column-Defaults in Model `$attributes`
+  ### Spiegel column-defaults in model `$attributes`
 
   Wanneer een column een database-default heeft, spiegel deze dan in het model zodat nieuwe instances de juiste waarden hebben vóór het opslaan:
 
@@ -120,7 +120,7 @@ content_nl: |-
   ];
   ```
 
-  ### Schrijf Omkeerbare `down()`-Methodes
+  ### Schrijf omkeerbare `down()`-methodes
 
   ```php
   public function down(): void
@@ -133,7 +133,7 @@ content_nl: |-
 
   Voor bewust onomkeerbare migrations laat je een duidelijke comment achter en vereis je in plaats daarvan een corrigerende voorwaartse migration.
 
-  ### Houd Migrations Gericht
+  ### Houd migrations gericht
 
   Meng nooit DDL (schemawijzigingen) en DML (datamanipulatie) in één migration:
 
@@ -154,16 +154,16 @@ content_nl: |-
   ```
 
   <a name="more-info"></a>
-  ## Meer Info
+  ## Meer info
 
   - [Laravel Migrations Documentation](https://laravel.com/docs/migrations)
-  - [Avoid Eloquent Models in Migrations](../../avoid-eloquent-models-in-migrations/translations/nl.md) — gebruik de Query Builder in plaats van Eloquent in migrations
+  - [Avoid Eloquent Models in Migrations](../../avoid-eloquent-models-in-migrations/translations/nl.md)
   - [Laravel Boost Best Practices PR](https://github.com/laravel/boost/pull/628)
 content_en: |-
   <a name="introduction"></a>
   ## Introduction
 
-  Migrations are the version control for your database schema. Well-written migrations are focused, reversible, and include proper indexing from the start. Since migrations are frozen snapshots in time, they require special discipline — once deployed to production, they should never be modified.
+  Migrations are the version control for your database schema. Well-written migrations are focused, reversible, and include proper indexing from the start. Since migrations are frozen snapshots in time, they require special discipline, once deployed to production, they should never be modified.
 
   <a name="why"></a>
   ## Why
@@ -184,7 +184,7 @@ content_en: |-
   <a name="less-suitable"></a>
   ## Less Suitable
 
-  - N/A — these practices apply to any project using Laravel migrations
+  - N/A, these practices apply to any project using Laravel migrations
 
   <a name="examples"></a>
   ## Examples
@@ -284,7 +284,7 @@ content_en: |-
   ## More Info
 
   - [Laravel Migrations Documentation](https://laravel.com/docs/migrations)
-  - [Avoid Eloquent Models in Migrations](../avoid-eloquent-models-in-migrations/BEST_PRACTICE.md) — use Query Builder instead of Eloquent in migrations
+  - [Avoid Eloquent Models in Migrations](../avoid-eloquent-models-in-migrations/BEST_PRACTICE.md), use Query Builder instead of Eloquent in migrations
   - [Laravel Boost Best Practices PR](https://github.com/laravel/boost/pull/628)
 best_practice_categories:
   - database-and-eloquent-orm
@@ -300,7 +300,7 @@ skill_content: |-
 
   ## Core Guidance
 
-  Migrations are the version control for your database schema. Well-written migrations are focused, reversible, and include proper indexing from the start. Since migrations are frozen snapshots in time, they require special discipline — once deployed to production, they should never be modified.
+  Migrations are the version control for your database schema. Well-written migrations are focused, reversible, and include proper indexing from the start. Since migrations are frozen snapshots in time, they require special discipline, once deployed to production, they should never be modified.
 
   ## Why It Matters
 
@@ -318,7 +318,7 @@ skill_content: |-
 
   ## Be Careful When
 
-  - N/A — these practices apply to any project using Laravel migrations
+  - N/A, these practices apply to any project using Laravel migrations
 
   ## Canonical Source
 
@@ -343,5 +343,5 @@ skill_content: |-
 skill_source_path: database-and-eloquent-orm/write-effective-migrations/skill/SKILL.md
 skill_github_url: 'https://github.com/Dutch-Laravel-Foundation/best-practices/blob/c7034be11f69954eac43e50486b6e5bebde98c46/database-and-eloquent-orm/write-effective-migrations/skill/SKILL.md'
 skill_references: []
-synced_at: 1785159222
+synced_at: 1785231871
 ---
