@@ -9,7 +9,14 @@ use Tests\TestCase;
 
 final class ContentSecurityPolicyTest extends TestCase
 {
-    public function testPublicHtmlResponsesUseAnEnforcedContentSecurityPolicy(): void
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        config(['csp.enabled_while_hot_reloading' => true]);
+    }
+
+    public function test_public_html_responses_use_an_enforced_content_security_policy(): void
     {
         $response = $this->get('/');
 
@@ -42,7 +49,22 @@ final class ContentSecurityPolicyTest extends TestCase
         $this->assertStringNotContainsString(' *', $policy);
     }
 
-    public function testPublicPolicyAllowsOnlyTheVerifiedThirdPartyIntegrations(): void
+    public function test_public_html_renders_the_site_background_before_javascript_runs(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertOk()->assertSee(
+            '<body class="dlf-site font-sans leading-normal bg-white text-primary-text">',
+            escape: false,
+        );
+
+        $this->assertMatchesRegularExpression(
+            '/<link rel="stylesheet" href="[^"]*tailwind[^"]*\.css"/',
+            (string) $response->getContent(),
+        );
+    }
+
+    public function test_public_policy_allows_only_the_verified_third_party_integrations(): void
     {
         $policy = (string) $this->get('/')->headers->get('Content-Security-Policy');
 
@@ -66,7 +88,7 @@ final class ContentSecurityPolicyTest extends TestCase
         }
     }
 
-    public function testInlineScriptsAndStylesUseTheResponseNonce(): void
+    public function test_inline_scripts_and_styles_use_the_response_nonce(): void
     {
         $response = $this->get('/');
         $policy = (string) $response->headers->get('Content-Security-Policy');
@@ -77,7 +99,10 @@ final class ContentSecurityPolicyTest extends TestCase
         $nonce = $matches[1];
         $content = (string) $response->getContent();
 
-        $this->assertStringContainsString("<style nonce=\"{$nonce}\">", $content);
+        $this->assertStringContainsString(
+            "<script type=\"application/ld+json\" nonce=\"{$nonce}\"",
+            $content,
+        );
         $this->assertMatchesRegularExpression(
             '/<script(?=[^>]*nonce="'.preg_quote($nonce, '/').'"|[^>]*\bsrc=)[^>]*>/',
             $content,
@@ -94,7 +119,7 @@ final class ContentSecurityPolicyTest extends TestCase
         }
     }
 
-    public function testHotReloadedFontsUseTheStylesheetPipelineAndAllowedOrigin(): void
+    public function test_hot_reloaded_fonts_use_the_stylesheet_pipeline_and_allowed_origin(): void
     {
         $vite = $this->app->make(Vite::class);
         $originalHotFile = $vite->hotFile();
@@ -125,7 +150,7 @@ final class ContentSecurityPolicyTest extends TestCase
         }
     }
 
-    public function testControlPanelResponsesAreNotModifiedByThePublicPolicy(): void
+    public function test_control_panel_responses_are_not_modified_by_the_public_policy(): void
     {
         $this->get('/cp')
             ->assertHeaderMissing('Content-Security-Policy')

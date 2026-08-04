@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Middleware\AddDiscoveryHeaders;
 use App\Http\Middleware\AddPublicContentSecurityPolicyHeaders;
+use App\Http\Middleware\HandleInertiaRequests;
 use App\Http\Middleware\RedirectWwwToCanonicalHost;
+use App\Http\Middleware\ServeMarkdown;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -17,8 +20,11 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->prepend(RedirectWwwToCanonicalHost::class);
         $middleware->append(AddPublicContentSecurityPolicyHeaders::class);
         $middleware->appendToGroup('web', [
-            \App\Http\Middleware\AddDiscoveryHeaders::class,
-            \App\Http\Middleware\ServeMarkdown::class,
+            AddDiscoveryHeaders::class,
+            ServeMarkdown::class,
+        ]);
+        $middleware->alias([
+            'inertia' => HandleInertiaRequests::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

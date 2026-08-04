@@ -4,59 +4,101 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
-class StagebankFeedbackTest extends TestCase
+final class StagebankFeedbackTest extends TestCase
 {
-    public function testStagebankOverviewUsesUpdatedFilterHeading(): void
+    public function test_stagebank_overview_uses_updated_filter_heading(): void
     {
-        $response = $this->get('/stagebank');
+        $response = $this->inertia('/stagebank');
+
+        $response->assertOk()
+            ->assertJsonPath('component', 'Community/InternshipsIndex')
+            ->assertJsonStructure(['props' => ['community' => ['items', 'filters']]]);
+
+        $page = file_get_contents(resource_path('js/pages/Community/InternshipsIndex.tsx'));
+
+        $this->assertNotFalse($page);
+        $this->assertStringContainsString('title="Wij helpen je zoeken!"', $page);
+        $this->assertStringNotContainsString('Kunnen wij je helpen zoeken?', $page);
+    }
+
+    public function test_internship_detail_uses_updated_apply_button_label(): void
+    {
+        $response = $this->inertia('/stagebank/qlic');
+
+        $response->assertOk()
+            ->assertJsonPath('component', 'Community/InternshipsShow')
+            ->assertJsonPath('props.community.applyUrl', 'https://www.qlic.nl/vacatures/stage-backend-developer/');
+
+        $page = file_get_contents(resource_path('js/pages/Community/InternshipsShow.tsx'));
+
+        $this->assertNotFalse($page);
+        $this->assertStringContainsString('Bekijk stage vacatures', $page);
+        $this->assertStringNotContainsString('Solliciteren', $page);
+    }
+
+    public function test_internship_detail_merges_company_information_into_the_header(): void
+    {
+        $response = $this->inertia('/stagebank/superscanner');
+
+        $response->assertOk()
+            ->assertJsonPath('component', 'Community/InternshipsShow')
+            ->assertJsonPath('props.community.member.website', 'superscanner.nl')
+            ->assertJsonPath('props.community.member.city', 'Haarlem')
+            ->assertJsonPath('props.community.member.internshipContact.name', 'Andries Mooij');
+
+        $page = file_get_contents(resource_path('js/pages/Community/InternshipsShow.tsx'));
+
+        $this->assertNotFalse($page);
+        $this->assertStringContainsString('Stage contactpersoon', $page);
+        $this->assertStringNotContainsString('Stagebedrijf', $page);
+    }
+
+    public function test_internship_tiles_do_not_render_duplicate_company_name_line(): void
+    {
+        $component = file_get_contents(resource_path('js/components/community-react/DirectoryCards.tsx'));
+
+        $this->assertNotFalse($component);
+        $internshipCard = strstr($component, 'export function InternshipCard');
+
+        $this->assertIsString($internshipCard);
+        $this->assertStringContainsString('{internship.title}', $internshipCard);
+        $this->assertStringNotContainsString('dlf-member-card__name">{member.title}', $internshipCard);
+    }
+
+    public function test_stagebank_overview_renders_member_logos(): void
+    {
+        $response = $this->inertia('/stagebank');
 
         $response->assertOk();
-        $response->assertSee('Wij helpen je zoeken!', false);
-        $response->assertDontSee('Kunnen wij je helpen zoeken?', false);
+
+        $items = $response->json('props.community.items');
+
+        $this->assertIsArray($items);
+
+        $logos = array_map(
+            static fn (array $item): mixed => $item['member']['logo']['url'] ?? null,
+            $items,
+        );
+
+        $this->assertContains('/assets/uploads/members/ux-logo.svg', $logos);
     }
 
-    public function testInternshipDetailUsesUpdatedApplyButtonLabel(): void
+    public function test_internship_detail_renders_the_member_logo(): void
     {
-        $response = $this->get('/stagebank/qlic');
-
-        $response->assertOk();
-        $response->assertSee('Bekijk stage vacatures', false);
-        $response->assertDontSee('Solliciteren', false);
-    }
-
-    public function testInternshipDetailMergesCompanyInformationIntoTheHeader(): void
-    {
-        $response = $this->get('/stagebank/superscanner');
-
-        $response->assertOk();
-        $response->assertSee('href="https://superscanner.nl"', false);
-        $response->assertSee('>Locatie<', false);
-        $response->assertSee('>Website<', false);
-        $response->assertSee('Stage contactpersoon', false);
-        $response->assertDontSee('Stagebedrijf', false);
-    }
-
-    public function testInternshipTilesDoNotRenderDuplicateCompanyNameLine(): void
-    {
-        $template = file_get_contents(resource_path('views/templates/internships/index.antlers.html'));
-
-        $this->assertNotFalse($template);
-        $this->assertStringNotContainsString('x-text="item.member_title"', $template);
-    }
-
-    public function testStagebankOverviewRendersMemberLogos(): void
-    {
-        $this->get('/stagebank')
+        $this->inertia('/stagebank/ux')
             ->assertOk()
-            ->assertSee('data-logo="/assets/uploads/members/ux-logo.svg"', false);
+            ->assertJsonPath('props.community.member.logo.url', '/assets/uploads/members/ux-logo.svg');
     }
 
-    public function testInternshipDetailRendersTheMemberLogo(): void
+    private function inertia(string $uri): TestResponse
     {
-        $this->get('/stagebank/ux')
-            ->assertOk()
-            ->assertSee('<img src="/assets/uploads/members/ux-logo.svg"', false);
+        return $this->withHeaders([
+            'Accept' => 'application/json',
+            'X-Inertia' => 'true',
+            'X-Inertia-Version' => hash_file('xxh128', public_path('build/manifest.json')),
+        ])->get($uri);
     }
 }

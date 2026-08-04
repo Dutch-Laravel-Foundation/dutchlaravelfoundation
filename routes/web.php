@@ -29,7 +29,7 @@ Route::permanentRedirect(
 // General redirects
 Route::permanentRedirect('/about-us', '/over-ons');
 Route::permanentRedirect('/become-member', '/lid-worden');
-Route::permanentRedirect('/about-laravel', '/what-is-laravel');
+Route::permanentRedirect('/about-laravel', '/wat-is-laravel');
 
 // Knowledge redirects
 Route::permanentRedirect('/knowledge/{slug?}', '/kennis/{slug?}');
@@ -42,8 +42,12 @@ Route::permanentRedirect('/news/{slug?}', '/nieuws/{slug?}');
 Route::permanentRedirect('/insights/{slug?}', '/nieuws/{slug?}');
 
 // Agenda/event redirects
-Route::permanentRedirect('/calendar/laravel-directors-dinner', '/events/laravel-directors-dinner');
-Route::permanentRedirect('/calendar/{slug?}', '/agenda/{slug?}');
+Route::permanentRedirect('/calendar', '/agenda');
+Route::permanentRedirect('/calendar/{slug}', '/events/{slug}');
 
 // Cases redirects
 Route::permanentRedirect('/showcases/{slug?}', '/cases/{slug?}');
+
+Route::middleware(['inertia', 'statamic.web'])
+    ->name('app.')
+    ->group(base_path('routes/app.php'));

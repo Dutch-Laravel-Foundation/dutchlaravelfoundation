@@ -309,8 +309,8 @@
         --prefer-dist \
         --no-interaction
 
-    npm ci
-    npm run build
+    bun install --frozen-lockfile
+    bun run build
 
     php artisan optimize:clear
     php artisan optimize

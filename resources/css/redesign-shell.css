@@ -102,6 +102,14 @@ html.dlf-menu-open {
     transform: none !important;
 }
 
+.dlf-header--instant {
+    transition: none !important;
+}
+
+.dlf-header--instant {
+    transform: translateY(0) !important;
+}
+
 .dlf-topbar {
     background-color: var(--dlf-red-action);
     font-size: 12px;
@@ -281,13 +289,21 @@ html.dlf-menu-open {
     top: 100%;
     left: 0;
     z-index: 60;
-    display: none;
+    display: flex;
     min-width: 192px;
     flex-direction: column;
     gap: 4px;
     padding: 14px 4px 4px;
     border: 0;
     background: transparent;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(6px);
+    transition:
+        opacity 160ms ease,
+        transform 180ms cubic-bezier(0.4, 0, 0.2, 1),
+        visibility 0s linear 180ms;
 }
 
 .dlf-submenu::before {
@@ -311,7 +327,11 @@ html.dlf-menu-open {
 .dlf-nav-item--parent:not([data-enhanced]):hover > .dlf-submenu,
 .dlf-nav-item--parent:not([data-enhanced]):focus-within > .dlf-submenu,
 .dlf-nav-item--parent.dlf-nav-item--open > .dlf-submenu {
-    display: flex;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+    transition-delay: 0s;
 }
 
 .dlf-submenu-link {
@@ -490,6 +510,22 @@ html.dlf-menu-open {
     height: 1.875rem;
 }
 
+.dlf-wizard-step {
+    animation: dlf-wizard-step-enter 300ms ease-out both;
+}
+
+@keyframes dlf-wizard-step-enter {
+    from {
+        opacity: 0;
+        transform: translateY(0.5rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .dlf-wizard-choice--selected {
     background-color: var(--dlf-red-action) !important;
     background-image: repeating-linear-gradient(
@@ -502,7 +538,9 @@ html.dlf-menu-open {
     color: #fff;
 }
 
-.dlf-wizard-choice--selected [x-text] {
+.dlf-wizard-choice--selected [x-text],
+.dlf-wizard-choice--selected .dlf-wizard-choice-label,
+.dlf-wizard-choice--selected .dlf-wizard-choice-description {
     color: #fff !important;
 }
 
@@ -599,6 +637,12 @@ html.dlf-menu-open {
     }
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .dlf-wizard-step {
+        animation: none;
+    }
+}
+
 @media (min-width: 640px) {
     .dlf-wizard-navigation {
         padding-block: 2rem;
@@ -633,6 +677,7 @@ html.dlf-menu-open {
 
 .dlf-footer {
     position: relative;
+    overflow-anchor: none;
 }
 
 .dlf-footer--home {
@@ -1089,6 +1134,11 @@ html.dlf-menu-open {
     display: none;
 }
 
+html[data-dlf-tracking-consent-resolved]:not([data-dlf-tracking-consent-hydrated])
+    .dlf-tracking-consent {
+    display: none;
+}
+
 .dlf-tracking-consent {
     position: fixed;
     z-index: 1100;
@@ -1105,6 +1155,17 @@ html.dlf-menu-open {
         transparent 5px
     );
     box-shadow: 0 -16px 48px rgb(9 9 16 / 14%);
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+        opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dlf-tracking-consent[data-visual-state="closed"] {
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(16px);
 }
 
 .dlf-tracking-consent[hidden] {
@@ -1734,10 +1795,16 @@ html.dlf-menu-open {
 @media (prefers-reduced-motion: reduce) {
     .dlf-header,
     .dlf-btn-face,
+    .dlf-tracking-consent,
     .dlf-tracking-consent__button--reject,
     .dlf-nav-chevron,
+    .dlf-submenu,
     .dlf-mobile-nav-chevron,
     .dlf-skip-link {
         transition-duration: 0.01ms !important;
+    }
+
+    .dlf-submenu {
+        transform: none;
     }
 }

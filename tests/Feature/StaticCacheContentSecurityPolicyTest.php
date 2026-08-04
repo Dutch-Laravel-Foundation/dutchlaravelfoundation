@@ -22,6 +22,7 @@ final class StaticCacheContentSecurityPolicyTest extends TestCase
 
         config([
             'cache.stores.static_cache' => ['driver' => 'array'],
+            'csp.enabled_while_hot_reloading' => true,
             'statamic.static_caching.strategy' => 'full',
             'statamic.static_caching.strategies.full.path' => $this->staticCachePath,
         ]);
@@ -34,7 +35,7 @@ final class StaticCacheContentSecurityPolicyTest extends TestCase
         parent::tearDown();
     }
 
-    public function testFullMeasureCacheMissesAndHitsUseTheResponseCspNonce(): void
+    public function test_full_measure_cache_misses_and_hits_use_the_response_csp_nonce(): void
     {
         $cacheMiss = $this->get('/stagebank');
 

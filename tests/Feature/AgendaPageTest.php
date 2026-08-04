@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use DOMDocument;
-use DOMElement;
-use DOMXPath;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
@@ -19,47 +16,36 @@ final class AgendaPageTest extends TestCase
         parent::tearDown();
     }
 
-    public function testAgendaSeparatesUpcomingAndPastEventsInChronologicalOrder(): void
+    public function test_agenda_separates_upcoming_and_past_events_in_chronological_order(): void
     {
         Carbon::setTestNow('2026-07-20 12:00:00');
 
-        $response = $this->get('/agenda');
+        $response = $this->withHeaders($this->inertiaHeaders())->get('/agenda');
 
         $response->assertOk();
+        $response->assertHeader('X-Inertia', 'true');
+        $response->assertJsonPath('component', 'Editorial/EventsIndex');
 
-        $document = new DOMDocument();
-        $previous = libxml_use_internal_errors(true);
-        $document->loadHTML($response->getContent());
-        libxml_clear_errors();
-        libxml_use_internal_errors($previous);
+        $upcomingEventTitles = array_column($response->json('props.editorial.upcoming'), 'title');
+        $pastEventTitles = array_column($response->json('props.editorial.past'), 'title');
 
-        $xpath = new DOMXPath($document);
-
-        $this->assertSame(
-            ['Laravel Hackathon 2026', 'CxO diner 2026'],
-            $this->eventTitles($xpath, '//section[@aria-label="Aankomende evenementen"]'),
-        );
-
-        $pastEventTitles = $this->eventTitles($xpath, '//section[@aria-labelledby="past-events-heading"]');
-
+        $this->assertSame(['Laravel Hackathon 2026', 'CxO diner 2026'], $upcomingEventTitles);
         $this->assertSame(
             ['LaraFest & LarAwards 2026', 'Dutch Laravel Foundation Meetup 2026 @ DIJ!', "CxO Diner '25"],
             array_slice($pastEventTitles, 0, 3),
         );
-        $this->assertSame('Laravel Hackathon', $pastEventTitles[array_key_last($pastEventTitles)]);
+        $this->assertCount(10, $pastEventTitles);
+        $response->assertJsonPath('props.editorial.pagination.currentPage', 1);
+        $response->assertJsonPath('props.editorial.pagination.hasMorePages', true);
     }
 
-    /** @return array<int, string> */
-    private function eventTitles(DOMXPath $xpath, string $sectionQuery): array
+    /** @return array<string, string> */
+    private function inertiaHeaders(): array
     {
-        $nodes = $xpath->query("{$sectionQuery}//h2[contains(concat(' ', normalize-space(@class), ' '), ' editorial-entry__title ')]/a");
-        $titles = [];
-
-        foreach ($nodes as $node) {
-            $this->assertInstanceOf(DOMElement::class, $node);
-            $titles[] = trim($node->textContent);
-        }
-
-        return $titles;
+        return [
+            'Accept' => 'application/json',
+            'X-Inertia' => 'true',
+            'X-Inertia-Version' => hash_file('xxh128', public_path('build/manifest.json')),
+        ];
     }
 }

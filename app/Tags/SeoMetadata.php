@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace App\Tags;
 
 use App\Services\Seo\SeoMetadata as SeoMetadataService;
-use Statamic\Contracts\Entries\Entry;
+use Statamic\Entries\Entry;
 use Statamic\Facades\Entry as EntryRepository;
 use Statamic\Tags\Tags;
 
 final class SeoMetadata extends Tags
 {
+    /** @var string */
     protected static $handle = 'seo_metadata';
 
     public function title(): string
@@ -33,6 +34,11 @@ final class SeoMetadata extends Tags
         return $this->service()->openGraphType($this->entry());
     }
 
+    public function socialImageUrl(): string
+    {
+        return $this->service()->socialImageUrl($this->entry());
+    }
+
     public function jsonLd(): string
     {
         return $this->service()->jsonLd($this->entry());
@@ -48,7 +54,9 @@ final class SeoMetadata extends Tags
         $id = $this->context->value('id');
 
         if (is_string($id) && $id !== '') {
-            return EntryRepository::find($id);
+            $entry = EntryRepository::find($id);
+
+            return $entry instanceof Entry ? $entry : null;
         }
 
         return $this->service()->currentEntry();

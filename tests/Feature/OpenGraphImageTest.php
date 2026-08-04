@@ -10,26 +10,17 @@ use Tests\TestCase;
 
 class OpenGraphImageTest extends TestCase
 {
-    public function testPagesWithoutAFeaturedImageUseTheDefaultOpenGraphImage(): void
+    public function test_pages_without_a_featured_image_use_the_default_open_graph_image(): void
     {
         $response = $this->get('/');
 
         $response->assertOk();
-        $this->assertStringContainsString(
-            '<meta property="og:image" content="' . config('app.url') . '/og-image.jpg?v=4">',
-            $response->getContent(),
-        );
-        $this->assertStringContainsString(
-            '<meta name="twitter:card" content="summary_large_image">',
-            $response->getContent(),
-        );
-        $this->assertStringContainsString(
-            '<meta name="twitter:image" content="' . config('app.url') . '/og-image.jpg?v=4">',
-            $response->getContent(),
-        );
+        $this->assertMetaContent($response->getContent(), 'property', 'og:image', config('app.url').'/og-image.jpg?v=4');
+        $this->assertMetaContent($response->getContent(), 'name', 'twitter:card', 'summary_large_image');
+        $this->assertMetaContent($response->getContent(), 'name', 'twitter:image', config('app.url').'/og-image.jpg?v=4');
     }
 
-    public function testDefaultOpenGraphImageIsAJpegLargeEnoughForSocialCards(): void
+    public function test_default_open_graph_image_is_a_jpeg_large_enough_for_social_cards(): void
     {
         [$width, $height, $type] = getimagesize(public_path('og-image.jpg'));
 
@@ -39,7 +30,7 @@ class OpenGraphImageTest extends TestCase
         $this->assertLessThan(5 * 1024 * 1024, filesize(public_path('og-image.jpg')));
     }
 
-    public function testDefaultOpenGraphImageUsesBaselineJpegEncoding(): void
+    public function test_default_open_graph_image_uses_baseline_jpeg_encoding(): void
     {
         $image = file_get_contents(public_path('og-image.jpg'));
 
@@ -47,7 +38,7 @@ class OpenGraphImageTest extends TestCase
         $this->assertFalse(str_contains($image, "\xFF\xC2"));
     }
 
-    public function testKnowledgeArticlesUseTheirFeaturedImageAsTheOpenGraphImage(): void
+    public function test_knowledge_articles_use_their_featured_image_as_the_open_graph_image(): void
     {
         $entry = $this->firstArticleWithFeaturedImage('knowledge');
 
@@ -58,17 +49,13 @@ class OpenGraphImageTest extends TestCase
         $response = $this->get($entry->url());
 
         $response->assertOk();
-        $this->assertStringContainsString(
-            '<meta property="og:image" content="' . config('app.url') . $entry->augmentedValue('featured_image')->value()->url() . '">',
-            $response->getContent(),
-        );
-        $this->assertStringContainsString(
-            '<meta name="twitter:image" content="' . config('app.url') . $entry->augmentedValue('featured_image')->value()->url() . '">',
-            $response->getContent(),
-        );
+        $image = config('app.url').$entry->augmentedValue('featured_image')->value()->url();
+
+        $this->assertMetaContent($response->getContent(), 'property', 'og:image', $image);
+        $this->assertMetaContent($response->getContent(), 'name', 'twitter:image', $image);
     }
 
-    public function testNewsArticlesUseTheirFeaturedImageAsTheOpenGraphImage(): void
+    public function test_news_articles_use_their_featured_image_as_the_open_graph_image(): void
     {
         $entry = $this->firstArticleWithFeaturedImage('insights');
 
@@ -79,17 +66,13 @@ class OpenGraphImageTest extends TestCase
         $response = $this->get($entry->url());
 
         $response->assertOk();
-        $this->assertStringContainsString(
-            '<meta property="og:image" content="' . config('app.url') . $entry->augmentedValue('featured_image')->value()->url() . '">',
-            $response->getContent(),
-        );
-        $this->assertStringContainsString(
-            '<meta name="twitter:image" content="' . config('app.url') . $entry->augmentedValue('featured_image')->value()->url() . '">',
-            $response->getContent(),
-        );
+        $image = config('app.url').$entry->augmentedValue('featured_image')->value()->url();
+
+        $this->assertMetaContent($response->getContent(), 'property', 'og:image', $image);
+        $this->assertMetaContent($response->getContent(), 'name', 'twitter:image', $image);
     }
 
-    public function testPodcastEntriesUseTheirThumbnailAsTheSocialImage(): void
+    public function test_podcast_entries_use_their_thumbnail_as_the_social_image(): void
     {
         $entry = $this->firstPodcastWithThumbnail();
 
@@ -101,14 +84,8 @@ class OpenGraphImageTest extends TestCase
         $thumbnailUrl = $entry->get('thumbnail_url');
 
         $response->assertOk();
-        $this->assertStringContainsString(
-            '<meta property="og:image" content="' . $thumbnailUrl . '">',
-            $response->getContent(),
-        );
-        $this->assertStringContainsString(
-            '<meta name="twitter:image" content="' . $thumbnailUrl . '">',
-            $response->getContent(),
-        );
+        $this->assertMetaContent($response->getContent(), 'property', 'og:image', $thumbnailUrl);
+        $this->assertMetaContent($response->getContent(), 'name', 'twitter:image', $thumbnailUrl);
     }
 
     private function firstArticleWithFeaturedImage(string $collection): ?Entry
@@ -127,5 +104,17 @@ class OpenGraphImageTest extends TestCase
             ->where('published', true)
             ->get()
             ->first(fn (Entry $entry): bool => filled($entry->get('thumbnail_url')));
+    }
+
+    private function assertMetaContent(
+        string $html,
+        string $attribute,
+        string $name,
+        string $content,
+    ): void {
+        $this->assertMatchesRegularExpression(
+            '/<meta\s+'.$attribute.'="'.preg_quote($name, '/').'"\s+content="'.preg_quote($content, '/').'"[^>]*>/',
+            $html,
+        );
     }
 }

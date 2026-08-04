@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class KnowledgeAuthorsTest extends TestCase
 {
-    public function testAuthorsCollectionIsCmsOnly(): void
+    public function test_authors_collection_is_cms_only(): void
     {
         $collection = $this->parseYaml(base_path('content/collections/authors.yaml'));
 
@@ -18,7 +18,7 @@ class KnowledgeAuthorsTest extends TestCase
         $this->assertArrayNotHasKey('template', $collection);
     }
 
-    public function testKnowledgeBlueprintUsesReusableAuthors(): void
+    public function test_knowledge_blueprint_uses_reusable_authors(): void
     {
         $authorBlueprint = $this->parseYaml(base_path('resources/blueprints/collections/authors/author.yaml'));
         $knowledgeBlueprint = $this->parseYaml(base_path('resources/blueprints/collections/knowledge/knowledge.yaml'));
@@ -39,7 +39,7 @@ class KnowledgeAuthorsTest extends TestCase
         }
     }
 
-    public function testBobKosseIsMigratedToTheAuthorsCollection(): void
+    public function test_bob_kosse_is_migrated_to_the_authors_collection(): void
     {
         $author = $this->parseFrontMatter(base_path('content/collections/authors/bob-kosse.md'));
         $article = $this->parseFrontMatter(base_path('content/collections/knowledge/2026-07-01-2200.het-belang-van-toegankelijke-websites.md'));
@@ -57,31 +57,38 @@ class KnowledgeAuthorsTest extends TestCase
         }
     }
 
-    public function testKnowledgeArticleRendersItsAssignedAuthor(): void
+    public function test_knowledge_article_renders_its_assigned_author(): void
     {
-        $response = $this->get('/kennis/het-belang-van-toegankelijke-websites');
+        $response = $this->withHeaders($this->inertiaHeaders())
+            ->get('/kennis/het-belang-van-toegankelijke-websites');
 
         $response->assertOk();
-        $response->assertSee('data-knowledge-authors', false);
-        $response->assertSee('Over de auteur', false);
-        $response->assertSee('Bob Kosse', false);
-        $response->assertSee('Onafhankelijk Laravel-ontwikkelaar', false);
-        $response->assertSee('Website van Bob Kosse', false);
-        $response->assertSee('href="https://www.ikverstajeniet.nl"', false);
-        $response->assertSee('LinkedIn van Bob Kosse', false);
-        $response->assertSee('href="https://www.linkedin.com/in/bobkosse/"', false);
+        $response->assertJsonCount(1, 'props.editorial.authors');
+        $response->assertJsonPath('props.editorial.authors.0.name', 'Bob Kosse');
+        $response->assertJsonPath(
+            'props.editorial.authors.0.role',
+            'Onafhankelijk Laravel-ontwikkelaar',
+        );
+        $response->assertJsonPath(
+            'props.editorial.authors.0.websiteUrl',
+            'https://www.ikverstajeniet.nl',
+        );
+        $response->assertJsonPath(
+            'props.editorial.authors.0.linkedinUrl',
+            'https://www.linkedin.com/in/bobkosse/',
+        );
     }
 
-    public function testKnowledgeArticleWithoutAuthorsRendersNoAuthorUi(): void
+    public function test_knowledge_article_without_authors_renders_no_author_ui(): void
     {
-        $response = $this->get('/kennis/ai-gedreven-zoekfunctionaliteit-dankzij-vragenai');
+        $response = $this->withHeaders($this->inertiaHeaders())
+            ->get('/kennis/ai-gedreven-zoekfunctionaliteit-dankzij-vragenai');
 
         $response->assertOk();
-        $response->assertDontSee('data-knowledge-authors', false);
-        $response->assertDontSee('editorial-article__author-summary', false);
+        $response->assertJsonCount(0, 'props.editorial.authors');
     }
 
-    public function testInlineKnowledgeCreditsAreMigratedToReusableAuthors(): void
+    public function test_inline_knowledge_credits_are_migrated_to_reusable_authors(): void
     {
         $authors = [
             'bob-van-biezen.md' => [
@@ -101,7 +108,7 @@ class KnowledgeAuthorsTest extends TestCase
                 'id' => 'dee61b68-cabe-4246-b927-2cdcddacb8ba',
                 'title' => 'Nick Retel',
                 'linkedin_url' => 'https://www.linkedin.com/in/nckrtl/',
-                'website_url' => 'https://ohdear.app/',
+                'website_url' => 'https://nckrtl.com',
                 'photo' => 'nick-retel.jpg',
             ],
             'timo-feenstra.md' => [
@@ -185,30 +192,34 @@ class KnowledgeAuthorsTest extends TestCase
         }
     }
 
-    public function testKnowledgeArticleRendersMultipleAssignedAuthors(): void
+    public function test_knowledge_article_renders_multiple_assigned_authors(): void
     {
-        $response = $this->get('/kennis/hostingmigraties-planning-communicatie-en-organisatie');
+        $response = $this->withHeaders($this->inertiaHeaders())
+            ->get('/kennis/hostingmigraties-planning-communicatie-en-organisatie');
 
         $response->assertOk();
-        $response->assertSee('Over de auteurs', false);
-        $response->assertSee('editorial-author__list--multiple', false);
-        $response->assertSeeInOrder(['Justin aan de Stegge', 'Reinier Sierag'], false);
+        $response->assertJsonCount(2, 'props.editorial.authors');
+        $response->assertJsonPath(
+            'props.editorial.authors.0.name',
+            'Justin aan de Stegge',
+        );
+        $response->assertJsonPath('props.editorial.authors.1.name', 'Reinier Sierag');
     }
 
-    public function testKnowledgeAuthorLinksUseAccessibleIcons(): void
+    public function test_knowledge_author_links_use_accessible_icons(): void
     {
-        $response = $this->get('/kennis/viteplus-als-enige-frontend-tool-in-je-laravel-project');
+        $response = $this->withHeaders($this->inertiaHeaders())
+            ->get('/kennis/viteplus-als-enige-frontend-tool-in-je-laravel-project');
 
         $response->assertOk();
-        $response->assertSee('aria-label="LinkedIn van Nick Retel"', false);
-        $response->assertSee('aria-label="Website van Nick Retel"', false);
-        $response->assertSee('editorial-author__icon', false);
-        $response->assertSee('src="/assets/redesign/socials/linkedin.svg"', false);
-        $response->assertDontSee('dlf-btn-face--red">LinkedIn van Nick Retel', false);
-        $response->assertDontSee('dlf-btn-face--red">Website van Nick Retel', false);
+        $response->assertJsonPath(
+            'props.editorial.authors.0.linkedinUrl',
+            'https://www.linkedin.com/in/nckrtl/',
+        );
+        $response->assertJsonPath('props.editorial.authors.0.websiteUrl', 'https://nckrtl.com');
     }
 
-    public function testKnowledgeAuthorPortraitsAreBorderless(): void
+    public function test_knowledge_author_portraits_are_borderless(): void
     {
         $stylesheet = file_get_contents(base_path('resources/css/redesign-editorial.css'));
 
@@ -223,7 +234,7 @@ class KnowledgeAuthorsTest extends TestCase
         );
     }
 
-    public function testPublishedKnowledgeArticlesDoNotUseBreakTagsForSpacing(): void
+    public function test_published_knowledge_articles_do_not_use_break_tags_for_spacing(): void
     {
         $paths = glob(base_path('content/collections/knowledge/*.md'));
         $this->assertIsArray($paths);
@@ -236,22 +247,19 @@ class KnowledgeAuthorsTest extends TestCase
         }
     }
 
-    public function testHostingMigrationListsRenderMarkersWithoutBreakTags(): void
+    public function test_hosting_migration_lists_render_markers_without_break_tags(): void
     {
-        $response = $this->get('/kennis/hostingmigraties-planning-communicatie-en-organisatie');
+        $response = $this->withHeaders($this->inertiaHeaders())
+            ->get('/kennis/hostingmigraties-planning-communicatie-en-organisatie');
         $stylesheet = file_get_contents(base_path('resources/css/redesign-editorial.css'));
 
         $response->assertOk();
-        preg_match(
-            '/<article\b[^>]*class="[^"]*\beditorial-article__prose\b[^"]*"[^>]*>(.*?)<\/article>/s',
-            $response->getContent(),
-            $article,
-        );
+        $content = $response->json('props.editorial.contentHtml');
 
-        $this->assertCount(2, $article);
+        $this->assertIsString($content);
         $this->assertDoesNotMatchRegularExpression(
             '/<li\b[^>]*>(?:(?!<\/li>).)*<br\s*\/?>/s',
-            $article[1],
+            $content,
         );
         $this->assertIsString($stylesheet);
         $this->assertMatchesRegularExpression(
@@ -260,7 +268,7 @@ class KnowledgeAuthorsTest extends TestCase
         );
     }
 
-    public function testKnowledgeTemplateUsesTheReusableAuthorsRelationship(): void
+    public function test_knowledge_template_uses_the_reusable_authors_relationship(): void
     {
         $template = file_get_contents(base_path('resources/views/templates/knowledge/show.antlers.html'));
         $partial = file_get_contents(base_path('resources/views/partials/editorial/_knowledge-authors.antlers.html'));
@@ -304,8 +312,18 @@ class KnowledgeAuthorsTest extends TestCase
         return $matches[1];
     }
 
+    /** @return array<string, string> */
+    private function inertiaHeaders(): array
+    {
+        return [
+            'Accept' => 'application/json',
+            'X-Inertia' => 'true',
+            'X-Inertia-Version' => hash_file('xxh128', public_path('build/manifest.json')),
+        ];
+    }
+
     /**
-     * @param array<string, mixed> $node
+     * @param  array<string, mixed>  $node
      * @return array<string, array<string, mixed>>
      */
     private function fieldsByHandle(array $node): array

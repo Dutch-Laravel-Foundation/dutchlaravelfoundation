@@ -6,9 +6,11 @@ namespace App\Services\Seo;
 
 use Illuminate\Support\Str;
 use Statamic\Contracts\Assets\Asset;
-use Statamic\Contracts\Entries\Entry;
+use Statamic\Entries\Entry;
 use Statamic\Facades\Entry as EntryRepository;
 use Statamic\Facades\GlobalSet;
+use Statamic\Facades\Site;
+use Statamic\Structures\Page;
 
 final class SeoMetadata
 {
@@ -67,6 +69,14 @@ final class SeoMetadata
         );
     }
 
+    public function keywords(?Entry $entry): ?string
+    {
+        return $this->stringValue($entry?->get('meta_keywords'))
+            ?? $this->stringValue(
+                GlobalSet::findByHandle('seo')?->inCurrentSite()?->get('meta_keywords'),
+            );
+    }
+
     public function canonicalUrl(?Entry $entry): string
     {
         $baseUrl = rtrim((string) config('app.url'), '/');
@@ -76,7 +86,7 @@ final class SeoMetadata
             return "{$baseUrl}/";
         }
 
-        return $baseUrl . '/' . ltrim($uri, '/');
+        return $baseUrl.'/'.ltrim($uri, '/');
     }
 
     public function openGraphType(?Entry $entry): string
@@ -86,6 +96,30 @@ final class SeoMetadata
             ['cases', 'insights', 'knowledge', 'podcasts'],
             true,
         ) ? 'article' : 'website';
+    }
+
+    public function socialImageUrl(?Entry $entry): string
+    {
+        if (
+            $entry !== null
+            && in_array($entry->collection()?->handle(), ['insights', 'knowledge', 'podcasts'], true)
+            && ($imageUrl = $this->imageUrl($entry)) !== null
+        ) {
+            return $imageUrl;
+        }
+
+        $variables = GlobalSet::findByHandle('opengraph')?->inCurrentSite();
+        $image = $variables?->augmentedValue('opengraph_image')->value();
+
+        if ($image instanceof Asset) {
+            return $this->absoluteUrl($image->url());
+        }
+
+        if (($imageUrl = $this->stringValue($image)) !== null) {
+            return $this->absoluteUrl($imageUrl);
+        }
+
+        return $this->absoluteUrl('/og-image.jpg?v=4');
     }
 
     public function jsonLd(?Entry $entry): string
@@ -104,7 +138,16 @@ final class SeoMetadata
 
     public function currentEntry(): ?Entry
     {
-        return EntryRepository::findByUri(request()->getPathInfo());
+        $entry = EntryRepository::findByUri(
+            request()->getPathInfo(),
+            Site::current()->handle(),
+        );
+
+        if ($entry instanceof Page) {
+            $entry = $entry->entry();
+        }
+
+        return $entry instanceof Entry ? $entry : null;
     }
 
     /**
@@ -112,7 +155,7 @@ final class SeoMetadata
      */
     private function organizationSchema(): array
     {
-        $rootUrl = rtrim((string) config('app.url'), '/') . '/';
+        $rootUrl = rtrim((string) config('app.url'), '/').'/';
 
         return [
             '@type' => 'Organization',
@@ -121,7 +164,7 @@ final class SeoMetadata
             'url' => $rootUrl,
             'logo' => [
                 '@type' => 'ImageObject',
-                'url' => $rootUrl . 'apple-touch-icon.png',
+                'url' => $rootUrl.'apple-touch-icon.png',
             ],
             'email' => $this->organizationValue('email', 'info@dutchlaravelfoundation.nl'),
             'telephone' => $this->organizationValue('phone', '+31 (0)88 73 33 319'),
@@ -161,7 +204,7 @@ final class SeoMetadata
             'name' => $this->stringValue($entry->get('title')),
             'description' => $this->description($entry),
             'publisher' => [
-                '@id' => rtrim((string) config('app.url'), '/') . '/#organization',
+                '@id' => rtrim((string) config('app.url'), '/').'/#organization',
             ],
         ];
 
@@ -193,14 +236,21 @@ final class SeoMetadata
      */
     private function authors(Entry $entry): array
     {
-        $authors = collect($entry->get('authors'))
-            ->filter()
-            ->map(function (mixed $authorId): ?array {
+        $authorIds = $entry->get('authors');
+        $authors = [];
+
+        if (is_array($authorIds)) {
+            foreach ($authorIds as $authorId) {
                 $author = is_string($authorId) ? EntryRepository::find($authorId) : null;
-                $name = $this->stringValue($author?->get('title'));
+
+                if (! $author instanceof Entry) {
+                    continue;
+                }
+
+                $name = $this->stringValue($author->get('title'));
 
                 if ($name === null) {
-                    return null;
+                    continue;
                 }
 
                 $person = [
@@ -208,15 +258,13 @@ final class SeoMetadata
                     'name' => $name,
                 ];
 
-                if ($url = $this->stringValue($author?->get('website_url'))) {
+                if ($url = $this->stringValue($author->get('website_url'))) {
                     $person['url'] = $url;
                 }
 
-                return $person;
-            })
-            ->filter()
-            ->values()
-            ->all();
+                $authors[] = $person;
+            }
+        }
 
         if ($authors !== []) {
             return $authors;
@@ -231,7 +279,7 @@ final class SeoMetadata
 
         return [[
             '@type' => 'Organization',
-            '@id' => rtrim((string) config('app.url'), '/') . '/#organization',
+            '@id' => rtrim((string) config('app.url'), '/').'/#organization',
             'name' => $this->organizationValue('title', 'Dutch Laravel Foundation'),
         ]];
     }
@@ -296,7 +344,7 @@ final class SeoMetadata
             return $url;
         }
 
-        return rtrim((string) config('app.url'), '/') . '/' . ltrim($url, '/');
+        return rtrim((string) config('app.url'), '/').'/'.ltrim($url, '/');
     }
 
     private function stringValue(mixed $value): ?string

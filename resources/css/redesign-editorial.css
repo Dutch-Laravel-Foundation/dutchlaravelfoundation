@@ -80,6 +80,7 @@
 .editorial-filters {
     --editorial-filter-offset: 1.5rem;
 
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     gap: 0.625rem 1.75rem;
@@ -102,7 +103,7 @@
     color: var(--editorial-red);
 }
 
-.editorial-filters a[aria-current="page"]::after {
+.editorial-filters:not([data-indicator-ready="true"]) a[aria-current="page"]::after {
     position: absolute;
     right: 0;
     bottom: calc(var(--editorial-filter-offset) * -1);
@@ -110,6 +111,45 @@
     height: 2px;
     background: currentColor;
     content: "";
+}
+
+.editorial-filters__indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: var(--editorial-indicator-width, 0);
+    height: 2px;
+    background: var(--editorial-red);
+    opacity: 0;
+    pointer-events: none;
+    transform: translate3d(var(--editorial-indicator-x, 0), 0, 0);
+    view-transition-name: editorial-filter-indicator;
+}
+
+.editorial-filters[data-indicator-animate="true"] .editorial-filters__indicator {
+    transition:
+        width 220ms cubic-bezier(0.4, 0, 0.2, 1),
+        transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.editorial-filters[data-indicator-ready="true"] .editorial-filters__indicator {
+    opacity: 1;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+}
+
+::view-transition-group(editorial-filter-indicator) {
+    animation-duration: 220ms;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+::view-transition-old(editorial-filter-indicator),
+::view-transition-new(editorial-filter-indicator) {
+    animation: none;
+    mix-blend-mode: normal;
 }
 
 .editorial-feed {
@@ -1347,6 +1387,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(editorial-filter-indicator) {
+        animation-duration: 0.01ms;
+    }
+
+    .editorial-filters__indicator,
     .editorial-entry__image,
     .editorial-text-link span,
     .editorial-pagination a span {

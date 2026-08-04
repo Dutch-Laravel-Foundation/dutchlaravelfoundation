@@ -4,40 +4,48 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use DOMDocument;
-use DOMNodeList;
-use DOMXPath;
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 final class MemberDetailPageTest extends TestCase
 {
-    public function testMemberWithInternshipsRendersItsDetailPage(): void
+    public function test_member_with_internships_renders_its_detail_page(): void
     {
-        $this->get('/leden/besite')
+        $this->inertia('/leden/besite')
             ->assertOk()
-            ->assertSee('Beschikbare stages bij Besite', false)
-            ->assertSee('logo-besite.svg', false);
+            ->assertHeader('X-Inertia', 'true')
+            ->assertJsonPath('component', 'Community/MembersShow')
+            ->assertJsonPath('props.community.title', 'Besite')
+            ->assertJsonPath('props.community.logo.url', '/assets/uploads/members/logo-besite.svg')
+            ->assertJsonPath('props.community.internships.0.title', 'Besite');
     }
 
-    public function testMemberDetailMarksMemberNavigationItemActive(): void
+    public function test_member_detail_marks_member_navigation_item_active(): void
     {
-        $response = $this->get('/leden/pionect');
+        $response = $this->inertia('/leden/pionect');
 
         $response->assertOk();
 
-        $document = new DOMDocument();
-        $previous = libxml_use_internal_errors(true);
-        $document->loadHTML($response->getContent());
-        libxml_clear_errors();
-        libxml_use_internal_errors($previous);
+        $navigation = $response->json('props.site.navigation.main');
 
-        $xpath = new DOMXPath($document);
-        $desktopLink = $xpath->query('//nav[contains(concat(" ", normalize-space(@class), " "), " dlf-desktop-navigation ")]//a[@href="/leden" and contains(concat(" ", normalize-space(@class), " "), " dlf-nav-link--active ")]');
-        $mobileLink = $xpath->query('//nav[contains(concat(" ", normalize-space(@class), " "), " dlf-mobile-navigation ")]//a[@href="/leden" and contains(concat(" ", normalize-space(@class), " "), " dlf-mobile-nav-link--active ")]');
+        $this->assertIsArray($navigation);
 
-        $this->assertInstanceOf(DOMNodeList::class, $desktopLink);
-        $this->assertInstanceOf(DOMNodeList::class, $mobileLink);
-        $this->assertCount(1, $desktopLink);
-        $this->assertCount(1, $mobileLink);
+        $members = array_find(
+            $navigation,
+            static fn (mixed $item): bool => is_array($item) && ($item['url'] ?? null) === '/leden',
+        );
+
+        $this->assertIsArray($members);
+        $this->assertFalse($members['isCurrent']);
+        $this->assertTrue($members['isAncestor']);
+    }
+
+    private function inertia(string $uri): TestResponse
+    {
+        return $this->withHeaders([
+            'Accept' => 'application/json',
+            'X-Inertia' => 'true',
+            'X-Inertia-Version' => hash_file('xxh128', public_path('build/manifest.json')),
+        ])->get($uri);
     }
 }

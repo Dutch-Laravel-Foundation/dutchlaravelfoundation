@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class PodcastsCollectionTest extends TestCase
 {
-    public function testPodcastsCollectionDefinesPluralHandleAndSingularPublicRoutes(): void
+    public function test_podcasts_collection_defines_plural_handle_and_singular_public_routes(): void
     {
         $collection = $this->parseYaml(base_path('content/collections/podcasts.yaml'));
 
@@ -23,7 +23,7 @@ class PodcastsCollectionTest extends TestCase
         $this->assertSame('desc', $collection['sort_dir'] ?? null);
     }
 
-    public function testPodcastBlueprintRequiresPublishingFields(): void
+    public function test_podcast_blueprint_requires_publishing_fields(): void
     {
         $blueprint = $this->parseYaml(base_path('resources/blueprints/collections/podcasts/podcasts.yaml'));
         $fields = $this->fieldsByHandle($blueprint);
@@ -50,16 +50,29 @@ class PodcastsCollectionTest extends TestCase
         $this->assertTrue($fields['published_at']['time_enabled'] ?? false);
     }
 
-    public function testPodcastsIndexPageRenders(): void
+    public function test_podcasts_index_page_renders(): void
     {
-        $response = $this->get('/podcast');
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'X-Inertia' => 'true',
+            'X-Inertia-Version' => hash_file('xxh128', public_path('build/manifest.json')),
+        ])->get('/podcast');
 
         $response->assertOk();
-        $response->assertSee('Podcast', false);
-        $response->assertSee('Talks, interviews en praktijkverhalen over Laravel, softwareontwikkeling en de mensen achter de Nederlandse community.', false);
+        $response->assertJsonPath('component', 'Editorial/PodcastsIndex');
+        $response->assertJsonPath('props.page.title', 'Podcast');
+        $response->assertJsonPath(
+            'props.page.seo.description',
+            'Luister naar gesprekken met developers, ondernemers en communityleden over Laravel, technologie, loopbanen en de Nederlandse community.',
+        );
+        $response->assertJsonPath(
+            'props.page.footerCta.id',
+            'ee5d33de-9a24-4860-92dd-3503740b62af',
+        );
+        $response->assertJsonCount(10, 'props.editorial.items');
     }
 
-    public function testPodcastOverviewPageAndNavigationUseSingularLabel(): void
+    public function test_podcast_overview_page_and_navigation_use_singular_label(): void
     {
         $page = $this->parseFrontMatter(base_path('content/collections/pages/podcast.md'));
         $navigation = $this->parseYaml(base_path('content/trees/navigation/main.yaml'));
@@ -77,7 +90,7 @@ class PodcastsCollectionTest extends TestCase
         );
     }
 
-    public function testPodcastTemplatesExposeVideoDescriptionAndTranscript(): void
+    public function test_podcast_templates_expose_video_description_and_transcript(): void
     {
         $showTemplate = file_get_contents(resource_path('views/templates/podcasts/show.antlers.html'));
         $indexTemplate = file_get_contents(resource_path('views/templates/podcasts/index.antlers.html'));
@@ -100,7 +113,7 @@ class PodcastsCollectionTest extends TestCase
         $this->assertStringContainsString('sort="published_at:desc"', $indexTemplate);
     }
 
-    public function testPodcastEntriesUseTheHomepageCallToActionBanner(): void
+    public function test_podcast_entries_use_the_homepage_call_to_action_banner(): void
     {
         $paths = glob(base_path('content/collections/podcasts/*.md'));
 
@@ -115,7 +128,7 @@ class PodcastsCollectionTest extends TestCase
         }
     }
 
-    public function testPodcastEntriesCanBeServedAsMarkdown(): void
+    public function test_podcast_entries_can_be_served_as_markdown(): void
     {
         $middleware = file_get_contents(app_path('Http/Middleware/ServeMarkdown.php'));
         $llmsController = file_get_contents(app_path('Http/Controllers/Agents/LlmsController.php'));
@@ -130,7 +143,7 @@ class PodcastsCollectionTest extends TestCase
         $this->assertStringContainsString('## Podcasts', $llmsIndex);
     }
 
-    public function testImportedPodcastEntriesContainVideoUrlsAndTranscripts(): void
+    public function test_imported_podcast_entries_contain_video_urls_and_transcripts(): void
     {
         $paths = glob(base_path('content/collections/podcasts/*.md'));
 
@@ -169,7 +182,7 @@ class PodcastsCollectionTest extends TestCase
         }
     }
 
-    public function testPodcastEntriesUsePublicationTimesForSameDayOrdering(): void
+    public function test_podcast_entries_use_publication_times_for_same_day_ordering(): void
     {
         $paths = glob(base_path('content/collections/podcasts/*.md'));
 
@@ -199,7 +212,7 @@ class PodcastsCollectionTest extends TestCase
         ], array_column($marchSecondEntries, 'file'));
     }
 
-    public function testPodcastSummariesAndDescriptionsUseDutchCopy(): void
+    public function test_podcast_summaries_and_descriptions_use_dutch_copy(): void
     {
         $paths = glob(base_path('content/collections/podcasts/*.md'));
         $englishImportPhrases = [
@@ -245,9 +258,10 @@ class PodcastsCollectionTest extends TestCase
         );
     }
 
-    public function testPodcastMarkdownIncludesVideoUrlAndTranscript(): void
+    public function test_podcast_markdown_includes_video_url_and_transcript(): void
     {
-        $entry = new class implements Entry {
+        $entry = new class implements Entry
+        {
             /** @var array<string, string|null> */
             private array $data = [
                 'title' => 'Under the Hood of Shift',
@@ -315,7 +329,7 @@ class PodcastsCollectionTest extends TestCase
     }
 
     /**
-     * @param array<string, mixed> $node
+     * @param  array<string, mixed>  $node
      * @return array<string, array<string, mixed>>
      */
     private function fieldsByHandle(array $node): array

@@ -16,21 +16,7 @@
     <meta property="og:type" content="{{ seo_metadata:open_graph_type }}">
     <meta property="og:url" content="{{ seo_metadata:canonical }}">
     <meta property="og:description" content="{{ seo_metadata:description }}">
-    {{ opengraph_image = opengraph:opengraph_image ?? "/og-image.jpg?v=4" }}
-    {{ if collection == "knowledge" || collection == "insights" }}
-        {{ if featured_image }}
-            {{ opengraph_image = featured_image:url }}
-        {{ /if }}
-    {{ elseif collection == "podcasts" }}
-        {{ if thumbnail_url }}
-            {{ opengraph_image = thumbnail_url }}
-        {{ /if }}
-    {{ /if }}
-    {{ if opengraph_image | contains('://') }}
-        {{ social_image_url = opengraph_image }}
-    {{ else }}
-        {{ social_image_url = config:app:url + opengraph_image }}
-    {{ /if }}
+    {{ social_image_url = seo_metadata:social_image_url }}
     <meta property="og:image" content="{{ social_image_url }}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ seo_metadata:title }}">

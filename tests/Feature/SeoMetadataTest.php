@@ -13,14 +13,14 @@ use Tests\TestCase;
 
 class SeoMetadataTest extends TestCase
 {
-    public function testHomepageHasCanonicalMetadataAndOrganizationStructuredData(): void
+    public function test_homepage_has_canonical_metadata_and_organization_structured_data(): void
     {
         $response = $this->get('/?campaign=test');
 
         $response->assertOk();
 
         $xpath = $this->xpath($response);
-        $canonicalUrl = rtrim(config('app.url'), '/') . '/';
+        $canonicalUrl = rtrim(config('app.url'), '/').'/';
 
         $this->assertSame($canonicalUrl, $this->attribute($xpath, '//link[@rel="canonical"]', 'href'));
         $this->assertSame($canonicalUrl, $this->attribute($xpath, '//meta[@property="og:url"]', 'content'));
@@ -37,12 +37,12 @@ class SeoMetadataTest extends TestCase
         $organization = $this->graphNode($graph, 'Organization');
 
         $this->assertSame('Dutch Laravel Foundation', $organization['name']);
-        $this->assertSame($canonicalUrl . '#organization', $organization['@id']);
+        $this->assertSame($canonicalUrl.'#organization', $organization['@id']);
         $this->assertSame('info@dutchlaravelfoundation.nl', $organization['email']);
         $this->assertSame('Zoetermeer', $organization['address']['addressLocality']);
     }
 
-    public function testKnowledgeArticleUsesItsIntroductionAndAuthorInStructuredData(): void
+    public function test_knowledge_article_uses_its_introduction_and_author_in_structured_data(): void
     {
         $response = $this->get('/kennis/het-belang-van-toegankelijke-websites');
 
@@ -61,12 +61,12 @@ class SeoMetadataTest extends TestCase
         $this->assertSame('Person', $article['author'][0]['@type']);
         $this->assertNotEmpty($article['author'][0]['name']);
         $this->assertSame(
-            rtrim(config('app.url'), '/') . '/#organization',
+            rtrim(config('app.url'), '/').'/#organization',
             $article['publisher']['@id'],
         );
     }
 
-    public function testNewsPodcastAndCasePagesExposeCollectionSpecificStructuredData(): void
+    public function test_news_podcast_and_case_pages_expose_collection_specific_structured_data(): void
     {
         $pages = [
             '/nieuws/van-der-arend-automatisering-korte-lijnen-laravel-als-vaste-basis' => 'NewsArticle',
@@ -75,12 +75,12 @@ class SeoMetadataTest extends TestCase
         ];
 
         foreach ($pages as $path => $expectedType) {
-            $response = $this->get($path);
+            $response = $this->getWithFreshRequestScope($path);
 
             $response->assertOk();
 
             $xpath = $this->xpath($response);
-            $canonicalUrl = rtrim(config('app.url'), '/') . $path;
+            $canonicalUrl = rtrim(config('app.url'), '/').$path;
 
             $this->assertSame(
                 $canonicalUrl,
@@ -94,7 +94,7 @@ class SeoMetadataTest extends TestCase
         }
     }
 
-    public function testAnExplicitBrandedTitleIsNotSuffixedWithTheSiteNameAgain(): void
+    public function test_an_explicit_branded_title_is_not_suffixed_with_the_site_name_again(): void
     {
         $response = $this->get(
             '/podcast/20-jaar-laravel-carriere-pixel-industries-tot-zig-dennis-koster-dutch-laravel-foundation',
@@ -107,7 +107,7 @@ class SeoMetadataTest extends TestCase
         $this->assertSame(1, substr_count($title, 'Dutch Laravel Foundation'));
     }
 
-    public function testAnExplicitUnbrandedTitleReceivesTheSiteName(): void
+    public function test_an_explicit_unbranded_title_receives_the_site_name(): void
     {
         $response = $this->get('/kennis/razendsnelle-php-tooling-met-mago');
 
@@ -119,36 +119,39 @@ class SeoMetadataTest extends TestCase
         );
     }
 
-    public function testEditorialBodySectionsStartAtH2(): void
+    public function test_editorial_body_sections_start_at_h2(): void
     {
-        $response = $this->get('/nieuws/wij-stellen-voor-kobalt-digital');
+        $response = $this->withHeaders($this->inertiaHeaders())
+            ->get('/nieuws/wij-stellen-voor-kobalt-digital');
 
         $response->assertOk();
 
-        $xpath = $this->xpath($response);
-        $heading = $xpath->query('//article//*[self::h2 or self::h3][1]')->item(0);
+        $blocks = $response->json('props.editorial.content');
 
-        $this->assertInstanceOf(DOMElement::class, $heading);
-        $this->assertSame('h2', $heading->tagName);
-    }
-
-    public function testEventBodySectionsStartAtH2(): void
-    {
-        $response = $this->get('/events/dutch-laravel-foundation-meetup');
-
-        $response->assertOk();
-
-        $xpath = $this->xpath($response);
-        $headings = $xpath->query(
-            '//*[@id="main-content"]//*[self::h1 or self::h2 or self::h3]',
+        $this->assertIsArray($blocks);
+        $this->assertStringStartsWith(
+            '<h2',
+            $this->firstHeadingFromBlocks($blocks),
         );
-
-        $this->assertGreaterThanOrEqual(2, $headings->count());
-        $this->assertSame('h1', $headings->item(0)->nodeName);
-        $this->assertSame('h2', $headings->item(1)->nodeName);
     }
 
-    public function testCoreLandingPagesHaveSpecificDescriptions(): void
+    public function test_event_body_sections_start_at_h2(): void
+    {
+        $response = $this->withHeaders($this->inertiaHeaders())
+            ->get('/events/dutch-laravel-foundation-meetup');
+
+        $response->assertOk();
+
+        $blocks = $response->json('props.editorial.content');
+
+        $this->assertIsArray($blocks);
+        $this->assertStringStartsWith(
+            '<h2',
+            $this->firstHeadingFromBlocks($blocks),
+        );
+    }
+
+    public function test_core_landing_pages_have_specific_descriptions(): void
     {
         $pages = [
             '/wat-is-laravel' => 'Laravel is een populair open-source PHP-framework',
@@ -164,7 +167,7 @@ class SeoMetadataTest extends TestCase
         ];
 
         foreach ($pages as $path => $expectedStart) {
-            $response = $this->get($path);
+            $response = $this->getWithFreshRequestScope($path);
 
             $response->assertOk();
 
@@ -182,7 +185,7 @@ class SeoMetadataTest extends TestCase
         }
     }
 
-    public function testMemberAndInternshipDescriptionsUseTheirOwnContent(): void
+    public function test_member_and_internship_descriptions_use_their_own_content(): void
     {
         $pages = [
             '/leden/goedemiddag' => 'Bij Goedemiddag! draait het niet alleen om techniek.',
@@ -190,7 +193,7 @@ class SeoMetadataTest extends TestCase
         ];
 
         foreach ($pages as $path => $expectedStart) {
-            $response = $this->get($path);
+            $response = $this->getWithFreshRequestScope($path);
 
             $response->assertOk();
 
@@ -205,10 +208,10 @@ class SeoMetadataTest extends TestCase
         }
     }
 
-    public function testMemberAndInternshipPagesHaveDistinctTitles(): void
+    public function test_member_and_internship_pages_have_distinct_titles(): void
     {
-        $memberResponse = $this->get('/leden/qlic');
-        $internshipResponse = $this->get('/stagebank/qlic');
+        $memberResponse = $this->getWithFreshRequestScope('/leden/qlic');
+        $internshipResponse = $this->getWithFreshRequestScope('/stagebank/qlic');
 
         $memberResponse->assertOk();
         $internshipResponse->assertOk();
@@ -223,21 +226,54 @@ class SeoMetadataTest extends TestCase
         );
     }
 
-    public function testSharedFooterCallToActionUsesAnH2Heading(): void
+    public function test_shared_footer_call_to_action_uses_an_h2_heading(): void
     {
         $response = $this->get('/');
 
         $response->assertOk();
 
-        $node = $this->xpath($response)->query('//*[@id="footer-cta-title"]')->item(0);
+        $footerCta = file_get_contents(resource_path('js/components/site/FooterCta.tsx'));
 
-        $this->assertInstanceOf(DOMElement::class, $node);
-        $this->assertSame('h2', $node->tagName);
+        $this->assertNotFalse($footerCta);
+        $this->assertStringContainsString('<h2 id="footer-cta-title">', $footerCta);
+    }
+
+    /** @return array<string, string> */
+    private function inertiaHeaders(): array
+    {
+        return [
+            'Accept' => 'application/json',
+            'X-Inertia' => 'true',
+            'X-Inertia-Version' => hash_file('xxh128', public_path('build/manifest.json')),
+        ];
+    }
+
+    private function getWithFreshRequestScope(string $uri): TestResponse
+    {
+        $this->app->forgetScopedInstances();
+
+        return $this->get($uri);
+    }
+
+    /** @param array<int, mixed> $blocks */
+    private function firstHeadingFromBlocks(array $blocks): string
+    {
+        foreach ($blocks as $block) {
+            if (! is_array($block) || ! is_string($block['html'] ?? null)) {
+                continue;
+            }
+
+            if (preg_match('/<h[1-6]\b[^>]*>/', $block['html'], $matches) === 1) {
+                return $matches[0];
+            }
+        }
+
+        $this->fail('No heading found in the Inertia editorial content DTO.');
     }
 
     private function xpath(TestResponse $response): DOMXPath
     {
-        $document = new DOMDocument();
+        $document = new DOMDocument;
         $previous = libxml_use_internal_errors(true);
         $document->loadHTML($response->getContent());
         libxml_clear_errors();

@@ -4,15 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use DOMDocument;
-use DOMElement;
-use DOMNodeList;
-use DOMXPath;
 use Tests\TestCase;
 
 class PublicPagePerformanceTest extends TestCase
 {
-    public function testStaticPagesUseAnIsolatedCacheStore(): void
+    public function test_static_pages_use_an_isolated_cache_store(): void
     {
         $this->assertSame('file', config('cache.stores.static_cache.driver'));
         $this->assertSame(base_path('cache/static'), config('cache.stores.static_cache.path'));
@@ -20,11 +16,15 @@ class PublicPagePerformanceTest extends TestCase
         $this->assertSame(public_path('static'), config('statamic.static_caching.strategies.full.path'));
     }
 
-    public function testDeploymentWarmsBeforeActivationAndChecksHealthBeforeCleanup(): void
+    public function test_deployment_warms_before_activation_and_checks_health_before_cleanup(): void
     {
         $deployment = file_get_contents(base_path('Envoy.blade.php'));
 
         $this->assertNotFalse($deployment);
+        $this->assertStringContainsString('bun install --frozen-lockfile', $deployment);
+        $this->assertStringContainsString('bun run build', $deployment);
+        $this->assertStringNotContainsString('npm ci', $deployment);
+        $this->assertStringNotContainsString('npm run build', $deployment);
         $this->assertStringContainsString('php please static:clear', $deployment);
         $this->assertStringContainsString('php please static:warm', $deployment);
 
@@ -45,7 +45,7 @@ class PublicPagePerformanceTest extends TestCase
         $this->assertLessThan($cleanup, $healthCheck);
     }
 
-    public function testSharedLayoutKeepsNonCriticalThirdPartiesOffTheCriticalPath(): void
+    public function test_shared_layout_keeps_non_critical_third_parties_off_the_critical_path(): void
     {
         $layout = file_get_contents(resource_path('views/layouts/layout.antlers.html'));
 
@@ -61,7 +61,7 @@ class PublicPagePerformanceTest extends TestCase
         $this->assertStringContainsString('data-environment="{{ environment }}"', $layout);
     }
 
-    public function testMainEntrypointLoadsOptionalEnhancementsConditionally(): void
+    public function test_main_entrypoint_loads_optional_enhancements_conditionally(): void
     {
         $entrypoint = file_get_contents(resource_path('js/site.js'));
 
@@ -84,104 +84,62 @@ class PublicPagePerformanceTest extends TestCase
         $this->assertStringContainsString('import("./components/turnstile")', $entrypoint);
     }
 
-    public function testHomepageServesAResponsiveModernHeroImage(): void
+    public function test_homepage_serves_a_responsive_modern_hero_image(): void
     {
-        $xpath = $this->pageXPath('/');
-        $heroImage = $xpath->query('//figure[contains(@class, "dlf-home-hero__photo")]//img');
-        $webpSource = $xpath->query('//figure[contains(@class, "dlf-home-hero__photo")]//source[@type="image/webp"]');
+        $hero = file_get_contents(resource_path('js/components/home/HomeHero.tsx'));
 
-        $this->assertInstanceOf(DOMNodeList::class, $heroImage);
-        $this->assertInstanceOf(DOMNodeList::class, $webpSource);
-        $this->assertCount(1, $heroImage);
-        $this->assertCount(1, $webpSource);
-
-        $image = $heroImage->item(0);
-        $source = $webpSource->item(0);
-
-        $this->assertInstanceOf(DOMElement::class, $image);
-        $this->assertInstanceOf(DOMElement::class, $source);
-        $this->assertSame('eager', $image->getAttribute('loading'));
-        $this->assertSame('high', $image->getAttribute('fetchpriority'));
-        $this->assertSame('async', $image->getAttribute('decoding'));
-        $this->assertStringContainsString('640w', $source->getAttribute('srcset'));
-        $this->assertStringContainsString('1280w', $source->getAttribute('srcset'));
-        $this->assertStringContainsString('1920w', $source->getAttribute('srcset'));
-        $this->assertSame('(min-width: 1024px) 50vw, 100vw', $source->getAttribute('sizes'));
+        $this->assertNotFalse($hero);
+        $this->assertStringContainsString('type="image/webp"', $hero);
+        $this->assertStringContainsString('640.webp 640w', $hero);
+        $this->assertStringContainsString('1280.webp 1280w', $hero);
+        $this->assertStringContainsString('1920.webp 1920w', $hero);
+        $this->assertStringContainsString('sizes="(min-width: 1024px) 50vw, 100vw"', $hero);
+        $this->assertStringContainsString('loading="eager"', $hero);
+        $this->assertStringContainsString('fetchPriority="high"', $hero);
+        $this->assertStringContainsString('decoding="async"', $hero);
     }
 
-    public function testSharedFooterUsesSizedLazyLoadedBadgeImages(): void
+    public function test_shared_footer_uses_sized_lazy_loaded_badge_images(): void
     {
-        $xpath = $this->pageXPath('/');
-        $badges = $xpath->query('//footer//*[contains(concat(" ", normalize-space(@class), " "), " dlf-footer-badges ")]//img');
+        $footer = file_get_contents(resource_path('js/components/site/Footer.tsx'));
 
-        $this->assertInstanceOf(DOMNodeList::class, $badges);
-        $this->assertCount(3, $badges);
+        $this->assertNotFalse($footer);
+        $this->assertStringContainsString('leadinfo-240.webp', $footer);
+        $this->assertStringContainsString('larabelles-badge-320.webp', $footer);
+        $this->assertStringContainsString('shockmedia-320.webp', $footer);
+        $this->assertGreaterThanOrEqual(3, substr_count($footer, 'loading="lazy"'));
+        $this->assertGreaterThanOrEqual(3, substr_count($footer, 'decoding="async"'));
+    }
 
-        foreach ($badges as $badge) {
-            $this->assertInstanceOf(DOMElement::class, $badge);
-            $this->assertSame('lazy', $badge->getAttribute('loading'));
-            $this->assertSame('async', $badge->getAttribute('decoding'));
-            $this->assertMatchesRegularExpression('/^[1-9][0-9]*$/', $badge->getAttribute('width'));
-            $this->assertMatchesRegularExpression('/^[1-9][0-9]*$/', $badge->getAttribute('height'));
+    public function test_homepage_defers_below_the_fold_partner_and_client_logos(): void
+    {
+        $partners = file_get_contents(resource_path('js/components/home/PartnerMarquee.tsx'));
+        $clients = file_get_contents(resource_path('js/components/home/ClientLogoWall.tsx'));
+
+        foreach ([$partners, $clients] as $component) {
+            $this->assertNotFalse($component);
+            $this->assertStringContainsString('loading="lazy"', $component);
+            $this->assertStringContainsString('decoding="async"', $component);
         }
     }
 
-    public function testHomepageDefersBelowTheFoldPartnerAndClientLogos(): void
+    public function test_react_page_families_keep_modern_image_source_contracts(): void
     {
-        $xpath = $this->pageXPath('/');
-        $logos = $xpath->query('//section[contains(@class, "dlf-home-partners") or contains(@class, "dlf-home-clients")]//img');
-
-        $this->assertInstanceOf(DOMNodeList::class, $logos);
-        $this->assertGreaterThan(20, $logos->length);
-
-        foreach ($logos as $logo) {
-            $this->assertInstanceOf(DOMElement::class, $logo);
-            $this->assertSame('lazy', $logo->getAttribute('loading'));
-            $this->assertSame('async', $logo->getAttribute('decoding'));
-        }
-    }
-
-    public function testPublicPageFamiliesServeGlidePhotographyAsWebp(): void
-    {
-        $uris = [
-            '/',
-            '/aanbestedingen',
-            '/agenda',
-            '/cases',
-            '/cases/diabetes-nl-helpt-je-verder-weten-delen-doen',
-            '/events/cxo-diner-2026',
-            '/kennis',
-            '/kennis/graphql-met-laravel-en-lighthouse',
-            '/nieuws',
-            '/nieuws/dlf-meetup-bij-dij',
-            '/over-ons',
+        $components = [
+            resource_path('js/components/home/HomeHero.tsx'),
+            resource_path('js/components/editorial-react/Media.tsx'),
+            resource_path('js/components/public-pages-react/ContentBlocks.tsx'),
+            resource_path('js/components/public-pages-react/LandingParts.tsx'),
         ];
 
-        foreach ($uris as $uri) {
-            $xpath = $this->pageXPath($uri);
-            $images = $xpath->query('//img[@data-progressive-media and starts-with(@src, "/img/")]');
+        foreach ($components as $path) {
+            $component = file_get_contents($path);
 
-            $this->assertInstanceOf(DOMNodeList::class, $images);
-            $this->assertGreaterThan(0, $images->length, $uri);
-
-            foreach ($images as $image) {
-                $this->assertInstanceOf(DOMElement::class, $image);
-                $this->assertStringContainsString('fm=webp', $image->getAttribute('src'), $uri);
-            }
+            $this->assertNotFalse($component);
+            $this->assertStringContainsString('ProgressiveImage', $component, $path);
+            $this->assertStringContainsString('width=', $component, $path);
+            $this->assertStringContainsString('height=', $component, $path);
+            $this->assertStringContainsString('decoding="async"', $component, $path);
         }
-    }
-
-    private function pageXPath(string $uri): DOMXPath
-    {
-        $response = $this->get($uri);
-        $response->assertOk();
-
-        $document = new DOMDocument();
-        $previous = libxml_use_internal_errors(true);
-        $document->loadHTML($response->getContent());
-        libxml_clear_errors();
-        libxml_use_internal_errors($previous);
-
-        return new DOMXPath($document);
     }
 }
