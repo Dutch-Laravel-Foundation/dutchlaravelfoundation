@@ -2,6 +2,7 @@ import { type ReactNode, useEffect, useRef, useState } from "react";
 
 import { slugify } from "@/components/editorial-react/format";
 import { SmartLink } from "@/components/ui/SmartLink";
+import { useSyntaxHighlighting } from "@/hooks/useSyntaxHighlighting";
 
 type TocItem = {
     id: string;
@@ -13,6 +14,8 @@ export function LarabellesArticleBody({ children }: { children: ReactNode }) {
     const proseRef = useRef<HTMLElement>(null);
     const [activeId, setActiveId] = useState<string>();
     const [toc, setToc] = useState<TocItem[]>([]);
+
+    useSyntaxHighlighting(proseRef, children);
 
     useEffect(() => {
         const prose = proseRef.current;

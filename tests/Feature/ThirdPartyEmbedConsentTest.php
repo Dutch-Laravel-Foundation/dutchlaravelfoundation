@@ -1,28 +1,40 @@
 <?php
 
 declare(strict_types=1);
-it('external video templates defer iframe sources until consent', function () {
-    $templates = [
-        resource_path('views/partials/sets/_video.antlers.html'),
-        resource_path('views/templates/members/show.antlers.html'),
-        resource_path('views/templates/podcasts/show.antlers.html'),
-    ];
 
-    foreach ($templates as $templatePath) {
-        $template = file_get_contents($templatePath);
+namespace Tests\Feature;
 
-        $this->assertNotFalse($template);
-        $this->assertStringContainsString('data-consent-src=', $template, $templatePath);
-        $this->assertStringContainsString('partial:embed_consent', $template, $templatePath);
+use Tests\TestCase;
+
+class ThirdPartyEmbedConsentTest extends TestCase
+{
+    public function test_external_video_components_defer_iframe_sources_until_consent(): void
+    {
+        $components = [
+            resource_path('js/components/editorial-react/ContentBlocks.tsx'),
+            resource_path('js/components/editorial-react/PodcastMedia.tsx'),
+            resource_path('js/pages/Community/MembersShow.tsx'),
+        ];
+
+        foreach ($components as $componentPath) {
+            $component = file_get_contents($componentPath);
+
+            $this->assertNotFalse($component);
+            $this->assertStringContainsString('data-consent-src=', $component, $componentPath);
+            $this->assertStringContainsString('hidden', $component, $componentPath);
+        }
     }
-});
-it('podcast template keeps the spotify link visible alongside the consent gated embed', function () {
-    $template = file_get_contents(
-        resource_path('views/templates/podcasts/show.antlers.html'),
-    );
 
-    $this->assertNotFalse($template);
-    $this->assertStringContainsString('open.spotify.com/embed/', $template);
-    $this->assertStringNotContainsString('data-consent-fallback', $template);
-    $this->assertStringContainsString('editorial-podcast__spotify-embed', $template);
-});
+    public function test_podcast_component_keeps_the_spotify_link_visible_alongside_the_consent_gated_embed(): void
+    {
+        $component = file_get_contents(
+            resource_path('js/components/editorial-react/PodcastControls.tsx'),
+        );
+
+        $this->assertNotFalse($component);
+        $this->assertStringContainsString('spotifyEmbedUrl(spotifyUrl)', $component);
+        $this->assertStringContainsString('data-consent-src=', $component);
+        $this->assertStringContainsString('editorial-podcast__spotify-embed', $component);
+        $this->assertStringContainsString('href={spotifyUrl}', $component);
+    }
+}

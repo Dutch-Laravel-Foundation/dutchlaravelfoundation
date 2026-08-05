@@ -115,12 +115,18 @@ final class ContentSecurityPolicyTest extends TestCase
         );
 
         foreach ($tags[0] as $tag) {
+            if (preg_match('/\btype=(["\'])application\/json\1/i', $tag)) {
+                continue;
+            }
+
             $this->assertStringContainsString("nonce=\"{$nonce}\"", $tag);
         }
     }
 
-    public function test_hot_reloaded_fonts_use_the_stylesheet_pipeline_and_allowed_origin(): void
+    public function test_hot_reloaded_fonts_use_an_independent_stylesheet_and_allowed_origin(): void
     {
+        config(['inertia.ssr.enabled' => false]);
+
         $vite = $this->app->make(Vite::class);
         $originalHotFile = $vite->hotFile();
         $temporaryHotFile = tempnam(sys_get_temp_dir(), 'dlf-vite-hot-');
@@ -136,13 +142,17 @@ final class ContentSecurityPolicyTest extends TestCase
                 "font-src 'self' data: https://vite.example.test:5174",
                 $policy,
             );
-            $this->assertStringContainsString(
+            $this->assertStringNotContainsString(
                 '@import "./fonts.css";',
                 (string) file_get_contents(resource_path('css/tailwind.css')),
             );
+            $this->assertStringContainsString(
+                "'resources/css/fonts.css'",
+                (string) file_get_contents(resource_path('views/app.blade.php')),
+            );
             $this->assertStringNotContainsString(
                 'import "../css/fonts.css";',
-                (string) file_get_contents(resource_path('js/site.js')),
+                (string) file_get_contents(resource_path('js/app.tsx')),
             );
         } finally {
             $vite->useHotFile($originalHotFile);

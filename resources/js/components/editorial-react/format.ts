@@ -72,22 +72,6 @@ export function formatDate(value: string | null | undefined, includeWeekday = fa
     }).format(date);
 }
 
-export function pageUrl(base: string, page: number, category?: string | null): string {
-    const parameters = new URLSearchParams();
-
-    if (category) {
-        parameters.set("category", category);
-    }
-
-    if (page > 1) {
-        parameters.set("page", String(page));
-    }
-
-    const query = parameters.toString();
-
-    return query ? `${base}?${query}` : base;
-}
-
 export function slugify(value: string): string {
     return value
         .toLocaleLowerCase("nl")

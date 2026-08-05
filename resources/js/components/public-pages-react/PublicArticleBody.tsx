@@ -1,6 +1,7 @@
 import { type ReactNode, useEffect, useRef, useState } from "react";
 
 import { SmartLink } from "@/components/ui/SmartLink";
+import { useSyntaxHighlighting } from "@/hooks/useSyntaxHighlighting";
 
 type TocItem = { id: string; label: string };
 
@@ -17,6 +18,8 @@ export function PublicArticleBody({ children, label }: { children: ReactNode; la
     const proseRef = useRef<HTMLElement>(null);
     const [activeId, setActiveId] = useState<string>();
     const [items, setItems] = useState<TocItem[]>([]);
+
+    useSyntaxHighlighting(proseRef, children);
 
     useEffect(() => {
         const prose = proseRef.current;

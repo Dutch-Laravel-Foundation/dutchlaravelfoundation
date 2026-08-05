@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "./fonts.css";
 @import "./redesign-shell.css";
 @import "./redesign-dividers.css";
 @import "./redesign-blocks.css";
@@ -11,10 +10,6 @@
 @import "./progressive-media.css";
 
 @config '../../tailwind.config.js';
-
-[x-cloak] {
-    display: none !important;
-}
 
 @layer utilities {
     .dlf-nowrap {

@@ -144,7 +144,9 @@ export function ArticleIndex({
     return (
         <div className="editorial-page">
             <div className="editorial-rail" data-dlf-footer-cta-stage>
-                <header className="editorial-page__header dlf-divider-section">
+                <header
+                    className={`editorial-page__header${data.pagination.total > 0 ? " editorial-page__header--open-feed" : " dlf-divider-section"}`}
+                >
                     <div className="editorial-page__heading">
                         <span className="editorial-eyebrow">{heading.eyebrow}</span>
                         <h1 className="editorial-page__title">{heading.title}</h1>
@@ -206,11 +208,11 @@ export function ArticleIndex({
                     <InfiniteScroll
                         data="editorial"
                         buffer={1200}
-                        className="editorial-feed dlf-divider-section dlf-divider-list"
+                        className="editorial-feed dlf-divider-section"
                         previous={({ loading }) =>
                             loading ? (
                                 <div
-                                    className="editorial-pagination dlf-divider-section"
+                                    className="editorial-pagination"
                                     role="status"
                                     aria-live="polite"
                                 >
@@ -224,7 +226,7 @@ export function ArticleIndex({
                             if (loading) {
                                 return (
                                     <div
-                                        className="editorial-pagination dlf-divider-section"
+                                        className="editorial-pagination"
                                         role="status"
                                         aria-live="polite"
                                     >
@@ -241,7 +243,7 @@ export function ArticleIndex({
 
                             return (
                                 <div
-                                    className="editorial-pagination dlf-divider-section"
+                                    className="editorial-pagination"
                                     role="status"
                                     aria-live="polite"
                                 >

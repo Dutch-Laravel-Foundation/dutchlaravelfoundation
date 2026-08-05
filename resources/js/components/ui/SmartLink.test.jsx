@@ -15,7 +15,7 @@ mock.module("@inertiajs/react", () => ({
             ...props,
             "data-cache-for": cacheFor,
             "data-inertia-link": "true",
-            "data-prefetch": prefetch?.join(","),
+            "data-prefetch": Array.isArray(prefetch) ? prefetch.join(",") : prefetch,
             "data-view-transition": viewTransition ? "true" : undefined,
         });
     },
@@ -168,7 +168,7 @@ describe("CMS link enhancement", () => {
 });
 
 describe("DlfButtonLink", () => {
-    it("uses an Inertia link with hover and click prefetching for app routes", () => {
+    it("uses hover prefetching without scheduling a duplicate click request", () => {
         const html = renderToStaticMarkup(
             <DlfButtonLink href="/lid-worden" face="red">
                 Word lid
@@ -176,7 +176,7 @@ describe("DlfButtonLink", () => {
         );
 
         expect(html).toContain('data-inertia-link="true"');
-        expect(html).toContain('data-prefetch="hover,click"');
+        expect(html).toContain('data-prefetch="hover"');
         expect(html).toContain('data-cache-for="30s"');
     });
 });

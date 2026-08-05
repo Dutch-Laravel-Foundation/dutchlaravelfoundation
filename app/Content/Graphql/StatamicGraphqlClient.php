@@ -7,16 +7,20 @@ namespace App\Content\Graphql;
 use App\Content\Exceptions\GraphqlQueryFailed;
 use Illuminate\Http\Request;
 use Rebing\GraphQL\GraphQL;
+use Statamic\GraphQL\TypeRegistrar;
 
 final readonly class StatamicGraphqlClient implements GraphqlClient
 {
     public function __construct(
         private GraphQL $graphql,
         private Request $request,
+        private TypeRegistrar $typeRegistrar,
     ) {}
 
     public function query(string $document, array $variables = []): array
     {
+        $this->typeRegistrar->register();
+
         $response = $this->graphql->query($document, $variables, [
             'schema' => 'default',
             'context' => $this->request,

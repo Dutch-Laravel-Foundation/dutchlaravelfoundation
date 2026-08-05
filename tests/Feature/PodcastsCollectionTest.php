@@ -90,27 +90,25 @@ class PodcastsCollectionTest extends TestCase
         );
     }
 
-    public function test_podcast_templates_expose_video_description_and_transcript(): void
+    public function test_podcast_react_components_expose_video_description_and_transcript(): void
     {
-        $showTemplate = file_get_contents(resource_path('views/templates/podcasts/show.antlers.html'));
-        $indexTemplate = file_get_contents(resource_path('views/templates/podcasts/index.antlers.html'));
+        $showPage = file_get_contents(resource_path('js/pages/Editorial/PodcastsShow.tsx'));
+        $indexPage = file_get_contents(resource_path('js/pages/Editorial/PodcastsIndex.tsx'));
+        $controls = file_get_contents(resource_path('js/components/editorial-react/PodcastControls.tsx'));
 
-        $this->assertNotFalse($showTemplate);
-        $this->assertNotFalse($indexTemplate);
-        $this->assertStringContainsString('video_url', $showTemplate);
-        $this->assertStringContainsString('spotify_url', $showTemplate);
-        $this->assertStringContainsString('https://www.youtube.com/@DutchLaravelFoundation', $indexTemplate);
-        $this->assertStringContainsString('https://open.spotify.com/show/28cbLx8VKFE0j3xdbRhxsO', $indexTemplate);
-        $this->assertStringContainsString('thumbnail_url', $indexTemplate);
-        $this->assertStringContainsString('summary', $indexTemplate);
-        $this->assertStringContainsString('description', $showTemplate);
-        $this->assertStringContainsString('transcript', $showTemplate);
-        $this->assertStringContainsString('role="tablist"', $showTemplate);
-        $this->assertStringContainsString('Samenvatting', $showTemplate);
-        $this->assertStringContainsString("activeTab === 'transcript'", $showTemplate);
-        $this->assertStringContainsString("activeTab === 'description'", $showTemplate);
-        $this->assertStringContainsString('collection:podcasts', $indexTemplate);
-        $this->assertStringContainsString('sort="published_at:desc"', $indexTemplate);
+        $this->assertNotFalse($showPage);
+        $this->assertNotFalse($indexPage);
+        $this->assertNotFalse($controls);
+        $this->assertStringContainsString('editorial.videoUrl', $showPage);
+        $this->assertStringContainsString('editorial.spotifyUrl', $showPage);
+        $this->assertStringContainsString('episode.thumbnailUrl', $indexPage);
+        $this->assertStringContainsString('episode.summary', $indexPage);
+        $this->assertStringContainsString('descriptionHtml', $controls);
+        $this->assertStringContainsString('transcriptHtml', $controls);
+        $this->assertStringContainsString('<Tabs.List', $controls);
+        $this->assertStringContainsString('Samenvatting', $controls);
+        $this->assertStringContainsString('value="transcript"', $controls);
+        $this->assertStringContainsString('value="description"', $controls);
     }
 
     public function test_podcast_entries_use_the_homepage_call_to_action_banner(): void

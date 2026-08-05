@@ -317,8 +317,6 @@
     php please stache:clear
     php please stache:warm
     php please search:update --all
-    php please static:clear
-    php please static:warm
 
     git fetch --quiet origin main
 
@@ -332,6 +330,9 @@
 
     reset_opcache
     check_health
+    php artisan inertia:check-ssr
+    php artisan responsecache:clear
+    php artisan responsecache:warm --base-url=https://dutchlaravelfoundation.nl --concurrency=20
     HEALTHY=1
 
     if ! cleanup_releases; then

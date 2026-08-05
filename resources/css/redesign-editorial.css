@@ -36,6 +36,10 @@
     padding: 3rem 2.5rem 1.75rem;
 }
 
+.editorial-page--podcasts .editorial-page__heading {
+    padding-bottom: 3rem;
+}
+
 .editorial-eyebrow,
 .editorial-entry__meta,
 .editorial-filters,
@@ -156,6 +160,17 @@
     display: block;
 }
 
+.editorial-page__header--open-feed {
+    border-bottom: 0;
+}
+
+.editorial-page__header--open-feed
+    ~ .editorial-feed
+    > .editorial-entry:first-of-type
+    .editorial-entry__body {
+    border-top: 1px solid var(--editorial-line);
+}
+
 .editorial-feed .editorial-entry:last-child {
     border-bottom: 0;
 }
@@ -165,7 +180,7 @@
     min-height: 0;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     margin: 0;
-    border-bottom: 1px solid var(--editorial-line);
+    border-bottom: 0;
 }
 
 .editorial-entry--linked {
@@ -228,13 +243,8 @@
     min-height: 0;
 }
 
-.editorial-entry--media-start .editorial-entry__media {
-    border-right: 1px solid var(--editorial-line);
-}
-
 .editorial-entry--media-end .editorial-entry__media {
     grid-column: 2;
-    border-left: 1px solid var(--editorial-line);
 }
 
 .editorial-entry--media-end .editorial-entry__body {
@@ -425,6 +435,10 @@
     letter-spacing: 0.12em;
     line-height: 1.5;
     text-transform: uppercase;
+}
+
+.editorial-rail > div:has(> .editorial-pagination) {
+    border-bottom: 1px solid var(--editorial-line);
 }
 
 .editorial-pagination__link--newer {
@@ -681,7 +695,7 @@
     color: var(--editorial-ink);
     font-weight: 400;
     letter-spacing: -0.02em;
-    scroll-margin-top: 8rem;
+    scroll-margin-top: calc(var(--dlf-header-visible-height, 0px) + 1.5rem);
     text-wrap: balance;
 }
 
@@ -909,7 +923,7 @@
 .editorial-author {
     position: relative;
     background: #fff;
-    scroll-margin-top: 8rem;
+    scroll-margin-top: calc(var(--dlf-header-visible-height, 0px) + 1.5rem);
 }
 
 .editorial-author__label {
@@ -1117,6 +1131,10 @@
         padding: 2.75rem 1.5rem 1.25rem;
     }
 
+    .editorial-page--podcasts .editorial-page__heading {
+        padding-bottom: 2.75rem;
+    }
+
     .editorial-page .editorial-page__title {
         margin-bottom: 0.875rem;
         font-size: 1.875rem;
@@ -1140,7 +1158,7 @@
         grid-row: 1;
         grid-column: 1;
         border-right: 0;
-        border-bottom: 1px solid var(--editorial-line);
+        border-bottom: 0;
         border-left: 0;
     }
 

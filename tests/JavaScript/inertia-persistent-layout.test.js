@@ -34,10 +34,25 @@ describe("the Inertia application shell", () => {
         expect(shell).toContain("PersistentSiteLayoutContext");
     });
 
-    test("closes desktop submenus after every Inertia navigation", async () => {
+    test("closes desktop navigation when a visit begins and mobile navigation when it finishes", async () => {
+        const header = await source("resources/js/components/site/Header.tsx");
         const navigation = await source("resources/js/components/site/DesktopNavigation.tsx");
+        const mobileNavigation = await source("resources/js/components/site/MobileNavigation.tsx");
+        const topbar = await source("resources/js/components/site/Topbar.tsx");
 
-        expect(navigation).toContain('router.on("navigate", () => setOpen(false))');
+        expect(navigation).toContain('router.on("before"');
+        expect(navigation).toContain("visit.prefetch");
+        expect(navigation).not.toContain('router.on("finish"');
+
+        expect(header).toContain('router.on("navigate"');
+        expect(header).toContain('router.on("finish"');
+        expect(header).toContain("visit.completed");
+        expect(header).toContain("visit.id");
+        expect(header).toContain("visitId");
+        expect(header).toContain("event.detail.cached");
+
+        expect(mobileNavigation).not.toContain("onNavigate");
+        expect(topbar).not.toContain("onNavigate");
     });
 
     test("renders page wrapper children without a nested shell inside the persistent layout", () => {

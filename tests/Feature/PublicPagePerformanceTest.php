@@ -8,15 +8,17 @@ use Tests\TestCase;
 
 class PublicPagePerformanceTest extends TestCase
 {
-    public function test_static_pages_use_an_isolated_cache_store(): void
+    public function test_public_responses_use_an_isolated_cache_store(): void
     {
-        $this->assertSame('file', config('cache.stores.static_cache.driver'));
-        $this->assertSame(base_path('cache/static'), config('cache.stores.static_cache.path'));
-        $this->assertSame('file', config('statamic.static_caching.strategies.full.driver'));
-        $this->assertSame(public_path('static'), config('statamic.static_caching.strategies.full.path'));
+        $this->assertSame('response_cache', config('responsecache.cache.store'));
+        $this->assertSame('redis', config('cache.stores.response_cache.driver'));
+        $this->assertSame('response_cache', config('cache.stores.response_cache.connection'));
+        $this->assertSame('2', config('database.redis.response_cache.database'));
+        $this->assertSame(20, config('responsecache.warm.concurrency'));
+        $this->assertNull(config('statamic.static_caching.strategy'));
     }
 
-    public function test_deployment_warms_before_activation_and_checks_health_before_cleanup(): void
+    public function test_deployment_warms_the_active_release_after_health_check(): void
     {
         $deployment = file_get_contents(base_path('Envoy.blade.php'));
 
@@ -25,29 +27,41 @@ class PublicPagePerformanceTest extends TestCase
         $this->assertStringContainsString('bun run build', $deployment);
         $this->assertStringNotContainsString('npm ci', $deployment);
         $this->assertStringNotContainsString('npm run build', $deployment);
-        $this->assertStringContainsString('php please static:clear', $deployment);
-        $this->assertStringContainsString('php please static:warm', $deployment);
+        $this->assertStringContainsString('php artisan responsecache:clear', $deployment);
+        $this->assertStringContainsString(
+            'php artisan responsecache:warm --base-url=https://dutchlaravelfoundation.nl --concurrency=20',
+            $deployment,
+        );
+        $this->assertStringContainsString('php artisan inertia:check-ssr', $deployment);
+        $this->assertStringNotContainsString('php please static:clear', $deployment);
+        $this->assertStringNotContainsString('php please static:warm', $deployment);
 
-        $staticWarm = strpos($deployment, 'php please static:warm');
+        $responseCacheClear = strpos($deployment, 'php artisan responsecache:clear');
+        $responseCacheWarm = strpos($deployment, 'php artisan responsecache:warm');
+        $ssrHealthCheck = strpos($deployment, 'php artisan inertia:check-ssr');
         $activation = strpos($deployment, 'activate_release "$RELEASE_PATH"');
         $opcacheReset = strpos($deployment, "\n    reset_opcache\n");
         $healthCheck = strpos($deployment, "\n    check_health\n");
         $cleanup = strpos($deployment, '    if ! cleanup_releases');
 
-        $this->assertNotFalse($staticWarm);
+        $this->assertNotFalse($responseCacheClear);
+        $this->assertNotFalse($responseCacheWarm);
+        $this->assertNotFalse($ssrHealthCheck);
         $this->assertNotFalse($activation);
         $this->assertNotFalse($opcacheReset);
         $this->assertNotFalse($healthCheck);
         $this->assertNotFalse($cleanup);
-        $this->assertLessThan($activation, $staticWarm);
         $this->assertLessThan($opcacheReset, $activation);
         $this->assertLessThan($healthCheck, $opcacheReset);
-        $this->assertLessThan($cleanup, $healthCheck);
+        $this->assertLessThan($ssrHealthCheck, $healthCheck);
+        $this->assertLessThan($responseCacheClear, $ssrHealthCheck);
+        $this->assertLessThan($responseCacheWarm, $responseCacheClear);
+        $this->assertLessThan($cleanup, $responseCacheWarm);
     }
 
     public function test_shared_layout_keeps_non_critical_third_parties_off_the_critical_path(): void
     {
-        $layout = file_get_contents(resource_path('views/layouts/layout.antlers.html'));
+        $layout = file_get_contents(resource_path('views/app.blade.php'));
 
         $this->assertNotFalse($layout);
         $this->assertStringNotContainsString('use.typekit.net', $layout);
@@ -58,30 +72,22 @@ class PublicPagePerformanceTest extends TestCase
         $this->assertStringNotContainsString('cdn.leadinfo.net/ping.js', $layout);
         $this->assertStringNotContainsString('snap.licdn.com/li.lms-analytics', $layout);
         $this->assertStringNotContainsString('{{ captcha:head }}', $layout);
-        $this->assertStringContainsString('data-environment="{{ environment }}"', $layout);
+        $this->assertStringContainsString('<x-inertia::app />', $layout);
     }
 
     public function test_main_entrypoint_loads_optional_enhancements_conditionally(): void
     {
-        $entrypoint = file_get_contents(resource_path('js/site.js'));
+        $syntaxHighlighting = file_get_contents(resource_path('js/hooks/useSyntaxHighlighting.ts'));
+        $trackingConsent = file_get_contents(resource_path('js/hooks/useTrackingConsent.ts'));
+        $vragenAi = file_get_contents(resource_path('js/hooks/useVragenAiSearch.ts'));
 
-        $this->assertNotFalse($entrypoint);
+        $this->assertNotFalse($syntaxHighlighting);
+        $this->assertNotFalse($trackingConsent);
+        $this->assertNotFalse($vragenAi);
 
-        foreach (['highlight.js', 'swiper', 'aos', 'gsap'] as $package) {
-            $this->assertDoesNotMatchRegularExpression(
-                '/^import .*'.preg_quote($package, '/').'.*;$/m',
-                $entrypoint,
-                $package,
-            );
-        }
-
-        $this->assertStringContainsString('import("./components/syntax-highlighting")', $entrypoint);
-        $this->assertStringContainsString('import("./components/swiper")', $entrypoint);
-        $this->assertStringContainsString('import("./components/scroll-animations")', $entrypoint);
-        $this->assertStringContainsString('import("./components/floor-animations")', $entrypoint);
-        $this->assertStringContainsString('import("./components/deferred-third-parties")', $entrypoint);
-        $this->assertStringContainsString('import("./components/vragen-ai-search")', $entrypoint);
-        $this->assertStringContainsString('import("./components/turnstile")', $entrypoint);
+        $this->assertStringContainsString('import("@/components/syntax-highlighting")', $syntaxHighlighting);
+        $this->assertStringContainsString('import("@/components/deferred-third-parties")', $trackingConsent);
+        $this->assertStringContainsString('import("@/components/vragen-ai-search")', $vragenAi);
     }
 
     public function test_homepage_serves_a_responsive_modern_hero_image(): void

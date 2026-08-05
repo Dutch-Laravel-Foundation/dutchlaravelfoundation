@@ -7,8 +7,8 @@ import { SmartLink } from "@/components/ui/SmartLink";
 import { SpotifyIcon, YouTubeIcon } from "./icons";
 import { spotifyEmbedUrl } from "./format";
 
-export const YOUTUBE_CHANNEL = "https://www.youtube.com/@DutchLaravelFoundation";
-export const SPOTIFY_CHANNEL = "https://open.spotify.com/show/28cbLx8VKFE0j3xdbRhxsO";
+const YOUTUBE_CHANNEL = "https://www.youtube.com/@DutchLaravelFoundation";
+const SPOTIFY_CHANNEL = "https://open.spotify.com/show/28cbLx8VKFE0j3xdbRhxsO";
 
 export function PodcastChannelActions() {
     return (

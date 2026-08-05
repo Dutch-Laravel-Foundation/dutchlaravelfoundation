@@ -14,7 +14,9 @@ declare module "headroom.js" {
 
         init(): void;
         destroy(): void;
+        freeze(): void;
         pin(): void;
+        unfreeze(): void;
         unpin(): void;
     }
 }

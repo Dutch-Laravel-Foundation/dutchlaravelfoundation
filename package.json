@@ -3,44 +3,37 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build && vite build --ssr",
+        "test": "bun test --path-ignore-patterns='vendor/**'",
         "typecheck": "tsc --noEmit",
         "types": "php artisan typescript:transform"
     },
     "type": "module",
     "devDependencies": {
-        "@laravel/vite-plugin-wayfinder": "^0.1.7",
+        "@inertiajs/vite": "^3.6.1",
         "@tailwindcss/forms": "^0.5.11",
         "@tailwindcss/postcss": "^4.3.3",
-        "@tailwindcss/typography": "^0.5.20",
         "@types/node": "^26.1.2",
         "@types/react": "^19.2.18",
         "@types/react-dom": "^19.2.4",
         "@vitejs/plugin-react": "^6.0.5",
+        "laravel-vite-plugin": "^3.1.3",
         "postcss": "^8.5.25",
         "postcss-import": "^16.1.1",
+        "shadcn": "^4.16.1",
         "tailwindcss": "^4.3.3",
         "typescript": "^7.0.2",
+        "vite": "^8.2.0",
         "vite-plugin-run": "^0.9.1"
     },
     "dependencies": {
-        "@alpinejs/csp": "^3.15.12",
         "@base-ui/react": "^1.7.0",
         "@inertiajs/react": "^3.6.1",
-        "@inertiajs/vite": "^3.6.1",
         "aos": "^2.3.4",
-        "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
-        "gsap": "^3.15.0",
         "headroom.js": "^0.12.0",
         "highlight.js": "^11.11.1",
-        "laravel-vite-plugin": "^3.1.3",
-        "lucide-react": "^1.28.0",
         "react": "^19.2.8",
         "react-dom": "^19.2.8",
-        "shadcn": "^4.16.1",
-        "swiper": "^14.0.7",
-        "tailwind-merge": "^3.6.0",
-        "tw-animate-css": "^1.4.0",
-        "vite": "^8.2.0"
+        "tailwind-merge": "^3.6.0"
     }
 }

@@ -6,15 +6,25 @@ export function useFooterCtaStage(enabled: boolean) {
             return;
         }
 
-        const stage = document.querySelector<HTMLElement>("[data-dlf-footer-cta-stage]");
-        const cta = document.querySelector<HTMLElement>(".dlf-footer .dlf-cta-section");
-        const card = cta?.querySelector<HTMLElement>(".dlf-cta-card");
-
-        if (!stage || !cta || !card) {
-            return;
-        }
+        let stagedElement: HTMLElement | null = null;
 
         const syncStagePadding = () => {
+            const stage = document.querySelector<HTMLElement>("[data-dlf-footer-cta-stage]");
+            const cta = document.querySelector<HTMLElement>(".dlf-footer .dlf-cta-section");
+            const card = cta?.querySelector<HTMLElement>(".dlf-cta-card");
+
+            if (!stage || !cta || !card) {
+                return;
+            }
+
+            resizeObserver.observe(cta);
+            resizeObserver.observe(card);
+
+            if (stagedElement !== stage) {
+                stagedElement?.style.removeProperty("--dlf-footer-cta-stage-padding");
+                stagedElement = stage;
+            }
+
             const sideInset = card.getBoundingClientRect().left - cta.getBoundingClientRect().left;
             const cardHalfHeight = card.getBoundingClientRect().height / 2;
 
@@ -23,15 +33,20 @@ export function useFooterCtaStage(enabled: boolean) {
                 `${sideInset + cardHalfHeight}px`,
             );
         };
-        const observer = new ResizeObserver(syncStagePadding);
+        const resizeObserver = new ResizeObserver(syncStagePadding);
+        const pageObserver = new MutationObserver(syncStagePadding);
+        const mainContent = document.querySelector("#main-content");
 
         syncStagePadding();
-        observer.observe(cta);
-        observer.observe(card);
+
+        if (mainContent) {
+            pageObserver.observe(mainContent, { childList: true });
+        }
 
         return () => {
-            observer.disconnect();
-            stage.style.removeProperty("--dlf-footer-cta-stage-padding");
+            pageObserver.disconnect();
+            resizeObserver.disconnect();
+            stagedElement?.style.removeProperty("--dlf-footer-cta-stage-padding");
         };
     }, [enabled]);
 }

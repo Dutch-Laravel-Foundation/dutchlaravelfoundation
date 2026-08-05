@@ -26,6 +26,7 @@ type PersistentPageProps = {
     acquisition?: App.Data.Forms.AcquisitionPageData;
     community?: CommunityPage;
     editorial?: EditorialPage;
+    error?: { status: number };
     page?: App.Data.Pages.HomePageData | App.Data.PublicPages.PublicPageData;
     site: App.Data.SiteShell.SiteShellData;
 };
@@ -57,6 +58,14 @@ function resolveEditorialFooterCta(editorial: EditorialPage): SiteShellProps["fo
 }
 
 export function resolveSiteLayoutProps(props: PersistentPageProps): ResolvedSiteLayoutProps {
+    if (props.error) {
+        return {
+            data: props.site,
+            footerCta: null,
+            pageSlug: `error-${props.error.status}`,
+        };
+    }
+
     if (props.page) {
         return {
             data: props.site,

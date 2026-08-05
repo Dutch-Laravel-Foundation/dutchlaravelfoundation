@@ -1,5 +1,6 @@
 import { Button } from "@base-ui/react/button";
-import { type KeyboardEvent, useEffect, useRef, useState } from "react";
+import { router } from "@inertiajs/react";
+import { type KeyboardEvent, useCallback, useEffect, useRef, useState } from "react";
 
 import { useHeaderBehavior } from "@/hooks/useHeaderBehavior";
 import { useVragenAiSearch } from "@/hooks/useVragenAiSearch";
@@ -24,9 +25,19 @@ export function Header({ navigation, siteName }: HeaderProps) {
     const menuButtonRef = useRef<HTMLButtonElement>(null);
     const closeButtonRef = useRef<HTMLButtonElement>(null);
     const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const navigatedVisitId = useRef<string | null>(null);
     const vragenAi = useVragenAiSearch();
 
     useHeaderBehavior(headerRef);
+
+    const closeMobileMenu = useCallback(() => {
+        if (closeTimer.current) {
+            clearTimeout(closeTimer.current);
+        }
+
+        setMobileOpen(false);
+        closeTimer.current = setTimeout(() => setMobileMenuMounted(false), 200);
+    }, []);
 
     useEffect(() => {
         document.documentElement.classList.toggle("dlf-menu-open", mobileOpen);
@@ -52,15 +63,52 @@ export function Header({ navigation, siteName }: HeaderProps) {
                 return;
             }
 
-            setMobileOpen(false);
-            closeTimer.current = setTimeout(() => setMobileMenuMounted(false), 200);
+            closeMobileMenu();
             requestAnimationFrame(() => menuButtonRef.current?.focus());
         };
 
         window.addEventListener("keydown", closeOnEscape);
 
         return () => window.removeEventListener("keydown", closeOnEscape);
-    }, [mobileOpen]);
+    }, [closeMobileMenu, mobileOpen]);
+
+    useEffect(() => {
+        if (!mobileMenuMounted) {
+            return;
+        }
+
+        let cachedNavigationFrame: number | null = null;
+        const stopListeningForNavigation = router.on("navigate", (event) => {
+            navigatedVisitId.current = event.detail.visitId ?? null;
+
+            if (event.detail.cached) {
+                navigatedVisitId.current = null;
+                cachedNavigationFrame = requestAnimationFrame(closeMobileMenu);
+            }
+        });
+        const stopListeningForFinish = router.on("finish", (event) => {
+            const { visit } = event.detail;
+
+            if (visit.id !== navigatedVisitId.current) {
+                return;
+            }
+
+            navigatedVisitId.current = null;
+
+            if (visit.completed) {
+                closeMobileMenu();
+            }
+        });
+
+        return () => {
+            if (cachedNavigationFrame !== null) {
+                cancelAnimationFrame(cachedNavigationFrame);
+            }
+
+            stopListeningForNavigation();
+            stopListeningForFinish();
+        };
+    }, [closeMobileMenu, mobileMenuMounted]);
 
     useEffect(
         () => () => {
@@ -81,14 +129,6 @@ export function Header({ navigation, siteName }: HeaderProps) {
             setMobileOpen(true);
             requestAnimationFrame(() => closeButtonRef.current?.focus());
         });
-    };
-    const closeMobileMenu = () => {
-        if (closeTimer.current) {
-            clearTimeout(closeTimer.current);
-        }
-
-        setMobileOpen(false);
-        closeTimer.current = setTimeout(() => setMobileMenuMounted(false), 200);
     };
     const trapMobileMenuFocus = (event: KeyboardEvent<HTMLDivElement>) => {
         if (event.key !== "Tab") {
@@ -183,15 +223,10 @@ export function Header({ navigation, siteName }: HeaderProps) {
                             mobile
                             onPrepareSearch={() => void vragenAi.prepare()}
                             onSearch={closeAndOpenSearch}
-                            onNavigate={closeMobileMenu}
                         />
 
                         <div className="dlf-mobile-menu-header">
-                            <SmartLink
-                                href="/"
-                                aria-label={`${siteName} — home`}
-                                onClick={closeMobileMenu}
-                            >
+                            <SmartLink href="/" aria-label={`${siteName} — home`}>
                                 <img
                                     src="/assets/img/logo-2025.svg"
                                     alt={siteName}
@@ -213,7 +248,7 @@ export function Header({ navigation, siteName }: HeaderProps) {
                             </Button>
                         </div>
 
-                        <MobileNavigation navigation={navigation} onNavigate={closeMobileMenu} />
+                        <MobileNavigation navigation={navigation} />
                     </div>
                 ) : null}
             </header>

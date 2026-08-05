@@ -40,7 +40,7 @@
         </script>
 
         @viteReactRefresh
-        @vite(['resources/css/tailwind.css', 'resources/js/app.tsx'])
+        @vite(['resources/css/fonts.css', 'resources/css/tailwind.css', 'resources/js/app.tsx'])
         <x-inertia::head>
             <title>{{ $title }}</title>
             <meta name="description" content="{{ $description }}" data-inertia="description">

@@ -8,15 +8,13 @@ import { type NavigationItem } from "./types";
 
 type MobileNavigationProps = {
     navigation: readonly NavigationItem[];
-    onNavigate: () => void;
 };
 
 type MobileNavigationGroupProps = {
     item: NavigationItem;
-    onNavigate: () => void;
 };
 
-function MobileNavigationGroup({ item, onNavigate }: MobileNavigationGroupProps) {
+function MobileNavigationGroup({ item }: MobileNavigationGroupProps) {
     const [open, setOpen] = useState(item.isAncestor);
 
     return (
@@ -44,7 +42,6 @@ function MobileNavigationGroup({ item, onNavigate }: MobileNavigationGroupProps)
                             )}
                             href={child.url ?? child.permalink ?? "#"}
                             aria-current={child.isCurrent ? "page" : undefined}
-                            onClick={onNavigate}
                         >
                             {child.title}
                         </SmartLink>
@@ -55,14 +52,14 @@ function MobileNavigationGroup({ item, onNavigate }: MobileNavigationGroupProps)
     );
 }
 
-export function MobileNavigation({ navigation, onNavigate }: MobileNavigationProps) {
+export function MobileNavigation({ navigation }: MobileNavigationProps) {
     return (
         <nav className="dlf-mobile-navigation" aria-label="Mobiele hoofdnavigatie">
             <ul className="dlf-mobile-nav-list">
                 {navigation.map((item) => (
                     <li className="dlf-mobile-nav-item" key={item.id}>
                         {item.children.length ? (
-                            <MobileNavigationGroup item={item} onNavigate={onNavigate} />
+                            <MobileNavigationGroup item={item} />
                         ) : (
                             <SmartLink
                                 className={cn(
@@ -72,7 +69,6 @@ export function MobileNavigation({ navigation, onNavigate }: MobileNavigationPro
                                 )}
                                 href={item.url ?? item.permalink ?? "#"}
                                 aria-current={item.isCurrent ? "page" : undefined}
-                                onClick={onNavigate}
                             >
                                 {item.title}
                             </SmartLink>
@@ -87,7 +83,6 @@ export function MobileNavigation({ navigation, onNavigate }: MobileNavigationPro
                     href="/aanvraag"
                     face="outline-red"
                     shadow="red"
-                    onClick={onNavigate}
                 >
                     Match je project
                 </DlfButtonLink>
@@ -96,7 +91,6 @@ export function MobileNavigation({ navigation, onNavigate }: MobileNavigationPro
                     href="/lid-worden"
                     face="red"
                     shadow="red"
-                    onClick={onNavigate}
                 >
                     Lid worden
                 </DlfButtonLink>

@@ -77,7 +77,7 @@ export default function EventsIndex({ editorial, page, site }: EventsIndexProps)
                                 previous={({ loading }) =>
                                     loading ? (
                                         <div
-                                            className="editorial-pagination dlf-divider-section"
+                                            className="editorial-pagination"
                                             role="status"
                                             aria-live="polite"
                                         >
@@ -91,7 +91,7 @@ export default function EventsIndex({ editorial, page, site }: EventsIndexProps)
                                     if (loading) {
                                         return (
                                             <div
-                                                className="editorial-pagination dlf-divider-section"
+                                                className="editorial-pagination"
                                                 role="status"
                                                 aria-live="polite"
                                             >
@@ -108,7 +108,7 @@ export default function EventsIndex({ editorial, page, site }: EventsIndexProps)
 
                                     return (
                                         <div
-                                            className="editorial-pagination dlf-divider-section"
+                                            className="editorial-pagination"
                                             role="status"
                                             aria-live="polite"
                                         >

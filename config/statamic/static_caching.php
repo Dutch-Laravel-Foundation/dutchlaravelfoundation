@@ -1,20 +1,7 @@
 <?php
 
-use App\StaticCaching\Replacers\CspNonceReplacer;
-use Statamic\StaticCaching\Replacers\NoCacheReplacer;
 use Statamic\StaticCaching\Replacers\CsrfTokenReplacer;
-
-$staticCachingEnabled = filter_var(
-    env('STATAMIC_STATIC_CACHING_ENABLED', env('APP_ENV') === 'production'),
-    FILTER_VALIDATE_BOOL,
-);
-$staticCachingStrategy = env('STATAMIC_STATIC_CACHING_STRATEGY', 'full');
-
-if (! $staticCachingEnabled) {
-    $staticCachingStrategy = 'null';
-} elseif (in_array($staticCachingStrategy, [null, 'null'], true)) {
-    $staticCachingStrategy = 'full';
-}
+use Statamic\StaticCaching\Replacers\NoCacheReplacer;
 
 return [
 
@@ -28,7 +15,7 @@ return [
     |
     */
 
-    'strategy' => $staticCachingStrategy,
+    'strategy' => null,
 
     /*
     |--------------------------------------------------------------------------
@@ -112,7 +99,6 @@ return [
     'replacers' => [
         CsrfTokenReplacer::class,
         NoCacheReplacer::class,
-        CspNonceReplacer::class,
     ],
 
 ];

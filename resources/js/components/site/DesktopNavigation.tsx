@@ -18,7 +18,15 @@ function NavigationDropdown({ item }: NavigationDropdownProps) {
     const triggerRef = useRef<HTMLButtonElement>(null);
     const submenuId = `dlf-submenu-${item.id}`;
 
-    useEffect(() => router.on("navigate", () => setOpen(false)), []);
+    useEffect(() => {
+        return router.on("before", (event) => {
+            const { visit } = event.detail;
+
+            if (!visit.prefetch) {
+                setOpen(false);
+            }
+        });
+    }, []);
 
     const closeOnMouseLeave = (event: MouseEvent<HTMLLIElement>) => {
         const activeElement = event.currentTarget.ownerDocument.activeElement;

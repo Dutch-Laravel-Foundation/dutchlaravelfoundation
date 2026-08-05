@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Rebing\GraphQL\GraphQL;
+use Statamic\GraphQL\TypeRegistrar;
 
 final class StatamicGraphqlClientTest extends TestCase
 {
@@ -18,6 +19,8 @@ final class StatamicGraphqlClientTest extends TestCase
     {
         $graphql = $this->createMock(GraphQL::class);
         $request = Request::create('/');
+        $typeRegistrar = $this->createMock(TypeRegistrar::class);
+        $typeRegistrar->expects($this->once())->method('register');
         $graphql->expects($this->once())
             ->method('query')
             ->with('query Site { ping }', ['locale' => 'nl'], [
@@ -28,7 +31,7 @@ final class StatamicGraphqlClientTest extends TestCase
                 'data' => ['ping' => 'pong'],
             ]);
 
-        $client = new StatamicGraphqlClient($graphql, $request);
+        $client = new StatamicGraphqlClient($graphql, $request, $typeRegistrar);
 
         $this->assertSame(
             ['ping' => 'pong'],
@@ -41,6 +44,7 @@ final class StatamicGraphqlClientTest extends TestCase
     {
         $graphql = $this->createStub(GraphQL::class);
         $request = Request::create('/');
+        $typeRegistrar = $this->createStub(TypeRegistrar::class);
         $graphql->method('query')->willReturn([
             'data' => null,
             'errors' => [
@@ -49,7 +53,7 @@ final class StatamicGraphqlClientTest extends TestCase
             ],
         ]);
 
-        $client = new StatamicGraphqlClient($graphql, $request);
+        $client = new StatamicGraphqlClient($graphql, $request, $typeRegistrar);
 
         $this->expectException(GraphqlQueryFailed::class);
         $this->expectExceptionMessage('Unknown field; Invalid variable');

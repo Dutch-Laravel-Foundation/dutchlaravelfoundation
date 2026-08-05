@@ -6,9 +6,6 @@ use DOMDocument;
 use DOMElement;
 use DOMXPath;
 use Illuminate\Testing\TestResponse;
-use Tests\TestCase;
-
-uses(TestCase::class);
 
 function seoHeadXpath(TestResponse $response): DOMXPath
 {
@@ -115,7 +112,7 @@ describe('SEO head consistency', function (): void {
         'thanks' => '/aanvraag/bedankt',
     ]);
 
-    it('matches the Antlers social-image rules for non-editorial featured images', function (string $path): void {
+    it('uses the default social image for non-editorial entries without featured images', function (string $path): void {
         $response = $this->get($path);
 
         $response->assertOk();

@@ -1,10 +1,18 @@
 <?php
 
+use App\Http\Controllers\AcquisitionPageController;
 use App\Http\Controllers\Agents\LlmsController;
 use App\Http\Controllers\Agents\RobotsController;
+use App\Http\Controllers\CommunityPageController;
+use App\Http\Controllers\EditorialPageController;
+use App\Http\Controllers\ErrorPageController;
+use App\Http\Controllers\PublicPageController;
+use App\Http\Controllers\ReactPageController;
 use App\Http\Controllers\SecurityTxtController;
+use App\Http\Middleware\CachePublicResponse;
 use App\Http\Middleware\EnsureOhDearHealthEndpointIsProduction;
 use Illuminate\Support\Facades\Route;
+use Pecotamic\Sitemap\Http\Controllers\SitemapController;
 use Spatie\Health\Http\Controllers\HealthCheckJsonResultsController;
 use Spatie\Health\Http\Middleware\RequiresSecret;
 
@@ -19,6 +27,7 @@ Route::get('/robots.txt', RobotsController::class);
 Route::get('/.well-known/security.txt', SecurityTxtController::class);
 Route::get('/llms.txt', [LlmsController::class, 'index']);
 Route::get('/llms-full.txt', [LlmsController::class, 'full']);
+Route::get('/sitemap.xml', [SitemapController::class, 'show'])->name('public.sitemap');
 
 Route::permanentRedirect('/leden/avocado-media', '/leden');
 Route::permanentRedirect(
@@ -48,6 +57,49 @@ Route::permanentRedirect('/calendar/{slug}', '/events/{slug}');
 // Cases redirects
 Route::permanentRedirect('/showcases/{slug?}', '/cases/{slug?}');
 
-Route::middleware(['inertia', 'statamic.web'])
+Route::middleware([CachePublicResponse::class, 'inertia', 'statamic.web'])
     ->name('app.')
-    ->group(base_path('routes/app.php'));
+    ->group(function (): void {
+        Route::get('/', ReactPageController::class)->name('home');
+        Route::get('/contact', AcquisitionPageController::class)->name('contact');
+        Route::get('/lid-worden', AcquisitionPageController::class)->name('become-member');
+        Route::get('/aanvraag', AcquisitionPageController::class)->name('sales-funnel');
+        Route::get('/aanvraag/bedankt', AcquisitionPageController::class)->name('sales-funnel.thanks');
+        Route::get('/nieuws', [EditorialPageController::class, 'insightsIndex'])->name('insights.index');
+        Route::get('/nieuws/{slug}', [EditorialPageController::class, 'insightsShow'])->name('insights.show');
+        Route::get('/kennis', [EditorialPageController::class, 'knowledgeIndex'])->name('knowledge.index');
+        Route::get('/kennis/{slug}', [EditorialPageController::class, 'knowledgeShow'])->name('knowledge.show');
+        Route::get('/podcast', [EditorialPageController::class, 'podcastsIndex'])->name('podcasts.index');
+        Route::get('/podcast/{slug}', [EditorialPageController::class, 'podcastsShow'])->name('podcasts.show');
+        Route::get('/agenda', [EditorialPageController::class, 'eventsIndex'])->name('events.index');
+        Route::get('/events/{slug}', [EditorialPageController::class, 'eventsShow'])->name('events.show');
+
+        Route::get('/cases', [CommunityPageController::class, 'casesIndex'])->name('cases.index');
+        Route::get('/cases/{slug}', [CommunityPageController::class, 'casesShow'])->name('cases.show');
+        Route::get('/leden', [CommunityPageController::class, 'membersIndex'])->name('members.index');
+        Route::get('/leden/{slug}', [CommunityPageController::class, 'membersShow'])->name('members.show');
+        Route::get('/stagebank', [CommunityPageController::class, 'internshipsIndex'])->name('internships.index');
+        Route::get('/stagebank/{slug}', [CommunityPageController::class, 'internshipsShow'])->name('internships.show');
+        Route::get('/larabelles', [CommunityPageController::class, 'larabelles'])->name('larabelles');
+
+        Route::get('/{page}', PublicPageController::class)
+            ->whereIn('page', [
+                'aanbestedingen',
+                'bedrijfsbezoek',
+                'co-organised-meet-ups',
+                'een-eigen-systeem-laten-bouwen-is-betaalbaarder-dan-je-denkt',
+                'gastcolleges-voor-hbo-mbo',
+                'hosting-hotline',
+                'laravel-het-framework-dat-jouw-systeem-op-maat-tot-een-succes-maakt',
+                'newsletter',
+                'over-ons',
+                'privacy-statement',
+                'terms-and-conditions',
+                'tips-voor-studenten',
+                'wat-is-laravel',
+                'werkgroepen',
+            ])
+            ->name('public-pages.show');
+
+        Route::fallback(ErrorPageController::class)->name('error');
+    });

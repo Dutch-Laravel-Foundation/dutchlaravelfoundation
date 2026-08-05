@@ -12,7 +12,7 @@ export default function BecomeMember({ acquisition, app, site }: AcquisitionPage
         <SiteLayout data={site} pageSlug={page.slug} footerCta={footerCta(page.callToAction)}>
             <div className="dlf-community-page dlf-become-member-page" data-dlf-footer-cta-stage>
                 <section
-                    className="dlf-community-section dlf-lid-grid dlf-divider-section dlf-divider-split"
+                    className="dlf-community-section dlf-lid-grid"
                     aria-labelledby="become-member-heading"
                 >
                     <div className="dlf-lid-hero-copy">

@@ -665,7 +665,7 @@ html.dlf-menu-open {
         padding-block-end: 2.5rem;
     }
 
-    .dlf-aanvraag-container [x-data="salesFunnelWizard"] {
+    .dlf-aanvraag-container form {
         padding-block-end: 2.5rem;
     }
 }

@@ -122,14 +122,14 @@ class KnowledgeAuthorsTest extends TestCase
                 'title' => 'Sven Mollinga',
                 'linkedin_url' => 'https://www.linkedin.com/in/svenmollinga/',
                 'website_url' => 'https://www.shockmedia.nl/',
-                'photo' => 'sven-mollinga.jpeg',
+                'photo' => 'sven-mollinga.jpg',
             ],
             'justin-aan-de-stegge.md' => [
                 'id' => '32edbb81-2c4f-4c9c-829a-c3604113a2c4',
                 'title' => 'Justin aan de Stegge',
                 'linkedin_url' => 'https://www.linkedin.com/in/justin-aan-de-stegge/',
                 'website_url' => 'https://www.shockmedia.nl/',
-                'photo' => 'justin-aan-de-stegge.png',
+                'photo' => 'justin-van-der-stegge.jpg',
             ],
             'reinier-sierag.md' => [
                 'id' => 'f1aada63-5de9-4833-a13d-3aafdc7992cb',
@@ -268,19 +268,16 @@ class KnowledgeAuthorsTest extends TestCase
         );
     }
 
-    public function test_knowledge_template_uses_the_reusable_authors_relationship(): void
+    public function test_knowledge_page_uses_the_reusable_authors_relationship(): void
     {
-        $template = file_get_contents(base_path('resources/views/templates/knowledge/show.antlers.html'));
-        $partial = file_get_contents(base_path('resources/views/partials/editorial/_knowledge-authors.antlers.html'));
+        $page = file_get_contents(resource_path('js/pages/Editorial/KnowledgeShow.tsx'));
+        $component = file_get_contents(resource_path('js/components/editorial-react/Authors.tsx'));
 
-        $this->assertIsString($template);
-        $this->assertIsString($partial);
-        $this->assertStringContainsString('{{ authors }}', $template);
-        $this->assertStringContainsString('partial:editorial/knowledge-authors', $template);
-        $this->assertStringContainsString('{{ authors }}', $partial);
-        $this->assertStringContainsString('linkedin_url', $partial);
-        $this->assertStringContainsString('website_url', $partial);
-        $this->assertStringNotContainsString('author_name', $template);
+        $this->assertIsString($page);
+        $this->assertIsString($component);
+        $this->assertStringContainsString('<KnowledgeAuthors authors={editorial.authors}', $page);
+        $this->assertStringContainsString('author.linkedinUrl', $component);
+        $this->assertStringContainsString('author.websiteUrl', $component);
     }
 
     /** @return array<string, mixed> */

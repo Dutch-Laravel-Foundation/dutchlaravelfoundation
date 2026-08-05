@@ -334,18 +334,24 @@ const browserScript = String.raw`(() => {
         const stage = stages[0];
 
         if (stage) {
-        const sections = [...stage.querySelectorAll(".dlf-divider-section")].filter(visible);
-        const finalSection = sections
-            .map(section => ({ element: section, rect: section.getBoundingClientRect() }))
-            .sort((first, second) => first.rect.bottom - second.rect.bottom)
-            .at(-1);
+            const sections = [...stage.querySelectorAll(".dlf-divider-section")].filter(visible);
+            const finalSection = sections
+                .map(section => ({ element: section, rect: section.getBoundingClientRect() }))
+                .sort((first, second) => first.rect.bottom - second.rect.bottom)
+                .at(-1);
+            const finalDirectChild = stage.matches(".editorial-rail")
+                ? [...stage.children].filter(visible).at(-1)
+                : null;
+            const finalDivider = finalDirectChild && exactlyOne(border(finalDirectChild).bottom)
+                ? { element: finalDirectChild, rect: finalDirectChild.getBoundingClientRect() }
+                : finalSection;
 
-            expect(Boolean(finalSection), label(stage, 0) + " has no final content divider to measure");
+            expect(Boolean(finalDivider), label(stage, 0) + " has no final content divider to measure");
 
-            if (finalSection) {
+            if (finalDivider) {
                 const ctaRect = cta.getBoundingClientRect();
                 const cardRect = card.getBoundingClientRect();
-                const verticalGap = cardRect.top - finalSection.rect.bottom;
+                const verticalGap = cardRect.top - finalDivider.rect.bottom;
                 const horizontalInset = cardRect.left - ctaRect.left;
 
                 expect(

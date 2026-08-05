@@ -11,9 +11,6 @@ use App\Data\Community\InternshipIndexData;
 use App\Data\Community\LarabellesData;
 use App\Data\Community\MemberData;
 use App\Data\Community\MemberIndexData;
-use Tests\TestCase;
-
-uses(TestCase::class);
 
 describe(CommunityDataMapper::class, function (): void {
     beforeEach(function (): void {

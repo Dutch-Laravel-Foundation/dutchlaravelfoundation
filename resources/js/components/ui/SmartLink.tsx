@@ -1,7 +1,7 @@
 import { Link, type InertiaLinkProps, router } from "@inertiajs/react";
 import { type ComponentPropsWithoutRef, useEffect } from "react";
 
-export type SmartLinkProps = ComponentPropsWithoutRef<"a"> & {
+type SmartLinkProps = ComponentPropsWithoutRef<"a"> & {
     onPrefetched?: InertiaLinkProps["onPrefetched"];
     reset?: string[];
     viewTransition?: InertiaLinkProps["viewTransition"];
@@ -217,7 +217,7 @@ export function SmartLink({ href, onPrefetched, reset, viewTransition, ...props 
             <Link
                 {...inertiaProps}
                 href={href!}
-                prefetch={reset?.length ? undefined : ["hover", "click"]}
+                prefetch={reset?.length ? undefined : "hover"}
                 cacheFor="30s"
                 viewTransition={viewTransition}
                 onFocus={

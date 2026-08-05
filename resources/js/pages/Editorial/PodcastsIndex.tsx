@@ -1,7 +1,6 @@
 import { SiteLayout } from "@/components/site";
 import { EditorialMeta } from "@/components/editorial-react/EditorialMeta";
 import { ExternalImage } from "@/components/editorial-react/Media";
-import { PodcastChannelActions } from "@/components/editorial-react/PodcastControls";
 import { truncate } from "@/components/editorial-react/format";
 import { SmartLink } from "@/components/ui/SmartLink";
 import { InfiniteScroll } from "@inertiajs/react";
@@ -17,7 +16,9 @@ export default function PodcastsIndex({ editorial, page, site }: PodcastsIndexPr
         <SiteLayout data={site} pageSlug={page.slug} footerCta={page.footerCta}>
             <div className="editorial-page editorial-page--podcasts">
                 <div className="editorial-rail" data-dlf-footer-cta-stage>
-                    <header className="editorial-page__header dlf-divider-section">
+                    <header
+                        className={`editorial-page__header${editorial.pagination.total > 0 ? " editorial-page__header--open-feed" : " dlf-divider-section"}`}
+                    >
                         <div className="editorial-page__heading">
                             <span className="editorial-eyebrow">Podcast</span>
                             <h1 className="editorial-page__title">
@@ -28,7 +29,6 @@ export default function PodcastsIndex({ editorial, page, site }: PodcastsIndexPr
                                 softwareontwikkeling en de mensen achter de Nederlandse community.
                             </p>
                         </div>
-                        <PodcastChannelActions />
                     </header>
 
                     {editorial.pagination.total === 0 ? (
@@ -40,11 +40,11 @@ export default function PodcastsIndex({ editorial, page, site }: PodcastsIndexPr
                         <InfiniteScroll
                             data="editorial"
                             buffer={1200}
-                            className="editorial-feed dlf-divider-section dlf-divider-list"
+                            className="editorial-feed dlf-divider-section"
                             previous={({ loading }) =>
                                 loading ? (
                                     <div
-                                        className="editorial-pagination dlf-divider-section"
+                                        className="editorial-pagination"
                                         role="status"
                                         aria-live="polite"
                                     >
@@ -58,7 +58,7 @@ export default function PodcastsIndex({ editorial, page, site }: PodcastsIndexPr
                                 if (loading) {
                                     return (
                                         <div
-                                            className="editorial-pagination dlf-divider-section"
+                                            className="editorial-pagination"
                                             role="status"
                                             aria-live="polite"
                                         >
@@ -75,7 +75,7 @@ export default function PodcastsIndex({ editorial, page, site }: PodcastsIndexPr
 
                                 return (
                                     <div
-                                        className="editorial-pagination dlf-divider-section"
+                                        className="editorial-pagination"
                                         role="status"
                                         aria-live="polite"
                                     >

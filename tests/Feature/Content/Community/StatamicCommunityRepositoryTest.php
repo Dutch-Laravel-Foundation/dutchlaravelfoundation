@@ -9,9 +9,6 @@ use App\Data\Community\CaseData;
 use App\Data\Community\InternshipData;
 use App\Data\Community\LarabellesData;
 use App\Data\Community\MemberData;
-use Tests\TestCase;
-
-uses(TestCase::class);
 
 describe(StatamicCommunityRepository::class, function (): void {
     beforeEach(function (): void {

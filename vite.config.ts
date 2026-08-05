@@ -1,7 +1,7 @@
 import inertia from "@inertiajs/vite";
-import { wayfinder } from "@laravel/vite-plugin-wayfinder";
 import react from "@vitejs/plugin-react";
 import laravel from "laravel-vite-plugin";
+import { resolve } from "node:path";
 import { defineConfig, loadEnv } from "vite";
 import { run } from "vite-plugin-run";
 
@@ -13,8 +13,8 @@ export default defineConfig(({ mode }) => {
         plugins: [
             laravel({
                 input: [
+                    "resources/css/fonts.css",
                     "resources/css/tailwind.css",
-                    "resources/js/site.js",
                     "resources/js/app.tsx",
                 ],
                 ssr: "resources/js/ssr.tsx",
@@ -27,11 +27,6 @@ export default defineConfig(({ mode }) => {
                 },
             }),
             react(),
-            wayfinder({
-                command: "php artisan app:wayfinder-generate",
-                formVariants: true,
-                patterns: ["routes/app.php", "app/Http/Controllers/**/*.php"],
-            }),
             run([
                 {
                     name: "typescript transform",
@@ -42,7 +37,7 @@ export default defineConfig(({ mode }) => {
         ],
         server: {
             watch: {
-                ignored: ["**/.worktrees/**", "**/vendor/**"],
+                ignored: [resolve(process.cwd(), ".worktrees/**"), "**/vendor/**"],
             },
             ...(appUrl
                 ? {

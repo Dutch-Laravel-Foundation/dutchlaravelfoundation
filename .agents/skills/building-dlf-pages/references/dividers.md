@@ -10,6 +10,8 @@ Use one owner per visible edge. A shared boundary must resolve to exactly `1px`:
 - When a lower top-level section intentionally bleeds wider than the section above it, the upper section adds `dlf-divider-section--yield-to-next` and the immediately adjacent lower section adds `dlf-divider-section--full-bleed-top`. The lower full-bleed section then owns the single shared boundary across its complete width.
 - The final page-content stack always ends with one continuous bottom rule before any footer CTA staging gap. An ordinary final section keeps its own `dlf-divider-section` bottom rule.
 - In an editorial rail, the final visible direct child owns that closing rule. This includes author/project-attribution blocks, pagination, and empty states; mark those terminal blocks with `dlf-divider-section` instead of relying on the earlier article/feed rule.
+- A populated editorial index feed is an intentional open sequence, not a `dlf-divider-list`. The page rail owns its left and right edges, the feed keeps `dlf-divider-section` for its closing bottom edge, and `.editorial-page__header--open-feed` yields the header's full-width bottom edge. The first `.editorial-entry__body` owns the only opening top rule. Images, image/text splits, and subsequent entries own no internal structural borders. An empty index does not enter this state: its header or empty-state owner keeps the ordinary full-width section divider.
+- Inertia Infinite Scroll renders its previous/next action slot inside a generated direct-child trigger wrapper. When that wrapper is the final visible editorial-rail child, the wrapper owns the closing bottom rule and the nested `.editorial-pagination` row remains borderless. CTA staging measures from that direct-child edge.
 - If the final desktop content edge is owned by one full-width child or composed from adjacent panes, add `dlf-divider-section--composite-tail` to the section and mark every child that jointly covers that edge with `dlf-divider-tail-segment`. One or more segments own one continuous bottom rule while the section wrapper remains at `0px`; below desktop they yield to the stacked section/split ownership automatically.
 - The footer band's top rule is a separate boundary at the far side of the CTA staging tail. It never replaces the final page-content rule because the two edges do not share a coordinate.
 - Every compatible page-family rail carries exactly one `data-dlf-footer-cta-stage` owner, whether or not its current CMS configuration renders a banner. The owner is inert without a CTA. With a CTA, desktop reserves the shared measured stage variable; stacked layouts reserve no rail padding and let the in-flow card's `24px` margin own the gap. Never add route-specific footer-stage padding.
@@ -22,6 +24,15 @@ Use one owner per visible edge. A shared boundary must resolve to exactly `1px`:
 - A vertical sequence uses `dlf-divider-list`: the first item has no top rule and every later item owns its top rule.
 - A split uses `dlf-divider-split`: the later/right pane owns the left rule on desktop and the later/lower pane owns the top rule when stacked.
 - Red and dark surfaces add `dlf-divider-theme-inverse` so the same ownership model uses the established translucent light rule.
+
+Do not add `dlf-divider-list` to an open editorial feed or restore row and media-column borders. Either change creates internal grid lines that violate the intended open composition.
+
+```html
+<header class="editorial-page__header editorial-page__header--open-feed">...</header>
+<div class="editorial-feed dlf-divider-section">
+    <article class="editorial-entry">...</article>
+</div>
+```
 
 ## Responsive grid classes
 
@@ -41,7 +52,7 @@ Declare the visual column count for every state; do not infer it with final-row 
 </section>
 ```
 
-For a grid whose unused final-row columns remain visibly patterned, add a real filler cell after all collection items (and after an Alpine `x-for` template):
+For a grid whose unused final-row columns remain visibly patterned, render a real React filler cell after all collection items:
 
 ```html
 <div

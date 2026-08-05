@@ -8,7 +8,10 @@ use App\Content\Graphql\GraphqlClient;
 use App\Content\Graphql\StatamicGraphqlClient;
 use App\Content\Repositories\PageRepository;
 use App\Content\Repositories\StatamicPageRepository;
+use App\Content\SiteShell\StatamicSiteShellRepository;
 use PHPUnit\Framework\Attributes\Test;
+use Rebing\GraphQL\GraphQL;
+use Rebing\GraphQL\Support\Facades\GraphQL as GraphQLFacade;
 use Tests\TestCase;
 
 final class GraphqlContentAvailabilityTest extends TestCase
@@ -74,6 +77,20 @@ final class GraphqlContentAvailabilityTest extends TestCase
             GRAPHQL);
 
         $this->assertSame('newsletter', $data['form']['handle']);
+    }
+
+    #[Test]
+    public function statamic_types_are_registered_again_when_the_graphql_registry_is_rebuilt(): void
+    {
+        $this->app->make(StatamicSiteShellRepository::class)->fetch();
+
+        $this->app->forgetInstance(GraphQL::class);
+        GraphQLFacade::clearResolvedInstance(GraphQL::class);
+
+        $siteShell = $this->app->make(StatamicSiteShellRepository::class)->fetch();
+
+        $this->assertSame('legal', $siteShell['legalNavigation']['handle']);
+        $this->assertNotEmpty($siteShell['newsletter']['fields']);
     }
 
     #[Test]

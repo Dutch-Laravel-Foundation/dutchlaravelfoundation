@@ -4,39 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
-use SplFileInfo;
 use Tests\TestCase;
 
 class ProgressiveMediaTest extends TestCase
 {
-    public function test_shared_partial_owns_the_repeated_image_attributes(): void
-    {
-        $partialPath = resource_path('views/partials/_progressive_media_attributes.antlers.html');
-        $partial = file_get_contents($partialPath);
-
-        $this->assertNotFalse($partial);
-        $this->assertStringContainsString('width="{{ width }}"', $partial);
-        $this->assertStringContainsString('height="{{ height }}"', $partial);
-        $this->assertStringContainsString('loading="{{ loading ?? \'lazy\' }}"', $partial);
-        $this->assertStringContainsString('decoding="async"', $partial);
-        $this->assertStringContainsString('data-progressive-media', $partial);
-        $this->assertStringContainsString('data-media-state="loading"', $partial);
-        $this->assertStringNotContainsString('onload=', $partial);
-
-        foreach ($this->antlersTemplates() as $path) {
-            if ($path === $partialPath) {
-                continue;
-            }
-
-            $template = file_get_contents($path);
-
-            $this->assertNotFalse($template);
-            $this->assertStringNotContainsString('data-media-state="loading"', $template, $path);
-        }
-    }
-
     public function test_progressive_media_frames_use_a_white_striped_background(): void
     {
         $stylesheet = file_get_contents(resource_path('css/progressive-media.css'));
@@ -302,30 +273,5 @@ class ProgressiveMediaTest extends TestCase
             'X-Inertia' => 'true',
             'X-Inertia-Version' => hash_file('xxh128', public_path('build/manifest.json')),
         ];
-    }
-
-    /** @return list<string> */
-    private function antlersTemplates(): array
-    {
-        $iterator = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator(resource_path('views')),
-        );
-        $paths = [];
-
-        foreach ($iterator as $file) {
-            if (! $file instanceof SplFileInfo || ! $file->isFile()) {
-                continue;
-            }
-
-            if (! str_ends_with($file->getFilename(), '.antlers.html')) {
-                continue;
-            }
-
-            $paths[] = $file->getPathname();
-        }
-
-        sort($paths);
-
-        return $paths;
     }
 }

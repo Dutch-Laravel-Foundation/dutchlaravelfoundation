@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 use App\Content\Community\StatamicCommunityRepository;
 use App\Content\Graphql\GraphqlClient;
-use Tests\TestCase;
-
-uses(TestCase::class);
 
 describe(StatamicCommunityRepository::class, function (): void {
     it('fetches case index and detail content with attribution data', function (): void {

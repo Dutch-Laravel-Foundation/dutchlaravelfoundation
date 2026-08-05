@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "528c47c451722607958debecb25b5e8b",
+    "content-hash": "148d63c497dac385e2c0b722e967a2fc",
     "packages": [
         {
             "name": "ajthinking/archetype",
@@ -2219,69 +2219,6 @@
                 "source": "https://github.com/laravel/tinker/tree/v3.0.2"
             },
             "time": "2026-03-17T14:54:13+00:00"
-        },
-        {
-            "name": "laravel/wayfinder",
-            "version": "v0.1.20",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/wayfinder.git",
-                "reference": "91d958a6f99fe9187c6eda84e62aa93d79330be5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/wayfinder/zipball/91d958a6f99fe9187c6eda84e62aa93d79330be5",
-                "reference": "91d958a6f99fe9187c6eda84e62aa93d79330be5",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/console": "^11.0|^12.0|^13.0",
-                "illuminate/filesystem": "^11.0|^12.0|^13.0",
-                "illuminate/routing": "^11.0|^12.0|^13.0",
-                "illuminate/support": "^11.0|^12.0|^13.0",
-                "php": "^8.2",
-                "phpstan/phpdoc-parser": "^2.3"
-            },
-            "require-dev": {
-                "laravel/pint": "^1.21",
-                "orchestra/testbench": "^11.0|^10.1|^9.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Laravel\\Wayfinder\\WayfinderServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Laravel\\Wayfinder\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylor@laravel.com"
-                }
-            ],
-            "description": "Generate TypeScript representations of your Laravel actions and routes.",
-            "homepage": "https://github.com/laravel/wayfinder",
-            "keywords": [
-                "laravel",
-                "php",
-                "routes",
-                "typescript"
-            ],
-            "support": {
-                "issues": "https://github.com/laravel/wayfinder/issues",
-                "source": "https://github.com/laravel/wayfinder"
-            },
-            "time": "2026-05-12T01:44:17+00:00"
         },
         {
             "name": "league/commonmark",
@@ -5704,6 +5641,93 @@
             "time": "2026-05-19T14:06:37+00:00"
         },
         {
+            "name": "spatie/laravel-responsecache",
+            "version": "8.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-responsecache.git",
+                "reference": "313f9b66794319238fb0ce0391ab1962b448961e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-responsecache/zipball/313f9b66794319238fb0ce0391ab1962b448961e",
+                "reference": "313f9b66794319238fb0ce0391ab1962b448961e",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/cache": "^12.0|^13.0",
+                "illuminate/console": "^12.0|^13.0",
+                "illuminate/container": "^12.0|^13.0",
+                "illuminate/http": "^12.0|^13.0",
+                "illuminate/support": "^12.0|^13.0",
+                "nesbot/carbon": "^3.0",
+                "php": "^8.4",
+                "spatie/laravel-package-tools": "^1.9",
+                "spatie/php-attribute-reader": "^1.0"
+            },
+            "require-dev": {
+                "larastan/larastan": "^3.9",
+                "laravel/framework": "^12.0|^13.0",
+                "laravel/pint": "^1.13.7",
+                "mockery/mockery": "^1.6",
+                "orchestra/testbench": "^10.0|^11.0",
+                "pestphp/pest": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "ResponseCache": "Spatie\\ResponseCache\\Facades\\ResponseCache"
+                    },
+                    "providers": [
+                        "Spatie\\ResponseCache\\ResponseCacheServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\ResponseCache\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Speed up a Laravel application by caching the entire response",
+            "homepage": "https://github.com/spatie/laravel-responsecache",
+            "keywords": [
+                "cache",
+                "laravel",
+                "laravel-responsecache",
+                "performance",
+                "response",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-responsecache/issues",
+                "source": "https://github.com/spatie/laravel-responsecache/tree/8.4.1"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-05-25T11:09:32+00:00"
+        },
+        {
             "name": "spatie/laravel-typescript-transformer",
             "version": "3.3.0",
             "source": {
@@ -5780,6 +5804,64 @@
                 }
             ],
             "time": "2026-06-19T12:19:54+00:00"
+        },
+        {
+            "name": "spatie/php-attribute-reader",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/php-attribute-reader.git",
+                "reference": "46e7484d7b51f5b22d672745c541e48c5a385404"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/php-attribute-reader/zipball/46e7484d7b51f5b22d672745c541e48c5a385404",
+                "reference": "46e7484d7b51f5b22d672745c541e48c5a385404",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "pestphp/pest": "^1.0|^2.0|^3.0|^4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Attributes\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A clean API for working with PHP attributes",
+            "homepage": "https://github.com/spatie/php-attribute-reader",
+            "keywords": [
+                "attributes",
+                "php-attribute-reader",
+                "reflection",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/php-attribute-reader/issues",
+                "source": "https://github.com/spatie/php-attribute-reader/tree/1.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-02-23T09:01:55+00:00"
         },
         {
             "name": "spatie/php-structure-discoverer",

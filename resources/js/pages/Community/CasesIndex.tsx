@@ -18,10 +18,11 @@ export default function CasesIndex({ community, site }: CasesIndexProps) {
             pageSlug={page.slug}
             footerCta={page.callToAction ? communityFooterCta(page.callToAction) : undefined}
         >
-
             <div className="editorial-page editorial-page--cases">
                 <div className="editorial-rail" data-dlf-footer-cta-stage>
-                    <header className="editorial-page__header dlf-divider-section">
+                    <header
+                        className={`editorial-page__header${items.length > 0 ? " editorial-page__header--open-feed" : " dlf-divider-section"}`}
+                    >
                         <div className="editorial-page__heading">
                             <span className="editorial-eyebrow">Cases</span>
                             <h1 className="editorial-page__title">Cases uit de community</h1>
@@ -38,7 +39,7 @@ export default function CasesIndex({ community, site }: CasesIndexProps) {
                             <p>Er zijn op dit moment geen cases beschikbaar.</p>
                         </div>
                     ) : (
-                        <div className="editorial-feed dlf-divider-section dlf-divider-list">
+                        <div className="editorial-feed dlf-divider-section">
                             {items.map((item, index) => {
                                 const featured = index === 0;
                                 const href = item.url ?? item.uri ?? `/cases/${item.slug}`;

@@ -61,4 +61,89 @@ describe("header behavior", () => {
         expect(source).not.toContain("hideHeaderForRestoredScroll");
         expect(source).not.toContain("monitoringRestoredScroll");
     });
+
+    it("recognizes only same-document anchor destinations", () => {
+        expect(headerBehavior.isSameDocumentAnchor).toBeFunction();
+        expect(
+            headerBehavior.isSameDocumentAnchor(
+                "#section-two",
+                "https://example.test/article?preview=1",
+            ),
+        ).toBeTrue();
+        expect(
+            headerBehavior.isSameDocumentAnchor(
+                "https://example.test/article?preview=1#section-two",
+                "https://example.test/article?preview=1#section-one",
+            ),
+        ).toBeTrue();
+        expect(
+            headerBehavior.isSameDocumentAnchor(
+                "/another-article#section-two",
+                "https://example.test/article?preview=1",
+            ),
+        ).toBeFalse();
+    });
+
+    it("keeps the current header state frozen until a programmatic scroll jump settles", () => {
+        expect(headerBehavior.preserveHeaderDuringScrollJump).toBeFunction();
+
+        let scrollListener;
+        let timeoutCallback;
+        const frames = [];
+        const headroom = {
+            freeze: mock(() => {}),
+            unfreeze: mock(() => {}),
+        };
+        const browserWindow = {
+            addEventListener: mock((eventName, listener) => {
+                if (eventName === "scroll") {
+                    scrollListener = listener;
+                }
+            }),
+            removeEventListener: mock(() => {}),
+            setTimeout: mock((callback) => {
+                timeoutCallback = callback;
+
+                return 7;
+            }),
+            clearTimeout: mock(() => {}),
+        };
+        const scheduleFrame = mock((callback) => {
+            frames.push(callback);
+
+            return frames.length;
+        });
+        const cancelFrame = mock(() => {});
+
+        headerBehavior.preserveHeaderDuringScrollJump(headroom, {
+            browserWindow,
+            scheduleFrame,
+            cancelFrame,
+        });
+
+        expect(headroom.freeze).toHaveBeenCalledTimes(1);
+        expect(headroom.unfreeze).not.toHaveBeenCalled();
+
+        scrollListener();
+        frames.shift()();
+        expect(headroom.unfreeze).not.toHaveBeenCalled();
+
+        frames.shift()();
+        expect(headroom.unfreeze).toHaveBeenCalledTimes(1);
+        expect(browserWindow.removeEventListener).toHaveBeenCalledWith("scroll", scrollListener);
+        expect(browserWindow.clearTimeout).toHaveBeenCalledWith(7);
+
+        timeoutCallback();
+        expect(headroom.unfreeze).toHaveBeenCalledTimes(1);
+    });
+
+    it("preserves the current header state during native form validation jumps", async () => {
+        const source = await Bun.file(new URL("./useHeaderBehavior.ts", import.meta.url)).text();
+
+        expect(source).toContain('document.addEventListener("invalid", handleInvalid, true)');
+        expect(source).toContain('document.removeEventListener("invalid", handleInvalid, true)');
+        expect(source).toMatch(
+            /const handleInvalid = \(\) => \{\s*preserveCurrentHeaderState\(\);\s*\}/,
+        );
+    });
 });

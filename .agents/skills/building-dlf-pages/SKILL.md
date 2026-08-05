@@ -1,6 +1,6 @@
 ---
 name: building-dlf-pages
-description: Use when building, adapting, or reviewing public frontend pages in the Dutch Laravel Foundation Statamic/Antlers new-design worktree, especially when choosing a page family, composing Bard blocks, applying the DLF brand system, or validating responsive UI.
+description: Use when building, adapting, or reviewing public React/Inertia pages in the Dutch Laravel Foundation Statamic-backed frontend, especially when choosing a page family, mapping CMS content into DTOs, applying the DLF brand system, or validating responsive UI.
 ---
 
 # Building DLF Pages
@@ -11,7 +11,7 @@ Extend the established redesign instead of inventing a parallel page system. Mat
 
 1. Work from the Git repository root containing this skill. Confirm the current branch/worktree and preserve all unrelated and uncommitted work.
 2. Read the final corrections in [foundations.md](references/foundations.md), the divider contract in [dividers.md](references/dividers.md), then scan the map and selected family in [page-families.md](references/page-families.md). Load other sections only when relevant.
-3. Inspect the target entry, its closest canonical rendered page, that page's blueprint, Antlers template/partials, scoped CSS, and interaction JavaScript before editing.
+3. Inspect the target entry, its closest canonical rendered page, the GraphQL repository and DTO mapper, React page/components, scoped CSS, and interaction hooks before editing.
 4. Record the reported viewport and whether the direction is viewport-specific. Measure the target and its nearest alignment/spacing reference in the browser before changing CSS.
 5. Use Orbit for the project lifecycle and `https://new-design.dutchlaravelfoundation.test` for browser review unless the task explicitly excludes Orbit.
 
@@ -38,11 +38,11 @@ Classify the page by content and behavior, not by whichever screenshot looks att
 
 Reuse the exact shell, rail, button family, blocks, and responsive behavior of the closest family in [page-families.md](references/page-families.md). Do not mix families merely to borrow isolated styling.
 
-Keep author-controlled content in the host family's existing Bard stream. The registered `dlf_*` sets are full-rail blocks with their own shared namespace; use them only where the template emits blocks at rail level. Do not place them inside `templates/default`'s narrow prose stream without an intentional, tested breakout adapter. Add a new set only when existing sets cannot express the semantics. Hardcode only structural composition that the chosen family already hardcodes.
+Keep author-controlled content in Statamic and map it through the host family's repository, DTO, and React block renderer. The registered `dlf_*` sets are full-rail blocks with their own shared namespace; use them only where the React page emits blocks at rail level. Do not place them inside the default public page's narrow prose stream without an intentional, tested breakout adapter. Add a new set only when existing sets cannot express the semantics. Hardcode only structural composition that the chosen family already hardcodes.
 
 ## Compose the page
 
-- Keep the global layout, header/navigation, and footer. Configure `call_to_action`; the footer already renders the reusable CTA banner, so never render a second copy in a page template.
+- Keep the persistent React layout, header/navigation, and footer. Configure `call_to_action`; the footer already renders the reusable CTA banner, so never render a second copy in a page component.
 - Every page-content stack ends with one continuous bottom divider before footer CTA staging. A simple final section owns it; a final section marked `dlf-divider-section--composite-tail` yields only to explicit `dlf-divider-tail-segment` children that cover the complete edge. The footer band's top rule is a separate boundary and never substitutes for the final content divider.
 - A full-width structural grid, list, split, or region ending flush with a section yields its bottom edge to the section. Never let both the nested owner and section draw adjacent terminal rules.
 - Mark every compatible page-family rail exactly once with `data-dlf-footer-cta-stage`, even when the current page has no footer CTA; the marker is inert without a banner and keeps future CMS CTA choices on the shared path. When a floating CTA is present, that owner reserves the measured tail. Its clear vertical gap—from the final content divider to the CTA card’s top edge—must equal the CTA card’s horizontal inset at that viewport. Use the shared measured stage variable; never approximate this with fixed page or route padding.
@@ -85,4 +85,4 @@ For purely visual changes, use browser inspection instead of adding screenshot/U
 
 ## Example
 
-For a new long-form information page, start from `templates/default.antlers.html`, keep its editorial rail/prose/TOC structure, use its ordinary narrow-column Bard content, and set `call_to_action` for the footer-owned close. Do not insert full-rail DLF blocks or copy the acquisition landing's `.dlf-bm` composition unless the template deliberately supports that layout.
+For a new long-form information page, map it through `PublicPageController` and `PublicPageDataMapper`, start from `resources/js/pages/PublicPages/Default.tsx`, keep its editorial rail/prose/TOC structure, and set `call_to_action` for the footer-owned close. Do not insert full-rail DLF blocks or copy the acquisition landing's `.dlf-bm` composition unless the page family deliberately supports that layout.

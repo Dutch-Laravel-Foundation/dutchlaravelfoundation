@@ -7,17 +7,10 @@ type TopbarProps = {
     inert?: boolean;
     onPrepareSearch: () => void;
     onSearch: () => void;
-    onNavigate?: () => void;
     mobile?: boolean;
 };
 
-export function Topbar({
-    inert,
-    mobile = false,
-    onNavigate,
-    onPrepareSearch,
-    onSearch,
-}: TopbarProps) {
+export function Topbar({ inert, mobile = false, onPrepareSearch, onSearch }: TopbarProps) {
     return (
         <div
             className={mobile ? "dlf-topbar dlf-mobile-menu-topbar" : "dlf-topbar"}
@@ -44,15 +37,11 @@ export function Topbar({
                     />
                 </span>
                 <span className="dlf-topbar-links">
-                    <SmartLink href="/aanvraag" onClick={onNavigate}>
-                        Match je project
-                    </SmartLink>
+                    <SmartLink href="/aanvraag">Match je project</SmartLink>
                     <span className="dlf-topbar-separator" aria-hidden="true">
                         |
                     </span>
-                    <SmartLink href="/contact" onClick={onNavigate}>
-                        Contact
-                    </SmartLink>
+                    <SmartLink href="/contact">Contact</SmartLink>
                 </span>
             </div>
         </div>

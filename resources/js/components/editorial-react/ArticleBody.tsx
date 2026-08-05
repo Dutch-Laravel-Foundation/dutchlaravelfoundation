@@ -1,6 +1,7 @@
 import { type ReactNode, useEffect, useRef, useState } from "react";
 
 import { SmartLink } from "@/components/ui/SmartLink";
+import { useSyntaxHighlighting } from "@/hooks/useSyntaxHighlighting";
 
 import { slugify } from "./format";
 import { enhanceInlineProgressiveMedia } from "./InlineProgressiveMedia";
@@ -29,6 +30,8 @@ export function ArticleBody({
     const proseRef = useRef<HTMLElement>(null);
     const [activeId, setActiveId] = useState<string>();
     const [toc, setToc] = useState<TocItem[]>([]);
+
+    useSyntaxHighlighting(proseRef, html ?? children);
 
     useEffect(() => {
         const prose = proseRef.current;
