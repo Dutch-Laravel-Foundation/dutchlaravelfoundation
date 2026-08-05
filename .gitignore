@@ -20,7 +20,8 @@ yarn-error.log
 public/mix-manifest.json
 .claude
 .worktrees/
-users/
+/users/*
+!/users/.gitkeep
 /storage/form-submissions/*
 !/storage/form-submissions/*/
 !/storage/form-submissions/*/.gitignore
