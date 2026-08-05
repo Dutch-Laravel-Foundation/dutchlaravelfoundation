@@ -8,14 +8,27 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-final class RedirectWwwToCanonicalHost
+final class RedirectToCanonicalHost
 {
     public function handle(Request $request, Closure $next): Response
     {
         $canonicalUrl = parse_url((string) config('app.url'));
         $canonicalHost = is_array($canonicalUrl) ? ($canonicalUrl['host'] ?? null) : null;
 
-        if ($canonicalHost === null || strcasecmp($request->getHost(), "www.{$canonicalHost}") !== 0) {
+        if ($canonicalHost === null) {
+            return $next($request);
+        }
+
+        $canonicalHost = strtolower($canonicalHost);
+        $requestHost = strtolower($request->getHost());
+
+        if ($requestHost === $canonicalHost) {
+            return $next($request);
+        }
+
+        $normalizedHost = rtrim($requestHost, '.');
+
+        if (! in_array($normalizedHost, [$canonicalHost, "www.{$canonicalHost}"], true)) {
             return $next($request);
         }
 

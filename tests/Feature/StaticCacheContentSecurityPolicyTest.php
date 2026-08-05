@@ -1,102 +1,84 @@
 <?php
 
 declare(strict_types=1);
-
-namespace Tests\Feature;
-
 use Illuminate\Support\Facades\File;
 use Illuminate\Testing\TestResponse;
-use Tests\TestCase;
 
-final class StaticCacheContentSecurityPolicyTest extends TestCase
+beforeEach(function () {
+    $this->staticCachePath = storage_path('framework/testing/static-csp');
+
+    File::deleteDirectory($this->staticCachePath);
+
+    config([
+        'cache.stores.static_cache' => ['driver' => 'array'],
+        'statamic.static_caching.strategy' => 'full',
+        'statamic.static_caching.strategies.full.path' => $this->staticCachePath,
+    ]);
+});
+afterEach(function () {
+    File::deleteDirectory($this->staticCachePath);
+
+});
+it('full measure cache misses and hits use the response csp nonce', function () {
+    $cacheMiss = $this->get('/stagebank');
+
+    $cacheMiss->assertOk();
+    assertInlineElementsUseResponseNonce($cacheMiss);
+    expect("{$this->staticCachePath}/stagebank_.html")->toBeFile();
+    $cachedContent = File::get("{$this->staticCachePath}/stagebank_.html");
+
+    preg_match_all(
+        '/<style\b[^>]*>|<script\b(?![^>]*\bsrc=)[^>]*>/',
+        $cachedContent,
+        $cachedTags,
+    );
+
+    foreach ($cachedTags[0] as $tag) {
+        $this->assertStringContainsString('nonce="STATAMIC_CSP_NONCE"', $tag);
+    }
+
+    preg_match_all('/\bnonce=(["\'])(.*?)\1/i', $cachedContent, $cachedNonces);
+
+    expect($cachedNonces[2])->not->toBeEmpty();
+
+    foreach ($cachedNonces[2] as $nonce) {
+        expect($nonce)->toBe('STATAMIC_CSP_NONCE');
+    }
+
+    $cacheHit = $this->get('/stagebank');
+
+    $cacheHit->assertOk();
+    assertInlineElementsUseResponseNonce($cacheHit);
+});
+function assertInlineElementsUseResponseNonce(TestResponse $response): void
 {
-    private string $staticCachePath;
+    $response->assertHeader('Content-Security-Policy');
 
-    protected function setUp(): void
-    {
-        parent::setUp();
+    $policy = (string) $response->headers->get('Content-Security-Policy');
 
-        $this->staticCachePath = storage_path('framework/testing/static-csp');
+    expect($policy)->toMatch("/script-src[^;]*'nonce-([^']+)'/");
+    preg_match("/script-src[^;]*'nonce-([^']+)'/", $policy, $matches);
 
-        File::deleteDirectory($this->staticCachePath);
+    $nonce = $matches[1];
+    $content = (string) $response->getContent();
 
-        config([
-            'cache.stores.static_cache' => ['driver' => 'array'],
-            'statamic.static_caching.strategy' => 'full',
-            'statamic.static_caching.strategies.full.path' => $this->staticCachePath,
-        ]);
+    preg_match_all('/\bnonce=(["\'])(.*?)\1/i', $content, $responseNonces);
+
+    expect($responseNonces[2])->not->toBeEmpty();
+
+    foreach ($responseNonces[2] as $responseNonce) {
+        expect($responseNonce)->toBe($nonce);
     }
 
-    protected function tearDown(): void
-    {
-        File::deleteDirectory($this->staticCachePath);
+    preg_match_all(
+        '/<style\b[^>]*>|<script\b(?![^>]*\bsrc=)[^>]*>/',
+        $content,
+        $tags,
+    );
 
-        parent::tearDown();
-    }
+    expect($tags[0])->not->toBeEmpty();
 
-    public function testFullMeasureCacheMissesAndHitsUseTheResponseCspNonce(): void
-    {
-        $cacheMiss = $this->get('/stagebank');
-
-        $cacheMiss->assertOk();
-        $this->assertInlineElementsUseResponseNonce($cacheMiss);
-        $this->assertFileExists("{$this->staticCachePath}/stagebank_.html");
-        $cachedContent = File::get("{$this->staticCachePath}/stagebank_.html");
-
-        preg_match_all(
-            '/<style\b[^>]*>|<script\b(?![^>]*\bsrc=)[^>]*>/',
-            $cachedContent,
-            $cachedTags,
-        );
-
-        foreach ($cachedTags[0] as $tag) {
-            $this->assertStringContainsString('nonce="STATAMIC_CSP_NONCE"', $tag);
-        }
-
-        preg_match_all('/\bnonce=(["\'])(.*?)\1/i', $cachedContent, $cachedNonces);
-
-        $this->assertNotEmpty($cachedNonces[2]);
-
-        foreach ($cachedNonces[2] as $nonce) {
-            $this->assertSame('STATAMIC_CSP_NONCE', $nonce);
-        }
-
-        $cacheHit = $this->get('/stagebank');
-
-        $cacheHit->assertOk();
-        $this->assertInlineElementsUseResponseNonce($cacheHit);
-    }
-
-    private function assertInlineElementsUseResponseNonce(TestResponse $response): void
-    {
-        $response->assertHeader('Content-Security-Policy');
-
-        $policy = (string) $response->headers->get('Content-Security-Policy');
-
-        $this->assertMatchesRegularExpression("/script-src[^;]*'nonce-([^']+)'/", $policy);
-        preg_match("/script-src[^;]*'nonce-([^']+)'/", $policy, $matches);
-
-        $nonce = $matches[1];
-        $content = (string) $response->getContent();
-
-        preg_match_all('/\bnonce=(["\'])(.*?)\1/i', $content, $responseNonces);
-
-        $this->assertNotEmpty($responseNonces[2]);
-
-        foreach ($responseNonces[2] as $responseNonce) {
-            $this->assertSame($nonce, $responseNonce);
-        }
-
-        preg_match_all(
-            '/<style\b[^>]*>|<script\b(?![^>]*\bsrc=)[^>]*>/',
-            $content,
-            $tags,
-        );
-
-        $this->assertNotEmpty($tags[0]);
-
-        foreach ($tags[0] as $tag) {
-            $this->assertStringContainsString("nonce=\"{$nonce}\"", $tag);
-        }
+    foreach ($tags[0] as $tag) {
+        expect($tag)->toContain("nonce=\"{$nonce}\"");
     }
 }

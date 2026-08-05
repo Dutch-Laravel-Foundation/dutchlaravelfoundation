@@ -2,54 +2,42 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature;
+it('news pagination uses compact three column navigation', function () {
+    $response = $this->get('/nieuws?page=2');
 
-use DOMDocument;
-use DOMElement;
-use DOMNodeList;
-use DOMXPath;
-use Tests\TestCase;
+    $response->assertOk();
 
-class EditorialPaginationTest extends TestCase
-{
-    public function testNewsPaginationUsesCompactThreeColumnNavigation(): void
-    {
-        $response = $this->get('/nieuws?page=2');
+    $document = new DOMDocument;
+    $previous = libxml_use_internal_errors(true);
+    $document->loadHTML($response->getContent());
+    libxml_clear_errors();
+    libxml_use_internal_errors($previous);
 
-        $response->assertOk();
+    $xpath = new DOMXPath($document);
+    $navigation = $xpath->query('//nav[contains(concat(" ", normalize-space(@class), " "), " editorial-pagination ")]');
+    $newer = $xpath->query('//nav[contains(concat(" ", normalize-space(@class), " "), " editorial-pagination ")]/a[contains(concat(" ", normalize-space(@class), " "), " editorial-pagination__link--newer ")]');
+    $status = $xpath->query('//nav[contains(concat(" ", normalize-space(@class), " "), " editorial-pagination ")]/span[contains(concat(" ", normalize-space(@class), " "), " editorial-pagination__status ")]');
+    $older = $xpath->query('//nav[contains(concat(" ", normalize-space(@class), " "), " editorial-pagination ")]/a[contains(concat(" ", normalize-space(@class), " "), " editorial-pagination__link--older ")]');
 
-        $document = new DOMDocument();
-        $previous = libxml_use_internal_errors(true);
-        $document->loadHTML($response->getContent());
-        libxml_clear_errors();
-        libxml_use_internal_errors($previous);
+    expect($navigation)->toBeInstanceOf(DOMNodeList::class);
+    expect($newer)->toBeInstanceOf(DOMNodeList::class);
+    expect($status)->toBeInstanceOf(DOMNodeList::class);
+    expect($older)->toBeInstanceOf(DOMNodeList::class);
+    expect($navigation)->toHaveCount(1);
+    expect($newer)->toHaveCount(1);
+    expect($status)->toHaveCount(1);
+    expect($older)->toHaveCount(1);
 
-        $xpath = new DOMXPath($document);
-        $navigation = $xpath->query('//nav[contains(concat(" ", normalize-space(@class), " "), " editorial-pagination ")]');
-        $newer = $xpath->query('//nav[contains(concat(" ", normalize-space(@class), " "), " editorial-pagination ")]/a[contains(concat(" ", normalize-space(@class), " "), " editorial-pagination__link--newer ")]');
-        $status = $xpath->query('//nav[contains(concat(" ", normalize-space(@class), " "), " editorial-pagination ")]/span[contains(concat(" ", normalize-space(@class), " "), " editorial-pagination__status ")]');
-        $older = $xpath->query('//nav[contains(concat(" ", normalize-space(@class), " "), " editorial-pagination ")]/a[contains(concat(" ", normalize-space(@class), " "), " editorial-pagination__link--older ")]');
+    $newerLink = $newer->item(0);
+    $pageStatus = $status->item(0);
+    $olderLink = $older->item(0);
 
-        $this->assertInstanceOf(DOMNodeList::class, $navigation);
-        $this->assertInstanceOf(DOMNodeList::class, $newer);
-        $this->assertInstanceOf(DOMNodeList::class, $status);
-        $this->assertInstanceOf(DOMNodeList::class, $older);
-        $this->assertCount(1, $navigation);
-        $this->assertCount(1, $newer);
-        $this->assertCount(1, $status);
-        $this->assertCount(1, $older);
-
-        $newerLink = $newer->item(0);
-        $pageStatus = $status->item(0);
-        $olderLink = $older->item(0);
-
-        $this->assertInstanceOf(DOMElement::class, $newerLink);
-        $this->assertInstanceOf(DOMElement::class, $pageStatus);
-        $this->assertInstanceOf(DOMElement::class, $olderLink);
-        $this->assertSame('← Nieuwer', trim($newerLink->textContent));
-        $this->assertSame('2 / 8', trim($pageStatus->textContent));
-        $this->assertSame('Ouder →', trim($olderLink->textContent));
-        $this->assertStringEndsWith('/nieuws?page=1', $newerLink->getAttribute('href'));
-        $this->assertStringEndsWith('/nieuws?page=3', $olderLink->getAttribute('href'));
-    }
-}
+    expect($newerLink)->toBeInstanceOf(DOMElement::class);
+    expect($pageStatus)->toBeInstanceOf(DOMElement::class);
+    expect($olderLink)->toBeInstanceOf(DOMElement::class);
+    expect(trim($newerLink->textContent))->toBe('← Nieuwer');
+    expect(trim($pageStatus->textContent))->toBe('2 / 8');
+    expect(trim($olderLink->textContent))->toBe('Ouder →');
+    expect($newerLink->getAttribute('href'))->toEndWith('/nieuws?page=1');
+    expect($olderLink->getAttribute('href'))->toEndWith('/nieuws?page=3');
+});
