@@ -1,43 +1,28 @@
 <?php
 
 declare(strict_types=1);
+it('homepage advertises llms txt', function () {
+    $response = $this->get('/');
+    $link = $response->headers->get('Link');
 
-namespace Tests\Feature\Agents;
+    expect($link)->not->toBeNull();
+    $this->assertStringContainsString('rel="llms-txt"', $link);
+    $this->assertStringContainsString('/llms.txt', $link);
+});
+it('homepage advertises sitemap', function () {
+    $link = $this->get('/')->headers->get('Link');
 
-use Tests\TestCase;
+    $this->assertStringContainsString('rel="sitemap"', (string) $link);
+    $this->assertStringContainsString('/sitemap.xml', (string) $link);
+});
+it('responses declare content signals', function () {
+    $this->get('/')->assertHeader(
+        'Content-Signal',
+        'search=yes, ai-train=no, ai-input=yes',
+    );
+});
+it('link headers only appear on html responses', function () {
+    $link = $this->get('/robots.txt')->headers->get('Link');
 
-class LinkHeadersTest extends TestCase
-{
-    public function testHomepageAdvertisesLlmsTxt(): void
-    {
-        $response = $this->get('/');
-        $link = $response->headers->get('Link');
-
-        $this->assertNotNull($link);
-        $this->assertStringContainsString('rel="llms-txt"', $link);
-        $this->assertStringContainsString('/llms.txt', $link);
-    }
-
-    public function testHomepageAdvertisesSitemap(): void
-    {
-        $link = $this->get('/')->headers->get('Link');
-
-        $this->assertStringContainsString('rel="sitemap"', (string) $link);
-        $this->assertStringContainsString('/sitemap.xml', (string) $link);
-    }
-
-    public function testResponsesDeclareContentSignals(): void
-    {
-        $this->get('/')->assertHeader(
-            'Content-Signal',
-            'search=yes, ai-train=no, ai-input=yes',
-        );
-    }
-
-    public function testLinkHeadersOnlyAppearOnHtmlResponses(): void
-    {
-        $link = $this->get('/robots.txt')->headers->get('Link');
-
-        $this->assertNull($link);
-    }
-}
+    expect($link)->toBeNull();
+});

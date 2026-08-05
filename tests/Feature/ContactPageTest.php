@@ -2,18 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature;
+it('contact copy uses header aware sticky positioning on desktop', function () {
+    $stylesheet = file_get_contents(resource_path('css/redesign-public.css'));
 
-use Tests\TestCase;
-
-class ContactPageTest extends TestCase
-{
-    public function testContactCopyUsesHeaderAwareStickyPositioningOnDesktop(): void
-    {
-        $stylesheet = file_get_contents(resource_path('css/redesign-public.css'));
-
-        $this->assertNotFalse($stylesheet);
-        $this->assertStringContainsString(<<<'CSS'
+    $this->assertNotFalse($stylesheet);
+    $this->assertStringContainsString(<<<'CSS'
 @media (min-width: 1024px) {
     .dlf-contact-copy {
         position: sticky;
@@ -23,5 +16,4 @@ class ContactPageTest extends TestCase
     }
 }
 CSS, $stylesheet);
-    }
-}
+});

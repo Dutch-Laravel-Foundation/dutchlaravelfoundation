@@ -1,43 +1,33 @@
 <?php
 
 declare(strict_types=1);
-
-namespace Tests\Feature;
-
 use Carbon\CarbonImmutable;
-use Tests\TestCase;
 
-final class SecurityTxtTest extends TestCase
-{
-    private const CANONICAL = 'https://dutchlaravelfoundation.nl/.well-known/security.txt';
+const SECURITY_TXT_CANONICAL = 'https://dutchlaravelfoundation.nl/.well-known/security.txt';
 
-    public function testSecurityTxtContainsTheRequiredPublishedFields(): void
-    {
-        $response = $this->get('/.well-known/security.txt');
+it('security txt contains the required published fields', function () {
+    $response = $this->get('/.well-known/security.txt');
 
-        $response
-            ->assertOk()
-            ->assertHeader('Content-Type', 'text/plain; charset=UTF-8')
-            ->assertHeaderMissing('Content-Security-Policy');
+    $response
+        ->assertOk()
+        ->assertHeader('Content-Type', 'text/plain; charset=UTF-8')
+        ->assertHeaderMissing('Content-Security-Policy');
 
-        $content = (string) $response->getContent();
+    $content = (string) $response->getContent();
 
-        $this->assertStringContainsString('Contact: mailto:info@dutchlaravelfoundation.nl', $content);
-        $this->assertStringContainsString('Canonical: '.self::CANONICAL, $content);
-        $this->assertStringContainsString('Preferred-Languages: nl, en', $content);
-        $this->assertMatchesRegularExpression('/^Expires: .+$/m', $content);
-    }
+    $this->assertStringContainsString('Contact: mailto:info@dutchlaravelfoundation.nl', $content);
+    $this->assertStringContainsString('Canonical: '.SECURITY_TXT_CANONICAL, $content);
+    $this->assertStringContainsString('Preferred-Languages: nl, en', $content);
+    expect($content)->toMatch('/^Expires: .+$/m');
+});
+it('security txt expiration always remains in the future', function () {
+    CarbonImmutable::setTestNow('2026-07-20 12:00:00 Europe/Amsterdam');
 
-    public function testSecurityTxtExpirationAlwaysRemainsInTheFuture(): void
-    {
-        CarbonImmutable::setTestNow('2026-07-20 12:00:00 Europe/Amsterdam');
+    $content = (string) $this->get('/.well-known/security.txt')->getContent();
+    expect($content)->toMatch('/^Expires: (.+)$/m');
+    preg_match('/^Expires: (.+)$/m', $content, $matches);
+    $expires = CarbonImmutable::parse($matches[1]);
 
-        $content = (string) $this->get('/.well-known/security.txt')->getContent();
-        $this->assertMatchesRegularExpression('/^Expires: (.+)$/m', $content);
-        preg_match('/^Expires: (.+)$/m', $content, $matches);
-        $expires = CarbonImmutable::parse($matches[1]);
-
-        $this->assertTrue($expires->isAfter(CarbonImmutable::now()));
-        $this->assertTrue($expires->lessThanOrEqualTo(CarbonImmutable::now()->addYear()));
-    }
-}
+    expect($expires->isAfter(CarbonImmutable::now()))->toBeTrue();
+    expect($expires->lessThanOrEqualTo(CarbonImmutable::now()->addYear()))->toBeTrue();
+});

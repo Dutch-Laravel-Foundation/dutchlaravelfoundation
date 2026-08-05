@@ -4,7 +4,9 @@ blueprint: author
 title: 'Justin aan de Stegge'
 job_title: 'Partner Manager bij Shock Media'
 description: 'Justin aan de Stegge is Partner Manager bij Shock Media.'
-photo: justin-aan-de-stegge.png
+photo: justin-van-der-stegge.jpg
 linkedin_url: 'https://www.linkedin.com/in/justin-aan-de-stegge/'
 website_url: 'https://www.shockmedia.nl/'
+updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
+updated_at: 1785418072
 ---
