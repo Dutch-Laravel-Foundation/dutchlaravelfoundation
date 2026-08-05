@@ -1,4 +1,3 @@
-import { Button as BaseButton } from "@base-ui/react/button";
 import { type ComponentPropsWithoutRef, type ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
@@ -27,15 +26,15 @@ function DlfButtonContents({ children, face, shadow }: DlfButtonContentsProps) {
     );
 }
 
-type DlfButtonProps = ComponentPropsWithoutRef<typeof BaseButton> & DlfButtonContentsProps;
+type DlfButtonProps = ComponentPropsWithoutRef<"button"> & DlfButtonContentsProps;
 
 export function DlfButton({ children, className, face, shadow, ...props }: DlfButtonProps) {
     return (
-        <BaseButton className={cn("dlf-btn", className)} {...props}>
+        <button className={cn("dlf-btn", className)} {...props}>
             <DlfButtonContents face={face} shadow={shadow}>
                 {children}
             </DlfButtonContents>
-        </BaseButton>
+        </button>
     );
 }
 

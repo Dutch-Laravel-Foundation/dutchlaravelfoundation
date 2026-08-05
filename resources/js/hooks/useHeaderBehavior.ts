@@ -20,6 +20,7 @@ type ScrollJumpOptions = {
     browserWindow?: ScrollJumpWindow;
     scheduleFrame?: ScheduleFrame;
     cancelFrame?: CancelFrame;
+    restoreState?: () => void;
 };
 
 export function shouldRevealHeaderForVisit(visit: { prefetch: boolean }) {
@@ -48,6 +49,7 @@ export function preserveHeaderDuringScrollJump(
         browserWindow = window,
         scheduleFrame = requestAnimationFrame,
         cancelFrame = cancelAnimationFrame,
+        restoreState,
     }: ScrollJumpOptions = {},
 ) {
     let firstFrame: number | null = null;
@@ -76,6 +78,7 @@ export function preserveHeaderDuringScrollJump(
 
         browserWindow.removeEventListener("scroll", queueRelease);
         headroom.unfreeze();
+        restoreState?.();
     };
     const queueRelease = () => {
         if (firstFrame !== null) {
@@ -157,7 +160,11 @@ export function useHeaderBehavior(headerRef: RefObject<HTMLElement | null>) {
         let stopPreservingScrollJump: (() => void) | null = null;
         const preserveCurrentHeaderState = () => {
             stopPreservingScrollJump?.();
-            stopPreservingScrollJump = preserveHeaderDuringScrollJump(headroom);
+            const wasHidden = header.classList.contains("slideUp");
+
+            stopPreservingScrollJump = preserveHeaderDuringScrollJump(headroom, {
+                restoreState: wasHidden ? () => headroom.unpin() : undefined,
+            });
         };
 
         const handleAnchorClick = (event: MouseEvent) => {

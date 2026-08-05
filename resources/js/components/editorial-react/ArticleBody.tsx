@@ -30,6 +30,11 @@ export function ArticleBody({
     const proseRef = useRef<HTMLElement>(null);
     const [activeId, setActiveId] = useState<string>();
     const [toc, setToc] = useState<TocItem[]>([]);
+    const [processedHtml, setProcessedHtml] = useState(() => ({
+        source: html ?? null,
+        value: html ?? null,
+    }));
+    const renderedHtml = processedHtml.source === (html ?? null) ? processedHtml.value : html;
 
     useSyntaxHighlighting(proseRef, html ?? children);
 
@@ -87,6 +92,14 @@ export function ArticleBody({
         });
 
         setToc(items);
+
+        // HTML content is rendered through dangerouslySetInnerHTML. React replaces that
+        // subtree whenever the component rerenders, so preserve the IDs (and the removed
+        // duplicate lead paragraph) in the rendered HTML rather than relying on direct DOM
+        // mutations that would otherwise be lost.
+        if (html) {
+            setProcessedHtml({ source: html, value: prose.innerHTML });
+        }
 
         if (!sections.length) {
             return;
@@ -152,7 +165,7 @@ export function ArticleBody({
                 className={`editorial-article__prose${className?.includes("editorial-podcast__body") ? " editorial-podcast__content" : ""}`}
                 data-editorial-prose
                 data-cms-html
-                dangerouslySetInnerHTML={html ? { __html: html } : undefined}
+                dangerouslySetInnerHTML={html ? { __html: renderedHtml ?? html } : undefined}
             >
                 {html ? undefined : children}
             </article>
