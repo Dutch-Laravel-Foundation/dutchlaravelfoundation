@@ -365,6 +365,7 @@ final class WarmResponseCache extends Command
             foreach ($requests as $key => $request) {
                 $batch->as($key)
                     ->timeout($this->timeout())
+                    ->retry(3, 250)
                     ->withHeaders($request['headers'])
                     ->get($request['url']);
             }
