@@ -23,4 +23,17 @@ describe("deferred third parties", () => {
             "https://snap.licdn.com/li.lms-analytics/insight.min.js",
         ]);
     });
+
+    it("hands Leadinfo its account id via the tracking namespace", () => {
+        const document = {
+            createElement: () => ({ setAttribute() {} }),
+            head: { append: () => {} },
+            querySelector: () => null,
+        };
+        const window = {};
+
+        initDeferredThirdParties({ document, window });
+
+        expect(window.leadinfo.t).toBe("LI-643558C020FD3");
+    });
 });

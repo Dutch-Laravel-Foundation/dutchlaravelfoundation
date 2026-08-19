@@ -36,7 +36,7 @@ const initLeadinfo = (documentRoot, browserWindow) => {
         browserWindow[namespace].q.push(parameters);
     };
     browserWindow[namespace].q = [];
-    browserWindow[namespace].t = Date.now();
+    browserWindow[namespace].t = browserWindow[namespace].t || "LI-643558C020FD3";
     loadScript(documentRoot, "https://cdn.leadinfo.net/ping.js");
 };
 
