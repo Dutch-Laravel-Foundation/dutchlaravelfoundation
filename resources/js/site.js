@@ -32,6 +32,25 @@ window.addEventListener("load", (event) => {
     });
 });
 
+// Best practices: give content headings ids that match the chapter anchors
+// (Str::slug on the server) so the "Op deze pagina" navigation can target them.
+function slugify(value) {
+    return value
+        .toLowerCase()
+        .replace(/[_]+/g, "-")
+        .replace(/[^a-z0-9\s-]+/g, "")
+        .replace(/[\s-]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+}
+
+window.addEventListener("load", () => {
+    document.querySelectorAll(".bp-content h2").forEach((heading) => {
+        if (!heading.id) {
+            heading.id = slugify(heading.textContent || "");
+        }
+    });
+});
+
 var header = document.querySelector("header"),
     banner = document.querySelector(".banner"),
     nav = header.querySelector("nav.animated");

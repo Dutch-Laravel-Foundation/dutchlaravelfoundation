@@ -1,0 +1,39 @@
+title: 'Best Practice Category'
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+              display: Titel
+          -
+            handle: source_path
+            field:
+              type: text
+              display: 'Source path'
+              read_only: true
+          -
+            handle: practice_count
+            field:
+              type: integer
+              display: 'Practice count'
+              read_only: true
+          -
+            handle: source_sha
+            field:
+              type: text
+              display: 'Source SHA'
+              read_only: true
+          -
+            handle: github_url
+            field:
+              type: link
+              display: 'GitHub URL'
+              read_only: true

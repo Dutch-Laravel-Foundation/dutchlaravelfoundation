@@ -1,0 +1,75 @@
+name: Sync Best Practices
+
+on:
+  repository_dispatch:
+    types:
+      - best-practices-updated
+  workflow_dispatch:
+    inputs:
+      source_ref:
+        description: 'best-practices ref or SHA to import'
+        required: false
+        default: main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      SOURCE_REF: ${{ github.event.client_payload.sha || github.event.client_payload.ref || github.event.inputs.source_ref || 'main' }}
+
+    steps:
+      - name: Checkout website
+        uses: actions/checkout@v4
+
+      - name: Checkout best practices
+        uses: actions/checkout@v4
+        with:
+          repository: Dutch-Laravel-Foundation/best-practices
+          ref: ${{ env.SOURCE_REF }}
+          path: best-practices
+          token: ${{ secrets.BEST_PRACTICES_REPO_TOKEN || github.token }}
+
+      - name: Resolve source SHA
+        id: source
+        run: echo "sha=$(git -C best-practices rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+
+      - name: Install PHP dependencies
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Sync generated Statamic content
+        run: >
+          php artisan best-practices:sync best-practices
+          --source-sha="${{ steps.source.outputs.sha }}"
+          --github-base-url="https://github.com/Dutch-Laravel-Foundation/best-practices/blob/${{ steps.source.outputs.sha }}"
+
+      - name: Run focused importer tests
+        run: ./vendor/bin/phpunit tests/Feature/BestPracticesSyncCommandTest.php
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Build frontend assets
+        run: npm run build
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/best-practices-${{ steps.source.outputs.sha }}
+          delete-branch: true
+          title: 'Sync Laravel best practices'
+          commit-message: 'Sync Laravel best practices'
+          body: |
+            Imports Dutch-Laravel-Foundation/best-practices at `${{ steps.source.outputs.sha }}` into generated Statamic content.
+
+            This PR was created by the website-side best practices sync workflow.

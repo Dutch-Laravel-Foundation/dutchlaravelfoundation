@@ -1,0 +1,113 @@
+title: 'Best Practices'
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+              display: Titel
+          -
+            handle: content
+            field:
+              display: Content
+              type: markdown
+              container: assets
+              folder: /
+          -
+            handle: summary
+            field:
+              type: textarea
+              display: Summary
+              read_only: true
+          -
+            handle: chapters
+            field:
+              type: grid
+              display: Chapters
+              read_only: true
+              fields:
+                -
+                  handle: title
+                  field:
+                    type: text
+                    display: Title
+                -
+                  handle: anchor
+                  field:
+                    type: text
+                    display: Anchor
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'
+          -
+            handle: best_practice_categories
+            field:
+              type: terms
+              taxonomies:
+                - best_practice_categories
+              max_items: 1
+              display: Categorie
+          -
+            handle: category_slug
+            field:
+              type: text
+              display: 'Category slug'
+              read_only: true
+          -
+            handle: category_title
+            field:
+              type: text
+              display: 'Category title'
+              read_only: true
+          -
+            handle: source_path
+            field:
+              type: text
+              display: 'Source path'
+              read_only: true
+          -
+            handle: source_sha
+            field:
+              type: text
+              display: 'Source SHA'
+              read_only: true
+          -
+            handle: github_url
+            field:
+              type: link
+              display: 'GitHub URL'
+              read_only: true
+          -
+            handle: boost_skill_path
+            field:
+              type: text
+              display: 'Boost skill path'
+              read_only: true
+          -
+            handle: related_files
+            field:
+              type: list
+              display: 'Related files'
+              read_only: true
+  seo:
+    display: SEO
+    sections:
+      -
+        fields:
+          -
+            import: seo

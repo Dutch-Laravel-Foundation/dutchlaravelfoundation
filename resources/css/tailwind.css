@@ -330,6 +330,69 @@
         @apply inline px-2! py-1! rounded-md border-gray-100 border;
     }
 
+    /* Best practices — dark code blocks (GitHub Dark), scoped to article content */
+    .bp-content pre {
+        background: #0d1117;
+        border: 1px solid #1f2530;
+        overflow: hidden;
+        margin: 1.25rem 0;
+    }
+
+    .bp-content pre code,
+    .bp-content pre code.hljs {
+        display: block;
+        background-color: #0d1117 !important;
+        color: #c9d1d9 !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
+        padding: 1.25rem 1.375rem !important;
+        overflow-x: auto;
+        font-size: 13px;
+        line-height: 1.7;
+    }
+
+    .bp-content .hljs-doctag,
+    .bp-content .hljs-keyword,
+    .bp-content .hljs-meta .hljs-keyword,
+    .bp-content .hljs-template-tag,
+    .bp-content .hljs-template-variable,
+    .bp-content .hljs-type,
+    .bp-content .hljs-variable.language_ { color: #ff7b72; }
+    .bp-content .hljs-title,
+    .bp-content .hljs-title.class_,
+    .bp-content .hljs-title.class_.inherited__,
+    .bp-content .hljs-title.function_ { color: #d2a8ff; }
+    .bp-content .hljs-attr,
+    .bp-content .hljs-attribute,
+    .bp-content .hljs-literal,
+    .bp-content .hljs-meta,
+    .bp-content .hljs-number,
+    .bp-content .hljs-operator,
+    .bp-content .hljs-selector-attr,
+    .bp-content .hljs-selector-class,
+    .bp-content .hljs-selector-id,
+    .bp-content .hljs-variable { color: #79c0ff; }
+    .bp-content .hljs-meta .hljs-string,
+    .bp-content .hljs-regexp,
+    .bp-content .hljs-string { color: #a5d6ff; }
+    .bp-content .hljs-built_in,
+    .bp-content .hljs-symbol { color: #ffa657; }
+    .bp-content .hljs-code,
+    .bp-content .hljs-comment,
+    .bp-content .hljs-formula { color: #8b949e; }
+    .bp-content .hljs-name,
+    .bp-content .hljs-quote,
+    .bp-content .hljs-selector-pseudo,
+    .bp-content .hljs-selector-tag { color: #7ee787; }
+    .bp-content .hljs-subst { color: #c9d1d9; }
+    .bp-content .hljs-section { color: #1f6feb; font-weight: 700; }
+    .bp-content .hljs-bullet { color: #f2cc60; }
+    .bp-content .hljs-emphasis { color: #c9d1d9; font-style: italic; }
+    .bp-content .hljs-strong { color: #c9d1d9; font-weight: 700; }
+    .bp-content .hljs-addition { color: #aff5b4; background-color: #033a16; }
+    .bp-content .hljs-deletion { color: #ffdcd7; background-color: #67060c; }
+
     .red-note h3 {
         @apply !text-white my-0;
     }

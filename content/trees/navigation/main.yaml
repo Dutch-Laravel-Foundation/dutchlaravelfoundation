@@ -26,6 +26,10 @@ tree:
         id: f4a92e8d-3b71-4c5e-9d68-1a2b3c4d5e6f
         entry: acb86213-2b12-4ac7-ba9a-db8d9f021c82
         title: Aanbestedingen
+      -
+        id: e7c1a8d2-6b34-4f90-8a17-2d9c5f3b4e21
+        entry: 65cc1c09-8303-5da7-9ec6-0e157b9a0207
+        title: 'Best practices'
   -
     id: 8191f4bc-14a4-4911-a3d5-c9d282bb0946
     entry: 7840f9f9-3fba-4608-b877-250f18e634b2

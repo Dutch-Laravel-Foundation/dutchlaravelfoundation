@@ -1,0 +1,123 @@
+<div class="pt-32 lg:pt-52 pb-44 md:pb-64">
+    <section class="relative overflow-hidden bg-secondary-light/60 border-y border-secondary-light">
+        {{ partial:decoration/floor-background background="floor-top-knowledge" /}}
+        <div class="container mx-auto relative py-16 lg:py-24">
+            <div class="w-full lg:w-3/5 px-6 sm:px-0">
+                <span class="meta">Kennis · Best Practices</span>
+                {{ content }}
+                    {{ partial src="sets/autoload" }}
+                {{ /content }}
+            </div>
+        </div>
+    </section>
+
+    <div class="container mx-auto px-6 sm:px-0 pt-8 pb-16 lg:pt-10 lg:pb-20">
+        {{ total_practices = { collection:count in="best_practices" } }}
+        {{ category_count = 0 }}
+        {{ taxonomy:best_practice_categories }}
+            {{ category_count += 1 }}
+        {{ /taxonomy:best_practice_categories }}
+
+        <div
+            class="grid gap-10 lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-14"
+            x-data="{
+                activeCategory: 'all',
+                query: '',
+                sidebarOffset: 28,
+                stickyTop: 28,
+                sidebarStyle() {
+                    return `top: ${this.stickyTop}px; max-height: calc(100vh - ${this.stickyTop + this.sidebarOffset}px);`;
+                },
+                updateSidebarPosition() {
+                    const header = document.querySelector('header');
+
+                    if (!header || window.innerWidth < 1024) {
+                        this.stickyTop = this.sidebarOffset;
+
+                        return;
+                    }
+
+                    const headerHeight = header.offsetHeight || header.getBoundingClientRect().height || 0;
+                    const headerIsHidden = header.classList.contains('slideUp');
+
+                    this.stickyTop = headerIsHidden ? this.sidebarOffset : Math.ceil(headerHeight + this.sidebarOffset);
+                }
+            }"
+            x-init="
+                const update = () => requestAnimationFrame(() => updateSidebarPosition());
+                const header = document.querySelector('header');
+
+                update();
+                window.addEventListener('resize', update);
+                window.addEventListener('load', update);
+
+                if (header) {
+                    const observer = new MutationObserver(update);
+                    observer.observe(header, { attributes: true, attributeFilter: ['class'] });
+                    header.addEventListener('transitionend', update);
+                }
+            "
+            x-ref="grid"
+        >
+            <div x-ref="sidebarColumn" class="lg:relative lg:pt-8">
+                <aside x-ref="sidebar" class="lg:sticky lg:overflow-y-auto lg:pr-2" x-bind:style="sidebarStyle()">
+                    <div class="mb-7 hidden lg:block">
+                        <div class="relative">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-black/40">
+                                <path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" />
+                            </svg>
+                            <input type="search" x-model="query" placeholder="Zoek in best practices..." class="w-full border border-secondary-light bg-white py-3 pl-10 pr-4 text-sm text-black/70 placeholder:text-black/40 focus:border-primary-accent focus:outline-none">
+                        </div>
+                    </div>
+
+                    <span class="meta block mb-3">Categorieën</span>
+                    <nav class="flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:gap-0 lg:overflow-visible lg:pb-0" aria-label="Best practice categorieën">
+                        <button type="button" x-on:click="activeCategory = 'all'" class="flex min-w-max items-start justify-between gap-4 px-4 py-3 text-left text-sm font-bold transition duration-200 lg:min-w-0" x-bind:class="activeCategory === 'all' ? 'bg-primary-accent text-white' : 'text-black hover:bg-white hover:text-primary-accent'">
+                            <span>Alle categorieën</span>
+                            <span class="shrink-0 pt-0.5">{{ total_practices }}</span>
+                        </button>
+                        {{ taxonomy:best_practice_categories sort="title:asc" }}
+                            <button type="button" x-on:click="activeCategory = '{{ slug }}'" class="flex min-w-max items-start justify-between gap-4 px-4 py-3 text-left text-sm font-bold transition duration-200 lg:min-w-0" x-bind:class="activeCategory === '{{ slug }}' ? 'bg-primary-accent text-white' : 'text-black hover:bg-white hover:text-primary-accent'">
+                                <span>{{ title }}</span>
+                                {{ if practice_count > 0 }}
+                                    <span class="shrink-0 pt-0.5" x-bind:class="activeCategory === '{{ slug }}' ? 'text-white' : 'text-black/45'">{{ practice_count }}</span>
+                                {{ else }}
+                                    <span class="shrink-0 pt-0.5 text-[10px] font-bold uppercase tracking-wide" x-bind:class="activeCategory === '{{ slug }}' ? 'text-white/80' : 'text-black/30'">Binnenkort</span>
+                                {{ /if }}
+                            </button>
+                        {{ /taxonomy:best_practice_categories }}
+                    </nav>
+                </aside>
+            </div>
+
+            <section>
+                <div class="mb-8 max-w-3xl">
+                    <h2>Alle best practices</h2>
+                    <p>Doorzoek {{ total_practices }} richtlijnen uit {{ category_count }} categorieën, samengesteld door de Dutch Laravel Foundation community.</p>
+                </div>
+
+                {{ if total_practices > 0 }}
+                    <div class="flex flex-col gap-5">
+                        {{ collection:best_practices sort="title:asc" }}
+                            <a href="{{ url }}" x-show="(activeCategory === 'all' || activeCategory === '{{ category_slug }}') && (!query || $el.innerText.toLowerCase().includes(query.toLowerCase()))" class="group block border border-secondary-light bg-white p-6 transition duration-300 hover:!border-secondary-light hover:!bg-secondary-light lg:p-8">
+                                <span class="meta text-primary-accent">{{ category_title }}</span>
+                                <h3 class="mt-3 mb-3">{{ title }}</h3>
+                                {{ if summary }}
+                                    <p class="mb-5 text-base text-black/65">{{ summary }}</p>
+                                {{ /if }}
+                                <span class="inline-flex items-center gap-2 text-sm font-bold text-black">
+                                    Lees meer
+                                    <span class="transition duration-200 group-hover:translate-x-1">→</span>
+                                </span>
+                            </a>
+                        {{ /collection:best_practices }}
+                    </div>
+                {{ else }}
+                    {{ partial:blocks/base class="w-full" title="Binnenkort beschikbaar" category="Best Practices" }}
+                        <p>De Laravel best practices verschijnen hier zodra de eerste sync is uitgevoerd.</p>
+                    {{ /partial:blocks/base }}
+                {{ /if }}
+            </section>
+        </div>
+    </div>
+</div>
