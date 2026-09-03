@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ seo_metadata:title }}</title>
     <meta name="description" content="{{ seo_metadata:description }}">
+    {{ if noindex }}
+    <meta name="robots" content="noindex, follow">
+    {{ /if }}
     <link rel="canonical" href="{{ seo_metadata:canonical }}">
     <meta property="og:title" content="{{ seo_metadata:title }}">
     {{ meta_keywords_text = meta_keywords ? meta_keywords : seo:meta_keywords }}

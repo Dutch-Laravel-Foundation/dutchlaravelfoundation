@@ -1,6 +1,14 @@
 <?php
 
 it('legacy internal urls redirect to live pages', function () {
+    $this->get('/about-laravel')
+        ->assertStatus(301)
+        ->assertRedirect('/wat-is-laravel');
+
+    $this->get('/what-is-laravel')
+        ->assertStatus(301)
+        ->assertRedirect('/wat-is-laravel');
+
     $this->get('/calendar/laravel-directors-dinner')
         ->assertRedirect('/events/laravel-directors-dinner');
 
@@ -24,6 +32,17 @@ it('source pages no longer render retired links', function () {
     $this->get('/events/hackathon-dutch-laravel-foundation-x-mollie')
         ->assertOk()
         ->assertDontSee('/leden/avocado-media', false);
+
+    $this->get('/nieuws/september-wint-laraward-2023')
+        ->assertOk()
+        ->assertSee('/nieuws/larafest-2023-een-groot-feest', false)
+        ->assertDontSee('/insights/larafest-2023-een-groot-feest', false);
+
+    $this->get('/kennis/laravel-meer-dan-een-framework')
+        ->assertOk()
+        ->assertSee('/nieuws/larafest-2024-beach', false)
+        ->assertSee('/nieuws/web-whales-met-trippz-winnaar-laraward-2024', false)
+        ->assertDontSee('/insights/', false);
 
     $this->get('/nieuws/eerste-laravel-meetup-groot-succes')
         ->assertOk()

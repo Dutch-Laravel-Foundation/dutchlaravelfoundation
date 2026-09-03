@@ -29,7 +29,8 @@ Route::permanentRedirect(
 // General redirects
 Route::permanentRedirect('/about-us', '/over-ons');
 Route::permanentRedirect('/become-member', '/lid-worden');
-Route::permanentRedirect('/about-laravel', '/what-is-laravel');
+Route::permanentRedirect('/about-laravel', '/wat-is-laravel');
+Route::permanentRedirect('/what-is-laravel', '/wat-is-laravel');
 
 // Knowledge redirects
 Route::permanentRedirect('/knowledge/{slug?}', '/kennis/{slug?}');

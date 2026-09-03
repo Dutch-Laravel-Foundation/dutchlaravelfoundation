@@ -24,6 +24,30 @@ it('homepage has canonical metadata and organization structured data', function 
     expect($organization['email'])->toBe('info@dutchlaravelfoundation.nl');
     expect($organization['address']['addressLocality'])->toBe('Zoetermeer');
 });
+it('paginated indexes have self-referencing canonical metadata', function () {
+    foreach (['/kennis', '/nieuws', '/podcast'] as $path) {
+        $response = $this->get("{$path}?page=2&utm_source=test");
+
+        $response->assertOk();
+
+        $xpath = xpath($response);
+        $canonicalUrl = rtrim(config('app.url'), '/')."{$path}?page=2";
+
+        expect(attribute($xpath, '//link[@rel="canonical"]', 'href'))->toBe($canonicalUrl);
+        expect(attribute($xpath, '//meta[@property="og:url"]', 'content'))->toBe($canonicalUrl);
+    }
+});
+it('filtered indexes canonicalize to their unfiltered listing', function () {
+    $response = $this->get('/kennis?category=Tooling&page=2');
+
+    $response->assertOk();
+
+    $xpath = xpath($response);
+    $canonicalUrl = rtrim(config('app.url'), '/').'/kennis';
+
+    expect(attribute($xpath, '//link[@rel="canonical"]', 'href'))->toBe($canonicalUrl);
+    expect(attribute($xpath, '//meta[@property="og:url"]', 'content'))->toBe($canonicalUrl);
+});
 it('knowledge article uses its introduction and author in structured data', function () {
     $response = $this->get('/kennis/het-belang-van-toegankelijke-websites');
 
