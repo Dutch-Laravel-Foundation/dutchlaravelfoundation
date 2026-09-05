@@ -4,9 +4,8 @@ blueprint: author
 title: 'Dennis Koster'
 job_title: 'Developer bij Zig'
 photo_url: /assets/uploads/board/_dsc6999-(1).jpg
-description: 'Dennis Koster is developer bij Zig en bestuurslid van de Dutch Laravel Foundation. Endeavour is founding partner van de foundation en specialist in GraphQL.'
+description: 'Dennis Koster is Software Engineer bij Zig en bestuurslid van de Dutch Laravel Foundation.'
 linkedin_url: 'https://www.linkedin.com/in/dennis-koster-688b7b48/'
-website_url: 'https://endeavour.nl'
-updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
-updated_at: 1785418254
+updated_by: 50f8ca13-10c1-43f9-b0a5-20bab3cf4f86
+updated_at: 1788621079
 ---
