@@ -25,7 +25,7 @@ class EditorialPaginationTest extends TestCase
         $response->assertHeader('X-Inertia', 'true');
         $response->assertJsonPath('component', 'Editorial/InsightsIndex');
         $response->assertJsonPath('props.editorial.pagination.currentPage', 2);
-        $response->assertJsonPath('props.editorial.pagination.lastPage', 8);
+        $response->assertJsonPath('props.editorial.pagination.lastPage', 9);
         $response->assertJsonPath('props.editorial.pagination.hasMorePages', true);
         $response->assertJsonPath('mergeProps.0', 'editorial.items');
         $response->assertJsonPath('matchPropsOn.0', 'editorial.items.id');
