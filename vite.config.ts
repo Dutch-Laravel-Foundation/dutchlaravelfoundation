@@ -8,6 +8,7 @@ import { run } from "vite-plugin-run";
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, process.cwd(), "");
     const appUrl = env.VITE_APP_URL ? new URL(env.VITE_APP_URL) : null;
+    const inertiaSsrUrl = env.INERTIA_SSR_URL ? new URL(env.INERTIA_SSR_URL) : null;
 
     return {
         plugins: [
@@ -24,6 +25,7 @@ export default defineConfig(({ mode }) => {
             inertia({
                 ssr: {
                     host: "127.0.0.1",
+                    ...(inertiaSsrUrl?.port ? { port: Number(inertiaSsrUrl.port) } : {}),
                 },
             }),
             react(),

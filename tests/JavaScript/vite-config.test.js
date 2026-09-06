@@ -16,6 +16,13 @@ test("the Inertia SSR renderer only listens on loopback", () => {
     assert.match(source, /ssr:\s*\{\s*host:\s*["']127\.0\.0\.1["']/);
 });
 
+test("the Inertia SSR renderer uses the configured production port", () => {
+    const source = readFileSync(new URL("../../vite.config.ts", import.meta.url), "utf8");
+
+    assert.match(source, /INERTIA_SSR_URL/);
+    assert.match(source, /port:\s*Number\(inertiaSsrUrl\.port\)/);
+});
+
 test("Vite has no legacy Statamic or Alpine frontend entrypoint", () => {
     const source = readFileSync(new URL("../../vite.config.ts", import.meta.url), "utf8");
     const packageJson = JSON.parse(
