@@ -12,6 +12,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <script defer data-domain="dlf-react.platform11.nl" src="https://analytics.dlf-react.platform11.nl/js/script.js"></script>
+
         <script @cspNonce>
             if (
                 /iPad|iPhone|iPod/.test(navigator.userAgent) ||
