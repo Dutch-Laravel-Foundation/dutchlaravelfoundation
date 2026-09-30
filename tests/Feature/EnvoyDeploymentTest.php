@@ -203,6 +203,12 @@ final class EnvoyDeploymentTest extends TestCase
         $recipe = $this->recipe();
 
         $this->assertStringContainsString('pm2 restart "$SSR_PROCESS"', $recipe);
+        $this->assertStringContainsString(
+            'pm2 start php --interpreter none --name "$SSR_PROCESS" --cwd "$CURRENT_PATH" -- artisan inertia:start-ssr',
+            $recipe,
+        );
+        $this->assertStringContainsString('pm2 stop "$SSR_PROCESS"', $recipe);
+        $this->assertStringContainsString('pm2 save', $recipe);
         $this->assertAppearsBefore('    ACTIVATED=1', "    restart_ssr\n", $recipe);
         $this->assertAppearsBefore("    restart_ssr\n", "    check_ssr\n", $recipe);
         $this->assertAppearsBefore("    check_ssr\n", 'php artisan responsecache:warm', $recipe);

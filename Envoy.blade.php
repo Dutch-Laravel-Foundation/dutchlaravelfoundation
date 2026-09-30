@@ -49,8 +49,7 @@
     REPOSITORY='git@github.com:Dutch-Laravel-Foundation/dutchlaravelfoundation.git'
     HEALTH_URL='https://dutchlaravelfoundation.nl/up'
     KEEP_RELEASES=6
-    # PM2 process that runs the Inertia SSR server from $CURRENT_PATH. One-time setup as the deploy user:
-    # pm2 start php --name dlf-ssr --cwd "$CURRENT_PATH" -- artisan inertia:start-ssr && pm2 save
+    # PM2 process that runs the Inertia SSR server from $CURRENT_PATH. restart_ssr creates it on first use.
     SSR_PROCESS='dlf-ssr'
     CURRENT_PATH="$BASE_PATH/current"
     LOCK_PATH="$BASE_PATH/.deployment-lock"
@@ -93,7 +92,20 @@
 
     # The SSR server keeps the previous release's bundle in memory until it restarts.
     restart_ssr() {
-        pm2 restart "$SSR_PROCESS"
+        # A release without an SSR bundle (the Antlers site) must not leave PM2 restarting a failing server.
+        if [ ! -f "$CURRENT_PATH/bootstrap/ssr/ssr.js" ]; then
+            pm2 stop "$SSR_PROCESS" >/dev/null 2>&1 || true
+            return 0
+        fi
+
+        if pm2 describe "$SSR_PROCESS" >/dev/null 2>&1; then
+            pm2 restart "$SSR_PROCESS"
+        else
+            pm2 start php --interpreter none --name "$SSR_PROCESS" --cwd "$CURRENT_PATH" -- artisan inertia:start-ssr
+        fi
+
+        # Keep the process in the list that pm2-<user>.service restores after a reboot.
+        pm2 save
     }
 
     check_ssr() {
