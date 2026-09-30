@@ -21,22 +21,49 @@ final class RedirectToCanonicalHost
 
         $canonicalHost = strtolower($canonicalHost);
         $requestHost = strtolower($request->getHost());
-
-        if ($requestHost === $canonicalHost) {
-            return $next($request);
-        }
-
         $normalizedHost = rtrim($requestHost, '.');
 
         if (! in_array($normalizedHost, [$canonicalHost, "www.{$canonicalHost}"], true)) {
             return $next($request);
         }
 
+        $requestUri = $request->getRequestUri();
+        $requestPath = parse_url($requestUri, PHP_URL_PATH);
+        $hasTrailingSlash = is_string($requestPath)
+            && $requestPath !== '/'
+            && str_ends_with($requestPath, '/');
+        $hasFirstPageParameter = in_array($request->getMethod(), ['GET', 'HEAD'], true)
+            && $request->query('page') === '1';
+
+        if ($requestHost === $canonicalHost && ! $hasTrailingSlash && ! $hasFirstPageParameter) {
+            return $next($request);
+        }
+
+        if ($hasTrailingSlash || $hasFirstPageParameter) {
+            $requestUri = is_string($requestPath) ? $requestPath : $request->getPathInfo();
+
+            if ($hasTrailingSlash) {
+                $requestUri = rtrim($requestUri, '/');
+            }
+
+            if ($hasFirstPageParameter) {
+                $query = $request->query();
+                unset($query['page']);
+                $queryString = http_build_query($query);
+            } else {
+                $queryString = $request->getQueryString();
+            }
+
+            if ($queryString !== null && $queryString !== '') {
+                $requestUri .= "?{$queryString}";
+            }
+        }
+
         $scheme = $canonicalUrl['scheme'] ?? $request->getScheme();
         $port = isset($canonicalUrl['port']) ? ":{$canonicalUrl['port']}" : '';
 
         return redirect()->away(
-            "{$scheme}://{$canonicalHost}{$port}{$request->getRequestUri()}",
+            "{$scheme}://{$canonicalHost}{$port}{$requestUri}",
             Response::HTTP_PERMANENTLY_REDIRECT,
         );
     }

@@ -42,6 +42,34 @@ class SeoMetadataTest extends TestCase
         $this->assertSame('Zoetermeer', $organization['address']['addressLocality']);
     }
 
+    public function test_paginated_indexes_have_self_referencing_canonical_metadata(): void
+    {
+        foreach (['/kennis', '/nieuws', '/podcast'] as $path) {
+            $response = $this->get("{$path}?page=2&utm_source=test");
+
+            $response->assertOk();
+
+            $xpath = $this->xpath($response);
+            $canonicalUrl = rtrim(config('app.url'), '/')."{$path}?page=2";
+
+            $this->assertSame($canonicalUrl, $this->attribute($xpath, '//link[@rel="canonical"]', 'href'));
+            $this->assertSame($canonicalUrl, $this->attribute($xpath, '//meta[@property="og:url"]', 'content'));
+        }
+    }
+
+    public function test_filtered_indexes_canonicalize_to_their_unfiltered_listing(): void
+    {
+        $response = $this->get('/kennis?category=Tooling&page=2');
+
+        $response->assertOk();
+
+        $xpath = $this->xpath($response);
+        $canonicalUrl = rtrim(config('app.url'), '/').'/kennis';
+
+        $this->assertSame($canonicalUrl, $this->attribute($xpath, '//link[@rel="canonical"]', 'href'));
+        $this->assertSame($canonicalUrl, $this->attribute($xpath, '//meta[@property="og:url"]', 'content'));
+    }
+
     public function test_knowledge_article_uses_its_introduction_and_author_in_structured_data(): void
     {
         $response = $this->get('/kennis/het-belang-van-toegankelijke-websites');

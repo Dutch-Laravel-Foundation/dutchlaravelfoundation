@@ -33,6 +33,7 @@ final class HandleInertiaRequests extends Middleware
                     'description' => $seoMetadata->description($entry),
                     'keywords' => $seoMetadata->keywords($entry),
                     'canonicalUrl' => $seoMetadata->canonicalUrl($entry),
+                    'noindex' => $seoMetadata->noindex($entry),
                     'openGraphType' => $seoMetadata->openGraphType($entry),
                     'socialImageUrl' => $seoMetadata->socialImageUrl($entry),
                     'jsonLd' => $seoMetadata->jsonLd($entry),

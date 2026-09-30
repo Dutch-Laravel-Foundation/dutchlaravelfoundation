@@ -5,6 +5,7 @@ type SeoMetadata = {
     description: string;
     jsonLd: string;
     keywords: string | null;
+    noindex: boolean;
     openGraphType: string;
     socialImageUrl: string;
     title: string;
@@ -25,6 +26,9 @@ export function SiteMetadataHead() {
             <meta head-key="description" name="description" content={seo.description} />
             {seo.keywords ? (
                 <meta head-key="keywords" name="keywords" content={seo.keywords} />
+            ) : null}
+            {seo.noindex ? (
+                <meta head-key="robots" name="robots" content="noindex, follow" />
             ) : null}
             <link head-key="canonical" rel="canonical" href={seo.canonicalUrl} />
             <meta head-key="og-title" property="og:title" content={seo.title} />

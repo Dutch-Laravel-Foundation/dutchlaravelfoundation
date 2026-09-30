@@ -101,6 +101,7 @@ class AppServiceProvider extends ServiceProvider
                 ->name('MailTransport')
                 ->label('Outbound mail'),
             UsedDiskSpaceCheck::new()
+                ->warnWhenUsedSpaceIsAbovePercentage(85)
                 ->name('UsedDiskSpace')
                 ->label('Disk space'),
         ]);

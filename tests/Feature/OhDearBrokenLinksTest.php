@@ -10,6 +10,11 @@ class OhDearBrokenLinksTest extends TestCase
     public function test_legacy_internal_urls_redirect_to_live_pages(): void
     {
         $this->get('/about-laravel')
+            ->assertStatus(301)
+            ->assertRedirect('/wat-is-laravel');
+
+        $this->get('/what-is-laravel')
+            ->assertStatus(301)
             ->assertRedirect('/wat-is-laravel');
 
         $this->get('/calendar/laravel-directors-dinner')
@@ -54,6 +59,32 @@ class OhDearBrokenLinksTest extends TestCase
         $this->assertStringNotContainsString(
             '/leden/avocado-media',
             $this->contentHtml($hackathon),
+        );
+
+        $laraward = $this->inertia('/nieuws/september-wint-laraward-2023');
+        $laraward->assertOk();
+        $larawardContent = json_encode($laraward->json('props'), JSON_UNESCAPED_SLASHES);
+        $this->assertStringContainsString(
+            '/nieuws/larafest-2023-een-groot-feest',
+            $larawardContent,
+        );
+        $this->assertStringNotContainsString(
+            '/insights/larafest-2023-een-groot-feest',
+            $larawardContent,
+        );
+
+        $framework = $this->inertia('/kennis/laravel-meer-dan-een-framework');
+        $framework->assertOk();
+        $frameworkContent = json_encode($framework->json('props'), JSON_UNESCAPED_SLASHES);
+        $this->assertStringContainsString('/nieuws/larafest-2024-beach', $frameworkContent);
+        $this->assertStringContainsString(
+            '/nieuws/web-whales-met-trippz-winnaar-laraward-2024',
+            $frameworkContent,
+        );
+        $this->assertStringNotContainsString('/insights/larafest-2024-beach', $frameworkContent);
+        $this->assertStringNotContainsString(
+            '/insights/web-whales-met-trippz-winnaar-laraward-2024',
+            $frameworkContent,
         );
 
         $meetup = $this->inertia('/nieuws/eerste-laravel-meetup-groot-succes');

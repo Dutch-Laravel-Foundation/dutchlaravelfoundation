@@ -3,7 +3,7 @@ type ConsentValue = "denied" | "granted";
 type TrackerFunction = ((...parameters: unknown[]) => void) & {
     dlfRevoked?: boolean;
     q: unknown[][];
-    t?: number;
+    t?: string;
 };
 
 type TrackerWindow = Window & {
@@ -75,7 +75,7 @@ function initLeadinfo(documentRoot: Document, browserWindow: TrackerWindow) {
         leadinfo.q.push(parameters);
     }) as TrackerFunction;
     leadinfo.q = [];
-    leadinfo.t = Date.now();
+    leadinfo.t = "LI-643558C020FD3";
     browserWindow.leadinfo = leadinfo;
 
     loadScript(documentRoot, "https://cdn.leadinfo.net/ping.js");

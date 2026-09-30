@@ -47,6 +47,9 @@
             @if ($keywords = $seoMetadata->keywords($entry))
                 <meta name="keywords" content="{{ $keywords }}" data-inertia="keywords">
             @endif
+            @if ($seoMetadata->noindex($entry))
+                <meta name="robots" content="noindex, follow" data-inertia="robots">
+            @endif
             <link rel="canonical" href="{{ $canonicalUrl }}" data-inertia="canonical">
             <meta property="og:title" content="{{ $title }}" data-inertia="og-title">
             <meta property="og:type" content="{{ $seoMetadata->openGraphType($entry) }}" data-inertia="og-type">

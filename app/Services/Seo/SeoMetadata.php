@@ -14,6 +14,12 @@ use Statamic\Structures\Page;
 
 final class SeoMetadata
 {
+    private const PAGINATED_INDEX_URIS = [
+        '/kennis',
+        '/nieuws',
+        '/podcast',
+    ];
+
     public function title(?Entry $entry): string
     {
         $siteName = $this->organizationValue('title', 'Dutch Laravel Foundation');
@@ -86,7 +92,25 @@ final class SeoMetadata
             return "{$baseUrl}/";
         }
 
-        return $baseUrl.'/'.ltrim($uri, '/');
+        $canonicalUrl = $baseUrl.'/'.ltrim($uri, '/');
+        $page = request()->query('page');
+
+        if (
+            in_array($uri, self::PAGINATED_INDEX_URIS, true)
+            && request()->query('category') === null
+            && is_string($page)
+            && ctype_digit($page)
+            && (int) $page > 1
+        ) {
+            return "{$canonicalUrl}?page=" . (int) $page;
+        }
+
+        return $canonicalUrl;
+    }
+
+    public function noindex(?Entry $entry): bool
+    {
+        return (bool) $entry?->get('noindex');
     }
 
     public function openGraphType(?Entry $entry): string

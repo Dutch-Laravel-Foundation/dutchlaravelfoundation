@@ -102,7 +102,7 @@ class KnowledgeAuthorsTest extends TestCase
                 'id' => 'ae0015ae-5d98-4b16-b952-3845bab456b4',
                 'title' => 'Dennis Koster',
                 'linkedin_url' => 'https://www.linkedin.com/in/dennis-koster-688b7b48/',
-                'website_url' => 'https://endeavour.nl',
+                'photo' => 'dennis-koster.png',
             ],
             'nick-retel.md' => [
                 'id' => 'dee61b68-cabe-4246-b927-2cdcddacb8ba',
