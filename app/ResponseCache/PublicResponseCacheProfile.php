@@ -35,7 +35,25 @@ final class PublicResponseCacheProfile extends CacheAllSuccessfulGetRequests
         'token',
     ];
 
+    /**
+     * Query parameters that shape a cacheable page. Requests with any other parameter
+     * (including utm_* and gclid) are rendered fresh and never stored, so visitors cannot
+     * fill the cache with variants or leak their parameters into other visitors' pages.
+     *
+     * @var list<string>
+     */
+    private const CACHEABLE_QUERY_PARAMETERS = ['page', 'category'];
+
+    private const MAX_CACHEABLE_PAGE = 1000;
+
+    private const MAX_CATEGORY_LENGTH = 64;
+
     public function __construct(private readonly HandleInertiaRequests $inertia) {}
+
+    public function enabled(Request $request): bool
+    {
+        return parent::enabled($request) && $this->hasCacheableQuery($request);
+    }
 
     public function shouldCacheRequest(Request $request): bool
     {
@@ -78,6 +96,25 @@ final class PublicResponseCacheProfile extends CacheAllSuccessfulGetRequests
     public function shouldCacheResponse(Response $response): bool
     {
         return $response->isSuccessful() && $this->hasCacheableContentType($response);
+    }
+
+    private function hasCacheableQuery(Request $request): bool
+    {
+        foreach ($request->query() as $key => $value) {
+            if (! in_array($key, self::CACHEABLE_QUERY_PARAMETERS, true) || ! is_string($value)) {
+                return false;
+            }
+        }
+
+        $page = $request->query('page');
+
+        if ($page !== null && (! ctype_digit($page) || (int) $page < 1 || (int) $page > self::MAX_CACHEABLE_PAGE)) {
+            return false;
+        }
+
+        $category = $request->query('category');
+
+        return $category === null || mb_strlen($category) <= self::MAX_CATEGORY_LENGTH;
     }
 
     public function useCacheNameSuffix(Request $request): string

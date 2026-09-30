@@ -81,6 +81,35 @@ final class PublicResponseCacheTest extends TestCase
         );
     }
 
+    public function test_only_page_and_category_query_strings_are_cached(): void
+    {
+        $this->get('/nieuws?page=2')->assertHeader('X-Cache-Status', 'MISS');
+        $this->get('/nieuws?page=2')->assertHeader('X-Cache-Status', 'HIT');
+
+        foreach ([
+            '/nieuws?utm_source=newsletter',
+            '/nieuws?gclid=abc',
+            '/nieuws?unknown=1',
+            '/nieuws?page=abc',
+            '/nieuws?page=1001',
+            '/nieuws?category='.str_repeat('a', 65),
+        ] as $uri) {
+            $this->get($uri);
+            $repeat = $this->get($uri);
+
+            $this->assertNotSame('HIT', $repeat->headers->get('X-Cache-Status'), $uri);
+        }
+    }
+
+    public function test_tracking_parameters_stay_on_the_rendered_page(): void
+    {
+        $this->get('/stagebank');
+
+        $this->withHeaders($this->inertiaHeaders())
+            ->get('/stagebank?utm_source=newsletter')
+            ->assertJsonPath('url', '/stagebank?utm_source=newsletter');
+    }
+
     public function test_response_cache_runs_before_inertia_and_statamic_page_resolution(): void
     {
         $router = app(Router::class);

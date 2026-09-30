@@ -84,19 +84,11 @@ return [
     ],
 
     /*
-     * These query parameters will be ignored when generating
-     * the cache key. This is useful for ignoring tracking
-     * parameters like UTM tags, gclid and also fbclid.
+     * Not used: PublicResponseCacheProfile does not cache requests with query
+     * parameters other than page and category, so tracking parameters such as
+     * utm_* and gclid reach the rendered page unchanged.
      */
-    'ignored_query_parameters' => [
-        'utm_source',
-        'utm_medium',
-        'utm_campaign',
-        'utm_term',
-        'utm_content',
-        'gclid',
-        'fbclid',
-    ],
+    'ignored_query_parameters' => [],
 
     /*
      * The given class determines if a request should be cached.
