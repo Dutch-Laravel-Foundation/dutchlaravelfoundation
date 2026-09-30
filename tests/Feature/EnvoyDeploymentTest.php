@@ -215,6 +215,22 @@ final class EnvoyDeploymentTest extends TestCase
         $this->assertStringContainsString("        restart_ssr || echo", $recipe);
     }
 
+    public function testItClearsTheResponseCacheWhenTheActiveReleaseChanges(): void
+    {
+        $recipe = $this->recipe();
+
+        $activationClear = "\n    php \"\$RELEASE_PATH/artisan\" responsecache:clear\n";
+
+        $this->assertAppearsBefore('    ACTIVATED=1', $activationClear, $recipe);
+        $this->assertAppearsBefore($activationClear, "\n    check_health\n", $recipe);
+        $this->assertStringContainsString(
+            '        php "$RELEASE_PATH/artisan" responsecache:clear || echo',
+            $recipe,
+        );
+        $this->assertAppearsBefore('    HEALTHY=1', 'php artisan responsecache:warm', $recipe);
+        $this->assertStringContainsString('if ! php artisan responsecache:warm', $recipe);
+    }
+
     public function testItIgnoresRebuildableGlideDerivatives(): void
     {
         $projectPath = dirname(__DIR__, 2);

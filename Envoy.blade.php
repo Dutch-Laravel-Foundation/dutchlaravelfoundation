@@ -138,6 +138,8 @@
         activate_release "$PREVIOUS_RELEASE"
         reset_opcache
         restart_ssr || echo 'Unable to restart the SSR server after rollback.' >&2
+        # Pages cached by the failed release point to asset files the previous release lacks.
+        php "$RELEASE_PATH/artisan" responsecache:clear || echo 'Unable to clear the response cache after rollback.' >&2
         echo "Rollback completed: $PREVIOUS_RELEASE"
     }
 
@@ -371,11 +373,18 @@
 
     reset_opcache
     restart_ssr
+    # Cached pages from the previous release point to its asset files.
+    php "$RELEASE_PATH/artisan" responsecache:clear
     check_health
     check_ssr
-    php artisan responsecache:clear
-    php artisan responsecache:warm --base-url=https://dutchlaravelfoundation.nl --concurrency=20
     HEALTHY=1
+
+    # Drop pages cached while SSR was starting. A failed warm-up is not a reason to roll back:
+    # the release is healthy and uncached pages are cached on their first visit.
+    php artisan responsecache:clear
+    if ! php artisan responsecache:warm --base-url=https://dutchlaravelfoundation.nl --concurrency=20; then
+        echo 'Response cache warm-up failed; pages will be cached on their first visit.' >&2
+    fi
 
     if ! cleanup_releases; then
         echo 'Release cleanup failed after a healthy activation; manual cleanup is required.' >&2
