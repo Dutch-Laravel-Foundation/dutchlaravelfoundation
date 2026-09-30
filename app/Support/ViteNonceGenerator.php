@@ -11,6 +11,8 @@ final class ViteNonceGenerator implements NonceGenerator
 {
     public function generate(): string
     {
-        return Vite::useCspNonce(base64_encode(random_bytes(16)));
+        // Hex, not base64: JSON escapes '/' as '\/', so a base64 nonce in cached Inertia
+        // props was not found and replaced by the response cache.
+        return Vite::useCspNonce(bin2hex(random_bytes(16)));
     }
 }
