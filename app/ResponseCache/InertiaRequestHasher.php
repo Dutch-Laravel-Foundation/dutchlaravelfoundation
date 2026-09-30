@@ -31,6 +31,9 @@ final class InertiaRequestHasher extends DefaultHasher
             ])
             ->all();
 
+        // The default hash ignores scheme and port, which change every generated URL.
+        $responseShape['origin'] = $request->getSchemeAndHttpHost();
+
         return hash('xxh128', parent::getHashFor($request).json_encode($responseShape, JSON_THROW_ON_ERROR));
     }
 }
