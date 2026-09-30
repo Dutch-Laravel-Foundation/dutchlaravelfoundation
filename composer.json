@@ -6,7 +6,7 @@
     "require": {
         "php": "^8.4",
         "aryehraber/statamic-captcha": "^1.16",
-        "inertiajs/inertia-laravel": "3.3.0 as 2.99.99",
+        "inertiajs/inertia-laravel": "^3.3",
         "laravel/framework": "^13.0",
         "laravel/tinker": "^3.0",
         "pecotamic/sitemap": "^2.0",
