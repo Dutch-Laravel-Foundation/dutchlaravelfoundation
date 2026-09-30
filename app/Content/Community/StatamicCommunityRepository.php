@@ -60,12 +60,13 @@ final readonly class StatamicCommunityRepository implements CommunityRepository
         }
         GRAPHQL;
 
+    // Same order as the collections' default sort, which the Antlers member page used.
     private const string MEMBER_RELATED_CONTENT = <<<'GRAPHQL'
         query MemberRelatedContent($site: String!, $memberFilter: JsonArgument!) {
-            internships: entries(collection: ["internships"], site: $site, limit: 500, filter: $memberFilter) {
+            internships: entries(collection: ["internships"], site: $site, limit: 500, filter: $memberFilter, sort: ["title desc"]) {
                 data { ...InternshipFields }
             }
-            cases: entries(collection: ["cases"], site: $site, limit: 3, filter: $memberFilter) {
+            cases: entries(collection: ["cases"], site: $site, limit: 3, filter: $memberFilter, sort: ["date asc"]) {
                 data { ...CaseCardFields }
             }
         }
