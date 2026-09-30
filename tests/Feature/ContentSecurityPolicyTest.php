@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
+use App\ContentSecurityPolicy;
 use Illuminate\Foundation\Vite;
+use Spatie\Csp\Policy;
 use Tests\TestCase;
 
 final class ContentSecurityPolicyTest extends TestCase
@@ -166,5 +168,29 @@ final class ContentSecurityPolicyTest extends TestCase
         $this->get('/cp')
             ->assertHeaderMissing('Content-Security-Policy')
             ->assertHeaderMissing('Content-Security-Policy-Report-Only');
+    }
+
+    public function test_drift_endpoints_are_allowed_only_in_local_development(): void
+    {
+        config([
+            'toolbar.dictation.provider' => 'post',
+            'toolbar.dictation.post_url' => 'http://127.0.0.1:12321/dictate',
+            'toolbar.dictation.stop_url' => 'http://127.0.0.1:12321/dictate-stop',
+        ]);
+
+        foreach (['local' => true, 'production' => false] as $environment => $allowed) {
+            $this->app->instance('env', $environment);
+            $policy = new Policy;
+            $this->app->make(ContentSecurityPolicy::class)->configure($policy);
+            $contents = $policy->getContents();
+
+            foreach (['dictate', 'dictate-stop'] as $path) {
+                if ($allowed) {
+                    $this->assertStringContainsString('http://127.0.0.1:12321/'.$path, $contents);
+                } else {
+                    $this->assertStringNotContainsString('http://127.0.0.1:12321/'.$path, $contents);
+                }
+            }
+        }
     }
 }
