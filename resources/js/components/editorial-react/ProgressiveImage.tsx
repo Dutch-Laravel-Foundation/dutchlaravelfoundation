@@ -80,10 +80,8 @@ export function ProgressiveImage({
                 return;
             }
 
-            void decodeImage(image, source).then(() => {
-                setCached(true);
-                setMediaState("loaded");
-            });
+            // Already complete at hydration (for example from the HTTP cache): still fade in, like the Antlers site.
+            void decodeImage(image, source).then(() => setMediaState("loaded"));
         }
     }, [source]);
 
