@@ -23,6 +23,8 @@ use Inertia\ScrollMetadata;
 
 final readonly class EditorialPageController
 {
+    private const MAX_PAGE = 1000;
+
     public function __construct(
         private EditorialRepository $editorial,
         private EditorialDataMapper $editorialMapper,
@@ -171,7 +173,12 @@ final readonly class EditorialPageController
 
     private function pageNumber(Request $request): int
     {
-        return max(1, $request->integer('page', 1));
+        $page = $request->integer('page', 1);
+
+        // GraphQL integers are 32-bit; far larger values caused a 500 instead of a 404.
+        abort_if($page > self::MAX_PAGE, 404);
+
+        return max(1, $page);
     }
 
     private function scrollMetadata(PaginationData $pagination): ScrollMetadata
