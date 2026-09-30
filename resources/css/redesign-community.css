@@ -842,7 +842,14 @@
 /* Become a member */
 .dlf-lid-hero-copy {
     padding: 48px 40px 40px;
+    border-top: 1px solid var(--dlf-line);
     border-bottom: 1px solid var(--dlf-line);
+}
+
+@layer base {
+    body:has(.dlf-become-member-page) .dlf-header {
+        border-bottom: 0 !important;
+    }
 }
 
 .dlf-become-member-page > .dlf-community-section:first-child,
@@ -1750,10 +1757,6 @@
 
     .dlf-become-member-page > .dlf-community-section:first-child .dlf-community-photo {
         border-left: 1px solid var(--dlf-line);
-    }
-
-    .dlf-become-member-page .dlf-lid-hero-copy {
-        border-bottom: 0;
     }
 
     .dlf-lid-left > .dlf-lid-content-block:first-child {

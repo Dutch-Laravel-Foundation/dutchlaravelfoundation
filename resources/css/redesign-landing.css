@@ -760,6 +760,8 @@
 }
 
 .dlf-bm-ink-band {
+    --dlf-divider-color: rgb(255 255 255 / 12%);
+
     position: relative;
     z-index: 6;
     width: 100vw;
@@ -831,19 +833,9 @@
 }
 
 .dlf-bm--tender .dlf-bm-ink-band__grid {
-    position: relative;
-    border-top: 0;
-}
-
-.dlf-bm--tender .dlf-bm-ink-band__grid::before {
-    position: absolute;
-    top: 0;
-    left: 50%;
     width: 100vw;
-    border-top: 1px solid rgb(255 255 255 / 16%);
-    content: "";
-    pointer-events: none;
-    transform: translateX(-50%);
+    margin-inline: calc(50% - 50vw);
+    padding-inline: max(calc((100vw - var(--dlf-max)) / 2), 0px);
 }
 
 .dlf-bm-ink-band .dlf-bm-ink-band__grid > article {

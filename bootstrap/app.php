@@ -1,10 +1,17 @@
 <?php
 
+use App\Http\Controllers\ErrorPageController;
+use App\Http\Middleware\AddDiscoveryHeaders;
 use App\Http\Middleware\AddPublicContentSecurityPolicyHeaders;
+use App\Http\Middleware\HandleInertiaRequests;
 use App\Http\Middleware\RedirectToCanonicalHost;
+use App\Http\Middleware\ServeMarkdown;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
+use Symfony\Component\HttpFoundation\Response;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -13,14 +20,44 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->trustProxies(at: '*');
+        // Production runs behind HAProxy on the same host, which terminates TLS and resets
+        // X-Forwarded-For/Proto/Host. It passes client X-Forwarded-Port/Prefix through, so
+        // those are not trusted (they would poison cached URLs).
+        $middleware->trustProxies(
+            at: ['127.0.0.1', '::1'],
+            headers: Request::HEADER_X_FORWARDED_FOR
+                | Request::HEADER_X_FORWARDED_HOST
+                | Request::HEADER_X_FORWARDED_PROTO,
+        );
         $middleware->prepend(RedirectToCanonicalHost::class);
         $middleware->append(AddPublicContentSecurityPolicyHeaders::class);
         $middleware->appendToGroup('web', [
-            \App\Http\Middleware\AddDiscoveryHeaders::class,
-            \App\Http\Middleware\ServeMarkdown::class,
+            AddDiscoveryHeaders::class,
+            ServeMarkdown::class,
+        ]);
+        $middleware->alias([
+            'inertia' => HandleInertiaRequests::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->respond(function (Response $response, Throwable $exception, Request $request): Response {
+            if (app()->environment('local', 'testing')) {
+                return $response;
+            }
+
+            $status = $response->getStatusCode();
+            $route = $request->route();
+
+            if (
+                ! in_array($status, [403, 404, 500, 503], true)
+                || ! $route instanceof Route
+                || ! in_array('inertia', $route->gatherMiddleware(), true)
+                || $request->is('cp', 'cp/*')
+                || ($request->expectsJson() && ! $request->header('X-Inertia'))
+            ) {
+                return $response;
+            }
+
+            return resolve(ErrorPageController::class)->render($request, $status);
+        });
     })->create();

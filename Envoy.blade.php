@@ -49,6 +49,8 @@
     REPOSITORY='git@github.com:Dutch-Laravel-Foundation/dutchlaravelfoundation.git'
     HEALTH_URL='https://dutchlaravelfoundation.nl/up'
     KEEP_RELEASES=6
+    # PM2 process that runs the Inertia SSR server from $CURRENT_PATH. restart_ssr creates it on first use.
+    SSR_PROCESS='dlf-ssr'
     CURRENT_PATH="$BASE_PATH/current"
     LOCK_PATH="$BASE_PATH/.deployment-lock"
     SWITCH_LINK="$BASE_PATH/.current-$RELEASE_NAME"
@@ -88,6 +90,44 @@
         cachetool opcache:reset --fcgi="$FPM_SOCKET"
     }
 
+    # The SSR server keeps the previous release's bundle in memory until it restarts.
+    restart_ssr() {
+        # A release without an SSR bundle (the Antlers site) must not leave PM2 restarting a failing server.
+        if [ ! -f "$CURRENT_PATH/bootstrap/ssr/ssr.js" ]; then
+            pm2 stop "$SSR_PROCESS" >/dev/null 2>&1 || true
+            return 0
+        fi
+
+        if pm2 describe "$SSR_PROCESS" >/dev/null 2>&1; then
+            pm2 restart "$SSR_PROCESS"
+        else
+            pm2 start php --interpreter none --name "$SSR_PROCESS" --cwd "$CURRENT_PATH" -- artisan inertia:start-ssr
+        fi
+
+        # Keep the process in the list that pm2-<user>.service restores after a reboot.
+        pm2 save
+    }
+
+    check_ssr() {
+        local attempt=1
+        local maximum_attempts=6
+
+        while [ "$attempt" -le "$maximum_attempts" ]; do
+            if php artisan inertia:check-ssr; then
+                return 0
+            fi
+
+            if [ "$attempt" -lt "$maximum_attempts" ]; then
+                sleep 5
+            fi
+
+            attempt=$((attempt + 1))
+        done
+
+        echo "SSR check failed after $maximum_attempts attempts." >&2
+        return 1
+    }
+
     rollback_release() {
         if [ -z "$PREVIOUS_RELEASE" ] || [ ! -d "$PREVIOUS_RELEASE" ]; then
             echo 'The previous release is unavailable; automatic rollback is impossible.' >&2
@@ -97,6 +137,9 @@
         echo "Rolling back to $PREVIOUS_RELEASE"
         activate_release "$PREVIOUS_RELEASE"
         reset_opcache
+        restart_ssr || echo 'Unable to restart the SSR server after rollback.' >&2
+        # Pages cached by the failed release point to asset files the previous release lacks.
+        php "$RELEASE_PATH/artisan" responsecache:clear || echo 'Unable to clear the response cache after rollback.' >&2
         echo "Rollback completed: $PREVIOUS_RELEASE"
     }
 
@@ -309,7 +352,7 @@
         --prefer-dist \
         --no-interaction
 
-    npm ci
+    npm ci --no-audit --no-fund
     npm run build
 
     php artisan optimize:clear
@@ -317,8 +360,6 @@
     php please stache:clear
     php please stache:warm
     php please search:update --all
-    php please static:clear
-    php please static:warm
 
     git fetch --quiet origin main
 
@@ -331,8 +372,19 @@
     ACTIVATED=1
 
     reset_opcache
+    restart_ssr
+    # Cached pages from the previous release point to its asset files.
+    php "$RELEASE_PATH/artisan" responsecache:clear
     check_health
+    check_ssr
     HEALTHY=1
+
+    # Drop pages cached while SSR was starting. A failed warm-up is not a reason to roll back:
+    # the release is healthy and uncached pages are cached on their first visit.
+    php artisan responsecache:clear
+    if ! php artisan responsecache:warm --base-url=https://dutchlaravelfoundation.nl --concurrency=20; then
+        echo 'Response cache warm-up failed; pages will be cached on their first visit.' >&2
+    fi
 
     if ! cleanup_releases; then
         echo 'Release cleanup failed after a healthy activation; manual cleanup is required.' >&2

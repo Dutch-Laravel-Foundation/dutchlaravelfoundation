@@ -17,12 +17,54 @@ return [
     'enabled' => env('STATAMIC_GRAPHQL_ENABLED', false),
 
     'resources' => [
-        'collections' => false,
-        'navs' => false,
+        'collections' => [
+            'authors',
+            'board',
+            'cases' => [
+                'allowed_filters' => ['member', 'slug'],
+            ],
+            'clients' => [
+                'allowed_filters' => ['slug'],
+            ],
+            'cta',
+            'events' => [
+                'allowed_filters' => ['date_start'],
+            ],
+            'insights' => [
+                'allowed_filters' => ['category', 'highlight'],
+            ],
+            'internships' => [
+                'allowed_filters' => ['member'],
+            ],
+            'knowledge' => [
+                'allowed_filters' => ['category', 'highlight'],
+            ],
+            'members' => [
+                'allowed_filters' => ['founding_partner'],
+            ],
+            'pages',
+            'partners',
+            'podcasts',
+            'reviews',
+            'socials',
+        ],
+        'navs' => ['legal', 'main'],
         'taxonomies' => false,
-        'assets' => false,
-        'globals' => false,
-        'sites' => false,
+        'assets' => [
+            'assets',
+            'board',
+            'cases',
+            'clients',
+            'events',
+            'globals',
+            'insights',
+            'knowledge',
+            'members',
+            'socials',
+        ],
+        'globals' => ['dlf', 'opengraph', 'seo'],
+        'forms' => ['newsletter', 'contact', 'become_member', 'sales_funnel'],
+        'sites' => true,
         'users' => false,
     ],
 

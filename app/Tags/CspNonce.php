@@ -8,6 +8,7 @@ use Statamic\Tags\Tags;
 
 final class CspNonce extends Tags
 {
+    /** @var string */
     protected static $handle = 'csp_nonce';
 
     public function index(): string

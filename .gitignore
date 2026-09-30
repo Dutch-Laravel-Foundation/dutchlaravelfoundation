@@ -1,4 +1,5 @@
 /node_modules
+/bootstrap/ssr
 /public/hot
 /public/build
 /public/static
@@ -19,7 +20,8 @@ yarn-error.log
 public/mix-manifest.json
 .claude
 .worktrees/
-users/
+/users/*
+!/users/.gitkeep
 /storage/form-submissions/*
 !/storage/form-submissions/*/
 !/storage/form-submissions/*/.gitignore

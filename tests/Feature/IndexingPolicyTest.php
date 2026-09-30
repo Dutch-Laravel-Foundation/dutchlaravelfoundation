@@ -6,7 +6,7 @@ it('marks confirmation pages as noindex while allowing links to be followed', fu
     foreach (['/newsletter', '/aanvraag/bedankt'] as $path) {
         $this->get($path)
             ->assertOk()
-            ->assertSee('<meta name="robots" content="noindex, follow">', false);
+            ->assertSee('<meta name="robots" content="noindex, follow"', false);
     }
 });
 

@@ -1,44 +1,51 @@
 <?php
 
 declare(strict_types=1);
+
+namespace Tests\Feature;
+
 use Illuminate\Support\Carbon;
+use Tests\TestCase;
 
-afterEach(function () {
-    Carbon::setTestNow();
-
-});
-it('agenda separates upcoming and past events in chronological order', function () {
-    Carbon::setTestNow('2026-07-20 12:00:00');
-
-    $response = $this->get('/agenda');
-
-    $response->assertOk();
-
-    $document = new DOMDocument;
-    $previous = libxml_use_internal_errors(true);
-    $document->loadHTML($response->getContent());
-    libxml_clear_errors();
-    libxml_use_internal_errors($previous);
-
-    $xpath = new DOMXPath($document);
-
-    expect(eventTitles($xpath, '//section[@aria-label="Aankomende evenementen"]'))->toBe(['Laravel Hackathon 2026', 'CxO diner 2026']);
-
-    $pastEventTitles = eventTitles($xpath, '//section[@aria-labelledby="past-events-heading"]');
-
-    expect(array_slice($pastEventTitles, 0, 3))->toBe(['LaraFest & LarAwards 2026', 'Dutch Laravel Foundation Meetup 2026 @ DIJ!', "CxO Diner '25"]);
-    expect($pastEventTitles[array_key_last($pastEventTitles)])->toBe('Laravel Hackathon');
-});
-/** @return array<int, string> */
-function eventTitles(DOMXPath $xpath, string $sectionQuery): array
+final class AgendaPageTest extends TestCase
 {
-    $nodes = $xpath->query("{$sectionQuery}//h2[contains(concat(' ', normalize-space(@class), ' '), ' editorial-entry__title ')]/a");
-    $titles = [];
+    protected function tearDown(): void
+    {
+        Carbon::setTestNow();
 
-    foreach ($nodes as $node) {
-        expect($node)->toBeInstanceOf(DOMElement::class);
-        $titles[] = trim($node->textContent);
+        parent::tearDown();
     }
 
-    return $titles;
+    public function test_agenda_separates_upcoming_and_past_events_in_chronological_order(): void
+    {
+        Carbon::setTestNow('2026-07-20 12:00:00');
+
+        $response = $this->withHeaders($this->inertiaHeaders())->get('/agenda');
+
+        $response->assertOk();
+        $response->assertHeader('X-Inertia', 'true');
+        $response->assertJsonPath('component', 'Editorial/EventsIndex');
+
+        $upcomingEventTitles = array_column($response->json('props.editorial.upcoming'), 'title');
+        $pastEventTitles = array_column($response->json('props.editorial.past'), 'title');
+
+        $this->assertSame(['Laravel Hackathon 2026', 'CxO diner 2026'], $upcomingEventTitles);
+        $this->assertSame(
+            ['LaraFest & LarAwards 2026', 'Dutch Laravel Foundation Meetup 2026 @ DIJ!', "CxO Diner '25"],
+            array_slice($pastEventTitles, 0, 3),
+        );
+        $this->assertCount(10, $pastEventTitles);
+        $response->assertJsonPath('props.editorial.pagination.currentPage', 1);
+        $response->assertJsonPath('props.editorial.pagination.hasMorePages', true);
+    }
+
+    /** @return array<string, string> */
+    private function inertiaHeaders(): array
+    {
+        return [
+            'Accept' => 'application/json',
+            'X-Inertia' => 'true',
+            'X-Inertia-Version' => hash_file('xxh128', public_path('build/manifest.json')),
+        ];
+    }
 }

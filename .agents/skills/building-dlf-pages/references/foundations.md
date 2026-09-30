@@ -7,6 +7,7 @@ This is the stable design contract for the new-design worktree. It distills the 
 These normative decisions override conflicting handoff text and page-local implementations. Keep a broader normalization outside the task's scope visible rather than silently rewriting the site.
 
 - Ordinary body copy follows the homepage's Mulish treatment at `15px` on every viewport. Editorial detail intro copy matches that `15px` tier; editorial index intros remain `16px` on mobile. Headings, navigation, metadata, controls, and other intentional leads keep their component scale. Headings use medium (`500`) weight, not semibold or bold.
+- Populated editorial indexes use an open feed inside the bordered page rail. The rail owns the outer vertical rules and the feed owns the continuous closing bottom rule; entries, images, and image/text splits own no internal structural dividers. The only opening rule sits above the first text pane, never above the lead image. Preserve that ownership when the entry stacks on smaller viewports. Empty states keep the ordinary full-width header/section divider instead.
 - Editorial detail titles are the page's single H1. Authored top-level chapters use H2, their subsections use H3, and deeper levels continue without skipping a rank. Correct the stored Bard heading level rather than visually restyling an invalid element.
 - Remove content-authored `<br>` elements and decorative embedded bold; CSS owns wrapping, spacing, and hierarchy.
 - Generic intro sections are white and unstriped. The homepage is the intro exception.

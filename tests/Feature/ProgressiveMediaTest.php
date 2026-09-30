@@ -2,286 +2,276 @@
 
 declare(strict_types=1);
 
+namespace Tests\Feature;
+
 use Tests\TestCase;
 
-it('shared partial owns the repeated image attributes', function () {
-    $partialPath = resource_path('views/partials/_progressive_media_attributes.antlers.html');
-    $partial = file_get_contents($partialPath);
+class ProgressiveMediaTest extends TestCase
+{
+    public function test_progressive_media_frames_use_a_white_striped_background(): void
+    {
+        $stylesheet = file_get_contents(resource_path('css/progressive-media.css'));
 
-    $this->assertNotFalse($partial);
-    $this->assertStringContainsString('width="{{ width }}"', $partial);
-    $this->assertStringContainsString('height="{{ height }}"', $partial);
-    $this->assertStringContainsString('loading="{{ loading ?? \'lazy\' }}"', $partial);
-    $this->assertStringContainsString('decoding="async"', $partial);
-    $this->assertStringContainsString('data-progressive-media', $partial);
-    $this->assertStringContainsString('data-media-state="loading"', $partial);
-    $this->assertStringNotContainsString('onload=', $partial);
-
-    foreach (antlersTemplates() as $path) {
-        if ($path === $partialPath) {
-            continue;
-        }
-
-        $template = file_get_contents($path);
-
-        $this->assertNotFalse($template);
-        $this->assertStringNotContainsString('data-media-state="loading"', $template, $path);
+        $this->assertNotFalse($stylesheet);
+        $this->assertStringContainsString('background-color: #fff;', $stylesheet);
+        $this->assertStringContainsString('repeating-linear-gradient', $stylesheet);
+        $this->assertStringContainsString('--progressive-media-opacity-duration: 0ms;', $stylesheet);
     }
-});
-it('progressive media frames use a white striped background', function () {
-    $stylesheet = file_get_contents(resource_path('css/progressive-media.css'));
 
-    $this->assertNotFalse($stylesheet);
-    $this->assertStringContainsString('background-color: #fff;', $stylesheet);
-    $this->assertStringContainsString('repeating-linear-gradient', $stylesheet);
-    $this->assertStringContainsString('--progressive-media-opacity-duration: 0ms;', $stylesheet);
-});
-it('inline article images do not expose their progressive frame', function () {
-    $stylesheet = file_get_contents(resource_path('css/redesign-editorial.css'));
+    public function test_inline_article_images_do_not_expose_their_progressive_frame(): void
+    {
+        $stylesheet = file_get_contents(resource_path('css/redesign-editorial.css'));
 
-    $this->assertNotFalse($stylesheet);
-    expect($stylesheet)->toMatch('/\.editorial-article \.editorial-article__prose \.dlf-inline-progressive-media\s*\{[^}]*margin-block:\s*1\.375rem;/s');
-    expect($stylesheet)->toMatch('/\.editorial-article \.editorial-article__prose \.dlf-inline-progressive-media > img\s*\{[^}]*margin-block:\s*0;/s');
-});
-it('article rails keep page spacing separate from prose spacing', function () {
-    $stylesheet = file_get_contents(resource_path('css/redesign-editorial.css'));
-
-    $this->assertNotFalse($stylesheet);
-    expect($stylesheet)->toMatch('/\.editorial-rail\s*\{[^}]*padding-bottom:\s*var\(--dlf-footer-cta-stage-padding,\s*10rem\);/s');
-    $this->assertDoesNotMatchRegularExpression(
-        '/\.editorial-rail--article\s*\{[^}]*padding-bottom:\s*0;/s',
-        $stylesheet,
-    );
-    expect($stylesheet)->toMatch('/\.editorial-article__body\s*\{[^}]*padding:\s*4rem 2\.5rem 5rem;/s');
-    expect($stylesheet)->toMatch('/\.editorial-article \.editorial-article__prose > :last-child:not\(\.dlf-block\) > :last-child\s*\{[^}]*margin-bottom:\s*0;/s');
-});
-it('article toc keeps space below the dynamic header', function () {
-    $stylesheet = file_get_contents(resource_path('css/redesign-editorial.css'));
-
-    $this->assertNotFalse($stylesheet);
-    expect($stylesheet)->toMatch('/\.editorial-toc\s*\{[^}]*top:\s*calc\(var\(--dlf-header-visible-height,\s*0px\) \+ 1\.5rem\);/s');
-});
-it('larafest article uses level two section headings for the table of contents', function () {
-    $xpath = progressivePageXPath($this, '/nieuws/larafest-2026-security-platforms-en-escape-boxes-aan-zee');
-    $headings = $xpath->query('//article[contains(concat(" ", normalize-space(@class), " "), " editorial-article__prose ")]//h2');
-
-    expect($headings)->toBeInstanceOf(DOMNodeList::class);
-    expect($headings)->toHaveCount(3);
-    expect(trim($headings->item(0)?->textContent ?? ''))->toBe('Worms, packages en Shai-Hulud');
-    expect(trim($headings->item(1)?->textContent ?? ''))->toBe('Praktijkverhalen uit echte platformen');
-    expect(trim($headings->item(2)?->textContent ?? ''))->toBe('Eten, escape boxes en bijpraten');
-});
-it('tablet article hero uses the taller image and article copy width', function () {
-    $stylesheet = file_get_contents(resource_path('css/redesign-editorial.css'));
-
-    $this->assertNotFalse($stylesheet);
-    expect($stylesheet)->toMatch('/@media \(min-width:\s*640px\) and \(max-width:\s*1023px\)\s*\{.*?\.editorial-article__figure\s*\{[^}]*min-height:\s*22\.5rem;/s');
-    expect($stylesheet)->toMatch('/@media \(min-width:\s*640px\) and \(max-width:\s*1023px\)\s*\{.*?\.editorial-article__head > \*\s*\{[^}]*max-width:\s*38rem;[^}]*margin-inline:\s*auto;/s');
-    expect($stylesheet)->toMatch('/@media \(min-width:\s*640px\) and \(max-width:\s*1023px\)\s*\{.*?\.editorial-article__head\s*\{[^}]*align-items:\s*center;/s');
-});
-it('emble article does not contain manual break nodes', function () {
-    $article = file_get_contents(base_path('content/collections/insights/2026-04-13-2200.emble-ontwikkelaars-pur-sang-blijven-zich-door-ontwikkelen.md'));
-
-    $this->assertNotFalse($article);
-    $this->assertStringNotContainsString('type: hardBreak', $article);
-});
-it('news and knowledge articles do not contain manual breaks', function () {
-    foreach (['insights', 'knowledge'] as $collection) {
-        $paths = glob(base_path("content/collections/{$collection}/*.md"));
-
-        expect($paths)->toBeArray();
-
-        foreach ($paths as $path) {
-            $article = file_get_contents($path);
-
-            $this->assertNotFalse($article);
-            $this->assertDoesNotMatchRegularExpression('/type:\s*hard_?break|<br\s*\/?\s*>/i', $article, $path);
-        }
+        $this->assertNotFalse($stylesheet);
+        $this->assertMatchesRegularExpression(
+            '/\.editorial-article \.editorial-article__prose \.dlf-inline-progressive-media\s*\{[^}]*margin-block:\s*1\.375rem;/s',
+            $stylesheet,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.editorial-article \.editorial-article__prose \.dlf-inline-progressive-media > img\s*\{[^}]*margin-block:\s*0;/s',
+            $stylesheet,
+        );
     }
-});
-it('article prose headings use normal weight including bold content', function () {
-    $stylesheet = file_get_contents(resource_path('css/redesign-editorial.css'));
 
-    $this->assertNotFalse($stylesheet);
-    expect($stylesheet)->toMatch('/\.editorial-article \.editorial-article__prose :is\(h1, h2, h3, h4, h5, h6\):not\(\.dlf-block \*\)\s*\{[^}]*font-weight:\s*400;/s');
-    expect($stylesheet)->toMatch('/\.editorial-article\s+\.editorial-article__prose\s+:is\(h1, h2, h3, h4, h5, h6\):not\(\.dlf-block \*\)\s+:is\(strong, b\)\s*\{[^}]*font-weight:\s*inherit;/s');
-});
-it('news and knowledge article headings do not contain bold marks', function () {
-    foreach (['insights', 'knowledge'] as $collection) {
-        $paths = glob(base_path("content/collections/{$collection}/*.md"));
+    public function test_article_rails_keep_page_spacing_separate_from_prose_spacing(): void
+    {
+        $stylesheet = file_get_contents(resource_path('css/redesign-editorial.css'));
 
-        expect($paths)->toBeArray();
+        $this->assertNotFalse($stylesheet);
+        $this->assertMatchesRegularExpression(
+            '/\.editorial-rail\s*\{[^}]*padding-bottom:\s*var\(--dlf-footer-cta-stage-padding,\s*10rem\);/s',
+            $stylesheet,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.editorial-rail--article\s*\{[^}]*padding-bottom:\s*0;/s',
+            $stylesheet,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.editorial-article__body\s*\{[^}]*padding:\s*4rem 2\.5rem 5rem;/s',
+            $stylesheet,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.editorial-article \.editorial-article__prose > :last-child:not\(\.dlf-block\) > :last-child\s*\{[^}]*margin-bottom:\s*0;/s',
+            $stylesheet,
+        );
+    }
 
-        foreach ($paths as $path) {
-            $article = file_get_contents($path);
+    public function test_article_toc_keeps_space_below_the_dynamic_header(): void
+    {
+        $stylesheet = file_get_contents(resource_path('css/redesign-editorial.css'));
 
-            $this->assertNotFalse($article);
+        $this->assertNotFalse($stylesheet);
+        $this->assertMatchesRegularExpression(
+            '/\.editorial-toc\s*\{[^}]*top:\s*calc\(var\(--dlf-header-visible-height,\s*0px\) \+ 1\.5rem\);/s',
+            $stylesheet,
+        );
+    }
 
-            preg_match_all(
-                '/^  -\n    type: heading\n(?:(?!^  -\n).)*/ms',
-                $article,
-                $headings,
-            );
+    public function test_larafest_article_uses_level_two_section_headings_for_the_table_of_contents(): void
+    {
+        $response = $this->withHeaders($this->inertiaHeaders())
+            ->get('/nieuws/larafest-2026-security-platforms-en-escape-boxes-aan-zee');
+        $blocks = $response->json('props.editorial.content');
 
-            foreach ($headings[0] as $heading) {
-                $this->assertStringNotContainsString('type: bold', $heading, $path);
+        $response->assertOk()->assertHeader('X-Inertia', 'true');
+        $this->assertIsArray($blocks);
+
+        $html = collect($blocks)->pluck('html')->filter()->implode('');
+        preg_match_all('/<h2\b[^>]*>(.*?)<\/h2>/s', $html, $headings);
+
+        $this->assertSame([
+            'Worms, packages en Shai-Hulud',
+            'Praktijkverhalen uit echte platformen',
+            'Eten, escape boxes en bijpraten',
+        ], array_map(static fn (string $heading): string => trim(strip_tags($heading)), $headings[1]));
+    }
+
+    public function test_tablet_article_hero_uses_the_taller_image_and_article_copy_width(): void
+    {
+        $stylesheet = file_get_contents(resource_path('css/redesign-editorial.css'));
+
+        $this->assertNotFalse($stylesheet);
+        $this->assertMatchesRegularExpression(
+            '/@media \(min-width:\s*640px\) and \(max-width:\s*1023px\)\s*\{.*?\.editorial-article__figure\s*\{[^}]*min-height:\s*22\.5rem;/s',
+            $stylesheet,
+        );
+        $this->assertMatchesRegularExpression(
+            '/@media \(min-width:\s*640px\) and \(max-width:\s*1023px\)\s*\{.*?\.editorial-article__head > \*\s*\{[^}]*max-width:\s*38rem;[^}]*margin-inline:\s*auto;/s',
+            $stylesheet,
+        );
+        $this->assertMatchesRegularExpression(
+            '/@media \(min-width:\s*640px\) and \(max-width:\s*1023px\)\s*\{.*?\.editorial-article__head\s*\{[^}]*align-items:\s*center;/s',
+            $stylesheet,
+        );
+    }
+
+    public function test_emble_article_does_not_contain_manual_break_nodes(): void
+    {
+        $article = file_get_contents(base_path('content/collections/insights/2026-04-13-2200.emble-ontwikkelaars-pur-sang-blijven-zich-door-ontwikkelen.md'));
+
+        $this->assertNotFalse($article);
+        $this->assertStringNotContainsString('type: hardBreak', $article);
+    }
+
+    public function test_news_and_knowledge_articles_do_not_contain_manual_breaks(): void
+    {
+        foreach (['insights', 'knowledge'] as $collection) {
+            $paths = glob(base_path("content/collections/{$collection}/*.md"));
+
+            $this->assertIsArray($paths);
+
+            foreach ($paths as $path) {
+                $article = file_get_contents($path);
+
+                $this->assertNotFalse($article);
+                $this->assertDoesNotMatchRegularExpression('/type:\s*hard_?break|<br\s*\/?\s*>/i', $article, $path);
             }
         }
     }
-});
-it('about page marks only substantial content media', function () {
-    $xpath = progressivePageXPath($this, '/over-ons');
-    $images = progressiveImages($xpath);
 
-    expect($images->length)->toBeGreaterThanOrEqual(11);
+    public function test_article_prose_headings_use_normal_weight_including_bold_content(): void
+    {
+        $stylesheet = file_get_contents(resource_path('css/redesign-editorial.css'));
 
-    foreach ($images as $image) {
-        assertProgressiveImageContract($image, '/over-ons');
-        expect($image->getAttribute('loading'))->toBe('lazy');
+        $this->assertNotFalse($stylesheet);
+        $this->assertMatchesRegularExpression(
+            '/\.editorial-article \.editorial-article__prose :is\(h1, h2, h3, h4, h5, h6\):not\(\.dlf-block \*\)\s*\{[^}]*font-weight:\s*400;/s',
+            $stylesheet,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.editorial-article\s+\.editorial-article__prose\s+:is\(h1, h2, h3, h4, h5, h6\):not\(\.dlf-block \*\)\s+:is\(strong, b\)\s*\{[^}]*font-weight:\s*inherit;/s',
+            $stylesheet,
+        );
     }
-});
-it('homepage uses eager loading only for its primary photo', function () {
-    $xpath = progressivePageXPath($this, '/');
-    $primary = $xpath->query('//img[@data-progressive-media and @fetchpriority="high"]');
-    $lazy = $xpath->query('//img[@data-progressive-media and @loading="lazy"]');
 
-    expect($primary)->toBeInstanceOf(DOMNodeList::class);
-    expect($lazy)->toBeInstanceOf(DOMNodeList::class);
-    expect($primary)->toHaveCount(1);
-    expect($lazy->length)->toBeGreaterThan(0);
-    expect($primary->item(0)?->attributes?->getNamedItem('loading')?->nodeValue)->toBe('eager');
-});
-it('public page families expose stable progressive media', function () {
-    $uris = [
-        '/',
-        '/aanbestedingen',
-        '/agenda',
-        '/cases',
-        '/een-eigen-systeem-laten-bouwen-is-betaalbaarder-dan-je-denkt',
-        '/kennis',
-        '/larabelles',
-        '/laravel-het-framework-dat-jouw-systeem-op-maat-tot-een-succes-maakt',
-        '/lid-worden',
-        '/nieuws',
-        '/over-ons',
-        '/podcast',
-    ];
+    public function test_news_and_knowledge_article_headings_do_not_contain_bold_marks(): void
+    {
+        foreach (['insights', 'knowledge'] as $collection) {
+            $paths = glob(base_path("content/collections/{$collection}/*.md"));
 
-    foreach ($uris as $uri) {
-        $xpath = progressivePageXPath($this, $uri);
-        $images = progressiveImages($xpath);
+            $this->assertIsArray($paths);
 
-        expect($images->length)->toBeGreaterThan(0, $uri);
+            foreach ($paths as $path) {
+                $article = file_get_contents($path);
 
-        foreach ($images as $image) {
-            assertProgressiveImageContract($image, $uri);
+                $this->assertNotFalse($article);
+
+                preg_match_all(
+                    '/^  -\n    type: heading\n(?:(?!^  -\n).)*/ms',
+                    $article,
+                    $headings,
+                );
+
+                foreach ($headings[0] as $heading) {
+                    $this->assertStringNotContainsString('type: bold', $heading, $path);
+                }
+            }
         }
     }
-});
-it('header footer icons and logos are not progressive media', function () {
-    $xpath = progressivePageXPath($this, '/over-ons');
-    $images = $xpath->query('//header//img | //footer//img');
 
-    expect($images)->toBeInstanceOf(DOMNodeList::class);
-    expect($images->length)->toBeGreaterThan(0);
+    public function test_about_page_marks_only_substantial_content_media(): void
+    {
+        $response = $this->withHeaders($this->inertiaHeaders())->get('/over-ons');
+        $component = file_get_contents(resource_path('js/pages/PublicPages/About.tsx'));
 
-    foreach ($images as $image) {
-        expect($image)->toBeInstanceOf(DOMElement::class);
-        expect($image->hasAttribute('data-progressive-media'))->toBeFalse();
+        $response->assertOk()->assertJsonPath('component', 'PublicPages/About');
+        $this->assertNotFalse($component);
+        $this->assertSame(3, substr_count($component, '<ProgressiveImage'));
+        $this->assertSame(3, substr_count($component, 'data-progressive-media-frame'));
+        $this->assertSame(3, substr_count($component, 'decoding="async"'));
     }
-});
-it('desktop footer brand divider spans the full viewport', function () {
-    $stylesheet = file_get_contents(resource_path('css/redesign-shell.css'));
 
-    $this->assertNotFalse($stylesheet);
-    expect($stylesheet)->toMatch('/@media \(min-width:\s*1024px\)\s*\{.*?\.dlf-footer-brand\s*\{[^}]*margin-inline:\s*calc\(50% - 50vw\);[^}]*padding-inline:\s*calc\(50vw - 50%\);/s');
-});
-it('mobile footer copyright is centered', function () {
-    $stylesheet = file_get_contents(resource_path('css/redesign-shell.css'));
+    public function test_homepage_uses_eager_loading_only_for_its_primary_photo(): void
+    {
+        $hero = file_get_contents(resource_path('js/components/home/HomeHero.tsx'));
+        $community = file_get_contents(resource_path('js/components/home/CurrentCommunity.tsx'));
 
-    $this->assertNotFalse($stylesheet);
-    expect($stylesheet)->toMatch('/@media \(max-width:\s*639px\)\s*\{.*?\.dlf-footer-bottom\s*>\s*p\s*\{[^}]*text-align:\s*center;/s');
-});
-it('inline article photography uses the progressive media contract', function () {
-    $uris = [
-        '/kennis/ai-gedreven-zoekfunctionaliteit-dankzij-vragenai',
-        '/kennis/graphql-met-laravel-en-lighthouse',
-        '/nieuws/dlf-meetup-bij-dij',
-    ];
+        $this->assertNotFalse($hero);
+        $this->assertNotFalse($community);
+        $this->assertSame(1, substr_count($hero, 'fetchPriority="high"'));
+        $this->assertSame(1, substr_count($hero, 'loading="eager"'));
+        $this->assertStringContainsString('loading="lazy"', $community);
+    }
 
-    foreach ($uris as $uri) {
-        $xpath = progressivePageXPath($this, $uri);
-        $images = $xpath->query('//article[contains(concat(" ", normalize-space(@class), " "), " editorial-article__prose ")]//img[contains(@src, ".gif") or contains(@src, ".jpg") or contains(@src, ".jpeg") or contains(@src, ".png") or contains(@src, ".webp")]');
+    public function test_public_page_families_expose_stable_progressive_media(): void
+    {
+        $components = [
+            resource_path('js/components/home/ProgressiveImage.tsx'),
+            resource_path('js/components/editorial-react/ProgressiveImage.tsx'),
+            resource_path('js/components/public-pages-react/ProgressiveImage.tsx'),
+        ];
 
-        expect($images)->toBeInstanceOf(DOMNodeList::class);
-        expect($images->length)->toBeGreaterThan(0, $uri);
+        foreach ($components as $path) {
+            $component = file_get_contents($path);
 
-        foreach ($images as $image) {
-            assertProgressiveImageContract($image, $uri);
+            $this->assertNotFalse($component);
+            $this->assertStringContainsString('data-progressive-media', $component, $path);
+            $this->assertStringContainsString('data-media-state={mediaState}', $component, $path);
+            $this->assertStringContainsString('onError={handleError}', $component, $path);
+            $this->assertStringContainsString('onLoad={handleLoad}', $component, $path);
         }
     }
-});
-function assertProgressiveImageContract(DOMElement $image, string $context): void
-{
-    expect($image->getAttribute('data-media-state'))->toBe('loading', $context);
-    expect(['eager', 'lazy'])->toContain($image->getAttribute('loading'));
-    expect($image->getAttribute('decoding'))->toBe('async', $context);
-    expect($image->hasAttribute('onload'))->toBeFalse($context);
-    expect($image->getAttribute('width'))->toMatch('/^[1-9][0-9]*$/', $context);
-    expect($image->getAttribute('height'))->toMatch('/^[1-9][0-9]*$/', $context);
-    expect($image->parentNode)->toBeInstanceOf(DOMElement::class, $context);
 
-    $frame = $image->parentNode;
+    public function test_header_footer_icons_and_logos_are_not_progressive_media(): void
+    {
+        $header = file_get_contents(resource_path('js/components/site/Header.tsx'));
+        $footer = file_get_contents(resource_path('js/components/site/Footer.tsx'));
 
-    while ($frame instanceof DOMElement && ! $frame->hasAttribute('data-progressive-media-frame')) {
-        $frame = $frame->parentNode;
+        $this->assertNotFalse($header);
+        $this->assertNotFalse($footer);
+        $this->assertStringContainsString('<img', $header);
+        $this->assertStringContainsString('<img', $footer);
+        $this->assertStringNotContainsString('ProgressiveImage', $header);
+        $this->assertStringNotContainsString('ProgressiveImage', $footer);
     }
 
-    expect($frame)->toBeInstanceOf(DOMElement::class, "{$context}\n{$image->getAttribute('src')}");
-}
-/** @return DOMNodeList<DOMElement> */
-function progressiveImages(DOMXPath $xpath): DOMNodeList
-{
-    $images = $xpath->query('//img[@data-progressive-media]');
+    public function test_desktop_footer_brand_divider_spans_the_full_viewport(): void
+    {
+        $stylesheet = file_get_contents(resource_path('css/redesign-shell.css'));
 
-    expect($images)->toBeInstanceOf(DOMNodeList::class);
-
-    return $images;
-}
-function progressivePageXPath(TestCase $testCase, string $uri): DOMXPath
-{
-    $response = $testCase->get($uri);
-    expect($response->getStatusCode())->toBe(200, "{$uri}\n{$response->getContent()}");
-
-    $document = new DOMDocument;
-    $previous = libxml_use_internal_errors(true);
-    $document->loadHTML($response->getContent());
-    libxml_clear_errors();
-    libxml_use_internal_errors($previous);
-
-    return new DOMXPath($document);
-}
-/** @return list<string> */
-function antlersTemplates(): array
-{
-    $iterator = new RecursiveIteratorIterator(
-        new RecursiveDirectoryIterator(resource_path('views')),
-    );
-    $paths = [];
-
-    foreach ($iterator as $file) {
-        if (! $file instanceof SplFileInfo || ! $file->isFile()) {
-            continue;
-        }
-
-        if (! str_ends_with($file->getFilename(), '.antlers.html')) {
-            continue;
-        }
-
-        $paths[] = $file->getPathname();
+        $this->assertNotFalse($stylesheet);
+        $this->assertMatchesRegularExpression(
+            '/@media \(min-width:\s*1024px\)\s*\{.*?\.dlf-footer-brand\s*\{[^}]*margin-inline:\s*calc\(50% - 50vw\);[^}]*padding-inline:\s*calc\(50vw - 50%\);/s',
+            $stylesheet,
+        );
     }
 
-    sort($paths);
+    public function test_mobile_footer_copyright_is_centered(): void
+    {
+        $stylesheet = file_get_contents(resource_path('css/redesign-shell.css'));
 
-    return $paths;
+        $this->assertNotFalse($stylesheet);
+        $this->assertMatchesRegularExpression(
+            '/@media \(max-width:\s*639px\)\s*\{.*?\.dlf-footer-bottom\s*>\s*p\s*\{[^}]*text-align:\s*center;/s',
+            $stylesheet,
+        );
+    }
+
+    public function test_inline_article_photography_is_preserved_in_the_inertia_dto(): void
+    {
+        $uris = [
+            '/kennis/ai-gedreven-zoekfunctionaliteit-dankzij-vragenai',
+            '/kennis/graphql-met-laravel-en-lighthouse',
+            '/nieuws/dlf-meetup-bij-dij',
+        ];
+
+        foreach ($uris as $uri) {
+            $response = $this->withHeaders($this->inertiaHeaders())->get($uri);
+            $editorial = $response->json('props.editorial');
+
+            $response->assertOk()->assertHeader('X-Inertia', 'true');
+            $this->assertIsArray($editorial);
+            $this->assertStringContainsString('<img', json_encode($editorial, JSON_THROW_ON_ERROR), $uri);
+        }
+    }
+
+    /** @return array<string, string> */
+    private function inertiaHeaders(): array
+    {
+        return [
+            'Accept' => 'application/json',
+            'X-Inertia' => 'true',
+            'X-Inertia-Version' => hash_file('xxh128', public_path('build/manifest.json')),
+        ];
+    }
 }
