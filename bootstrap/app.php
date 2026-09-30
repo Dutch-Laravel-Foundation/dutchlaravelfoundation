@@ -20,14 +20,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // Production runs behind HAProxy on the same host, which terminates TLS and resets
-        // X-Forwarded-For/Proto/Host. It passes client X-Forwarded-Port/Prefix through, so
-        // those are not trusted (they would poison cached URLs).
+        // Production runs behind HAProxy in transparent mode: PHP already sees the visitor's
+        // IP as REMOTE_ADDR, so the proxy cannot be matched by address. HAProxy deletes any
+        // client X-Forwarded-Proto and sets it itself, so trust that header only. Client
+        // X-Forwarded-Port/Prefix pass through HAProxy and must not be trusted.
         $middleware->trustProxies(
-            at: ['127.0.0.1', '::1'],
-            headers: Request::HEADER_X_FORWARDED_FOR
-                | Request::HEADER_X_FORWARDED_HOST
-                | Request::HEADER_X_FORWARDED_PROTO,
+            at: '*',
+            headers: Request::HEADER_X_FORWARDED_PROTO,
         );
         $middleware->prepend(RedirectToCanonicalHost::class);
         $middleware->append(AddPublicContentSecurityPolicyHeaders::class);

@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Tests\TestCase;
 
+/**
+ * Production: HAProxy terminates TLS in transparent mode, so REMOTE_ADDR is the visitor's IP,
+ * and HAProxy replaces X-Forwarded-Proto. Client X-Forwarded-Port/Prefix pass through.
+ */
 final class TrustedProxiesTest extends TestCase
 {
     protected function setUp(): void
@@ -21,13 +25,10 @@ final class TrustedProxiesTest extends TestCase
         ]);
     }
 
-    public function test_haproxy_on_the_same_host_provides_scheme_and_client_ip(): void
+    public function test_haproxy_scheme_is_trusted_for_a_visitor_address(): void
     {
-        $this->withServerVariables(['REMOTE_ADDR' => '127.0.0.1'])
-            ->withHeaders([
-                'X-Forwarded-Proto' => 'https',
-                'X-Forwarded-For' => '203.0.113.7',
-            ])
+        $this->withServerVariables(['REMOTE_ADDR' => '203.0.113.7'])
+            ->withHeaders(['X-Forwarded-Proto' => 'https'])
             ->get('http://localhost/_proxy-probe')
             ->assertExactJson([
                 'secure' => true,
@@ -36,30 +37,21 @@ final class TrustedProxiesTest extends TestCase
             ]);
     }
 
-    public function test_client_supplied_port_and_prefix_are_ignored(): void
+    public function test_client_supplied_port_prefix_host_and_ip_are_ignored(): void
     {
-        $this->withServerVariables(['REMOTE_ADDR' => '127.0.0.1'])
+        $this->withServerVariables(['REMOTE_ADDR' => '203.0.113.7'])
             ->withHeaders([
                 'X-Forwarded-Proto' => 'https',
                 'X-Forwarded-Port' => '8081',
                 'X-Forwarded-Prefix' => '/evil',
-            ])
-            ->get('http://localhost/_proxy-probe')
-            ->assertJsonPath('url', 'https://localhost/x');
-    }
-
-    public function test_forwarded_headers_from_other_addresses_are_ignored(): void
-    {
-        $this->withServerVariables(['REMOTE_ADDR' => '198.51.100.9'])
-            ->withHeaders([
-                'X-Forwarded-Proto' => 'https',
-                'X-Forwarded-For' => '203.0.113.7',
+                'X-Forwarded-Host' => 'evil.example',
+                'X-Forwarded-For' => '198.51.100.9',
             ])
             ->get('http://localhost/_proxy-probe')
             ->assertExactJson([
-                'secure' => false,
-                'ip' => '198.51.100.9',
-                'url' => 'http://localhost/x',
+                'secure' => true,
+                'ip' => '203.0.113.7',
+                'url' => 'https://localhost/x',
             ]);
     }
 }
