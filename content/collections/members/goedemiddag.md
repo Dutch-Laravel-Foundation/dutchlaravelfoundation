@@ -6,7 +6,7 @@ founding_partner: true
 type: Bedrijf
 employees: 11-50
 updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
-updated_at: 1772523173
+updated_at: 1790661796
 logo: goedemiddag-header_2112x640px_v2.jpg
 description: |-
   Bij Goedemiddag! draait het niet alleen om techniek. Wij maken software die begrijpelijk blijft, goed te onderhouden is en écht in jouw voordeel werkt. Jij komt met het idee of de uitdaging, wij vertalen dat naar een doordachte online oplossing die past bij je organisatie en je toekomstplannen.
@@ -25,7 +25,7 @@ city: Delft
 email: robert@goedemiddag.nl
 website: goedemiddag.nl
 phone: '+31 (0)88 733 33 33'
-recruitment_website: goedemiddag.recruitee.com
+recruitment_website: goedemiddag.nl/vacatures
 video: 'https://vimeo.com/939054474'
 sbb: false
 internship_contact_name: 'Robert Verboon'

@@ -10,6 +10,6 @@ description: |-
   We zoeken studenten die nieuwsgierig zijn, graag willen leren en enthousiast worden van Laravel en webontwikkeling. Je hoeft nog geen expert te zijn, motivatie en interesse vinden we veel belangrijker. Als je het leuk vindt om problemen op te lossen, nieuwe technieken te ontdekken en samen te werken met andere developers, dan pas je waarschijnlijk goed bij Goedemiddag!. Tijdens je stage krijg je de kans om je Laravel skills echt naar een hoger niveau te brengen.
 member: 70515914-2f0f-4b46-97f5-3b8e09e591ca
 updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
-updated_at: 1773648252
-apply_url: 'https://goedemiddag.recruitee.com/'
+updated_at: 1790661761
+apply_url: 'https://www.goedemiddag.nl/vacatures/stage-php-laravel-developer'
 ---
