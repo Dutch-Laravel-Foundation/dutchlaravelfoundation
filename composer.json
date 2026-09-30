@@ -15,9 +15,10 @@
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^4.0",
-        "laravel/boost": "^2.2",
+        "laravel/boost": "^2.9",
+        "laravel/mcp": "^1.0",
         "laravel/envoy": "*",
-        "nckrtl/laravel-toolbar": "^0.3.1",
+        "nckrtl/laravel-toolbar": "^0.3.6",
         "nunomaduro/collision": "^8.0",
         "pestphp/pest": "^5.0",
         "pestphp/pest-plugin-laravel": "^5.0"
