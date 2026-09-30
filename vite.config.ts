@@ -32,6 +32,8 @@ export default defineConfig(({ mode }) => {
             run([
                 {
                     name: "typescript transform",
+                    // Dev server only: the production build must not rewrite tracked files.
+                    build: false,
                     run: ["php", "artisan", "typescript:transform"],
                     pattern: ["app/{Data,Enums}/**/*.php"],
                 },

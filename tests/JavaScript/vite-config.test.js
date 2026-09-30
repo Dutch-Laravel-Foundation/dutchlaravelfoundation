@@ -32,3 +32,9 @@ test("Vite has no legacy Statamic or Alpine frontend entrypoint", () => {
     assert.doesNotMatch(source, /resources\/js\/statamic\.js/);
     assert.equal(packageJson.dependencies?.["@alpinejs/csp"], undefined);
 });
+
+test("production builds do not regenerate tracked TypeScript types", () => {
+    const source = readFileSync(new URL("../../vite.config.ts", import.meta.url), "utf8");
+
+    assert.match(source, /name:\s*"typescript transform",[\s\S]*?build:\s*false/);
+});
