@@ -50,6 +50,17 @@ final class PublicResponseCacheProfile extends CacheAllSuccessfulGetRequests
 
     public function __construct(private readonly HandleInertiaRequests $inertia) {}
 
+    /**
+     * Pages also change without a save event: /agenda splits events on "today", and
+     * scheduled entries appear when their date passes. Expire at the next full hour.
+     */
+    public function cacheLifetimeInSeconds(Request $request): int
+    {
+        $untilNextHour = (int) now()->diffInSeconds(now()->addHour()->startOfHour());
+
+        return max(1, min(parent::cacheLifetimeInSeconds($request), $untilNextHour));
+    }
+
     public function enabled(Request $request): bool
     {
         return parent::enabled($request) && $this->hasCacheableQuery($request);

@@ -6,6 +6,7 @@ namespace Tests\Feature;
 
 use App\Http\Middleware\CachePublicResponse;
 use App\Http\Middleware\HandleInertiaRequests;
+use App\ResponseCache\PublicResponseCacheProfile;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Session\Middleware\StartSession;
@@ -99,6 +100,23 @@ final class PublicResponseCacheTest extends TestCase
 
             $this->assertNotSame('HIT', $repeat->headers->get('X-Cache-Status'), $uri);
         }
+    }
+
+    public function test_cached_pages_expire_at_the_next_full_hour(): void
+    {
+        $profile = resolve(PublicResponseCacheProfile::class);
+        $request = Request::create('/agenda');
+
+        config(['responsecache.cache.lifetime_in_seconds' => 604800]);
+
+        $this->travelTo(now()->setTime(10, 59, 30));
+        $this->assertSame(30, $profile->cacheLifetimeInSeconds($request));
+
+        $this->travelTo(now()->setTime(11, 0, 0));
+        $this->assertSame(3600, $profile->cacheLifetimeInSeconds($request));
+
+        config(['responsecache.cache.lifetime_in_seconds' => 60]);
+        $this->assertSame(60, $profile->cacheLifetimeInSeconds($request));
     }
 
     public function test_tracking_parameters_stay_on_the_rendered_page(): void
