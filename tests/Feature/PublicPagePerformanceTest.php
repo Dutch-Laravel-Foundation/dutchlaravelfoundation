@@ -29,7 +29,7 @@ class PublicPagePerformanceTest extends TestCase
         $this->assertStringNotContainsString('bun run build', $deployment);
         $this->assertStringContainsString('php artisan responsecache:clear', $deployment);
         $this->assertStringContainsString(
-            'php artisan responsecache:warm --base-url=https://dutchlaravelfoundation.nl --concurrency=20',
+            'php artisan responsecache:warm --base-url=https://dutchlaravelfoundation.nl --concurrency=4 --requests-per-second=4',
             $deployment,
         );
         $this->assertStringContainsString('php artisan inertia:check-ssr', $deployment);

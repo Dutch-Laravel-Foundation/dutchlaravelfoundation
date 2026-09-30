@@ -122,6 +122,7 @@ return [
     'warm' => [
         'base_url' => env('RESPONSE_CACHE_WARM_BASE_URL', env('APP_URL')),
         'batch_size' => (int) env('RESPONSE_CACHE_WARM_BATCH_SIZE', 50),
+        'requests_per_second' => (int) env('RESPONSE_CACHE_WARM_REQUESTS_PER_SECOND', 0),
         'concurrency' => (int) env('RESPONSE_CACHE_WARM_CONCURRENCY', 20),
         'sitemap_path' => '/sitemap.xml',
         'timeout_in_seconds' => 30,

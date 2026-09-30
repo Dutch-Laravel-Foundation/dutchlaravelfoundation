@@ -379,10 +379,11 @@
     check_ssr
     HEALTHY=1
 
+    # HAProxy answers 429 above 50 requests per 10 seconds from one IP, including this server.
     # Drop pages cached while SSR was starting. A failed warm-up is not a reason to roll back:
     # the release is healthy and uncached pages are cached on their first visit.
     php artisan responsecache:clear
-    if ! php artisan responsecache:warm --base-url=https://dutchlaravelfoundation.nl --concurrency=20; then
+    if ! php artisan responsecache:warm --base-url=https://dutchlaravelfoundation.nl --concurrency=4 --requests-per-second=4; then
         echo 'Response cache warm-up failed; pages will be cached on their first visit.' >&2
     fi
 
