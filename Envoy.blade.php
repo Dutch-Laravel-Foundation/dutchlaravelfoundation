@@ -49,6 +49,9 @@
     REPOSITORY='git@github.com:Dutch-Laravel-Foundation/dutchlaravelfoundation.git'
     HEALTH_URL='https://dutchlaravelfoundation.nl/up'
     KEEP_RELEASES=6
+    # PM2 process that runs the Inertia SSR server from $CURRENT_PATH. One-time setup as the deploy user:
+    # pm2 start php --name dlf-ssr --cwd "$CURRENT_PATH" -- artisan inertia:start-ssr && pm2 save
+    SSR_PROCESS='dlf-ssr'
     CURRENT_PATH="$BASE_PATH/current"
     LOCK_PATH="$BASE_PATH/.deployment-lock"
     SWITCH_LINK="$BASE_PATH/.current-$RELEASE_NAME"
@@ -88,6 +91,31 @@
         cachetool opcache:reset --fcgi="$FPM_SOCKET"
     }
 
+    # The SSR server keeps the previous release's bundle in memory until it restarts.
+    restart_ssr() {
+        pm2 restart "$SSR_PROCESS"
+    }
+
+    check_ssr() {
+        local attempt=1
+        local maximum_attempts=6
+
+        while [ "$attempt" -le "$maximum_attempts" ]; do
+            if php artisan inertia:check-ssr; then
+                return 0
+            fi
+
+            if [ "$attempt" -lt "$maximum_attempts" ]; then
+                sleep 5
+            fi
+
+            attempt=$((attempt + 1))
+        done
+
+        echo "SSR check failed after $maximum_attempts attempts." >&2
+        return 1
+    }
+
     rollback_release() {
         if [ -z "$PREVIOUS_RELEASE" ] || [ ! -d "$PREVIOUS_RELEASE" ]; then
             echo 'The previous release is unavailable; automatic rollback is impossible.' >&2
@@ -97,6 +125,7 @@
         echo "Rolling back to $PREVIOUS_RELEASE"
         activate_release "$PREVIOUS_RELEASE"
         reset_opcache
+        restart_ssr || echo 'Unable to restart the SSR server after rollback.' >&2
         echo "Rollback completed: $PREVIOUS_RELEASE"
     }
 
@@ -309,8 +338,8 @@
         --prefer-dist \
         --no-interaction
 
-    bun install --frozen-lockfile
-    bun run build
+    npm ci --no-audit --no-fund
+    npm run build
 
     php artisan optimize:clear
     php artisan optimize
@@ -329,8 +358,9 @@
     ACTIVATED=1
 
     reset_opcache
+    restart_ssr
     check_health
-    php artisan inertia:check-ssr
+    check_ssr
     php artisan responsecache:clear
     php artisan responsecache:warm --base-url=https://dutchlaravelfoundation.nl --concurrency=20
     HEALTHY=1

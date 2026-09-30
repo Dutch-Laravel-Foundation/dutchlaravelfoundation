@@ -188,6 +188,27 @@ final class EnvoyDeploymentTest extends TestCase
         );
     }
 
+    public function testItBuildsFrontendAssetsWithNpm(): void
+    {
+        $recipe = $this->recipe();
+
+        $this->assertStringContainsString('npm ci --no-audit --no-fund', $recipe);
+        $this->assertStringContainsString('npm run build', $recipe);
+        $this->assertStringNotContainsString('bun ', $recipe);
+        $this->assertAppearsBefore('npm run build', 'activate_release "$RELEASE_PATH"', $recipe);
+    }
+
+    public function testItRestartsTheSsrServerForTheActiveRelease(): void
+    {
+        $recipe = $this->recipe();
+
+        $this->assertStringContainsString('pm2 restart "$SSR_PROCESS"', $recipe);
+        $this->assertAppearsBefore('    ACTIVATED=1', "    restart_ssr\n", $recipe);
+        $this->assertAppearsBefore("    restart_ssr\n", "    check_ssr\n", $recipe);
+        $this->assertAppearsBefore("    check_ssr\n", 'php artisan responsecache:warm', $recipe);
+        $this->assertStringContainsString("        restart_ssr || echo", $recipe);
+    }
+
     public function testItIgnoresRebuildableGlideDerivatives(): void
     {
         $projectPath = dirname(__DIR__, 2);

@@ -23,10 +23,10 @@ class PublicPagePerformanceTest extends TestCase
         $deployment = file_get_contents(base_path('Envoy.blade.php'));
 
         $this->assertNotFalse($deployment);
-        $this->assertStringContainsString('bun install --frozen-lockfile', $deployment);
-        $this->assertStringContainsString('bun run build', $deployment);
-        $this->assertStringNotContainsString('npm ci', $deployment);
-        $this->assertStringNotContainsString('npm run build', $deployment);
+        $this->assertStringContainsString('npm ci --no-audit --no-fund', $deployment);
+        $this->assertStringContainsString('npm run build', $deployment);
+        $this->assertStringNotContainsString('bun install', $deployment);
+        $this->assertStringNotContainsString('bun run build', $deployment);
         $this->assertStringContainsString('php artisan responsecache:clear', $deployment);
         $this->assertStringContainsString(
             'php artisan responsecache:warm --base-url=https://dutchlaravelfoundation.nl --concurrency=20',
@@ -38,7 +38,7 @@ class PublicPagePerformanceTest extends TestCase
 
         $responseCacheClear = strpos($deployment, 'php artisan responsecache:clear');
         $responseCacheWarm = strpos($deployment, 'php artisan responsecache:warm');
-        $ssrHealthCheck = strpos($deployment, 'php artisan inertia:check-ssr');
+        $ssrHealthCheck = strpos($deployment, "\n    check_ssr\n");
         $activation = strpos($deployment, 'activate_release "$RELEASE_PATH"');
         $opcacheReset = strpos($deployment, "\n    reset_opcache\n");
         $healthCheck = strpos($deployment, "\n    check_health\n");
