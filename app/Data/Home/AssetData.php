@@ -18,5 +18,7 @@ final class AssetData extends Data
         public readonly ?int $height,
         public readonly ?string $focusCss,
         public readonly ?string $alt,
+        public readonly ?string $src = null,
+        public readonly ?string $srcset = null,
     ) {}
 }

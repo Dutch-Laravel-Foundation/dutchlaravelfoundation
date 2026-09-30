@@ -23,7 +23,8 @@ function CardImage({
 }) {
     return (
         <ProgressiveImage
-            src={asset.url}
+            src={asset.src ?? asset.url}
+            srcSet={asset.srcset ?? undefined}
             sizes={sizes}
             alt={asset.alt ?? alt}
             style={{ objectPosition: asset.focusCss ?? undefined }}

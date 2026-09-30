@@ -24,7 +24,8 @@ export function HighlightedInsight({ insight }: { insight: App.Data.Home.Content
             <figure data-progressive-media-frame>
                 {insight.featuredImage ? (
                     <ProgressiveImage
-                        src={insight.featuredImage.url}
+                        src={insight.featuredImage.src ?? insight.featuredImage.url}
+                        srcSet={insight.featuredImage.srcset ?? undefined}
                         sizes="(min-width: 1280px) 640px, (min-width: 1024px) 50vw, 100vw"
                         alt={insight.featuredImage.alt ?? insight.title}
                         style={{ objectPosition: insight.featuredImage.focusCss ?? undefined }}
