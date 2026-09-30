@@ -44,14 +44,15 @@ describe(StatamicCommunityRepository::class, function (): void {
                 if (str_contains($document, 'query MemberIndex')) {
                     expect($variables['uri'])->toBe('/leden')
                         ->and($document)->toContain('sort: ["title asc"]')
-                        ->and($document)->toContain('province { value label }');
+                        ->and($document)->toContain('province { value label }')
+                        ->and($document)->not->toContain('internship_contact_email');
 
                     return ['page' => ['id' => 'members-page'], 'entries' => ['data' => []]];
                 }
 
                 if (str_contains($document, 'query MemberDetail')) {
                     expect($variables['uri'])->toBe('/leden/example')
-                        ->and($document)->toContain('internship_contact_email')
+                        ->and($document)->not->toContain('internship_contact_email')
                         ->and($document)->toContain('recruitment_website');
 
                     return ['entry' => $member];
@@ -83,7 +84,8 @@ describe(StatamicCommunityRepository::class, function (): void {
                 if (str_contains($document, 'query InternshipIndex')) {
                     expect($variables['uri'])->toBe('/stagebank')
                         ->and($document)->toContain('Set_Content_DoubleColumn')
-                        ->and($document)->toContain('apply_url { url title }');
+                        ->and($document)->toContain('apply_url { url title }')
+                        ->and($document)->not->toContain('internship_contact_email');
 
                     return ['page' => ['id' => 'stagebank-page'], 'entries' => ['data' => []]];
                 }

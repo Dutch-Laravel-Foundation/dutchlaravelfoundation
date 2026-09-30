@@ -85,6 +85,14 @@ final readonly class StatamicCommunityRepository implements CommunityRepository
             entry(site: $site, uri: $uri) {
                 ... on Entry_Internships_Internships {
                     ...InternshipFields
+                    # Only the internship page shows the member's internship contact.
+                    member {
+                        ... on Entry_Members_Members {
+                            internship_contact_name
+                            internship_contact_email
+                            internship_contact_phone
+                        }
+                    }
                     meta_title
                     meta_description
                     meta_keywords
@@ -197,9 +205,6 @@ final readonly class StatamicCommunityRepository implements CommunityRepository
                 city
                 province { value label }
                 website
-                internship_contact_name
-                internship_contact_email
-                internship_contact_phone
             }
         }
         GRAPHQL;
