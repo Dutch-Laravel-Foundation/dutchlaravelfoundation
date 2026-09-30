@@ -11,6 +11,7 @@ use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response as HttpResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Sleep;
 use Illuminate\Support\Uri;
 use Inertia\Support\Header;
 use RuntimeException;
@@ -24,7 +25,8 @@ final class WarmResponseCache extends Command
 
     protected $signature = 'responsecache:warm
         {--base-url= : Override the public application URL}
-        {--concurrency= : Maximum number of simultaneous warming requests}';
+        {--concurrency= : Maximum number of simultaneous warming requests}
+        {--requests-per-second= : Maximum warming requests per second (0 = no limit)}';
 
     protected $description = 'Warm public document and Inertia response caches';
 
@@ -78,6 +80,22 @@ final class WarmResponseCache extends Command
         }
 
         return rtrim($baseUrl, '/');
+    }
+
+    /**
+     * Production's HAProxy answers 429 above 50 requests per 10 seconds from one IP,
+     * including the server's own, so the deploy warms at a limited rate.
+     */
+    private function requestsPerSecond(): int
+    {
+        $option = $this->option('requests-per-second');
+        $rate = (int) ($option ?? config('responsecache.warm.requests_per_second', 0));
+
+        if ($rate < 0) {
+            throw new RuntimeException('Response cache warm requests per second must be 0 or more.');
+        }
+
+        return $rate;
     }
 
     private function concurrency(): int
@@ -357,6 +375,35 @@ final class WarmResponseCache extends Command
      */
     private function sendRequests(array $requests, int $concurrency, ProgressBar $progress): array
     {
+        $rate = $this->requestsPerSecond();
+
+        if ($rate === 0) {
+            return $this->sendBatch($requests, $concurrency, $progress);
+        }
+
+        $responses = [];
+        $chunks = array_chunk($requests, $rate, true);
+
+        foreach ($chunks as $index => $chunk) {
+            $startedAt = microtime(true);
+            $responses += $this->sendBatch($chunk, min($concurrency, $rate), $progress);
+
+            $remaining = 1 - (microtime(true) - $startedAt);
+
+            if ($index < count($chunks) - 1 && $remaining > 0) {
+                Sleep::for((int) ceil($remaining * 1000))->milliseconds();
+            }
+        }
+
+        return $responses;
+    }
+
+    /**
+     * @param  array<string, array{url: string, headers: array<string, string>}>  $requests
+     * @return array<string, HttpResponse>
+     */
+    private function sendBatch(array $requests, int $concurrency, ProgressBar $progress): array
+    {
         if ($requests === []) {
             return [];
         }
@@ -386,7 +433,12 @@ final class WarmResponseCache extends Command
             $result = $results[$key] ?? null;
 
             if (! $result instanceof HttpResponse) {
-                throw new RuntimeException("Response cache warm request [{$key}] did not return a response.");
+                $reason = $result instanceof Throwable ? ': '.$result->getMessage() : '.';
+
+                throw new RuntimeException(
+                    "Response cache warm request [{$key}] {$requests[$key]['url']} did not return a response{$reason}",
+                    previous: $result instanceof Throwable ? $result : null,
+                );
             }
 
             $result->throw();

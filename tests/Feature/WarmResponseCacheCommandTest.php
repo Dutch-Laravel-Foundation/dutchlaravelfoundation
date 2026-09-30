@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Sleep;
 use Inertia\Support\Header;
 
 it('warms documents, Inertia visits, and infinite scroll responses from the sitemap', function (): void {
@@ -126,4 +127,61 @@ it('rejects an unsafe concurrency value before sending requests', function (): v
         ->and(Artisan::output())->toContain('between 1 and 50');
 
     Http::assertNothingSent();
+});
+
+it('limits the number of warming requests per second', function (): void {
+    config([
+        'responsecache.warm.base_url' => 'https://example.test',
+        'responsecache.warm.batch_size' => 50,
+        'responsecache.warm.concurrency' => 20,
+        'responsecache.warm.sitemap_path' => '/sitemap.xml',
+        'responsecache.warm.timeout_in_seconds' => 5,
+        'responsecache.warm.additional_urls' => [],
+    ]);
+
+    Sleep::fake();
+
+    Http::fake(function (Request $request) {
+        if ($request->url() === 'https://example.test/sitemap.xml') {
+            return Http::response(<<<'XML'
+                <?xml version="1.0" encoding="UTF-8"?>
+                <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+                    <url><loc>https://example.test/a</loc></url>
+                    <url><loc>https://example.test/b</loc></url>
+                    <url><loc>https://example.test/c</loc></url>
+                    <url><loc>https://example.test/d</loc></url>
+                    <url><loc>https://example.test/e</loc></url>
+                </urlset>
+                XML, 200, ['Content-Type' => 'application/xml']);
+        }
+
+        return $request->hasHeader(Header::INERTIA)
+            ? Http::response(['component' => 'PublicPages/Page', 'props' => []])
+            : Http::response('<html>Rendered document</html>', 200, ['Content-Type' => 'text/html']);
+    });
+
+    expect(Artisan::call('responsecache:warm', ['--requests-per-second' => 2]))->toBe(0);
+
+    // 5 documents and 5 Inertia visits in groups of 2: a pause after every group but the last.
+    Sleep::assertSleptTimes(4);
+});
+
+it('reports why a warming request failed', function (): void {
+    config([
+        'responsecache.warm.base_url' => 'https://example.test',
+        'responsecache.warm.sitemap_path' => '/sitemap.xml',
+        'responsecache.warm.timeout_in_seconds' => 5,
+        'responsecache.warm.additional_urls' => [],
+    ]);
+
+    Http::fake(function (Request $request) {
+        if ($request->url() === 'https://example.test/sitemap.xml') {
+            return Http::response('<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://example.test/a</loc></url></urlset>', 200, ['Content-Type' => 'application/xml']);
+        }
+
+        return Http::response('Too Many Requests', 429);
+    });
+
+    expect(Artisan::call('responsecache:warm'))->toBe(1);
+    expect(Artisan::output())->toContain('https://example.test/a')->toContain('429');
 });
