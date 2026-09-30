@@ -102,7 +102,7 @@ final class SeoMetadata
             && ctype_digit($page)
             && (int) $page > 1
         ) {
-            return "{$canonicalUrl}?page=" . (int) $page;
+            return "{$canonicalUrl}?page=".(int) $page;
         }
 
         return $canonicalUrl;
@@ -171,7 +171,15 @@ final class SeoMetadata
             $entry = $entry->entry();
         }
 
-        return $entry instanceof Entry ? $entry : null;
+        if (! $entry instanceof Entry) {
+            return null;
+        }
+
+        // Match Statamic's own visibility rules, so a 404 for a draft or scheduled entry
+        // does not expose its title, description or structured data.
+        $visible = $entry->published() && ! $entry->private();
+
+        return $visible || request()->isLivePreviewOf($entry) ? $entry : null;
     }
 
     /**

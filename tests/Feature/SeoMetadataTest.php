@@ -4,15 +4,28 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
+use App\Services\Seo\SeoMetadata;
 use DOMDocument;
 use DOMElement;
 use DOMXPath;
+use Illuminate\Http\Request;
 use Illuminate\Testing\TestResponse;
 use JsonException;
 use Tests\TestCase;
 
 class SeoMetadataTest extends TestCase
 {
+    public function test_draft_entries_do_not_provide_seo_metadata(): void
+    {
+        $seo = resolve(SeoMetadata::class);
+
+        $this->app->instance('request', Request::create('/leden/mollie'));
+        $this->assertNull($seo->currentEntry());
+
+        $this->app->instance('request', Request::create('/leden/emble'));
+        $this->assertSame('emble', $seo->currentEntry()?->slug());
+    }
+
     public function test_homepage_has_canonical_metadata_and_organization_structured_data(): void
     {
         $response = $this->get('/?campaign=test');
