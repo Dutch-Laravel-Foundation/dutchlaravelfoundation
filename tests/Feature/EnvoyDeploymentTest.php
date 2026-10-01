@@ -128,7 +128,7 @@ test('it locks warms checks and rolls back before cleanup', function () {
     $this->assertStringContainsString('rollback_release', $recipe);
     $this->assertStringContainsString('find /run/php', $recipe);
     $this->assertStringContainsString('https://dutchlaravelfoundation.nl/up', $recipe);
-    $this->assertStringContainsString('KEEP_RELEASES=6', $recipe);
+    $this->assertStringContainsString('KEEP_RELEASES=3', $recipe);
     $this->assertStringContainsString('php artisan inertia:check-ssr', $recipe);
     assertAppearsBefore('activate_release "$RELEASE_PATH"', 'php artisan responsecache:warm', $recipe);
     assertAppearsBefore("    check_health\n", 'php artisan responsecache:warm', $recipe);

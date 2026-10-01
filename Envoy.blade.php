@@ -48,7 +48,7 @@
     REVISION={{ escapeshellarg($revision) }}
     REPOSITORY='git@github.com:Dutch-Laravel-Foundation/dutchlaravelfoundation.git'
     HEALTH_URL='https://dutchlaravelfoundation.nl/up'
-    KEEP_RELEASES=6
+    KEEP_RELEASES=3
     # PM2 process that runs the Inertia SSR server from $CURRENT_PATH. restart_ssr creates it on first use.
     SSR_PROCESS='dlf-ssr'
     CURRENT_PATH="$BASE_PATH/current"
