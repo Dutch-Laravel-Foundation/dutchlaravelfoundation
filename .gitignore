@@ -26,3 +26,6 @@ public/mix-manifest.json
 !/storage/form-submissions/*/
 !/storage/form-submissions/*/.gitignore
 /storage/statamic/glide/
+
+# SQLite file created when DB_DATABASE=laravel is used with the sqlite driver
+/laravel
