@@ -1,372 +1,272 @@
 <?php
 
 declare(strict_types=1);
-
-namespace Tests\Feature;
-
 use App\Services\Seo\SeoMetadata;
-use DOMDocument;
-use DOMElement;
-use DOMXPath;
 use Illuminate\Http\Request;
 use Illuminate\Testing\TestResponse;
-use JsonException;
-use Tests\TestCase;
 
-class SeoMetadataTest extends TestCase
+test('draft entries do not provide seo metadata', function () {
+    $seo = resolve(SeoMetadata::class);
+
+    $this->app->instance('request', Request::create('/leden/mollie'));
+    expect($seo->currentEntry())->toBeNull();
+
+    $this->app->instance('request', Request::create('/leden/emble'));
+    expect($seo->currentEntry()?->slug())->toBe('emble');
+});
+test('homepage has canonical metadata and organization structured data', function () {
+    $response = $this->get('/?campaign=test');
+
+    $response->assertOk();
+
+    $xpath = xpath($response);
+    $canonicalUrl = rtrim(config('app.url'), '/').'/';
+
+    expect(attribute($xpath, '//link[@rel="canonical"]', 'href'))->toBe($canonicalUrl);
+    expect(attribute($xpath, '//meta[@property="og:url"]', 'content'))->toBe($canonicalUrl);
+    expect(text($xpath, '//title'))->toBe('Dutch Laravel Foundation | Laravel-community Nederland');
+    expect(attribute($xpath, '//meta[@name="description"]', 'content'))->toStartWith('De Dutch Laravel Foundation stimuleert');
+
+    $graph = jsonLdGraph($xpath);
+    $organization = graphNode($graph, 'Organization');
+
+    expect($organization['name'])->toBe('Dutch Laravel Foundation');
+    expect($organization['@id'])->toBe($canonicalUrl.'#organization');
+    expect($organization['email'])->toBe('info@dutchlaravelfoundation.nl');
+    expect($organization['address']['addressLocality'])->toBe('Zoetermeer');
+});
+test('paginated indexes have self referencing canonical metadata', function () {
+    foreach (['/kennis', '/nieuws', '/podcast'] as $path) {
+        $response = $this->get("{$path}?page=2&utm_source=test");
+
+        $response->assertOk();
+
+        $xpath = xpath($response);
+        $canonicalUrl = rtrim(config('app.url'), '/')."{$path}?page=2";
+
+        expect(attribute($xpath, '//link[@rel="canonical"]', 'href'))->toBe($canonicalUrl);
+        expect(attribute($xpath, '//meta[@property="og:url"]', 'content'))->toBe($canonicalUrl);
+    }
+});
+test('filtered indexes canonicalize to their unfiltered listing', function () {
+    $response = $this->get('/kennis?category=Tooling&page=2');
+
+    $response->assertOk();
+
+    $xpath = xpath($response);
+    $canonicalUrl = rtrim(config('app.url'), '/').'/kennis';
+
+    expect(attribute($xpath, '//link[@rel="canonical"]', 'href'))->toBe($canonicalUrl);
+    expect(attribute($xpath, '//meta[@property="og:url"]', 'content'))->toBe($canonicalUrl);
+});
+test('knowledge article uses its introduction and author in structured data', function () {
+    $response = $this->get('/kennis/het-belang-van-toegankelijke-websites');
+
+    $response->assertOk();
+
+    $xpath = xpath($response);
+    $description = attribute($xpath, '//meta[@name="description"]', 'content');
+
+    expect($description)->toStartWith('We willen in ons vakgebied');
+    $this->assertNotSame('De kennis- en brancheorganisatie voor Laravel developers', $description);
+    expect(attribute($xpath, '//meta[@property="og:type"]', 'content'))->toBe('article');
+
+    $article = graphNode(jsonLdGraph($xpath), 'Article');
+
+    expect($article['headline'])->toBe('Het belang van toegankelijke websites');
+    expect($article['author'][0]['@type'])->toBe('Person');
+    expect($article['author'][0]['name'])->not->toBeEmpty();
+    expect($article['publisher']['@id'])->toBe(rtrim(config('app.url'), '/').'/#organization');
+});
+test('news podcast and case pages expose collection specific structured data', function () {
+    $pages = [
+        '/nieuws/van-der-arend-automatisering-korte-lijnen-laravel-als-vaste-basis' => 'NewsArticle',
+        '/podcast/20-jaar-laravel-carriere-pixel-industries-tot-zig-dennis-koster-dutch-laravel-foundation' => 'PodcastEpisode',
+        '/cases/dropday' => 'CreativeWork',
+    ];
+
+    foreach ($pages as $path => $expectedType) {
+        $response = getWithFreshRequestScope($path);
+
+        $response->assertOk();
+
+        $xpath = xpath($response);
+        $canonicalUrl = rtrim(config('app.url'), '/').$path;
+
+        expect(attribute($xpath, '//link[@rel="canonical"]', 'href'))->toBe($canonicalUrl, "Canonical URL mismatch for [{$path}].");
+        expect(graphNode(jsonLdGraph($xpath), $expectedType))->not->toBeEmpty("Missing {$expectedType} schema for [{$path}].");
+    }
+});
+test('an explicit branded title is not suffixed with the site name again', function () {
+    $response = $this->get(
+        '/podcast/20-jaar-laravel-carriere-pixel-industries-tot-zig-dennis-koster-dutch-laravel-foundation',
+    );
+
+    $response->assertOk();
+
+    $title = text(xpath($response), '//title');
+
+    expect(substr_count($title, 'Dutch Laravel Foundation'))->toBe(1);
+});
+test('an explicit unbranded title receives the site name', function () {
+    $response = $this->get('/kennis/razendsnelle-php-tooling-met-mago');
+
+    $response->assertOk();
+
+    expect(text(xpath($response), '//title'))->toBe('Razendsnelle PHP tooling met Mago | Dutch Laravel Foundation');
+});
+test('editorial body sections start at h2', function () {
+    $response = $this->withHeaders(inertiaHeaders())
+        ->get('/nieuws/wij-stellen-voor-kobalt-digital');
+
+    $response->assertOk();
+
+    $blocks = $response->json('props.editorial.content');
+
+    expect($blocks)->toBeArray();
+    expect(firstHeadingFromBlocks($blocks))->toStartWith('<h2');
+});
+test('event body sections start at h2', function () {
+    $response = $this->withHeaders(inertiaHeaders())
+        ->get('/events/dutch-laravel-foundation-meetup');
+
+    $response->assertOk();
+
+    $blocks = $response->json('props.editorial.content');
+
+    expect($blocks)->toBeArray();
+    expect(firstHeadingFromBlocks($blocks))->toStartWith('<h2');
+});
+test('core landing pages have specific descriptions', function () {
+    $pages = [
+        '/wat-is-laravel' => 'Laravel is een populair open-source PHP-framework',
+        '/leden' => 'Vind ervaren Nederlandse Laravel-bureaus',
+        '/lid-worden' => 'Word lid van de Dutch Laravel Foundation',
+        '/over-ons' => 'Maak kennis met de Dutch Laravel Foundation',
+        '/stagebank' => 'Vind een Laravel-stage bij aangesloten organisaties',
+        '/cases' => 'Bekijk cases van Nederlandse organisaties',
+        '/kennis' => 'Lees praktische artikelen over Laravel',
+        '/nieuws' => 'Blijf op de hoogte van nieuws',
+        '/podcast' => 'Luister naar gesprekken met developers',
+        '/agenda' => 'Bekijk aankomende Laravel-meetups',
+    ];
+
+    foreach ($pages as $path => $expectedStart) {
+        $response = getWithFreshRequestScope($path);
+
+        $response->assertOk();
+
+        $description = attribute(xpath($response), '//meta[@name="description"]', 'content');
+
+        expect($description)->toStartWith($expectedStart, "Unexpected description for [{$path}].");
+    }
+});
+test('member and internship descriptions use their own content', function () {
+    $pages = [
+        '/leden/goedemiddag' => 'Bij Goedemiddag! draait het niet alleen om techniek.',
+        '/stagebank/qlic' => 'Als backend stagiair ga je aan de slag met Laravel',
+    ];
+
+    foreach ($pages as $path => $expectedStart) {
+        $response = getWithFreshRequestScope($path);
+
+        $response->assertOk();
+
+        expect(attribute(xpath($response), '//meta[@name="description"]', 'content'))->toStartWith($expectedStart);
+    }
+});
+test('member and internship pages have distinct titles', function () {
+    $memberResponse = getWithFreshRequestScope('/leden/qlic');
+    $internshipResponse = getWithFreshRequestScope('/stagebank/qlic');
+
+    $memberResponse->assertOk();
+    $internshipResponse->assertOk();
+
+    expect(text(xpath($memberResponse), '//title'))->toBe('Qlic | Dutch Laravel Foundation');
+    expect(text(xpath($internshipResponse), '//title'))->toBe('Laravel-stage bij Qlic | Dutch Laravel Foundation');
+});
+test('shared footer call to action uses an h2 heading', function () {
+    $response = $this->get('/');
+
+    $response->assertOk();
+
+    $footerCta = file_get_contents(resource_path('js/components/site/FooterCta.tsx'));
+
+    $this->assertNotFalse($footerCta);
+    $this->assertStringContainsString('<h2 id="footer-cta-title">', $footerCta);
+});
+/** @return array<string, string> */
+function getWithFreshRequestScope(string $uri): TestResponse
 {
-    public function test_draft_entries_do_not_provide_seo_metadata(): void
-    {
-        $seo = resolve(SeoMetadata::class);
+    app()->forgetScopedInstances();
 
-        $this->app->instance('request', Request::create('/leden/mollie'));
-        $this->assertNull($seo->currentEntry());
+    return test()->get($uri);
+}
+/** @param array<int, mixed> $blocks */
+function firstHeadingFromBlocks(array $blocks): string
+{
+    foreach ($blocks as $block) {
+        if (! is_array($block) || ! is_string($block['html'] ?? null)) {
+            continue;
+        }
 
-        $this->app->instance('request', Request::create('/leden/emble'));
-        $this->assertSame('emble', $seo->currentEntry()?->slug());
-    }
-
-    public function test_homepage_has_canonical_metadata_and_organization_structured_data(): void
-    {
-        $response = $this->get('/?campaign=test');
-
-        $response->assertOk();
-
-        $xpath = $this->xpath($response);
-        $canonicalUrl = rtrim(config('app.url'), '/').'/';
-
-        $this->assertSame($canonicalUrl, $this->attribute($xpath, '//link[@rel="canonical"]', 'href'));
-        $this->assertSame($canonicalUrl, $this->attribute($xpath, '//meta[@property="og:url"]', 'content'));
-        $this->assertSame(
-            'Dutch Laravel Foundation | Laravel-community Nederland',
-            $this->text($xpath, '//title'),
-        );
-        $this->assertStringStartsWith(
-            'De Dutch Laravel Foundation stimuleert',
-            $this->attribute($xpath, '//meta[@name="description"]', 'content'),
-        );
-
-        $graph = $this->jsonLdGraph($xpath);
-        $organization = $this->graphNode($graph, 'Organization');
-
-        $this->assertSame('Dutch Laravel Foundation', $organization['name']);
-        $this->assertSame($canonicalUrl.'#organization', $organization['@id']);
-        $this->assertSame('info@dutchlaravelfoundation.nl', $organization['email']);
-        $this->assertSame('Zoetermeer', $organization['address']['addressLocality']);
-    }
-
-    public function test_paginated_indexes_have_self_referencing_canonical_metadata(): void
-    {
-        foreach (['/kennis', '/nieuws', '/podcast'] as $path) {
-            $response = $this->get("{$path}?page=2&utm_source=test");
-
-            $response->assertOk();
-
-            $xpath = $this->xpath($response);
-            $canonicalUrl = rtrim(config('app.url'), '/')."{$path}?page=2";
-
-            $this->assertSame($canonicalUrl, $this->attribute($xpath, '//link[@rel="canonical"]', 'href'));
-            $this->assertSame($canonicalUrl, $this->attribute($xpath, '//meta[@property="og:url"]', 'content'));
+        if (preg_match('/<h[1-6]\b[^>]*>/', $block['html'], $matches) === 1) {
+            return $matches[0];
         }
     }
 
-    public function test_filtered_indexes_canonicalize_to_their_unfiltered_listing(): void
-    {
-        $response = $this->get('/kennis?category=Tooling&page=2');
-
-        $response->assertOk();
-
-        $xpath = $this->xpath($response);
-        $canonicalUrl = rtrim(config('app.url'), '/').'/kennis';
-
-        $this->assertSame($canonicalUrl, $this->attribute($xpath, '//link[@rel="canonical"]', 'href'));
-        $this->assertSame($canonicalUrl, $this->attribute($xpath, '//meta[@property="og:url"]', 'content'));
-    }
-
-    public function test_knowledge_article_uses_its_introduction_and_author_in_structured_data(): void
-    {
-        $response = $this->get('/kennis/het-belang-van-toegankelijke-websites');
-
-        $response->assertOk();
-
-        $xpath = $this->xpath($response);
-        $description = $this->attribute($xpath, '//meta[@name="description"]', 'content');
-
-        $this->assertStringStartsWith('We willen in ons vakgebied', $description);
-        $this->assertNotSame('De kennis- en brancheorganisatie voor Laravel developers', $description);
-        $this->assertSame('article', $this->attribute($xpath, '//meta[@property="og:type"]', 'content'));
-
-        $article = $this->graphNode($this->jsonLdGraph($xpath), 'Article');
-
-        $this->assertSame('Het belang van toegankelijke websites', $article['headline']);
-        $this->assertSame('Person', $article['author'][0]['@type']);
-        $this->assertNotEmpty($article['author'][0]['name']);
-        $this->assertSame(
-            rtrim(config('app.url'), '/').'/#organization',
-            $article['publisher']['@id'],
-        );
-    }
-
-    public function test_news_podcast_and_case_pages_expose_collection_specific_structured_data(): void
-    {
-        $pages = [
-            '/nieuws/van-der-arend-automatisering-korte-lijnen-laravel-als-vaste-basis' => 'NewsArticle',
-            '/podcast/20-jaar-laravel-carriere-pixel-industries-tot-zig-dennis-koster-dutch-laravel-foundation' => 'PodcastEpisode',
-            '/cases/dropday' => 'CreativeWork',
-        ];
-
-        foreach ($pages as $path => $expectedType) {
-            $response = $this->getWithFreshRequestScope($path);
-
-            $response->assertOk();
-
-            $xpath = $this->xpath($response);
-            $canonicalUrl = rtrim(config('app.url'), '/').$path;
-
-            $this->assertSame(
-                $canonicalUrl,
-                $this->attribute($xpath, '//link[@rel="canonical"]', 'href'),
-                "Canonical URL mismatch for [{$path}].",
-            );
-            $this->assertNotEmpty(
-                $this->graphNode($this->jsonLdGraph($xpath), $expectedType),
-                "Missing {$expectedType} schema for [{$path}].",
-            );
-        }
-    }
-
-    public function test_an_explicit_branded_title_is_not_suffixed_with_the_site_name_again(): void
-    {
-        $response = $this->get(
-            '/podcast/20-jaar-laravel-carriere-pixel-industries-tot-zig-dennis-koster-dutch-laravel-foundation',
-        );
-
-        $response->assertOk();
-
-        $title = $this->text($this->xpath($response), '//title');
-
-        $this->assertSame(1, substr_count($title, 'Dutch Laravel Foundation'));
-    }
-
-    public function test_an_explicit_unbranded_title_receives_the_site_name(): void
-    {
-        $response = $this->get('/kennis/razendsnelle-php-tooling-met-mago');
-
-        $response->assertOk();
-
-        $this->assertSame(
-            'Razendsnelle PHP tooling met Mago | Dutch Laravel Foundation',
-            $this->text($this->xpath($response), '//title'),
-        );
-    }
-
-    public function test_editorial_body_sections_start_at_h2(): void
-    {
-        $response = $this->withHeaders($this->inertiaHeaders())
-            ->get('/nieuws/wij-stellen-voor-kobalt-digital');
-
-        $response->assertOk();
-
-        $blocks = $response->json('props.editorial.content');
-
-        $this->assertIsArray($blocks);
-        $this->assertStringStartsWith(
-            '<h2',
-            $this->firstHeadingFromBlocks($blocks),
-        );
-    }
-
-    public function test_event_body_sections_start_at_h2(): void
-    {
-        $response = $this->withHeaders($this->inertiaHeaders())
-            ->get('/events/dutch-laravel-foundation-meetup');
-
-        $response->assertOk();
-
-        $blocks = $response->json('props.editorial.content');
-
-        $this->assertIsArray($blocks);
-        $this->assertStringStartsWith(
-            '<h2',
-            $this->firstHeadingFromBlocks($blocks),
-        );
-    }
-
-    public function test_core_landing_pages_have_specific_descriptions(): void
-    {
-        $pages = [
-            '/wat-is-laravel' => 'Laravel is een populair open-source PHP-framework',
-            '/leden' => 'Vind ervaren Nederlandse Laravel-bureaus',
-            '/lid-worden' => 'Word lid van de Dutch Laravel Foundation',
-            '/over-ons' => 'Maak kennis met de Dutch Laravel Foundation',
-            '/stagebank' => 'Vind een Laravel-stage bij aangesloten organisaties',
-            '/cases' => 'Bekijk cases van Nederlandse organisaties',
-            '/kennis' => 'Lees praktische artikelen over Laravel',
-            '/nieuws' => 'Blijf op de hoogte van nieuws',
-            '/podcast' => 'Luister naar gesprekken met developers',
-            '/agenda' => 'Bekijk aankomende Laravel-meetups',
-        ];
-
-        foreach ($pages as $path => $expectedStart) {
-            $response = $this->getWithFreshRequestScope($path);
-
-            $response->assertOk();
-
-            $description = $this->attribute(
-                $this->xpath($response),
-                '//meta[@name="description"]',
-                'content',
-            );
-
-            $this->assertStringStartsWith(
-                $expectedStart,
-                $description,
-                "Unexpected description for [{$path}].",
-            );
-        }
-    }
-
-    public function test_member_and_internship_descriptions_use_their_own_content(): void
-    {
-        $pages = [
-            '/leden/goedemiddag' => 'Bij Goedemiddag! draait het niet alleen om techniek.',
-            '/stagebank/qlic' => 'Als backend stagiair ga je aan de slag met Laravel',
-        ];
-
-        foreach ($pages as $path => $expectedStart) {
-            $response = $this->getWithFreshRequestScope($path);
-
-            $response->assertOk();
-
-            $this->assertStringStartsWith(
-                $expectedStart,
-                $this->attribute(
-                    $this->xpath($response),
-                    '//meta[@name="description"]',
-                    'content',
-                ),
-            );
-        }
-    }
-
-    public function test_member_and_internship_pages_have_distinct_titles(): void
-    {
-        $memberResponse = $this->getWithFreshRequestScope('/leden/qlic');
-        $internshipResponse = $this->getWithFreshRequestScope('/stagebank/qlic');
-
-        $memberResponse->assertOk();
-        $internshipResponse->assertOk();
-
-        $this->assertSame(
-            'Qlic | Dutch Laravel Foundation',
-            $this->text($this->xpath($memberResponse), '//title'),
-        );
-        $this->assertSame(
-            'Laravel-stage bij Qlic | Dutch Laravel Foundation',
-            $this->text($this->xpath($internshipResponse), '//title'),
-        );
-    }
-
-    public function test_shared_footer_call_to_action_uses_an_h2_heading(): void
-    {
-        $response = $this->get('/');
-
-        $response->assertOk();
-
-        $footerCta = file_get_contents(resource_path('js/components/site/FooterCta.tsx'));
-
-        $this->assertNotFalse($footerCta);
-        $this->assertStringContainsString('<h2 id="footer-cta-title">', $footerCta);
-    }
-
-    /** @return array<string, string> */
-    private function inertiaHeaders(): array
-    {
-        return [
-            'Accept' => 'application/json',
-            'X-Inertia' => 'true',
-            'X-Inertia-Version' => hash_file('xxh128', public_path('build/manifest.json')),
-        ];
-    }
-
-    private function getWithFreshRequestScope(string $uri): TestResponse
-    {
-        $this->app->forgetScopedInstances();
-
-        return $this->get($uri);
-    }
-
-    /** @param array<int, mixed> $blocks */
-    private function firstHeadingFromBlocks(array $blocks): string
-    {
-        foreach ($blocks as $block) {
-            if (! is_array($block) || ! is_string($block['html'] ?? null)) {
-                continue;
-            }
-
-            if (preg_match('/<h[1-6]\b[^>]*>/', $block['html'], $matches) === 1) {
-                return $matches[0];
-            }
-        }
-
-        $this->fail('No heading found in the Inertia editorial content DTO.');
-    }
-
-    private function xpath(TestResponse $response): DOMXPath
-    {
-        $document = new DOMDocument;
-        $previous = libxml_use_internal_errors(true);
-        $document->loadHTML($response->getContent());
-        libxml_clear_errors();
-        libxml_use_internal_errors($previous);
-
-        return new DOMXPath($document);
-    }
-
-    private function attribute(DOMXPath $xpath, string $query, string $attribute): string
-    {
-        $node = $xpath->query($query)->item(0);
-
-        $this->assertInstanceOf(DOMElement::class, $node, "No element found for [{$query}].");
-
-        return $node->getAttribute($attribute);
-    }
-
-    private function text(DOMXPath $xpath, string $query): string
-    {
-        $node = $xpath->query($query)->item(0);
-
-        $this->assertNotNull($node, "No element found for [{$query}].");
-
-        return trim($node->textContent);
-    }
-
-    /**
-     * @return array<int, array<string, mixed>>
-     *
-     * @throws JsonException
-     */
-    private function jsonLdGraph(DOMXPath $xpath): array
-    {
-        $json = $this->text($xpath, '//script[@type="application/ld+json"]');
-        $data = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
-
-        $this->assertSame('https://schema.org', $data['@context']);
-        $this->assertIsArray($data['@graph']);
-
-        return $data['@graph'];
-    }
-
-    /**
-     * @param  array<int, array<string, mixed>>  $graph
-     * @return array<string, mixed>
-     */
-    private function graphNode(array $graph, string $type): array
-    {
-        $node = collect($graph)->firstWhere('@type', $type);
-
-        $this->assertIsArray($node, "No JSON-LD node with type [{$type}] found.");
-
-        return $node;
-    }
+    test()->fail('No heading found in the Inertia editorial content DTO.');
+}
+function xpath(TestResponse $response): DOMXPath
+{
+    $document = new DOMDocument;
+    $previous = libxml_use_internal_errors(true);
+    $document->loadHTML($response->getContent());
+    libxml_clear_errors();
+    libxml_use_internal_errors($previous);
+
+    return new DOMXPath($document);
+}
+function attribute(DOMXPath $xpath, string $query, string $attribute): string
+{
+    $node = $xpath->query($query)->item(0);
+
+    expect($node)->toBeInstanceOf(DOMElement::class, "No element found for [{$query}].");
+
+    return $node->getAttribute($attribute);
+}
+function text(DOMXPath $xpath, string $query): string
+{
+    $node = $xpath->query($query)->item(0);
+
+    expect($node)->not->toBeNull("No element found for [{$query}].");
+
+    return trim($node->textContent);
+}
+/**
+ * @return array<int, array<string, mixed>>
+ *
+ * @throws JsonException
+ */
+function jsonLdGraph(DOMXPath $xpath): array
+{
+    $json = text($xpath, '//script[@type="application/ld+json"]');
+    $data = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
+
+    expect($data['@context'])->toBe('https://schema.org');
+    expect($data['@graph'])->toBeArray();
+
+    return $data['@graph'];
+}
+/**
+ * @param  array<int, array<string, mixed>>  $graph
+ * @return array<string, mixed>
+ */
+function graphNode(array $graph, string $type): array
+{
+    $node = collect($graph)->firstWhere('@type', $type);
+
+    expect($node)->toBeArray("No JSON-LD node with type [{$type}] found.");
+
+    return $node;
 }

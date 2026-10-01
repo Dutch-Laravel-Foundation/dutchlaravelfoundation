@@ -1,29 +1,20 @@
 <?php
 
 declare(strict_types=1);
-
-namespace Tests\Feature\Content;
-
 use App\Content\Graphql\GraphqlClient;
 use App\Content\Graphql\StatamicGraphqlClient;
 use App\Content\Repositories\PageRepository;
 use App\Content\Repositories\StatamicPageRepository;
 use App\Content\SiteShell\StatamicSiteShellRepository;
-use PHPUnit\Framework\Attributes\Test;
 use Rebing\GraphQL\GraphQL;
 use Rebing\GraphQL\Support\Facades\GraphQL as GraphQLFacade;
-use Tests\TestCase;
 
-final class GraphqlContentAvailabilityTest extends TestCase
-{
-    #[Test]
-    public function the_pages_collection_is_available_to_in_process_graphql_queries(): void
-    {
-        $client = $this->app->make(GraphqlClient::class);
+test('the pages collection is available to in process graphql queries', function () {
+    $client = $this->app->make(GraphqlClient::class);
 
-        $this->assertInstanceOf(StatamicGraphqlClient::class, $client);
+    expect($client)->toBeInstanceOf(StatamicGraphqlClient::class);
 
-        $data = $client->query(<<<'GRAPHQL'
+    $data = $client->query(<<<'GRAPHQL'
             query ContentCollections {
                 collections {
                     handle
@@ -32,18 +23,12 @@ final class GraphqlContentAvailabilityTest extends TestCase
             }
             GRAPHQL);
 
-        $this->assertContains(
-            ['handle' => 'pages', 'title' => "Pagina's"],
-            $data['collections'],
-        );
-    }
+    expect($data['collections'])->toContain(['handle' => 'pages', 'title' => "Pagina's"]);
+});
+test('page supporting filters are available to in process queries', function () {
+    $client = $this->app->make(GraphqlClient::class);
 
-    #[Test]
-    public function page_supporting_filters_are_available_to_in_process_queries(): void
-    {
-        $client = $this->app->make(GraphqlClient::class);
-
-        $data = $client->query(<<<'GRAPHQL'
+    $data = $client->query(<<<'GRAPHQL'
             query HighlightedInsight($filter: JsonArgument!) {
                 entries(
                     collection: ["insights"]
@@ -54,20 +39,17 @@ final class GraphqlContentAvailabilityTest extends TestCase
                 }
             }
             GRAPHQL, [
-            'filter' => [
-                'highlight' => ['equals' => true],
-            ],
-        ]);
+        'filter' => [
+            'highlight' => ['equals' => true],
+        ],
+    ]);
 
-        $this->assertIsInt($data['entries']['total']);
-    }
+    expect($data['entries']['total'])->toBeInt();
+});
+test('public form metadata is available to in process queries', function () {
+    $client = $this->app->make(GraphqlClient::class);
 
-    #[Test]
-    public function public_form_metadata_is_available_to_in_process_queries(): void
-    {
-        $client = $this->app->make(GraphqlClient::class);
-
-        $data = $client->query(<<<'GRAPHQL'
+    $data = $client->query(<<<'GRAPHQL'
             query NewsletterForm {
                 form(handle: "newsletter") {
                     handle
@@ -76,33 +58,26 @@ final class GraphqlContentAvailabilityTest extends TestCase
             }
             GRAPHQL);
 
-        $this->assertSame('newsletter', $data['form']['handle']);
-    }
+    expect($data['form']['handle'])->toBe('newsletter');
+});
+test('statamic types are registered again when the graphql registry is rebuilt', function () {
+    $this->app->make(StatamicSiteShellRepository::class)->fetch();
 
-    #[Test]
-    public function statamic_types_are_registered_again_when_the_graphql_registry_is_rebuilt(): void
-    {
-        $this->app->make(StatamicSiteShellRepository::class)->fetch();
+    $this->app->forgetInstance(GraphQL::class);
+    GraphQLFacade::clearResolvedInstance(GraphQL::class);
 
-        $this->app->forgetInstance(GraphQL::class);
-        GraphQLFacade::clearResolvedInstance(GraphQL::class);
+    $siteShell = $this->app->make(StatamicSiteShellRepository::class)->fetch();
 
-        $siteShell = $this->app->make(StatamicSiteShellRepository::class)->fetch();
+    expect($siteShell['legalNavigation']['handle'])->toBe('legal');
+    expect($siteShell['newsletter']['fields'])->not->toBeEmpty();
+});
+test('the page repository resolves the home entry through graphql', function () {
+    $repository = $this->app->make(PageRepository::class);
 
-        $this->assertSame('legal', $siteShell['legalNavigation']['handle']);
-        $this->assertNotEmpty($siteShell['newsletter']['fields']);
-    }
+    expect($repository)->toBeInstanceOf(StatamicPageRepository::class);
 
-    #[Test]
-    public function the_page_repository_resolves_the_home_entry_through_graphql(): void
-    {
-        $repository = $this->app->make(PageRepository::class);
+    $page = $repository->findByUri('/');
 
-        $this->assertInstanceOf(StatamicPageRepository::class, $repository);
-
-        $page = $repository->findByUri('/');
-
-        $this->assertSame('home', $page['id']);
-        $this->assertSame('Entry_Pages_Pages', $page['__typename']);
-    }
-}
+    expect($page['id'])->toBe('home');
+    expect($page['__typename'])->toBe('Entry_Pages_Pages');
+});

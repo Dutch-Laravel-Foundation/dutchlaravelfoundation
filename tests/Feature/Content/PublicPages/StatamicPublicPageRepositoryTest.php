@@ -1,46 +1,32 @@
 <?php
 
 declare(strict_types=1);
-
-namespace Tests\Feature\Content\PublicPages;
-
 use App\Content\Graphql\GraphqlClient;
 use App\Content\PublicPages\PublicPageDataMapper;
 use App\Content\PublicPages\StatamicPublicPageRepository;
 use App\Data\PublicPages\PublicPageData;
-use PHPUnit\Framework\Attributes\Test;
-use Tests\TestCase;
 
-final class StatamicPublicPageRepositoryTest extends TestCase
+it('s query executes against the real schema and preserves bard html', function () {
+    $page = find('/wat-is-laravel');
+
+    expect($page)->toBeInstanceOf(PublicPageData::class);
+    expect($page->template)->toBe('templates/what-is-laravel/index');
+    expect($page->content)->not->toBeEmpty();
+    $this->assertStringContainsString('Laravel', $page->content[0]->headingHtml ?? '');
+    expect($page->support->memberCount)->toBeGreaterThan(0);
+});
+it('fetches support collections and page specific content', function () {
+    $page = find('/over-ons');
+
+    expect($page)->toBeInstanceOf(PublicPageData::class);
+    expect($page->support->board)->not->toBeEmpty();
+    expect($page->support->foundingPartners)->not->toBeEmpty();
+    expect($page->support->generalLandingCases)->not->toBeEmpty();
+    expect($page->support->frameworkLandingCases)->not->toBeEmpty();
+});
+function find(string $uri): ?PublicPageData
 {
-    #[Test]
-    public function its_query_executes_against_the_real_schema_and_preserves_bard_html(): void
-    {
-        $page = $this->find('/wat-is-laravel');
+    $repository = new StatamicPublicPageRepository(app()->make(GraphqlClient::class));
 
-        $this->assertInstanceOf(PublicPageData::class, $page);
-        $this->assertSame('templates/what-is-laravel/index', $page->template);
-        $this->assertNotEmpty($page->content);
-        $this->assertStringContainsString('Laravel', $page->content[0]->headingHtml ?? '');
-        $this->assertGreaterThan(0, $page->support->memberCount);
-    }
-
-    #[Test]
-    public function it_fetches_support_collections_and_page_specific_content(): void
-    {
-        $page = $this->find('/over-ons');
-
-        $this->assertInstanceOf(PublicPageData::class, $page);
-        $this->assertNotEmpty($page->support->board);
-        $this->assertNotEmpty($page->support->foundingPartners);
-        $this->assertNotEmpty($page->support->generalLandingCases);
-        $this->assertNotEmpty($page->support->frameworkLandingCases);
-    }
-
-    private function find(string $uri): ?PublicPageData
-    {
-        $repository = new StatamicPublicPageRepository($this->app->make(GraphqlClient::class));
-
-        return (new PublicPageDataMapper)->map($repository->findByUri($uri));
-    }
+    return (new PublicPageDataMapper)->map($repository->findByUri($uri));
 }

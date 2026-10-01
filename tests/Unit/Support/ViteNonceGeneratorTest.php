@@ -1,26 +1,18 @@
 <?php
 
 declare(strict_types=1);
-
-namespace Tests\Unit\Support;
-
 use App\Support\ViteNonceGenerator;
 use Illuminate\Support\Facades\Vite;
-use Tests\TestCase;
 
-final class ViteNonceGeneratorTest extends TestCase
-{
-    public function test_nonces_contain_no_characters_that_json_escapes(): void
-    {
-        $generator = new ViteNonceGenerator;
+test('nonces contain no characters that json escapes', function () {
+    $generator = new ViteNonceGenerator;
 
-        for ($i = 0; $i < 50; $i++) {
-            $nonce = $generator->generate();
+    for ($i = 0; $i < 50; $i++) {
+        $nonce = $generator->generate();
 
-            $this->assertMatchesRegularExpression('/\A[0-9a-f]{32}\z/', $nonce);
-            $this->assertSame($nonce, trim(json_encode($nonce), '"'));
-        }
-
-        $this->assertSame($nonce, Vite::cspNonce());
+        expect($nonce)->toMatch('/\A[0-9a-f]{32}\z/');
+        expect(trim(json_encode($nonce), '"'))->toBe($nonce);
     }
-}
+
+    expect(Vite::cspNonce())->toBe($nonce);
+});
