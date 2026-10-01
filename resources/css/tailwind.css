@@ -477,6 +477,10 @@
         @apply inline px-2! py-1! rounded-md border-gray-100 border;
     }
 
+    blockquote code {
+        @apply bg-white/15! px-1! py-0! border-white/30 text-inherit;
+    }
+
     .red-note h3 {
         @apply !text-white my-0;
     }

@@ -828,6 +828,11 @@
     line-height: inherit;
 }
 
+.editorial-article .editorial-article__prose blockquote:not(.dlf-block *) :not(pre) > code:not(.dlf-block *) {
+    color: inherit;
+    font-size: 0.85em;
+}
+
 .editorial-article .editorial-article__prose img:not(.dlf-block *) {
     width: 100%;
     height: auto;
