@@ -1,36 +1,23 @@
 <?php
 
 declare(strict_types=1);
-
-namespace Tests\Feature\Content\SiteShell;
-
 use App\Content\Graphql\GraphqlClient;
 use App\Content\SiteShell\StatamicSiteShellRepository;
-use PHPUnit\Framework\Attributes\Test;
-use Tests\TestCase;
 
-final class StatamicSiteShellRepositoryTest extends TestCase
-{
-    #[Test]
-    public function its_query_matches_the_live_statamic_graphql_schema(): void
-    {
-        $repository = new StatamicSiteShellRepository(
-            $this->app->make(GraphqlClient::class),
-        );
+it('s query matches the live statamic graphql schema', function () {
+    $repository = new StatamicSiteShellRepository(
+        $this->app->make(GraphqlClient::class),
+    );
 
-        $response = $repository->fetch();
+    $response = $repository->fetch();
 
-        $this->assertSame('Gegevens Dutch Laravel Foundation', $response['organization']['title']);
-        $this->assertSame('Dutch Laravel Foundation', $response['seo']['meta_title']);
-        $this->assertSame('main', $response['mainNavigation']['handle']);
-        $this->assertSame('legal', $response['legalNavigation']['handle']);
-        $this->assertNotEmpty($response['members']['data']);
-        $this->assertNotEmpty($response['socials']['data']);
-        $this->assertSame(
-            'ee5d33de-9a24-4860-92dd-3503740b62af',
-            $response['defaultCta']['id'],
-        );
-        $this->assertSame('newsletter', $response['newsletter']['handle']);
-        $this->assertNotEmpty($response['newsletter']['fields']);
-    }
-}
+    expect($response['organization']['title'])->toBe('Gegevens Dutch Laravel Foundation');
+    expect($response['seo']['meta_title'])->toBe('Dutch Laravel Foundation');
+    expect($response['mainNavigation']['handle'])->toBe('main');
+    expect($response['legalNavigation']['handle'])->toBe('legal');
+    expect($response['members']['data'])->not->toBeEmpty();
+    expect($response['socials']['data'])->not->toBeEmpty();
+    expect($response['defaultCta']['id'])->toBe('ee5d33de-9a24-4860-92dd-3503740b62af');
+    expect($response['newsletter']['handle'])->toBe('newsletter');
+    expect($response['newsletter']['fields'])->not->toBeEmpty();
+});

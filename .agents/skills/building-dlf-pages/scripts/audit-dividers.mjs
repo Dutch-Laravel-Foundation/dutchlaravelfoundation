@@ -35,7 +35,11 @@ function option(name) {
     return index === -1 ? null : args[index + 1];
 }
 
-const baseUrl = option("--base-url") ?? "https://new-design.dutchlaravelfoundation.test";
+const baseUrl = option("--base-url") ?? process.env.APP_URL;
+
+if (!baseUrl) {
+    throw new Error("Pass --base-url or set APP_URL to the local development URL.");
+}
 const routesFile = option("--routes-file");
 const sitemapUrl = option("--sitemap");
 const sitemapRoutes = sitemapUrl

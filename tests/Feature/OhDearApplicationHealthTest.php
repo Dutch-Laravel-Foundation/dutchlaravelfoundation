@@ -93,7 +93,7 @@ it('is unavailable on the development host', function () {
 
     $response = $this
         ->withHeader('oh-dear-health-check-secret', OH_DEAR_SECRET)
-        ->get('https://new-design.dutchlaravelfoundation.test/oh-dear-health-check-results');
+        ->get('https://staging.example.test/oh-dear-health-check-results');
 
     $response->assertNotFound();
 });

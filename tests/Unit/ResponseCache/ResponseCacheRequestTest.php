@@ -81,15 +81,15 @@ describe('Inertia response cache hashing', function (): void {
     it('separates documents, full Inertia responses, partial reloads, and scroll directions', function (): void {
         $hasher = resolve(RequestHasher::class);
         $document = requestFor('/nieuws?page=2');
-        $inertia = requestFor('/nieuws?page=2', inertiaHeaders());
+        $inertia = requestFor('/nieuws?page=2', versionedInertiaHeaders());
         $partial = requestFor('/nieuws?page=2', [
-            ...inertiaHeaders(),
+            ...versionedInertiaHeaders(),
             Header::PARTIAL_COMPONENT => 'Editorial/InsightsIndex',
             Header::PARTIAL_ONLY => 'editorial',
             Header::INFINITE_SCROLL_MERGE_INTENT => 'append',
         ]);
         $prepend = requestFor('/nieuws?page=2', [
-            ...inertiaHeaders(),
+            ...versionedInertiaHeaders(),
             Header::PARTIAL_COMPONENT => 'Editorial/InsightsIndex',
             Header::PARTIAL_ONLY => 'editorial',
             Header::INFINITE_SCROLL_MERGE_INTENT => 'prepend',
@@ -102,9 +102,9 @@ describe('Inertia response cache hashing', function (): void {
 
     it('shares a key between an Inertia prefetch and the eventual visit', function (): void {
         $hasher = resolve(RequestHasher::class);
-        $visit = requestFor('/nieuws?category=Bestuur', inertiaHeaders());
+        $visit = requestFor('/nieuws?category=Bestuur', versionedInertiaHeaders());
         $prefetch = requestFor('/nieuws?category=Bestuur', [
-            ...inertiaHeaders(),
+            ...versionedInertiaHeaders(),
             'Purpose' => 'prefetch',
         ]);
 
@@ -125,7 +125,7 @@ function requestFor(string $uri, array $headers = []): Request
 }
 
 /** @return array<string, string> */
-function inertiaHeaders(): array
+function versionedInertiaHeaders(): array
 {
     Inertia::version('current-assets');
 

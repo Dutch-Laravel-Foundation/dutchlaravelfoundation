@@ -20,9 +20,12 @@ yarn-error.log
 public/mix-manifest.json
 .claude
 .worktrees/
-/users/*
-!/users/.gitkeep
+# Statamic users: a symlink to persistent storage, like production
+/users
 /storage/form-submissions/*
 !/storage/form-submissions/*/
 !/storage/form-submissions/*/.gitignore
 /storage/statamic/glide/
+
+# SQLite file created when DB_DATABASE=laravel is used with the sqlite driver
+/laravel

@@ -1,10 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
-use DOMDocument;
-use DOMElement;
-use DOMXPath;
 use Illuminate\Testing\TestResponse;
 
 function seoHeadXpath(TestResponse $response): DOMXPath
