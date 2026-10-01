@@ -13,7 +13,7 @@ Extend the established redesign instead of inventing a parallel page system. Mat
 2. Read the final corrections in [foundations.md](references/foundations.md), the divider contract in [dividers.md](references/dividers.md), then scan the map and selected family in [page-families.md](references/page-families.md). Load other sections only when relevant.
 3. Inspect the target entry, its closest canonical rendered page, the GraphQL repository and DTO mapper, React page/components, scoped CSS, and interaction hooks before editing.
 4. Record the reported viewport and whether the direction is viewport-specific. Measure the target and its nearest alignment/spacing reference in the browser before changing CSS.
-5. Use Orbit for the project lifecycle and `https://new-design.dutchlaravelfoundation.test` for browser review unless the task explicitly excludes Orbit.
+5. Use the local development URL (`APP_URL`) for browser review.
 
 Resolve conflicts in this order:
 
