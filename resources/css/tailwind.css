@@ -478,7 +478,7 @@
     }
 
     blockquote code {
-        @apply bg-white/15! px-1! py-0! border-white/30 text-inherit;
+        @apply bg-white/15! px-1! py-0.5! border-white/25 text-white;
     }
 
     .red-note h3 {
