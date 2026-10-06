@@ -12,6 +12,7 @@ pest()->extend(TestCase::class)
 pest()->tia()
     ->always()
     ->locally()
+    ->baselined()
     ->filtered();
 
 /*
