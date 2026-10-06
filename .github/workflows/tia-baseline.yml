@@ -66,3 +66,11 @@ jobs:
           path: ${{ steps.baseline.outputs.path }}/
           if-no-files-found: error
           retention-days: 90
+      - name: Upload PR baseline for validation
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: pest-tia-validation
+          path: ${{ steps.baseline.outputs.path }}/
+          if-no-files-found: error
+          retention-days: 7
