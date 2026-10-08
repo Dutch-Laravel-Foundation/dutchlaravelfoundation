@@ -1,15 +1,15 @@
 # Dutch Laravel Foundation
 
-- This is a Statamic-backed React/Inertia site, not an Eloquent CMS. Read the matching `.ai/rules` before changing content repositories, DTOs, forms, or public routing.
-- For public frontend work, load `.agents/skills/building-dlf-pages/SKILL.md`; preserve its DLF page-family and divider contracts.
-- Use Boost's version-matched documentation search before relying on unfamiliar framework/package APIs. Load relevant skills on demand.
+- This is a Statamic-backed React/Inertia site, not an Eloquent CMS. Read the matching `.ai/rules` before you change content repositories, DTOs, forms, or public routing.
+- For public frontend work, load `.agents/skills/building-dlf-pages/SKILL.md`. Keep its page-family and divider contracts.
 
 ## Checks and boundaries
 
-- Before handoff: `vendor/bin/pest --compact && bun run test && bun run typecheck`. TIA setup and full-suite flags are documented in `README.md`.
-- PHP formatting: `vendor/bin/pint --dirty`. Frontend build: `bun run build`. Regenerate DTO types with `bun run types` when their public shape changes.
-- Use the assigned local `APP_URL` for browser review. Do not deploy, start a competing server, or mutate another workspace's database/content. Ask for an isolated environment if none is assigned.
-- Never commit credentials, `.env`, local agent settings, test baselines, or real form submissions. Only use disposable test/sandbox resources.
+- Before handoff, run `vendor/bin/pest --compact && bun run test && bun run typecheck`. `composer quality` runs every gate.
+- Format PHP with `vendor/bin/pint --dirty`. Build with `bun run build`. Run `bun run types` when a DTO's public shape changes.
+- Use the assigned `APP_URL` for browser review. Do not start a second server when the environment already runs one. Do not deploy.
+- Never commit credentials, `.env`, local agent settings, test baselines, or real form submissions.
+- Dependency changes follow `docs/dependency-policy.md`.
 
 ## UI and Layout Changes
 
@@ -30,46 +30,23 @@ normal testing guidance for that behavioral change.
 
 # Laravel Boost Guidelines
 
-The Laravel Boost guidelines are specifically curated by Laravel maintainers for this application. These guidelines should be followed closely to ensure the best experience when building Laravel applications.
-
 ## Foundational Context
 
-This application is a Laravel application running on PHP 8.5. You are an expert with the Laravel ecosystem. Always use the APIs that match the installed major version of each package — do not assume a version.
-
-Before relying on a package's API, confirm its installed version:
-- PHP packages: run `composer show --direct` to list direct dependencies with versions, or `composer show <vendor/package>` for a single package.
-- JS packages: check `package.json` for the installed versions.
+This is a Laravel application on PHP 8.5. Use the APIs that match the installed major version of each package. Check a PHP package with `composer show <vendor/package>` and JS packages in `package.json`.
 
 ## Skills Activation
 
-This project has domain-specific skills available in `**/skills/**`. You MUST activate the relevant skill whenever you work in that domain—don't wait until you're stuck.
+Domain skills live in `**/skills/**`. Activate the relevant skill when you work in its domain.
 
 ## Conventions
 
-- You must follow all existing code conventions used in this application. When creating or editing a file, check sibling files for the correct structure, approach, and naming.
-- Use descriptive names for variables and methods. For example, `isRegisteredForDiscounts`, not `discount()`.
-- Check for existing components to reuse before writing a new one.
-
-## Verification Scripts
-
-- Do not create verification scripts or tinker when tests cover that functionality and prove they work. Unit and feature tests are more important.
-
-## Application Structure & Architecture
-
-- Stick to existing directory structure; don't create new base folders without approval.
-- Do not change the application's dependencies without approval.
-
-## Frontend Bundling
-
-- If the user doesn't see a frontend change reflected in the UI, it could mean they need to run `npm run build`, `npm run dev`, or `composer run dev`. Ask them.
-
-## Documentation Files
-
-- You must only create documentation files if explicitly requested by the user.
-
-## Replies
-
-- Be concise in your explanations - focus on what's important rather than explaining obvious details.
+- Follow the existing conventions. Check sibling files for structure, approach, and naming.
+- Use descriptive names, such as `isRegisteredForDiscounts`, not `discount()`.
+- Reuse existing components before you write a new one.
+- Prove behavior with tests, not with verification scripts or tinker.
+- Keep the directory structure. Do not add base folders or change dependencies without approval.
+- If a frontend change does not show, run `bun run build`.
+- Be concise in replies.
 
 === boost rules ===
 
@@ -125,13 +102,6 @@ This project has domain-specific skills available in `**/skills/**`. You MUST ac
 - Prefer PHPDoc blocks over inline comments. Only add inline comments for exceptionally complex logic.
 - Use array shape type definitions in PHPDoc blocks.
 
-=== deployments rules ===
-
-# Deployment
-
-- Laravel can be deployed using [Laravel Cloud](https://cloud.laravel.com/), which is the fastest way to deploy and scale production Laravel applications.
-- Activate the `deploying-to-cloud` skill whenever deploying to Laravel Cloud, configuring Cloud environments or resources, using the Cloud CLI, or troubleshooting Cloud deployments.
-
 === inertia-laravel/core rules ===
 
 # Inertia
@@ -169,7 +139,7 @@ This project has domain-specific skills available in `**/skills/**`. You MUST ac
 
 ## Vite Error
 
-- If you receive an "Illuminate\Foundation\ViteException: Unable to locate file in Vite manifest" error, you can run `npm run build` or ask the user to run `npm run dev` or `composer run dev`.
+- If you receive an "Illuminate\Foundation\ViteException: Unable to locate file in Vite manifest" error, you can run `bun run build` or ask the user to run `bun run dev` or `composer run dev`.
 
 === pint/core rules ===
 
@@ -188,107 +158,11 @@ This project has domain-specific skills available in `**/skills/**`. You MUST ac
 
 ## Statamic
 
-- This application uses Statamic.
-- Statamic is an open source, PHP CMS designed and built specifically for developers and their clients or content managers.
-- Out of the box, Statamic stores content in Markdown files. It's trivial to move into a database later, if necessary.
-- Statamic comes in two flavours:
-    - **Statamic Core** which is free to use, however you want, forever. It includes everything needed to build a blog or portfolio site.
-    - **Statamic Pro** which includes everything from Core, as well as unlimited user accounts, revision history, multi-site, Git integration, white labelling and more. Tailored for most production websites.
-    - For more information on pricing, please send the user to https://statamic.com/pricing.
-
-### Folder Structure
-
-Statamic is a Laravel package, meaning it can be used alone or alongside an existing Laravel application.
-
-Most of the folder structure will feel familiar to Laravel developers. However, Statamic creates a few additional files and folders during the install process.
-
-<code-snippet name="Folder Structure" lang="text">
-├── app/
-├── bootstrap/
-├── config/
-│   ├── statamic/         # Statamic-specific configs
-├── content/
-│   ├── assets/           # Asset containers
-│   ├── collections/      # Collections and entries
-│   ├── globals/          # Global sets
-│   ├── navigation/       # Navigations
-│   ├── trees/            # Collection and navigation trees
-├── database/
-├── lang/
-├── public/
-│   ├── assets/           # Default location for assets
-│   ├── ...
-├── resources/
-│   ├── addons/
-│   ├── blueprints/       # Blueprints
-│   ├── fieldsets/        # Fieldsets
-│   ├── users/            # User roles & groups
-│   ├── preferences.yaml  # Default preferences
-│   ├── sites.yaml        # Sites config
-│   ├── ...
-├── routes/
-├── storage/
-├── tests/
-├── users/
-├── please                # Statamic's CLI tool
-├── ...
-</code-snippet>
-
-### Statamic's CLI
-
-- Statamic ships with its own `please` CLI tool, useful for creating tags or fieldtypes, updating search indexes, enabling multi-site and much more.
-- You may run `php please` to get the list of available commands. You may use the `--help` option on a command to inspect its required parameters.
-
-### Statamic's Core Concepts
-
-- **Assets:** Files managed by Statamic and made available to your writers and developers with tags and fieldtypes. They can be images, videos, PDFs, or any other type of file.
-- **Collections:** Collections are containers that hold groups of related entries. Each entry in a collection can represent a blog post, product, recipe or page.
-- **Globals:** Global variables store content that belongs to your whole site, not just a single page or URL. They're available everywhere, in all of your views, all the time.
-- **Navigations:** A navigation is a hierarchy of links and text nodes that are used to build navs and menus on the frontend of your site.
-- **Taxonomies:** A taxonomy is a system of classifying data around a set of unique characteristics. Think things like tags, categories, etc.
-- **Users:** Users are the member accounts to your site or application. What a user can do with their account is up to you. They could have limited or full access to the Control Panel, a login-only area of the front-end, or even something more custom by tapping into Laravel.
-- **Blueprints:** Blueprints determine the fields shown in your publish forms. You can configure the field's order, each field's width and group them into sections and tabs. Blueprints are attached to collections, taxonomies, globals, assets, users and even forms, all of which help to determine their content schema.
-- **Fieldsets:** Fieldsets are used to store and organize reusable fields. Blueprints can reference fields or entire fieldsets, helping you keep your configurations nice and DRY.
-
-### Templating
-
-- Statamic supports two templating languages:
-    - **Antlers** is tightly integrated and simple to learn. Uses the `.antlers.html` file extension.
-    - **Laravel Blade** ships with Laravel and is familiar to most Laravel developers. Uses the `.blade.php` file extension.
-- When creating views, you should familiarize yourself with the project and determine which templating language is already in use.
-- When using Laravel Blade, you may want to use the "Antlers Blade Components" feature which lets you use a Blade-component-esque syntax with Statamic's tags feature:
-
-<code-snippet name="Antlers Blade Components example" lang="blade">
-    <s:collection from="pages" limit="2" sort="title:desc">
-        {{ $title }}
-    </s:collection>
-</code-snippet>
-
-### Control Panel
-
-- The Control Panel is the primary way to create and manage content.
-- Unless disabled or overridden, the Control Panel is usually accessible from `https://your-website.com/cp`.
-- Super users can do and see everything, while non-super users can only do & see what their roles allow for.
-
-### Extending Statamic
-
-- You can either extend Statamic in the context of an application, or in the context of an addon.
-- Addons are Composer packages, meaning they can be reused, distributed, or even sold to others later.
-- There are a variety of ways you can extend Statamic: creating tags, fieldtypes, modifiers, etc. A lot of these things can be bootstrapped with `php please make:` commands.
-
-#### Extending the Control Panel
-
-- The Control Panel is built with Inertia.js and Vue 3.
-- When running the `make:fieldtype` or `make:widget` commands, Statamic will install the necessary npm packages and configure Vite.
-- Running `setup-cp-vite` in an application context will also do this for you. You'll be able to use `npm run cp:dev` and `npm run cp:build` to run Vite.
-- You should use Statamic's UI Components where possible. It includes components for buttons, cards, inputs, etc.
-    - UI Components can be imported from `@statamic/cms/ui`.
-    - For more information on Statamic's UI Components, please visit our Storybook docs: https://ui.statamic.dev
-    - A machine-readable manifest of the UI Components (props, slots, events, and usage snippets) is available at https://ui.statamic.dev/manifests/components.json. Its entries link to per-component details via relative `$ref` URLs.
-
-### Additional Context
-
-- Statamic Documentation: https://statamic.dev/llms.txt
-- GitHub Issues: https://github.com/statamic/cms/issues
+- This site uses Statamic. Content lives in flat files under `content/` (collections, globals, navigation, trees). Users live in `users/`.
+- Blueprints and fieldsets in `resources/blueprints` and `resources/fieldsets` define the content schema. Check them before you change authored fields.
+- Use `php please` for Statamic commands. Add `--help` to inspect a command.
+- Extend Statamic with tags, modifiers and fieldtypes (`php please make:...`), not by editing vendor code.
+- The Control Panel (`/cp`) is built with Vue 3. The public site is React/Inertia.
+- Docs: https://statamic.dev/llms.txt
 
 </laravel-boost-guidelines>

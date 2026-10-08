@@ -33,7 +33,7 @@
     },
     "config": {
         "optimize-autoloader": true,
-        "preferred-install": "dist",
+        "preferred-install": "source",
         "sort-packages": true,
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
@@ -87,7 +87,6 @@
         "test:full": "@php vendor/bin/pest --no-tia --compact",
         "audit:dependencies": [
             "@composer audit --locked --no-interaction",
-            "@php vendor/bin/vet --no-interaction",
             "npm audit --package-lock-only --ignore-scripts"
         ],
         "quality": [

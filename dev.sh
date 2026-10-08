@@ -1,29 +1,20 @@
 #!/usr/bin/env bash
+# Starts the PHP server and Vite (with Inertia SSR). Works with macOS /bin/bash 3.2.
 set -euo pipefail
 
-if (( BASH_VERSINFO[0] < 4 || (BASH_VERSINFO[0] == 4 && BASH_VERSINFO[1] < 3) )); then
-    printf '%s\n' 'composer dev requires Bash 4.3+ (wait -n). Install a current Bash and put its bin directory first in PATH; see README.md for macOS setup.' >&2
-    exit 1
-fi
-
-: "${APP_URL:?Supply the environment-assigned APP_URL}"
-: "${APP_PORT:?Supply the environment-assigned backend port}"
-: "${VITE_PORT:?Supply the environment-assigned Vite port}"
-: "${INERTIA_SSR_URL:?Supply the environment-assigned SSR URL}"
+: "${APP_PORT:?Export APP_PORT (PHP server port) before running composer dev}"
+: "${VITE_PORT:?Export VITE_PORT (Vite port) before running composer dev}"
+export INERTIA_SSR_URL="${INERTIA_SSR_URL:-http://127.0.0.1:$((VITE_PORT + 1))}"
 
 backend=
 frontend=
 cleanup() {
     trap - EXIT INT TERM
-    for pid in "$backend" "$frontend"; do
-        if [[ -n "$pid" ]]; then
-            kill "$pid" 2>/dev/null || true
-        fi
+    for pid in $backend $frontend; do
+        kill "$pid" 2>/dev/null || true
     done
-    for pid in "$backend" "$frontend"; do
-        if [[ -n "$pid" ]]; then
-            wait "$pid" 2>/dev/null || true
-        fi
+    for pid in $backend $frontend; do
+        wait "$pid" 2>/dev/null || true
     done
 }
 trap cleanup EXIT
@@ -35,7 +26,15 @@ backend=$!
 bun run dev --host=127.0.0.1 --port="$VITE_PORT" --strictPort &
 frontend=$!
 
-# The first process exit ends the session, preserving its exit status.
+# Bash 3.2 has no `wait -n`: poll until one process exits, then return its status.
+while kill -0 "$backend" 2>/dev/null && kill -0 "$frontend" 2>/dev/null; do
+    sleep 0.2
+done
+
 status=0
-wait -n "$backend" "$frontend" || status=$?
+if kill -0 "$backend" 2>/dev/null; then
+    wait "$frontend" || status=$?
+else
+    wait "$backend" || status=$?
+fi
 exit "$status"

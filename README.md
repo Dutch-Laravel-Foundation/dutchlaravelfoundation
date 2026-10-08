@@ -1,98 +1,37 @@
 # Dutch Laravel Foundation website
 
-## Installation and workspace checks
+## Installation
 
-Use PHP 8.5 (with PCOV, SQLite and zip), Composer, Node 24, npm 11.19.0+
-and Bun 1.4.2, plus Bash 4.3+ for `composer dev`. Follow [the dependency trust and update policy](docs/dependency-policy.md)
-for seven-day release holds, advisory audits, Vet review and urgent CVE exceptions.
-Install locked dependencies with `composer install --prefer-dist --no-interaction`
-and `npm ci --no-audit --no-fund`. For a **fresh, disposable workspace only**:
+Requirements: PHP 8.5 (with PCOV, SQLite and zip), Composer, Node 24 and Bun 1.4.
 
 ```sh
-cp .env.example .env # never overwrite an environment-provided .env
+composer install
+npm ci
+cp .env.example .env
 mkdir -p users storage/framework/cache/data storage/framework/sessions storage/framework/views storage/logs
 touch database/database.sqlite
-php artisan key:generate --no-interaction
+php artisan key:generate
 bun run build
 ```
 
-Do not copy production `.env`, users, databases or form submissions. Example
-configuration contains no credentials: SQLite stays inside the workspace, mail
-uses the log driver, queues run synchronously and response caching is disabled
-(no Redis required). Tracked `storage/forms` must resolve to the workspace-local
-`storage/form-submissions`, never a production shared directory. Dependencies,
-local credentials, submissions, SQLite files and Pest/TIA caches remain untracked.
+The example environment uses SQLite, the log mailer and no response cache, so it needs no Redis or real credentials.
 
-`composer quality` is the canonical non-mutating gate: Pint, Larastan level 5,
-the **full** Pest suite (including architecture and isolation contracts), Bun
-tests, TypeScript and client/SSR builds. `composer test` retains the fast local
-TIA path; `composer test:full` bypasses selection. CI runs the same PHP/JS gates
-and build before recording its full TIA baseline. Static analysis starts with a
-counted, file/message-specific inventory of 29 existing diagnostics in
-`phpstan-baseline.neon`; new diagnostics fail and stale ignores fail. Do not
-regenerate that inventory to hide regressions. Analysis uses PHPStan's debug
-execution mode (no result-cache reuse or parallel workers) with CLI OPcache off
-to avoid a reproduced PHP 8.5 heap corruption during cached analysis; all rules
-and the counted diagnostic inventory still apply. No test gate was removed. PHPUnit forces SSR off as well as in-memory services;
-the test application factory rejects cached configuration before bootstrap so
-cached production settings cannot bypass isolation. A disposable sentinel cache
-regression verifies refusal without evaluating the cache or booting providers.
+## Commands
 
-### One development start path
+| Command | Purpose |
+| --- | --- |
+| `APP_PORT=8000 VITE_PORT=5173 composer dev` | PHP server and Vite with SSR. Export both ports. `INERTIA_SSR_URL` defaults to `VITE_PORT + 1`. |
+| `composer test` | Pest with TIA. `composer test:full` runs every test. |
+| `bun run test` / `bun run typecheck` | JavaScript tests and TypeScript. |
+| `composer lint` / `composer analyse` | Pint and PHPStan (level 5, counted baseline). |
+| `composer audit:dependencies` | Composer and npm advisory audits. |
+| `composer quality` | All of the above, plus the build. |
 
-The canonical developer entry point is `composer dev`: it runs the loopback PHP
-server and Vite (including Inertia's integrated SSR). The launcher propagates
-the first process's exit status and stops/reaps its sibling; regression tests
-exercise both failure directions using disposable command doubles, not servers.
-The launcher requires **Bash 4.3+** for `wait -n` and rejects older versions
-before either service starts. macOS ships Bash 3.2; install a current Bash with
-Homebrew and put it first in the `PATH` inherited by Composer (changing your
-login shell alone is not enough):
+Dependency updates follow the [dependency policy](docs/dependency-policy.md).
 
-```sh
-brew install bash
-export PATH="$(brew --prefix)/bin:$PATH"
-bash --version # verify 4.3 or newer, rather than /bin/bash 3.2
-composer dev
-```
+## Agent context
 
-This works with both Apple Silicon and Intel Homebrew prefixes. `composer dev`
-invokes `bash dev.sh`, so it selects Bash from `PATH`.
-
-Supply **environment-assigned** `APP_URL`, `APP_PORT`,
-`VITE_PORT` and `INERTIA_SSR_URL`; it refuses to start without them and Vite
-uses strict port binding (no fallback to an unassigned port). A Project workspace that already manages its
-server must use that managed process instead, not launch this command alongside
-it. Never invent a port, acquire a topology, or start a competing server.
-
-### Workspace/browser review evidence
-
-For an assigned fresh Project workspace, confirm its `.env` uses only disposable
-resources, run `composer quality`, then review the assigned `APP_URL` in a real
-browser: homepage, editorial/detail navigation, mobile layout, contact and sales
-funnel using disposable submissions; inspect console/network failures and verify
-submissions land only in local storage. Existing HTTP and JS tests are not a
-substitute for that browser review.
-
-For Orbit subtask #1087, **fresh-workspace and browser proof were not executed**:
-no assigned APP_URL or managed start path was supplied. Orbit refused topology
-acquisition because Project VM groups use their own Project workspace. No server
-was started and no topology was acquired. Deterministic checks were executed in
-the existing workspace; browser confirmation remains explicitly unavailable,
-not claimed as passing.
-
-## Development agent context
-
-`AGENTS.md` is the shared instruction file. Boost choices live in `boost.json`;
-refresh generated guidelines and skills with `php artisan boost:update --no-discover`.
-Load `.ai/rules/index.md` for scoped project rules and `.agents/skills` for on-demand
-knowledge. Claude Code uses the same skills through `.claude/skills`.
-
-Codex MCP configuration is tracked in `.codex/config.toml`. For Claude Code or
-another MCP client, merge `.mcp.example.json` into your environment's local
-`.mcp.json`; preserve any environment-provided servers and never commit credentials.
-See [.ai/context-review.md](.ai/context-review.md) for the published article audit,
-intentional differences, and revalidation procedure.
+`AGENTS.md` (also `CLAUDE.md`) is the shared instruction file. Boost settings live in `boost.json` and `config/boost.php`; project overrides of Boost guidelines live in `.ai/guidelines`. Run `php artisan boost:update --no-discover` to regenerate. Merge `.mcp.example.json` into a local `.mcp.json` for MCP clients other than Codex.
 
 ## LLM / Agent integration
 
