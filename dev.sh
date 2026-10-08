@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+if (( BASH_VERSINFO[0] < 4 || (BASH_VERSINFO[0] == 4 && BASH_VERSINFO[1] < 3) )); then
+    printf '%s\n' 'composer dev requires Bash 4.3+ (wait -n). Install a current Bash and put its bin directory first in PATH; see README.md for macOS setup.' >&2
+    exit 1
+fi
+
 : "${APP_URL:?Supply the environment-assigned APP_URL}"
 : "${APP_PORT:?Supply the environment-assigned backend port}"
 : "${VITE_PORT:?Supply the environment-assigned Vite port}"

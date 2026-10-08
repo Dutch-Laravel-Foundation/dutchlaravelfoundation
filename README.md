@@ -3,7 +3,7 @@
 ## Installation and workspace checks
 
 Use PHP 8.5 (with PCOV, SQLite and zip), Composer, Node 24, npm 11.19.0+
-and Bun 1.4.2. Follow [the dependency trust and update policy](docs/dependency-policy.md)
+and Bun 1.4.2, plus Bash 4.3+ for `composer dev`. Follow [the dependency trust and update policy](docs/dependency-policy.md)
 for seven-day release holds, advisory audits, Vet review and urgent CVE exceptions.
 Install locked dependencies with `composer install --prefer-dist --no-interaction`
 and `npm ci --no-audit --no-fund`. For a **fresh, disposable workspace only**:
@@ -43,7 +43,23 @@ regression verifies refusal without evaluating the cache or booting providers.
 The canonical developer entry point is `composer dev`: it runs the loopback PHP
 server and Vite (including Inertia's integrated SSR). The launcher propagates
 the first process's exit status and stops/reaps its sibling; regression tests
-exercise both failure directions using disposable command doubles, not servers. Supply **environment-assigned** `APP_URL`, `APP_PORT`,
+exercise both failure directions using disposable command doubles, not servers.
+The launcher requires **Bash 4.3+** for `wait -n` and rejects older versions
+before either service starts. macOS ships Bash 3.2; install a current Bash with
+Homebrew and put it first in the `PATH` inherited by Composer (changing your
+login shell alone is not enough):
+
+```sh
+brew install bash
+export PATH="$(brew --prefix)/bin:$PATH"
+bash --version # verify 4.3 or newer, rather than /bin/bash 3.2
+composer dev
+```
+
+This works with both Apple Silicon and Intel Homebrew prefixes. `composer dev`
+invokes `bash dev.sh`, so it selects Bash from `PATH`.
+
+Supply **environment-assigned** `APP_URL`, `APP_PORT`,
 `VITE_PORT` and `INERTIA_SSR_URL`; it refuses to start without them and Vite
 uses strict port binding (no fallback to an unassigned port). A Project workspace that already manages its
 server must use that managed process instead, not launch this command alongside
