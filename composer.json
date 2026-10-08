@@ -78,8 +78,7 @@
             "@php artisan key:generate --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
-            "@php artisan boost:update --no-discover --ansi"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
         ],
         "lint": "@php vendor/bin/pint --test",
         "analyse": "@php -d opcache.enable_cli=0 vendor/bin/phpstan analyse --no-progress --debug",
@@ -89,14 +88,13 @@
             "@composer audit --locked --no-interaction",
             "npm audit --package-lock-only --ignore-scripts"
         ],
-        "quality": [
-            "@audit:dependencies",
+        "check": [
             "@lint",
             "@analyse",
-            "@test:full",
             "bun run test",
             "bun run typecheck",
-            "bun run build"
+            "bun run build",
+            "@test:full"
         ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",

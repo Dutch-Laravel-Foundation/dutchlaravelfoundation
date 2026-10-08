@@ -4,22 +4,9 @@
         "claude_code"
     ],
     "cloud": false,
-    "guidelines": true,
+    "guidelines": false,
     "mcp": true,
     "nightwatch": false,
-    "packages": [
-        "statamic/cms",
-        "spatie/laravel-responsecache",
-        "barryvdh/laravel-debugbar"
-    ],
     "sail": false,
-    "skills": [
-        "infer-conventions",
-        "laravel-best-practices",
-        "testing-best-practices",
-        "inertia-react-development",
-        "tailwindcss-development",
-        "responsecache-development",
-        "debug-using-debugbar"
-    ]
+    "skills": []
 }

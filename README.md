@@ -25,13 +25,13 @@ The example environment uses SQLite, the log mailer and no response cache, so it
 | `bun run test` / `bun run typecheck` | JavaScript tests and TypeScript. |
 | `composer lint` / `composer analyse` | Pint and PHPStan (level 5, counted baseline). |
 | `composer audit:dependencies` | Composer and npm advisory audits. |
-| `composer quality` | All of the above, plus the build. |
+| `composer check` | Pint, PHPStan, Bun tests, typecheck, build and the full Pest suite. Audits stay separate. |
 
 Dependency updates follow the [dependency policy](docs/dependency-policy.md).
 
 ## Agent context
 
-`AGENTS.md` (also `CLAUDE.md`) is the shared instruction file. Boost settings live in `boost.json` and `config/boost.php`; project overrides of Boost guidelines live in `.ai/guidelines`. Run `php artisan boost:update --no-discover` to regenerate. Merge `.mcp.example.json` into a local `.mcp.json` for MCP clients other than Codex.
+`AGENTS.md` (also `CLAUDE.md`) holds the agent instructions. Scoped rules live in `.ai/rules`, the DLF page skill in `.agents/skills`. Boost provides MCP only (`boost.json` turns off generated guidelines and skills). Merge `.mcp.example.json` into a local `.mcp.json` for MCP clients other than Codex.
 
 ## LLM / Agent integration
 
