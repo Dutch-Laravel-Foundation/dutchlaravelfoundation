@@ -2,7 +2,9 @@
 
 ## Installation and workspace checks
 
-Use PHP 8.5 (with PCOV and SQLite), Composer, Node 24 and Bun 1.4.2.
+Use PHP 8.5 (with PCOV, SQLite and zip), Composer, Node 24, npm 11.19.0+
+and Bun 1.4.2. Follow [the dependency trust and update policy](docs/dependency-policy.md)
+for seven-day release holds, advisory audits, Vet review and urgent CVE exceptions.
 Install locked dependencies with `composer install --prefer-dist --no-interaction`
 and `npm ci --no-audit --no-fund`. For a **fresh, disposable workspace only**:
 

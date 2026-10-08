@@ -24,6 +24,7 @@
         "laravel/envoy": "*",
         "laravel/mcp": "^1.0",
         "laravel/pint": "^1.27",
+        "laravel/vet": "0.2.1",
         "nckrtl/laravel-toolbar": "^0.3.6",
         "nunomaduro/collision": "^8.0",
         "pestphp/pest": "^5.0",
@@ -32,13 +33,14 @@
     },
     "config": {
         "optimize-autoloader": true,
-        "preferred-install": "source",
+        "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
             "php-http/discovery": true,
             "pixelfear/composer-dist-plugin": true,
-            "pestphp/pest-plugin": true
+            "pestphp/pest-plugin": true,
+            "laravel/vet": true
         }
     },
     "extra": {
@@ -83,7 +85,13 @@
         "analyse": "@php -d opcache.enable_cli=0 vendor/bin/phpstan analyse --no-progress --debug",
         "test": "@php vendor/bin/pest --compact",
         "test:full": "@php vendor/bin/pest --no-tia --compact",
+        "audit:dependencies": [
+            "@composer audit --locked --no-interaction",
+            "@php vendor/bin/vet --no-interaction",
+            "npm audit --package-lock-only --ignore-scripts"
+        ],
         "quality": [
+            "@audit:dependencies",
             "@lint",
             "@analyse",
             "@test:full",

@@ -1,0 +1,4 @@
+[install]
+# Seconds: seven days. Applies to newly resolved releases, not existing locks.
+minimumReleaseAge = 604800
+minimumReleaseAgeExcludes = []
