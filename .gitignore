@@ -32,3 +32,6 @@ public/mix-manifest.json
 
 # SQLite file created when DB_DATABASE=laravel is used with the sqlite driver
 /laravel
+/database/*.sqlite
+/database/*.sqlite-*
+/storage/framework/phpstan/

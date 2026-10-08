@@ -17,17 +17,17 @@ class ServeMarkdown
      * Maps URL prefix → Statamic collection handle.
      */
     private const WHITELIST = [
-        '/nieuws/'    => 'insights',
-        '/kennis/'    => 'knowledge',
-        '/events/'    => 'events',
+        '/nieuws/' => 'insights',
+        '/kennis/' => 'knowledge',
+        '/events/' => 'events',
         '/stagebank/' => 'internships',
-        '/cases/'     => 'cases',
-        '/podcast/'   => 'podcasts',
+        '/cases/' => 'cases',
+        '/podcast/' => 'podcasts',
     ];
 
     public function handle(Request $request, Closure $next): Response
     {
-        $path = '/' . ltrim($request->path(), '/');
+        $path = '/'.ltrim($request->path(), '/');
         $wantsMarkdown = false;
 
         if (str_ends_with($path, '.md')) {
@@ -49,8 +49,8 @@ class ServeMarkdown
         $markdown = app(EntryMarkdownRenderer::class)->render($entry);
 
         return response($markdown, 200, [
-            'Content-Type'  => 'text/markdown; charset=UTF-8',
-            'Vary'          => 'Accept',
+            'Content-Type' => 'text/markdown; charset=UTF-8',
+            'Vary' => 'Accept',
             'Cache-Control' => 'public, max-age=300',
         ]);
     }
@@ -64,7 +64,7 @@ class ServeMarkdown
 
         // Simple preference: markdown explicit AND no higher-priority html
         $hasMarkdown = str_contains($accept, 'text/markdown');
-        $hasHtml     = str_contains($accept, 'text/html');
+        $hasHtml = str_contains($accept, 'text/html');
 
         return $hasMarkdown && ! $hasHtml;
     }

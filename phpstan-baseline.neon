@@ -1,0 +1,109 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Cannot call method fit\(\) on Statamic\\Contracts\\Imaging\\ImageManipulator\|string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Content/Home/HomeDataMapper.php
+
+		-
+			message: '#^Call to an undefined method Statamic\\Contracts\\Entries\\QueryBuilder\:\:where\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: app/Http/Controllers/Agents/LlmsController.php
+
+		-
+			message: '#^Call to an undefined method Statamic\\Contracts\\Entries\\Entry\:\:published\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Middleware/ServeMarkdown.php
+
+		-
+			message: '#^Static method Statamic\\Facades\\Entry\:\:findByUri\(\) invoked with 1 parameter, 2 required\.$#'
+			identifier: arguments.count
+			count: 1
+			path: app/Http/Middleware/ServeMarkdown.php
+
+		-
+			message: '#^PHPDoc type array of property App\\Models\\User\:\:\$casts is not covariant with PHPDoc type array\<string, string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$casts\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^PHPDoc type array of property App\\Models\\User\:\:\$fillable is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$fillable\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^PHPDoc type array of property App\\Models\\User\:\:\$hidden is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$hidden\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^PHPDoc tag @param references unknown parameter\: \$context$#'
+			identifier: parameter.notFound
+			count: 1
+			path: app/Modifiers/MainTemplatePart.php
+
+		-
+			message: '#^PHPDoc tag @param references unknown parameter\: \$params$#'
+			identifier: parameter.notFound
+			count: 1
+			path: app/Modifiers/MainTemplatePart.php
+
+		-
+			message: '#^PHPDoc tag @param references unknown parameter\: \$context$#'
+			identifier: parameter.notFound
+			count: 1
+			path: app/Modifiers/RemoveEmpty.php
+
+		-
+			message: '#^PHPDoc tag @param references unknown parameter\: \$params$#'
+			identifier: parameter.notFound
+			count: 1
+			path: app/Modifiers/RemoveEmpty.php
+
+		-
+			message: '#^PHPDoc type array of property App\\Providers\\AuthServiceProvider\:\:\$policies is not covariant with PHPDoc type array\<class\-string, class\-string\> of overridden property Illuminate\\Foundation\\Support\\Providers\\AuthServiceProvider\:\:\$policies\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: app/Providers/AuthServiceProvider.php
+
+		-
+			message: '#^PHPDoc tag @var above a method has no effect\.$#'
+			identifier: varTag.misplaced
+			count: 1
+			path: app/Providers/RouteServiceProvider.php
+
+		-
+			message: '#^Parameter \#1 \$tool of method NckRtl\\Toolbar\\Data\\Layout\\GroupConfig\:\:addTool\(\) expects NckRtl\\Toolbar\\Data\\Tools\\ToolInterface, NckRtl\\Toolbar\\Data\\Tools\\AnnotationTool given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Providers/ToolbarConfigProvider.php
+
+		-
+			message: '#^Call to an undefined method Statamic\\Contracts\\Entries\\Entry\:\:absoluteUrl\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Services/Agents/EntryMarkdownRenderer.php
+
+		-
+			message: '#^Call to an undefined method Statamic\\Contracts\\Entries\\Entry\:\:collectionHandle\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: app/Services/Agents/EntryMarkdownRenderer.php
+
+		-
+			message: '#^Call to an undefined method Statamic\\Contracts\\Entries\\Entry\:\:date\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: app/Services/Agents/EntryMarkdownRenderer.php
+
+		-
+			message: '#^Call to an undefined method Statamic\\Contracts\\Entries\\Entry\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 9
+			path: app/Services/Agents/EntryMarkdownRenderer.php

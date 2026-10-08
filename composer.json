@@ -79,6 +79,22 @@
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
             "@php artisan boost:update --no-discover --ansi"
         ],
+        "lint": "@php vendor/bin/pint --test",
+        "analyse": "@php -d opcache.enable_cli=0 vendor/bin/phpstan analyse --no-progress --debug",
+        "test": "@php vendor/bin/pest --compact",
+        "test:full": "@php vendor/bin/pest --no-tia --compact",
+        "quality": [
+            "@lint",
+            "@analyse",
+            "@test:full",
+            "bun run test",
+            "bun run typecheck",
+            "bun run build"
+        ],
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "bash dev.sh"
+        ],
         "deploy": "@php vendor/bin/envoy run deploy --ansi"
     }
 }

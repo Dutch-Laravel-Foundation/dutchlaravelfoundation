@@ -53,6 +53,14 @@ jobs:
         run: |
           npm ci --no-audit --no-fund
           bun run build
+      - name: PHP formatting and static analysis
+        run: |
+          composer lint
+          composer analyse
+      - name: JavaScript tests and type checking
+        run: |
+          bun run test
+          bun run typecheck
       - name: Record the full TIA baseline
         run: vendor/bin/pest --tia --fresh --compact --no-coverage
       - name: Locate baseline

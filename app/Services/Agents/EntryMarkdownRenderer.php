@@ -12,36 +12,36 @@ class EntryMarkdownRenderer
     {
         $lines = [];
 
-        $lines[] = '# ' . $entry->get('title');
+        $lines[] = '# '.$entry->get('title');
         $lines[] = '';
 
         $excerpt = (string) ($entry->get('excerpt') ?? $entry->get('meta_description') ?? '');
         if ($excerpt !== '') {
-            $lines[] = '> ' . $excerpt;
+            $lines[] = '> '.$excerpt;
             $lines[] = '';
         }
 
-        $lines[] = '**Type:** ' . $entry->collectionHandle();
+        $lines[] = '**Type:** '.$entry->collectionHandle();
 
         if ($entry->date()) {
-            $lines[] = '**Published:** ' . $entry->date()->format('Y-m-d');
+            $lines[] = '**Published:** '.$entry->date()->format('Y-m-d');
         }
 
-        $lines[] = '**URL:** ' . $entry->absoluteUrl();
+        $lines[] = '**URL:** '.$entry->absoluteUrl();
 
         $videoUrl = $this->fieldAsText($entry->get('video_url'));
         if ($videoUrl !== '') {
-            $lines[] = '**Video:** ' . $videoUrl;
+            $lines[] = '**Video:** '.$videoUrl;
         }
 
         $spotifyUrl = $this->fieldAsText($entry->get('spotify_url'));
         if ($spotifyUrl !== '') {
-            $lines[] = '**Spotify:** ' . $spotifyUrl;
+            $lines[] = '**Spotify:** '.$spotifyUrl;
         }
 
         $tags = $entry->get('tags');
         if (is_array($tags) && $tags !== []) {
-            $lines[] = '**Tags:** ' . implode(', ', array_map('strval', $tags));
+            $lines[] = '**Tags:** '.implode(', ', array_map('strval', $tags));
         }
 
         $lines[] = '';
@@ -49,7 +49,7 @@ class EntryMarkdownRenderer
         $lines[] = '';
         $lines[] = $this->body($entry);
 
-        return implode("\n", $lines) . "\n";
+        return implode("\n", $lines)."\n";
     }
 
     private function body(Entry $entry): string
@@ -102,7 +102,7 @@ class EntryMarkdownRenderer
     /**
      * Recursively extract text from a Bard/ProseMirror node array.
      *
-     * @param array<mixed> $nodes
+     * @param  array<mixed>  $nodes
      */
     private function flattenBardNodes(array $nodes): string
     {
@@ -112,12 +112,13 @@ class EntryMarkdownRenderer
                 continue;
             }
             if (isset($node['text']) && is_string($node['text'])) {
-                $text .= $node['text'] . ' ';
+                $text .= $node['text'].' ';
             }
             if (isset($node['content']) && is_array($node['content'])) {
                 $text .= $this->flattenBardNodes($node['content']);
             }
         }
+
         return $text;
     }
 }

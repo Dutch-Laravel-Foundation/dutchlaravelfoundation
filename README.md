@@ -1,8 +1,67 @@
 # Dutch Laravel Foundation website
 
-## Installation
+## Installation and workspace checks
 
-...
+Use PHP 8.5 (with PCOV and SQLite), Composer, Node 24 and Bun 1.4.2.
+Install locked dependencies with `composer install --prefer-dist --no-interaction`
+and `npm ci --no-audit --no-fund`. For a **fresh, disposable workspace only**:
+
+```sh
+cp .env.example .env # never overwrite an environment-provided .env
+mkdir -p users storage/framework/cache/data storage/framework/sessions storage/framework/views storage/logs
+touch database/database.sqlite
+php artisan key:generate --no-interaction
+bun run build
+```
+
+Do not copy production `.env`, users, databases or form submissions. Example
+configuration contains no credentials: SQLite stays inside the workspace, mail
+uses the log driver, queues run synchronously and response caching is disabled
+(no Redis required). Tracked `storage/forms` must resolve to the workspace-local
+`storage/form-submissions`, never a production shared directory. Dependencies,
+local credentials, submissions, SQLite files and Pest/TIA caches remain untracked.
+
+`composer quality` is the canonical non-mutating gate: Pint, Larastan level 5,
+the **full** Pest suite (including architecture and isolation contracts), Bun
+tests, TypeScript and client/SSR builds. `composer test` retains the fast local
+TIA path; `composer test:full` bypasses selection. CI runs the same PHP/JS gates
+and build before recording its full TIA baseline. Static analysis starts with a
+counted, file/message-specific inventory of 29 existing diagnostics in
+`phpstan-baseline.neon`; new diagnostics fail and stale ignores fail. Do not
+regenerate that inventory to hide regressions. Analysis uses PHPStan's debug
+execution mode (no result-cache reuse or parallel workers) with CLI OPcache off
+to avoid a reproduced PHP 8.5 heap corruption during cached analysis; all rules
+and the counted diagnostic inventory still apply. No test gate was removed. PHPUnit forces SSR off as well as in-memory services;
+the test application factory rejects cached configuration before bootstrap so
+cached production settings cannot bypass isolation. A disposable sentinel cache
+regression verifies refusal without evaluating the cache or booting providers.
+
+### One development start path
+
+The canonical developer entry point is `composer dev`: it runs the loopback PHP
+server and Vite (including Inertia's integrated SSR). The launcher propagates
+the first process's exit status and stops/reaps its sibling; regression tests
+exercise both failure directions using disposable command doubles, not servers. Supply **environment-assigned** `APP_URL`, `APP_PORT`,
+`VITE_PORT` and `INERTIA_SSR_URL`; it refuses to start without them and Vite
+uses strict port binding (no fallback to an unassigned port). A Project workspace that already manages its
+server must use that managed process instead, not launch this command alongside
+it. Never invent a port, acquire a topology, or start a competing server.
+
+### Workspace/browser review evidence
+
+For an assigned fresh Project workspace, confirm its `.env` uses only disposable
+resources, run `composer quality`, then review the assigned `APP_URL` in a real
+browser: homepage, editorial/detail navigation, mobile layout, contact and sales
+funnel using disposable submissions; inspect console/network failures and verify
+submissions land only in local storage. Existing HTTP and JS tests are not a
+substitute for that browser review.
+
+For Orbit subtask #1087, **fresh-workspace and browser proof were not executed**:
+no assigned APP_URL or managed start path was supplied. Orbit refused topology
+acquisition because Project VM groups use their own Project workspace. No server
+was started and no topology was acquired. Deterministic checks were executed in
+the existing workspace; browser confirmation remains explicitly unavailable,
+not claimed as passing.
 
 ## Development agent context
 

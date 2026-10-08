@@ -7,13 +7,16 @@ namespace App\Http\Controllers\Agents;
 use App\Http\Controllers\Controller;
 use App\Services\Agents\EntryMarkdownRenderer;
 use Illuminate\Http\Response;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Statamic\Facades\Entry;
 
 class LlmsController extends Controller
 {
     public const CACHE_KEY_INDEX = 'dlf:agents:llms-txt';
-    public const CACHE_KEY_FULL  = 'dlf:agents:llms-full-txt';
+
+    public const CACHE_KEY_FULL = 'dlf:agents:llms-full-txt';
+
     private const CACHE_TTL = 3600;
 
     public function index(): Response
@@ -33,34 +36,34 @@ class LlmsController extends Controller
     private function renderIndex(): string
     {
         $limit = (int) config('dlf.llms.max_entries_per_section', 50);
-        $base  = rtrim(config('app.url'), '/');
+        $base = rtrim(config('app.url'), '/');
 
         return view('agents.llms', [
-            'base'            => $base,
-            'preamble'        => config('dlf.llms.preamble'),
-            'highlighted'     => config('dlf.llms.highlighted_pages', []),
-            'knowledgeItems'  => $this->publishedEntries('knowledge', $limit),
-            'insightsItems'   => $this->publishedEntries('insights', $limit),
-            'eventsItems'     => $this->publishedEntries('events', $limit),
+            'base' => $base,
+            'preamble' => config('dlf.llms.preamble'),
+            'highlighted' => config('dlf.llms.highlighted_pages', []),
+            'knowledgeItems' => $this->publishedEntries('knowledge', $limit),
+            'insightsItems' => $this->publishedEntries('insights', $limit),
+            'eventsItems' => $this->publishedEntries('events', $limit),
             'internshipItems' => $this->publishedEntries('internships', $limit),
-            'podcastItems'    => $this->publishedEntries('podcasts', $limit),
+            'podcastItems' => $this->publishedEntries('podcasts', $limit),
         ])->render();
     }
 
     private function renderFull(): string
     {
-        $limit    = (int) config('dlf.llms.max_entries_per_section', 50);
+        $limit = (int) config('dlf.llms.max_entries_per_section', 50);
         $renderer = app(EntryMarkdownRenderer::class);
 
         return view('agents.llms-full', [
-            'base'     => rtrim(config('app.url'), '/'),
+            'base' => rtrim(config('app.url'), '/'),
             'preamble' => config('dlf.llms.preamble'),
             'sections' => [
                 'Knowledge Base' => $this->entriesFor('knowledge', $limit),
-                'Insights'       => $this->entriesFor('insights', $limit),
-                'Events'         => $this->entriesFor('events', $limit),
-                'Internships'    => $this->entriesFor('internships', $limit),
-                'Podcasts'       => $this->entriesFor('podcasts', $limit),
+                'Insights' => $this->entriesFor('insights', $limit),
+                'Events' => $this->entriesFor('events', $limit),
+                'Internships' => $this->entriesFor('internships', $limit),
+                'Podcasts' => $this->entriesFor('podcasts', $limit),
             ],
             'renderer' => $renderer,
         ])->render();
@@ -79,16 +82,16 @@ class LlmsController extends Controller
             ->get()
             ->map(fn ($entry) => [
                 'title' => (string) $entry->get('title'),
-                'url'   => (string) $entry->absoluteUrl(),
-                'date'  => $entry->date()?->format('Y-m-d'),
+                'url' => (string) $entry->absoluteUrl(),
+                'date' => $entry->date()?->format('Y-m-d'),
             ])
             ->all();
     }
 
     /**
-     * @return \Illuminate\Support\Collection<int, \Statamic\Contracts\Entries\Entry>
+     * @return Collection<int, \Statamic\Contracts\Entries\Entry>
      */
-    private function entriesFor(string $handle, int $limit): \Illuminate\Support\Collection
+    private function entriesFor(string $handle, int $limit): Collection
     {
         return Entry::query()
             ->where('collection', $handle)
@@ -101,7 +104,7 @@ class LlmsController extends Controller
     private function markdownResponse(string $body): Response
     {
         return response($body, 200, [
-            'Content-Type'  => 'text/markdown; charset=UTF-8',
+            'Content-Type' => 'text/markdown; charset=UTF-8',
             'Cache-Control' => 'public, max-age=300',
         ]);
     }
