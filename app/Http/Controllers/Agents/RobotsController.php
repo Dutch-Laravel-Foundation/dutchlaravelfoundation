@@ -28,14 +28,14 @@ class RobotsController extends Controller
             'Google-Extended', 'Applebot-Extended',
             'CCBot', 'Bytespider',
         ] as $bot) {
-            $lines[] = 'User-agent: ' . $bot;
+            $lines[] = 'User-agent: '.$bot;
         }
 
         $lines[] = 'Allow: /';
         $lines[] = '';
-        $lines[] = 'Sitemap: ' . rtrim(config('app.url'), '/') . '/sitemap.xml';
+        $lines[] = 'Sitemap: '.rtrim(config('app.url'), '/').'/sitemap.xml';
 
-        return response(implode("\n", $lines) . "\n", 200, [
+        return response(implode("\n", $lines)."\n", 200, [
             'Content-Type' => 'text/plain; charset=UTF-8',
             'Cache-Control' => 'public, max-age=3600',
         ]);

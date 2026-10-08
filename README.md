@@ -2,7 +2,36 @@
 
 ## Installation
 
-...
+Requirements: PHP 8.5 (with PCOV, SQLite and zip), Composer, Node 24 and Bun 1.4.
+
+```sh
+composer install
+npm ci
+cp .env.example .env
+mkdir -p users storage/framework/cache/data storage/framework/sessions storage/framework/views storage/logs
+touch database/database.sqlite
+php artisan key:generate
+bun run build
+```
+
+The example environment uses SQLite, the log mailer and no response cache, so it needs no Redis or real credentials.
+
+## Commands
+
+| Command | Purpose |
+| --- | --- |
+| `APP_PORT=8000 VITE_PORT=5173 composer dev` | PHP server and Vite with SSR. Export both ports. `INERTIA_SSR_URL` defaults to `VITE_PORT + 1`. |
+| `composer test` | Pest with TIA. `composer test:full` runs every test. |
+| `bun run test` / `bun run typecheck` | JavaScript tests and TypeScript. |
+| `composer lint` / `composer analyse` | Pint and PHPStan (level 5, counted baseline). |
+| `composer audit:dependencies` | Composer and npm advisory audits. |
+| `composer check` | Pint, PHPStan, Bun tests, typecheck, build and the full Pest suite. Audits stay separate. |
+
+Dependency updates follow the [dependency policy](docs/dependency-policy.md).
+
+## Agent context
+
+`AGENTS.md` (also `CLAUDE.md`) holds the agent instructions. Scoped rules live in `.ai/rules`, the DLF page skill in `.agents/skills`. Boost provides MCP only (`boost.json` turns off generated guidelines and skills). Merge `.mcp.example.json` into a local `.mcp.json` for MCP clients other than Codex.
 
 ## LLM / Agent integration
 

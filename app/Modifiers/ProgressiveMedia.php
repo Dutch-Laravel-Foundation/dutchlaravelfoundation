@@ -17,7 +17,7 @@ final class ProgressiveMedia extends Modifier
             return $value;
         }
 
-        $document = new DOMDocument();
+        $document = new DOMDocument;
         $previous = libxml_use_internal_errors(true);
         $document->loadHTML(
             '<?xml encoding="UTF-8">'.$value,

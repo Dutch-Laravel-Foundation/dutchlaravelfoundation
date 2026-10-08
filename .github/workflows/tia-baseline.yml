@@ -74,3 +74,42 @@ jobs:
           path: ${{ steps.baseline.outputs.path }}/
           if-no-files-found: error
           retention-days: 7
+
+  # Separate from the baseline job so a lint or audit failure never blocks baseline publication.
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          extensions: curl, dom, gd, intl, mbstring, pdo_sqlite, sqlite3, xml, zip
+          coverage: none
+          tools: composer:v2
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.4.2'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install dependencies
+        run: |
+          cp .env.example .env
+          mkdir -p users storage/framework/cache/data storage/framework/sessions storage/framework/views storage/logs
+          composer install --prefer-dist --no-interaction --no-progress
+          php artisan key:generate --no-interaction
+          npm ci --no-audit --no-fund
+      - name: Dependency audits
+        run: composer audit:dependencies
+      - name: Pint
+        run: composer lint
+      - name: PHPStan
+        run: composer analyse
+      - name: JavaScript tests and type checking
+        run: |
+          bun run test
+          bun run typecheck

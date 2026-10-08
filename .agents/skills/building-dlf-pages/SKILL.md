@@ -64,7 +64,7 @@ Do not add generic intro stripes, floating divider fragments, isolated decorativ
 
 ## Validate before handoff
 
-Use the `agent-browser` skill after frontend changes. Start at the exact reported viewport, then check both sides of every affected breakpoint and one unaffected control viewport. For a mobile-only task, desktop is a required regression check.
+Use the `agent-browser` skill, or the browser tools your environment provides, after frontend changes. Start at the exact reported viewport, then check both sides of every affected breakpoint and one unaffected control viewport. For a mobile-only task, desktop is a required regression check.
 
 Run the divider audit from [dividers.md](references/dividers.md) for the changed route. Run its canonical-page mode whenever a shared divider primitive or reusable layout component changes.
 

@@ -28,8 +28,8 @@ class AddDiscoveryHeaders
         $base = rtrim(config('app.url'), '/');
 
         $response->headers->set('Link', implode(', ', [
-            '<' . $base . '/llms.txt>; rel="llms-txt"',
-            '<' . $base . '/sitemap.xml>; rel="sitemap"',
+            '<'.$base.'/llms.txt>; rel="llms-txt"',
+            '<'.$base.'/sitemap.xml>; rel="sitemap"',
         ]));
 
         return $response;
