@@ -76,7 +76,8 @@
             "@php artisan key:generate --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "@php artisan boost:update --no-discover --ansi"
         ],
         "deploy": "@php vendor/bin/envoy run deploy --ansi"
     }

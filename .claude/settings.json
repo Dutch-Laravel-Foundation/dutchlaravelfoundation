@@ -1,0 +1,15 @@
+{
+    "permissions": {
+        "allow": [
+            "Bash(vendor/bin/pest *)",
+            "Bash(vendor/bin/pint *)",
+            "Bash(bun run test)",
+            "Bash(bun run typecheck)",
+            "Bash(bun run build)"
+        ],
+        "deny": [
+            "Read(./.env)",
+            "Read(./.env.*)"
+        ]
+    }
+}

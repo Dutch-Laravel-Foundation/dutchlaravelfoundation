@@ -18,7 +18,10 @@ npm-debug.log
 yarn-error.log
 .DS_Store
 public/mix-manifest.json
-.claude
+.claude/*
+!.claude/skills
+!.claude/settings.json
+.claude/settings.local.json
 .worktrees/
 # Statamic users: a symlink to persistent storage, like production
 /users

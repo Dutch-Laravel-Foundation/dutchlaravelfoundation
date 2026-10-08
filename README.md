@@ -4,6 +4,19 @@
 
 ...
 
+## Development agent context
+
+`AGENTS.md` is the shared instruction file. Boost choices live in `boost.json`;
+refresh generated guidelines and skills with `php artisan boost:update --no-discover`.
+Load `.ai/rules/index.md` for scoped project rules and `.agents/skills` for on-demand
+knowledge. Claude Code uses the same skills through `.claude/skills`.
+
+Codex MCP configuration is tracked in `.codex/config.toml`. For Claude Code or
+another MCP client, merge `.mcp.example.json` into your environment's local
+`.mcp.json`; preserve any environment-provided servers and never commit credentials.
+See [.ai/context-review.md](.ai/context-review.md) for the published article audit,
+intentional differences, and revalidation procedure.
+
 ## LLM / Agent integration
 
 This site exposes content to LLMs and agent frameworks:
