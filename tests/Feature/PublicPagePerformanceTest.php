@@ -1,12 +1,26 @@
 <?php
 
 declare(strict_types=1);
-test('public responses use an isolated cache store', function () {
-    expect(config('responsecache.cache.store'))->toBe('response_cache');
+
+use Symfony\Component\Process\Process;
+
+test('public responses default to an isolated cache store', function () {
+    $process = new Process([
+        PHP_BINARY,
+        '-r',
+        'require "vendor/autoload.php"; echo json_encode(require "config/responsecache.php", JSON_THROW_ON_ERROR);',
+    ], base_path(), [
+        'RESPONSE_CACHE_DRIVER' => false,
+        'RESPONSE_CACHE_WARM_CONCURRENCY' => false,
+    ]);
+    $process->mustRun();
+    $responseCache = json_decode($process->getOutput(), true, flags: JSON_THROW_ON_ERROR);
+
+    expect($responseCache['cache']['store'])->toBe('response_cache');
     expect(config('cache.stores.response_cache.driver'))->toBe('redis');
     expect(config('cache.stores.response_cache.connection'))->toBe('response_cache');
     expect(config('database.redis.response_cache.database'))->toBe('2');
-    expect(config('responsecache.warm.concurrency'))->toBe(20);
+    expect($responseCache['warm']['concurrency'])->toBe(20);
     expect(config('statamic.static_caching.strategy'))->toBeNull();
 });
 test('deployment warms the active release after health check', function () {
