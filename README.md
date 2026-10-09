@@ -20,7 +20,7 @@ The example environment uses SQLite, the log mailer and no response cache, so it
 
 | Command | Purpose |
 | --- | --- |
-| `APP_PORT=8000 VITE_PORT=5173 composer dev` | PHP server and Vite with SSR. Export both ports. `INERTIA_SSR_URL` defaults to `VITE_PORT + 1`. |
+| `php artisan serve` and `bun run dev` | PHP server and Vite with SSR. Run each in its own terminal. |
 | `composer test` | Pest with TIA. `composer test:full` runs every test. |
 | `bun run test` / `bun run typecheck` | JavaScript tests and TypeScript. |
 | `composer lint` / `composer analyse` | Pint and PHPStan (level 5, counted baseline). |
@@ -31,7 +31,7 @@ Dependency updates follow the [dependency policy](docs/dependency-policy.md).
 
 ## Agent context
 
-`AGENTS.md` (also `CLAUDE.md`) holds the agent instructions. Scoped rules live in `.ai/rules`, the DLF page skill in `.agents/skills`. Boost provides MCP only (`boost.json` turns off generated guidelines and skills). Merge `.mcp.example.json` into a local `.mcp.json` for MCP clients other than Codex.
+`AGENTS.md` (also `CLAUDE.md`) holds the agent instructions. The DLF page skill lives in `.agents/skills`. Boost provides MCP only (`boost.json` turns off generated guidelines and skills). Merge `.mcp.example.json` into a local `.mcp.json` for MCP clients other than Codex.
 
 ## LLM / Agent integration
 

@@ -96,10 +96,6 @@
             "bun run build",
             "@test:full"
         ],
-        "dev": [
-            "Composer\\Config::disableProcessTimeout",
-            "bash dev.sh"
-        ],
         "deploy": "@php vendor/bin/envoy run deploy --ansi"
     }
 }
