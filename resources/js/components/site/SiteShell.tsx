@@ -13,19 +13,18 @@ import { type FooterCta, type SiteShellData } from "./types";
 export type SiteShellProps = {
     children: ReactNode;
     data: SiteShellData;
-    environment?: string;
     footerCta?: FooterCta | null;
     pageSlug: string;
 };
 
 export const PersistentSiteLayoutContext = createContext(false);
 
-export function SiteShell({ children, data, environment, footerCta, pageSlug }: SiteShellProps) {
+export function SiteShell({ children, data, footerCta, pageSlug }: SiteShellProps) {
     const bannerRef = useRef<HTMLElement>(null);
     const consent = useTrackingConsent({ bannerRef });
     const cta = footerCta === undefined ? data.defaultCta : footerCta;
 
-    useSiteDocument(pageSlug, environment);
+    useSiteDocument(pageSlug);
     useFooterCtaStage(Boolean(cta));
 
     return (

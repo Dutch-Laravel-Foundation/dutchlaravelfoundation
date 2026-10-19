@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-environment="{{ app()->environment() }}">
     @php
         $seoMetadata = resolve(\App\Services\Seo\SeoMetadata::class);
         $entry = $seoMetadata->currentEntry();

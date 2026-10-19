@@ -62,6 +62,12 @@ test('shared layout keeps non critical third parties off the critical path', fun
     $this->assertStringNotContainsString('{{ captcha:head }}', $layout);
     $this->assertStringContainsString('<x-inertia::app />', $layout);
 });
+test('shared layout exposes the environment before the tracking consent loader runs', function () {
+    $response = $this->get('/');
+
+    $response->assertOk();
+    $response->assertSee('data-environment="'.app()->environment().'"', false);
+});
 test('main entrypoint loads optional enhancements conditionally', function () {
     $syntaxHighlighting = file_get_contents(resource_path('js/hooks/useSyntaxHighlighting.ts'));
     $trackingConsent = file_get_contents(resource_path('js/hooks/useTrackingConsent.ts'));
