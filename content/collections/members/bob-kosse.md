@@ -1,5 +1,6 @@
 ---
 id: 14c647d5-6d8f-4e7a-af67-cc7348364a4a
+published: false
 blueprint: members
 title: 'Bob Kosse'
 description: |-
