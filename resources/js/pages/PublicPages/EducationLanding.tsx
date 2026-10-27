@@ -453,12 +453,11 @@ export default function EducationLanding({ page, site }: Props) {
                             >
                                 Kickstart met Laravel
                             </a>{" "}
-                            van Stichting Praktijkleren (enkel toegankelijk voor studenten met
-                            toegang tot Praktijkleren) vinden studenten met een leermiddelenlicentie
-                            een cursus Laravel met 27 praktijkopdrachten, voorbereiding op de
-                            officiële Laravel Student Developer Certification, oefenmogelijkheden,
-                            links naar gastcolleges, een stagebank en praktische tips van ervaren
-                            developers.
+                            van Stichting Praktijkleren vinden studenten met een
+                            leermiddelenlicentie een cursus Laravel met 27 praktijkopdrachten,
+                            voorbereiding op de officiële Laravel Student Developer Certification,
+                            oefenmogelijkheden, links naar gastcolleges, een stagebank en praktische
+                            tips van ervaren developers.
                         </p>
                         <p>
                             Voor mbo-studenten is certificering een mooie manier om hun kennis
