@@ -568,11 +568,11 @@ export default function EducationLanding({ page, site }: Props) {
                             <article key={habit}>
                                 <svg
                                     viewBox="0 0 24 24"
-                                    width="28"
-                                    height="28"
+                                    width="30"
+                                    height="30"
                                     fill="none"
                                     stroke="currentColor"
-                                    strokeWidth="1.5"
+                                    strokeWidth="1.15"
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
                                     aria-hidden="true"
