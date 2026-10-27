@@ -507,7 +507,8 @@ export default function EducationLanding({ page, site }: Props) {
                 </section>
                 <section className="dlf-bm-split dlf-divider-section dlf-divider-split dlf-divider-split--stacked-reversed">
                     <div>
-                        <h2>Voor docenten: houd het haalbaar en actueel</h2>
+                        <p className="dlf-kicker">Voor docenten</p>
+                        <h2>Houd het haalbaar en actueel</h2>
                         <p>
                             Een nieuw framework opnemen in het curriculum vraagt tijd. Daarom is het
                             belangrijk dat ondersteuning niet alleen technisch is, maar ook
