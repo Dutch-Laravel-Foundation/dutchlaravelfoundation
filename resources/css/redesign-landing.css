@@ -959,11 +959,7 @@
 }
 
 .dlf-bm--education .dlf-bm-split p a {
-    color: var(--dlf-red-text);
-    text-decoration-line: underline;
-    text-decoration-color: currentColor;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
+    text-decoration: underline;
 }
 
 .dlf-bm--education .dlf-bm-split .dlf-kicker {
