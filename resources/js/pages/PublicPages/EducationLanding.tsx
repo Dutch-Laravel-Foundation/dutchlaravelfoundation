@@ -321,7 +321,6 @@ export default function EducationLanding({ page, site }: Props) {
                     aria-labelledby="education-agentic-heading"
                 >
                     <div>
-                        <p className="dlf-kicker">Agentic engineering</p>
                         <h2 id="education-agentic-heading">
                             Laravel als fundament voor agentic engineering
                         </h2>
