@@ -1120,34 +1120,38 @@
     object-fit: cover;
 }
 
-.dlf-lid-certified-list {
-    display: flex;
-    max-width: 560px;
-    flex-direction: column;
-    gap: 18px;
+.dlf-info-popover__trigger {
+    display: inline;
+    padding: 0;
+    color: inherit;
+    border: 0;
+    background: none;
+    /* A solid 1px dash reads darker than antialiased text, so soften it. */
+    text-decoration: underline dashed color-mix(in srgb, currentColor 55%, transparent) 1px;
+    text-underline-offset: 3px;
+    font: inherit;
+    line-height: inherit;
+    cursor: help;
 }
 
-.dlf-lid-certified-list > div {
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
-    color: var(--dlf-copy);
-    font-size: var(--dlf-body-font-size);
-    line-height: 1.6;
+.dlf-info-popover__trigger:focus-visible {
+    outline: 2px solid var(--dlf-focus);
+    outline-offset: 2px;
 }
 
-.dlf-lid-checkmark {
-    display: grid;
-    width: 21px;
-    height: 21px;
-    flex: none;
-    place-items: center;
-    margin-top: 2px;
-    color: var(--dlf-red-text);
-    border-radius: 3px;
-    background: var(--dlf-soft-red);
-    font-size: 12.75px;
-    font-weight: 700;
+.dlf-info-popover {
+    z-index: 1300;
+}
+
+.dlf-info-popover__popup {
+    max-width: min(320px, calc(100vw - 32px));
+    padding: 12px 14px;
+    color: #fff;
+    border-radius: 6px;
+    background: var(--dlf-ink);
+    box-shadow: 0 8px 24px rgb(9 9 16 / 18%);
+    font-size: 14px;
+    line-height: 1.5;
 }
 
 .dlf-lid-reason {

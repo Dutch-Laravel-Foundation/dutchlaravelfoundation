@@ -1,3 +1,4 @@
+import { InfoPopover } from "@/components/ui/InfoPopover";
 import { SmartLink } from "@/components/ui/SmartLink";
 
 const benefits = [
@@ -58,6 +59,35 @@ const certificationBenefits = [
     <>
         Daarna betaal je als gecertificeerd bedrijf nog maar <strong>€ 99,-</strong> per Developer
         Certification examen, in plaats van € 249,-.
+    </>,
+];
+
+const certifiedDealBenefits = [
+    <>
+        <strong>25% korting</strong> op alle Certificates.dev examens, trainingen en{" "}
+        <InfoPopover content="Enablements zijn de preparation bundles: zelfstudiemateriaal, oefenexamens en ‑vragen en een herexamen, indien gezakt.">
+            enablements
+        </InfoPopover>
+        .
+    </>,
+    <>
+        <strong>33% korting</strong> op Unlearn.dev vanaf 2 licenties.
+    </>,
+    <>
+        <strong>Premium Laravel Company Certification</strong> voor € 149,- in plaats van € 199,-
+        per jaar.
+    </>,
+    <>
+        <strong>Gratis Company Profile</strong> voor bedrijven met minimaal één Certified
+        Developer.
+    </>,
+    <>
+        Vacatures plaatsen op CertifiedDevs.com voor <strong>$ 1,- per vacature</strong>{" "}
+        (introductieactie).
+    </>,
+    <>
+        <strong>Extra:</strong> bedrijfsprofiel op CertifiedDevs.com voor slechts $ 99,- in plaats
+        van $ 199,-.
     </>,
 ];
 
@@ -184,20 +214,31 @@ export function BecomeMemberContent() {
             </div>
 
             <div className="dlf-lid-content-block">
+                <span className="dlf-community-kicker">Certified deal</span>
+                <h2 className="dlf-community-heading dlf-community-heading--small">
+                    Kortingen op certificeringen
+                </h2>
+                <ul className="dlf-lid-list">
+                    {certifiedDealBenefits.map((benefit, index) => (
+                        <li key={index}>
+                            <span>{benefit}</span>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
+            <div className="dlf-lid-content-block">
                 <span className="dlf-community-kicker">Laravel Company Certified</span>
                 <h2 className="dlf-community-heading dlf-community-heading--small">
-                    Extra voordeel als je Laravel Company Certified bent
+                    Aanvullende voordelen als je Laravel Company Certified bent
                 </h2>
-                <div className="dlf-lid-certified-list">
+                <ul className="dlf-lid-list">
                     {certificationBenefits.map((benefit, index) => (
-                        <div key={index}>
-                            <span className="dlf-lid-checkmark" aria-hidden="true">
-                                ✓
-                            </span>
+                        <li key={index}>
                             <span>{benefit}</span>
-                        </div>
+                        </li>
                     ))}
-                </div>
+                </ul>
             </div>
 
             <div className="dlf-lid-reason dlf-divider-tail-segment">
