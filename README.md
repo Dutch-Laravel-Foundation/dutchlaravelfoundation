@@ -69,5 +69,4 @@ complete Git history available so TIA can compare against the recorded commit.
 
 Local form submissions use `storage/forms -> form-submissions`. Production
 deployment recreates that link to its shared forms directory. Test configuration
-enables debug headers and disables the optional Laravel toolbar consistently
-across CI and development machines.
+enables debug headers consistently across CI and development machines.

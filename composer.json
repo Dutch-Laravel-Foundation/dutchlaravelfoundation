@@ -25,7 +25,6 @@
         "laravel/mcp": "^1.0",
         "laravel/pint": "^1.27",
         "laravel/vet": "0.2.1",
-        "nckrtl/laravel-toolbar": "^0.3.6",
         "nunomaduro/collision": "^8.0",
         "pestphp/pest": "^5.0",
         "pestphp/pest-plugin-laravel": "^5.0",

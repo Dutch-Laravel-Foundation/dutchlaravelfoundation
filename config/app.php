@@ -3,7 +3,6 @@
 use App\Providers\AppServiceProvider;
 use App\Providers\EventServiceProvider;
 use App\Providers\RouteServiceProvider;
-use App\Providers\ToolbarConfigProvider;
 use App\Providers\TypeScriptTransformerServiceProvider;
 use Illuminate\Auth\AuthServiceProvider;
 use Illuminate\Auth\Passwords\PasswordResetServiceProvider;
@@ -239,7 +238,6 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         EventServiceProvider::class,
         RouteServiceProvider::class,
-        ToolbarConfigProvider::class,
         TypeScriptTransformerServiceProvider::class,
 
     ],
