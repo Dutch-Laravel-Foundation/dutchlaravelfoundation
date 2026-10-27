@@ -92,6 +92,7 @@ Route::middleware([CachePublicResponse::class, 'inertia', 'statamic.web'])
                 'gastcolleges-voor-hbo-mbo',
                 'hosting-hotline',
                 'laravel-het-framework-dat-jouw-systeem-op-maat-tot-een-succes-maakt',
+                'laravel-in-het-onderwijs',
                 'newsletter',
                 'over-ons',
                 'privacy-statement',

@@ -142,13 +142,7 @@ test('control panel responses are not modified by the public policy', function (
         ->assertHeaderMissing('Content-Security-Policy')
         ->assertHeaderMissing('Content-Security-Policy-Report-Only');
 });
-test('drift endpoints are allowed only in local development', function () {
-    config([
-        'toolbar.dictation.provider' => 'post',
-        'toolbar.dictation.post_url' => 'http://127.0.0.1:12321/dictate',
-        'toolbar.dictation.stop_url' => 'http://127.0.0.1:12321/dictate-stop',
-    ]);
-
+test('operator dictation endpoints are allowed only in local development', function () {
     foreach (['local' => true, 'production' => false] as $environment => $allowed) {
         $this->app->instance('env', $environment);
         $policy = new Policy;

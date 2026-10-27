@@ -9,6 +9,7 @@ test('every public page family is served by its inertia component', function () 
         '/een-eigen-systeem-laten-bouwen-is-betaalbaarder-dan-je-denkt' => 'PublicPages/GeneralLanding',
         '/laravel-het-framework-dat-jouw-systeem-op-maat-tot-een-succes-maakt' => 'PublicPages/FrameworkLanding',
         '/aanbestedingen' => 'PublicPages/TenderLanding',
+        '/laravel-in-het-onderwijs' => 'PublicPages/EducationLanding',
         '/privacy-statement' => 'PublicPages/PrivacyStatement',
         '/newsletter' => 'PublicPages/Newsletter',
     ];

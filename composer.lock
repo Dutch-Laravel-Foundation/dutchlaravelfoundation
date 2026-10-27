@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f9174bf4a6c2a4b2b6ed0e426891490c",
+    "content-hash": "550465476394efdde588bde13f45af94",
     "packages": [
         {
             "name": "ajthinking/archetype",
@@ -11597,91 +11597,6 @@
                 }
             ],
             "time": "2026-08-11T10:17:44+00:00"
-        },
-        {
-            "name": "nckrtl/laravel-toolbar",
-            "version": "v0.3.8",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nckrtl/laravel-toolbar.git",
-                "reference": "8e1733eda5cbcb8dcd0b3d469b7c4d337dfe8a1c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nckrtl/laravel-toolbar/zipball/8e1733eda5cbcb8dcd0b3d469b7c4d337dfe8a1c",
-                "reference": "8e1733eda5cbcb8dcd0b3d469b7c4d337dfe8a1c",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/contracts": "^11.0||^12.0||^13.0",
-                "laravel/mcp": "^0.5.1 || ^0.6.0 || ^0.7.0 || ^1.0",
-                "php": "^8.4",
-                "spatie/laravel-data": "*",
-                "spatie/laravel-package-tools": "^1.16"
-            },
-            "require-dev": {
-                "larastan/larastan": "^3.0",
-                "laravel/pint": "^1.14",
-                "nunomaduro/collision": "^8.8",
-                "orchestra/testbench": "^11.0.0||^10.0.0||^9.0.0",
-                "pestphp/pest": "^5.0",
-                "pestphp/pest-plugin-arch": "^5.0",
-                "pestphp/pest-plugin-laravel": "^5.0",
-                "phpstan/extension-installer": "^1.4",
-                "phpstan/phpstan-deprecation-rules": "^2.0",
-                "phpstan/phpstan-phpunit": "^2.0",
-                "spatie/laravel-typescript-transformer": "^3.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "Toolbar": "NckRtl\\Toolbar\\Facades\\Toolbar"
-                    },
-                    "providers": [
-                        "NckRtl\\Toolbar\\ToolbarServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "NckRtl\\Toolbar\\": "src/",
-                    "NckRtl\\Toolbar\\Database\\Factories\\": "database/factories/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "nckrtl",
-                    "email": "nick.retel@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A customizable toolbar that sits nicely in the bottom of your screen, showing useful information for development.",
-            "homepage": "https://github.com/nckrtl/laravel-toolbar",
-            "keywords": [
-                "laravel",
-                "laravel-toolbar",
-                "nckrtl",
-                "toolbar"
-            ],
-            "support": {
-                "issues": "https://github.com/nckrtl/laravel-toolbar/issues",
-                "source": "https://github.com/nckrtl/laravel-toolbar/tree/v0.3.8"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/nckrtl",
-                    "type": "github"
-                }
-            ],
-            "time": "2026-10-03T07:46:52+00:00"
         },
         {
             "name": "nunomaduro/collision",

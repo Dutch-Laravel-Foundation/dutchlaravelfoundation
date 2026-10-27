@@ -76,13 +76,12 @@ final readonly class ContentSecurityPolicy implements Preset
             ])
             ->add(Directive::UPGRADE_INSECURE_REQUESTS, Value::NO_VALUE);
 
-        if (app()->environment('local') && config('toolbar.dictation.provider') === 'post') {
-            foreach (['post_url', 'stop_url'] as $key) {
-                $url = config("toolbar.dictation.{$key}");
-                if (is_string($url) && $url !== '') {
-                    $policy->add(Directive::CONNECT, $url);
-                }
-            }
+        // Browser annotations send dictation to Operator's Local API during development.
+        if (app()->environment('local')) {
+            $policy->add(Directive::CONNECT, [
+                'http://127.0.0.1:12321/dictate',
+                'http://127.0.0.1:12321/dictate-stop',
+            ]);
         }
 
         $this->allowHotReloading($policy);

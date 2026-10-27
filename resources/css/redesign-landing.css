@@ -408,6 +408,7 @@
     transform: translateX(-74px);
 }
 
+.dlf-bm--education .dlf-bm-objections__mark svg,
 .dlf-bm--tender .dlf-bm-objections__mark svg {
     transform: translateX(-74px);
 }
@@ -875,6 +876,344 @@
     object-fit: contain !important;
 }
 
+.dlf-bm--education .dlf-bm-split p + p {
+    margin-top: 16px;
+}
+
+.dlf-bm--education .dlf-bm-split h3 {
+    margin: 28px 0 14px;
+    font-size: 1.125rem;
+}
+
+.dlf-bm--education .dlf-bm-split ul {
+    max-width: 480px;
+}
+
+.dlf-bm--education .dlf-bm-pains > header p {
+    max-width: 640px;
+    margin: 14px 0 0;
+    line-height: 1.6;
+}
+
+.dlf-bm--education .dlf-bm-pains article > h3:last-child {
+    margin-bottom: 0;
+}
+
+.dlf-bm--education .dlf-bm-narrative p:not(.dlf-kicker) {
+    font-size: var(--dlf-body-font-size);
+    line-height: 1.7;
+}
+
+.dlf-bm--education .dlf-bm-ink-band__lead {
+    margin-top: 32px;
+}
+
+.dlf-bm-narrative--center .dlf-bm-narrative__inner {
+    margin-inline: auto;
+    text-align: center;
+}
+
+.dlf-bm--education .dlf-bm-ink-band__inner {
+    border-inline: 0;
+}
+
+.dlf-bm-habits > header {
+    text-align: center;
+}
+
+.dlf-bm-habits > header h2 {
+    margin-inline: auto;
+}
+
+.dlf-bm-habits .dlf-fill-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.dlf-bm .dlf-bm-habits .dlf-fill-grid > article {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    padding: 32px 40px;
+    background: #fff;
+}
+
+.dlf-bm-habits .dlf-fill-grid > article > svg {
+    flex: none;
+    color: var(--dlf-red);
+}
+
+.dlf-bm-habits .dlf-fill-grid h3 {
+    margin: 0;
+    font-size: 1.0625rem;
+    font-weight: 500;
+}
+
+/* The red text pane and the photo meet without a visible rule. */
+.dlf-bm--education .dlf-bm-efficient > .dlf-bm-split > * {
+    border-color: var(--dlf-red-action) !important;
+}
+
+.dlf-bm-ink-band--wide.dlf-bm-ink-band--center p {
+    max-width: 760px;
+}
+
+.dlf-bm--education .dlf-bm-split p a {
+    text-decoration: underline;
+}
+
+.dlf-bm--education .dlf-bm-split .dlf-kicker {
+    margin: 0 0 12px;
+    font-size: 0.75rem;
+}
+
+/* A red band owns the boundary with the white section above it; the rule blends into the red. */
+.dlf-bm--education .dlf-divider-section--full-bleed-top {
+    border-top-color: var(--dlf-red-action) !important;
+}
+
+.dlf-bm--education .dlf-bm-ink-band:not(.dlf-bm-ink-band--red).dlf-divider-section--full-bleed-top {
+    border-top-color: var(--dlf-black) !important;
+}
+
+.dlf-bm--education .dlf-bm-ink-band--red {
+    border-bottom-color: rgb(255 255 255 / 16%);
+    background: var(--dlf-red-action)
+        repeating-linear-gradient(
+            30deg,
+            rgba(0, 0, 0, 0.09) 0,
+            rgba(0, 0, 0, 0.09) 1px,
+            transparent 1px,
+            transparent 5px
+        );
+}
+
+.dlf-bm--education .dlf-bm-ink-band--red p {
+    color: #fff;
+}
+
+.dlf-bm--education .dlf-bm-framework-reasons > header .dlf-kicker {
+    margin: 0 0 12px;
+}
+
+.dlf-bm--education .dlf-bm-framework-reasons > header p:not(.dlf-kicker) {
+    color: var(--dlf-copy);
+}
+
+.dlf-bm--education .dlf-bm-grid-3 > article {
+    padding: 36px 40px 44px;
+}
+
+.dlf-bm--education .dlf-bm-grid-3 > article > img {
+    display: block;
+    width: 44px;
+    height: 44px;
+    margin-bottom: 20px;
+    object-fit: contain;
+}
+
+.dlf-bm--education .dlf-bm-grid-3 > article > h3 {
+    margin: 0;
+    color: var(--dlf-black);
+    font-size: 1.0625rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.dlf-bm-partnership .dlf-bm-grid-2 > article > .dlf-kicker {
+    margin: 0 0 6px;
+    color: var(--dlf-muted);
+}
+
+.dlf-bm-partnership .dlf-bm-grid-2 > article > h3 {
+    margin: 0 0 14px;
+    color: var(--dlf-red-text);
+    font-size: 1.5rem;
+}
+
+.dlf-bm-partnership .dlf-bm-grid-2 > article > p:not(.dlf-kicker) {
+    max-width: 480px;
+    margin: 0 0 22px;
+    color: #5f6464;
+    line-height: 1.6;
+}
+
+.dlf-bm-partnership__together {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px;
+    padding: 56px 40px;
+    background: var(--dlf-red-action)
+        repeating-linear-gradient(
+            30deg,
+            rgba(0, 0, 0, 0.09) 0,
+            rgba(0, 0, 0, 0.09) 1px,
+            transparent 1px,
+            transparent 5px
+        );
+    color: #fff;
+}
+
+.dlf-bm .dlf-bm-partnership__together h3 {
+    margin: 0 0 14px;
+    color: #fff;
+    font-size: 1.625rem;
+    line-height: 1.25;
+}
+
+.dlf-bm-partnership__together p {
+    max-width: 440px;
+    margin: 0 0 16px;
+    line-height: 1.6;
+}
+
+.dlf-bm-partnership__together li {
+    color: #fff;
+}
+
+.dlf-bm-partnership__together li::before {
+    background: #fff;
+}
+
+.dlf-bm-learning-path {
+    border-bottom: 1px solid var(--dlf-line);
+    background: #fff;
+}
+
+/* Photos contrast enough on their own, so the split rule beside them stays invisible. */
+.dlf-bm--education .dlf-bm-split.dlf-divider-split > figure {
+    border-color: transparent !important;
+    background-clip: padding-box;
+}
+
+/* Beside the red contact pane, the rule takes the pane red instead. */
+.dlf-bm--education .dlf-bm-efficient > .dlf-bm-split.dlf-divider-split > figure {
+    border-color: var(--dlf-red-action) !important;
+}
+
+/* The red band closes the partnership section; its closing rule takes the band color. */
+.dlf-bm--education .dlf-bm-partnership.dlf-divider-section {
+    border-bottom-color: var(--dlf-red-action) !important;
+}
+
+/* The pink panel contrasts enough on its own, so its rules take the panel color. */
+.dlf-bm--education .dlf-bm-learning-path.dlf-divider-section--full-bleed-top,
+.dlf-bm-learning-path .dlf-bm-learning-path__grid > .dlf-bm-learning-path__steps {
+    border-color: #fdecec !important;
+}
+
+.dlf-bm-learning-path__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.dlf-bm-learning-path__intro {
+    background: #fdecec
+        repeating-linear-gradient(
+            30deg,
+            rgba(255, 45, 32, 0.05) 0,
+            rgba(255, 45, 32, 0.05) 1px,
+            transparent 1px,
+            transparent 5px
+        );
+}
+
+.dlf-bm-learning-path__intro > div {
+    position: sticky;
+    top: var(--dlf-sticky-top, 120px);
+    padding: 64px 40px;
+    transition: top 350ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dlf-bm-learning-path h2 {
+    max-width: 380px;
+    margin: 0 0 16px;
+    color: var(--dlf-red-text);
+    font-size: 1.875rem;
+    line-height: 1.2;
+}
+
+.dlf-bm-learning-path__intro p:not(.dlf-kicker) {
+    max-width: 420px;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.dlf-bm-learning-path__note {
+    max-width: 420px;
+    margin-top: 32px;
+    padding: 24px;
+    border-radius: 3px;
+    background: var(--dlf-black)
+        repeating-linear-gradient(
+            30deg,
+            rgb(255 255 255 / 0.04) 0,
+            rgb(255 255 255 / 0.04) 1px,
+            transparent 1px,
+            transparent 6px
+        );
+    box-shadow: 0 18px 40px rgba(9, 9, 16, 0.12);
+}
+
+.dlf-bm .dlf-bm-learning-path__note h3 {
+    margin: 0 0 8px;
+    color: #fff;
+    font-size: 1.125rem;
+}
+
+.dlf-bm-learning-path__intro .dlf-bm-learning-path__note p {
+    color: rgb(255 255 255 / 82%);
+}
+
+.dlf-bm .dlf-bm-learning-path__steps {
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.dlf-bm .dlf-bm-learning-path__steps > li {
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 20px;
+    align-items: center;
+    padding: 24px 40px;
+}
+
+.dlf-bm .dlf-bm-learning-path__steps > li::before {
+    display: none;
+}
+
+.dlf-bm-learning-path__steps > li > span {
+    display: flex;
+    width: 52px;
+    height: 52px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    background: #ffecea;
+    color: var(--dlf-red-text);
+    font-family: "JetBrains Mono Variable", ui-monospace, monospace;
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+
+.dlf-bm-learning-path__steps > li:last-child > span {
+    background: var(--dlf-red-action);
+    color: #fff;
+}
+
+.dlf-bm-learning-path__steps h3 {
+    margin: 0 0 4px;
+    font-size: 1.125rem;
+}
+
+.dlf-bm-learning-path__steps p {
+    margin: 0;
+    color: #5f6464;
+    line-height: 1.5;
+}
+
 .dlf-bm-faq {
     border-bottom: 1px solid var(--dlf-line);
     background: #fff;
@@ -1164,6 +1503,35 @@
         padding: 44px 24px;
     }
 
+    .dlf-bm--education .dlf-bm-grid-3 > article {
+        padding: 28px 24px;
+    }
+
+    .dlf-bm-partnership__together {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 44px 24px;
+    }
+
+    .dlf-bm-learning-path__grid,
+    .dlf-bm-habits .dlf-fill-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dlf-bm .dlf-bm-habits .dlf-fill-grid > article {
+        padding: 24px;
+    }
+
+    .dlf-bm-learning-path__intro > div {
+        position: static;
+        padding: 44px 24px;
+    }
+
+    .dlf-bm .dlf-bm-learning-path__steps > li {
+        gap: 16px;
+        padding: 20px 24px;
+    }
+
     .dlf-bm-ink-band__inner {
         padding: 48px 24px;
     }
@@ -1211,6 +1579,14 @@
 }
 
 @media (min-width: 640px) and (max-width: 1023px) {
+    .dlf-bm-habits .dlf-fill-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .dlf-bm--education .dlf-bm-pains .dlf-bm-grid-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .dlf-bm-pains .dlf-bm-grid-2 {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }

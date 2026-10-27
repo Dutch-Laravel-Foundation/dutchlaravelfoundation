@@ -79,12 +79,6 @@ parameters:
 			path: app/Providers/RouteServiceProvider.php
 
 		-
-			message: '#^Parameter \#1 \$tool of method NckRtl\\Toolbar\\Data\\Layout\\GroupConfig\:\:addTool\(\) expects NckRtl\\Toolbar\\Data\\Tools\\ToolInterface, NckRtl\\Toolbar\\Data\\Tools\\AnnotationTool given\.$#'
-			identifier: argument.type
-			count: 1
-			path: app/Providers/ToolbarConfigProvider.php
-
-		-
 			message: '#^Call to an undefined method Statamic\\Contracts\\Entries\\Entry\:\:absoluteUrl\(\)\.$#'
 			identifier: method.notFound
 			count: 1
