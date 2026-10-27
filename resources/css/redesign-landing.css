@@ -960,6 +960,7 @@
 
 .dlf-bm--education .dlf-bm-split .dlf-kicker {
     margin: 0 0 12px;
+    font-size: 0.75rem;
 }
 
 /* A red band owns the boundary with the white section above it; the rule blends into the red. */
@@ -1013,6 +1014,7 @@
 
 .dlf-bm-partnership .dlf-bm-grid-2 > article > .dlf-kicker {
     margin: 0 0 6px;
+    color: var(--dlf-muted);
 }
 
 .dlf-bm-partnership .dlf-bm-grid-2 > article > h3 {
