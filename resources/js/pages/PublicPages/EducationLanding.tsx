@@ -220,8 +220,7 @@ export default function EducationLanding({ page, site }: Props) {
                     <h1>{page.title}</h1>
                     <p>
                         Voor docenten en onderwijsontwikkelaars in mbo, hbo en wo. Actueel onderwijs
-                        ontstaat waar didactiek, beroepspraktijk en community elkaar versterken. De
-                        Dutch Laravel Foundation brengt de actuele softwarepraktijk in.
+                        ontstaat waar didactiek, beroepspraktijk en community elkaar versterken.
                     </p>
                 </section>
                 <section className="dlf-bm-split dlf-divider-section dlf-divider-section--yield-to-next dlf-divider-split dlf-divider-split--stacked-reversed">
