@@ -973,6 +973,10 @@
     border-top-color: var(--dlf-red-action) !important;
 }
 
+.dlf-bm--education .dlf-bm-ink-band:not(.dlf-bm-ink-band--red).dlf-divider-section--full-bleed-top {
+    border-top-color: var(--dlf-black) !important;
+}
+
 .dlf-bm--education .dlf-bm-ink-band--red {
     border-bottom-color: rgb(255 255 255 / 16%);
     background: var(--dlf-red-action)

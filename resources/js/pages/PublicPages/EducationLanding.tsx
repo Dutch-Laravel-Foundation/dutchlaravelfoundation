@@ -515,7 +515,7 @@ export default function EducationLanding({ page, site }: Props) {
                         </ol>
                     </div>
                 </section>
-                <section className="dlf-bm-split dlf-divider-section dlf-divider-split dlf-divider-split--stacked-reversed">
+                <section className="dlf-bm-split dlf-divider-section dlf-divider-section--yield-to-next dlf-divider-split dlf-divider-split--stacked-reversed">
                     <div>
                         <p className="dlf-kicker">Voor docenten</p>
                         <h2>Houd het haalbaar en actueel</h2>
@@ -539,7 +539,7 @@ export default function EducationLanding({ page, site }: Props) {
                     </figure>
                 </section>
                 <section
-                    className="dlf-bm-ink-band dlf-divider-section dlf-divider-theme-inverse"
+                    className="dlf-bm-ink-band dlf-divider-section dlf-divider-section--full-bleed-top dlf-divider-theme-inverse"
                     aria-labelledby="education-ai-heading"
                 >
                     <div className="dlf-bm-ink-band__inner">
