@@ -445,26 +445,25 @@ export default function EducationLanding({ page, site }: Props) {
                         <p className="dlf-kicker">Voor studenten</p>
                         <h2>Kickstart met Laravel</h2>
                         <p>
-                            Op de pagina Kickstart met Laravel van Stichting Praktijkleren vinden
-                            studenten met een leermiddelenlicentie een cursus Laravel met 27
-                            praktijkopdrachten, voorbereiding op de officiële Laravel Student
-                            Developer Certification, oefenmogelijkheden, links naar gastcolleges,
-                            een stagebank en praktische tips van ervaren developers.
+                            Op de pagina{" "}
+                            <a
+                                href="https://www.stichtingpraktijkleren.nl/index.php?id=210802"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Kickstart met Laravel
+                            </a>{" "}
+                            van Stichting Praktijkleren (enkel toegankelijk voor studenten met
+                            toegang tot Praktijkleren) vinden studenten met een leermiddelenlicentie
+                            een cursus Laravel met 27 praktijkopdrachten, voorbereiding op de
+                            officiële Laravel Student Developer Certification, oefenmogelijkheden,
+                            links naar gastcolleges, een stagebank en praktische tips van ervaren
+                            developers.
                         </p>
                         <p>
                             Voor mbo-studenten is certificering een mooie manier om hun kennis
                             zichtbaar te maken voor werkgevers.
                         </p>
-                        <DlfButtonLink
-                            href="https://www.stichtingpraktijkleren.nl/index.php?id=210802"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            face="red"
-                            shadow="red"
-                            className="dlf-bm-split__action"
-                        >
-                            Naar Kickstart met Laravel
-                        </DlfButtonLink>
                     </div>
                     <figure data-progressive-media-frame>
                         <Photo

@@ -958,9 +958,12 @@
     max-width: 760px;
 }
 
-.dlf-bm--education .dlf-bm-split__action {
-    align-self: flex-start;
-    margin-top: 28px;
+.dlf-bm--education .dlf-bm-split p a {
+    color: var(--dlf-red-text);
+    text-decoration-line: underline;
+    text-decoration-color: currentColor;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
 }
 
 .dlf-bm--education .dlf-bm-split .dlf-kicker {
