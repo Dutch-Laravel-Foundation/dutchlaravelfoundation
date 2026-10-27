@@ -6,6 +6,7 @@ use App\Http\Controllers\Agents\RobotsController;
 use App\Http\Controllers\CommunityPageController;
 use App\Http\Controllers\EditorialPageController;
 use App\Http\Controllers\ErrorPageController;
+use App\Http\Controllers\OpenGraphImageController;
 use App\Http\Controllers\PublicPageController;
 use App\Http\Controllers\ReactPageController;
 use App\Http\Controllers\SecurityTxtController;
@@ -28,6 +29,9 @@ Route::get('/.well-known/security.txt', SecurityTxtController::class);
 Route::get('/llms.txt', [LlmsController::class, 'index']);
 Route::get('/llms-full.txt', [LlmsController::class, 'full']);
 Route::get('/sitemap.xml', [SitemapController::class, 'show'])->name('public.sitemap');
+Route::get('/og/{entry}.jpg', OpenGraphImageController::class)
+    ->where('entry', '[A-Za-z0-9-]+')
+    ->name('open-graph-image');
 
 Route::permanentRedirect('/leden/avocado-media', '/leden');
 Route::permanentRedirect(

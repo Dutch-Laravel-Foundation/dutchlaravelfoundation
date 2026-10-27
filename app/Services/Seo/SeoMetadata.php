@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Seo;
 
 use Illuminate\Support\Str;
+use Statamic\Assets\Asset as StatamicAsset;
 use Statamic\Contracts\Assets\Asset;
 use Statamic\Entries\Entry;
 use Statamic\Facades\Entry as EntryRepository;
@@ -23,16 +24,7 @@ final class SeoMetadata
     public function title(?Entry $entry): string
     {
         $siteName = $this->organizationValue('title', 'Dutch Laravel Foundation');
-        $explicitTitle = $this->stringValue($entry?->get('meta_title'));
-        $entryTitle = $explicitTitle ?? $this->stringValue($entry?->get('title'));
-
-        if (
-            $explicitTitle === null
-            && $entryTitle !== null
-            && $entry?->collection()?->handle() === 'internships'
-        ) {
-            $entryTitle = "Laravel-stage bij {$entryTitle}";
-        }
+        $entryTitle = $entry === null ? null : $this->headline($entry);
 
         if ($entryTitle === null || $entryTitle === 'Home') {
             return $siteName;
@@ -125,11 +117,14 @@ final class SeoMetadata
     public function socialImageUrl(?Entry $entry): string
     {
         if (
-            $entry !== null
-            && in_array($entry->collection()?->handle(), ['insights', 'knowledge', 'podcasts'], true)
+            $entry?->collection()?->handle() === 'podcasts'
             && ($imageUrl = $this->imageUrl($entry)) !== null
         ) {
             return $imageUrl;
+        }
+
+        if ($entry !== null && ($card = $this->openGraphCard($entry)) !== null) {
+            return $this->absoluteUrl("/og/{$entry->id()}.jpg?v={$card->fingerprint()}");
         }
 
         $variables = GlobalSet::findByHandle('opengraph')?->inCurrentSite();
@@ -144,6 +139,43 @@ final class SeoMetadata
         }
 
         return $this->absoluteUrl('/og-image.jpg?v=4');
+    }
+
+    /**
+     * The generated social card for an entry: its title on the red panel and its featured image,
+     * or the Larafest group photo. The home page and podcasts keep their static image.
+     */
+    public function openGraphCard(Entry $entry): ?OpenGraphCard
+    {
+        $collection = $entry->collection()?->handle();
+        $title = $this->headline($entry);
+
+        if ($collection === 'podcasts' || $title === null || $entry->uri() === '/') {
+            return null;
+        }
+
+        $eyebrow = match ($collection) {
+            'knowledge' => 'Kennis',
+            'insights' => 'Nieuws',
+            'cases' => 'Cases',
+            'events' => 'Agenda',
+            'members' => 'Leden',
+            'internships' => 'Stagebank',
+            default => 'Dutch Laravel Foundation',
+        };
+
+        if (
+            in_array($collection, ['knowledge', 'insights'], true)
+            && ($category = $this->stringValue($entry->get('category'))) !== null
+        ) {
+            $eyebrow .= " · {$category}";
+        }
+
+        $photoPath = $this->featuredImagePath($entry);
+
+        return $photoPath === null
+            ? new OpenGraphCard($eyebrow, $title, public_path('assets/redesign/photos/larafest-groepsfoto-1280.webp'), 0.52)
+            : new OpenGraphCard($eyebrow, $title, $photoPath);
     }
 
     public function jsonLd(?Entry $entry): string
@@ -345,6 +377,41 @@ final class SeoMetadata
         }
 
         return null;
+    }
+
+    private function headline(Entry $entry): ?string
+    {
+        $explicitTitle = $this->stringValue($entry->get('meta_title'));
+        $entryTitle = $explicitTitle ?? $this->stringValue($entry->get('title'));
+
+        if (
+            $explicitTitle === null
+            && $entryTitle !== null
+            && $entry->collection()?->handle() === 'internships'
+        ) {
+            return "Laravel-stage bij {$entryTitle}";
+        }
+
+        return $entryTitle;
+    }
+
+    /**
+     * Local path of the featured image when GD can read it.
+     */
+    private function featuredImagePath(Entry $entry): ?string
+    {
+        $image = $entry->augmentedValue('featured_image')->value();
+
+        if (
+            ! $image instanceof StatamicAsset
+            || ! in_array(strtolower((string) $image->extension()), ['jpg', 'jpeg', 'png', 'webp', 'gif'], true)
+        ) {
+            return null;
+        }
+
+        $path = $image->resolvedPath();
+
+        return is_file($path) ? $path : null;
     }
 
     private function organizationValue(string $key, string $fallback): string

@@ -108,16 +108,16 @@ describe('SEO head consistency', function (): void {
         'thanks' => '/aanvraag/bedankt',
     ]);
 
-    it('uses the default social image for non-editorial entries without featured images', function (string $path): void {
+    it('uses a generated social card for entries without a featured image', function (string $path): void {
         $response = $this->get($path);
 
         $response->assertOk();
 
         $xpath = seoHeadXpath($response);
-        $defaultImage = rtrim((string) config('app.url'), '/').'/og-image.jpg?v=4';
+        $image = seoHeadAttribute($xpath, '//meta[@property="og:image"]', 'content');
 
-        expect(seoHeadAttribute($xpath, '//meta[@property="og:image"]', 'content'))->toBe($defaultImage)
-            ->and(seoHeadAttribute($xpath, '//meta[@name="twitter:image"]', 'content'))->toBe($defaultImage);
+        expect($image)->toMatch('#^'.preg_quote(rtrim((string) config('app.url'), '/'), '#').'/og/[0-9a-f-]{36}\\.jpg\\?v=[0-9a-f]{16}$#')
+            ->and(seoHeadAttribute($xpath, '//meta[@name="twitter:image"]', 'content'))->toBe($image);
     })->with([
         'case detail' => '/cases/dropday',
         'event detail' => '/events/dutch-laravel-foundation-meetup',
