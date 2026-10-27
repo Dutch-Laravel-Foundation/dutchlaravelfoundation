@@ -21,6 +21,7 @@ final readonly class PublicPageController
         'templates/landings-page/general' => 'PublicPages/GeneralLanding',
         'templates/landings-page/general2' => 'PublicPages/FrameworkLanding',
         'templates/landings-page/aanbesteding' => 'PublicPages/TenderLanding',
+        'templates/landings-page/education' => 'PublicPages/EducationLanding',
         'templates/privacy-statement/index' => 'PublicPages/PrivacyStatement',
         'templates/newsletter/index' => 'PublicPages/Newsletter',
     ];
