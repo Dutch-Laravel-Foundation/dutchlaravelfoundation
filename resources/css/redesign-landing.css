@@ -958,6 +958,11 @@
     max-width: 760px;
 }
 
+.dlf-bm--education .dlf-bm-split__action {
+    align-self: flex-start;
+    margin-top: 28px;
+}
+
 .dlf-bm--education .dlf-bm-split .dlf-kicker {
     margin: 0 0 12px;
     font-size: 0.75rem;

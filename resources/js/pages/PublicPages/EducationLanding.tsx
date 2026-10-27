@@ -455,6 +455,16 @@ export default function EducationLanding({ page, site }: Props) {
                             Voor mbo-studenten is certificering een mooie manier om hun kennis
                             zichtbaar te maken voor werkgevers.
                         </p>
+                        <DlfButtonLink
+                            href="https://www.stichtingpraktijkleren.nl/index.php?id=210802"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            face="red"
+                            shadow="red"
+                            className="dlf-bm-split__action"
+                        >
+                            Naar Kickstart met Laravel
+                        </DlfButtonLink>
                     </div>
                     <figure data-progressive-media-frame>
                         <Photo
