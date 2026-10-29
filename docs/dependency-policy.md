@@ -12,7 +12,11 @@ Applies to Composer and JavaScript dependencies, direct and transitive.
 
 ## Security fixes skip the wait
 
-A fix for a known CVE ships as soon as it is reviewed. In the PR, link the advisory (CVE, GHSA or Packagist) and name the fixed version. Bypass the age hold for that one package only: `minimum-release-age-exclude` in `vet.json`, `minimumReleaseAgeExcludes` in `bunfig.toml`, or `npm install --min-release-age-exclude=package`. Remove the exclusion in the same PR or once the release is seven days old. Never set the age to zero.
+Security updates are always allowed. The age hold never delays a fix for a known CVE.
+
+- Dependabot security updates are on for the repository. For each advisory, Dependabot opens a pull request with the fixed version. It does not apply our age hold. Review and merge it like any other dependency change; CI runs the strict audit and the full test suite on it.
+- To ship a fix before Dependabot does, update only the affected package and skip the hold for that one run: `composer update vendor/package --no-plugins` (check that the lock diff touches only that package), or `npm install package@version --min-release-age-exclude=package`. A newer lock installs normally with Vet enabled.
+- In the PR, link the advisory (CVE, GHSA or Packagist) and name the fixed version. Do not add a permanent exclusion, and never set the age to zero.
 
 ## Audits
 
