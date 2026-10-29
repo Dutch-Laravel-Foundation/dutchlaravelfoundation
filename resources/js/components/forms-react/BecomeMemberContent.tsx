@@ -44,37 +44,36 @@ const benefits = [
     ],
 ] as const;
 
-const certificationBenefits = [
-    <>
-        <strong>€ 250,- korting</strong> op de lidmaatschapsfee van de DLF (eenmalig).
-    </>,
-    <>
-        <strong>25% korting</strong> op het Developer Certification examen — van € 249,- voor €
-        186,75 per examen.
-    </>,
-    <>
-        <strong>25% korting</strong> op een jaar Company Certification — van € 799,- voor € 599,-,
-        inclusief één Developer Certification examen.
-    </>,
-    <>
-        Daarna betaal je als gecertificeerd bedrijf nog maar <strong>€ 99,-</strong> per Developer
-        Certification examen, in plaats van € 249,-.
-    </>,
-];
+function ExternalLink({ href, children }: { href: string; children: string }) {
+    return (
+        <a href={href} target="_blank" rel="noopener noreferrer">
+            {children}
+        </a>
+    );
+}
 
 const certifiedDealBenefits = [
     <>
-        <strong>25% korting</strong> op alle Certificates.dev examens, trainingen en{" "}
+        <strong>25% korting</strong> op alle{" "}
+        <ExternalLink href="https://certificates.dev">Certificates.dev</ExternalLink> examens,
+        trainingen en{" "}
         <InfoPopover content="Enablements zijn de preparation bundles: zelfstudiemateriaal, oefenexamens en ‑vragen en een herexamen, indien gezakt.">
             enablements
         </InfoPopover>
         .
     </>,
     <>
-        <strong>33% korting</strong> op Unlearn.dev vanaf 2 licenties.
+        <strong>33% korting</strong> op{" "}
+        <ExternalLink href="https://unlearn.dev">Unlearn.dev</ExternalLink> vanaf 2 licenties.
     </>,
     <>
-        <strong>Premium Laravel Company Certification</strong> voor € 149,- in plaats van € 199,-
+        <strong>
+            Premium{" "}
+            <ExternalLink href="https://certificationforlaravel.com/companies#companies_information">
+                Laravel Company Certification
+            </ExternalLink>
+        </strong>{" "}
+        voor € 149,- in plaats van € 199,-
         per jaar.
     </>,
     <>
@@ -82,12 +81,14 @@ const certifiedDealBenefits = [
         Developer.
     </>,
     <>
-        Vacatures plaatsen op CertifiedDevs.com voor <strong>$ 1,- per vacature</strong>{" "}
-        (introductieactie).
+        Vacatures plaatsen op{" "}
+        <ExternalLink href="https://certifieddevs.com">CertifiedDevs.com</ExternalLink> voor{" "}
+        <strong>$ 1,- per vacature</strong> (introductieactie).
     </>,
     <>
-        <strong>Extra:</strong> bedrijfsprofiel op CertifiedDevs.com voor slechts $ 99,- in plaats
-        van $ 199,-.
+        <strong>Extra:</strong> bedrijfsprofiel op{" "}
+        <ExternalLink href="https://certifieddevs.com">CertifiedDevs.com</ExternalLink> voor slechts
+        $ 99,- in plaats van $ 199,-.
     </>,
 ];
 
@@ -220,20 +221,6 @@ export function BecomeMemberContent() {
                 </h2>
                 <ul className="dlf-lid-list">
                     {certifiedDealBenefits.map((benefit, index) => (
-                        <li key={index}>
-                            <span>{benefit}</span>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-
-            <div className="dlf-lid-content-block">
-                <span className="dlf-community-kicker">Laravel Company Certified</span>
-                <h2 className="dlf-community-heading dlf-community-heading--small">
-                    Aanvullende voordelen als je Laravel Company Certified bent
-                </h2>
-                <ul className="dlf-lid-list">
-                    {certificationBenefits.map((benefit, index) => (
                         <li key={index}>
                             <span>{benefit}</span>
                         </li>

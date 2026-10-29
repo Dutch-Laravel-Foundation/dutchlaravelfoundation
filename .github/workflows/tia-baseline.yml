@@ -75,7 +75,7 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
-  # Separate from the baseline job so a lint or audit failure never blocks baseline publication.
+  # Separate from the baseline job so a lint failure never blocks baseline publication.
   quality:
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -103,8 +103,6 @@ jobs:
           composer install --prefer-dist --no-interaction --no-progress
           php artisan key:generate --no-interaction
           npm ci --no-audit --no-fund
-      - name: Dependency audits
-        run: composer audit:dependencies
       - name: Pint
         run: composer lint
       - name: PHPStan
@@ -113,3 +111,44 @@ jobs:
         run: |
           bun run test
           bun run typecheck
+
+  # A new advisory in a dependency the change does not touch only warns, so unrelated
+  # pull requests stay green. A change to a manifest or lockfile must pass the audit.
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          coverage: none
+          tools: composer:v2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Detect dependency changes
+        id: deps
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          if [ -n "$BASE_SHA" ] && git diff --name-only "$BASE_SHA...HEAD" -- composer.json composer.lock package.json package-lock.json | grep -q .; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Dependency audits
+        env:
+          DEPENDENCIES_CHANGED: ${{ steps.deps.outputs.changed }}
+        run: |
+          if composer audit:dependencies; then
+            exit 0
+          fi
+          if [ "$DEPENDENCIES_CHANGED" = "true" ]; then
+            echo "::error::This change touches dependencies and the audit found advisories. Fix them before merging."
+            exit 1
+          fi
+          echo "::warning::The audit found advisories in dependencies this change does not touch. Fix them in a separate pull request."
