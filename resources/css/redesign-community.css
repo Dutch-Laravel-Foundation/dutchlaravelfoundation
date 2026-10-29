@@ -1106,6 +1106,16 @@
     font-weight: 600;
 }
 
+.dlf-lid-list a {
+    color: var(--dlf-ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.dlf-lid-list a:hover {
+    color: var(--dlf-red);
+}
+
 .dlf-lid-events-photo {
     height: 320px;
     margin: 52px -48px 0;
