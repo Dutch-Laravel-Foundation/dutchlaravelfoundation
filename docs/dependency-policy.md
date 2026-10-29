@@ -16,7 +16,7 @@ A fix for a known CVE ships as soon as it is reviewed. In the PR, link the advis
 
 ## Audits
 
-`composer audit:dependencies` runs `composer audit --locked` and `npm audit --package-lock-only`. CI runs it in the `quality` job. Any advisory fails the job: fix it or escalate. Do not suppress it.
+`composer audit:dependencies` runs `composer audit --locked` and `npm audit --package-lock-only`. CI runs it in the `audit` job. When a pull request changes `composer.json`, `composer.lock`, `package.json` or `package-lock.json`, any advisory fails the job. Otherwise an advisory only adds a warning, so a new advisory does not block unrelated work. Fix it in a separate pull request or escalate. Do not suppress it.
 
 ## Why Vet only holds back releases
 
