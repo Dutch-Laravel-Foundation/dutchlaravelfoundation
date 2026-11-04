@@ -82,7 +82,6 @@
         "lint": "@php vendor/bin/pint --test",
         "analyse": "@php -d opcache.enable_cli=0 vendor/bin/phpstan analyse --no-progress --debug",
         "test": "@php vendor/bin/pest --compact",
-        "test:full": "@php vendor/bin/pest --no-tia --compact",
         "audit:dependencies": [
             "@composer audit --locked --no-interaction",
             "npm audit --package-lock-only --ignore-scripts"
@@ -93,7 +92,7 @@
             "bun run test",
             "bun run typecheck",
             "bun run build",
-            "@test:full"
+            "@test"
         ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",

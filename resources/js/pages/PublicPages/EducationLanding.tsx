@@ -91,7 +91,7 @@ const levels = [
 const roles = [
     [
         "Stichting Praktijkleren",
-        "Kent het mbo, de kwalificatiedossiers en de praktijk van beroepsgericht opleiden. SPL vertaalt technische praktijkcases naar bruikbare leeractiviteiten, beroepsproducten en beoordelingssituaties die passen bij de opleiding.",
+        "Stichting Praktijkleren verbindt de kennis uit de beroepspraktijk en techniek met de vragen van mbo-scholen. Samen met docenten en vakexperts ontwikkelen we leermiddelen en andere leeractiviteiten die aansluiten op het kwalificatiedossier en de onderwijspraktijk.",
         [
             "Kennis van beroepsonderwijs en kwalificatiedossiers",
             "Vertaling naar leerdoelen, opdrachten en beoordeling",
@@ -325,6 +325,11 @@ export default function EducationLanding({ page, site }: Props) {
                             Laravel als fundament voor agentic engineering
                         </h2>
                         <p>
+                            Agentic engineering betekent AI-agents inzetten om ontwikkeltaken uit
+                            te voeren, waarbij de developer de opdrachten bepaalt, de resultaten
+                            controleert en de regie houdt.
+                        </p>
+                        <p>
                             Laravel is bij uitstek geschikt als basis voor agentic engineering,
                             juist omdat het een opinionated framework is. Het biedt voor veel
                             voorkomende ontwikkelvraagstukken een duidelijke, doordachte en
@@ -455,13 +460,19 @@ export default function EducationLanding({ page, site }: Props) {
                             </a>{" "}
                             van Stichting Praktijkleren vinden studenten met een
                             leermiddelenlicentie een cursus Laravel met 27 praktijkopdrachten,
-                            voorbereiding op de officiële Laravel Student Developer Certification,
+                            voorbereiding op het officiële Laravel Student Developer Certificate,
                             oefenmogelijkheden, links naar gastcolleges, een stagebank en praktische
                             tips van ervaren developers.
                         </p>
                         <p>
                             Voor mbo-studenten is certificering een mooie manier om hun kennis
                             zichtbaar te maken voor werkgevers.
+                        </p>
+                        <p>
+                            Mbo-studenten die via hun school zijn aangesloten bij Stichting
+                            Praktijkleren kunnen bovendien korting krijgen op oefenexamens en het
+                            officiële Laravel Student Developer Certificate van Certification for
+                            Laravel. Vraag je docent naar de mogelijkheden.
                         </p>
                     </div>
                     <figure data-progressive-media-frame>
@@ -483,7 +494,9 @@ export default function EducationLanding({ page, site }: Props) {
                                 <p>
                                     Studenten hoeven niet alles tegelijk te beheersen. Door meerdere
                                     projecten uit te voeren herkennen zij geleidelijk de structuur,
-                                    conventies en professionele werkwijzen.
+                                    conventies en professionele werkwijzen. Dit is een voorbeeldroute:
+                                    niet iedere opleiding hoeft alle fasen te doorlopen en de volgorde
+                                    kan verschillen.
                                 </p>
                                 <div className="dlf-bm-learning-path__note">
                                     <h3>Begin klein</h3>

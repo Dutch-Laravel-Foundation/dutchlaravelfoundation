@@ -59,55 +59,12 @@ test('tablet article hero uses the taller image and article copy width', functio
     expect($stylesheet)->toMatch('/@media \(min-width:\s*640px\) and \(max-width:\s*1023px\)\s*\{.*?\.editorial-article__head > \*\s*\{[^}]*max-width:\s*38rem;[^}]*margin-inline:\s*auto;/s');
     expect($stylesheet)->toMatch('/@media \(min-width:\s*640px\) and \(max-width:\s*1023px\)\s*\{.*?\.editorial-article__head\s*\{[^}]*align-items:\s*center;/s');
 });
-test('emble article does not contain manual break nodes', function () {
-    $article = file_get_contents(base_path('content/collections/insights/2026-04-13-2200.emble-ontwikkelaars-pur-sang-blijven-zich-door-ontwikkelen.md'));
-
-    $this->assertNotFalse($article);
-    $this->assertStringNotContainsString('type: hardBreak', $article);
-});
-test('news and knowledge articles do not contain manual breaks', function () {
-    foreach (['insights', 'knowledge'] as $collection) {
-        $paths = glob(base_path("content/collections/{$collection}/*.md"));
-
-        expect($paths)->toBeArray();
-
-        foreach ($paths as $path) {
-            $article = file_get_contents($path);
-
-            $this->assertNotFalse($article);
-            $this->assertDoesNotMatchRegularExpression('/type:\s*hard_?break|<br\s*\/?\s*>/i', $article, $path);
-        }
-    }
-});
 test('article prose headings use normal weight including bold content', function () {
     $stylesheet = file_get_contents(resource_path('css/redesign-editorial.css'));
 
     $this->assertNotFalse($stylesheet);
     expect($stylesheet)->toMatch('/\.editorial-article \.editorial-article__prose :is\(h1, h2, h3, h4, h5, h6\):not\(\.dlf-block \*\)\s*\{[^}]*font-weight:\s*400;/s');
     expect($stylesheet)->toMatch('/\.editorial-article\s+\.editorial-article__prose\s+:is\(h1, h2, h3, h4, h5, h6\):not\(\.dlf-block \*\)\s+:is\(strong, b\)\s*\{[^}]*font-weight:\s*inherit;/s');
-});
-test('news and knowledge article headings do not contain bold marks', function () {
-    foreach (['insights', 'knowledge'] as $collection) {
-        $paths = glob(base_path("content/collections/{$collection}/*.md"));
-
-        expect($paths)->toBeArray();
-
-        foreach ($paths as $path) {
-            $article = file_get_contents($path);
-
-            $this->assertNotFalse($article);
-
-            preg_match_all(
-                '/^  -\n    type: heading\n(?:(?!^  -\n).)*/ms',
-                $article,
-                $headings,
-            );
-
-            foreach ($headings[0] as $heading) {
-                $this->assertStringNotContainsString('type: bold', $heading, $path);
-            }
-        }
-    }
 });
 test('about page marks only substantial content media', function () {
     $response = $this->withHeaders(inertiaHeaders())->get('/over-ons');

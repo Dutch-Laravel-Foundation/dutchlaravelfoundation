@@ -2,7 +2,7 @@
 
 ## Installation
 
-Requirements: PHP 8.5 (with PCOV, SQLite and zip), Composer, Node 24 and Bun 1.4.
+Requirements: PHP 8.5 (with SQLite and zip), Composer, Node 24 and Bun 1.4.
 
 ```sh
 composer install
@@ -21,7 +21,8 @@ The example environment uses SQLite, the log mailer and no response cache, so it
 | Command | Purpose |
 | --- | --- |
 | `APP_PORT=8000 VITE_PORT=5173 composer dev` | PHP server and Vite with SSR. Export both ports. `INERTIA_SSR_URL` defaults to `VITE_PORT + 1`. |
-| `composer test` | Pest with TIA. `composer test:full` runs every test. |
+| `composer test` | Full Pest suite. Append a path or `--filter` for a targeted run. |
+| `composer test -- --parallel --processes=4` | Full Pest suite with four workers, as used in CI. |
 | `bun run test` / `bun run typecheck` | JavaScript tests and TypeScript. |
 | `composer lint` / `composer analyse` | Pint and PHPStan (level 5, counted baseline). |
 | `composer audit:dependencies` | Composer and npm advisory audits. |
@@ -44,28 +45,15 @@ This site exposes content to LLMs and agent frameworks:
 
 The llms.txt caches are invalidated automatically on Statamic `EntrySaved` / `EntryDeleted` events.
 
-## TIA baselines
+## Testing
 
-The `TIA baseline` workflow runs the full Pest suite with PCOV on every push
-to `main`. Only successful `main` runs upload `pest-tia-baseline`; generated
-cache files stay out of Git. Pull requests run the same checks without publishing.
-Artifacts are retained for 90 days. Dispatch the workflow on `main` to refresh
-an expired baseline.
+The `Tests` workflow runs the full Pest suite on pull requests and pushes to
+`main`, alongside quality checks and dependency audits. It uses four Pest workers
+to match the four CPUs on GitHub's standard public Linux runners. No coverage
+extension, baseline artifacts or authenticated GitHub CLI is needed for tests.
 
-Development machines, including disposable task-group VMs, need PHP 8.5 with
-PCOV and an authenticated GitHub CLI with access to this repository and Actions
-artifacts. Provision authentication through a scoped, short-lived credential;
-do not bake credentials or project baselines into VM images.
-
-Run `vendor/bin/pest --tia --baselined --refetch` after checkout/setup to fetch
-the latest published baseline and execute affected tests. Subsequent Pest runs
-automatically use TIA and shared baseline retrieval. `--baseline` prints the
-local cache directory. `--no-tia` executes the full suite without TIA.
-
-TIA checks the dependency/configuration fingerprint and PHP minor version before
-reuse. An incompatible baseline can require a local recording run; a shared
-baseline does not guarantee every first run will skip the full suite. Keep the
-complete Git history available so TIA can compare against the recorded commit.
+Build assets before running feature tests. Do not rebuild assets while tests are
+running: Inertia tests use the build manifest to identify the current asset version.
 
 Local form submissions use `storage/forms -> form-submissions`. Production
 deployment recreates that link to its shared forms directory. Test configuration

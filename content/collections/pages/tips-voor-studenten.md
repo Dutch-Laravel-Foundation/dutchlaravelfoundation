@@ -557,7 +557,7 @@ content:
     content:
       -
         type: text
-        text: 'Juist van bugs, errors en problemen leer je het meest. Dat hoort erbij, ook senior developers zittendagelijks te debuggen.'
+        text: 'Juist van bugs, errors en problemen leer je het meest. Dat hoort erbij, ook senior developers zitten dagelijks te debuggen.'
   -
     type: heading
     attrs:
@@ -701,7 +701,13 @@ content:
     content:
       -
         type: text
-        text: 'Er is een speciaal Junior Developer examen voor studenten voor een aantrekkelijke prijs. Nice voor je cv, LinkedIn én portfolio.'
+        text: 'Certification for Laravel biedt examens op verschillende niveaus, waaronder het Junior Developer examen en het Laravel Student Developer Certificate. Nice voor je cv, LinkedIn én portfolio.'
+  -
+    type: paragraph
+    content:
+      -
+        type: text
+        text: 'Via Stichting Praktijkleren kun je als mbo-student korting krijgen op oefenexamens en het officiële Laravel Student Developer Certificate van Certification for Laravel. Vraag je docent naar de mogelijkheden.'
   -
     type: bulletList
     content:
@@ -713,13 +719,21 @@ content:
             content:
               -
                 type: text
-                text: 'Ben je mbo-student en lid van Stichting Praktijkleren? Vergeet dan niet de Kickstart met'
-          -
-            type: paragraph
-            content:
+                text: 'Ben je mbo-student en lid van Stichting Praktijkleren? Vergeet dan niet de '
               -
                 type: text
-                text: 'Laravel te checken, of vraag je docent om meer info.'
+                marks:
+                  -
+                    type: link
+                    attrs:
+                      href: 'https://www.stichtingpraktijkleren.nl/index.php?id=210802'
+                      rel: 'noopener noreferrer'
+                      target: _blank
+                      title: null
+                text: 'Kickstart met Laravel'
+              -
+                type: text
+                text: ' te checken, of vraag je docent om meer info.'
   -
     type: heading
     attrs:
