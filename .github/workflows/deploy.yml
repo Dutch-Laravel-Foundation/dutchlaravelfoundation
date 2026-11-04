@@ -1,0 +1,62 @@
+name: Deploy production
+
+on:
+  pull_request_target:
+    branches: [main]
+    types: [closed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-deployment
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    # Repository variable (not environment variable): absent/false means disabled.
+    if: >-
+      vars.PRODUCTION_DEPLOY_ENABLED == 'true' &&
+      ((github.event_name == 'pull_request_target' && github.event.pull_request.merged == true) ||
+       (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    environment: production
+    steps:
+      # Never check out pull_request.head: this job has production secrets.
+      - name: Check out trusted main
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # v2
+        with:
+          php-version: '8.5'
+          extensions: curl, dom, gd, intl, mbstring, pdo_sqlite, sqlite3, xml, zip
+          tools: composer:v2
+          coverage: none
+
+      - name: Configure deployment SSH
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
+          DEPLOY_SSH_KNOWN_HOSTS: ${{ secrets.DEPLOY_SSH_KNOWN_HOSTS }}
+        run: bash .github/scripts/configure-deploy-ssh.sh
+
+      - name: Deploy latest main with bounded retries
+        env:
+          DEPLOY_SERVER: dlf-production
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          REQUIRED_REVISION: ${{ github.event.pull_request.merge_commit_sha }}
+          GIT_TERMINAL_PROMPT: '0'
+        run: bash .github/scripts/deploy-production.sh
+
+      - name: Remove deployment credentials
+        if: always()
+        run: rm -f "$HOME/.ssh/dlf-deploy" "$HOME/.ssh/dlf-known-hosts" "$HOME/.ssh/config"

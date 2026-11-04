@@ -59,6 +59,7 @@
     FPM_SOCKET=''
     ACTIVATED=0
     HEALTHY=0
+    RETRY_MAIN_ADVANCED=0
 
     activate_release() {
         local target="$1"
@@ -234,12 +235,28 @@
             rollback_release || true
         fi
 
+        # A stale, inactive candidate is safe to discard before retrying latest main.
+        if [ "$RETRY_MAIN_ADVANCED" -eq 1 ] && [ "$ACTIVATED" -eq 0 ]; then
+            case "$RELEASE_PATH" in
+                "$BASE_PATH"/deployment-*)
+                    rm -rf -- "$RELEASE_PATH" || status=1
+                    ;;
+                *)
+                    status=1
+                    ;;
+            esac
+        fi
+
         rm -f "$SWITCH_LINK"
         rm -f "$LOCK_PATH/revision" "$LOCK_PATH/pid"
 
         if ! rmdir "$LOCK_PATH"; then
             echo "Unable to remove deployment lock: $LOCK_PATH" >&2
             status=1
+        fi
+
+        if [ "$status" -eq 75 ] && [ "$RETRY_MAIN_ADVANCED" -eq 1 ] && [ "$ACTIVATED" -eq 0 ]; then
+            echo 'DLF_DEPLOY_RETRY_MAIN_ADVANCED'
         fi
 
         exit "$status"
@@ -331,7 +348,8 @@
 
     if [ "$(git rev-parse origin/main)" != "$REVISION" ]; then
         echo 'Requested revision is not the current origin/main tip.' >&2
-        exit 1
+        RETRY_MAIN_ADVANCED=1
+        exit 75
     fi
 
     if [ "$(git rev-parse HEAD)" != "$REVISION" ]; then
@@ -365,7 +383,8 @@
 
     if [ "$(git rev-parse origin/main)" != "$(git rev-parse HEAD)" ]; then
         echo 'origin/main advanced while the release was building.' >&2
-        exit 1
+        RETRY_MAIN_ADVANCED=1
+        exit 75
     fi
 
     activate_release "$RELEASE_PATH"

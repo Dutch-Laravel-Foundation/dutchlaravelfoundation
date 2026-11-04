@@ -29,6 +29,12 @@ The example environment uses SQLite, the log mailer and no response cache, so it
 
 Dependency updates follow the [dependency policy](docs/dependency-policy.md).
 
+## Production deployment
+
+The [production deployment guide](docs/production-deployment.md) covers the
+disabled-by-default GitHub workflow, SSH secrets, VPS setup, and enabling releases
+after merged pull requests. Statamic's direct pushes do not trigger deployments.
+
 ## Agent context
 
 `AGENTS.md` (also `CLAUDE.md`) holds the agent instructions. Scoped rules live in `.ai/rules`, the DLF page skill in `.agents/skills`. Boost provides MCP only (`boost.json` turns off generated guidelines and skills). Merge `.mcp.example.json` into a local `.mcp.json` for MCP clients other than Codex.
