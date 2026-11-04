@@ -9,12 +9,6 @@ use Tests\TestCase;
 pest()->extend(TestCase::class)
     ->in('Feature', 'Unit');
 
-pest()->tia()
-    ->always()
-    ->locally()
-    ->baselined()
-    ->filtered();
-
 /*
  * Helpers shared by several test files.
  */

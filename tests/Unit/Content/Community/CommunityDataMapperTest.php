@@ -59,6 +59,7 @@ describe(CommunityDataMapper::class, function (): void {
             ->and($index->filters->provinces)->toBe(['Noord-Brabant', 'Utrecht'])
             ->and($detail)->toBeInstanceOf(MemberData::class)
             ->and($detail->descriptionHtml)->toBe('<p>Member description</p>')
+            ->and($detail->internshipContact?->name)->toBe('Testcontact')
             ->and($detail->internshipContact?->email)->toBe('internships@example.test')
             ->and($detail->internships[0]->applyUrl)->toBe('https://example.test/internships')
             ->and($detail->cases[0]->client?->title)->toBe('Example Client');
@@ -191,7 +192,7 @@ function communityMemberFixture(): array
         'website' => 'example.test',
         'recruitment_website' => 'jobs.example.test',
         'video' => 'https://youtube.test/watch?v=example',
-        'internship_contact_name' => 'Ada Lovelace',
+        'internship_contact_name' => 'Testcontact',
         'internship_contact_email' => 'internships@example.test',
         'internship_contact_phone' => '+31 20 123 4567',
         'meta_title' => 'Member SEO title',

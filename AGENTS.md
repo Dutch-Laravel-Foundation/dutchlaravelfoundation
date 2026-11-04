@@ -23,14 +23,15 @@ The DLF website. Statamic CMS (flat-file content) with a React 19 / Inertia v3 p
 | --- | --- |
 | Install | `composer install`, `npm ci` |
 | Build client + SSR | `bun run build` |
-| Tests (TIA) | `vendor/bin/pest --compact` (add a path or `--filter`) |
+| Tests | `vendor/bin/pest --compact` (add a path or `--filter`) |
+| Parallel tests | `vendor/bin/pest --parallel --processes=4 --compact` |
 | Handoff check | `vendor/bin/pest --compact && bun run test && bun run typecheck` |
 | Full gate | `composer check` (Pint, PHPStan, Bun tests, typecheck, build, full Pest) |
 | Format PHP | `vendor/bin/pint --dirty` |
 | Dependency audits | `composer audit:dependencies` |
 | Local dev server | `APP_PORT=8000 VITE_PORT=5173 composer dev` |
 
-Feature tests need a build (`public/build/manifest.json`). PHPStan uses a counted baseline in `phpstan-baseline.neon`; fix new errors, do not add them to the baseline. TIA setup is in `README.md`.
+Feature tests need a build (`public/build/manifest.json`). PHPStan uses a counted baseline in `phpstan-baseline.neon`; fix new errors, do not add them to the baseline.
 
 ## Boundaries
 

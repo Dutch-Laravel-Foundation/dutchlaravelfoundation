@@ -1,6 +1,9 @@
 <?php
 
 declare(strict_types=1);
+
+use App\Content\Community\CommunityRepository;
+
 test('stagebank overview uses updated filter heading', function () {
     $response = inertiaVisit('/stagebank');
 
@@ -28,13 +31,27 @@ test('internship detail uses updated apply button label', function () {
     $this->assertStringNotContainsString('Solliciteren', $page);
 });
 test('internship detail merges company information into the header', function () {
-    $response = inertiaVisit('/stagebank/superscanner');
+    $repository = $this->createStub(CommunityRepository::class);
+    $repository->method('findInternshipByUri')->willReturn([
+        'id' => 'internship-test',
+        'title' => 'Test internship',
+        'member' => [
+            'id' => 'member-test',
+            'title' => 'Test Agency',
+            'website' => 'agency.example.test',
+            'city' => 'Teststad',
+            'internship_contact_name' => 'Testcontact',
+        ],
+    ]);
+    $this->app->instance(CommunityRepository::class, $repository);
+
+    $response = inertiaVisit('/stagebank/test-internship');
 
     $response->assertOk()
         ->assertJsonPath('component', 'Community/InternshipsShow')
-        ->assertJsonPath('props.community.member.website', 'superscanner.nl')
-        ->assertJsonPath('props.community.member.city', 'Haarlem')
-        ->assertJsonPath('props.community.member.internshipContact.name', 'Andries Mooij');
+        ->assertJsonPath('props.community.member.website', 'agency.example.test')
+        ->assertJsonPath('props.community.member.city', 'Teststad')
+        ->assertJsonPath('props.community.member.internshipContact.name', 'Testcontact');
 
     $page = file_get_contents(resource_path('js/pages/Community/InternshipsShow.tsx'));
 

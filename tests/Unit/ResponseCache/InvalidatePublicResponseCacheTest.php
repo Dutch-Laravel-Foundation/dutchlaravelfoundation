@@ -9,7 +9,7 @@ use Statamic\Entries\Entry;
 use Statamic\Events\EntrySaved;
 
 it('invalidates only the changed entry and its dependent overview', function (): void {
-    $entry = $this->createMock(Entry::class);
+    $entry = $this->createStub(Entry::class);
     $entry->method('collectionHandle')->willReturn('insights');
     $entry->method('root')->willReturn($entry);
     $entry->method('id')->willReturn('entry-id');
