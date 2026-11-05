@@ -1,5 +1,6 @@
 ---
 id: f5591ac7-067d-4826-a2b8-491f61131623
+published: false
 blueprint: members
 title: OrangeTalent
 description: |-
@@ -16,8 +17,8 @@ province: Gelderland
 email: info@orangetalent.nl
 website: orangetalent.nl
 phone: '+31 (0)341 561 341'
-updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
-updated_at: 1774950858
+updated_by: 50ac328e-5084-4c6e-9551-2fb5bb9f3d88
+updated_at: 1793869419
 recruitment_website: orangetalent.nl/werken-bij
 sbb: true
 internship_contact_name: 'Emma Smit'
