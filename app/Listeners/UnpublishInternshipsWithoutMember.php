@@ -49,7 +49,7 @@ final class UnpublishInternshipsWithoutMember
 
     private function memberId(Entry $internship): ?string
     {
-        $memberId = Arr::first(Arr::wrap($internship->get('member')));
+        $memberId = Arr::first(Arr::wrap($internship->value('member')));
 
         return is_string($memberId) && $memberId !== '' ? $memberId : null;
     }
