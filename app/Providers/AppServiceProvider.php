@@ -23,6 +23,7 @@ use App\Content\SiteShell\StatamicSiteShellRepository;
 use App\Health\Checks\MailTransportCheck;
 use App\Http\Controllers\Agents\LlmsController;
 use App\Listeners\InvalidatePublicResponseCache;
+use App\Listeners\UnpublishInternshipsWithoutMember;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Event;
@@ -42,6 +43,7 @@ use Statamic\Events\CollectionTreeDeleted;
 use Statamic\Events\CollectionTreeSaved;
 use Statamic\Events\EntryDeleted;
 use Statamic\Events\EntrySaved;
+use Statamic\Events\EntrySaving;
 use Statamic\Events\GlobalVariablesDeleted;
 use Statamic\Events\GlobalVariablesSaved;
 use Statamic\Events\NavDeleted;
@@ -105,6 +107,12 @@ class AppServiceProvider extends ServiceProvider
                 ->name('UsedDiskSpace')
                 ->label('Disk space'),
         ]);
+
+        Event::listen([
+            EntrySaving::class,
+            EntrySaved::class,
+            EntryDeleted::class,
+        ], UnpublishInternshipsWithoutMember::class);
 
         Event::listen([
             AssetDeleted::class,
