@@ -7,7 +7,7 @@ template: templates/larabelles/index
 call_to_action: ee5d33de-9a24-4860-92dd-3503740b62af
 menu_color: white
 updated_by: 56dfbdc8-dfe6-463c-8129-227705aace57
-updated_at: 1771836086
+updated_at: 1794469686
 content:
   -
     type: heading
@@ -36,7 +36,7 @@ content:
         text: Larabelles
       -
         type: text
-        text: ' zijn een internationale community van vrouwelijke Laravel developers die elkaar ondersteunen, inspireren en versterken. Het initiatief is ontstaan vanuit de behoefte aan meer zichtbaarheid, verbinding en onderlinge steun voor vrouwen binnen Laravel en de bredere PHP community.'
+        text: ' zijn een internationale community van vrouwelijke (en mensen die zich identificeren als vrouw) Laravel developers die elkaar ondersteunen, inspireren en versterken. Het initiatief is ontstaan vanuit de behoefte aan meer zichtbaarheid, verbinding en onderlinge steun voor vrouwen binnen Laravel en de bredere PHP community.'
   -
     type: paragraph
     content:
@@ -108,7 +108,7 @@ content:
     content:
       -
         type: text
-        text: 'Ben jij een vrouwelijke developer die met Laravel werkt, of wil je daar juist mee beginnen? Dan nodigen wij je van harte uit om je aan te sluiten bij de Larabelles. Dat kost je niks, maar levert je heel veel op.'
+        text: 'Ben jij een vrouwelijke developer die met Laravel werkt of identificeer jij jezelf als zodanig, of wil je juist beginnen als Laravel developer? Dan nodigen wij je van harte uit om je aan te sluiten bij de Larabelles. Dat kost je niks, maar levert je heel veel op.'
   -
     type: paragraph
     content:
