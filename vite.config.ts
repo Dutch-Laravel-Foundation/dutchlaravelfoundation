@@ -9,6 +9,8 @@ export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, process.cwd(), "");
     const appUrl = env.VITE_APP_URL ? new URL(env.VITE_APP_URL) : null;
     const inertiaSsrUrl = env.INERTIA_SSR_URL ? new URL(env.INERTIA_SSR_URL) : null;
+    // The public address of the dev server, when a proxy serves it under the site's own domain.
+    const devServerOrigin = env.DEV_SERVER_ORIGIN ? new URL(env.DEV_SERVER_ORIGIN).origin : null;
 
     return {
         plugins: [
@@ -40,10 +42,11 @@ export default defineConfig(({ mode }) => {
             ]),
         ],
         server: {
+            ...(devServerOrigin ? { origin: devServerOrigin } : {}),
             watch: {
                 ignored: [resolve(process.cwd(), ".worktrees/**"), "**/vendor/**"],
             },
-            ...(appUrl
+            ...(appUrl && !devServerOrigin
                 ? {
                       hmr: {
                           host: appUrl.hostname,
