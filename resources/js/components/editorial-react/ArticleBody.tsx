@@ -100,6 +100,14 @@ export function ArticleBody({
         if (html) {
             setProcessedHtml({ source: html, value: prose.innerHTML });
         }
+    }, [children, html, showToc]);
+
+    // Look the sections up by ID after each render: replacing the processed HTML swaps
+    // the heading nodes, and detached nodes would all report a top of 0.
+    useEffect(() => {
+        const sections = toc
+            .map((item) => document.getElementById(item.id))
+            .filter((section): section is HTMLElement => section !== null);
 
         if (!sections.length) {
             return;
@@ -134,7 +142,7 @@ export function ArticleBody({
             window.removeEventListener("scroll", updateActive);
             window.removeEventListener("hashchange", updateActive);
         };
-    }, [children, html, showToc]);
+    }, [renderedHtml, toc]);
 
     return (
         <div
