@@ -7,9 +7,11 @@ featured_image: cxo-diner.jpg
 type: Meetup
 date_start: '2026-11-26 00:00'
 updated_by: 55178a8a-9ba7-40f6-8e39-3efdc936cd23
-updated_at: 1795160642
+updated_at: 1795161597
 location: 'Buitenplaats Amerongen'
 address: 'Drostestraat 12, 3958 BK Amerongen'
+time_start: '16:00'
+time_end: '22:00'
 content:
   -
     type: paragraph
