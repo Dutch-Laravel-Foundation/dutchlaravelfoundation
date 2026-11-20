@@ -7,7 +7,7 @@ featured_image: cxo-diner.jpg
 type: Meetup
 date_start: '2026-11-26 00:00'
 updated_by: 55178a8a-9ba7-40f6-8e39-3efdc936cd23
-updated_at: 1795161597
+updated_at: 1795161682
 location: 'Buitenplaats Amerongen'
 address: 'Drostestraat 12, 3958 BK Amerongen'
 time_start: '16:00'
@@ -18,7 +18,7 @@ content:
     content:
       -
         type: text
-        text: 'Op donderdag 26 november zijn we te gast bij Buitenplaats Amerongen. Het thema van dit jaar is De wendbare organisatie. Naar verwachting starten we de inloop om 17:00 en zijn we rond 22:00 klaar.'
+        text: 'Op donderdag 26 november zijn we te gast bij Buitenplaats Amerongen. Het thema van dit jaar is De wendbare organisatie. De inloop is vanaf 16:00. Vanaf 16:30 start het programma. De verwachting is dat het programma rond 22:00 is afgelopen.'
   -
     type: heading
     attrs:
